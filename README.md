@@ -1,6 +1,6 @@
 # The Open SDK
 
-One kit for one platform to build and port towards and from: headers, function tables, link libraries, autodocs, examples and ACKitchen templates for every Open library. Dale, 4 October 2026: "one 'platform' to build and port towards and from".
+One kit for one platform to build and port towards and from: headers, function tables, link libraries, autodocs, examples and ACKitchen templates for every Open library. We, 4 October 2026: "one 'platform' to build and port towards and from".
 
 Status, 4 October 2026: designed (phase 1: what exists today, plus a Shell command template and a GadTools template). `DESIGN.md` is the design.
 

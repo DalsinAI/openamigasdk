@@ -1,6 +1,6 @@
 # The Open SDK
 
-Dale, 4 October 2026: "one 'platform' to build and port towards and from",
+We, 4 October 2026: "one 'platform' to build and port towards and from",
 and "that was the bones of my NDK / SDK question". The Open SDK is the kit
 for that platform: AmigaOS 3.2.x with the Open family. The same sources also
 build for AROS 68k, and later for OS 4. It answers the mission test too: a
