@@ -1,0 +1,22 @@
+Short:        One kit to build for the Open platform
+Uploader:     (Dale fills this in at upload time)
+Author:       Dalsin Limited
+Type:         dev/misc
+Version:      0.1
+Architecture: m68k-amigaos >= 3.2.0
+Distribution: Aminet
+
+The Open SDK holds what you need to write programs for AmigaOS 3.2.x with the
+Open libraries: headers, function tables, link libraries, autodocs, examples
+and ACKitchen templates, each building for AmigaOS 3.2 and AROS.
+
+It sits beside the NDK 3.2, the AROS SDK, the OS 4 SDK and MUI's SDK, never
+instead of them, and uses only published interfaces with names that port.
+
+Status: designed, not built; this readme is ready for the first release.
+
+Licence: MIT, Copyright (c) 2026 Dalsin Limited, for our files; third-party
+code keeps its own. If you build on it, we ask that you credit Dalsin Limited
+and AmigaChrome.
+
+Source: https://github.com/DalsinAI/openamigasdk
