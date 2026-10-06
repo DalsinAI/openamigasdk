@@ -8,6 +8,7 @@
 #include <string.h>
 #include <proto/exec.h>
 #include <proto/dos.h>
+#include <dos/stdio.h>
 #include <proto/utility.h>
 
 /* the 64-bit packets, answered by filesystems that know them */

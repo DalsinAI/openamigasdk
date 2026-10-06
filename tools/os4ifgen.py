@@ -146,9 +146,17 @@ def parse_sfd(path):
     lib = {"funcs": [], "includes": [], "base": None, "basetype": None, "libname": None}
     public, pending = True, None
     last = None
+    held = ""
     for raw in open(path, encoding="latin-1"):
         line = raw.strip()
         if not line or line.startswith("*"):
+            continue
+        # a prototype can run over several lines (exec's SetFunction): join
+        # them until the parentheses balance and the register list is there
+        if held:
+            line, held = held + " " + line, ""
+        if not line.startswith("==") and (line.count("(") != line.count(")") or not line.endswith(")")):
+            held = line
             continue
         if line.startswith("=="):
             key, _, val = line[2:].partition(" ")
