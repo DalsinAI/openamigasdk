@@ -20,7 +20,7 @@ build/$(NAME).os32: $(SRC)
 
 build/$(NAME).aros: $(SRC)
 	@mkdir -p build
-	$(CC_AROS) $(CFLAGS) -I$(SDK)/Include -o $@ $(SRC)
+	$(CC_AROS) $(CFLAGS) -Wno-volatile-register-var -I$(SDK)/Include -o $@ $(SRC)
 
 clean:
 	rm -rf build

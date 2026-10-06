@@ -10,6 +10,10 @@
 #include <proto/exec.h>
 #include <proto/dos.h>
 
+#ifndef __AROS__
+typedef LONG SIPTR;     /* AROS has it; NDK 3.2 doesn't. ReadArgs' array is SIPTR on AROS */
+#endif
+
 static const char version[] = "$VER: Hello 1.0 (6.10.2026)";
 
 #define TEMPLATE "NAME/A,TIMES/N/K,QUIET/S"
@@ -17,7 +21,7 @@ enum { ARG_NAME, ARG_TIMES, ARG_QUIET, ARG_COUNT };
 
 int main(void)
 {
-    LONG args[ARG_COUNT] = { 0 };
+    SIPTR args[ARG_COUNT] = { 0 };
     struct RDArgs *rd = ReadArgs((CONST_STRPTR)TEMPLATE, args, NULL);
     LONG times = 1, i;
     if (!rd) {
