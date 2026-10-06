@@ -1,0 +1,53 @@
+{
+  "sdk": "The Open SDK",
+  "version": "0.1",
+  "note": "Each library's own repository owns its headers and function tables; tools/gather.py copies them from these commits. Never edit the copies under Include/ or SFD/: change the library's repository, then move its commit here.",
+  "parts": [
+    {
+      "name": "openrtg.library",
+      "version": "0.10",
+      "repo": "DalsinAI/openamigartg",
+      "commit": "0f0aa04c63c61fe22d66a7ab035d7277d247e5c5",
+      "licence": "MIT",
+      "files": {
+        "include/openrtg/openrtg.h": "Include/openrtg/openrtg.h",
+        "include/proto/openrtg.h": "Include/proto/openrtg.h",
+        "include/inline/openrtg.h": "Include/inline/openrtg.h",
+        "library/modes.h": "Include/openrtg/modes.h",
+        "library/openrtg_lib.sfd": "SFD/openrtg_lib.sfd"
+      }
+    },
+    {
+      "name": "opensocket.library",
+      "version": "main 3603f02",
+      "repo": "DalsinAI/openamigasocket",
+      "commit": "3603f02badcbd0704e7cd301c63cb1a6d851eaaa",
+      "licence": "MIT",
+      "files": {
+        "guest/network/acnetwork/include/acnetwork.h": "Include/acnetwork.h",
+        "guest/network/acnetwork/include/proto/acnetwork.h": "Include/proto/acnetwork.h",
+        "guest/network/acnet/include/acnet_socket_tags.h": "Include/opensocket/acnet_socket_tags.h"
+      }
+    },
+    {
+      "name": "accontrol.device",
+      "version": "guest 8349ead",
+      "repo": "DalsinAI/amigachrome-guest",
+      "commit": "8349ead65881ad33c58bc67e3e240df74d36d27e",
+      "licence": "MIT",
+      "files": {
+        "devices/accontrol.device/include/accontrol.h": "Include/accontrol/accontrol.h"
+      }
+    },
+    {
+      "name": "oapspool.device",
+      "version": "main bbbbecf",
+      "repo": "DalsinAI/openamigaprint",
+      "commit": "bbbbecf3be7006cdb4597b7876776af1efbcd35a",
+      "licence": "MIT",
+      "files": {
+        "include/oap_device.h": "Include/openprint/oap_device.h"
+      }
+    }
+  ]
+}
