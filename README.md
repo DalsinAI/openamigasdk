@@ -16,3 +16,7 @@ Third-party code keeps its own licence (see `DESIGN.md`).
 If you use or build on this work, we ask (we do not require) that you credit
 Dalsin Limited and AmigaChrome, for example "based on The Open SDK by Dalsin
 Limited".
+
+## Contributors
+
+The Open SDK is created and maintained by [SacredTrees](https://github.com/SacredTrees) with the AmigaChrome agent team, copyright Dalsin Limited. Everyone whose work it includes is credited in [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
