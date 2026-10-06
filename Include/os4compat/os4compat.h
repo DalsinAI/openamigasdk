@@ -252,14 +252,25 @@ struct ExamineData
 #define EXDF_NO_DELETE  (1UL << 0)
 
 /* ---- graphics -------------------------------------------------------- */
-#define BMATags_Dummy       (TAG_USER + 0x4f343000)
-#define BMATags_Friend      (BMATags_Dummy + 1)
-#define BMATags_Clear       (BMATags_Dummy + 2)
-#define BMATags_Displayable (BMATags_Dummy + 3)
-#define BMATags_Interleaved (BMATags_Dummy + 4)
-#define BMATags_UserPrivate (BMATags_Dummy + 5)  /* ignored */
-#define BMATags_PixelFormat (BMATags_Dummy + 6)  /* RGBFB_ value, RTG only */
-#define BMATags_NoMemory    (BMATags_Dummy + 7)  /* ignored */
+/* NDK 3.2's graphics/gfx.h already has these, with the values P96 and OS 4
+ * use; keep its values so code built with and without os4compat agrees */
+#ifndef BMATags_Friend
+#define BMATags_Friend      (TAG_USER + 0)
+#define BMATags_Depth       (TAG_USER + 1)
+#define BMATags_RGBFormat   (TAG_USER + 2)
+#define BMATags_Clear       (TAG_USER + 3)
+#define BMATags_Displayable (TAG_USER + 4)
+#define BMATags_Private1    (TAG_USER + 5)
+#define BMATags_NoMemory    (TAG_USER + 6)
+#define BMATags_NoSprite    (TAG_USER + 7)
+#define BMATags_UserPrivate (TAG_USER + 17)
+#endif
+#ifndef BMATags_PixelFormat
+#define BMATags_PixelFormat BMATags_RGBFormat
+#endif
+#ifndef BMATags_Interleaved
+#define BMATags_Interleaved (TAG_USER + 0x4f343004)  /* ours: the NDK has none */
+#endif
 
 #define BLITA_Dummy     (TAG_USER + 0x4f344000)
 #define BLITA_SrcX      (BLITA_Dummy + 1)
