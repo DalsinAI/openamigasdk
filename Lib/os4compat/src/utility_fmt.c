@@ -87,7 +87,8 @@ LONG os4c_VSNPrintf(STRPTR buffer, ULONG size, CONST_STRPTR format, va_list args
 			else while (*f >= '0' && *f <= '9') prec = prec * 10 + (*f++ - '0');
 		}
 		while (*f == 'l' || *f == 'h' || *f == 'z' || *f == 't' || *f == 'j' || *f == 'L') {
-			if (*f == 'l' || *f == 'j') lng++;
+			if (*f == 'l') lng++;
+			else if (*f == 'j') lng = 2;   /* intmax_t is long long */
 			f++;
 		}
 		conv = *f ? *f++ : 0;

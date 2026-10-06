@@ -9,14 +9,15 @@
 #include <exec/execbase.h>
 #include <proto/exec.h>
 
-#define MAX_OPENED 32
-static struct Interface *opened[MAX_OPENED];
-static int nopened, atexit_done;
+/* the interfaces whose base we opened, linked through Data.Link: no limit */
+static struct MinList opened = { (struct MinNode *)&opened.mlh_Tail, NULL, (struct MinNode *)&opened.mlh_Head };
+static int atexit_done;
 
 static void close_bases(void)
 {
-	while (nopened > 0) {
-		struct Interface *i = opened[--nopened];
+	struct Node *n;
+	while ((n = RemHead((struct List *)&opened)) != NULL) {
+		struct Interface *i = (struct Interface *)n;   /* Data.Link comes first */
 		if (i->Data.LibBase && (i->Data.Flags & OS4CF_WEOPENED))
 			CloseLibrary(i->Data.LibBase);
 		i->Data.LibBase = NULL;
@@ -54,9 +55,9 @@ struct Library *os4c_OpenBase(struct Interface *iface)
 		base = (struct Library *)OpenResource((STRPTR)name);
 	} else {
 		base = OpenLibrary((STRPTR)name, 0);
-		if (base && nopened < MAX_OPENED) {
+		if (base) {
 			iface->Data.Flags |= OS4CF_WEOPENED;
-			opened[nopened++] = iface;
+			AddTail((struct List *)&opened, &iface->Data.Link);
 			if (!atexit_done) {
 				atexit(close_bases);
 				atexit_done = 1;
@@ -88,10 +89,10 @@ struct Interface *os4c_GetInterface(struct Library *library, CONST_STRPTR name,
 	ULONG version, struct TagItem *tags)
 {
 	struct Interface *const *r;
-	(void)version;
 	(void)tags;
 
-	if (!library || !library->lib_Node.ln_Name)
+	/* every interface here is version 1; a newer one is not available */
+	if (!library || !library->lib_Node.ln_Name || version > 1)
 		return NULL;
 	if (name && !same_name(name, "main"))
 		return NULL;   /* only the main interface exists here */

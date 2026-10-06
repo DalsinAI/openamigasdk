@@ -23,7 +23,12 @@ INC      := -I$(SDK)/Include -I$(B)/include
 
 all: $(B)/libos4compat.a
 
-$(B)/.generated: $(SFDS) $(SDK)/tools/os4ifgen.py
+# remade only when LIBS changes, so a new list regenerates the interfaces
+$(B)/.libs: FORCE
+	@mkdir -p $(B)
+	@echo '$(LIBS)' | cmp -s - $@ || echo '$(LIBS)' > $@
+
+$(B)/.generated: $(SFDS) $(SDK)/tools/os4ifgen.py $(B)/.libs
 	@mkdir -p $(B)
 	$(PYTHON) $(SDK)/tools/os4ifgen.py $(B) $(SFDS)
 	@touch $@
@@ -49,4 +54,5 @@ $(B)/libos4compat.a: $(OBJS)
 
 clean:
 	rm -rf $(B)
-.PHONY: all clean
+.PHONY: all clean FORCE
+FORCE:

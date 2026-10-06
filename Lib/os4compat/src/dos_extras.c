@@ -75,6 +75,7 @@ int64 os4c_GetFileSize(BPTR file)
 	struct FileInfoBlock *fib;
 	if (!file)
 		return -1;
+	Flush(file);   /* what is still in the buffer counts, as on OS 4 */
 	if (DoPkt(FH(file)->fh_Type, ACTION_GET_FILE_SIZE64, FH(file)->fh_Arg1, (LONG)&size, 0, 0, 0))
 		return size;
 	fib = AllocDosObject(DOS_FIB, NULL);
@@ -210,6 +211,12 @@ struct ExamineData *os4c_ExamineDir(APTR context)
 			continue;
 		memset(&c->data, 0, sizeof(c->data));
 		fill(&c->data, c->fib);
+		if (EXD_IS_SOFTLINK(&c->data)) {
+			/* the link's own filesystem reads it, relative to this directory */
+			struct MsgPort *fs = ((struct FileLock *)BADDR(c->lock))->fl_Task;
+			ReadLink(fs, c->lock, (STRPTR)c->data.NameBuffer,
+			         (STRPTR)c->data.LinkBuffer, sizeof(c->data.LinkBuffer));
+		}
 		if (c->match && !CallHookPkt(c->match, &c->data, NULL))
 			continue;
 		return &c->data;

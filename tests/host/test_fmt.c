@@ -1,6 +1,7 @@
 /* Host test: the kit's SNPrintf and Strlcpy against the C library's. */
 #include <stdio.h>
 #include <string.h>
+#include <stdint.h>
 #include <os4compat/os4compat.h>
 
 static int fails;
@@ -18,6 +19,7 @@ int main(void)
 	T("plain"); T("%d|%i", 42, -42); T("%5d|%-5d|%05d", 7, 7, -7); T("%+d % d", 3, 3);
 	T("%u %lu %llu", 3000000000u, 4000000000ul, 18000000000000000000ull);
 	T("%ld %lld", -2147483647L - 1, -9223372036854775807LL - 1);
+	T("%jd %ju", (intmax_t)-9000000000LL, (uintmax_t)18000000000000000000ull);
 	T("%x %X %#x %08x %lx %#x", 255, 255, 255, 0xbeef, 0xdeadbeeful, 0); T("%o %#o", 8, 8);
 	T("%s|%10s|%-10s|%.3s|%*s|%-*.*s|", "abc", "abc", "abc", "abcdef", 6, "ab", 6, 2, "xyz");
 	T("%c%c%3c", 'o', 'k', '!'); T("100%%"); T("%.0d|%.3d", 0, 7); T("%p", (void *)0x1234);

@@ -20,6 +20,10 @@ struct BitMap *os4c_AllocBitMapTagList(ULONG width, ULONG height, ULONG depth, s
 {
 	ULONG flags = 0, fmt;
 	struct BitMap *friend;
+	/* a BitMap with no planes for the caller to fill: graphics cannot make
+	 * one for RTG, so this is unsupported rather than a wrong allocation */
+	if (GetTagData(BMATags_NoMemory, FALSE, tags))
+		return NULL;
 	if (GetTagData(BMATags_Clear, FALSE, tags)) flags |= BMF_CLEAR;
 	if (GetTagData(BMATags_Displayable, FALSE, tags)) flags |= BMF_DISPLAYABLE;
 	if (GetTagData(BMATags_Interleaved, FALSE, tags)) flags |= BMF_INTERLEAVED;
@@ -80,6 +84,7 @@ LONG os4c_BltBitMapTags(Tag tag1, ...)
 ULONG os4c_CompositeTagList(ULONG op, struct BitMap *src, struct BitMap *dst, struct TagItem *tags)
 {
 	LONG sx, sy, w, h, dx, dy;
+	ULONG depth;
 	if (!dst || (!src && op != COMPOSITE_Clear))
 		return COMPERR_MissingInput;
 	if (GetTagData(COMPTAG_ScaleX, 0x10000, tags) != 0x10000
@@ -97,7 +102,11 @@ ULONG os4c_CompositeTagList(ULONG op, struct BitMap *src, struct BitMap *dst, st
 	dy = GetTagData(COMPTAG_DestY, 0, tags) + GetTagData(COMPTAG_OffsetY, 0, tags);
 	switch (op) {
 	case COMPOSITE_Src:
-	case COMPOSITE_Src_Over_Dest:   /* opaque source: the same as a copy */
+	case COMPOSITE_Src_Over_Dest:
+		/* only an opaque source is a copy; a 32-bit one may carry alpha */
+		depth = src ? GetBitMapAttr(src, BMA_DEPTH) : 0;
+		if (op == COMPOSITE_Src_Over_Dest && depth >= 32)
+			return COMPERR_SoftwareFallback;
 		if (w > 0 && h > 0)
 			BltBitMap(src, sx, sy, dst, dx, dy, w, h, 0xc0, 0xff, NULL);
 		return COMPERR_Success;

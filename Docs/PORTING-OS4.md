@@ -62,7 +62,7 @@ way, and prints PASS or FAIL for each call it tries.
 
 | Interface | Calls |
 | --- | --- |
-| IExec | `AllocSysObject(Tags)`, `FreeSysObject` (ports, IORequests, hooks, interrupts, lists, nodes, semaphores, mutexes, tag lists, pools, messages), `AllocVecTagList`/`AllocVecTags` (`AVT_Type`, `AVT_ClearWithValue`), `GetInterface`, `DropInterface`, `NewList`, `NewMinList`, `GetHead`, `GetTail`, `GetSucc`, `GetPred`, `MutexObtain`, `MutexAttempt`, `MutexRelease`, `DebugPrintF` (to the serial port) |
+| IExec | `AllocSysObject(Tags)`, `FreeSysObject` (ports, IORequests, hooks, interrupts, lists, nodes, semaphores, mutexes, tag lists, pools (`ASOPOOL_Protected` locks them in `AllocPooled`, `FreePooled`, `AllocVecPooled`, `FreeVecPooled` and `DeletePool`), messages), `AllocVecTagList`/`AllocVecTags` (`AVT_Type`, `AVT_ClearWithValue`), `GetInterface`, `DropInterface`, `NewList`, `NewMinList`, `GetHead`, `GetTail`, `GetSucc`, `GetPred`, `MutexObtain`, `MutexAttempt`, `MutexRelease`, `DebugPrintF` (to the serial port) |
 | IDOS | `FOpen`, `FClose`, `ChangeFilePosition`, `GetFilePosition`, `GetFileSize` (64-bit), `ExamineObject(Tags)`, `ObtainDirContext(Tags)`, `ExamineDir`, `ReleaseDirContext`, `FreeDosObject(DOS_EXAMINEDATA)` |
 | IUtility | `Strlcpy`, `Strlcat`, `SNPrintf`, `VSNPrintf`, `ASPrintf`, `VASPrintf` |
 | IGraphics | `AllocBitMapTagList`/`Tags`, `BltBitMapTagList`/`Tags` (bitmaps and rastports), `CompositeTagList`/`Tags` (copy and clear) |
@@ -82,8 +82,10 @@ values are ours, since everything is rebuilt.
 | `newlib.library` or clib4 calls beyond C99 | link a POSIX C library for 68k (the Open SDK's choice is still to come); libnix covers C99 |
 | ELF shared objects (`.so`) | link statically |
 | Warp3D Nova, `ogles2.library` | need a host GPU; see OpenGPU. There is no 68040 route |
-| `CompositeTags()` with alpha or scaling | answers `COMPERR_SoftwareFallback`, as OS 4 does without hardware; draw it yourself or through OpenRTG |
+| `CompositeTags()` with alpha or scaling, or `COMPOSITE_Src_Over_Dest` from a 32-bit source | answers `COMPERR_SoftwareFallback`, as OS 4 does without hardware; draw it yourself or through OpenRTG |
 | `AVT_Alignment` over 8 | not honoured: AllocVec gives 8 |
+| `BMATags_NoMemory` | `AllocBitMapTags()` answers `NULL`: OS 3.2 graphics cannot make an RTG bitmap without its memory |
+| `GetInterface()` for a version over 1 | answers `NULL`: every interface here is version 1 |
 | 64-bit files over 2 GB | need a filesystem that answers the 64-bit packets; otherwise `ERROR_OBJECT_TOO_LARGE` |
 | `ASOT_ITEMPOOL`, `ASOT_RMAP`, `ASOT_DMAENTRY`, `ASOT_EXTMEM` | answer `NULL`. For more than 2 GB of memory use openextmem.library |
 | `application.library` notifications, AmiDock dockies | coming as OpenUp parts |

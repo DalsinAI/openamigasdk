@@ -58,8 +58,93 @@ APTR os4c_AllocVecTags(ULONG size, ...)
 }
 
 /* ---- system objects ---- */
-struct os4c_port { struct MsgPort mp; BYTE ownsig; BYTE pub; };
-struct os4c_sem  { struct SignalSemaphore ss; BYTE pub; };
+/* What FreeSysObject needs to know about a port or semaphore lives in a
+ * header in front of the object, so all of ASOPORT_Size or ASOSEM_Size is
+ * the caller's, as on OS 4. 8 bytes keep the object 8-byte aligned. */
+struct os4c_hdr { BYTE ownsig; BYTE pub; UBYTE pad[6]; };
+#define HDR(obj) ((struct os4c_hdr *)(obj) - 1)
+
+static APTR hdr_alloc(ULONG size, ULONG extra, ULONG mflags)
+{
+	struct os4c_hdr *h = AllocVec(sizeof(*h) + size + extra, mflags | MEMF_CLEAR);
+	return h ? h + 1 : NULL;
+}
+
+/* ASOPOOL_Protected pools: exec's pools have no lock, so the kit keeps one
+ * per protected pool and takes it in the pooled calls below */
+struct os4c_ppool { struct MinNode node; APTR pool; struct SignalSemaphore lock; };
+static struct MinList ppools = { (struct MinNode *)&ppools.mlh_Tail, NULL, (struct MinNode *)&ppools.mlh_Head };
+
+static struct os4c_ppool *find_ppool(APTR pool)
+{
+	struct MinNode *n;
+	struct os4c_ppool *found = NULL;
+	if (!pool)
+		return NULL;
+	Forbid();
+	for (n = ppools.mlh_Head; n->mln_Succ; n = n->mln_Succ)
+		if (((struct os4c_ppool *)n)->pool == pool) {
+			found = (struct os4c_ppool *)n;
+			break;
+		}
+	Permit();
+	return found;
+}
+
+APTR os4c_AllocPooled(APTR pool, ULONG size)
+{
+	struct os4c_ppool *p = find_ppool(pool);
+	APTR m;
+	if (!p)
+		return AllocPooled(pool, size);
+	ObtainSemaphore(&p->lock);
+	m = AllocPooled(pool, size);
+	ReleaseSemaphore(&p->lock);
+	return m;
+}
+
+VOID os4c_FreePooled(APTR pool, APTR memory, ULONG size)
+{
+	struct os4c_ppool *p = find_ppool(pool);
+	if (!p) {
+		FreePooled(pool, memory, size);
+		return;
+	}
+	ObtainSemaphore(&p->lock);
+	FreePooled(pool, memory, size);
+	ReleaseSemaphore(&p->lock);
+}
+
+/* the size goes in front, as AllocVec keeps it */
+APTR os4c_AllocVecPooled(APTR pool, ULONG size)
+{
+	ULONG *m = os4c_AllocPooled(pool, size + 8);
+	if (!m)
+		return NULL;
+	m[0] = size + 8;
+	return m + 2;
+}
+
+VOID os4c_FreeVecPooled(APTR pool, APTR memory)
+{
+	ULONG *m = memory;
+	if (m) {
+		m -= 2;
+		os4c_FreePooled(pool, m, m[0]);
+	}
+}
+
+VOID os4c_DeletePool(APTR pool)
+{
+	struct os4c_ppool *p = find_ppool(pool);
+	if (p) {
+		Forbid();
+		Remove((struct Node *)&p->node);
+		Permit();
+		FreeVec(p);
+	}
+	DeletePool(pool);
+}
 
 APTR os4c_AllocSysObject(ULONG type, struct TagItem *tags)
 {
@@ -75,8 +160,9 @@ APTR os4c_AllocSysObject(ULONG type, struct TagItem *tags)
 		struct IORequest *io = AllocVec(size, mflags);
 		if (!io)
 			return NULL;
+		/* copy no more than the original holds: ASOIOR_Size may be larger */
 		if (dup)
-			CopyMem(dup, io, size);
+			CopyMem(dup, io, size < dup->io_Message.mn_Length ? size : dup->io_Message.mn_Length);
 		io->io_Message.mn_Node.ln_Type = NT_REPLYMSG;
 		io->io_Message.mn_ReplyPort = port;
 		io->io_Message.mn_Length = size;
@@ -133,57 +219,61 @@ APTR os4c_AllocSysObject(ULONG type, struct TagItem *tags)
 		CONST_STRPTR name = (CONST_STRPTR)GetTagData(ASOPORT_Name, 0, tags);
 		BOOL copy = name && GetTagData(ASOPORT_CopyName, FALSE, tags);
 		ULONG size = GetTagData(ASOPORT_Size, sizeof(struct MsgPort), tags);
-		ULONG alloc = (size > sizeof(struct MsgPort) ? size : sizeof(struct MsgPort))
-			+ sizeof(struct os4c_port) - sizeof(struct MsgPort);
-		struct os4c_port *p;
+		struct MsgPort *mp;
 		LONG sig = (LONG)GetTagData(ASOPORT_Signal, (ULONG)-1, tags);
 		ULONG me;
 
-		p = AllocVec(alloc + (copy ? strlen0(name) + 1 : 0), mflags);
-		if (!p)
+		if (size < sizeof(struct MsgPort))
+			size = sizeof(struct MsgPort);
+		mp = hdr_alloc(size, copy ? strlen0(name) + 1 : 0, mflags);
+		if (!mp)
 			return NULL;
-		p->mp.mp_Node.ln_Type = NT_MSGPORT;
-		p->mp.mp_Node.ln_Pri = GetTagData(ASOPORT_Pri, 0, tags);
-		p->mp.mp_Node.ln_Name = (char *)(copy ? copy_after(p, alloc, name) : name);
-		p->mp.mp_Flags = GetTagData(ASOPORT_Action, PA_SIGNAL, tags);
+		mp->mp_Node.ln_Type = NT_MSGPORT;
+		mp->mp_Node.ln_Pri = GetTagData(ASOPORT_Pri, 0, tags);
+		mp->mp_Node.ln_Name = (char *)(copy ? copy_after(mp, size, name) : name);
+		mp->mp_Flags = GetTagData(ASOPORT_Action, PA_SIGNAL, tags);
 		/* never one library call inside another's arguments: GCC's inline
 		 * calls keep the base in a6, and the inner call leaves its own there */
 		me = (ULONG)FindTask(NULL);
-		p->mp.mp_SigTask = (APTR)GetTagData(ASOPORT_Target, me, tags);
-		if (GetTagData(ASOPORT_AllocSig, TRUE, tags) && p->mp.mp_Flags == PA_SIGNAL) {
+		mp->mp_SigTask = (APTR)GetTagData(ASOPORT_Target, me, tags);
+		if (GetTagData(ASOPORT_AllocSig, TRUE, tags) && mp->mp_Flags == PA_SIGNAL) {
 			sig = AllocSignal(sig);
 			if (sig < 0) {
-				FreeVec(p);
+				FreeVec(HDR(mp));
 				return NULL;
 			}
-			p->ownsig = 1;
+			HDR(mp)->ownsig = 1;
 		}
-		p->mp.mp_SigBit = sig < 0 ? 0 : sig;
-		NewList(&p->mp.mp_MsgList);
+		mp->mp_SigBit = sig < 0 ? 0 : sig;
+		NewList(&mp->mp_MsgList);
 		if (GetTagData(ASOPORT_Public, FALSE, tags) && name) {
-			AddPort(&p->mp);
-			p->pub = 1;
+			AddPort(mp);
+			HDR(mp)->pub = 1;
 		}
-		return &p->mp;
+		return mp;
 	}
 	case ASOT_SEMAPHORE:
 	case ASOT_MUTEX: {
 		CONST_STRPTR name = (CONST_STRPTR)GetTagData(ASOSEM_Name, 0, tags);
 		BOOL copy = name && GetTagData(ASOSEM_CopyName, FALSE, tags);
-		ULONG alloc = sizeof(struct os4c_sem);
-		struct os4c_sem *s = AllocVec(alloc + (copy ? strlen0(name) + 1 : 0), mflags);
-		if (!s)
+		ULONG size = GetTagData(ASOSEM_Size, sizeof(struct SignalSemaphore), tags);
+		struct SignalSemaphore *ss;
+
+		if (size < sizeof(struct SignalSemaphore))
+			size = sizeof(struct SignalSemaphore);
+		ss = hdr_alloc(size, copy ? strlen0(name) + 1 : 0, mflags);
+		if (!ss)
 			return NULL;
-		InitSemaphore(&s->ss);
+		InitSemaphore(ss);
 		if (type == ASOT_SEMAPHORE) {
-			s->ss.ss_Link.ln_Pri = GetTagData(ASOSEM_Pri, 0, tags);
-			s->ss.ss_Link.ln_Name = (char *)(copy ? copy_after(s, alloc, name) : name);
+			ss->ss_Link.ln_Pri = GetTagData(ASOSEM_Pri, 0, tags);
+			ss->ss_Link.ln_Name = (char *)(copy ? copy_after(ss, size, name) : name);
 			if (GetTagData(ASOSEM_Public, FALSE, tags) && name) {
-				AddSemaphore(&s->ss);
-				s->pub = 1;
+				AddSemaphore(ss);
+				HDR(ss)->pub = 1;
 			}
 		}
-		return &s->ss;
+		return ss;
 	}
 	case ASOT_TAGLIST: {
 		ULONG n = GetTagData(ASOTAGS_Size, 1, tags);
@@ -197,7 +287,27 @@ APTR os4c_AllocSysObject(ULONG type, struct TagItem *tags)
 		ULONG pf = GetTagData(ASOPOOL_MFlags, MEMF_ANY, tags) & ~MEMF_OS4ONLY;
 		ULONG puddle = GetTagData(ASOPOOL_Puddle, 8192, tags);
 		ULONG thresh = GetTagData(ASOPOOL_Threshold, 4096, tags);
-		return CreatePool(pf, puddle, thresh);
+		struct os4c_ppool *p = NULL;
+		APTR pool;
+
+		if (GetTagData(ASOPOOL_Protected, FALSE, tags)) {
+			p = AllocVec(sizeof(*p), MEMF_PUBLIC | MEMF_CLEAR);
+			if (!p)
+				return NULL;
+			InitSemaphore(&p->lock);
+		}
+		pool = CreatePool(pf, puddle, thresh);
+		if (p) {
+			if (!pool) {
+				FreeVec(p);
+				return NULL;
+			}
+			p->pool = pool;
+			Forbid();
+			AddTail((struct List *)&ppools, (struct Node *)&p->node);
+			Permit();
+		}
+		return pool;
 	}
 	case ASOT_MESSAGE: {
 		ULONG size = GetTagData(ASOMSG_Size, sizeof(struct Message), tags);
@@ -231,24 +341,22 @@ VOID os4c_FreeSysObject(ULONG type, APTR object)
 		return;
 	switch (type) {
 	case ASOT_PORT: {
-		struct os4c_port *p = (struct os4c_port *)object;
-		if (p->pub)
-			RemPort(&p->mp);
-		if (p->ownsig)
-			FreeSignal(p->mp.mp_SigBit);
-		FreeVec(p);
+		struct MsgPort *mp = object;
+		if (HDR(mp)->pub)
+			RemPort(mp);
+		if (HDR(mp)->ownsig)
+			FreeSignal(mp->mp_SigBit);
+		FreeVec(HDR(mp));
 		break;
 	}
 	case ASOT_SEMAPHORE:
-	case ASOT_MUTEX: {
-		struct os4c_sem *s = (struct os4c_sem *)object;
-		if (s->pub)
-			RemSemaphore(&s->ss);
-		FreeVec(s);
+	case ASOT_MUTEX:
+		if (HDR(object)->pub)
+			RemSemaphore((struct SignalSemaphore *)object);
+		FreeVec(HDR(object));
 		break;
-	}
 	case ASOT_MEMPOOL:
-		DeletePool(object);
+		os4c_DeletePool(object);
 		break;
 	default:
 		FreeVec(object);

@@ -52,6 +52,12 @@ EXTRAS = {
         ("APTR (*AllocSysObject)(ULONG type, struct TagItem *tags)", "os4c_AllocSysObject"),
         ("APTR (*AllocSysObjectTags)(ULONG type, ...)", "os4c_AllocSysObjectTags"),
         ("VOID (*FreeSysObject)(ULONG type, APTR object)", "os4c_FreeSysObject"),
+        # ASOPOOL_Protected pools take a lock in these
+        ("APTR (*AllocPooled)(APTR poolHeader, ULONG memSize)", "os4c_AllocPooled"),
+        ("VOID (*FreePooled)(APTR poolHeader, APTR memory, ULONG memSize)", "os4c_FreePooled"),
+        ("APTR (*AllocVecPooled)(APTR poolHeader, ULONG memSize)", "os4c_AllocVecPooled"),
+        ("VOID (*FreeVecPooled)(APTR poolHeader, APTR memory)", "os4c_FreeVecPooled"),
+        ("VOID (*DeletePool)(APTR poolHeader)", "os4c_DeletePool"),
         ("APTR (*AllocVecTagList)(ULONG size, struct TagItem *tags)", "os4c_AllocVecTagList"),
         ("APTR (*AllocVecTags)(ULONG size, ...)", "os4c_AllocVecTags"),
         ("VOID (*DebugPrintF)(CONST_STRPTR format, ...)", "os4c_DebugPrintF"),
