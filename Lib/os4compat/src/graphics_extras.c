@@ -19,14 +19,16 @@
 struct BitMap *os4c_AllocBitMapTagList(ULONG width, ULONG height, ULONG depth, struct TagItem *tags)
 {
 	ULONG flags = 0, fmt;
+	struct BitMap *friend;
 	if (GetTagData(BMATags_Clear, FALSE, tags)) flags |= BMF_CLEAR;
 	if (GetTagData(BMATags_Displayable, FALSE, tags)) flags |= BMF_DISPLAYABLE;
 	if (GetTagData(BMATags_Interleaved, FALSE, tags)) flags |= BMF_INTERLEAVED;
 	fmt = GetTagData(BMATags_PixelFormat, 0, tags);
 	if (fmt)
 		flags |= BMF_SPECIALFMT | (fmt << 24);   /* the RTG pixel-format convention */
-	return AllocBitMap(width, height, depth, flags,
-		(struct BitMap *)GetTagData(BMATags_Friend, 0, tags));
+	/* not inside AllocBitMap's arguments: see exec_extras.c, ASOT_PORT */
+	friend = (struct BitMap *)GetTagData(BMATags_Friend, 0, tags);
+	return AllocBitMap(width, height, depth, flags, friend);
 }
 
 struct BitMap *os4c_AllocBitMapTags(ULONG width, ULONG height, ULONG depth, ...)
@@ -87,8 +89,10 @@ ULONG os4c_CompositeTagList(ULONG op, struct BitMap *src, struct BitMap *dst, st
 		return COMPERR_SoftwareFallback;
 	sx = GetTagData(COMPTAG_SrcX, 0, tags);
 	sy = GetTagData(COMPTAG_SrcY, 0, tags);
-	w = GetTagData(COMPTAG_SrcWidth, src ? GetBitMapAttr(src, BMA_WIDTH) : 0, tags);
-	h = GetTagData(COMPTAG_SrcHeight, src ? GetBitMapAttr(src, BMA_HEIGHT) : 0, tags);
+	w = src ? GetBitMapAttr(src, BMA_WIDTH) : 0;
+	h = src ? GetBitMapAttr(src, BMA_HEIGHT) : 0;
+	w = GetTagData(COMPTAG_SrcWidth, w, tags);
+	h = GetTagData(COMPTAG_SrcHeight, h, tags);
 	dx = GetTagData(COMPTAG_DestX, 0, tags) + GetTagData(COMPTAG_OffsetX, 0, tags);
 	dy = GetTagData(COMPTAG_DestY, 0, tags) + GetTagData(COMPTAG_OffsetY, 0, tags);
 	switch (op) {
@@ -100,8 +104,10 @@ ULONG os4c_CompositeTagList(ULONG op, struct BitMap *src, struct BitMap *dst, st
 	case COMPOSITE_Dest:
 		return COMPERR_Success;
 	case COMPOSITE_Clear:
-		w = GetTagData(COMPTAG_DestWidth, GetBitMapAttr(dst, BMA_WIDTH), tags);
-		h = GetTagData(COMPTAG_DestHeight, GetBitMapAttr(dst, BMA_HEIGHT), tags);
+		w = GetBitMapAttr(dst, BMA_WIDTH);
+		h = GetBitMapAttr(dst, BMA_HEIGHT);
+		w = GetTagData(COMPTAG_DestWidth, w, tags);
+		h = GetTagData(COMPTAG_DestHeight, h, tags);
 		BltBitMap(dst, dx, dy, dst, dx, dy, w, h, 0x00, 0xff, NULL);
 		return COMPERR_Success;
 	default:

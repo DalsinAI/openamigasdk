@@ -137,6 +137,7 @@ APTR os4c_AllocSysObject(ULONG type, struct TagItem *tags)
 			+ sizeof(struct os4c_port) - sizeof(struct MsgPort);
 		struct os4c_port *p;
 		LONG sig = (LONG)GetTagData(ASOPORT_Signal, (ULONG)-1, tags);
+		ULONG me;
 
 		p = AllocVec(alloc + (copy ? strlen0(name) + 1 : 0), mflags);
 		if (!p)
@@ -145,7 +146,10 @@ APTR os4c_AllocSysObject(ULONG type, struct TagItem *tags)
 		p->mp.mp_Node.ln_Pri = GetTagData(ASOPORT_Pri, 0, tags);
 		p->mp.mp_Node.ln_Name = (char *)(copy ? copy_after(p, alloc, name) : name);
 		p->mp.mp_Flags = GetTagData(ASOPORT_Action, PA_SIGNAL, tags);
-		p->mp.mp_SigTask = (APTR)GetTagData(ASOPORT_Target, (ULONG)FindTask(NULL), tags);
+		/* never one library call inside another's arguments: GCC's inline
+		 * calls keep the base in a6, and the inner call leaves its own there */
+		me = (ULONG)FindTask(NULL);
+		p->mp.mp_SigTask = (APTR)GetTagData(ASOPORT_Target, me, tags);
 		if (GetTagData(ASOPORT_AllocSig, TRUE, tags) && p->mp.mp_Flags == PA_SIGNAL) {
 			sig = AllocSignal(sig);
 			if (sig < 0) {
@@ -188,10 +192,13 @@ APTR os4c_AllocSysObject(ULONG type, struct TagItem *tags)
 			t[0].ti_Tag = TAG_DONE;
 		return t;
 	}
-	case ASOT_MEMPOOL:
+	case ASOT_MEMPOOL: {
 		/* OS 4 hands back the pool, which Alloc/FreePooled take; so do we */
-		return CreatePool(GetTagData(ASOPOOL_MFlags, MEMF_ANY, tags) & ~MEMF_OS4ONLY,
-			GetTagData(ASOPOOL_Puddle, 8192, tags), GetTagData(ASOPOOL_Threshold, 4096, tags));
+		ULONG pf = GetTagData(ASOPOOL_MFlags, MEMF_ANY, tags) & ~MEMF_OS4ONLY;
+		ULONG puddle = GetTagData(ASOPOOL_Puddle, 8192, tags);
+		ULONG thresh = GetTagData(ASOPOOL_Threshold, 4096, tags);
+		return CreatePool(pf, puddle, thresh);
+	}
 	case ASOT_MESSAGE: {
 		ULONG size = GetTagData(ASOMSG_Size, sizeof(struct Message), tags);
 		struct Message *m = AllocVec(size, mflags);
