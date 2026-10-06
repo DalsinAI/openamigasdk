@@ -1,0 +1,9 @@
+# The Open SDK: include this in a Makefile that builds OS 4 source for OS 3.2.
+#   SDK := path/to/openamigasdk
+#   include $(SDK)/Lib/os4compat/os4compat.mk
+#   $(CC) $(OS4COMPAT_CFLAGS) ... $(OS4COMPAT_LIBS)
+# The generated proto/ and interfaces/ headers come first on the include
+# path, so <proto/dos.h> gives the program IDOS as OS 4 does.
+OS4COMPAT_DIR    := $(SDK)/Lib/os4compat/build
+OS4COMPAT_CFLAGS := -I$(OS4COMPAT_DIR)/include -I$(SDK)/Include
+OS4COMPAT_LIBS   := -L$(OS4COMPAT_DIR) -los4compat -lamiga
