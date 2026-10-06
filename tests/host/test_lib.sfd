@@ -1,0 +1,21 @@
+==id $Id: test_lib.sfd 1.0 $
+* "test.library"
+==base _TestBase
+==basetype struct Library *
+==libname test.library
+==bias 30
+==public
+==include <exec/types.h>
+LONG TestAdd(LONG a, LONG b)(d0,d1)
+VOID TestNothing()()
+APTR TestTagsA(ULONG kind, struct TagItem *tags)(d0,a0)
+==varargs
+APTR TestTags(ULONG kind, Tag tag1, ...)(d0,a0)
+LONG TestVPrint(CONST_STRPTR fmt, APTR args)(a0,a1)
+==varargs
+LONG TestPrint(CONST_STRPTR fmt, ...)(a0,a1)
+==private
+LONG TestSecret()()
+==public
+LONG TestHook(LONG (*func)(LONG), LONG v)(a0,d0)
+==end

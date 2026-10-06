@@ -4,6 +4,10 @@ One kit for one platform to build and port towards and from: headers, function t
 
 Status, 6 October 2026: phase 1 in progress. The headers and function tables of what exists today (openrtg.library, opensocket.library, accontrol.device, oapspool.device), gathered at pinned commits by `tools/gather.py` from `manifest.json`, plus a Shell command template and a GadTools template. `Docs/PORTING.md` is where to start; `DESIGN.md` is the design.
 
+Also: **os4compat** (`Lib/os4compat`, `Docs/PORTING-OS4.md`), which builds
+AmigaOS 4 source for OS 3.2 by giving each library OS 4's interfaces and
+adding the OS 4 calls OS 3.2 lacks.
+
 Part of the Open family (internally, the Great Open Source Reunification
 Project): one platform, AmigaOS 3.2.x with the Open libraries, that is easy
 to set up, and to build and port for.

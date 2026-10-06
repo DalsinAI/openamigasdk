@@ -24,6 +24,12 @@ NDK 3.2) and `m68k-aros-gcc` on your PATH.
 - **Give a big program its own stack** with `StackSwap`, because libnix
   ignores `__stack`.
 - **Build libraries with `-fno-common`**, so library bases aren't merged.
+- **Never put one library call inside another's arguments** with the NDK's
+  inline calls, as in `GetTagData(TAG, (ULONG)FindTask(NULL), tags)`. Each
+  inline call loads its library base into a6, so the inner call leaves the
+  wrong base there and the outer call jumps into the wrong library. Work
+  out the inner value into a local first. Calls through OS 4 interfaces
+  (os4compat) are safe either way.
 - **Never require an accelerator.** Every Open library works on a real
   68040 with no Cradle. OpenGPU always has its CPU back end, and a feature
   that needs the services card says so in words.
@@ -38,6 +44,13 @@ NDK 3.2) and `m68k-aros-gcc` on your PATH.
 | opensocket.library | `acnetwork.h`, `proto/acnetwork.h`, `opensocket/acnet_socket_tags.h` | in the proto header |
 | accontrol.device | `accontrol/accontrol.h` | device commands |
 | oapspool.device | `openprint/oap_device.h` | device commands |
+| os4compat 0.1 | `os4compat/os4compat.h`, made `interfaces/` and `proto/` | `Lib/os4compat`, made from the NDK's SFD files |
+
+## Porting from OS 4
+
+`Docs/PORTING-OS4.md`: the os4compat kit gives OS 3.2's libraries OS 4's
+interfaces (`IExec->AllocVec()`) and adds the OS 4 calls OS 3.2 lacks, so
+most OS 4 source builds for 68k unchanged.
 
 `manifest.json` lists the commit each part comes from, and
 `tools/gather.py --check` says whether the copies here still match.
