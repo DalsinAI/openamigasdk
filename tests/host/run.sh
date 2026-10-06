@@ -1,0 +1,20 @@
+#!/bin/sh
+# Host tests for os4compat: the generator and the plain-C calls, with the
+# host's gcc and stand-in NDK headers (mock/). The 68k build is Lib/os4compat.
+set -e
+cd "$(dirname "$0")"
+SDK=../..
+T=$(mktemp -d)
+python3 $SDK/tools/os4ifgen.py "$T" test_lib.sfd
+W="-Wall -Wextra -Werror -Wno-unused-parameter -Wno-pointer-sign -Wno-int-to-pointer-cast -Wno-pointer-to-int-cast"
+# the members are built against the NDK's proto (here mock/), the program against the overrides
+gcc $W -Imock -I$SDK/Include -c -o "$T/test_iface.o" "$T/src/test_iface.c"
+gcc $W -Imock -I$SDK/Include -c -o "$T/test_ivar.o" "$T/src/test_ivar.c"
+gcc $W -Imock -I$SDK/Include -c -o "$T/reg.o" "$T/src/os4c_registry.c"
+gcc $W -I"$T/include" -Imock -I$SDK/Include -o "$T/t_iface" test_iface.c "$T"/*.o
+gcc $W -I"$T/include" -Imock -I$SDK/Include -fsyntax-only test_inline.c
+gcc $W -Imock -I$SDK/Include -o "$T/t_fmt" test_fmt.c $SDK/Lib/os4compat/src/utility_fmt.c
+"$T/t_iface"
+"$T/t_fmt"
+rm -rf "$T"
+echo "host tests passed"

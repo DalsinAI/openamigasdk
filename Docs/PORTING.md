@@ -38,6 +38,13 @@ NDK 3.2) and `m68k-aros-gcc` on your PATH.
 | opensocket.library | `acnetwork.h`, `proto/acnetwork.h`, `opensocket/acnet_socket_tags.h` | in the proto header |
 | accontrol.device | `accontrol/accontrol.h` | device commands |
 | oapspool.device | `openprint/oap_device.h` | device commands |
+| os4compat 0.1 | `os4compat/os4compat.h`, made `interfaces/` and `proto/` | `Lib/os4compat`, made from the NDK's SFD files |
+
+## Porting from OS 4
+
+`Docs/PORTING-OS4.md`: the os4compat kit gives OS 3.2's libraries OS 4's
+interfaces (`IExec->AllocVec()`) and adds the OS 4 calls OS 3.2 lacks, so
+most OS 4 source builds for 68k unchanged.
 
 `manifest.json` lists the commit each part comes from, and
 `tools/gather.py --check` says whether the copies here still match.
