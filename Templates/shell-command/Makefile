@@ -8,7 +8,9 @@ SRC      ?= hello.c
 SDK      ?= ../..
 CC_OS32  ?= m68k-amigaos-gcc
 CC_AROS  ?= m68k-aros-gcc
-CFLAGS   ?= -O2 -Wall -Wextra -Wno-pointer-sign
+# -fno-delete-null-pointer-checks: address 0 is memory on an Amiga; without it GCC
+# puts TRAP #7 (Software Failure 80000027) where it proves a pointer null.
+CFLAGS   ?= -O2 -fno-delete-null-pointer-checks -Wall -Wextra -Wno-pointer-sign
 
 all: os32 aros
 os32: build/$(NAME).os32

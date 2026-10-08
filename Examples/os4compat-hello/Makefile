@@ -3,7 +3,9 @@
 #   make                                  build/HelloOS4
 SDK      ?= ../..
 CC       ?= m68k-amigaos-gcc
-CFLAGS   ?= -O2 -Wall -Wno-pointer-sign
+# -fno-delete-null-pointer-checks: address 0 is memory on an Amiga; without it GCC
+# puts TRAP #7 (Software Failure 80000027) where it proves a pointer null.
+CFLAGS   ?= -O2 -fno-delete-null-pointer-checks -Wall -Wno-pointer-sign
 include $(SDK)/Lib/os4compat/os4compat.mk
 
 build/HelloOS4: hello_os4.c
