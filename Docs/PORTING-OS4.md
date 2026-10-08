@@ -37,11 +37,15 @@ own calls use them.
 SDK := path/to/openamigasdk
 include $(SDK)/Lib/os4compat/os4compat.mk
 prog: prog.c
-	m68k-amigaos-gcc -m68020 -noixemul -O2 $(OS4COMPAT_CFLAGS) -o $@ prog.c $(OS4COMPAT_LIBS)
+	m68k-amigaos-gcc -m68020 -noixemul -O2 -fno-delete-null-pointer-checks $(OS4COMPAT_CFLAGS) -o $@ prog.c $(OS4COMPAT_LIBS)
 ```
 
 `Examples/os4compat-hello` is a complete OS 4 style program that builds this
 way, and prints PASS or FAIL for each call it tries.
+
+`-fno-delete-null-pointer-checks` matters on 68k: address 0 is memory on an
+Amiga, and without it GCC puts `TRAP #7` (Software Failure 80000027) where it
+can prove a pointer is NULL. The SDK's Makefiles pass it by default.
 
 ## How it works
 
