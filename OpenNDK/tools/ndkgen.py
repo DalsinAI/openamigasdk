@@ -336,7 +336,7 @@ def inline(lib):
            "#define __OPENNDK_FPCLOBBER \"fp0\", \"fp1\",\n#else\n"
            "#define __OPENNDK_FPCLOBBER\n#endif\n#endif\n"]
     for f in lib.public():
-        if f.alias_of:
+        if f.alias_of and same_call(f, f.alias_of):
             out.append("#define %s(...) %s(__VA_ARGS__)\n" % (f.name, f.alias_of.name) if f.args
                        else "#define %s() %s()\n" % (f.name, f.alias_of.name))
             continue
@@ -345,6 +345,12 @@ def inline(lib):
         out.append(inline_func(lib, f, bn))
     out.append("#endif /* %s */" % g)
     return "\n".join(out) + "\n"
+
+
+def same_call(f, g):
+    """An alias that takes the same registers is a plain second name; one
+    that takes fewer (dos's DoPkt0 to DoPkt4) gets an inline of its own."""
+    return f.regs == g.regs
 
 
 def cast_in(a, var):
@@ -430,7 +436,7 @@ def stubs(lib, outdir):
     os.makedirs(outdir, exist_ok=True)
     written = []
     for f in lib.public():
-        if f.alias_of:
+        if f.alias_of and same_call(f, f.alias_of):
             continue
         path = os.path.join(outdir, "%s_%s.c" % (lib.stem.replace(".", "_"), f.name))
         src = ["/* " + BANNER % lib.sfdname + " */",

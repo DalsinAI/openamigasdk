@@ -27,8 +27,6 @@ VOID RefreshTagItemClones(struct TagItem * clone, CONST struct TagItem * origina
 BOOL TagInArray(Tag tagValue, CONST Tag * tagArray) (d0,a0)
 ULONG FilterTagItems(struct TagItem * tagList, CONST Tag * filterArray, ULONG logic) (a0,a1,d0)
 ULONG CallHookPkt(struct Hook * hook, APTR object, APTR paramPacket) (a0,a2,a1)
-==varargs
-ULONG CallHook(struct Hook * hook, APTR object, ...) (a0,a2,a1)
 ==private
 VOID utilityPrivate1() ()
 VOID utilityPrivate2() ()

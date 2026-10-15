@@ -22,7 +22,6 @@
 #pragma libcall UtilityBase TagInArray 5a 8002
 #pragma libcall UtilityBase FilterTagItems 60 09803
 #pragma libcall UtilityBase CallHookPkt 66 9a803
-#pragma tagcall UtilityBase CallHook 66 9a803
 #pragma libcall UtilityBase Amiga2Date 78 8002
 #pragma libcall UtilityBase Date2Amiga 7e 801
 #pragma libcall UtilityBase CheckDate 84 801

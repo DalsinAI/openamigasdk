@@ -6,6 +6,7 @@
 #define CLIB_DATATYPES_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <exec/lists.h>
 #include <intuition/intuition.h>
 #include <intuition/classes.h>

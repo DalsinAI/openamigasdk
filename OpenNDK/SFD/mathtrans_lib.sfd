@@ -7,6 +7,7 @@
 ==bias 30
 ==public
 ==include <exec/types.h>
+==include <exec/libraries.h>
 ==version 33
 FLOAT SPAtan(FLOAT parm) (d0)
 FLOAT SPSin(FLOAT parm) (d0)

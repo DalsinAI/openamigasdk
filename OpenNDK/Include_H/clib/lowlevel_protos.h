@@ -6,6 +6,7 @@
 #define CLIB_LOWLEVEL_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <devices/timer.h>
 #include <libraries/lowlevel.h>
 #include <utility/tagitem.h>

@@ -6,6 +6,7 @@
 #define CLIB_KEYMAP_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <devices/inputevent.h>
 #include <devices/keymap.h>
 

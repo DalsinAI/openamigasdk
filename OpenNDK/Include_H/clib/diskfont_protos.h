@@ -6,6 +6,7 @@
 #define CLIB_DISKFONT_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <exec/lists.h>
 #include <dos/dos.h>
 #include <diskfont/diskfont.h>

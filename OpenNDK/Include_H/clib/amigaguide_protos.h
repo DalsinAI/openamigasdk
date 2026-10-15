@@ -6,6 +6,7 @@
 #define CLIB_AMIGAGUIDE_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <exec/ports.h>
 #include <dos/dos.h>
 #include <libraries/amigaguide.h>
