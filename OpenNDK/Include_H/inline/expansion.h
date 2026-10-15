@@ -55,7 +55,7 @@ __expansion_AddBootNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags,
 }
 #define AddBootNode(bootPri, flags, deviceNode, configDev) __expansion_AddBootNode((EXPANSION_BASE_NAME), (bootPri), (flags), (deviceNode), (configDev))
 
-static __inline__ LONG
+static __inline__ VOID
 __expansion_AllocBoardMem(struct ExpansionBase *__base, ULONG slotSpec)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(slotSpec);
@@ -67,7 +67,7 @@ __expansion_AllocBoardMem(struct ExpansionBase *__base, ULONG slotSpec)
 		: "+r" (_d0), "=r" (_d1), "=r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (LONG)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AllocBoardMem(slotSpec) __expansion_AllocBoardMem((EXPANSION_BASE_NAME), (slotSpec))
 
@@ -87,7 +87,7 @@ __expansion_AllocConfigDev(struct ExpansionBase *__base)
 }
 #define AllocConfigDev() __expansion_AllocConfigDev((EXPANSION_BASE_NAME))
 
-static __inline__ LONG
+static __inline__ APTR
 __expansion_AllocExpansionMem(struct ExpansionBase *__base, ULONG numSlots, ULONG slotAlign)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(numSlots);
@@ -99,11 +99,11 @@ __expansion_AllocExpansionMem(struct ExpansionBase *__base, ULONG numSlots, ULON
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (LONG)_d0;
+	return (APTR)_d0;
 }
 #define AllocExpansionMem(numSlots, slotAlign) __expansion_AllocExpansionMem((EXPANSION_BASE_NAME), (numSlots), (slotAlign))
 
-static __inline__ BOOL
+static __inline__ VOID
 __expansion_ConfigBoard(struct ExpansionBase *__base, APTR board, struct ConfigDev * configDev)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(board);
@@ -115,11 +115,11 @@ __expansion_ConfigBoard(struct ExpansionBase *__base, APTR board, struct ConfigD
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (BOOL)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ConfigBoard(board, configDev) __expansion_ConfigBoard((EXPANSION_BASE_NAME), (board), (configDev))
 
-static __inline__ BOOL
+static __inline__ VOID
 __expansion_ConfigChain(struct ExpansionBase *__base, APTR baseAddr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(baseAddr);
@@ -131,7 +131,7 @@ __expansion_ConfigChain(struct ExpansionBase *__base, APTR baseAddr)
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (BOOL)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ConfigChain(baseAddr) __expansion_ConfigChain((EXPANSION_BASE_NAME), (baseAddr))
 
@@ -215,7 +215,7 @@ __expansion_ReadExpansionByte(struct ExpansionBase *__base, CONST_APTR board, UL
 }
 #define ReadExpansionByte(board, offset) __expansion_ReadExpansionByte((EXPANSION_BASE_NAME), (board), (offset))
 
-static __inline__ BOOL
+static __inline__ VOID
 __expansion_ReadExpansionRom(struct ExpansionBase *__base, CONST_APTR board, struct ConfigDev * configDev)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(board);
@@ -227,7 +227,7 @@ __expansion_ReadExpansionRom(struct ExpansionBase *__base, CONST_APTR board, str
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (BOOL)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReadExpansionRom(board, configDev) __expansion_ReadExpansionRom((EXPANSION_BASE_NAME), (board), (configDev))
 
@@ -247,8 +247,8 @@ __expansion_RemConfigDev(struct ExpansionBase *__base, struct ConfigDev * config
 }
 #define RemConfigDev(configDev) __expansion_RemConfigDev((EXPANSION_BASE_NAME), (configDev))
 
-static __inline__ BOOL
-__expansion_WriteExpansionByte(struct ExpansionBase *__base, APTR board, ULONG offset, ULONG byte)
+static __inline__ VOID
+__expansion_WriteExpansionByte(struct ExpansionBase *__base, APTR board, ULONG offset, UBYTE byte)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(board);
 	register ULONG _d0 __asm("d0") = (ULONG)(offset);
@@ -259,7 +259,7 @@ __expansion_WriteExpansionByte(struct ExpansionBase *__base, APTR board, ULONG o
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (BOOL)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WriteExpansionByte(board, offset, byte) __expansion_WriteExpansionByte((EXPANSION_BASE_NAME), (board), (offset), (byte))
 

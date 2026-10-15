@@ -56,7 +56,7 @@ __intuition_Intuition(struct IntuitionBase *__base, struct InputEvent * iEvent)
 #define Intuition(iEvent) __intuition_Intuition((INTUITION_BASE_NAME), (iEvent))
 
 static __inline__ UWORD
-__intuition_AddGadget(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget, ULONG position)
+__intuition_AddGadget(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget, UWORD position)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(gadget);
@@ -184,7 +184,7 @@ __intuition_CurrentTime(struct IntuitionBase *__base, ULONG * seconds, ULONG * m
 #define CurrentTime(seconds, micros) __intuition_CurrentTime((INTUITION_BASE_NAME), (seconds), (micros))
 
 static __inline__ BOOL
-__intuition_DisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_STRPTR string, ULONG height)
+__intuition_DisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_STRPTR string, UWORD height)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(alertNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
@@ -234,7 +234,7 @@ __intuition_DoubleClick(struct IntuitionBase *__base, ULONG sSeconds, ULONG sMic
 #define DoubleClick(sSeconds, sMicros, cSeconds, cMicros) __intuition_DoubleClick((INTUITION_BASE_NAME), (sSeconds), (sMicros), (cSeconds), (cMicros))
 
 static __inline__ VOID
-__intuition_DrawBorder(struct IntuitionBase *__base, struct RastPort * rp, CONST struct Border * border, LONG leftOffset, LONG topOffset)
+__intuition_DrawBorder(struct IntuitionBase *__base, struct RastPort * rp, CONST struct Border * border, WORD leftOffset, WORD topOffset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(border);
@@ -250,7 +250,7 @@ __intuition_DrawBorder(struct IntuitionBase *__base, struct RastPort * rp, CONST
 #define DrawBorder(rp, border, leftOffset, topOffset) __intuition_DrawBorder((INTUITION_BASE_NAME), (rp), (border), (leftOffset), (topOffset))
 
 static __inline__ VOID
-__intuition_DrawImage(struct IntuitionBase *__base, struct RastPort * rp, CONST struct Image * image, LONG leftOffset, LONG topOffset)
+__intuition_DrawImage(struct IntuitionBase *__base, struct RastPort * rp, CONST struct Image * image, WORD leftOffset, WORD topOffset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(image);
@@ -282,7 +282,7 @@ __intuition_EndRequest(struct IntuitionBase *__base, struct Requester * requeste
 #define EndRequest(requester, window) __intuition_EndRequest((INTUITION_BASE_NAME), (requester), (window))
 
 static __inline__ struct Preferences *
-__intuition_GetDefPrefs(struct IntuitionBase *__base, struct Preferences * preferences, LONG size)
+__intuition_GetDefPrefs(struct IntuitionBase *__base, struct Preferences * preferences, WORD size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(preferences);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
@@ -298,7 +298,7 @@ __intuition_GetDefPrefs(struct IntuitionBase *__base, struct Preferences * prefe
 #define GetDefPrefs(preferences, size) __intuition_GetDefPrefs((INTUITION_BASE_NAME), (preferences), (size))
 
 static __inline__ struct Preferences *
-__intuition_GetPrefs(struct IntuitionBase *__base, struct Preferences * preferences, LONG size)
+__intuition_GetPrefs(struct IntuitionBase *__base, struct Preferences * preferences, WORD size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(preferences);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
@@ -330,7 +330,7 @@ __intuition_InitRequester(struct IntuitionBase *__base, struct Requester * reque
 #define InitRequester(requester) __intuition_InitRequester((INTUITION_BASE_NAME), (requester))
 
 static __inline__ struct MenuItem *
-__intuition_ItemAddress(struct IntuitionBase *__base, CONST struct Menu * menuStrip, ULONG menuNumber)
+__intuition_ItemAddress(struct IntuitionBase *__base, CONST struct Menu * menuStrip, UWORD menuNumber)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(menuStrip);
 	register ULONG _d0 __asm("d0") = (ULONG)(menuNumber);
@@ -362,7 +362,7 @@ __intuition_ModifyIDCMP(struct IntuitionBase *__base, struct Window * window, UL
 #define ModifyIDCMP(window, flags) __intuition_ModifyIDCMP((INTUITION_BASE_NAME), (window), (flags))
 
 static __inline__ VOID
-__intuition_ModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, ULONG flags, ULONG horizPot, ULONG vertPot, ULONG horizBody, ULONG vertBody)
+__intuition_ModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, UWORD flags, UWORD horizPot, UWORD vertPot, UWORD horizBody, UWORD vertBody)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
@@ -382,7 +382,7 @@ __intuition_ModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, str
 #define ModifyProp(gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody) __intuition_ModifyProp((INTUITION_BASE_NAME), (gadget), (window), (requester), (flags), (horizPot), (vertPot), (horizBody), (vertBody))
 
 static __inline__ VOID
-__intuition_MoveScreen(struct IntuitionBase *__base, struct Screen * screen, LONG dx, LONG dy)
+__intuition_MoveScreen(struct IntuitionBase *__base, struct Screen * screen, WORD dx, WORD dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -398,7 +398,7 @@ __intuition_MoveScreen(struct IntuitionBase *__base, struct Screen * screen, LON
 #define MoveScreen(screen, dx, dy) __intuition_MoveScreen((INTUITION_BASE_NAME), (screen), (dx), (dy))
 
 static __inline__ VOID
-__intuition_MoveWindow(struct IntuitionBase *__base, struct Window * window, LONG dx, LONG dy)
+__intuition_MoveWindow(struct IntuitionBase *__base, struct Window * window, WORD dx, WORD dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -431,7 +431,7 @@ __intuition_OffGadget(struct IntuitionBase *__base, struct Gadget * gadget, stru
 #define OffGadget(gadget, window, requester) __intuition_OffGadget((INTUITION_BASE_NAME), (gadget), (window), (requester))
 
 static __inline__ VOID
-__intuition_OffMenu(struct IntuitionBase *__base, struct Window * window, ULONG menuNumber)
+__intuition_OffMenu(struct IntuitionBase *__base, struct Window * window, UWORD menuNumber)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(menuNumber);
@@ -464,7 +464,7 @@ __intuition_OnGadget(struct IntuitionBase *__base, struct Gadget * gadget, struc
 #define OnGadget(gadget, window, requester) __intuition_OnGadget((INTUITION_BASE_NAME), (gadget), (window), (requester))
 
 static __inline__ VOID
-__intuition_OnMenu(struct IntuitionBase *__base, struct Window * window, ULONG menuNumber)
+__intuition_OnMenu(struct IntuitionBase *__base, struct Window * window, UWORD menuNumber)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(menuNumber);
@@ -528,7 +528,7 @@ __intuition_OpenWorkBench(struct IntuitionBase *__base)
 #define OpenWorkBench() __intuition_OpenWorkBench((INTUITION_BASE_NAME))
 
 static __inline__ VOID
-__intuition_PrintIText(struct IntuitionBase *__base, struct RastPort * rp, CONST struct IntuiText * iText, LONG left, LONG top)
+__intuition_PrintIText(struct IntuitionBase *__base, struct RastPort * rp, CONST struct IntuiText * iText, WORD left, WORD top)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(iText);
@@ -577,7 +577,7 @@ __intuition_RemoveGadget(struct IntuitionBase *__base, struct Window * window, s
 #define RemoveGadget(window, gadget) __intuition_RemoveGadget((INTUITION_BASE_NAME), (window), (gadget))
 
 static __inline__ VOID
-__intuition_ReportMouse(struct IntuitionBase *__base, LONG flag, struct Window * window)
+__intuition_ReportMouse(struct IntuitionBase *__base, BOOL flag, struct Window * window)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(flag);
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
@@ -591,6 +591,22 @@ __intuition_ReportMouse(struct IntuitionBase *__base, LONG flag, struct Window *
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReportMouse(flag, window) __intuition_ReportMouse((INTUITION_BASE_NAME), (flag), (window))
+
+static __inline__ VOID
+__intuition_ReportMouse1(struct IntuitionBase *__base, struct Window * window, BOOL flag)
+{
+	register ULONG _a0 __asm("a0") = (ULONG)(window);
+	register ULONG _d0 __asm("d0") = (ULONG)(flag);
+	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register ULONG _d1 __asm("d1");
+	register ULONG _a1 __asm("a1");
+	__asm__ __volatile__ ("jsr -234(%/a6)"
+		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "=r" (_a1)
+		: "r" (_a6)
+		: __OPENNDK_FPCLOBBER "cc", "memory");
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
+}
+#define ReportMouse1(window, flag) __intuition_ReportMouse1((INTUITION_BASE_NAME), (window), (flag))
 
 static __inline__ BOOL
 __intuition_Request(struct IntuitionBase *__base, struct Requester * requester, struct Window * window)
@@ -673,7 +689,7 @@ __intuition_SetMenuStrip(struct IntuitionBase *__base, struct Window * window, s
 #define SetMenuStrip(window, menu) __intuition_SetMenuStrip((INTUITION_BASE_NAME), (window), (menu))
 
 static __inline__ VOID
-__intuition_SetPointer(struct IntuitionBase *__base, struct Window * window, UWORD * pointer, LONG height, LONG width, LONG xOffset, LONG yOffset)
+__intuition_SetPointer(struct IntuitionBase *__base, struct Window * window, UWORD * pointer, WORD height, WORD width, WORD xOffset, WORD yOffset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(pointer);
@@ -708,7 +724,7 @@ __intuition_SetWindowTitles(struct IntuitionBase *__base, struct Window * window
 #define SetWindowTitles(window, windowTitle, screenTitle) __intuition_SetWindowTitles((INTUITION_BASE_NAME), (window), (windowTitle), (screenTitle))
 
 static __inline__ VOID
-__intuition_ShowTitle(struct IntuitionBase *__base, struct Screen * screen, LONG showIt)
+__intuition_ShowTitle(struct IntuitionBase *__base, struct Screen * screen, BOOL showIt)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(showIt);
@@ -724,7 +740,7 @@ __intuition_ShowTitle(struct IntuitionBase *__base, struct Screen * screen, LONG
 #define ShowTitle(screen, showIt) __intuition_ShowTitle((INTUITION_BASE_NAME), (screen), (showIt))
 
 static __inline__ VOID
-__intuition_SizeWindow(struct IntuitionBase *__base, struct Window * window, LONG dx, LONG dy)
+__intuition_SizeWindow(struct IntuitionBase *__base, struct Window * window, WORD dx, WORD dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -822,7 +838,7 @@ __intuition_WindowLimits(struct IntuitionBase *__base, struct Window * window, L
 #define WindowLimits(window, widthMin, heightMin, widthMax, heightMax) __intuition_WindowLimits((INTUITION_BASE_NAME), (window), (widthMin), (heightMin), (widthMax), (heightMax))
 
 static __inline__ struct Preferences *
-__intuition_SetPrefs(struct IntuitionBase *__base, CONST struct Preferences * preferences, LONG size, LONG inform)
+__intuition_SetPrefs(struct IntuitionBase *__base, CONST struct Preferences * preferences, LONG size, BOOL inform)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(preferences);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
@@ -886,7 +902,7 @@ __intuition_WBenchToFront(struct IntuitionBase *__base)
 #define WBenchToFront() __intuition_WBenchToFront((INTUITION_BASE_NAME))
 
 static __inline__ BOOL
-__intuition_AutoRequest(struct IntuitionBase *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG pFlag, ULONG nFlag, ULONG width, ULONG height)
+__intuition_AutoRequest(struct IntuitionBase *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG pFlag, ULONG nFlag, UWORD width, UWORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(body);
@@ -922,7 +938,7 @@ __intuition_BeginRefresh(struct IntuitionBase *__base, struct Window * window)
 #define BeginRefresh(window) __intuition_BeginRefresh((INTUITION_BASE_NAME), (window))
 
 static __inline__ struct Window *
-__intuition_BuildSysRequest(struct IntuitionBase *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG flags, ULONG width, ULONG height)
+__intuition_BuildSysRequest(struct IntuitionBase *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG flags, UWORD width, UWORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(body);
@@ -1037,7 +1053,7 @@ __intuition_AllocRemember(struct IntuitionBase *__base, struct Remember ** remem
 #define AllocRemember(rememberKey, size, flags) __intuition_AllocRemember((INTUITION_BASE_NAME), (rememberKey), (size), (flags))
 
 static __inline__ VOID
-__intuition_AlohaWorkbench(struct IntuitionBase *__base, struct MsgPort * wbport)
+__intuition_AlohaWorkbench(struct IntuitionBase *__base, LONG wbport)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(wbport);
 	register struct IntuitionBase *_a6 __asm("a6") = __base;
@@ -1053,7 +1069,7 @@ __intuition_AlohaWorkbench(struct IntuitionBase *__base, struct MsgPort * wbport
 #define AlohaWorkbench(wbport) __intuition_AlohaWorkbench((INTUITION_BASE_NAME), (wbport))
 
 static __inline__ VOID
-__intuition_FreeRemember(struct IntuitionBase *__base, struct Remember ** rememberKey, LONG reallyForget)
+__intuition_FreeRemember(struct IntuitionBase *__base, struct Remember ** rememberKey, BOOL reallyForget)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rememberKey);
 	register ULONG _d0 __asm("d0") = (ULONG)(reallyForget);
@@ -1101,7 +1117,7 @@ __intuition_UnlockIBase(struct IntuitionBase *__base, ULONG ibLock)
 #define UnlockIBase(ibLock) __intuition_UnlockIBase((INTUITION_BASE_NAME), (ibLock))
 
 static __inline__ LONG
-__intuition_GetScreenData(struct IntuitionBase *__base, APTR buffer, ULONG size, ULONG type, CONST struct Screen * screen)
+__intuition_GetScreenData(struct IntuitionBase *__base, APTR buffer, UWORD size, UWORD type, CONST struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
@@ -1117,7 +1133,7 @@ __intuition_GetScreenData(struct IntuitionBase *__base, APTR buffer, ULONG size,
 #define GetScreenData(buffer, size, type, screen) __intuition_GetScreenData((INTUITION_BASE_NAME), (buffer), (size), (type), (screen))
 
 static __inline__ VOID
-__intuition_RefreshGList(struct IntuitionBase *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester, LONG numGad)
+__intuition_RefreshGList(struct IntuitionBase *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester, WORD numGad)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadgets);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
@@ -1134,7 +1150,7 @@ __intuition_RefreshGList(struct IntuitionBase *__base, struct Gadget * gadgets, 
 #define RefreshGList(gadgets, window, requester, numGad) __intuition_RefreshGList((INTUITION_BASE_NAME), (gadgets), (window), (requester), (numGad))
 
 static __inline__ UWORD
-__intuition_AddGList(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget, ULONG position, LONG numGad, struct Requester * requester)
+__intuition_AddGList(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget, UWORD position, WORD numGad, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(gadget);
@@ -1151,7 +1167,7 @@ __intuition_AddGList(struct IntuitionBase *__base, struct Window * window, struc
 #define AddGList(window, gadget, position, numGad, requester) __intuition_AddGList((INTUITION_BASE_NAME), (window), (gadget), (position), (numGad), (requester))
 
 static __inline__ UWORD
-__intuition_RemoveGList(struct IntuitionBase *__base, struct Window * remPtr, struct Gadget * gadget, LONG numGad)
+__intuition_RemoveGList(struct IntuitionBase *__base, struct Window * remPtr, struct Gadget * gadget, WORD numGad)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(remPtr);
 	register ULONG _a1 __asm("a1") = (ULONG)(gadget);
@@ -1216,7 +1232,7 @@ __intuition_ActivateGadget(struct IntuitionBase *__base, struct Gadget * gadgets
 #define ActivateGadget(gadgets, window, requester) __intuition_ActivateGadget((INTUITION_BASE_NAME), (gadgets), (window), (requester))
 
 static __inline__ VOID
-__intuition_NewModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, ULONG flags, ULONG horizPot, ULONG vertPot, ULONG horizBody, ULONG vertBody, LONG numGad)
+__intuition_NewModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, UWORD flags, UWORD horizPot, UWORD vertPot, UWORD horizBody, UWORD vertBody, WORD numGad)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
@@ -1237,7 +1253,7 @@ __intuition_NewModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, 
 #define NewModifyProp(gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody, numGad) __intuition_NewModifyProp((INTUITION_BASE_NAME), (gadget), (window), (requester), (flags), (horizPot), (vertPot), (horizBody), (vertBody), (numGad))
 
 static __inline__ LONG
-__intuition_QueryOverscan(struct IntuitionBase *__base, ULONG displayID, struct Rectangle * rect, LONG oScanType)
+__intuition_QueryOverscan(struct IntuitionBase *__base, ULONG displayID, struct Rectangle * rect, WORD oScanType)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(displayID);
 	register ULONG _a1 __asm("a1") = (ULONG)(rect);
@@ -1269,7 +1285,7 @@ __intuition_MoveWindowInFrontOf(struct IntuitionBase *__base, struct Window * wi
 #define MoveWindowInFrontOf(window, behindWindow) __intuition_MoveWindowInFrontOf((INTUITION_BASE_NAME), (window), (behindWindow))
 
 static __inline__ VOID
-__intuition_ChangeWindowBox(struct IntuitionBase *__base, struct Window * window, LONG left, LONG top, LONG width, LONG height)
+__intuition_ChangeWindowBox(struct IntuitionBase *__base, struct Window * window, WORD left, WORD top, WORD width, WORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(left);
@@ -1303,7 +1319,7 @@ __intuition_SetEditHook(struct IntuitionBase *__base, struct Hook * hook)
 #define SetEditHook(hook) __intuition_SetEditHook((INTUITION_BASE_NAME), (hook))
 
 static __inline__ LONG
-__intuition_SetMouseQueue(struct IntuitionBase *__base, struct Window * window, ULONG queueLength)
+__intuition_SetMouseQueue(struct IntuitionBase *__base, struct Window * window, UWORD queueLength)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(queueLength);
@@ -1431,7 +1447,7 @@ __intuition_SetDefaultPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
 #define SetDefaultPubScreen(name) __intuition_SetDefaultPubScreen((INTUITION_BASE_NAME), (name))
 
 static __inline__ UWORD
-__intuition_SetPubScreenModes(struct IntuitionBase *__base, ULONG modes)
+__intuition_SetPubScreenModes(struct IntuitionBase *__base, UWORD modes)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(modes);
 	register struct IntuitionBase *_a6 __asm("a6") = __base;
@@ -1447,7 +1463,7 @@ __intuition_SetPubScreenModes(struct IntuitionBase *__base, ULONG modes)
 #define SetPubScreenModes(modes) __intuition_SetPubScreenModes((INTUITION_BASE_NAME), (modes))
 
 static __inline__ UWORD
-__intuition_PubScreenStatus(struct IntuitionBase *__base, struct Screen * screen, ULONG statusFlags)
+__intuition_PubScreenStatus(struct IntuitionBase *__base, struct Screen * screen, UWORD statusFlags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(statusFlags);
@@ -1563,7 +1579,7 @@ __intuition_BuildEasyRequestArgs(struct IntuitionBase *__base, struct Window * w
 #define BuildEasyRequestArgs(window, easyStruct, idcmp, args) __intuition_BuildEasyRequestArgs((INTUITION_BASE_NAME), (window), (easyStruct), (idcmp), (args))
 
 static __inline__ LONG
-__intuition_SysReqHandler(struct IntuitionBase *__base, struct Window * window, ULONG * idcmpPtr, LONG waitInput)
+__intuition_SysReqHandler(struct IntuitionBase *__base, struct Window * window, ULONG * idcmpPtr, BOOL waitInput)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(idcmpPtr);
@@ -1611,7 +1627,7 @@ __intuition_OpenScreenTagList(struct IntuitionBase *__base, CONST struct NewScre
 #define OpenScreenTagList(newScreen, tagList) __intuition_OpenScreenTagList((INTUITION_BASE_NAME), (newScreen), (tagList))
 
 static __inline__ VOID
-__intuition_DrawImageState(struct IntuitionBase *__base, struct RastPort * rp, struct Image * image, LONG leftOffset, LONG topOffset, ULONG state, CONST struct DrawInfo * drawInfo)
+__intuition_DrawImageState(struct IntuitionBase *__base, struct RastPort * rp, struct Image * image, WORD leftOffset, WORD topOffset, ULONG state, CONST struct DrawInfo * drawInfo)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(image);
@@ -1645,7 +1661,7 @@ __intuition_PointInImage(struct IntuitionBase *__base, ULONG point, struct Image
 #define PointInImage(point, image) __intuition_PointInImage((INTUITION_BASE_NAME), (point), (image))
 
 static __inline__ VOID
-__intuition_EraseImage(struct IntuitionBase *__base, struct RastPort * rp, struct Image * image, LONG leftOffset, LONG topOffset)
+__intuition_EraseImage(struct IntuitionBase *__base, struct RastPort * rp, struct Image * image, WORD leftOffset, WORD topOffset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(image);
@@ -1760,7 +1776,7 @@ __intuition_NextObject(struct IntuitionBase *__base, APTR objectPtrPtr)
 #define NextObject(objectPtrPtr) __intuition_NextObject((INTUITION_BASE_NAME), (objectPtrPtr))
 
 static __inline__ struct IClass *
-__intuition_MakeClass(struct IntuitionBase *__base, CONST_STRPTR classID, CONST_STRPTR superClassID, CONST struct IClass * superClassPtr, ULONG instanceSize, ULONG flags)
+__intuition_MakeClass(struct IntuitionBase *__base, CONST_STRPTR classID, CONST_STRPTR superClassID, CONST struct IClass * superClassPtr, UWORD instanceSize, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(classID);
 	register ULONG _a1 __asm("a1") = (ULONG)(superClassID);
@@ -1956,7 +1972,7 @@ __intuition_ScreenPosition(struct IntuitionBase *__base, struct Screen * screen,
 #define ScreenPosition(screen, flags, x1, y1, x2, y2) __intuition_ScreenPosition((INTUITION_BASE_NAME), (screen), (flags), (x1), (y1), (x2), (y2))
 
 static __inline__ VOID
-__intuition_ScrollWindowRaster(struct IntuitionBase *__base, struct Window * win, LONG dx, LONG dy, LONG xMin, LONG yMin, LONG xMax, LONG yMax)
+__intuition_ScrollWindowRaster(struct IntuitionBase *__base, struct Window * win, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -2026,7 +2042,7 @@ __intuition_SetWindowPointerA(struct IntuitionBase *__base, struct Window * win,
 #define SetWindowPointerA(win, taglist) __intuition_SetWindowPointerA((INTUITION_BASE_NAME), (win), (taglist))
 
 static __inline__ BOOL
-__intuition_TimedDisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_STRPTR string, ULONG height, ULONG time)
+__intuition_TimedDisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_STRPTR string, UWORD height, ULONG time)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(alertNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);

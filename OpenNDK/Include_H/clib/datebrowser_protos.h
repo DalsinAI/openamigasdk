@@ -18,6 +18,9 @@ extern "C" {
 
 /* From version 44 */
 Class * DATEBROWSER_GetClass(VOID);
+UWORD JulianWeekDay(ULONG day, ULONG month, LONG year);
+UWORD JulianMonthDays(ULONG month, LONG year);
+BOOL JulianLeapYear(LONG year);
 
 #ifdef __cplusplus
 }

@@ -45,7 +45,9 @@ def headers(root):
 
 def cflags(root):
     inc = subprocess.run([CC, "-print-file-name=include"], capture_output=True, text=True).stdout.strip()
-    return ["-nostdinc", "-ffreestanding", "-isystem", inc, "-I", root, "-w", "-fomit-frame-pointer"] \
+    shim = os.path.join(os.path.dirname(os.path.abspath(__file__)), "shim")
+    return ["-nostdinc", "-ffreestanding", "-isystem", inc, "-idirafter", shim, "-I", root, "-w",
+            "-fomit-frame-pointer"] \
         + os.environ.get("LAYOUT_CFLAGS", "").split()
 
 

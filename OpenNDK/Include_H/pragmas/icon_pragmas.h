@@ -17,10 +17,12 @@
 #pragma libcall IconBase FindToolType 60 9802
 #pragma libcall IconBase MatchToolValue 66 9802
 #pragma libcall IconBase BumpRevision 6c 9802
+#pragma libcall IconBase FreeAlloc 72 a9803
 #pragma libcall IconBase GetDefDiskObject 78 001
 #pragma libcall IconBase PutDefDiskObject 7e 801
 #pragma libcall IconBase GetDiskObjectNew 84 801
 #pragma libcall IconBase DeleteDiskObject 8a 801
+#pragma libcall IconBase FreeFree 90 9802
 #pragma libcall IconBase DupDiskObjectA 96 9802
 #pragma tagcall IconBase DupDiskObject 96 9802
 #pragma libcall IconBase IconControlA 9c 9802
@@ -36,5 +38,6 @@
 #pragma libcall IconBase LayoutIconA c0 a9803
 #pragma tagcall IconBase LayoutIcon c0 a9803
 #pragma libcall IconBase ChangeToSelectedIconColor c6 801
+#pragma libcall IconBase BumpRevisionLength cc 09803
 
 #endif /* PRAGMAS_ICON_PRAGMAS_H */

@@ -66,10 +66,13 @@
 #define AN_FreeTwice		0x01000009
 #define AN_BogusExcpt		0x8100000A
 #define AN_IOUsedTwice		0x0100000B
+#define AN_MemoryInsane		0x0100000C
 #define AN_IOAfterClose		0x0100000D
 #define AN_StackProbe		0x0100000E
 #define AN_BadFreeAddr		0x0100000F
 #define AN_BadSemaphore		0x01000010
+#define AN_AVLNotImpl		0x01000011
+#define AN_TreeNotImpl		0x01000012
 
 /* graphics.library */
 #define AN_GraphicsLib		0x02000000
@@ -110,6 +113,7 @@
 #define AN_NoConsole		0x8400000F
 #define AN_NoISem		0x04000010
 #define AN_ISemOrder		0x04000011
+#define AN_DeadIntui		0x04000012
 
 /* The maths libraries */
 #define AN_MathLib		0x05000000
@@ -130,6 +134,7 @@
 #define AN_BadOverlay		0x0700000C
 #define AN_BadInitFunc		0x0700000D
 #define AN_FileReclosed		0x0700000E
+#define AN_CLIObsolete		0x0700000F
 
 /* ramlib */
 #define AN_RAMLib		0x08000000

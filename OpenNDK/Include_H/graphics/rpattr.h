@@ -10,6 +10,7 @@
 #define RPTAG_BPen		0x80000003
 #define RPTAG_DrMd		0x80000004
 #define RPTAG_OutlinePen	0x80000005
+#define RPTAG_OutLinePen	RPTAG_OutlinePen	/* the same tag, the other spelling */
 #define RPTAG_WriteMask		0x80000006
 #define RPTAG_MaxPen		0x80000007
 #define RPTAG_DrawBounds	0x80000008	/* get only: struct Rectangle * */

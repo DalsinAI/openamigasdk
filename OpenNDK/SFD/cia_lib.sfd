@@ -10,8 +10,8 @@
 ==include <exec/interrupts.h>
 ==include <exec/libraries.h>
 ==version 33
-struct Interrupt * AddICRVector(struct Library * resource, LONG iCRBit, struct Interrupt * interrupt) (a6,d0,a1)
-VOID RemICRVector(struct Library * resource, LONG iCRBit, struct Interrupt * interrupt) (a6,d0,a1)
-WORD AbleICR(struct Library * resource, LONG mask) (a6,d0)
-WORD SetICR(struct Library * resource, LONG mask) (a6,d0)
+struct Interrupt *AddICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * interrupt) (a6,d0,a1)
+VOID RemICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * interrupt) (a6,d0,a1)
+WORD AbleICR(struct Library * resource, WORD mask) (a6,d0)
+WORD SetICR(struct Library * resource, WORD mask) (a6,d0)
 ==end

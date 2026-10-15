@@ -62,22 +62,24 @@ its `proto/` header, and `__NOLIBBASE__` leaves out the base's declaration.
   `libamiga.a` (1,278 objects). 73 SFDs match the open libraries' `.lvo`
   tables with no difference; icon, workbench, input and translator have no
   table to compare with yet.
-- **Checked against NDK 3.2** (`check/compare_ndk.sh`, first run on Daletop
-  15 October; reports in `check/results/`): four exec alert codes, the
-  types of 34 calls, `listbrowser.gadget`'s column-info registers,
-  `UpdateWorkbench` and `texteditor.gadget`'s base name were corrected from
-  it. That run read only part of the NDK (its headers did not compile with
-  Ubuntu's GCC, and its multi-line SFDs were not read), so the compare now
-  measures both header sets with the os32 stove's GCC and reads every SFD.
-  Until its next run is clean, treat a value in OpenNDK that no open
-  library uses yet as unconfirmed. Still open: `WA_` tags from
-  `WA_WindowName` on, `PDTA_ModeID` and the picture tags (200 or 201),
-  datebrowser's three Julian calls, `texteditor.gadget`'s
-  `HighlightSetFormat`, the `listview` and `trackfile` SFDs,
-  `dos/ansiio.h` and `resources/ciabase.h`. OpenNDK keeps
-  `struct timeval` in timer's calls and `struct DiscResourceUnit` in
-  `GetUnit`, which the NDK's SFDs name differently; both are the same
-  layout.
+- **Checked against NDK 3.2** (`check/compare_ndk.sh`, run twice on
+  Daletop on 15 October; reports in `check/results/`). From the SFD
+  comparison, which now reads all 74 of the NDK's SFDs: the types of some
+  170 calls follow the NDK's, `listbrowser.gadget`'s column-info registers
+  and `UpdateWorkbench` were corrected, and the calls and SFDs OpenNDK
+  lacked were added (icon's `FreeAlloc`, `FreeFree` and
+  `BumpRevisionLength`, datebrowser's three Julian calls, texteditor's
+  `HighlightSetFormat`, `ReportMouse1`, `RefreshDTObject`, `listview` and
+  `trackfile`). From the constants: nine exec alert codes, the IDE
+  battery-backed setting and `RPTAG_OutLinePen`. The structure comparison
+  has not run yet: the NDK's `exec/types.h` includes `<stdint.h>`, which
+  the os32 stove's GCC lacks, so `check/shim/` now supplies one. Until it
+  has run clean, treat a structure or constant no open library uses as
+  unconfirmed. Still open: `WA_` tags from `WA_WindowName` on, the picture
+  tags (200 or 201), `devices/trackfile.h`, `dos/ansiio.h` and
+  `resources/ciabase.h`. OpenNDK keeps `struct timeval` in timer's calls
+  and `struct DiscResourceUnit` in `GetUnit`, which the NDK's SFDs name
+  differently; both are the same layout.
 - **Not yet written:** the assembler structure includes (`Include_I` other
   than `lvo/`), `debug.lib`, autodocs, vbcc's inline headers,
   `gadgets/sketchboard.h` and `piechart.h`, and the OS 4.1 headers (OS 4.1

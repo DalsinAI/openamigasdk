@@ -24,7 +24,7 @@ struct ExecBase;
 #endif
 
 static __inline__ ULONG
-__exec_Supervisor(struct ExecBase *__base, ULONG (*CONST userFunction)(VOID))
+__exec_Supervisor(struct ExecBase *__base, ULONG (*CONST userFunction)())
 {
 	register struct ExecBase *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
@@ -73,7 +73,7 @@ __exec_InitStruct(struct ExecBase *__base, CONST_APTR initTable, APTR memory, UL
 #define InitStruct(initTable, memory, size) __exec_InitStruct((EXEC_BASE_NAME), (initTable), (memory), (size))
 
 static __inline__ struct Library *
-__exec_MakeLibrary(struct ExecBase *__base, CONST_APTR funcInit, CONST_APTR structInit, ULONG (*CONST libInit)(VOID), ULONG dataSize, BPTR segList)
+__exec_MakeLibrary(struct ExecBase *__base, CONST_APTR funcInit, CONST_APTR structInit, ULONG (*CONST libInit)(), ULONG dataSize, ULONG segList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(funcInit);
 	register ULONG _a1 __asm("a1") = (ULONG)(structInit);
@@ -89,7 +89,7 @@ __exec_MakeLibrary(struct ExecBase *__base, CONST_APTR funcInit, CONST_APTR stru
 }
 #define MakeLibrary(funcInit, structInit, libInit, dataSize, segList) __exec_MakeLibrary((EXEC_BASE_NAME), (funcInit), (structInit), (libInit), (dataSize), (segList))
 
-static __inline__ ULONG
+static __inline__ VOID
 __exec_MakeFunctions(struct ExecBase *__base, APTR target, CONST_APTR functionArray, ULONG funcDispBase)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(target);
@@ -102,7 +102,7 @@ __exec_MakeFunctions(struct ExecBase *__base, APTR target, CONST_APTR functionAr
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (ULONG)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define MakeFunctions(target, functionArray, funcDispBase) __exec_MakeFunctions((EXEC_BASE_NAME), (target), (functionArray), (funcDispBase))
 
@@ -123,7 +123,7 @@ __exec_FindResident(struct ExecBase *__base, CONST_STRPTR name)
 #define FindResident(name) __exec_FindResident((EXEC_BASE_NAME), (name))
 
 static __inline__ APTR
-__exec_InitResident(struct ExecBase *__base, CONST struct Resident * resident, BPTR segList)
+__exec_InitResident(struct ExecBase *__base, CONST struct Resident * resident, ULONG segList)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(resident);
 	register ULONG _d1 __asm("d1") = (ULONG)(segList);
@@ -747,7 +747,7 @@ __exec_Signal(struct ExecBase *__base, struct Task * task, ULONG signalSet)
 #define Signal(task, signalSet) __exec_Signal((EXEC_BASE_NAME), (task), (signalSet))
 
 static __inline__ BYTE
-__exec_AllocSignal(struct ExecBase *__base, LONG signalNum)
+__exec_AllocSignal(struct ExecBase *__base, BYTE signalNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(signalNum);
 	register struct ExecBase *_a6 __asm("a6") = __base;
@@ -763,7 +763,7 @@ __exec_AllocSignal(struct ExecBase *__base, LONG signalNum)
 #define AllocSignal(signalNum) __exec_AllocSignal((EXEC_BASE_NAME), (signalNum))
 
 static __inline__ VOID
-__exec_FreeSignal(struct ExecBase *__base, LONG signalNum)
+__exec_FreeSignal(struct ExecBase *__base, BYTE signalNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(signalNum);
 	register struct ExecBase *_a6 __asm("a6") = __base;
@@ -987,7 +987,7 @@ __exec_CloseLibrary(struct ExecBase *__base, struct Library * library)
 #define CloseLibrary(library) __exec_CloseLibrary((EXEC_BASE_NAME), (library))
 
 static __inline__ APTR
-__exec_SetFunction(struct ExecBase *__base, struct Library * library, LONG funcOffset, ULONG (*CONST newFunction)(VOID))
+__exec_SetFunction(struct ExecBase *__base, struct Library * library, LONG funcOffset, ULONG (*CONST newFunction)())
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(library);
 	register ULONG _a0 __asm("a0") = (ULONG)(funcOffset);
@@ -1146,7 +1146,7 @@ __exec_WaitIO(struct ExecBase *__base, struct IORequest * ioRequest)
 }
 #define WaitIO(ioRequest) __exec_WaitIO((EXEC_BASE_NAME), (ioRequest))
 
-static __inline__ LONG
+static __inline__ VOID
 __exec_AbortIO(struct ExecBase *__base, struct IORequest * ioRequest)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(ioRequest);
@@ -1158,7 +1158,7 @@ __exec_AbortIO(struct ExecBase *__base, struct IORequest * ioRequest)
 		: "=r" (_d0), "=r" (_d1), "=r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (LONG)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AbortIO(ioRequest) __exec_AbortIO((EXEC_BASE_NAME), (ioRequest))
 
@@ -1211,7 +1211,7 @@ __exec_OpenResource(struct ExecBase *__base, CONST_STRPTR resName)
 #define OpenResource(resName) __exec_OpenResource((EXEC_BASE_NAME), (resName))
 
 static __inline__ APTR
-__exec_RawDoFmt(struct ExecBase *__base, CONST_STRPTR formatString, CONST_APTR dataStream, VOID (*CONST putChProc)(VOID), APTR putChData)
+__exec_RawDoFmt(struct ExecBase *__base, CONST_STRPTR formatString, CONST_APTR dataStream, VOID (*CONST putChProc)(), APTR putChData)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(formatString);
 	register ULONG _a1 __asm("a1") = (ULONG)(dataStream);
@@ -1790,7 +1790,7 @@ __exec_StackSwap(struct ExecBase *__base, struct StackSwapStruct * newStack)
 }
 #define StackSwap(newStack) __exec_StackSwap((EXEC_BASE_NAME), (newStack))
 
-static __inline__ VOID
+static __inline__ APTR
 __exec_CachePreDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(address);
@@ -1802,7 +1802,7 @@ __exec_CachePreDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length, 
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
+	return (APTR)_d0;
 }
 #define CachePreDMA(address, length, flags) __exec_CachePreDMA((EXEC_BASE_NAME), (address), (length), (flags))
 

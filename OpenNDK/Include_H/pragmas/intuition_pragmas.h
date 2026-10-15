@@ -44,6 +44,7 @@
 #pragma libcall IntuitionBase RefreshGadgets de a9803
 #pragma libcall IntuitionBase RemoveGadget e4 9802
 #pragma libcall IntuitionBase ReportMouse ea 8002
+#pragma libcall IntuitionBase ReportMouse1 ea 0802
 #pragma libcall IntuitionBase Request f0 9802
 #pragma libcall IntuitionBase ScreenToBack f6 801
 #pragma libcall IntuitionBase ScreenToFront fc 801

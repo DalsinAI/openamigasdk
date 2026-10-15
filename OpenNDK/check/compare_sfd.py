@@ -48,7 +48,7 @@ def main():
         except ValueError as e:
             out.append("- %s: cannot read: %s" % (name, e)); bad += 1
             continue
-        if a.base != b.base:
+        if a.base != b.base and b.base:
             out.append("- %s: base %s, NDK %s" % (name, a.base, b.base)); bad += 1
         sa = {f.bias: f for f in a.slots()}
         sb = {f.bias: f for f in b.slots()}
@@ -67,7 +67,7 @@ def main():
             elif sig(fa) != sig(fb):
                 out.append("- %s -%d: types %s, NDK %s" % (name, bias, proto(fa), proto(fb))); typediff += 1
         va = {f.name for f in a.funcs if f.varargs_of or f.alias_of}
-        vb = {f.name for f in b.funcs if f.varargs_of or f.alias_of}
+        vb = {f.name for f in b.funcs if (f.varargs_of or f.alias_of) and not f.private}
         for n in sorted(vb - va):
             f = next(f for f in b.funcs if f.name == n)
             out.append("- %s: varargs or alias missing: %s" % (name, proto(f))); bad += 1

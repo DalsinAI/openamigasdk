@@ -12,10 +12,12 @@ _LVOFreeDiskObject	EQU	-90
 _LVOFindToolType	EQU	-96
 _LVOMatchToolValue	EQU	-102
 _LVOBumpRevision	EQU	-108
+_LVOFreeAlloc	EQU	-114
 _LVOGetDefDiskObject	EQU	-120
 _LVOPutDefDiskObject	EQU	-126
 _LVOGetDiskObjectNew	EQU	-132
 _LVODeleteDiskObject	EQU	-138
+_LVOFreeFree	EQU	-144
 _LVODupDiskObjectA	EQU	-150
 _LVOIconControlA	EQU	-156
 _LVODrawIconStateA	EQU	-162
@@ -25,5 +27,6 @@ _LVOGetIconTagList	EQU	-180
 _LVOPutIconTagList	EQU	-186
 _LVOLayoutIconA	EQU	-192
 _LVOChangeToSelectedIconColor	EQU	-198
+_LVOBumpRevisionLength	EQU	-204
 
 	ENDC	; LVO_ICON_LIB_I

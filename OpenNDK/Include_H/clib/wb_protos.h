@@ -16,7 +16,7 @@
 extern "C" {
 #endif
 
-BOOL UpdateWorkbench(CONST_STRPTR name, BPTR parentLock, LONG action);
+VOID UpdateWorkbench(CONST_STRPTR name, BPTR parentLock, LONG action);
 
 /* From version 36 */
 struct AppWindow * AddAppWindowA(ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, CONST struct TagItem * taglist);

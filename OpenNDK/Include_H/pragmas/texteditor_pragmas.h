@@ -10,5 +10,6 @@
 #endif
 
 #pragma libcall TextFieldBase TEXTEDITOR_GetClass 1e 00
+#pragma libcall TextFieldBase HighlightSetFormat 24 210804
 
 #endif /* PRAGMAS_TEXTEDITOR_PRAGMAS_H */

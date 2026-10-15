@@ -25,4 +25,8 @@
 #define BATTMEM_SCSI_TAG_QUEUES_ADDR	70
 #define BATTMEM_SCSI_TAG_QUEUES_LEN	1
 
+/* extra time the IDE controller waits for its drives at boot */
+#define BATTMEM_IDE_EXTRA_WAIT_ADDR	71
+#define BATTMEM_IDE_EXTRA_WAIT_LEN	1
+
 #endif /* RESOURCES_BATTMEMBITSSHARED_H */

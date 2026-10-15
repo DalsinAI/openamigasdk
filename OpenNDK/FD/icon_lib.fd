@@ -20,16 +20,12 @@ FreeDiskObject(diskobj)(a0)
 FindToolType(toolTypeArray,typeName)(a0,a1)
 MatchToolValue(typeString,value)(a0,a1)
 BumpRevision(newname,oldname)(a0,a1)
-##private
-iconPrivate7()()
-##public
+FreeAlloc(freelist,len,type)(a0,a1,a2)
 GetDefDiskObject(type)(d0)
 PutDefDiskObject(diskObject)(a0)
 GetDiskObjectNew(name)(a0)
 DeleteDiskObject(name)(a0)
-##private
-iconPrivate8()()
-##public
+FreeFree(freelist,address)(a0,a1)
 DupDiskObjectA(diskObject,tags)(a0,a1)
 IconControlA(icon,tags)(a0,a1)
 DrawIconStateA(rp,icon,label,leftOffset,topOffset,state,tags)(a0,a1,a2,d0,d1,d2,a3)
@@ -39,4 +35,5 @@ GetIconTagList(name,tags)(a0,a1)
 PutIconTagList(name,icon,tags)(a0,a1,a2)
 LayoutIconA(icon,screen,tags)(a0,a1,a2)
 ChangeToSelectedIconColor(cr)(a0)
+BumpRevisionLength(newname,oldname,maxLength)(a0,a1,d0)
 ##end

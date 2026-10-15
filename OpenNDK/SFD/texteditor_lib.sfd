@@ -13,4 +13,5 @@
 ==include <intuition/classusr.h>
 ==version 47
 Class * TEXTEDITOR_GetClass() ()
+VOID HighlightSetFormat(APTR handle, ULONG first, ULONG last, UWORD format) (a0,d0,d1,d2)
 ==end

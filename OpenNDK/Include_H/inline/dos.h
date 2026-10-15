@@ -987,7 +987,7 @@ __dos_FPuts(struct DosLibrary *__base, BPTR fh, CONST_STRPTR str)
 }
 #define FPuts(fh, str) __dos_FPuts((DOS_BASE_NAME), (fh), (str))
 
-static __inline__ LONG
+static __inline__ VOID
 __dos_VFWritef(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST LONG * argarray)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
@@ -1001,7 +1001,7 @@ __dos_VFWritef(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST LO
 		: "=r" (_d0), "+r" (_d1), "=r" (_a0), "=r" (_a1)
 		: "r" (_a6), "r" (_d2), "r" (_d3)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (LONG)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define VFWritef(fh, format, argarray) __dos_VFWritef((DOS_BASE_NAME), (fh), (format), (argarray))
 
@@ -1177,7 +1177,7 @@ __dos_NameFromFH(struct DosLibrary *__base, BPTR fh, STRPTR buffer, LONG len)
 #define NameFromFH(fh, buffer, len) __dos_NameFromFH((DOS_BASE_NAME), (fh), (buffer), (len))
 
 static __inline__ WORD
-__dos_SplitName(struct DosLibrary *__base, CONST_STRPTR name, ULONG separator, STRPTR buf, LONG oldpos, LONG size)
+__dos_SplitName(struct DosLibrary *__base, CONST_STRPTR name, UBYTE separator, STRPTR buf, WORD oldpos, LONG size)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(separator);
@@ -2144,7 +2144,7 @@ __dos_InternalLoadSeg(struct DosLibrary *__base, BPTR fh, BPTR table, CONST LONG
 #define InternalLoadSeg(fh, table, funcarray, stack) __dos_InternalLoadSeg((DOS_BASE_NAME), (fh), (table), (funcarray), (stack))
 
 static __inline__ BOOL
-__dos_InternalUnLoadSeg(struct DosLibrary *__base, BPTR seglist, VOID (*CONST freefunc)(VOID))
+__dos_InternalUnLoadSeg(struct DosLibrary *__base, BPTR seglist, VOID (*CONST freefunc)())
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(seglist);
 	register ULONG _a1 __asm("a1") = (ULONG)(freefunc);
@@ -2366,7 +2366,7 @@ __dos_MatchEnd(struct DosLibrary *__base, struct AnchorPath * anchor)
 #define MatchEnd(anchor) __dos_MatchEnd((DOS_BASE_NAME), (anchor))
 
 static __inline__ LONG
-__dos_ParsePattern(struct DosLibrary *__base, CONST_STRPTR pat, STRPTR patbuf, LONG patbuflen)
+__dos_ParsePattern(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE *patbuf, LONG patbuflen)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(pat);
 	register ULONG _d2 __asm("d2") = (ULONG)(patbuf);
@@ -2384,7 +2384,7 @@ __dos_ParsePattern(struct DosLibrary *__base, CONST_STRPTR pat, STRPTR patbuf, L
 #define ParsePattern(pat, patbuf, patbuflen) __dos_ParsePattern((DOS_BASE_NAME), (pat), (patbuf), (patbuflen))
 
 static __inline__ BOOL
-__dos_MatchPattern(struct DosLibrary *__base, CONST_STRPTR patbuf, CONST_STRPTR str)
+__dos_MatchPattern(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_STRPTR str)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(patbuf);
 	register ULONG _d2 __asm("d2") = (ULONG)(str);
@@ -2671,7 +2671,7 @@ __dos_ParsePatternNoCase(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE * pa
 #define ParsePatternNoCase(pat, patbuf, patbuflen) __dos_ParsePatternNoCase((DOS_BASE_NAME), (pat), (patbuf), (patbuflen))
 
 static __inline__ BOOL
-__dos_MatchPatternNoCase(struct DosLibrary *__base, CONST_STRPTR patbuf, CONST_STRPTR str)
+__dos_MatchPatternNoCase(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_STRPTR str)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(patbuf);
 	register ULONG _d2 __asm("d2") = (ULONG)(str);
@@ -2789,7 +2789,7 @@ __dos_PutErrStr(struct DosLibrary *__base, CONST_STRPTR str)
 }
 #define PutErrStr(str) __dos_PutErrStr((DOS_BASE_NAME), (str))
 
-static __inline__ BPTR
+static __inline__ LONG
 __dos_ErrorOutput(struct DosLibrary *__base)
 {
 	register struct DosLibrary *_a6 __asm("a6") = __base;
@@ -2801,11 +2801,11 @@ __dos_ErrorOutput(struct DosLibrary *__base)
 		: "=r" (_d0), "=r" (_d1), "=r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (BPTR)_d0;
+	return (LONG)_d0;
 }
 #define ErrorOutput() __dos_ErrorOutput((DOS_BASE_NAME))
 
-static __inline__ BPTR
+static __inline__ LONG
 __dos_SelectError(struct DosLibrary *__base, BPTR fh)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
@@ -2817,11 +2817,11 @@ __dos_SelectError(struct DosLibrary *__base, BPTR fh)
 		: "=r" (_d0), "+r" (_d1), "=r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (BPTR)_d0;
+	return (LONG)_d0;
 }
 #define SelectError(fh) __dos_SelectError((DOS_BASE_NAME), (fh))
 
-static __inline__ LONG
+static __inline__ APTR
 __dos_DoShellMethodTagList(struct DosLibrary *__base, ULONG method, CONST struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(method);
@@ -2833,7 +2833,7 @@ __dos_DoShellMethodTagList(struct DosLibrary *__base, ULONG method, CONST struct
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (LONG)_d0;
+	return (APTR)_d0;
 }
 #define DoShellMethodTagList(method, tags) __dos_DoShellMethodTagList((DOS_BASE_NAME), (method), (tags))
 

@@ -56,7 +56,7 @@ __datatypes_ReleaseDataType(struct Library *__base, struct DataType * dt)
 #define ReleaseDataType(dt) __datatypes_ReleaseDataType((DATATYPES_BASE_NAME), (dt))
 
 static __inline__ Object *
-__datatypes_NewDTObjectA(struct Library *__base, APTR name, CONST struct TagItem * attrs)
+__datatypes_NewDTObjectA(struct Library *__base, STRPTR name, CONST struct TagItem * attrs)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(name);
 	register ULONG _a0 __asm("a0") = (ULONG)(attrs);
@@ -223,7 +223,7 @@ __datatypes_GetDTMethods(struct Library *__base, CONST Object * object)
 }
 #define GetDTMethods(object) __datatypes_GetDTMethods((DATATYPES_BASE_NAME), (object))
 
-static __inline__ struct DTMethod *
+static __inline__ struct DTMethods *
 __datatypes_GetDTTriggerMethods(struct Library *__base, Object * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
@@ -235,7 +235,7 @@ __datatypes_GetDTTriggerMethods(struct Library *__base, Object * object)
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (struct DTMethod *)_d0;
+	return (struct DTMethods *)_d0;
 }
 #define GetDTTriggerMethods(object) __datatypes_GetDTTriggerMethods((DATATYPES_BASE_NAME), (object))
 
@@ -339,7 +339,7 @@ __datatypes_CopyDTTriggerMethods(struct Library *__base, struct DTMethod * metho
 }
 #define CopyDTTriggerMethods(methods, include, exclude) __datatypes_CopyDTTriggerMethods((DATATYPES_BASE_NAME), (methods), (include), (exclude))
 
-static __inline__ VOID
+static __inline__ APTR
 __datatypes_FreeDTMethods(struct Library *__base, APTR methods)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(methods);
@@ -351,7 +351,7 @@ __datatypes_FreeDTMethods(struct Library *__base, APTR methods)
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
+	return (APTR)_d0;
 }
 #define FreeDTMethods(methods) __datatypes_FreeDTMethods((DATATYPES_BASE_NAME), (methods))
 
@@ -372,7 +372,7 @@ __datatypes_GetDTTriggerMethodDataFlags(struct Library *__base, ULONG method)
 #define GetDTTriggerMethodDataFlags(method) __datatypes_GetDTTriggerMethodDataFlags((DATATYPES_BASE_NAME), (method))
 
 static __inline__ ULONG
-__datatypes_SaveDTObjectA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, CONST struct TagItem * attrs)
+__datatypes_SaveDTObjectA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, LONG saveicon, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(win);

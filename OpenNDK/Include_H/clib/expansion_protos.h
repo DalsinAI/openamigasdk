@@ -22,19 +22,19 @@ VOID AddConfigDev(struct ConfigDev * configDev);
 BOOL AddBootNode(LONG bootPri, ULONG flags, struct DeviceNode * deviceNode, struct ConfigDev * configDev);
 
 /* From version 33 */
-LONG AllocBoardMem(ULONG slotSpec);
+VOID AllocBoardMem(ULONG slotSpec);
 struct ConfigDev * AllocConfigDev(VOID);
-LONG AllocExpansionMem(ULONG numSlots, ULONG slotAlign);
-BOOL ConfigBoard(APTR board, struct ConfigDev * configDev);
-BOOL ConfigChain(APTR baseAddr);
+APTR AllocExpansionMem(ULONG numSlots, ULONG slotAlign);
+VOID ConfigBoard(APTR board, struct ConfigDev * configDev);
+VOID ConfigChain(APTR baseAddr);
 struct ConfigDev * FindConfigDev(CONST struct ConfigDev * oldConfigDev, LONG manufacturer, LONG product);
 VOID FreeBoardMem(ULONG startSlot, ULONG slotSpec);
 VOID FreeConfigDev(struct ConfigDev * configDev);
 VOID FreeExpansionMem(ULONG startSlot, ULONG numSlots);
 UBYTE ReadExpansionByte(CONST_APTR board, ULONG offset);
-BOOL ReadExpansionRom(CONST_APTR board, struct ConfigDev * configDev);
+VOID ReadExpansionRom(CONST_APTR board, struct ConfigDev * configDev);
 VOID RemConfigDev(struct ConfigDev * configDev);
-BOOL WriteExpansionByte(APTR board, ULONG offset, ULONG byte);
+VOID WriteExpansionByte(APTR board, ULONG offset, UBYTE byte);
 VOID ObtainConfigBinding(VOID);
 VOID ReleaseConfigBinding(VOID);
 VOID SetCurrentBinding(struct CurrentBinding * currentBinding, ULONG bindingSize);

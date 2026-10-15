@@ -23,9 +23,10 @@ BOOL AddFreeList(struct FreeList * freelist, CONST_APTR mem, ULONG size);
 struct DiskObject * GetDiskObject(CONST_STRPTR name);
 BOOL PutDiskObject(CONST_STRPTR name, CONST struct DiskObject * diskobj);
 VOID FreeDiskObject(struct DiskObject * diskobj);
-STRPTR FindToolType(CONST STRPTR * toolTypeArray, CONST_STRPTR typeName);
+UBYTE * FindToolType(CONST STRPTR * toolTypeArray, CONST_STRPTR typeName);
 BOOL MatchToolValue(CONST_STRPTR typeString, CONST_STRPTR value);
 STRPTR BumpRevision(STRPTR newname, CONST_STRPTR oldname);
+APTR FreeAlloc(struct FreeList * freelist, ULONG len, ULONG type);
 
 /* From version 36 */
 struct DiskObject * GetDefDiskObject(LONG type);
@@ -34,6 +35,7 @@ struct DiskObject * GetDiskObjectNew(CONST_STRPTR name);
 
 /* From version 37 */
 BOOL DeleteDiskObject(CONST_STRPTR name);
+VOID FreeFree(struct FreeList * freelist, APTR address);
 
 /* From version 44 */
 struct DiskObject * DupDiskObjectA(CONST struct DiskObject * diskObject, CONST struct TagItem * tags);
@@ -52,6 +54,9 @@ BOOL PutIconTags(CONST_STRPTR name, CONST struct DiskObject * icon, Tag tag1, ..
 BOOL LayoutIconA(struct DiskObject * icon, struct Screen * screen, struct TagItem * tags);
 BOOL LayoutIcon(struct DiskObject * icon, struct Screen * screen, Tag tag1, ...);
 VOID ChangeToSelectedIconColor(struct ColorRegister * cr);
+
+/* From version 47 */
+STRPTR BumpRevisionLength(STRPTR newname, CONST_STRPTR oldname, ULONG maxLength);
 
 #ifdef __cplusplus
 }

@@ -18,7 +18,7 @@ extern "C" {
 /* From version 36 */
 VOID SetKeyMapDefault(CONST struct KeyMap * keyMap);
 struct KeyMap * AskKeyMapDefault(VOID);
-WORD MapRawKey(CONST struct InputEvent * event, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap);
+WORD MapRawKey(CONST struct InputEvent * event, STRPTR buffer, WORD length, CONST struct KeyMap * keyMap);
 LONG MapANSI(CONST_STRPTR string, LONG count, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap);
 
 #ifdef __cplusplus

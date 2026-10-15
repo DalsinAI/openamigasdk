@@ -24,7 +24,7 @@ struct GfxBase;
 #endif
 
 static __inline__ LONG
-__graphics_BltBitMap(struct GfxBase *__base, CONST struct BitMap * srcBitMap, LONG xSrc, LONG ySrc, struct BitMap * destBitMap, LONG xDest, LONG yDest, LONG xSize, LONG ySize, ULONG minterm, ULONG mask, PLANEPTR tempA)
+__graphics_BltBitMap(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct BitMap * destBitMap, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm, UBYTE mask, PLANEPTR tempA)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcBitMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -47,7 +47,7 @@ __graphics_BltBitMap(struct GfxBase *__base, CONST struct BitMap * srcBitMap, LO
 #define BltBitMap(srcBitMap, xSrc, ySrc, destBitMap, xDest, yDest, xSize, ySize, minterm, mask, tempA) __graphics_BltBitMap((GRAPHICS_BASE_NAME), (srcBitMap), (xSrc), (ySrc), (destBitMap), (xDest), (yDest), (xSize), (ySize), (minterm), (mask), (tempA))
 
 static __inline__ VOID
-__graphics_BltTemplate(struct GfxBase *__base, CONST PLANEPTR source, LONG xSrc, LONG srcMod, struct RastPort * destRP, LONG xDest, LONG yDest, LONG xSize, LONG ySize)
+__graphics_BltTemplate(struct GfxBase *__base, CONST PLANEPTR source, WORD xSrc, WORD srcMod, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(source);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -99,7 +99,7 @@ __graphics_ClearScreen(struct GfxBase *__base, struct RastPort * rp)
 #define ClearScreen(rp) __graphics_ClearScreen((GRAPHICS_BASE_NAME), (rp))
 
 static __inline__ WORD
-__graphics_TextLength(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, ULONG count)
+__graphics_TextLength(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD count)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
@@ -115,7 +115,7 @@ __graphics_TextLength(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR
 #define TextLength(rp, string, count) __graphics_TextLength((GRAPHICS_BASE_NAME), (rp), (string), (count))
 
 static __inline__ LONG
-__graphics_Text(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, ULONG count)
+__graphics_Text(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD count)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
@@ -406,7 +406,7 @@ __graphics_Animate(struct GfxBase *__base, struct AnimOb ** anKey, struct RastPo
 #define Animate(anKey, rp) __graphics_Animate((GRAPHICS_BASE_NAME), (anKey), (rp))
 
 static __inline__ BOOL
-__graphics_GetGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct RastPort * rp, LONG flag)
+__graphics_GetGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct RastPort * rp, BOOL flag)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(anOb);
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
@@ -438,7 +438,7 @@ __graphics_InitGMasks(struct GfxBase *__base, struct AnimOb * anOb)
 #define InitGMasks(anOb) __graphics_InitGMasks((GRAPHICS_BASE_NAME), (anOb))
 
 static __inline__ VOID
-__graphics_DrawEllipse(struct GfxBase *__base, struct RastPort * rp, LONG xCenter, LONG yCenter, LONG a, LONG b)
+__graphics_DrawEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCenter, WORD yCenter, WORD a, WORD b)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xCenter);
@@ -456,7 +456,7 @@ __graphics_DrawEllipse(struct GfxBase *__base, struct RastPort * rp, LONG xCente
 #define DrawEllipse(rp, xCenter, yCenter, a, b) __graphics_DrawEllipse((GRAPHICS_BASE_NAME), (rp), (xCenter), (yCenter), (a), (b))
 
 static __inline__ LONG
-__graphics_AreaEllipse(struct GfxBase *__base, struct RastPort * rp, LONG xCenter, LONG yCenter, LONG a, LONG b)
+__graphics_AreaEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCenter, WORD yCenter, WORD a, WORD b)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xCenter);
@@ -474,7 +474,7 @@ __graphics_AreaEllipse(struct GfxBase *__base, struct RastPort * rp, LONG xCente
 #define AreaEllipse(rp, xCenter, yCenter, a, b) __graphics_AreaEllipse((GRAPHICS_BASE_NAME), (rp), (xCenter), (yCenter), (a), (b))
 
 static __inline__ VOID
-__graphics_LoadRGB4(struct GfxBase *__base, struct ViewPort * vp, CONST UWORD * colors, LONG count)
+__graphics_LoadRGB4(struct GfxBase *__base, struct ViewPort * vp, CONST UWORD * colors, WORD count)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _a1 __asm("a1") = (ULONG)(colors);
@@ -586,7 +586,7 @@ __graphics_WaitBlit(struct GfxBase *__base)
 #define WaitBlit() __graphics_WaitBlit((GRAPHICS_BASE_NAME))
 
 static __inline__ VOID
-__graphics_SetRast(struct GfxBase *__base, struct RastPort * rp, ULONG pen)
+__graphics_SetRast(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(pen);
@@ -602,7 +602,7 @@ __graphics_SetRast(struct GfxBase *__base, struct RastPort * rp, ULONG pen)
 #define SetRast(rp, pen) __graphics_SetRast((GRAPHICS_BASE_NAME), (rp), (pen))
 
 static __inline__ VOID
-__graphics_Move(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y)
+__graphics_Move(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
@@ -618,7 +618,7 @@ __graphics_Move(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y)
 #define Move(rp, x, y) __graphics_Move((GRAPHICS_BASE_NAME), (rp), (x), (y))
 
 static __inline__ VOID
-__graphics_Draw(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y)
+__graphics_Draw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
@@ -634,7 +634,7 @@ __graphics_Draw(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y)
 #define Draw(rp, x, y) __graphics_Draw((GRAPHICS_BASE_NAME), (rp), (x), (y))
 
 static __inline__ LONG
-__graphics_AreaMove(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y)
+__graphics_AreaMove(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
@@ -650,7 +650,7 @@ __graphics_AreaMove(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y
 #define AreaMove(rp, x, y) __graphics_AreaMove((GRAPHICS_BASE_NAME), (rp), (x), (y))
 
 static __inline__ LONG
-__graphics_AreaDraw(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y)
+__graphics_AreaDraw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
@@ -714,7 +714,7 @@ __graphics_QBlit(struct GfxBase *__base, struct bltnode * blit)
 #define QBlit(blit) __graphics_QBlit((GRAPHICS_BASE_NAME), (blit))
 
 static __inline__ VOID
-__graphics_InitArea(struct GfxBase *__base, struct AreaInfo * areaInfo, APTR vectorBuffer, LONG maxVectors)
+__graphics_InitArea(struct GfxBase *__base, struct AreaInfo * areaInfo, APTR vectorBuffer, WORD maxVectors)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(areaInfo);
 	register ULONG _a1 __asm("a1") = (ULONG)(vectorBuffer);
@@ -730,7 +730,7 @@ __graphics_InitArea(struct GfxBase *__base, struct AreaInfo * areaInfo, APTR vec
 #define InitArea(areaInfo, vectorBuffer, maxVectors) __graphics_InitArea((GRAPHICS_BASE_NAME), (areaInfo), (vectorBuffer), (maxVectors))
 
 static __inline__ VOID
-__graphics_SetRGB4(struct GfxBase *__base, struct ViewPort * vp, LONG index, ULONG red, ULONG green, ULONG blue)
+__graphics_SetRGB4(struct GfxBase *__base, struct ViewPort * vp, WORD index, UBYTE red, UBYTE green, UBYTE blue)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _d0 __asm("d0") = (ULONG)(index);
@@ -780,7 +780,7 @@ __graphics_BltClear(struct GfxBase *__base, PLANEPTR memBlock, ULONG byteCount, 
 #define BltClear(memBlock, byteCount, flags) __graphics_BltClear((GRAPHICS_BASE_NAME), (memBlock), (byteCount), (flags))
 
 static __inline__ VOID
-__graphics_RectFill(struct GfxBase *__base, struct RastPort * rp, LONG xMin, LONG yMin, LONG xMax, LONG yMax)
+__graphics_RectFill(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xMin);
@@ -798,7 +798,7 @@ __graphics_RectFill(struct GfxBase *__base, struct RastPort * rp, LONG xMin, LON
 #define RectFill(rp, xMin, yMin, xMax, yMax) __graphics_RectFill((GRAPHICS_BASE_NAME), (rp), (xMin), (yMin), (xMax), (yMax))
 
 static __inline__ VOID
-__graphics_BltPattern(struct GfxBase *__base, struct RastPort * rp, CONST PLANEPTR mask, LONG xMin, LONG yMin, LONG xMax, LONG yMax, ULONG maskBPR)
+__graphics_BltPattern(struct GfxBase *__base, struct RastPort * rp, CONST PLANEPTR mask, WORD xMin, WORD yMin, WORD xMax, WORD yMax, UWORD maskBPR)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(mask);
@@ -816,8 +816,8 @@ __graphics_BltPattern(struct GfxBase *__base, struct RastPort * rp, CONST PLANEP
 }
 #define BltPattern(rp, mask, xMin, yMin, xMax, yMax, maskBPR) __graphics_BltPattern((GRAPHICS_BASE_NAME), (rp), (mask), (xMin), (yMin), (xMax), (yMax), (maskBPR))
 
-static __inline__ LONG
-__graphics_ReadPixel(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y)
+static __inline__ ULONG
+__graphics_ReadPixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
@@ -828,12 +828,12 @@ __graphics_ReadPixel(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG 
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (LONG)_d0;
+	return (ULONG)_d0;
 }
 #define ReadPixel(rp, x, y) __graphics_ReadPixel((GRAPHICS_BASE_NAME), (rp), (x), (y))
 
 static __inline__ LONG
-__graphics_WritePixel(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG y)
+__graphics_WritePixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
@@ -849,7 +849,7 @@ __graphics_WritePixel(struct GfxBase *__base, struct RastPort * rp, LONG x, LONG
 #define WritePixel(rp, x, y) __graphics_WritePixel((GRAPHICS_BASE_NAME), (rp), (x), (y))
 
 static __inline__ BOOL
-__graphics_Flood(struct GfxBase *__base, struct RastPort * rp, ULONG mode, LONG x, LONG y)
+__graphics_Flood(struct GfxBase *__base, struct RastPort * rp, ULONG mode, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d2 __asm("d2") = (ULONG)(mode);
@@ -866,7 +866,7 @@ __graphics_Flood(struct GfxBase *__base, struct RastPort * rp, ULONG mode, LONG 
 #define Flood(rp, mode, x, y) __graphics_Flood((GRAPHICS_BASE_NAME), (rp), (mode), (x), (y))
 
 static __inline__ VOID
-__graphics_PolyDraw(struct GfxBase *__base, struct RastPort * rp, LONG count, CONST WORD * polyTable)
+__graphics_PolyDraw(struct GfxBase *__base, struct RastPort * rp, WORD count, CONST WORD * polyTable)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(count);
@@ -882,7 +882,7 @@ __graphics_PolyDraw(struct GfxBase *__base, struct RastPort * rp, LONG count, CO
 #define PolyDraw(rp, count, polyTable) __graphics_PolyDraw((GRAPHICS_BASE_NAME), (rp), (count), (polyTable))
 
 static __inline__ VOID
-__graphics_SetAPen(struct GfxBase *__base, struct RastPort * rp, ULONG pen)
+__graphics_SetAPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(pen);
@@ -898,7 +898,7 @@ __graphics_SetAPen(struct GfxBase *__base, struct RastPort * rp, ULONG pen)
 #define SetAPen(rp, pen) __graphics_SetAPen((GRAPHICS_BASE_NAME), (rp), (pen))
 
 static __inline__ VOID
-__graphics_SetBPen(struct GfxBase *__base, struct RastPort * rp, ULONG pen)
+__graphics_SetBPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(pen);
@@ -914,7 +914,7 @@ __graphics_SetBPen(struct GfxBase *__base, struct RastPort * rp, ULONG pen)
 #define SetBPen(rp, pen) __graphics_SetBPen((GRAPHICS_BASE_NAME), (rp), (pen))
 
 static __inline__ VOID
-__graphics_SetDrMd(struct GfxBase *__base, struct RastPort * rp, ULONG drawMode)
+__graphics_SetDrMd(struct GfxBase *__base, struct RastPort * rp, UBYTE drawMode)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(drawMode);
@@ -961,8 +961,8 @@ __graphics_CBump(struct GfxBase *__base, struct UCopList * copList)
 }
 #define CBump(copList) __graphics_CBump((GRAPHICS_BASE_NAME), (copList))
 
-static __inline__ VOID
-__graphics_CMove(struct GfxBase *__base, struct UCopList * copList, APTR destination, LONG data)
+static __inline__ LONG
+__graphics_CMove(struct GfxBase *__base, struct UCopList * copList, APTR destination, WORD data)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(copList);
 	register ULONG _d0 __asm("d0") = (ULONG)(destination);
@@ -973,12 +973,12 @@ __graphics_CMove(struct GfxBase *__base, struct UCopList * copList, APTR destina
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
+	return (LONG)_d0;
 }
 #define CMove(copList, destination, data) __graphics_CMove((GRAPHICS_BASE_NAME), (copList), (destination), (data))
 
-static __inline__ VOID
-__graphics_CWait(struct GfxBase *__base, struct UCopList * copList, LONG v, LONG h)
+static __inline__ LONG
+__graphics_CWait(struct GfxBase *__base, struct UCopList * copList, WORD v, WORD h)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(copList);
 	register ULONG _d0 __asm("d0") = (ULONG)(v);
@@ -989,7 +989,7 @@ __graphics_CWait(struct GfxBase *__base, struct UCopList * copList, LONG v, LONG
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
+	return (LONG)_d0;
 }
 #define CWait(copList, v, h) __graphics_CWait((GRAPHICS_BASE_NAME), (copList), (v), (h))
 
@@ -1010,7 +1010,7 @@ __graphics_VBeamPos(struct GfxBase *__base)
 #define VBeamPos() __graphics_VBeamPos((GRAPHICS_BASE_NAME))
 
 static __inline__ VOID
-__graphics_InitBitMap(struct GfxBase *__base, struct BitMap * bitMap, LONG depth, LONG width, LONG height)
+__graphics_InitBitMap(struct GfxBase *__base, struct BitMap * bitMap, BYTE depth, WORD width, WORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(bitMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(depth);
@@ -1027,7 +1027,7 @@ __graphics_InitBitMap(struct GfxBase *__base, struct BitMap * bitMap, LONG depth
 #define InitBitMap(bitMap, depth, width, height) __graphics_InitBitMap((GRAPHICS_BASE_NAME), (bitMap), (depth), (width), (height))
 
 static __inline__ VOID
-__graphics_ScrollRaster(struct GfxBase *__base, struct RastPort * rp, LONG dx, LONG dy, LONG xMin, LONG yMin, LONG xMax, LONG yMax)
+__graphics_ScrollRaster(struct GfxBase *__base, struct RastPort * rp, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -1063,7 +1063,7 @@ __graphics_WaitBOVP(struct GfxBase *__base, struct ViewPort * vp)
 #define WaitBOVP(vp) __graphics_WaitBOVP((GRAPHICS_BASE_NAME), (vp))
 
 static __inline__ WORD
-__graphics_GetSprite(struct GfxBase *__base, struct SimpleSprite * sprite, LONG num)
+__graphics_GetSprite(struct GfxBase *__base, struct SimpleSprite * sprite, WORD num)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sprite);
 	register ULONG _d0 __asm("d0") = (ULONG)(num);
@@ -1079,7 +1079,7 @@ __graphics_GetSprite(struct GfxBase *__base, struct SimpleSprite * sprite, LONG 
 #define GetSprite(sprite, num) __graphics_GetSprite((GRAPHICS_BASE_NAME), (sprite), (num))
 
 static __inline__ VOID
-__graphics_FreeSprite(struct GfxBase *__base, LONG num)
+__graphics_FreeSprite(struct GfxBase *__base, WORD num)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(num);
 	register struct GfxBase *_a6 __asm("a6") = __base;
@@ -1112,7 +1112,7 @@ __graphics_ChangeSprite(struct GfxBase *__base, struct ViewPort * vp, struct Sim
 #define ChangeSprite(vp, sprite, newData) __graphics_ChangeSprite((GRAPHICS_BASE_NAME), (vp), (sprite), (newData))
 
 static __inline__ VOID
-__graphics_MoveSprite(struct GfxBase *__base, struct ViewPort * vp, struct SimpleSprite * sprite, LONG x, LONG y)
+__graphics_MoveSprite(struct GfxBase *__base, struct ViewPort * vp, struct SimpleSprite * sprite, WORD x, WORD y)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _a1 __asm("a1") = (ULONG)(sprite);
@@ -1288,7 +1288,7 @@ __graphics_RemFont(struct GfxBase *__base, struct TextFont * textFont)
 #define RemFont(textFont) __graphics_RemFont((GRAPHICS_BASE_NAME), (textFont))
 
 static __inline__ PLANEPTR
-__graphics_AllocRaster(struct GfxBase *__base, ULONG width, ULONG height)
+__graphics_AllocRaster(struct GfxBase *__base, UWORD width, UWORD height)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(width);
 	register ULONG _d1 __asm("d1") = (ULONG)(height);
@@ -1304,7 +1304,7 @@ __graphics_AllocRaster(struct GfxBase *__base, ULONG width, ULONG height)
 #define AllocRaster(width, height) __graphics_AllocRaster((GRAPHICS_BASE_NAME), (width), (height))
 
 static __inline__ VOID
-__graphics_FreeRaster(struct GfxBase *__base, PLANEPTR p, ULONG width, ULONG height)
+__graphics_FreeRaster(struct GfxBase *__base, PLANEPTR p, UWORD width, UWORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(p);
 	register ULONG _d0 __asm("d0") = (ULONG)(width);
@@ -1448,7 +1448,7 @@ __graphics_FreeCopList(struct GfxBase *__base, struct CopList * copList)
 #define FreeCopList(copList) __graphics_FreeCopList((GRAPHICS_BASE_NAME), (copList))
 
 static __inline__ VOID
-__graphics_ClipBlit(struct GfxBase *__base, struct RastPort * srcRP, LONG xSrc, LONG ySrc, struct RastPort * destRP, LONG xDest, LONG yDest, LONG xSize, LONG ySize, ULONG minterm)
+__graphics_ClipBlit(struct GfxBase *__base, struct RastPort * srcRP, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcRP);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -1565,7 +1565,7 @@ __graphics_ScrollVPort(struct GfxBase *__base, struct ViewPort * vp)
 #define ScrollVPort(vp) __graphics_ScrollVPort((GRAPHICS_BASE_NAME), (vp))
 
 static __inline__ struct CopList *
-__graphics_UCopperListInit(struct GfxBase *__base, struct UCopList * uCopList, LONG n)
+__graphics_UCopperListInit(struct GfxBase *__base, struct UCopList * uCopList, WORD n)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(uCopList);
 	register ULONG _d0 __asm("d0") = (ULONG)(n);
@@ -1581,7 +1581,7 @@ __graphics_UCopperListInit(struct GfxBase *__base, struct UCopList * uCopList, L
 #define UCopperListInit(uCopList, n) __graphics_UCopperListInit((GRAPHICS_BASE_NAME), (uCopList), (n))
 
 static __inline__ VOID
-__graphics_FreeGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct RastPort * rp, LONG flag)
+__graphics_FreeGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct RastPort * rp, BOOL flag)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(anOb);
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
@@ -1597,7 +1597,7 @@ __graphics_FreeGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct Ras
 #define FreeGBuffers(anOb, rp, flag) __graphics_FreeGBuffers((GRAPHICS_BASE_NAME), (anOb), (rp), (flag))
 
 static __inline__ VOID
-__graphics_BltBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBitMap, LONG xSrc, LONG ySrc, struct RastPort * destRP, LONG xDest, LONG yDest, LONG xSize, LONG ySize, ULONG minterm)
+__graphics_BltBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcBitMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -1666,7 +1666,7 @@ __graphics_AndRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegi
 #define AndRegionRegion(srcRegion, destRegion) __graphics_AndRegionRegion((GRAPHICS_BASE_NAME), (srcRegion), (destRegion))
 
 static __inline__ VOID
-__graphics_SetRGB4CM(struct GfxBase *__base, struct ColorMap * colorMap, LONG index, ULONG red, ULONG green, ULONG blue)
+__graphics_SetRGB4CM(struct GfxBase *__base, struct ColorMap * colorMap, WORD index, UBYTE red, UBYTE green, UBYTE blue)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(colorMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(index);
@@ -1684,7 +1684,7 @@ __graphics_SetRGB4CM(struct GfxBase *__base, struct ColorMap * colorMap, LONG in
 #define SetRGB4CM(colorMap, index, red, green, blue) __graphics_SetRGB4CM((GRAPHICS_BASE_NAME), (colorMap), (index), (red), (green), (blue))
 
 static __inline__ VOID
-__graphics_BltMaskBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBitMap, LONG xSrc, LONG ySrc, struct RastPort * destRP, LONG xDest, LONG yDest, LONG xSize, LONG ySize, ULONG minterm, CONST PLANEPTR bltMask)
+__graphics_BltMaskBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm, CONST PLANEPTR bltMask)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcBitMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -1721,7 +1721,7 @@ __graphics_AttemptLockLayerRom(struct GfxBase *__base, struct Layer * layer)
 }
 #define AttemptLockLayerRom(layer) __graphics_AttemptLockLayerRom((GRAPHICS_BASE_NAME), (layer))
 
-static __inline__ struct ExtendedNode *
+static __inline__ APTR
 __graphics_GfxNew(struct GfxBase *__base, ULONG gfxNodeType)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(gfxNodeType);
@@ -1733,12 +1733,12 @@ __graphics_GfxNew(struct GfxBase *__base, ULONG gfxNodeType)
 		: "+r" (_d0), "=r" (_d1), "=r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (struct ExtendedNode *)_d0;
+	return (APTR)_d0;
 }
 #define GfxNew(gfxNodeType) __graphics_GfxNew((GRAPHICS_BASE_NAME), (gfxNodeType))
 
 static __inline__ VOID
-__graphics_GfxFree(struct GfxBase *__base, struct ExtendedNode * gfxNodePtr)
+__graphics_GfxFree(struct GfxBase *__base, APTR gfxNodePtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gfxNodePtr);
 	register struct GfxBase *_a6 __asm("a6") = __base;
@@ -1754,7 +1754,7 @@ __graphics_GfxFree(struct GfxBase *__base, struct ExtendedNode * gfxNodePtr)
 #define GfxFree(gfxNodePtr) __graphics_GfxFree((GRAPHICS_BASE_NAME), (gfxNodePtr))
 
 static __inline__ VOID
-__graphics_GfxAssociate(struct GfxBase *__base, CONST_APTR associateNode, struct ExtendedNode * gfxNodePtr)
+__graphics_GfxAssociate(struct GfxBase *__base, CONST_APTR associateNode, APTR gfxNodePtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(associateNode);
 	register ULONG _a1 __asm("a1") = (ULONG)(gfxNodePtr);
@@ -1786,7 +1786,7 @@ __graphics_BitMapScale(struct GfxBase *__base, struct BitScaleArgs * bitScaleArg
 #define BitMapScale(bitScaleArgs) __graphics_BitMapScale((GRAPHICS_BASE_NAME), (bitScaleArgs))
 
 static __inline__ UWORD
-__graphics_ScalerDiv(struct GfxBase *__base, ULONG factor, ULONG numerator, ULONG denominator)
+__graphics_ScalerDiv(struct GfxBase *__base, UWORD factor, UWORD numerator, UWORD denominator)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(factor);
 	register ULONG _d1 __asm("d1") = (ULONG)(numerator);
@@ -1803,7 +1803,7 @@ __graphics_ScalerDiv(struct GfxBase *__base, ULONG factor, ULONG numerator, ULON
 #define ScalerDiv(factor, numerator, denominator) __graphics_ScalerDiv((GRAPHICS_BASE_NAME), (factor), (numerator), (denominator))
 
 static __inline__ WORD
-__graphics_TextExtent(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, LONG count, struct TextExtent * textExtent)
+__graphics_TextExtent(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, WORD count, struct TextExtent * textExtent)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
@@ -1820,7 +1820,7 @@ __graphics_TextExtent(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR
 #define TextExtent(rp, string, count, textExtent) __graphics_TextExtent((GRAPHICS_BASE_NAME), (rp), (string), (count), (textExtent))
 
 static __inline__ ULONG
-__graphics_TextFit(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, ULONG strLen, CONST struct TextExtent * textExtent, CONST struct TextExtent * constrainingExtent, LONG strDirection, ULONG constrainingBitWidth, ULONG constrainingBitHeight)
+__graphics_TextFit(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD strLen, CONST struct TextExtent * textExtent, CONST struct TextExtent * constrainingExtent, WORD strDirection, UWORD constrainingBitWidth, UWORD constrainingBitHeight)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
@@ -1855,7 +1855,7 @@ __graphics_GfxLookUp(struct GfxBase *__base, CONST_APTR associateNode)
 }
 #define GfxLookUp(associateNode) __graphics_GfxLookUp((GRAPHICS_BASE_NAME), (associateNode))
 
-static __inline__ ULONG
+static __inline__ BOOL
 __graphics_VideoControl(struct GfxBase *__base, struct ColorMap * colorMap, struct TagItem * tagarray)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(colorMap);
@@ -1867,7 +1867,7 @@ __graphics_VideoControl(struct GfxBase *__base, struct ColorMap * colorMap, stru
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (ULONG)_d0;
+	return (BOOL)_d0;
 }
 #define VideoControl(colorMap, tagarray) __graphics_VideoControl((GRAPHICS_BASE_NAME), (colorMap), (tagarray))
 
@@ -1969,7 +1969,7 @@ __graphics_FontExtent(struct GfxBase *__base, CONST struct TextFont * font, stru
 #define FontExtent(font, fontExtent) __graphics_FontExtent((GRAPHICS_BASE_NAME), (font), (fontExtent))
 
 static __inline__ LONG
-__graphics_ReadPixelLine8(struct GfxBase *__base, struct RastPort * rp, ULONG xstart, ULONG ystart, ULONG width, UBYTE * array, struct RastPort * tempRP)
+__graphics_ReadPixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD width, UBYTE * array, struct RastPort * tempRP)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -1987,7 +1987,7 @@ __graphics_ReadPixelLine8(struct GfxBase *__base, struct RastPort * rp, ULONG xs
 #define ReadPixelLine8(rp, xstart, ystart, width, array, tempRP) __graphics_ReadPixelLine8((GRAPHICS_BASE_NAME), (rp), (xstart), (ystart), (width), (array), (tempRP))
 
 static __inline__ LONG
-__graphics_WritePixelLine8(struct GfxBase *__base, struct RastPort * rp, ULONG xstart, ULONG ystart, ULONG width, UBYTE * array, struct RastPort * tempRP)
+__graphics_WritePixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD width, UBYTE * array, struct RastPort * tempRP)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -2005,7 +2005,7 @@ __graphics_WritePixelLine8(struct GfxBase *__base, struct RastPort * rp, ULONG x
 #define WritePixelLine8(rp, xstart, ystart, width, array, tempRP) __graphics_WritePixelLine8((GRAPHICS_BASE_NAME), (rp), (xstart), (ystart), (width), (array), (tempRP))
 
 static __inline__ LONG
-__graphics_ReadPixelArray8(struct GfxBase *__base, struct RastPort * rp, ULONG xstart, ULONG ystart, ULONG xstop, ULONG ystop, UBYTE * array, struct RastPort * temprp)
+__graphics_ReadPixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, UBYTE * array, struct RastPort * temprp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -2024,7 +2024,7 @@ __graphics_ReadPixelArray8(struct GfxBase *__base, struct RastPort * rp, ULONG x
 #define ReadPixelArray8(rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_ReadPixelArray8((GRAPHICS_BASE_NAME), (rp), (xstart), (ystart), (xstop), (ystop), (array), (temprp))
 
 static __inline__ LONG
-__graphics_WritePixelArray8(struct GfxBase *__base, struct RastPort * rp, ULONG xstart, ULONG ystart, ULONG xstop, ULONG ystop, UBYTE * array, struct RastPort * temprp)
+__graphics_WritePixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, UBYTE * array, struct RastPort * temprp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -2042,7 +2042,7 @@ __graphics_WritePixelArray8(struct GfxBase *__base, struct RastPort * rp, ULONG 
 }
 #define WritePixelArray8(rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_WritePixelArray8((GRAPHICS_BASE_NAME), (rp), (xstart), (ystart), (xstop), (ystop), (array), (temprp))
 
-static __inline__ ULONG
+static __inline__ LONG
 __graphics_GetVPModeID(struct GfxBase *__base, CONST struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
@@ -2054,11 +2054,11 @@ __graphics_GetVPModeID(struct GfxBase *__base, CONST struct ViewPort * vp)
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (ULONG)_d0;
+	return (LONG)_d0;
 }
 #define GetVPModeID(vp) __graphics_GetVPModeID((GRAPHICS_BASE_NAME), (vp))
 
-static __inline__ ULONG
+static __inline__ LONG
 __graphics_ModeNotAvailable(struct GfxBase *__base, ULONG modeID)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(modeID);
@@ -2070,7 +2070,7 @@ __graphics_ModeNotAvailable(struct GfxBase *__base, ULONG modeID)
 		: "+r" (_d0), "=r" (_d1), "=r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (ULONG)_d0;
+	return (LONG)_d0;
 }
 #define ModeNotAvailable(modeID) __graphics_ModeNotAvailable((GRAPHICS_BASE_NAME), (modeID))
 
@@ -2092,7 +2092,7 @@ __graphics_WeighTAMatch(struct GfxBase *__base, CONST struct TextAttr * reqTextA
 #define WeighTAMatch(reqTextAttr, targetTextAttr, targetTags) __graphics_WeighTAMatch((GRAPHICS_BASE_NAME), (reqTextAttr), (targetTextAttr), (targetTags))
 
 static __inline__ VOID
-__graphics_EraseRect(struct GfxBase *__base, struct RastPort * rp, LONG xMin, LONG yMin, LONG xMax, LONG yMax)
+__graphics_EraseRect(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xMin);
@@ -2572,7 +2572,7 @@ __graphics_SetRGB32CM(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULO
 #define SetRGB32CM(cm, n, r, g, b) __graphics_SetRGB32CM((GRAPHICS_BASE_NAME), (cm), (n), (r), (g), (b))
 
 static __inline__ VOID
-__graphics_ScrollRasterBF(struct GfxBase *__base, struct RastPort * rp, LONG dx, LONG dy, LONG xMin, LONG yMin, LONG xMax, LONG yMax)
+__graphics_ScrollRasterBF(struct GfxBase *__base, struct RastPort * rp, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -2712,7 +2712,7 @@ __graphics_BestModeIDA(struct GfxBase *__base, CONST struct TagItem * tags)
 #define BestModeIDA(tags) __graphics_BestModeIDA((GRAPHICS_BASE_NAME), (tags))
 
 static __inline__ VOID
-__graphics_WriteChunkyPixels(struct GfxBase *__base, struct RastPort * rp, ULONG xstart, ULONG ystart, ULONG xstop, ULONG ystop, CONST UBYTE * array, LONG bytesperrow)
+__graphics_WriteChunkyPixels(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, CONST UBYTE * array, LONG bytesperrow)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);

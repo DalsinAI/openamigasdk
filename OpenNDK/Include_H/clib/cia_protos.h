@@ -15,10 +15,10 @@ extern "C" {
 
 
 /* From version 33 */
-struct Interrupt * AddICRVector(struct Library * resource, LONG iCRBit, struct Interrupt * interrupt);
-VOID RemICRVector(struct Library * resource, LONG iCRBit, struct Interrupt * interrupt);
-WORD AbleICR(struct Library * resource, LONG mask);
-WORD SetICR(struct Library * resource, LONG mask);
+struct Interrupt * AddICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * interrupt);
+VOID RemICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * interrupt);
+WORD AbleICR(struct Library * resource, WORD mask);
+WORD SetICR(struct Library * resource, WORD mask);
 
 #ifdef __cplusplus
 }

@@ -104,7 +104,7 @@ __icon_FreeDiskObject(struct Library *__base, struct DiskObject * diskobj)
 }
 #define FreeDiskObject(diskobj) __icon_FreeDiskObject((ICON_BASE_NAME), (diskobj))
 
-static __inline__ STRPTR
+static __inline__ UBYTE *
 __icon_FindToolType(struct Library *__base, CONST STRPTR * toolTypeArray, CONST_STRPTR typeName)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(toolTypeArray);
@@ -116,7 +116,7 @@ __icon_FindToolType(struct Library *__base, CONST STRPTR * toolTypeArray, CONST_
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (STRPTR)_d0;
+	return (UBYTE *)_d0;
 }
 #define FindToolType(toolTypeArray, typeName) __icon_FindToolType((ICON_BASE_NAME), (toolTypeArray), (typeName))
 
@@ -151,6 +151,23 @@ __icon_BumpRevision(struct Library *__base, STRPTR newname, CONST_STRPTR oldname
 	return (STRPTR)_d0;
 }
 #define BumpRevision(newname, oldname) __icon_BumpRevision((ICON_BASE_NAME), (newname), (oldname))
+
+static __inline__ APTR
+__icon_FreeAlloc(struct Library *__base, struct FreeList * freelist, ULONG len, ULONG type)
+{
+	register ULONG _a0 __asm("a0") = (ULONG)(freelist);
+	register ULONG _a1 __asm("a1") = (ULONG)(len);
+	register ULONG _a2 __asm("a2") = (ULONG)(type);
+	register struct Library *_a6 __asm("a6") = __base;
+	register ULONG _d0 __asm("d0");
+	register ULONG _d1 __asm("d1");
+	__asm__ __volatile__ ("jsr -114(%/a6)"
+		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
+		: "r" (_a2), "r" (_a6)
+		: __OPENNDK_FPCLOBBER "cc", "memory");
+	return (APTR)_d0;
+}
+#define FreeAlloc(freelist, len, type) __icon_FreeAlloc((ICON_BASE_NAME), (freelist), (len), (type))
 
 static __inline__ struct DiskObject *
 __icon_GetDefDiskObject(struct Library *__base, LONG type)
@@ -215,6 +232,22 @@ __icon_DeleteDiskObject(struct Library *__base, CONST_STRPTR name)
 	return (BOOL)_d0;
 }
 #define DeleteDiskObject(name) __icon_DeleteDiskObject((ICON_BASE_NAME), (name))
+
+static __inline__ VOID
+__icon_FreeFree(struct Library *__base, struct FreeList * freelist, APTR address)
+{
+	register ULONG _a0 __asm("a0") = (ULONG)(freelist);
+	register ULONG _a1 __asm("a1") = (ULONG)(address);
+	register struct Library *_a6 __asm("a6") = __base;
+	register ULONG _d0 __asm("d0");
+	register ULONG _d1 __asm("d1");
+	__asm__ __volatile__ ("jsr -144(%/a6)"
+		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
+		: "r" (_a6)
+		: __OPENNDK_FPCLOBBER "cc", "memory");
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
+}
+#define FreeFree(freelist, address) __icon_FreeFree((ICON_BASE_NAME), (freelist), (address))
 
 static __inline__ struct DiskObject *
 __icon_DupDiskObjectA(struct Library *__base, CONST struct DiskObject * diskObject, CONST struct TagItem * tags)
@@ -366,5 +399,21 @@ __icon_ChangeToSelectedIconColor(struct Library *__base, struct ColorRegister * 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ChangeToSelectedIconColor(cr) __icon_ChangeToSelectedIconColor((ICON_BASE_NAME), (cr))
+
+static __inline__ STRPTR
+__icon_BumpRevisionLength(struct Library *__base, STRPTR newname, CONST_STRPTR oldname, ULONG maxLength)
+{
+	register ULONG _a0 __asm("a0") = (ULONG)(newname);
+	register ULONG _a1 __asm("a1") = (ULONG)(oldname);
+	register ULONG _d0 __asm("d0") = (ULONG)(maxLength);
+	register struct Library *_a6 __asm("a6") = __base;
+	register ULONG _d1 __asm("d1");
+	__asm__ __volatile__ ("jsr -204(%/a6)"
+		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
+		: "r" (_a6)
+		: __OPENNDK_FPCLOBBER "cc", "memory");
+	return (STRPTR)_d0;
+}
+#define BumpRevisionLength(newname, oldname, maxLength) __icon_BumpRevisionLength((ICON_BASE_NAME), (newname), (oldname), (maxLength))
 
 #endif /* INLINE_ICON_H */
