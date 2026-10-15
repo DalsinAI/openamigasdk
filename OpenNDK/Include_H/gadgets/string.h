@@ -22,9 +22,6 @@
 #define STRINGA_Mark		(REACTION_Dummy + 0x0055011)	/* mark a block */
 #define STRINGA_AllowMarking	(REACTION_Dummy + 0x0055012)	/* BOOL */
 
-/* The field's length when STRINGA_MaxChars is not given */
-#define SG_DEFAULTMAXCHARS	128
-
 /* Built-in edit hooks */
 #define SHK_CUSTOM	0
 #define SHK_PASSWORD	1
