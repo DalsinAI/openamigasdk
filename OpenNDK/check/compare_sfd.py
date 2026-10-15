@@ -27,6 +27,14 @@ def sig(f):
     return (norm_type(f.ret), tuple(norm_type(a.type) for a in f.args), f.dots)
 
 
+def proto(f):
+    """A call as name, types and registers only: what a program's binary
+    depends on, with none of the vendor's wording."""
+    args = [norm_type(a.type) for a in f.args] + (["..."] if f.dots else [])
+    return "%s %s(%s) (%s)%s" % (norm_type(f.ret), f.name, ", ".join(args), ",".join(f.regs),
+                                 " private" if f.private else "")
+
+
 def main():
     ndk = sys.argv[1]
     report = sys.argv[3] if len(sys.argv) > 3 and sys.argv[2] == "--report" else None
@@ -36,7 +44,7 @@ def main():
     ours = {os.path.basename(p): p for p in glob.glob(os.path.join(here, "*.sfd"))}
     for name in sorted(set(ours) & set(theirs)):
         try:
-            a, b = ndkgen.Lib(ours[name]), ndkgen.Lib(theirs[name])
+            a, b = ndkgen.Lib(ours[name], need_base=False), ndkgen.Lib(theirs[name], need_base=False)
         except ValueError as e:
             out.append("- %s: cannot read: %s" % (name, e)); bad += 1
             continue
@@ -46,25 +54,37 @@ def main():
         sb = {f.bias: f for f in b.slots()}
         for bias in sorted(set(sa) | set(sb)):
             fa, fb = sa.get(bias), sb.get(bias)
+            if fa is None and fb.private or fb is None and fa.private:
+                continue                        # a private slot one side leaves unnamed
             if fa is None or fb is None:
-                out.append("- %s -%d: %s, NDK %s" % (name, bias, fa and fa.name, fb and fb.name)); bad += 1
+                out.append("- %s -%d: %s, NDK %s" % (name, bias, fa and proto(fa), fb and proto(fb))); bad += 1
                 continue
             if fa.private and fb.private:
                 continue
             if fa.name != fb.name or fa.regs != fb.regs or fa.private != fb.private:
-                out.append("- %s -%d: %s(%s)%s, NDK %s(%s)%s" % (name, bias, fa.name, ",".join(fa.regs),
-                           " private" if fa.private else "", fb.name, ",".join(fb.regs), " private" if fb.private else ""))
+                out.append("- %s -%d: %s, NDK %s" % (name, bias, proto(fa), proto(fb)))
                 bad += 1
             elif sig(fa) != sig(fb):
-                out.append("- %s %s: types %s, NDK %s" % (name, fa.name, sig(fa), sig(fb))); typediff += 1
+                out.append("- %s -%d: types %s, NDK %s" % (name, bias, proto(fa), proto(fb))); typediff += 1
         va = {f.name for f in a.funcs if f.varargs_of or f.alias_of}
         vb = {f.name for f in b.funcs if f.varargs_of or f.alias_of}
         for n in sorted(vb - va):
-            out.append("- %s: varargs or alias %s missing" % (name, n)); bad += 1
+            f = next(f for f in b.funcs if f.name == n)
+            out.append("- %s: varargs or alias missing: %s" % (name, proto(f))); bad += 1
         for n in sorted(va - vb):
             out.append("- %s: varargs or alias %s not in the NDK" % (name, n))
     miss = sorted(set(theirs) - set(ours))
     out.append("\nSFDs missing from OpenNDK (%d): %s" % (len(miss), ", ".join(miss) or "none"))
+    for name in miss:
+        try:
+            b = ndkgen.Lib(theirs[name], need_base=False)
+        except ValueError as e:
+            out.append("- %s: cannot read: %s" % (name, e))
+            continue
+        out.append("\n%s: base %s, type %s" % (name, b.base, b.basetype))
+        for f in b.funcs:
+            kind = "varargs " if f.varargs_of else "alias " if f.alias_of else ""
+            out.append("- -%d %s%s" % (f.bias, kind, proto(f)))
     out.append("%d SFDs compared: %d differences in names, offsets or registers, %d in types."
                % (len(set(ours) & set(theirs)), bad, typediff))
     text = "\n".join(out) + "\n"

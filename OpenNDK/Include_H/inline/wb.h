@@ -23,6 +23,22 @@ struct Library;
 #endif
 #endif
 
+static __inline__ BOOL
+__wb_UpdateWorkbench(struct Library *__base, CONST_STRPTR name, BPTR parentLock, LONG action)
+{
+	register ULONG _a0 __asm("a0") = (ULONG)(name);
+	register ULONG _a1 __asm("a1") = (ULONG)(parentLock);
+	register ULONG _d0 __asm("d0") = (ULONG)(action);
+	register struct Library *_a6 __asm("a6") = __base;
+	register ULONG _d1 __asm("d1");
+	__asm__ __volatile__ ("jsr -30(%/a6)"
+		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
+		: "r" (_a6)
+		: __OPENNDK_FPCLOBBER "cc", "memory");
+	return (BOOL)_d0;
+}
+#define UpdateWorkbench(name, parentLock, action) __wb_UpdateWorkbench((WB_BASE_NAME), (name), (parentLock), (action))
+
 static __inline__ struct AppWindow *
 __wb_AddAppWindowA(struct Library *__base, ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, CONST struct TagItem * taglist)
 {

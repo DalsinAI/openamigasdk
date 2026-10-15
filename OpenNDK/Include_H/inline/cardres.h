@@ -136,7 +136,7 @@ __cardres_CardResetRemove(struct Library *__base, struct CardHandle * handle, UL
 #define CardResetRemove(handle, flag) __cardres_CardResetRemove((CARDRES_BASE_NAME), (handle), (flag))
 
 static __inline__ UBYTE
-__cardres_CardMiscControl(struct Library *__base, struct CardHandle * handle, ULONG control_bits)
+__cardres_CardMiscControl(struct Library *__base, struct CardHandle * handle, UBYTE control_bits)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
 	register ULONG _d1 __asm("d1") = (ULONG)(control_bits);

@@ -62,13 +62,22 @@ its `proto/` header, and `__NOLIBBASE__` leaves out the base's declaration.
   `libamiga.a` (1,278 objects). 73 SFDs match the open libraries' `.lvo`
   tables with no difference; icon, workbench, input and translator have no
   table to compare with yet.
-- **Not yet checked:** the field-by-field and constant-by-constant
-  comparison with NDK 3.2 (`check/compare_ndk.sh`), which needs the vendor
-  NDK. Until it has run clean, treat a value in OpenNDK that no open
-  library uses yet as unconfirmed. Known questions for that run:
-  `WA_` tags from `WA_WindowName` on (openintuition's test and openreaction's
-  table disagree by one), `PDTA_ModeID` and the picture tags (200 or 201),
-  and the V47 fields and tags written from the guest's notes.
+- **Checked against NDK 3.2** (`check/compare_ndk.sh`, first run on Daletop
+  15 October; reports in `check/results/`): four exec alert codes, the
+  types of 34 calls, `listbrowser.gadget`'s column-info registers,
+  `UpdateWorkbench` and `texteditor.gadget`'s base name were corrected from
+  it. That run read only part of the NDK (its headers did not compile with
+  Ubuntu's GCC, and its multi-line SFDs were not read), so the compare now
+  measures both header sets with the os32 stove's GCC and reads every SFD.
+  Until its next run is clean, treat a value in OpenNDK that no open
+  library uses yet as unconfirmed. Still open: `WA_` tags from
+  `WA_WindowName` on, `PDTA_ModeID` and the picture tags (200 or 201),
+  datebrowser's three Julian calls, `texteditor.gadget`'s
+  `HighlightSetFormat`, the `listview` and `trackfile` SFDs,
+  `dos/ansiio.h` and `resources/ciabase.h`. OpenNDK keeps
+  `struct timeval` in timer's calls and `struct DiscResourceUnit` in
+  `GetUnit`, which the NDK's SFDs name differently; both are the same
+  layout.
 - **Not yet written:** the assembler structure includes (`Include_I` other
   than `lvo/`), `debug.lib`, autodocs, vbcc's inline headers,
   `gadgets/sketchboard.h` and `piechart.h`, and the OS 4.1 headers (OS 4.1

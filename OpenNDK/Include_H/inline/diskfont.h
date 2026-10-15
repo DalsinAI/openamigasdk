@@ -40,7 +40,7 @@ __diskfont_OpenDiskFont(struct Library *__base, CONST struct TextAttr * textAttr
 #define OpenDiskFont(textAttr) __diskfont_OpenDiskFont((DISKFONT_BASE_NAME), (textAttr))
 
 static __inline__ LONG
-__diskfont_AvailFonts(struct Library *__base, STRPTR buffer, LONG bufBytes, ULONG flags)
+__diskfont_AvailFonts(struct Library *__base, struct AvailFontsHeader * buffer, LONG bufBytes, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(bufBytes);
@@ -87,7 +87,7 @@ __diskfont_DisposeFontContents(struct Library *__base, struct FontContentsHeader
 }
 #define DisposeFontContents(fontContentsHeader) __diskfont_DisposeFontContents((DISKFONT_BASE_NAME), (fontContentsHeader))
 
-static __inline__ struct DiskFontHeader *
+static __inline__ struct DiskFont *
 __diskfont_NewScaledDiskFont(struct Library *__base, struct TextFont * sourceFont, CONST struct TextAttr * destTextAttr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sourceFont);
@@ -99,7 +99,7 @@ __diskfont_NewScaledDiskFont(struct Library *__base, struct TextFont * sourceFon
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (struct DiskFontHeader *)_d0;
+	return (struct DiskFont *)_d0;
 }
 #define NewScaledDiskFont(sourceFont, destTextAttr) __diskfont_NewScaledDiskFont((DISKFONT_BASE_NAME), (sourceFont), (destTextAttr))
 
@@ -135,7 +135,7 @@ __diskfont_SetDiskFontCtrlA(struct Library *__base, CONST struct TagItem * tagli
 }
 #define SetDiskFontCtrlA(taglist) __diskfont_SetDiskFontCtrlA((DISKFONT_BASE_NAME), (taglist))
 
-static __inline__ struct GlyphEngine *
+static __inline__ LONG
 __diskfont_EOpenEngine(struct Library *__base, struct EGlyphEngine * eEngine)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(eEngine);
@@ -147,7 +147,7 @@ __diskfont_EOpenEngine(struct Library *__base, struct EGlyphEngine * eEngine)
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (struct GlyphEngine *)_d0;
+	return (LONG)_d0;
 }
 #define EOpenEngine(eEngine) __diskfont_EOpenEngine((DISKFONT_BASE_NAME), (eEngine))
 

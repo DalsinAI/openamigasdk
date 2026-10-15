@@ -40,7 +40,7 @@ __radiobutton_RADIOBUTTON_GetClass(struct Library *__base)
 #define RADIOBUTTON_GetClass() __radiobutton_RADIOBUTTON_GetClass((RADIOBUTTON_BASE_NAME))
 
 static __inline__ struct Node *
-__radiobutton_AllocRadioButtonNodeA(struct Library *__base, UWORD columns, struct TagItem * tags)
+__radiobutton_AllocRadioButtonNodeA(struct Library *__base, ULONG columns, struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(columns);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);

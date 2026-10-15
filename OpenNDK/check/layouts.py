@@ -3,6 +3,7 @@
 """Measure a header set's structures and constants, and compare two sets.
 
     layouts.py dump INCLUDE_DIR OUT.json      (CC, READELF from the environment)
+    layouts.py measure INCLUDE_DIR PROBE.json OUT.json   (CC from the environment)
     layouts.py compare OURS.json THEIRS.json  [--report FILE]
 
 dump compiles every header under INCLUDE_DIR (leaving out proto/, inline/,
@@ -44,19 +45,25 @@ def headers(root):
 
 def cflags(root):
     inc = subprocess.run([CC, "-print-file-name=include"], capture_output=True, text=True).stdout.strip()
-    return ["-nostdinc", "-isystem", inc, "-I", root, "-w", "-fomit-frame-pointer"]
+    return ["-nostdinc", "-ffreestanding", "-isystem", inc, "-I", root, "-w", "-fomit-frame-pointer"] \
+        + os.environ.get("LAYOUT_CFLAGS", "").split()
 
 
-def usable(root, hs, tmp):
+def usable(root, hs, tmp, errors=None):
     """The headers that compile on their own (a vendor set may have some
-    that don't); each is tried alone."""
+    that don't); each is tried alone. The first error of each that doesn't
+    goes into errors."""
     ok = []
     src = os.path.join(tmp, "one.c")
     for h in hs:
         open(src, "w").write("#include <%s>\n" % h)
-        r = subprocess.run([CC] + cflags(root) + ["-fsyntax-only", src], capture_output=True)
+        r = subprocess.run([CC] + cflags(root) + ["-fsyntax-only", "-fno-diagnostics-show-caret", src],
+                           capture_output=True, text=True)
         if r.returncode == 0:
             ok.append(h)
+        elif errors is not None:
+            first = next((l for l in r.stderr.splitlines() if "error" in l), r.stderr.strip()[:200])
+            errors[h] = first.replace(root + "/", "")
     return ok
 
 
@@ -179,8 +186,36 @@ def structs(obj):
 
 # --------------------------------------------------------------- constants
 
-def macros(root, hs, tmp):
-    src = os.path.join(tmp, "all.c")
+def evaluate(root, src, exprs, tmp):
+    """The value of each constant expression in exprs (key -> C text) with
+    src included, read back from the compiler's assembler output, so any
+    m68k GCC will do and nothing is run. Expressions that don't compile
+    are left out."""
+    keys = sorted(exprs)
+    ev = os.path.join(tmp, "ev.c")
+    asm = os.path.join(tmp, "ev.s")
+    while True:
+        body = ["#include \"%s\"" % src, "void __openndk_values(void) {"]
+        for k in keys:
+            body.append("__asm__ volatile (\"#OPENNDK %s %%0\" :: \"i\" ((long)(%s)));" % (k, exprs[k]))
+        body.append("}")
+        open(ev, "w").write("\n".join(body) + "\n")
+        r = subprocess.run([CC] + cflags(root) + ["-O0", "-S", ev, "-o", asm], capture_output=True, text=True)
+        if r.returncode == 0:
+            break
+        bad = {int(x) - 3 for x in re.findall(r"ev\.c:(\d+):\d+:", r.stderr)}
+        if not bad:
+            raise SystemExit("cannot evaluate the constants:\n" + r.stderr[:3000])
+        keys = [k for i, k in enumerate(keys) if i not in bad]
+    out = {}
+    for line in open(asm):
+        m = re.search(r"#OPENNDK (\S+) #?(-?\d+)", line)
+        if m:
+            out[m.group(1)] = int(m.group(2)) & 0xFFFFFFFF
+    return out
+
+
+def macros(root, src, tmp):
     empty = os.path.join(tmp, "empty.c")
     open(empty, "w").write("")
     def defs(path):
@@ -192,47 +227,72 @@ def macros(root, hs, tmp):
                 out[m.group(1)] = m.group(2)
         return out
     base = defs(empty)
-    names = sorted(n for n, v in defs(src).items()
-                   if n not in base and '"' not in v and not re.search(r"\b(sizeof|offsetof)\b", v)
-                   and not n.endswith("_H") and not n.endswith("_I"))
-    # evaluate them all at once; a name that isn't a constant expression is
-    # dropped and the unit compiled again
-    ev = os.path.join(tmp, "ev.c")
-    asm = os.path.join(tmp, "ev.s")
-    while True:
-        body = ["#include \"%s\"" % src, "void __openndk_values(void) {"]
-        for i, n in enumerate(names):
-            body.append("__asm__ volatile (\"#OPENNDK %s %%0\" :: \"i\" ((long)(%s)));" % (n, n))
-        body.append("}")
-        open(ev, "w").write("\n".join(body) + "\n")
-        r = subprocess.run([CC] + cflags(root) + ["-O0", "-S", ev, "-o", asm], capture_output=True, text=True)
-        if r.returncode == 0:
-            break
-        bad = {int(x) - 3 for x in re.findall(r"ev\.c:(\d+):\d+:", r.stderr)}
-        if not bad:
-            raise SystemExit("cannot evaluate the constants:\n" + r.stderr[:3000])
-        names = [n for i, n in enumerate(names) if i not in bad]
-    out = {}
-    for line in open(asm):
-        m = re.search(r"#OPENNDK (\w+) #?(-?\d+)", line)
-        if m:
-            out[m.group(1)] = int(m.group(2)) & 0xFFFFFFFF
-    return out
+    names = [n for n, v in defs(src).items()
+             if n not in base and '"' not in v and not re.search(r"\b(sizeof|offsetof)\b", v)
+             and not n.endswith("_H") and not n.endswith("_I")]
+    return evaluate(root, src, {n: n for n in names}, tmp)
+
+
+def struct_names(src_text):
+    return set(re.findall(r"\b(struct|union)\s+(\w+)\s*\{", src_text))
+
+
+def unit(root, tmp):
+    errors = {}
+    hs = together(root, usable(root, headers(root), tmp, errors), tmp)
+    src = os.path.join(tmp, "all.c")
+    open(src, "w").write("".join("#include <%s>\n" % h for h in hs))
+    return hs, src, errors
 
 
 def dump(root, dest):
+    """Structures from the debug information (needs an ELF GCC)."""
     root = os.path.abspath(root)
     with tempfile.TemporaryDirectory() as tmp:
-        hs = together(root, usable(root, headers(root), tmp), tmp)
-        src = os.path.join(tmp, "all.c")
-        open(src, "w").write("".join("#include <%s>\n" % h for h in hs))
+        hs, src, errors = unit(root, tmp)
         obj = os.path.join(tmp, "all.o")
         subprocess.run([CC] + cflags(root) + ["-g", "-gdwarf-4", "-fno-eliminate-unused-debug-types",
                                               "-c", src, "-o", obj], check=True)
-        data = {"headers": hs, "structs": structs(obj), "constants": macros(root, hs, tmp)}
+        data = {"headers": hs, "errors": errors, "structs": structs(obj), "constants": macros(root, src, tmp)}
+    save(data, dest)
+
+
+def measure(root, probe_path, dest):
+    """Structures by sizeof and offsetof, for every structure and field
+    named in a dump (probe), with any m68k GCC: the vendor NDK is measured
+    this way with the compiler it was written for. Structures the probe
+    doesn't name are listed with their size only."""
+    root = os.path.abspath(root)
+    probe = json.load(open(probe_path))
+    with tempfile.TemporaryDirectory() as tmp:
+        hs, src, errors = unit(root, tmp)
+        pre = subprocess.run([CC] + cflags(root) + ["-E", src], capture_output=True, text=True).stdout
+        exprs = {}
+        names = {k for k in probe["structs"]} | {"%s %s" % kw for kw in struct_names(pre)}
+        for k in names:
+            exprs["S:%s" % k.replace(" ", ":")] = "sizeof(%s)" % k
+            for n, _, _ in probe["structs"].get(k, {}).get("members", []):
+                if re.match(r"^\w+$", n):
+                    exprs["O:%s:%s" % (k.replace(" ", ":"), n)] = "__builtin_offsetof(%s, %s)" % (k, n)
+                    exprs["Z:%s:%s" % (k.replace(" ", ":"), n)] = "sizeof(((%s *)0)->%s)" % (k, n)
+        vals = evaluate(root, src, exprs, tmp)
+        st = {}
+        for key, v in vals.items():
+            if key.startswith("S:"):
+                st.setdefault(key[2:].replace(":", " "), {"size": None, "members": []})["size"] = v
+        for k in st:
+            kk = k.replace(" ", ":")
+            for n, _, _ in probe["structs"].get(k, {}).get("members", []):
+                if "O:%s:%s" % (kk, n) in vals:
+                    st[k]["members"].append([n, vals["O:%s:%s" % (kk, n)], vals.get("Z:%s:%s" % (kk, n))])
+        data = {"headers": hs, "errors": errors, "structs": st, "constants": macros(root, src, tmp)}
+    save(data, dest)
+
+
+def save(data, dest):
     json.dump(data, open(dest, "w"), indent=0, sort_keys=True)
-    print("%s: %d headers, %d structures, %d constants" % (dest, len(data["headers"]),
-          len(data["structs"]), len(data["constants"])))
+    print("%s: %d headers (%d not compiling alone), %d structures, %d constants" % (
+        dest, len(data["headers"]), len(data["errors"]), len(data["structs"]), len(data["constants"])))
 
 
 def compare(ours_path, theirs_path, report=None):
@@ -261,11 +321,16 @@ def compare(ours_path, theirs_path, report=None):
     say("\n## Missing from OpenNDK\n")
     say("Headers: " + (", ".join(sorted(set(theirs["headers"]) - set(ours["headers"]))) or "none"))
     miss = sorted(set(theirs["structs"]) - set(ours["structs"]))
-    say("\nStructures (%d): %s" % (len(miss), ", ".join(miss) or "none"))
+    say("\nStructures (%d): %s" % (len(miss), ", ".join("%s (%s bytes)" % (k, theirs["structs"][k]["size"]) for k in miss) or "none"))
     missc = sorted(set(theirs["constants"]) - set(ours["constants"]))
-    say("\nConstants (%d): %s" % (len(missc), ", ".join(missc) or "none"))
+    say("\nConstants (%d): %s" % (len(missc), ", ".join("%s=0x%x" % (k, theirs["constants"][k]) for k in missc) or "none"))
     extra = sorted(set(ours["constants"]) - set(theirs["constants"]))
-    say("\n## In OpenNDK only\n\nConstants (%d): %s" % (len(extra), ", ".join(extra) or "none"))
+    say("\n## In OpenNDK only\n\nConstants (%d): %s" % (len(extra), ", ".join(extra) if len(extra) <= 400 else "(too many to list)"))
+    for side, d in (("OpenNDK", ours), ("NDK", theirs)):
+        errs = d.get("errors", {})
+        say("\n## %s headers that don't compile alone (%d)\n" % (side, len(errs)))
+        for h in sorted(errs)[:60]:
+            say("- %s: %s" % (h, errs[h]))
     shared = len(set(ours["structs"]) & set(theirs["structs"])), len(set(ours["constants"]) & set(theirs["constants"]))
     say("\n%d structures and %d constants compared, %d differences." % (shared[0], shared[1], bad))
     text = "\n".join(lines) + "\n"
@@ -278,6 +343,8 @@ def compare(ours_path, theirs_path, report=None):
 def main():
     if len(sys.argv) >= 4 and sys.argv[1] == "dump":
         dump(sys.argv[2], sys.argv[3])
+    elif len(sys.argv) >= 5 and sys.argv[1] == "measure":
+        measure(sys.argv[2], sys.argv[3], sys.argv[4])
     elif len(sys.argv) >= 4 and sys.argv[1] == "compare":
         rep = sys.argv[5] if len(sys.argv) > 5 and sys.argv[4] == "--report" else None
         sys.exit(1 if compare(sys.argv[2], sys.argv[3], rep) else 0)

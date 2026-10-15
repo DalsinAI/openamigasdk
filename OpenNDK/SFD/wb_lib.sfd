@@ -12,8 +12,9 @@
 ==include <utility/tagitem.h>
 ==include <workbench/workbench.h>
 ==include <intuition/intuition.h>
+==public
+BOOL UpdateWorkbench(CONST_STRPTR name, BPTR parentLock, LONG action) (a0,a1,d0)
 ==private
-VOID wbPrivate1() ()
 VOID wbPrivate2() ()
 VOID wbPrivate3() ()
 ==public

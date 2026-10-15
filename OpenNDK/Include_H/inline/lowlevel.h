@@ -72,7 +72,7 @@ __lowlevel_GetKey(struct Library *__base)
 #define GetKey() __lowlevel_GetKey((LOWLEVEL_BASE_NAME))
 
 static __inline__ VOID
-__lowlevel_QueryKeys(struct Library *__base, struct KeyQuery * queryArray, ULONG arraySize)
+__lowlevel_QueryKeys(struct Library *__base, struct KeyQuery * queryArray, LONG arraySize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(queryArray);
 	register ULONG _d1 __asm("d1") = (ULONG)(arraySize);
@@ -184,7 +184,7 @@ __lowlevel_StopTimerInt(struct Library *__base, APTR intHandle)
 #define StopTimerInt(intHandle) __lowlevel_StopTimerInt((LOWLEVEL_BASE_NAME), (intHandle))
 
 static __inline__ VOID
-__lowlevel_StartTimerInt(struct Library *__base, APTR intHandle, ULONG timeInterval, LONG continuous)
+__lowlevel_StartTimerInt(struct Library *__base, APTR intHandle, ULONG timeInterval, BOOL continuous)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(intHandle);
 	register ULONG _d0 __asm("d0") = (ULONG)(timeInterval);

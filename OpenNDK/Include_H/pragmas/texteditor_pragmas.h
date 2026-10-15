@@ -9,6 +9,6 @@
 #include <clib/texteditor_protos.h>
 #endif
 
-#pragma libcall TextEditorBase TEXTEDITOR_GetClass 1e 00
+#pragma libcall TextFieldBase TEXTEDITOR_GetClass 1e 00
 
 #endif /* PRAGMAS_TEXTEDITOR_PRAGMAS_H */

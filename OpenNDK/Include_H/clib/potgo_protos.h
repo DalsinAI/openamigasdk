@@ -13,9 +13,9 @@ extern "C" {
 
 
 /* From version 33 */
-UWORD AllocPotBits(ULONG bits);
-VOID FreePotBits(ULONG bits);
-VOID WritePotgo(ULONG word, ULONG mask);
+UWORD AllocPotBits(UWORD bits);
+VOID FreePotBits(UWORD bits);
+VOID WritePotgo(UWORD word, UWORD mask);
 
 #ifdef __cplusplus
 }

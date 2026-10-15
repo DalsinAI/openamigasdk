@@ -10,7 +10,7 @@
 #endif
 
 #ifndef TEXTEDITOR_BASE_NAME
-#define TEXTEDITOR_BASE_NAME TextEditorBase
+#define TEXTEDITOR_BASE_NAME TextFieldBase
 #endif
 
 struct Library;

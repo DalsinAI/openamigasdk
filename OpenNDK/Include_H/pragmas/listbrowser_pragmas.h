@@ -25,10 +25,10 @@
 #pragma libcall ListBrowserBase FreeListBrowserList 5a 801
 #pragma libcall ListBrowserBase AllocLBColumnInfoA 60 8002
 #pragma tagcall ListBrowserBase AllocLBColumnInfo 60 8002
-#pragma libcall ListBrowserBase SetLBColumnInfoAttrsA 66 9802
-#pragma tagcall ListBrowserBase SetLBColumnInfoAttrs 66 9802
-#pragma libcall ListBrowserBase GetLBColumnInfoAttrsA 6c 9802
-#pragma tagcall ListBrowserBase GetLBColumnInfoAttrs 6c 9802
+#pragma libcall ListBrowserBase SetLBColumnInfoAttrsA 66 8902
+#pragma tagcall ListBrowserBase SetLBColumnInfoAttrs 66 8902
+#pragma libcall ListBrowserBase GetLBColumnInfoAttrsA 6c 8902
+#pragma tagcall ListBrowserBase GetLBColumnInfoAttrs 6c 8902
 #pragma libcall ListBrowserBase FreeLBColumnInfo 72 801
 #pragma libcall ListBrowserBase ListBrowserClearAll 78 801
 

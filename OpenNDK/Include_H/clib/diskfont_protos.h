@@ -20,14 +20,14 @@ extern "C" {
 
 /* From version 33 */
 struct TextFont * OpenDiskFont(CONST struct TextAttr * textAttr);
-LONG AvailFonts(STRPTR buffer, LONG bufBytes, ULONG flags);
+LONG AvailFonts(struct AvailFontsHeader * buffer, LONG bufBytes, ULONG flags);
 
 /* From version 34 */
 struct FontContentsHeader * NewFontContents(BPTR fontsLock, CONST_STRPTR fontName);
 VOID DisposeFontContents(struct FontContentsHeader * fontContentsHeader);
 
 /* From version 36 */
-struct DiskFontHeader * NewScaledDiskFont(struct TextFont * sourceFont, CONST struct TextAttr * destTextAttr);
+struct DiskFont * NewScaledDiskFont(struct TextFont * sourceFont, CONST struct TextAttr * destTextAttr);
 
 /* From version 45 */
 LONG GetDiskFontCtrl(LONG tagid);
@@ -35,7 +35,7 @@ VOID SetDiskFontCtrlA(CONST struct TagItem * taglist);
 VOID SetDiskFontCtrl(Tag tag1, ...);
 
 /* From version 47 */
-struct GlyphEngine * EOpenEngine(struct EGlyphEngine * eEngine);
+LONG EOpenEngine(struct EGlyphEngine * eEngine);
 VOID ECloseEngine(struct EGlyphEngine * eEngine);
 ULONG ESetInfoA(struct EGlyphEngine * eEngine, CONST struct TagItem * taglist);
 ULONG ESetInfo(struct EGlyphEngine * eEngine, Tag tag1, ...);

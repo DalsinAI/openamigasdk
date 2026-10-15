@@ -24,7 +24,7 @@ struct Library;
 #endif
 
 static __inline__ UWORD
-__potgo_AllocPotBits(struct Library *__base, ULONG bits)
+__potgo_AllocPotBits(struct Library *__base, UWORD bits)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(bits);
 	register struct Library *_a6 __asm("a6") = __base;
@@ -40,7 +40,7 @@ __potgo_AllocPotBits(struct Library *__base, ULONG bits)
 #define AllocPotBits(bits) __potgo_AllocPotBits((POTGO_BASE_NAME), (bits))
 
 static __inline__ VOID
-__potgo_FreePotBits(struct Library *__base, ULONG bits)
+__potgo_FreePotBits(struct Library *__base, UWORD bits)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(bits);
 	register struct Library *_a6 __asm("a6") = __base;
@@ -56,7 +56,7 @@ __potgo_FreePotBits(struct Library *__base, ULONG bits)
 #define FreePotBits(bits) __potgo_FreePotBits((POTGO_BASE_NAME), (bits))
 
 static __inline__ VOID
-__potgo_WritePotgo(struct Library *__base, ULONG word, ULONG mask)
+__potgo_WritePotgo(struct Library *__base, UWORD word, UWORD mask)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(word);
 	register ULONG _d1 __asm("d1") = (ULONG)(mask);

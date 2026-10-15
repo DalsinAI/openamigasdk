@@ -176,7 +176,7 @@ __layers_BeginUpdate(struct Library *__base, struct Layer * l)
 #define BeginUpdate(l) __layers_BeginUpdate((LAYERS_BASE_NAME), (l))
 
 static __inline__ VOID
-__layers_EndUpdate(struct Library *__base, struct Layer * layer, ULONG flag)
+__layers_EndUpdate(struct Library *__base, struct Layer * layer, UWORD flag)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
 	register ULONG _d0 __asm("d0") = (ULONG)(flag);
@@ -304,7 +304,7 @@ __layers_SwapBitsRastPortClipRect(struct Library *__base, struct RastPort * rp, 
 #define SwapBitsRastPortClipRect(rp, cr) __layers_SwapBitsRastPortClipRect((LAYERS_BASE_NAME), (rp), (cr))
 
 static __inline__ struct Layer *
-__layers_WhichLayer(struct Library *__base, struct Layer_Info * li, LONG x, LONG y)
+__layers_WhichLayer(struct Library *__base, struct Layer_Info * li, WORD x, WORD y)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
@@ -524,7 +524,7 @@ __layers_InstallLayerInfoHook(struct Library *__base, struct Layer_Info * li, CO
 #define InstallLayerInfoHook(li, hook) __layers_InstallLayerInfoHook((LAYERS_BASE_NAME), (li), (hook))
 
 static __inline__ VOID
-__layers_SortLayerCR(struct Library *__base, struct Layer * layer, LONG dx, LONG dy)
+__layers_SortLayerCR(struct Library *__base, struct Layer * layer, WORD dx, WORD dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -556,7 +556,7 @@ __layers_DoHookClipRects(struct Library *__base, struct Hook * hook, struct Rast
 }
 #define DoHookClipRects(hook, rport, rect) __layers_DoHookClipRects((LAYERS_BASE_NAME), (hook), (rport), (rect))
 
-static __inline__ LONG
+static __inline__ BOOL
 __layers_LayerOccluded(struct Library *__base, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
@@ -568,7 +568,7 @@ __layers_LayerOccluded(struct Library *__base, struct Layer * layer)
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "=r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (LONG)_d0;
+	return (BOOL)_d0;
 }
 #define LayerOccluded(layer) __layers_LayerOccluded((LAYERS_BASE_NAME), (layer))
 
@@ -604,7 +604,7 @@ __layers_ShowLayer(struct Library *__base, struct Layer * layer, struct Layer * 
 }
 #define ShowLayer(layer, in_front_of) __layers_ShowLayer((LAYERS_BASE_NAME), (layer), (in_front_of))
 
-static __inline__ LONG
+static __inline__ BOOL
 __layers_SetLayerInfoBounds(struct Library *__base, struct Layer_Info * li, CONST struct Rectangle * bounds)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
@@ -616,7 +616,7 @@ __layers_SetLayerInfoBounds(struct Library *__base, struct Layer_Info * li, CONS
 		: "=r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (LONG)_d0;
+	return (BOOL)_d0;
 }
 #define SetLayerInfoBounds(li, bounds) __layers_SetLayerInfoBounds((LAYERS_BASE_NAME), (li), (bounds))
 

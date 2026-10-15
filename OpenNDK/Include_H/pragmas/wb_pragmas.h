@@ -9,6 +9,7 @@
 #include <clib/wb_protos.h>
 #endif
 
+#pragma libcall WorkbenchBase UpdateWorkbench 1e 09803
 #pragma libcall WorkbenchBase AddAppWindowA 30 a981005
 #pragma tagcall WorkbenchBase AddAppWindow 30 a981005
 #pragma libcall WorkbenchBase RemoveAppWindow 36 801

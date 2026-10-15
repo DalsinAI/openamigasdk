@@ -40,7 +40,7 @@ __listbrowser_LISTBROWSER_GetClass(struct Library *__base)
 #define LISTBROWSER_GetClass() __listbrowser_LISTBROWSER_GetClass((LISTBROWSER_BASE_NAME))
 
 static __inline__ struct Node *
-__listbrowser_AllocListBrowserNodeA(struct Library *__base, UWORD columns, struct TagItem * tags)
+__listbrowser_AllocListBrowserNodeA(struct Library *__base, ULONG columns, struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(columns);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
@@ -120,7 +120,7 @@ __listbrowser_ListBrowserSelectAll(struct Library *__base, struct List * list)
 #define ListBrowserSelectAll(list) __listbrowser_ListBrowserSelectAll((LISTBROWSER_BASE_NAME), (list))
 
 static __inline__ VOID
-__listbrowser_ShowListBrowserNodeChildren(struct Library *__base, struct Node * node, WORD depth)
+__listbrowser_ShowListBrowserNodeChildren(struct Library *__base, struct Node * node, LONG depth)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _d0 __asm("d0") = (ULONG)(depth);
@@ -200,7 +200,7 @@ __listbrowser_FreeListBrowserList(struct Library *__base, struct List * list)
 #define FreeListBrowserList(list) __listbrowser_FreeListBrowserList((LISTBROWSER_BASE_NAME), (list))
 
 static __inline__ struct ColumnInfo *
-__listbrowser_AllocLBColumnInfoA(struct Library *__base, UWORD columns, struct TagItem * tags)
+__listbrowser_AllocLBColumnInfoA(struct Library *__base, ULONG columns, struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(columns);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
@@ -218,8 +218,8 @@ __listbrowser_AllocLBColumnInfoA(struct Library *__base, UWORD columns, struct T
 static __inline__ LONG
 __listbrowser_SetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * columninfo, struct TagItem * tags)
 {
-	register ULONG _a0 __asm("a0") = (ULONG)(columninfo);
-	register ULONG _a1 __asm("a1") = (ULONG)(tags);
+	register ULONG _a1 __asm("a1") = (ULONG)(columninfo);
+	register ULONG _a0 __asm("a0") = (ULONG)(tags);
 	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
@@ -234,8 +234,8 @@ __listbrowser_SetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 static __inline__ LONG
 __listbrowser_GetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * columninfo, struct TagItem * tags)
 {
-	register ULONG _a0 __asm("a0") = (ULONG)(columninfo);
-	register ULONG _a1 __asm("a1") = (ULONG)(tags);
+	register ULONG _a1 __asm("a1") = (ULONG)(columninfo);
+	register ULONG _a0 __asm("a0") = (ULONG)(tags);
 	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
