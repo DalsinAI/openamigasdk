@@ -332,6 +332,7 @@ def inline(lib):
     out = [header(lib, "GCC inline calls"), "#ifndef %s\n#define %s\n" % (g, g),
            "#ifndef CLIB_%s_PROTOS_H\n#include <clib/%s_protos.h>\n#endif\n" % (lib.guard, lib.stem),
            "#ifndef %s\n#define %s %s\n#endif\n" % (bn, bn, lib.base),
+           base_decl(lib),
            "#ifndef __OPENNDK_FPCLOBBER\n#ifdef __HAVE_68881__\n"
            "#define __OPENNDK_FPCLOBBER \"fp0\", \"fp1\",\n#else\n"
            "#define __OPENNDK_FPCLOBBER\n#endif\n#endif\n"]
@@ -351,6 +352,13 @@ def same_call(f, g):
     """An alias that takes the same registers is a plain second name; one
     that takes fewer (dos's DoPkt0 to DoPkt4) gets an inline of its own."""
     return f.regs == g.regs
+
+
+def base_decl(lib):
+    """Declare the base's structure at file scope, so the inline functions'
+    parameter names the same type the program's base variable has."""
+    m = re.match(r"\s*struct\s+(\w+)\s*\*\s*$", lib.basetype)
+    return "struct %s;\n" % m.group(1) if m else ""
 
 
 def cast_in(a, var):

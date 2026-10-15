@@ -6,6 +6,7 @@
 #define CLIB_GADTOOLS_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <intuition/intuition.h>
 #include <utility/tagitem.h>
 #include <libraries/gadtools.h>

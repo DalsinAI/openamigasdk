@@ -49,17 +49,27 @@ its `proto/` header, and `__NOLIBBASE__` leaves out the base's declaration.
 
 ## Status, 15 October 2026
 
-- **Covered:** the AmigaOS 3.2 C headers listed above and SFDs for exec,
-  dos, graphics, layers, intuition, utility, the other ROM and disk
-  libraries, the devices and resources with calls, and the ReAction classes.
-  Every SFD that has an open library behind it matches that library's
-  `.lvo` table, which the library's own build checks against the vendor's.
-- **Checked in the cloud** (`tests/run.sh`): every header compiles alone in C
-  and C++, 90 structure sizes, a program's calls, and `libamiga.a`.
+- **Written:** 209 C headers in the OS's own paths and 77 SFDs: exec, dos,
+  graphics, layers, intuition, utility, gadtools, asl, icon, workbench,
+  expansion, the other disk libraries (amigaguide, commodities, datatypes,
+  diskfont, iffparse, keymap, locale, lowlevel, the six math libraries,
+  nonvolatile, realtime, rexxsyslib, translator, bullet), the devices and
+  resources with calls, and the ReAction classes. With the generated files,
+  519 headers in all.
+- **Checked here** (`tests/run.sh`, about 20 minutes): every header compiles
+  alone in C and C++ and all together in one unit; 89 structure sizes that
+  the open libraries' own tests measured against NDK 3.2; a program's calls;
+  `libamiga.a` (1,278 objects). 73 SFDs match the open libraries' `.lvo`
+  tables with no difference; icon, workbench, input and translator have no
+  table to compare with yet.
 - **Not yet checked:** the field-by-field and constant-by-constant
-  comparison with NDK 3.2 (`check/compare_ndk.sh`), which needs a machine
-  that has the vendor NDK installed. Until it has run clean, treat a value
-  in OpenNDK that no open library uses yet as unconfirmed.
+  comparison with NDK 3.2 (`check/compare_ndk.sh`), which needs the vendor
+  NDK. Until it has run clean, treat a value in OpenNDK that no open
+  library uses yet as unconfirmed. Known questions for that run:
+  `WA_` tags from `WA_WindowName` on (openintuition's test and openreaction's
+  table disagree by one), `PDTA_ModeID` and the picture tags (200 or 201),
+  and the V47 fields and tags written from the guest's notes.
 - **Not yet written:** the assembler structure includes (`Include_I` other
-  than `lvo/`), `debug.lib`, autodocs, vbcc's inline headers, and the OS 4.1
-  headers (OS 4.1 builds keep using Hyperion's SDK for now).
+  than `lvo/`), `debug.lib`, autodocs, vbcc's inline headers,
+  `gadgets/sketchboard.h` and `piechart.h`, and the OS 4.1 headers (OS 4.1
+  builds keep using Hyperion's SDK for now).

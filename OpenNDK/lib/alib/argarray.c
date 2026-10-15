@@ -39,7 +39,7 @@ STRPTR *ArgArrayInit(LONG argc, CONST_STRPTR *argv)
 		if (!alib_IconBase)
 			return NULL;
 		old = CurrentDir(wb->sm_ArgList[0].wa_Lock);
-		arg_icon = GetDiskObject(wb->sm_ArgList[0].wa_Name);
+		arg_icon = GetDiskObject((CONST_STRPTR)wb->sm_ArgList[0].wa_Name);
 		CurrentDir(old);
 		return arg_icon ? (STRPTR *)arg_icon->do_ToolTypes : NULL;
 	}
@@ -63,7 +63,7 @@ VOID ArgArrayDone(VOID)
 STRPTR ArgString(CONST_STRPTR *tt, CONST_STRPTR entry, CONST_STRPTR defaultString)
 {
 	STRPTR v;
-	if (tt && alib_IconBase && (v = FindToolType(tt, entry)) != NULL)
+	if (tt && alib_IconBase && (v = FindToolType((CONST STRPTR *)tt, entry)) != NULL)
 		return v;
 	if (tt && !alib_IconBase) {
 		/* Shell arguments: NAME=value */

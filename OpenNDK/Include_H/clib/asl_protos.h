@@ -6,6 +6,7 @@
 #define CLIB_ASL_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <utility/tagitem.h>
 #include <libraries/asl.h>
 

@@ -26,6 +26,16 @@ echo "== headers"
 "$NDK/tests/compile_headers.sh"
 
 FLAGS="-nostdinc -isystem $($CC -print-file-name=include) -I$NDK/Include_H -O2 -fomit-frame-pointer -Wall -Wextra -Werror"
+echo "== all headers in one unit"
+# every header at once: two headers defining one name differently show here
+# (the IEEE math headers rename the same functions as mathffp.h, as they
+# always have, so only one of the three goes in a program)
+(cd "$NDK/Include_H" && find . -name '*.h' ! -path './pragmas/*' ! -name 'mathieeedp.h' ! -name 'mathieeesp.h' | sed 's|^\./||' | sort |
+    sed 's/.*/#include <&>/') > "$T/all.c"
+# shellcheck disable=SC2086
+"$CC" $FLAGS -std=gnu11 -fsyntax-only "$T/all.c"
+echo "one unit ok"
+
 echo "== sizes"
 # shellcheck disable=SC2086
 "$CC" $FLAGS -std=gnu11 -fsyntax-only "$NDK/tests/sizes.c"
@@ -33,8 +43,9 @@ echo "sizes ok"
 
 echo "== a program"
 # shellcheck disable=SC2086
-"$CC" $FLAGS -m68020 -c "$NDK/tests/hello.c" -o "$T/hello.o"
-"$OBJDUMP" -d "$T/hello.o" > "$T/hello.dis"
+# address 4 holds SysBase: GCC must not treat low addresses as invalid
+"$CC" $FLAGS -m68020 --param=min-pagesize=0 -c "$NDK/tests/hello.c" -o "$T/hello.o"
+"$OBJDUMP" -dr "$T/hello.o" > "$T/hello.dis"
 for want in 'jsr %fp@\(-552\)|jsr -552\(%fp\)|jsr %a6@\(-552\)' 'jsr %a6@\(-948\)|jsr %fp@\(-948\)' 'jsr %a6@\(-342\)|jsr %fp@\(-342\)' 'OpenWindowTags'; do
     grep -Eq "$want" "$T/hello.dis" || { echo "hello.o lacks $want"; sed -n 1,80p "$T/hello.dis"; exit 1; }
 done

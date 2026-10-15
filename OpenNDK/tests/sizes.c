@@ -50,7 +50,7 @@
 #include <libraries/realtime.h>
 #include <libraries/nonvolatile.h>
 #include <classes/window.h>
-#include <gadgets/clicktab.h>
+#include <gadgets/tabs.h>
 #include <classes/arexx.h>
 #include <images/drawlist.h>
 

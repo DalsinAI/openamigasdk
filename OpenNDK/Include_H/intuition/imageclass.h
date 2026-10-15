@@ -125,7 +125,7 @@ struct impFrameBox
 };
 
 /* imp_FrameFlags */
-#define FRAMEF_SPECIFY	(1 << 0)	/* keep the frame's size; fit the contents */
+#define FRAMEF_SPECIFY	(1<<0)	/* keep the frame's size; fit the contents */
 
 /* IM_DRAW and IM_DRAWFRAME */
 struct impDraw

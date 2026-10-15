@@ -12,10 +12,13 @@ first.
 - **One download**, with everything needed to use every Open library:
   headers, function tables, link libraries, autodocs, examples, and
   ACKitchen templates.
-- **Beside each OS's own kit, never instead of it.** These have their own
+- **OpenNDK replaces NDK 3.2** (`OpenNDK/`, 15 October 2026): our own
+  headers, function tables and `libamiga.a` for 68k AmigaOS 3.x, so nothing
+  we build needs the vendor's kit. NDK 3.2 stays useful only as a test
+  oracle (`OpenNDK/check/compare_ndk.sh`).
+- **Beside the other OS kits, never instead of them.** These have their own
   licences and the user supplies them, as AmigaChrome's stoves already
   require:
-  - NDK 3.2;
   - the AROS SDK;
   - the OS 4.1 SDK;
   - MUI's SDK.

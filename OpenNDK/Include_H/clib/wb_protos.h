@@ -6,6 +6,7 @@
 #define CLIB_WB_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <dos/dos.h>
 #include <utility/tagitem.h>
 #include <workbench/workbench.h>
