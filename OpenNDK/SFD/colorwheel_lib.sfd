@@ -7,6 +7,7 @@
 ==bias 30
 ==public
 ==include <exec/types.h>
+==include <exec/libraries.h>
 ==include <gadgets/colorwheel.h>
 ==version 39
 VOID ConvertHSBToRGB(struct ColorWheelHSB * hsb, struct ColorWheelRGB * rgb) (a0,a1)

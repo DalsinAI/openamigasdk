@@ -152,4 +152,20 @@ struct VecInfo
     ULONG reserved[2];
 };
 
+/* BestModeIDA() tags */
+#define BIDTAG_DIPFMustHave	0x80000001	/* DIPF_ bits the mode must have */
+#define BIDTAG_DIPFMustNotHave	0x80000002
+#define BIDTAG_ViewPort		0x80000003	/* match this ViewPort */
+#define BIDTAG_NominalWidth	0x80000004
+#define BIDTAG_NominalHeight	0x80000005
+#define BIDTAG_DesiredWidth	0x80000006
+#define BIDTAG_DesiredHeight	0x80000007
+#define BIDTAG_Depth		0x80000008
+#define BIDTAG_MonitorID	0x80000009
+#define BIDTAG_SourceID		0x8000000A	/* start from this mode's properties */
+#define BIDTAG_RedBits		0x8000000B
+#define BIDTAG_BlueBits		0x8000000C
+#define BIDTAG_GreenBits	0x8000000D
+#define BIDTAG_GfxPrivate	0x8000000E	/* private */
+
 #endif /* GRAPHICS_DISPLAYINFO_H */

@@ -50,6 +50,8 @@
 #define IESUBCLASS_TABLET	0x02	/* ie_EventAddress: IEPointerTablet */
 #define IESUBCLASS_NEWTABLET	0x03	/* ie_EventAddress: IENewTablet */
 
+struct Screen;
+
 /* A pointer position in a given screen's pixels */
 struct IEPointerPixel {
 	struct Screen	*iepp_Screen;
