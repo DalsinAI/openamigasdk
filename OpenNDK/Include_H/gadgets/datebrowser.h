@@ -12,18 +12,18 @@
 #include <intuition/gadgetclass.h>
 #endif
 
-#define DATEBROWSER_Dummy		(REACTION_Dummy + 0x58000)
+#define DATEBROWSER_Dummy		(REACTION_Dummy + 0x61000)
 
-#define DATEBROWSER_Day			(DATEBROWSER_Dummy + 1)
-#define DATEBROWSER_Month		(DATEBROWSER_Dummy + 2)
-#define DATEBROWSER_Year		(DATEBROWSER_Dummy + 3)
-#define DATEBROWSER_SelectedDays	(DATEBROWSER_Dummy + 4)	/* ULONG: one bit a day */
-#define DATEBROWSER_WeekDay		(DATEBROWSER_Dummy + 5)
-#define DATEBROWSER_FirstWDay		(DATEBROWSER_Dummy + 6)	/* the month's first weekday */
-#define DATEBROWSER_NumDays		(DATEBROWSER_Dummy + 7)	/* days in the month */
-#define DATEBROWSER_ShowTitle		(DATEBROWSER_Dummy + 8)	/* BOOL: day names on top */
-#define DATEBROWSER_MultiSelect		(DATEBROWSER_Dummy + 9)
-#define DATEBROWSER_DayTitles		(DATEBROWSER_Dummy + 10)	/* STRPTR *: seven names */
+#define DATEBROWSER_Day			(DATEBROWSER_Dummy + 0)
+#define DATEBROWSER_Month		(DATEBROWSER_Dummy + 1)
+#define DATEBROWSER_Year		(DATEBROWSER_Dummy + 2)
+#define DATEBROWSER_SelectedDays	(DATEBROWSER_Dummy + 3)	/* ULONG: one bit a day */
+#define DATEBROWSER_WeekDay		(DATEBROWSER_Dummy + 4)
+#define DATEBROWSER_FirstWDay		(DATEBROWSER_Dummy + 5)	/* the month's first weekday */
+#define DATEBROWSER_NumDays		(DATEBROWSER_Dummy + 6)	/* days in the month */
+#define DATEBROWSER_ShowTitle		(DATEBROWSER_Dummy + 7)	/* BOOL: day names on top */
+#define DATEBROWSER_MultiSelect		(DATEBROWSER_Dummy + 8)
+#define DATEBROWSER_DayTitles		(DATEBROWSER_Dummy + 9)	/* STRPTR *: seven names */
 #define DATEBROWSER_JulianDate		(DATEBROWSER_Dummy + 11)
 
 #endif /* GADGETS_DATEBROWSER_H */

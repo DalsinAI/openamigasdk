@@ -17,7 +17,7 @@
 
 #define VIRTUALA_Dummy		(REACTION_Dummy + 0x2B000)
 
-#define VIRTUALA_Contents	(VIRTUALA_Dummy + 1)	/* Object *: the layout inside */
-#define VIRTUALA_Scroller	(VIRTUALA_Dummy + 2)	/* which scrollers it has */
+#define VIRTUALA_Contents	0x85024500	/* Object *: the layout inside */
+#define VIRTUALA_Scroller	0x85024501	/* which scrollers it has */
 
 #endif /* GADGETS_VIRTUAL_H */

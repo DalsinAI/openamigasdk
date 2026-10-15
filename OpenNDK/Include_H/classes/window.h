@@ -16,7 +16,7 @@
 #include <intuition/classusr.h>
 #endif
 
-#define WINDOW_Dummy		(REACTION_Dummy + 25000)
+#define WINDOW_Dummy		(REACTION_Dummy + 0x25000)
 
 /* Tags; the class also takes Intuition's WA_ tags for the window it opens */
 #define WINDOW_Window		(WINDOW_Dummy + 1)	/* (get) struct Window *: NULL while closed */

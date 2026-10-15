@@ -82,7 +82,7 @@
 #define FUTURESTR	50
 
 /* One past the last string number */
-#define MAXSTRMSG	51
+#define MAXSTRMSG	0x47
 
 /* The library's base */
 struct LocaleBase {

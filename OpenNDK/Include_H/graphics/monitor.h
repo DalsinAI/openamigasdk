@@ -83,7 +83,7 @@ struct MonitorSpec
 
 /* BEAMCON0 bits for programmed timing: VARVBLANK, LOLDIS, CSBLANK,
    VARVSYNC, VARHSYNC and VARBEAMEN */
-#define SPECIAL_BEAMCON		(0x1000 | 0x0800 | 0x0400 | 0x0200 | 0x0100 | 0x0080)
+#define SPECIAL_BEAMCON		0x1B8A
 
 #define MIN_NTSC_ROW	21
 #define MIN_PAL_ROW	29
@@ -125,7 +125,7 @@ struct MonitorSpec
 #define VGA70_VSSTRT		0x02A6
 #define VGA70_VSSTOP		0x0388
 #define VGA70_VBSTOP		0x0F73
-#define VGA70_BEAMCON		(SPECIAL_BEAMCON ^ 0x0002)	/* VSYNCTRUE flipped */
+#define VGA70_BEAMCON		0x1B88	/* VSYNCTRUE flipped */
 
 /* Broadcast timing */
 #define BROADCAST_HBSTRT	0x01
@@ -136,7 +136,7 @@ struct MonitorSpec
 #define BROADCAST_VSSTRT	0x02A6
 #define BROADCAST_VSSTOP	0x054C
 #define BROADCAST_VBSTOP	0x1C40
-#define BROADCAST_BEAMCON	(0x0800 | 0x0400)	/* LOLDIS | CSBLANK */
+#define BROADCAST_BEAMCON	0x808	/* LOLDIS | CSBLANK */
 
 /* ratioh and ratiov are fixed point with this many fraction bits */
 #define RATIO_FIXEDPART		4
