@@ -733,12 +733,6 @@ struct EasyStruct
 
 /* ---- Miscellany ------------------------------------------------------- */
 
-/* A gadget's or image's box */
-#define GADGET_BOX(g)	((struct IBox *)&((struct Gadget *)(g))->LeftEdge)
-#define IM_BOX(im)	((struct IBox *)&((struct Image *)(im))->LeftEdge)
-#define IM_FGPEN(im)	((im)->PlanePick)
-#define IM_BGPEN(im)	((im)->PlaneOnOff)
-
 /* DisplayAlert()'s kinds */
 #define RECOVERY_ALERT	0x00000000
 #define DEADEND_ALERT	0x80000000
