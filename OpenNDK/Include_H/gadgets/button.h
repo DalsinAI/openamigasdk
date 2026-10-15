@@ -15,7 +15,7 @@
 #include <images/bevel.h>
 #endif
 
-#define BUTTON_Dummy		(REACTION_Dummy + 0x04000)
+#define BUTTON_Dummy		0x84000000
 
 #define BUTTON_PushButton	(BUTTON_Dummy + 1)	/* BOOL: stays down when clicked */
 #define BUTTON_Glyph		(BUTTON_Dummy + 2)	/* struct Image *: drawn in the text's pen */

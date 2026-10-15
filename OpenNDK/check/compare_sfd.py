@@ -20,7 +20,8 @@ import ndkgen  # noqa: E402
 def norm_type(t):
     t = re.sub(r"\b(CONST|const)\b", "", t)
     t = t.replace("CONST_STRPTR", "STRPTR").replace("CONST_APTR", "APTR")
-    return re.sub(r"\s+", "", t)
+    t = re.sub(r"\s+", "", t)
+    return "APTR" if t in ("VOID*", "void*") else t
 
 
 def sig(f):

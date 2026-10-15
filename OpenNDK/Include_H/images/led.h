@@ -17,8 +17,8 @@
 #define LED_Pairs		(LED_Dummy + 1)	/* how many two-digit groups */
 #define LED_Values		(LED_Dummy + 2)	/* UWORD *: one value a group */
 #define LED_Colon		(LED_Dummy + 3)	/* BOOL: colons between groups */
-#define LED_Hexadecimal		(LED_Dummy + 4)	/* BOOL: show values in hex */
-#define LED_Negative		(LED_Dummy + 5)	/* BOOL: a minus sign in front */
+#define LED_Hexadecimal		(LED_Dummy + 7)	/* BOOL: show values in hex */
+#define LED_Negative		(LED_Dummy + 4)	/* BOOL: a minus sign in front */
 #define LED_EditMode		(LED_Dummy + 6)	/* BOOL */
 
 #endif /* IMAGES_LED_H */

@@ -45,6 +45,6 @@
 #define GETSCREENMODE_CustomSMList	(GETSCREENMODE_Dummy + 29)
 
 /* Method: open the requester */
-#define GSM_REQUEST	0x410001
+#define GSM_REQUEST	0x610001
 
 #endif /* GADGETS_GETSCREENMODE_H */

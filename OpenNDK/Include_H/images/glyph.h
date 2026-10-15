@@ -15,7 +15,7 @@
 #define GLYPH_Dummy		(REACTION_Dummy + 0x15000)
 
 #define GLYPH_Glyph		(GLYPH_Dummy + 1)	/* which symbol, below */
-#define GLYPH_DrawInfo		SYSIA_DrawInfo
+#define GLYPH_DrawInfo		(GLYPH_Dummy + 2)
 
 #define GLYPH_NONE		0
 #define GLYPH_DOWNARROW		1
@@ -30,7 +30,7 @@
 #define GLYPH_POPDRAWER		10
 #define GLYPH_POPSCREENMODE	11
 #define GLYPH_POPTIME		12
-#define GLYPH_RADIOBUTTON	13
-#define GLYPH_RETURNARROW	14
+#define GLYPH_RADIOBUTTON	0x12
+#define GLYPH_RETURNARROW	0x14
 
 #endif /* IMAGES_GLYPH_H */
