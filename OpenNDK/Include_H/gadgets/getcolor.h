@@ -26,4 +26,40 @@
 /* Method: open the requester */
 #define GCOLOR_REQUEST	0x630001
 
+/* GCOLOR_REQUEST's message */
+struct gcRequest
+{
+    ULONG MethodID;
+    struct Window *gcr_Window;		/* the requester's parent */
+};
+
+/* What a palette box's draw hook is given */
+struct PBoxDrawMsg
+{
+    ULONG pbdm_MethodID;
+    struct RastPort *pbdm_RastPort;
+    struct DrawInfo *pbdm_DrawInfo;
+    struct Rectangle pbdm_Bounds;
+    ULONG pbdm_State;
+    ULONG pbdm_Color;
+    struct Gadget *pbdm_Gadget;
+};
+
+/* More names from the 3.2 interface */
+#define GETCOLOR_Blue		(GETCOLOR_Dummy + 6)
+#define GETCOLOR_Brightness	(GETCOLOR_Dummy + 9)
+#define GETCOLOR_ColorWheel	(GETCOLOR_Dummy + 12)
+#define GETCOLOR_Green		(GETCOLOR_Dummy + 5)
+#define GETCOLOR_HSB		(GETCOLOR_Dummy + 11)
+#define GETCOLOR_HSBSliders	(GETCOLOR_Dummy + 14)
+#define GETCOLOR_Hue		(GETCOLOR_Dummy + 7)
+#define GETCOLOR_Initial	(GETCOLOR_Dummy + 16)
+#define GETCOLOR_RGBSliders	(GETCOLOR_Dummy + 13)
+#define GETCOLOR_Red		(GETCOLOR_Dummy + 4)
+#define GETCOLOR_Saturation	(GETCOLOR_Dummy + 8)
+#define GETCOLOR_ShowHSB	(GETCOLOR_Dummy + 18)
+#define GETCOLOR_ShowRGB	(GETCOLOR_Dummy + 17)
+#define GETCOLOR_SmallTextAttr	(GETCOLOR_Dummy + 19)
+#define GETCOLOR_SwitchMode	(GETCOLOR_Dummy + 15)
+
 #endif /* GADGETS_GETCOLOR_H */

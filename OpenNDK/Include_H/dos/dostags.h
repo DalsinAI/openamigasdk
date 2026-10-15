@@ -54,4 +54,12 @@
 #define ADO_CommFileLen	(ADO_Dummy + 4)
 #define ADO_PromptLen	(ADO_Dummy + 5)
 
+/* More names from the 3.2 interface */
+#define SYS_CmdName		(SYS_Dummy + 11)
+#define SYS_CmdStream		(SYS_Dummy + 8)
+#define SYS_Error		(SYS_Dummy + 6)
+#define SYS_ExecuteInputStream	(SYS_Dummy + 7)
+#define SYS_InName		(SYS_Dummy + 9)
+#define SYS_OutName		(SYS_Dummy + 10)
+
 #endif /* DOS_DOSTAGS_H */

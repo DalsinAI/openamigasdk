@@ -26,4 +26,10 @@
 #define SORIENT_HORIZ	0x0002
 #define SORIENT_VERT	0x0004
 
+/* More names from the 3.2 interface */
+#define SCROLLER_HORIZONTAL	2
+#define SCROLLER_SignalTask	(SCROLLER_Dummy + 10)
+#define SCROLLER_SignalTaskBit	(SCROLLER_Dummy + 11)
+#define SCROLLER_VERTICAL	4
+
 #endif /* GADGETS_SCROLLER_H */

@@ -120,6 +120,8 @@ struct GfxBase
     ULONG               VBCounter;
     struct SignalSemaphore *HashTableSemaphore;
     ULONG              *HWEmul[9];
+    UBYTE              *Scratch;	/* private scratch space */
+    ULONG               ScratchSize;
 };
 
 /* A chunky-to-planar converter, when one is installed */

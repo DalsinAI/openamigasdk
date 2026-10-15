@@ -19,4 +19,9 @@
 #define CHECKBOX_TextPlace	(CHECKBOX_Dummy + 0x0005)	/* PLACETEXT_LEFT or _RIGHT */
 #define CHECKBOX_Checked	GA_Selected
 
+/* More names from the 3.2 interface */
+#define CHECKBOX_BevelStyle	(CHECKBOX_Dummy + 4)
+#define CHECKBOX_FillTextPen	(CHECKBOX_Dummy + 2)
+#define CHECKBOX_Invert		(CHECKBOX_Dummy + 6)
+
 #endif /* GADGETS_CHECKBOX_H */

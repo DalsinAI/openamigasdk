@@ -34,7 +34,7 @@ struct DiscResource {
 	struct Library dr_Library;
 	struct DiscResourceUnit *dr_Current;	/* the controller's owner */
 	UBYTE	dr_Flags;
-	UBYTE	dr_pad;
+	UBYTE	dr_UnitInit;		/* private */
 	struct Library *dr_SysLib;
 	struct Library *dr_CiaResource;
 	ULONG	dr_UnitID[4];
@@ -78,5 +78,9 @@ struct DiscResource {
 #define DRT_37422D2S	(0x55555555)
 #define DRT_EMPTY	(0xFFFFFFFF)
 #define DRT_150RPM	(0xAAAAAAAA)
+
+/* More names from the 3.2 interface */
+#define DRB_DETECT0		4
+#define DRF_DETECT0		16
 
 #endif /* RESOURCES_DISK_H */

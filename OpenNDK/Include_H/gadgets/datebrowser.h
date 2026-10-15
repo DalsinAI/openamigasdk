@@ -26,4 +26,8 @@
 #define DATEBROWSER_DayTitles		(DATEBROWSER_Dummy + 9)	/* STRPTR *: seven names */
 #define DATEBROWSER_JulianDate		(DATEBROWSER_Dummy + 11)
 
+/* More names from the 3.2 interface */
+#define DATEBROWSER_CalendarType	(DATEBROWSER_Dummy + 12)
+#define DATEBROWSER_WeekTitle	(DATEBROWSER_Dummy + 11)
+
 #endif /* GADGETS_DATEBROWSER_H */

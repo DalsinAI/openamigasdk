@@ -42,4 +42,7 @@ struct ColorWheelRGB
 #define WHEEL_GradientSlider	(WHEEL_Dummy + 13)	/* Object *: a slider it keeps in step */
 #define WHEEL_MaxPens		(WHEEL_Dummy + 14)	/* how many pens it may take */
 
+/* More names from the 3.2 interface */
+#define WHEEL_KeepAspect	(WHEEL_Dummy + 15)
+
 #endif /* GADGETS_COLORWHEEL_H */

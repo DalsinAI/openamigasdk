@@ -148,4 +148,8 @@ struct ExecBase {
 #define DMA_NoModify		(1L<<2)
 #define DMA_ReadFromRAM		(1L<<3)
 
+/* More names from the 3.2 interface */
+#define AFB_FPGA		10
+#define AFF_FPGA		0x400
+
 #endif /* EXEC_EXECBASE_H */

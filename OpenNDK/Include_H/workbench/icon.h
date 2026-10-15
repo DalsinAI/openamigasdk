@@ -146,4 +146,21 @@ struct IconIdentifyMsg
     struct TagItem *iim_Tags;		/* GetIconTagList()'s tags */
 };
 
+/* More names from the 3.2 interface */
+#define ICONA_LAST_TAG		(ICONA_Dummy + 123)
+#define ICONA_Reserved1		(ICONA_Dummy + 73)
+#define ICONA_Reserved2		(ICONA_Dummy + 74)
+#define ICONA_Reserved3		(ICONA_Dummy + 76)
+#define ICONA_Reserved4		(ICONA_Dummy + 81)
+#define ICONA_Reserved5		(ICONA_Dummy + 85)
+#define ICONA_Reserved6		(ICONA_Dummy + 86)
+#define ICONA_Reserved7		(ICONA_Dummy + 87)
+#define ICONA_Reserved8		(ICONA_Dummy + 88)
+#define ICONCTRLA_GetGlobalPrecision	(ICONA_Dummy + 5)
+#define ICONCTRLA_SetGlobalPrecision	(ICONA_Dummy + 4)
+#define ICONDRAWA_LabelOutline	(ICONA_Dummy + 94)
+#define ICONDRAWA_LabelShadow	(ICONA_Dummy + 93)
+#define ICONGETA_IdentifyBuffer	(ICONA_Dummy + 122)
+#define ICONGETA_IdentifyOnly	(ICONA_Dummy + 123)
+
 #endif /* WORKBENCH_ICON_H */

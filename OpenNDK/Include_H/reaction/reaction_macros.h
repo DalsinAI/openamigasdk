@@ -145,4 +145,31 @@
 #define RA_SetUpHook(hook, func, data) \
 	((hook).h_Entry = (HOOKFUNC)(func), (hook).h_SubEntry = NULL, (hook).h_Data = (APTR)(data))
 
+/* More names from the 3.2 interface */
+#define BAligned		1
+#define ButtonFrame		1
+#define CheckMark		7
+#define DropBoxFrame		5
+#define DropDown		5
+#define EvenSized		1
+#define GetFile			9
+#define GetPath			10
+#define GetScreen		11
+#define GetTime			12
+#define GroupFrame		2
+#define HBarFrame		6
+#define HCentered		2
+#define LAligned		0
+#define MxFrame			10
+#define PopUp			6
+#define RAligned		1
+#define RadioFrame		10
+#define RidgeFrame		3
+#define StandardFrame		11
+#define StringFrame		3
+#define TAligned		0
+#define ThinFrame		0
+#define VBarFrame		7
+#define VCentered		2
+
 #endif /* REACTION_REACTION_MACROS_H */

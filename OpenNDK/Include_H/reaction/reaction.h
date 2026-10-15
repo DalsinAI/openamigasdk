@@ -28,4 +28,7 @@ struct SpecialPens
 	LONG	sp_LightPen;	/* -1: none */
 };
 
+/* More names from the 3.2 interface */
+#define REACTION_Justification	(REACTION_Dummy + 8)
+
 #endif /* REACTION_REACTION_H */
