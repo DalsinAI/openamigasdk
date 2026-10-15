@@ -50,4 +50,24 @@ struct gfRequest
 	struct Window	*gfr_Window;	/* the window it opens over */
 };
 
+/* GFILE_REQUEST's message */
+struct gfileRequest
+{
+    ULONG MethodID;
+    struct Window *gfile_Window;
+};
+
+/* GFILE_FREELIST's message */
+struct gfileFreelist
+{
+    ULONG MethodID;
+    struct List *gfile_Filelist;
+};
+
+/* More names from the 3.2 interface */
+#define GETFILE_AllowEmptyFileSelection	(GETFILE_Dummy + 24)
+#define GETFILE_FilePartOnly	(GETFILE_Dummy + 23)
+#define GETFILE_FilterHook	(GETFILE_Dummy + 25)
+#define GETFILE_InitialShowVolumes	(GETFILE_Dummy + 26)
+
 #endif /* GADGETS_GETFILE_H */

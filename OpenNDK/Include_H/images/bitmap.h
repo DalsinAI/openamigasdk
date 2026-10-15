@@ -32,4 +32,18 @@
 #define BITMAP_SelectOffsetX	(BITMAP_Dummy + 16)
 #define BITMAP_SelectOffsetY	(BITMAP_Dummy + 17)
 
+/* More names from the 3.2 interface */
+#define BITMAP_AlphaBitMap	(BITMAP_Dummy + 27)
+#define BITMAP_DisabledAlphaBitMap	(BITMAP_Dummy + 29)
+#define BITMAP_DisabledBitMap	(BITMAP_Dummy + 20)
+#define BITMAP_DisabledHeight	(BITMAP_Dummy + 22)
+#define BITMAP_DisabledMaskPlane	(BITMAP_Dummy + 23)
+#define BITMAP_DisabledOffsetX	(BITMAP_Dummy + 24)
+#define BITMAP_DisabledOffsetY	(BITMAP_Dummy + 25)
+#define BITMAP_DisabledSourceFile	(BITMAP_Dummy + 19)
+#define BITMAP_DisabledWidth	(BITMAP_Dummy + 21)
+#define BITMAP_HasAlpha		(BITMAP_Dummy + 26)
+#define BITMAP_SelectAlphaBitMap	(BITMAP_Dummy + 28)
+#define BITMAP_Transparent	(BITMAP_Dummy + 18)
+
 #endif /* IMAGES_BITMAP_H */

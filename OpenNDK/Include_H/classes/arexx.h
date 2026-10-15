@@ -64,4 +64,7 @@ struct ARexxCmd
 	STRPTR	ac_Result;
 };
 
+/* More names from the 3.2 interface */
+#define AREXX_DefExtention	(AREXX_Dummy + 2)
+
 #endif /* CLASSES_AREXX_H */

@@ -250,4 +250,15 @@ struct gpKeyGoInactive
     ULONG gpki_Abort;
 };
 
+/* More names from the 3.2 interface */
+#define GA_CustomMousePointer	(GA_Dummy + 60)
+#define GA_Hidden		(GA_Dummy + 54)
+#define GA_ParentHidden		(GA_Dummy + 62)
+#define GA_PointerType		(GA_Dummy + 61)
+#define GMR_KEYACTIVE		16
+#define GMR_KEYVERIFY		32
+#define GM_HANDLESCROLL		14
+#define GM_QUERYHOVERED		15
+#define PGA_KnobImage		(PGA_Dummy + 13)
+
 #endif /* INTUITION_GADGETCLASS_H */

@@ -23,4 +23,8 @@
 #define SPACE_RenderHook	(SPACE_Dummy + 7)	/* struct Hook *: the program draws */
 #define SPACE_BevelStyle	(SPACE_Dummy + 8)	/* BVS_ from images/bevel.h */
 
+/* More names from the 3.2 interface */
+#define SPACE_DomainBevel	(SPACE_Dummy + 9)
+#define SPACE_RenderBox		(SPACE_Dummy + 10)
+
 #endif /* GADGETS_SPACE_H */

@@ -92,7 +92,7 @@ struct FontRequester
     UBYTE fo_FrontPen;
     UBYTE fo_BackPen;
     UBYTE fo_DrawMode;
-    UBYTE fo_Reserved1;
+    UBYTE fo_SpecialDrawMode;
     APTR fo_UserData;
     WORD fo_LeftEdge;
     WORD fo_TopEdge;
@@ -402,5 +402,45 @@ struct DisplayMode
 #define FONF_NEWIDCMP	(1L << FONB_NEWIDCMP)
 #define FONF_DOMSGFUNC	(1L << FONB_DOMSGFUNC)
 #define FONF_DOWILDFUNC	(1L << FONB_DOWILDFUNC)
+
+/* The semaphore ASL publishes with its current preferences */
+struct AslSemaphore
+{
+    struct SignalSemaphore as_Semaphore;
+    UWORD as_Version;
+    ULONG as_Size;			/* of this structure */
+    UBYTE as_SortBy;			/* ASLSORTBY_ */
+    UBYTE as_SortDrawers;
+    UBYTE as_SortOrder;
+    UBYTE as_SizePosition;
+    WORD as_RelativeLeft;
+    WORD as_RelativeTop;
+    UBYTE as_RelativeWidth;
+    UBYTE as_RelativeHeight;
+};
+
+/* More names from the 3.2 interface */
+#define ASLFO_CSFilterFunc	(ASL_Dummy + 138)
+#define ASLFO_DoCharSet		(ASL_Dummy + 135)
+#define ASLFO_DoSpecialMode	(ASL_Dummy + 140)
+#define ASLFO_InitialCharSet	(ASL_Dummy + 134)
+#define ASLFO_InitialSpecMode	(ASL_Dummy + 139)
+#define ASLFO_OTagOnly		(ASL_Dummy + 136)
+#define ASLFO_ScalableOnly	(ASL_Dummy + 137)
+#define ASLOPTION_ASLOverrides	64
+#define ASLPOS_CenterMouse	5
+#define ASLPOS_CenterScreen	2
+#define ASLPOS_CenterWindow	1
+#define ASLPOS_DefaultPosition	0
+#define ASLPOS_MASK		15
+#define ASLPOS_ScreenPosition	4
+#define ASLPOS_WindowPosition	3
+#define ASLSIZE_DefaultSize	0
+#define ASLSIZE_MASK		48
+#define ASLSIZE_RelativeSize	16
+#define ASL_LAST_TAG		(ASL_Dummy + 140)
+#define FO_SPECIALMODE_NONE	0
+#define FO_SPECIALMODE_OUTLINE	1
+#define FO_SPECIALMODE_SHADOW	2
 
 #endif /* LIBRARIES_ASL_H */

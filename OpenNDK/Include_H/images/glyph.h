@@ -33,4 +33,16 @@
 #define GLYPH_RADIOBUTTON	0x12
 #define GLYPH_RETURNARROW	0x14
 
+/* More names from the 3.2 interface */
+#define GLYPH_BDOWNARROW	21
+#define GLYPH_BLEFTARROW	23
+#define GLYPH_BRIGHTARROW	24
+#define GLYPH_BUPARROW		22
+#define GLYPH_CYCLE		26
+#define GLYPH_DROPDOWNMENU	25
+#define GLYPH_POPCOLOR		28
+#define GLYPH_POPCOLOUR		28
+#define GLYPH_POPDATE		27
+#define GLYPH_SHIFTKEY		32
+
 #endif /* IMAGES_GLYPH_H */

@@ -44,4 +44,15 @@ struct timerequest {
 #define TR_GETSYSTIME	(CMD_NONSTD+1)
 #define TR_SETSYSTIME	(CMD_NONSTD+2)
 
+/* The same two, by the names the 3.2 interface uses */
+struct TimeVal {
+	ULONG	tv_secs;
+	ULONG	tv_micro;
+};
+
+struct TimeRequest {
+	struct IORequest	tr_node;
+	struct TimeVal		tr_time;
+};
+
 #endif /* DEVICES_TIMER_H */

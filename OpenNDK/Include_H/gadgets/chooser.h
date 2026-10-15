@@ -45,4 +45,12 @@
 #define CNA_FGPen	(CNA_Dummy + 8)
 #define CNA_ReadOnly	(CNA_Dummy + 9)
 
+/* More names from the 3.2 interface */
+#define CHOOSER_DeactivateOnMostRawKeys	(CHOOSER_Dummy + 16)
+#define CHOOSER_ImageJustification	(CHOOSER_Dummy + 14)
+#define CHOOSER_MinHeight	10
+#define CHOOSER_MinWidth	36
+#define CHOOSER_SelectedNode	(CHOOSER_Dummy + 15)
+#define CNA_CopyText		(CNA_Dummy + 10)
+
 #endif /* GADGETS_CHOOSER_H */

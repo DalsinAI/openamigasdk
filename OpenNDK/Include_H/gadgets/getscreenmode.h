@@ -47,4 +47,11 @@
 /* Method: open the requester */
 #define GSM_REQUEST	0x610001
 
+/* GSM_REQUEST's message */
+struct gsmRequest
+{
+    ULONG MethodID;
+    struct Window *gsmr_Window;
+};
+
 #endif /* GADGETS_GETSCREENMODE_H */

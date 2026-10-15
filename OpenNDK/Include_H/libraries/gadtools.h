@@ -295,4 +295,29 @@ struct LVDrawMsg
     ULONG lvdm_State;			/* LVR_ */
 };
 
+/* More names from the 3.2 interface */
+#define BBFT_CTXTFRAME		7
+#define BBFT_DISPLAY		6
+#define CHECKBOX_HEIGHT		11
+#define CHECKBOX_WIDTH		26
+#define GADTOOLBIT		0x8000
+#define GADTOOLMASK		(-32769)
+#define GTBB_Headline		(GT_TagBase + 93)
+#define GTBB_HeadlineFont	(GT_TagBase + 95)
+#define GTBB_HeadlinePen	(GT_TagBase + 94)
+#define GTBB_reserved1		(GT_TagBase + 90)
+#define GTLV_Total		(GT_TagBase + 92)
+#define GTLV_Visible		(GT_TagBase + 93)
+#define GTMN_reserved1		(GT_TagBase + 91)
+#define GTMX_ScaledSpacing	(GT_TagBase + 102)
+#define GTNW_Active		(GT_TagBase + 15)
+#define GTNW_Labels		(GT_TagBase + 14)
+#define GT_Private0		(GT_TagBase + 3)
+#define GT_Reserved0		(GT_TagBase + 55)
+#define GT_Reserved1		(GT_TagBase + 56)
+#define MX_HEIGHT		9
+#define MX_WIDTH		17
+#define NWAYIDCMP		64
+#define NWAY_KIND		7
+
 #endif /* LIBRARIES_GADTOOLS_H */

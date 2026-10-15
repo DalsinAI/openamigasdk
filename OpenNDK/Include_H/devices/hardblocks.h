@@ -53,7 +53,7 @@ struct RigidDiskBlock {
 	char	rdb_ControllerVendor[8];
 	char	rdb_ControllerProduct[16];
 	char	rdb_ControllerRevision[4];
-	ULONG	rdb_Reserved5[10];
+	char	rdb_DriveInitName[40];	/* a drive-init program to run, by name */
 };
 
 #define IDNAME_RIGIDDISK	0x5244534B	/* RDSK */
@@ -139,7 +139,7 @@ struct FileSysHeaderBlock {
 	LONG	fhb_SegListBlocks;	/* the first LoadSegBlock */
 	LONG	fhb_GlobalVec;
 	ULONG	fhb_Reserved2[23];
-	ULONG	fhb_Reserved3[21];
+	char	fhb_FileSysName[84];	/* the file system's name, as text */
 };
 
 #define IDNAME_FSHEADER		0x46534844	/* FSHD */
@@ -155,5 +155,8 @@ struct LoadSegBlock {
 };
 
 #define IDNAME_LOADSEG		0x4C534547	/* LSEG */
+
+/* More names from the 3.2 interface */
+#define IDNAME_FILESYSHEADER	0x46534844
 
 #endif /* DEVICES_HARDBLOCKS_H */

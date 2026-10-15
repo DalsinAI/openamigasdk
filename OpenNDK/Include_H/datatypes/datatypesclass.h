@@ -300,4 +300,8 @@ struct dtWrite {
 #define DTWM_IFF	0	/* as the IFF form the clipboard takes */
 #define DTWM_RAW	1	/* as the data's own format */
 
+/* More names from the 3.2 interface */
+#define DTA_Class		(DTA_Dummy + 62)
+#define STM_UNRETRACE		21
+
 #endif /* DATATYPES_DATATYPESCLASS_H */

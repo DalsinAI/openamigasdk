@@ -20,4 +20,18 @@
 #define PENMAP_Palette		(PENMAP_Dummy + 3)	/* ULONG *: the picture's colours */
 #define PENMAP_Screen		(PENMAP_Dummy + 4)	/* struct Screen *: where pens come from */
 
+/* More names from the 3.2 interface */
+#define IMAGE_CHUNKY		0
+#define IMAGE_DRAWLIST		2
+#define IMAGE_IMAGE		1
+#define PENMAP_ColorMap		(PENMAP_Dummy + 9)
+#define PENMAP_Compressed	(PENMAP_Dummy + 11)
+#define PENMAP_ImageType	(PENMAP_Dummy + 5)
+#define PENMAP_MaskBlit		(PENMAP_Dummy + 10)
+#define PENMAP_MaskPlane	(PENMAP_Dummy + 12)
+#define PENMAP_Precision	(PENMAP_Dummy + 8)
+#define PENMAP_RenderBGPen	0x80020006UL
+#define PENMAP_RenderData	0x80020007UL
+#define PENMAP_SelectMaskPlane	(PENMAP_Dummy + 13)
+
 #endif /* IMAGES_PENMAP_H */

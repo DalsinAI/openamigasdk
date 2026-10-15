@@ -87,4 +87,9 @@ struct DeviceNode {
 	BSTR		dn_Name;
 };
 
+/* More names from the 3.2 interface */
+#define ENVF_DISABLENSD		0x40000
+#define ENVF_SCSIDIRECT		0x10000
+#define ENVF_SUPERFLOPPY	0x20000
+
 #endif /* DOS_FILEHANDLER_H */

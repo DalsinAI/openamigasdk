@@ -33,15 +33,17 @@ struct Layer
     struct ClipRect   *SuperClipRect;	/* private */
     APTR               Window;	/* free for the owner (Intuition) */
     WORD               Scroll_X, Scroll_Y;
-    struct ClipRect   *cr, *cr2, *crnew;	/* private */
+    struct ClipRect   *OnScreen;	/* private: the visible pieces */
+    struct ClipRect   *OffScreen;	/* private: the hidden pieces */
+    struct ClipRect   *Backup;	/* private */
     struct ClipRect   *SuperSaveClipRects;	/* private */
-    struct ClipRect   *_cliprects;	/* private */
+    struct Region     *Undamaged;	/* private */
     struct Layer_Info *LayerInfo;
     struct SignalSemaphore Lock;
     struct Hook       *BackFill;
     ULONG              reserved1;
     struct Region     *ClipRegion;
-    struct Region     *saveClipRects;	/* private */
+    struct Region     *clipped;	/* private: the region before clipping */
     WORD               Width, Height;
     UBYTE              reserved2[18];
     struct Region     *DamageList;	/* to repair after a refresh */
@@ -54,15 +56,14 @@ struct ClipRect
     LONG             obscured;	/* nonzero when hidden by another layer */
     struct BitMap   *BitMap;	/* private backing store */
     struct Rectangle bounds;
-    void            *_p1;
-    void            *_p2;
-    LONG             reserved;
-    LONG             Flags;	/* private */
+    struct ClipRect *vlink;	/* private */
+    struct Layer    *home;	/* private: the layer this piece belongs to */
+    APTR             reserved;	/* private */
 };
 
-/* ClipRect Flags, private */
-#define CR_NEEDS_NO_CONCEALED_RASTERS	1
-#define CR_NEEDS_NO_LAYERBLIT_DAMAGE	2
+/* Private ClipRect bits */
+#define CR_USERCLIPPED		16	/* clipped by the user's region */
+#define CR_DAMAGECLIPPED	32	/* clipped by the damage list */
 
 /* Outcodes */
 #define ISLESSX	1

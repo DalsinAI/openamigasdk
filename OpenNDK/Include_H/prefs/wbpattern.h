@@ -58,4 +58,11 @@ struct WBPatternPrefs
 #define PAT_WIDTH	16
 #define PAT_HEIGHT	16
 
+/* More names from the 3.2 interface */
+#define WBPF_ALIGNMENT_LEFTTOP	0x4000
+#define WBPF_ALIGNMENT_MASK	0xC000
+#define WBPF_ALIGNMENT_MIDDLE	0
+#define WBPF_ALIGNMENT_RIGHTBOTTOM	0x8000
+#define WBPF_PLACEMENT_SCALEGOOD	0x3000
+
 #endif /* PREFS_WBPATTERN_H */

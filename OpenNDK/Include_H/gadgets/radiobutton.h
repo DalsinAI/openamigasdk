@@ -26,4 +26,10 @@
 #define RBNA_UserData	(RBNA_Dummy + 0x0001)
 #define RBNA_Label	(RBNA_Dummy + 0x0002)	/* STRPTR */
 
+/* More names from the 3.2 interface */
+#define RADIOBUTTON_LabelArray	(RADIOBUTTON_Dummy + 6)
+#define RBNA_Disabled		(RBNA_Dummy + 4)
+#define RBNA_HintInfo		(RBNA_Dummy + 3)
+#define RBNA_Labels		(RBNA_Dummy + 2)
+
 #endif /* GADGETS_RADIOBUTTON_H */

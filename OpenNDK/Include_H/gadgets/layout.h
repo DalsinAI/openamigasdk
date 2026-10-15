@@ -147,4 +147,50 @@ struct LayoutLimits
 #define PAGE_FixedHoriz		(PAGE_Dummy + 5)
 #define PAGE_Transparent	(PAGE_Dummy + 6)
 
+/* LM_ADDIMAGE's message */
+struct lmAddImage
+{
+	ULONG	MethodID;
+	struct Window *lm_Window;
+	Object	*lm_Object;
+	struct TagItem *lm_ObjectAttrs;
+};
+
+/* What a weight bar is told about its neighbours */
+struct WeightObject
+{
+	LONG	wb_SuccHeight;
+	LONG	wb_PredHeight;
+	ULONG	wb_Reserved1;
+	LONG	wb_SuccWidth;
+	LONG	wb_PredWidth;
+	ULONG	wb_Reserved2;
+};
+
+/* More names from the 3.2 interface */
+#define CHILD_DataType		(CHILD_Dummy + 16)
+#define CHILD_WeightBar		(LAYOUT_Dummy + 43)
+#define INTERSPACE		1
+#define LALIGN_CENTRE		2
+#define LAYOUT_ALIGN_BOTTOM	1
+#define LAYOUT_ALIGN_CENTER	2
+#define LAYOUT_ALIGN_LEFT	0
+#define LAYOUT_ALIGN_RIGHT	1
+#define LAYOUT_ALIGN_TOP	0
+#define LAYOUT_CharSet		(LAYOUT_Dummy + 47)
+#define LAYOUT_DisposeLabels	(LAYOUT_Dummy + 0)
+#define LAYOUT_DoImmediate	(LAYOUT_Dummy + 49)
+#define LAYOUT_HORIZONTAL	0
+#define LAYOUT_HorizSpacing	(LAYOUT_Dummy + 9)
+#define LAYOUT_Immediate	(LAYOUT_Dummy + 48)
+#define LAYOUT_Inverted		(LAYOUT_Dummy + 42)
+#define LAYOUT_LayoutBackFill	(LAYOUT_Dummy + 45)
+#define LAYOUT_LayoutMagic	(LAYOUT_Dummy + 46)
+#define LAYOUT_NoLayout		(LAYOUT_Dummy + 44)
+#define LAYOUT_VERTICAL		1
+#define LAYOUT_VertSpacing	(LAYOUT_Dummy + 9)
+#define LAYOUT_WeightBar	(LAYOUT_Dummy + 43)
+#define LCLABEL_NOLABEL		1
+#define PAGE_NoDispose		(PAGE_Dummy + 7)
+
 #endif /* GADGETS_LAYOUT_H */
