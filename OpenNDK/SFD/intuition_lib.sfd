@@ -10,6 +10,7 @@
 ==include <intuition/classes.h>
 ==include <intuition/cghooks.h>
 ==include <intuition/classusr.h>
+==include <intuition/intuitionbase.h>
 ==version 30
 VOID OpenIntuition() ()
 VOID Intuition(struct InputEvent * iEvent) (a0)
