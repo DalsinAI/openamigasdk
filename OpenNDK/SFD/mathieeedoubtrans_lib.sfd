@@ -1,0 +1,29 @@
+==id OpenNDK mathieeedoubtrans_lib.sfd 47.1
+* mathieeedoubtrans.library's calls (IEEE double precision functions), for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _MathIeeeDoubTransBase
+==basetype struct Library *
+==libname mathieeedoubtrans.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==version 33
+DOUBLE IEEEDPAtan(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPSin(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPCos(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPTan(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPSincos(DOUBLE * pf2, DOUBLE parm) (a0,d0,d1)
+DOUBLE IEEEDPSinh(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPCosh(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPTanh(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPExp(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPLog(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPPow(DOUBLE power, DOUBLE arg) (d2,d3,d0,d1)
+DOUBLE IEEEDPSqrt(DOUBLE parm) (d0,d1)
+FLOAT IEEEDPTieee(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPFieee(FLOAT single) (d0)
+DOUBLE IEEEDPAsin(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPAcos(DOUBLE parm) (d0,d1)
+DOUBLE IEEEDPLog10(DOUBLE parm) (d0,d1)
+==end

@@ -1,0 +1,13 @@
+==id OpenNDK translator_lib.sfd 47.1
+* translator.library's call (English text to phonemes), for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _TranslatorBase
+==basetype struct Library *
+==libname translator.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==version 33
+LONG Translate(CONST_STRPTR inputString, LONG inputLength, STRPTR outputBuffer, LONG bufferSize) (a0,d0,a1,d1)
+==end

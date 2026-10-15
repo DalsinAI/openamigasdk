@@ -1,0 +1,47 @@
+==id OpenNDK lowlevel_lib.sfd 47.1
+* lowlevel.library's calls (game ports, keyboard and timing), for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _LowLevelBase
+==basetype struct Library *
+==libname lowlevel.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==include <devices/timer.h>
+==include <libraries/lowlevel.h>
+==include <utility/tagitem.h>
+==version 40
+ULONG ReadJoyPort(ULONG port) (d0)
+UBYTE GetLanguageSelection() ()
+==private
+VOID lowlevelPrivate1() ()
+==public
+ULONG GetKey() ()
+VOID QueryKeys(struct KeyQuery * queryArray, LONG arraySize) (a0,d1)
+APTR AddKBInt(APTR intRoutine, APTR intData) (a0,a1)
+VOID RemKBInt(APTR intHandle) (a1)
+ULONG SystemControlA(CONST struct TagItem * tagList) (a1)
+==varargs
+ULONG SystemControl(Tag firstTag, ...) (a1)
+APTR AddTimerInt(APTR intRoutine, APTR intData) (a0,a1)
+VOID RemTimerInt(APTR intHandle) (a1)
+VOID StopTimerInt(APTR intHandle) (a1)
+VOID StartTimerInt(APTR intHandle, ULONG timeInterval, BOOL continuous) (a1,d0,d1)
+ULONG ElapsedTime(struct EClockVal * context) (a0)
+APTR AddVBlankInt(APTR intRoutine, APTR intData) (a0,a1)
+VOID RemVBlankInt(APTR intHandle) (a1)
+==private
+VOID lowlevelPrivate2() ()
+VOID lowlevelPrivate3() ()
+==public
+BOOL SetJoyPortAttrsA(ULONG portNumber, CONST struct TagItem * tagList) (d0,a1)
+==varargs
+BOOL SetJoyPortAttrs(ULONG portNumber, Tag firstTag, ...) (d0,a1)
+==private
+VOID lowlevelPrivate4() ()
+VOID lowlevelPrivate5() ()
+VOID lowlevelPrivate6() ()
+VOID lowlevelPrivate7() ()
+VOID lowlevelPrivate8() ()
+==end
