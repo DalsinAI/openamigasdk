@@ -1,0 +1,20 @@
+==id OpenNDK nonvolatile_lib.sfd 47.1
+* nonvolatile.library's calls (small saved settings), for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _NVBase
+==basetype struct Library *
+==libname nonvolatile.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/lists.h>
+==include <libraries/nonvolatile.h>
+==version 40
+APTR GetCopyNV(CONST_STRPTR appName, CONST_STRPTR itemName, LONG killRequesters) (a0,a1,d1)
+VOID FreeNVData(APTR data) (a0)
+UWORD StoreNV(CONST_STRPTR appName, CONST_STRPTR itemName, CONST_APTR data, ULONG length, LONG killRequesters) (a0,a1,a2,d0,d1)
+BOOL DeleteNV(CONST_STRPTR appName, CONST_STRPTR itemName, LONG killRequesters) (a0,a1,d1)
+struct NVInfo * GetNVInfo(LONG killRequesters) (d1)
+struct MinList * GetNVList(CONST_STRPTR appName, LONG killRequesters) (a0,d1)
+BOOL SetNVProtection(CONST_STRPTR appName, CONST_STRPTR itemName, LONG mask, LONG killRequesters) (a0,a1,d2,d1)
+==end

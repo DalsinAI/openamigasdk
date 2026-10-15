@@ -1,0 +1,55 @@
+==id OpenNDK locale_lib.sfd 47.1
+* locale.library's calls (languages, catalogs and formats), for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _LocaleBase
+==basetype struct LocaleBase *
+==libname locale.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <libraries/locale.h>
+==include <dos/dos.h>
+==include <utility/hooks.h>
+==include <utility/tagitem.h>
+==include <rexx/storage.h>
+==version 38
+==private
+VOID localePrivate1() ()
+==public
+VOID CloseCatalog(struct Catalog * catalog) (a0)
+VOID CloseLocale(struct Locale * locale) (a0)
+ULONG ConvToLower(CONST struct Locale * locale, ULONG character) (a0,d0)
+ULONG ConvToUpper(CONST struct Locale * locale, ULONG character) (a0,d0)
+VOID FormatDate(CONST struct Locale * locale, CONST_STRPTR fmtTemplate, CONST struct DateStamp * date, CONST struct Hook * putCharFunc) (a0,a1,a2,a3)
+APTR FormatString(CONST struct Locale * locale, CONST_STRPTR fmtTemplate, CONST_APTR dataStream, CONST struct Hook * putCharFunc) (a0,a1,a2,a3)
+CONST_STRPTR GetCatalogStr(CONST struct Catalog * catalog, LONG stringNum, CONST_STRPTR defaultString) (a0,d0,a1)
+CONST_STRPTR GetLocaleStr(CONST struct Locale * locale, ULONG stringNum) (a0,d0)
+BOOL IsAlNum(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsAlpha(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsCntrl(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsDigit(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsGraph(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsLower(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsPrint(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsPunct(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsSpace(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsUpper(CONST struct Locale * locale, ULONG character) (a0,d0)
+BOOL IsXDigit(CONST struct Locale * locale, ULONG character) (a0,d0)
+struct Catalog * OpenCatalogA(CONST struct Locale * locale, CONST_STRPTR name, CONST struct TagItem * tags) (a0,a1,a2)
+==varargs
+struct Catalog * OpenCatalog(CONST struct Locale * locale, CONST_STRPTR name, Tag tag1, ...) (a0,a1,a2)
+struct Locale * OpenLocale(CONST_STRPTR name) (a0)
+BOOL ParseDate(CONST struct Locale * locale, struct DateStamp * date, CONST_STRPTR fmtTemplate, CONST struct Hook * getCharFunc) (a0,a1,a2,a3)
+==private
+VOID localePrivate2() ()
+==public
+ULONG StrConvert(CONST struct Locale * locale, CONST_STRPTR string, APTR buffer, ULONG bufferSize, ULONG type) (a0,a1,a2,d0,d1)
+LONG StrnCmp(CONST struct Locale * locale, CONST_STRPTR string1, CONST_STRPTR string2, LONG length, ULONG type) (a0,a1,a2,d0,d1)
+==private
+VOID localePrivate3() ()
+VOID localePrivate4() ()
+VOID localePrivate5() ()
+VOID localePrivate6() ()
+VOID localePrivate7() ()
+VOID localePrivate8() ()
+==end

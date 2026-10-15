@@ -1,0 +1,26 @@
+==id OpenNDK bullet_lib.sfd 47.1
+* bullet.library's calls (the outline font engine), for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _BulletBase
+==basetype struct Library *
+==libname bullet.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <utility/tagitem.h>
+==include <diskfont/glyph.h>
+==version 37
+struct GlyphEngine * OpenEngine() ()
+VOID CloseEngine(struct GlyphEngine * glyphEngine) (a0)
+ULONG SetInfoA(struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList) (a0,a1)
+==varargs
+ULONG SetInfo(struct GlyphEngine * glyphEngine, Tag tag1, ...) (a0,a1)
+ULONG ObtainInfoA(struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList) (a0,a1)
+==varargs
+ULONG ObtainInfo(struct GlyphEngine * glyphEngine, Tag tag1, ...) (a0,a1)
+ULONG ReleaseInfoA(struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList) (a0,a1)
+==varargs
+ULONG ReleaseInfo(struct GlyphEngine * glyphEngine, Tag tag1, ...) (a0,a1)
+==private
+VOID bulletPrivate1() ()
+==end

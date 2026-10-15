@@ -1,0 +1,53 @@
+#ifndef GADGETS_GETFILE_H
+#define GADGETS_GETFILE_H
+/*
+ * OpenNDK: getfile.gadget, a file name field with a file requester behind it.
+ * Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+ */
+
+#ifndef REACTION_REACTION_H
+#include <reaction/reaction.h>
+#endif
+#ifndef INTUITION_GADGETCLASS_H
+#include <intuition/gadgetclass.h>
+#endif
+#ifndef INTUITION_INTUITION_H
+#include <intuition/intuition.h>
+#endif
+
+#define GETFILE_Dummy		(REACTION_Dummy + 0x60000)
+
+#define GETFILE_TitleText	(GETFILE_Dummy + 1)	/* the requester's title */
+#define GETFILE_LeftEdge	(GETFILE_Dummy + 2)	/* the requester's box */
+#define GETFILE_TopEdge		(GETFILE_Dummy + 3)
+#define GETFILE_Width		(GETFILE_Dummy + 4)
+#define GETFILE_Height		(GETFILE_Dummy + 5)
+#define GETFILE_FullFile	(GETFILE_Dummy + 6)	/* STRPTR: drawer and file together */
+#define GETFILE_File		(GETFILE_Dummy + 7)
+#define GETFILE_Drawer		(GETFILE_Dummy + 8)
+#define GETFILE_Pattern		(GETFILE_Dummy + 9)
+#define GETFILE_DoSaveMode	(GETFILE_Dummy + 10)
+#define GETFILE_DoMultiSelect	(GETFILE_Dummy + 11)
+#define GETFILE_DoPatterns	(GETFILE_Dummy + 12)
+#define GETFILE_DrawersOnly	(GETFILE_Dummy + 13)
+#define GETFILE_FilterFunc	(GETFILE_Dummy + 14)
+#define GETFILE_RejectIcons	(GETFILE_Dummy + 15)
+#define GETFILE_RejectPattern	(GETFILE_Dummy + 16)
+#define GETFILE_AcceptPattern	(GETFILE_Dummy + 17)
+#define GETFILE_FilterDrawers	(GETFILE_Dummy + 18)
+#define GETFILE_Filelist	(GETFILE_Dummy + 19)	/* (get) struct List *: a multi-select's files */
+#define GETFILE_LBNodeStructs	(GETFILE_Dummy + 20)	/* BOOL: that list as listbrowser nodes */
+#define GETFILE_ReadOnly	(GETFILE_Dummy + 21)
+#define GETFILE_FullFileExpand	(GETFILE_Dummy + 22)
+
+/* Methods */
+#define GFILE_REQUEST	0x600001	/* open the requester */
+#define GFILE_FREELIST	0x600002	/* free a GETFILE_Filelist */
+
+struct gfRequest
+{
+	ULONG		MethodID;	/* GFILE_REQUEST */
+	struct Window	*gfr_Window;	/* the window it opens over */
+};
+
+#endif /* GADGETS_GETFILE_H */

@@ -1,0 +1,54 @@
+==id OpenNDK rexxsyslib_lib.sfd 47.1
+* rexxsyslib.library's calls (ARexx messages and strings), for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _RexxSysBase
+==basetype struct RxsLib *
+==libname rexxsyslib.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/ports.h>
+==include <dos/dos.h>
+==include <rexx/rxslib.h>
+==include <rexx/rexxio.h>
+==include <rexx/storage.h>
+==version 33
+==private
+VOID rexxsyslibPrivate1() ()
+VOID rexxsyslibPrivate2() ()
+VOID rexxsyslibPrivate3() ()
+VOID rexxsyslibPrivate4() ()
+VOID rexxsyslibPrivate5() ()
+VOID rexxsyslibPrivate6() ()
+VOID rexxsyslibPrivate7() ()
+VOID rexxsyslibPrivate8() ()
+VOID rexxsyslibPrivate9() ()
+VOID rexxsyslibPrivate10() ()
+VOID rexxsyslibPrivate11() ()
+VOID rexxsyslibPrivate12() ()
+VOID rexxsyslibPrivate13() ()
+VOID rexxsyslibPrivate14() ()
+VOID rexxsyslibPrivate15() ()
+VOID rexxsyslibPrivate16() ()
+==public
+UBYTE * CreateArgstring(CONST_STRPTR string, ULONG length) (a0,d0)
+VOID DeleteArgstring(UBYTE * argstring) (a0)
+ULONG LengthArgstring(CONST UBYTE * argstring) (a0)
+struct RexxMsg * CreateRexxMsg(CONST struct MsgPort * port, CONST_STRPTR extension, CONST_STRPTR host) (a0,a1,d0)
+VOID DeleteRexxMsg(struct RexxMsg * packet) (a0)
+VOID ClearRexxMsg(struct RexxMsg * msgptr, ULONG count) (a0,d0)
+BOOL FillRexxMsg(struct RexxMsg * msgptr, ULONG count, ULONG mask) (a0,d0,d1)
+BOOL IsRexxMsg(CONST struct RexxMsg * msgptr) (a0)
+==bias 450
+VOID LockRexxBase(ULONG resource) (d0)
+VOID UnlockRexxBase(ULONG resource) (d0)
+==bias 480
+==version 45
+struct MsgPort * CreateRexxHostPort(CONST_STRPTR basename) (a0)
+VOID DeleteRexxHostPort(struct MsgPort * port) (a0)
+LONG GetRexxVarFromMsg(CONST_STRPTR var, CONST struct RexxMsg * msgptr, STRPTR value) (a0,a2,a1)
+LONG SetRexxVarFromMsg(CONST_STRPTR var, struct RexxMsg * msgptr, CONST_STRPTR value) (a0,a2,a1)
+struct RexxMsg * LaunchRexxScript(CONST_STRPTR script, struct MsgPort * replyport, CONST_STRPTR extension, BPTR input, BPTR output) (a0,a1,a2,d1,d2)
+VOID FreeRexxMsg(struct RexxMsg * rxm) (a0)
+LONG GetRexxBufferFromMsg(CONST_STRPTR var, CONST struct RexxMsg * msgptr, STRPTR buffer, ULONG buffer_size) (a0,a2,a1,d0)
+==end

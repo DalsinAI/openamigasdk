@@ -1,0 +1,47 @@
+==id OpenNDK diskfont_lib.sfd 47.1
+* diskfont.library's calls (fonts from disk), for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _DiskfontBase
+==basetype struct Library *
+==libname diskfont.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/lists.h>
+==include <dos/dos.h>
+==include <diskfont/diskfont.h>
+==include <diskfont/glyph.h>
+==include <utility/tagitem.h>
+==version 33
+struct TextFont * OpenDiskFont(CONST struct TextAttr * textAttr) (a0)
+LONG AvailFonts(STRPTR buffer, LONG bufBytes, ULONG flags) (a0,d0,d1)
+==version 34
+struct FontContentsHeader * NewFontContents(BPTR fontsLock, CONST_STRPTR fontName) (a0,a1)
+VOID DisposeFontContents(struct FontContentsHeader * fontContentsHeader) (a1)
+==version 36
+struct DiskFontHeader * NewScaledDiskFont(struct TextFont * sourceFont, CONST struct TextAttr * destTextAttr) (a0,a1)
+==version 45
+LONG GetDiskFontCtrl(LONG tagid) (d0)
+VOID SetDiskFontCtrlA(CONST struct TagItem * taglist) (a0)
+==varargs
+VOID SetDiskFontCtrl(Tag tag1, ...) (a0)
+==version 47
+struct GlyphEngine * EOpenEngine(struct EGlyphEngine * eEngine) (a0)
+VOID ECloseEngine(struct EGlyphEngine * eEngine) (a0)
+ULONG ESetInfoA(struct EGlyphEngine * eEngine, CONST struct TagItem * taglist) (a0,a1)
+==varargs
+ULONG ESetInfo(struct EGlyphEngine * eEngine, Tag tag1, ...) (a0,a1)
+ULONG EObtainInfoA(struct EGlyphEngine * eEngine, CONST struct TagItem * taglist) (a0,a1)
+==varargs
+ULONG EObtainInfo(struct EGlyphEngine * eEngine, Tag tag1, ...) (a0,a1)
+ULONG EReleaseInfoA(struct EGlyphEngine * eEngine, CONST struct TagItem * taglist) (a0,a1)
+==varargs
+ULONG EReleaseInfo(struct EGlyphEngine * eEngine, Tag tag1, ...) (a0,a1)
+struct OutlineFont * OpenOutlineFont(CONST_STRPTR name, struct List * list, ULONG flags) (a0,a1,d0)
+VOID CloseOutlineFont(struct OutlineFont * olf, struct List * list) (a0,a1)
+LONG WriteFontContents(BPTR fontsLock, CONST_STRPTR fontName, CONST struct FontContentsHeader * fontContentsHeader) (a0,a1,a2)
+LONG WriteDiskFontHeaderA(CONST struct TextFont * font, CONST_STRPTR fileName, CONST struct TagItem * tagList) (a0,a1,a2)
+==varargs
+LONG WriteDiskFontHeader(CONST struct TextFont * font, CONST_STRPTR fileName, Tag tag1, ...) (a0,a1,a2)
+ULONG ObtainCharsetInfo(ULONG knownTag, ULONG knownValue, ULONG wantedTag) (d0,d1,d2)
+==end
