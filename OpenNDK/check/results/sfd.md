@@ -1,0 +1,107 @@
+- cardres_lib.sfd CardMiscControl: types ('UBYTE', ('structCardHandle*', 'ULONG'), False), NDK ('UBYTE', ('structCardHandle*', 'UBYTE'), False)
+- cia_lib.sfd: cannot read: ~/AmigaChrome/stoves/os32/ndk/SFD/cia_lib.sfd: no ==base
+- console_lib.sfd: cannot read: line 11: not a prototype: struct InputEvent *CDInputHandler( CONST struct InputEvent *events,
+- datatypes_lib.sfd: cannot read: line 71: not a prototype: struct DTMethod *CopyDTTriggerMethods( CONST struct DTMethod *methods,
+- datebrowser_lib.sfd -36: None, NDK JulianWeekDay
+- datebrowser_lib.sfd -42: None, NDK JulianMonthDays
+- datebrowser_lib.sfd -48: None, NDK JulianLeapYear
+- disk_lib.sfd GetUnit: types ('structDiscResourceUnit*', ('structDiscResourceUnit*',), False), NDK ('structDiskResourceUnit*', ('structDiskResourceUnit*',), False)
+- diskfont_lib.sfd AvailFonts: types ('LONG', ('STRPTR', 'LONG', 'ULONG'), False), NDK ('LONG', ('structAvailFontsHeader*', 'LONG', 'ULONG'), False)
+- diskfont_lib.sfd NewScaledDiskFont: types ('structDiskFontHeader*', ('structTextFont*', 'structTextAttr*'), False), NDK ('structDiskFont*', ('structTextFont*', 'structTextAttr*'), False)
+- diskfont_lib.sfd EOpenEngine: types ('structGlyphEngine*', ('structEGlyphEngine*',), False), NDK ('LONG', ('structEGlyphEngine*',), False)
+- dos_lib.sfd: cannot read: line 35: not a prototype: struct MsgPort *CreateProc( CONST_STRPTR name, LONG pri, BPTR segList,
+- exec_lib.sfd: cannot read: line 31: not a prototype: struct Library *MakeLibrary( CONST_APTR funcInit, CONST_APTR structInit, ULONG (*libInit)(),
+- expansion_lib.sfd: cannot read: line 13: not a prototype: BOOL  AddBootNode( LONG bootPri, ULONG flags, struct DeviceNode *deviceNode,
+- gadtools_lib.sfd GT_EndRefresh: types ('VOID', ('structWindow*', 'LONG'), False), NDK ('VOID', ('structWindow*', 'BOOL'), False)
+- gadtools_lib.sfd DrawBevelBoxA: types ('VOID', ('structRastPort*', 'LONG', 'LONG', 'LONG', 'LONG', 'structTagItem*'), False), NDK ('VOID', ('structRastPort*', 'WORD', 'WORD', 'WORD', 'WORD', 'structTagItem*'), False)
+- graphics_lib.sfd: cannot read: line 22: not a prototype: LONG BltBitMap( CONST struct BitMap *srcBitMap, WORD xSrc, WORD ySrc,
+- icon_lib.sfd: cannot read: line 14: not a prototype: LONG GetIcon(CONST_STRPTR name, struct DiskObject *icon,
+- iffparse_lib.sfd -96: iffparsePrivate1, NDK None
+- intuition_lib.sfd: cannot read: line 16: not a prototype: UWORD AddGadget( struct Window *window, struct Gadget *gadget, UWORD position )
+- keymap_lib.sfd: cannot read: line 14: not a prototype: WORD MapRawKey( CONST struct InputEvent *event, STRPTR buffer, WORD length,
+- layers_lib.sfd EndUpdate: types ('VOID', ('structLayer*', 'ULONG'), False), NDK ('VOID', ('structLayer*', 'UWORD'), False)
+- layers_lib.sfd WhichLayer: types ('structLayer*', ('structLayer_Info*', 'LONG', 'LONG'), False), NDK ('structLayer*', ('structLayer_Info*', 'WORD', 'WORD'), False)
+- layers_lib.sfd SortLayerCR: types ('VOID', ('structLayer*', 'LONG', 'LONG'), False), NDK ('VOID', ('structLayer*', 'WORD', 'WORD'), False)
+- layers_lib.sfd LayerOccluded: types ('LONG', ('structLayer*',), False), NDK ('BOOL', ('structLayer*',), False)
+- layers_lib.sfd SetLayerInfoBounds: types ('LONG', ('structLayer_Info*', 'structRectangle*'), False), NDK ('BOOL', ('structLayer_Info*', 'structRectangle*'), False)
+- listbrowser_lib.sfd AllocListBrowserNodeA: types ('structNode*', ('UWORD', 'structTagItem*'), False), NDK ('structNode*', ('ULONG', 'structTagItem*'), False)
+- listbrowser_lib.sfd ShowListBrowserNodeChildren: types ('VOID', ('structNode*', 'WORD'), False), NDK ('VOID', ('structNode*', 'LONG'), False)
+- listbrowser_lib.sfd AllocLBColumnInfoA: types ('structColumnInfo*', ('UWORD', 'structTagItem*'), False), NDK ('structColumnInfo*', ('ULONG', 'structTagItem*'), False)
+- listbrowser_lib.sfd -102: SetLBColumnInfoAttrsA(a0,a1), NDK SetLBColumnInfoAttrsA(a1,a0)
+- listbrowser_lib.sfd -108: GetLBColumnInfoAttrsA(a0,a1), NDK GetLBColumnInfoAttrsA(a1,a0)
+- lowlevel_lib.sfd QueryKeys: types ('VOID', ('structKeyQuery*', 'ULONG'), False), NDK ('VOID', ('structKeyQuery*', 'LONG'), False)
+- lowlevel_lib.sfd StartTimerInt: types ('VOID', ('APTR', 'ULONG', 'LONG'), False), NDK ('VOID', ('APTR', 'ULONG', 'BOOL'), False)
+- nonvolatile_lib.sfd GetCopyNV: types ('APTR', ('STRPTR', 'STRPTR', 'LONG'), False), NDK ('APTR', ('STRPTR', 'STRPTR', 'BOOL'), False)
+- nonvolatile_lib.sfd StoreNV: types ('UWORD', ('STRPTR', 'STRPTR', 'APTR', 'ULONG', 'LONG'), False), NDK ('UWORD', ('STRPTR', 'STRPTR', 'APTR', 'ULONG', 'BOOL'), False)
+- nonvolatile_lib.sfd DeleteNV: types ('BOOL', ('STRPTR', 'STRPTR', 'LONG'), False), NDK ('BOOL', ('STRPTR', 'STRPTR', 'BOOL'), False)
+- nonvolatile_lib.sfd GetNVInfo: types ('structNVInfo*', ('LONG',), False), NDK ('structNVInfo*', ('BOOL',), False)
+- nonvolatile_lib.sfd GetNVList: types ('structMinList*', ('STRPTR', 'LONG'), False), NDK ('structMinList*', ('STRPTR', 'BOOL'), False)
+- nonvolatile_lib.sfd SetNVProtection: types ('BOOL', ('STRPTR', 'STRPTR', 'LONG', 'LONG'), False), NDK ('BOOL', ('STRPTR', 'STRPTR', 'LONG', 'BOOL'), False)
+- potgo_lib.sfd AllocPotBits: types ('UWORD', ('ULONG',), False), NDK ('UWORD', ('UWORD',), False)
+- potgo_lib.sfd FreePotBits: types ('VOID', ('ULONG',), False), NDK ('VOID', ('UWORD',), False)
+- potgo_lib.sfd WritePotgo: types ('VOID', ('ULONG', 'ULONG'), False), NDK ('VOID', ('UWORD', 'UWORD'), False)
+- radiobutton_lib.sfd AllocRadioButtonNodeA: types ('structNode*', ('UWORD', 'structTagItem*'), False), NDK ('structNode*', ('ULONG', 'structTagItem*'), False)
+- realtime_lib.sfd -90: realtimePrivate1, NDK None
+- realtime_lib.sfd -96: realtimePrivate2, NDK None
+- realtime_lib.sfd -102: realtimePrivate3, NDK None
+- realtime_lib.sfd -108: realtimePrivate4, NDK None
+- realtime_lib.sfd -114: realtimePrivate5, NDK None
+- rexxsyslib_lib.sfd -30: rexxsyslibPrivate1, NDK None
+- rexxsyslib_lib.sfd -36: rexxsyslibPrivate2, NDK None
+- rexxsyslib_lib.sfd -42: rexxsyslibPrivate3, NDK None
+- rexxsyslib_lib.sfd -48: rexxsyslibPrivate4, NDK None
+- rexxsyslib_lib.sfd -54: rexxsyslibPrivate5, NDK None
+- rexxsyslib_lib.sfd -60: rexxsyslibPrivate6, NDK None
+- rexxsyslib_lib.sfd -66: rexxsyslibPrivate7, NDK None
+- rexxsyslib_lib.sfd -72: rexxsyslibPrivate8, NDK None
+- rexxsyslib_lib.sfd -78: rexxsyslibPrivate9, NDK None
+- rexxsyslib_lib.sfd -84: rexxsyslibPrivate10, NDK None
+- rexxsyslib_lib.sfd -90: rexxsyslibPrivate11, NDK None
+- rexxsyslib_lib.sfd -96: rexxsyslibPrivate12, NDK None
+- rexxsyslib_lib.sfd -102: rexxsyslibPrivate13, NDK None
+- rexxsyslib_lib.sfd -108: rexxsyslibPrivate14, NDK None
+- rexxsyslib_lib.sfd -114: rexxsyslibPrivate15, NDK None
+- rexxsyslib_lib.sfd -120: rexxsyslibPrivate16, NDK None
+- speedbar_lib.sfd AllocSpeedButtonNodeA: types ('structNode*', ('UWORD', 'structTagItem*'), False), NDK ('structNode*', ('ULONG', 'structTagItem*'), False)
+- texteditor_lib.sfd: base TextEditorBase, NDK TextFieldBase
+- texteditor_lib.sfd -36: None, NDK HighlightSetFormat
+- timer_lib.sfd AddTime: types ('VOID', ('structtimeval*', 'structtimeval*'), False), NDK ('VOID', ('TimeVal_Type*', 'TimeVal_Type*'), False)
+- timer_lib.sfd SubTime: types ('VOID', ('structtimeval*', 'structtimeval*'), False), NDK ('VOID', ('TimeVal_Type*', 'TimeVal_Type*'), False)
+- timer_lib.sfd CmpTime: types ('LONG', ('structtimeval*', 'structtimeval*'), False), NDK ('LONG', ('TimeVal_Type*', 'TimeVal_Type*'), False)
+- timer_lib.sfd GetSysTime: types ('VOID', ('structtimeval*',), False), NDK ('VOID', ('TimeVal_Type*',), False)
+- translator_lib.sfd: cannot read: line 9: not a prototype: LONG Translate(CONST_STRPTR inputString, LONG inputLength, STRPTR outputBuffer,
+- utility_lib.sfd -108: utilityPrivate1, NDK None
+- utility_lib.sfd -114: utilityPrivate2, NDK None
+- utility_lib.sfd ToUpper: types ('UBYTE', ('ULONG',), False), NDK ('UBYTE', ('UBYTE',), False)
+- utility_lib.sfd ToLower: types ('UBYTE', ('ULONG',), False), NDK ('UBYTE', ('UBYTE',), False)
+- utility_lib.sfd -192: utilityPrivate3, NDK None
+- utility_lib.sfd -276: utilityPrivate4, NDK None
+- utility_lib.sfd -282: utilityPrivate5, NDK None
+- utility_lib.sfd -288: utilityPrivate6, NDK None
+- utility_lib.sfd -294: utilityPrivate7, NDK None
+- utility_lib.sfd -300: utilityPrivate8, NDK None
+- utility_lib.sfd -306: utilityPrivate9, NDK None
+- utility_lib.sfd -318: utilityPrivate10, NDK None
+- utility_lib.sfd -324: utilityPrivate11, NDK None
+- utility_lib.sfd -330: utilityPrivate12, NDK None
+- utility_lib.sfd -336: utilityPrivate13, NDK None
+- utility_lib.sfd -342: utilityPrivate14, NDK None
+- utility_lib.sfd -348: utilityPrivate15, NDK None
+- utility_lib.sfd -354: utilityPrivate16, NDK None
+- utility_lib.sfd -360: utilityPrivate17, NDK None
+- utility_lib.sfd -366: utilityPrivate18, NDK None
+- utility_lib.sfd -372: utilityPrivate19, NDK None
+- utility_lib.sfd -378: utilityPrivate20, NDK None
+- utility_lib.sfd -384: utilityPrivate21, NDK None
+- utility_lib.sfd -390: utilityPrivate22, NDK None
+- utility_lib.sfd -396: utilityPrivate23, NDK None
+- utility_lib.sfd -402: utilityPrivate24, NDK None
+- utility_lib.sfd -408: utilityPrivate25, NDK None
+- utility_lib.sfd -414: utilityPrivate26, NDK None
+- utility_lib.sfd -420: utilityPrivate27, NDK None
+- utility_lib.sfd -426: utilityPrivate28, NDK None
+- utility_lib.sfd -432: utilityPrivate29, NDK None
+- wb_lib.sfd -30: wbPrivate1() private, NDK UpdateWorkbench(a0,a1,d0)
+
+SFDs missing from OpenNDK (2): listview_lib.sfd, trackfile_lib.sfd
+74 SFDs compared: 70 differences in names, offsets or registers, 34 in types.
