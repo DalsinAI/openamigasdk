@@ -23,10 +23,10 @@
 #ifndef INTUITION_SCREENS_H
 #include <intuition/screens.h>
 #endif
-#ifndef INTUITION_CLASSUSR_H
-#include <intuition/classusr.h>
+#ifndef UTILITY_HOOKS_H
+#include <utility/hooks.h>
 #endif
-#ifndef DO_DOS_H
+#ifndef DOS_DOS_H
 #include <dos/dos.h>
 #endif
 #ifndef UTILITY_TAGITEM_H
