@@ -62,4 +62,8 @@ struct ExpansionBase {
 #define EBB_SILENTSTART	6	/* no boot-time display */
 #define EBF_SILENTSTART	(1<<6)
 
+/* More names from the 3.2 interface */
+#define EBB_START_CC0		7
+#define EBF_START_CC0		128
+
 #endif /* LIBRARIES_EXPANSIONBASE_H */

@@ -43,4 +43,8 @@ struct DrawList
 #define DLST_ARC	12
 #define DLST_LINESIZE	0xE
 
+/* More names from the 3.2 interface */
+#define DLST_BOUNDS		13
+#define DLST_START		13
+
 #endif /* IMAGES_DRAWLIST_H */

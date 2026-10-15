@@ -70,4 +70,36 @@ struct orRequest
 /* Shows obj over win (amiga.lib's DoMethod) */
 #define OpenRequester(obj, win) DoMethod((Object *)(obj), RM_OPENREQ, NULL, (win), NULL)
 
+/* More names from the 3.2 interface */
+#define REQS_Dummy		(REQ_Dummy + 256)
+#define REQI_Dummy		(REQS_Dummy + 256)
+#define REQP_Dummy		(REQI_Dummy + 256)
+#define REQI_Mark		(REQI_Dummy + 9)
+#define REQI_MaxText		(REQI_Dummy + 8)
+#define REQI_MinText		(REQI_Dummy + 7)
+#define REQI_ReturnEnds		(REQI_Dummy + 10)
+#define REQP_AbortText		(REQ_Dummy + 4)
+#define REQP_CenterWindow	(REQP_Dummy + 6)
+#define REQP_Current		(REQP_Dummy + 2)
+#define REQP_Dynamic		(REQP_Dummy + 5)
+#define REQP_LastPosition	(REQP_Dummy + 7)
+#define REQP_NoText		(REQP_Dummy + 4)
+#define REQP_OpenInactive	(REQP_Dummy + 3)
+#define REQP_Percent		(REQP_Dummy + 8)
+#define REQP_ProgressText	(REQ_Dummy + 3)
+#define REQP_ShortTicks		(REQP_Dummy + 10)
+#define REQP_Ticks		(REQP_Dummy + 9)
+#define REQP_Total		(REQP_Dummy + 1)
+#define REQS_Mark		(REQS_Dummy + 7)
+#define REQS_ReturnEnds		(REQS_Dummy + 8)
+#define REQTYPE_PROGRESS	3
+#define REQ_CharSet		(REQ_Dummy + 14)
+#define REQ_EvenButtons		(REQ_Dummy + 9)
+#define REQ_ForceFocus		(REQ_Dummy + 16)
+#define REQ_IDCMP_Ptr		(REQ_Dummy + 12)
+#define REQ_Inactive		(REQ_Dummy + 13)
+#define REQ_StayOnTop		(REQ_Dummy + 15)
+#define REQ_TimeOutSecs		(REQ_Dummy + 11)
+#define REQ_WrapBorder		(REQ_Dummy + 10)
+
 #endif /* CLASSES_REQUESTER_H */

@@ -51,4 +51,20 @@
 #define BVJ_IN_LEFT	4
 #define BVJ_IN_RIGHT	5
 
+/* More names from the 3.2 interface */
+#define BEVEL_ColourMap		(BEVEL_Dummy + 17)
+#define BEVEL_HorzSize		(BEVEL_Dummy + 10)
+#define BFLG_TRANS		2
+#define BFLG_XENFILL		1
+#define BVJ_BOT_CENTER		6
+#define BVJ_BOT_LEFT		7
+#define BVJ_BOT_RIGHT		8
+#define BVS_CONTAINER		12
+#define BVS_DISPLAY		14
+#define BVS_FOCUS		9
+#define BVS_KNOB		13
+#define BVS_RADIOBUTTON		10
+#define BVS_SBAR_HORZ		6
+#define BVS_STANDARD		11
+
 #endif /* IMAGES_BEVEL_H */

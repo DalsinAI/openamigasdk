@@ -157,4 +157,8 @@ struct OutlineFont {
 #define DFCS_MIMENAME	(DFCTRL_BASE + 3)
 #define DFCS_MAPTABLE	(DFCTRL_BASE + 4)
 
+/* More names from the 3.2 interface */
+#define AFF_CHARSET		32
+#define TA_CharSet		0x80000003UL
+
 #endif /* DISKFONT_DISKFONT_H */

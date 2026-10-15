@@ -278,4 +278,9 @@ struct ScreenBuffer
 #define SB_SCREEN_BITMAP	1
 #define SB_COPY_BITMAP		2
 
+/* More names from the 3.2 interface */
+#define NSTAG_EXT_VPMODE	0x80000001UL
+#define OSERR_NORTGBITMAP	10
+#define SA_OffScreenDragging	(SA_Dummy + 42)
+
 #endif /* INTUITION_SCREENS_H */

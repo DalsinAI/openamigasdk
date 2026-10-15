@@ -246,4 +246,12 @@ struct InfoData {
 #define DOS_CLI			4
 #define DOS_RDARGS		5
 
+/* More names from the 3.2 interface */
+#define FAULT_MAX		82
+#define FIBB_HOLD		7
+#define FIBF_HOLD		128
+#define ID_COMPLONG_FFS_DISK	0x444F5308
+#define ID_LONG_DOS_DISK	0x444F5306
+#define ID_LONG_FFS_DISK	0x444F5307
+
 #endif /* DOS_DOS_H */

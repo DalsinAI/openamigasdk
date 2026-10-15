@@ -50,4 +50,12 @@ struct GlyphWidthEntry {
 	FIXED		gwe_Width;	/* its advance, a fraction of the em */
 };
 
+/* A glyph's width, for 32-bit character codes */
+struct GlyphWidthEntry32 {
+	struct MinNode	gwe32_Node;
+	UWORD		gwe32_reserved;
+	FIXED		gwe32_Width;	/* 16.16, in ems */
+	ULONG		gwe32_Code;
+};
+
 #endif /* DISKFONT_GLYPH_H */

@@ -74,4 +74,45 @@ struct BitMap
 #define BMA_WIDTH	8
 #define BMA_FLAGS	12
 
+/* More names from the 3.2 interface */
+#define BMATags_Alignment	0x8000000FUL
+#define BMATags_BitmapColors	0x80000029UL
+#define BMATags_BitmapColors32	0x80000043UL
+#define BMATags_BitmapErrorCode	0x8000002AUL
+#define BMATags_BitmapInvisible	0x80000037UL
+#define BMATags_Clear		0x80000003UL
+#define BMATags_ConstantBytesPerRow	0x80000010UL
+#define BMATags_Depth		0x80000001UL
+#define BMATags_DisplayID	0x80000032UL
+#define BMATags_Displayable	0x80000004UL
+#define BMATags_Friend		0x80000000UL
+#define BMATags_ModeHeight	0x8000000BUL
+#define BMATags_ModeWidth	0x8000000AUL
+#define BMATags_NoMemory	0x80000006UL
+#define BMATags_NoSprite	0x80000007UL
+#define BMATags_PixelFormat	0x80000002UL
+#define BMATags_Private1	0x80000005UL
+#define BMATags_Private2	0x80000008UL
+#define BMATags_Private3	0x80000009UL
+#define BMATags_Private4	0x80000012UL
+#define BMATags_Private5	0x80000013UL
+#define BMATags_Private6	0x80000014UL
+#define BMATags_Private7	0x80000015UL
+#define BMATags_RenderFunc	0x8000000CUL
+#define BMATags_SaveFunc	0x8000000DUL
+#define BMATags_UserData	0x8000000EUL
+#define BMATags_UserPrivate	0x80000011UL
+#define BMB_FRIENDISTAG		10
+#define BMB_HIJACKED		7
+#define BMB_INVALID		11
+#define BMB_RTGCHECK		9
+#define BMB_RTGTAGS		8
+#define BMF_CHECKMASK		0xF80
+#define BMF_CHECKVALUE		0x700
+#define BMF_FRIENDISTAG		0x400
+#define BMF_HIJACKED		128
+#define BMF_INVALID		0x800
+#define BMF_RTGCHECK		0x200
+#define BMF_RTGTAGS		0x100
+
 #endif /* GRAPHICS_GFX_H */

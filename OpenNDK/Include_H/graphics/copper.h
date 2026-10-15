@@ -66,10 +66,6 @@ struct CopList
     WORD             Count;
     WORD             MaxCount;
     WORD             DyOffset;
-    UWORD           *Cop2Start;
-    UWORD           *Cop3Start;
-    UWORD           *Cop4Start;
-    UWORD           *Cop5Start;
     UWORD            SLRepeat;
     UWORD            Flags;
 };

@@ -11,6 +11,9 @@
 #ifndef UTILITY_HOOKS_H
 #include <utility/hooks.h>
 #endif
+#ifndef EXEC_LIBRARIES_H
+#include <exec/libraries.h>
+#endif
 #ifndef INTUITION_CLASSUSR_H
 #include <intuition/classusr.h>
 #endif
@@ -53,5 +56,13 @@ struct _Object
 #define BASEOBJECT(_obj) ((Object *)(_OBJ(_obj) + 1))
 #define _OBJECT(o)	(_OBJ(o) - 1)
 #define OCLASS(o)	((_OBJECT(o))->o_Class)
+
+/* The base of a class held in its own library */
+struct ClassLibrary
+{
+    struct Library cl_Lib;
+    UWORD cl_Pad;
+    Class *cl_Class;
+};
 
 #endif /* INTUITION_CLASSES_H */

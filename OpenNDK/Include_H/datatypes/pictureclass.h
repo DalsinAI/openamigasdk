@@ -144,4 +144,22 @@ struct ColorRegister {
 #define ID_BODY	MAKE_ID('B','O','D','Y')
 #endif
 
+/* PDTM_OBTAINPIXELARRAY's message */
+struct pdtObtainPixelArray
+{
+    ULONG MethodID;
+    APTR popa_PixelArray;		/* filled in */
+    ULONG popa_Flags;
+};
+
+/* More names from the 3.2 interface */
+#define PDTANUMPICTURES_Unknown	0
+#define PDTA_AlphaChannel	0x80001100UL
+#define PDTA_ForeignPlaceholder1	0x80001103UL
+#define PDTA_ObtainPixelBuffer	0x80001104UL
+#define PDTA_SubClassRendersAll	0x80001105UL
+#define PDTM_OBTAINPIXELARRAY	0x667
+#define POBAB_WRITEGREY8	0
+#define POPAF_WRITEGREY8	1
+
 #endif /* DATATYPES_PICTURECLASS_H */

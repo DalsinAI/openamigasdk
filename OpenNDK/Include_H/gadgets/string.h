@@ -34,4 +34,14 @@
 #define SHK_UPPERCASE	8
 #define SHK_HOTKEY	9
 
+/* More names from the 3.2 interface */
+#define SHK_HEXADECIMAL		4
+#define STRINGA_ASLTags		0x85055013UL
+#define STRINGA_DisablePopup	0x85055015UL
+#define STRINGA_InterimUpdates	0x85055013UL
+#define STRINGA_MarkActive	0x85055014UL
+#define STRINGA_MaxVal		0x85055017UL
+#define STRINGA_MinVal		0x85055016UL
+#define STRINGA_RelVerifySpecial	0x8505500AUL
+
 #endif /* GADGETS_STRING_H */

@@ -33,21 +33,21 @@
 struct Layer_Info
 {
     struct Layer    *top_layer;
-    struct Layer    *check_lp;	/* private */
-    struct ClipRect *obs;	/* private */
+    APTR             resPtr1;	/* private */
+    APTR             resPtr2;	/* private */
     struct ClipRect *FreeClipRects;	/* private */
-    LONG             PrivateReserve1;
-    LONG             PrivateReserve2;
+    struct Rectangle bounds;	/* the area the layers cover */
     struct SignalSemaphore Lock;
     struct MinList   gs_Head;	/* private */
     WORD             PrivateReserve3;
     VOID            *PrivateReserve4;
     UWORD            Flags;
-    BYTE             fatten_count;	/* private */
+    BYTE             res_count;	/* private */
     BYTE             LockLayersCount;	/* private */
-    WORD             PrivateReserve5;
-    VOID            *BlankHook;	/* private */
-    VOID            *LayerInfo_extra;	/* private */
+    BYTE             PrivateReserve5;
+    BYTE             UserClipRectsCount;	/* private */
+    struct Hook     *BlankHook;	/* backfill for areas no layer covers */
+    APTR             resPtr5;	/* private */
 };
 
 /* Layer_Info Flags */
@@ -56,5 +56,11 @@ struct Layer_Info
 /* Special hook values for a layer's or Layer_Info's backfill */
 #define LAYERS_NOBACKFILL	((struct Hook *)1)	/* leave the pixels alone */
 #define LAYERS_BACKFILL		((struct Hook *)0)	/* clear to colour 0 */
+
+/* More names from the 3.2 interface */
+#define LAYERHIDDEN		0x1000
+#define LAYERSAVEBACK		0x800
+#define LAYER_BACKMOST		0
+#define LAYER_FRONTMOST		1
 
 #endif /* GRAPHICS_LAYERS_H */

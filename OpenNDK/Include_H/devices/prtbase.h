@@ -181,4 +181,36 @@ struct PrinterSegment {
 	struct PrinterExtendedData ps_PED;
 };
 
+/* More names from the 3.2 interface */
+#define DUB_STOPPED		0
+#define DUF_STOPPED		1
+#define IOB_CURRENT		5
+#define IOB_DONE		7
+#define IOB_QUEUED		4
+#define IOB_SERVICING		6
+#define IOF_CURRENT		32
+#define IOF_DONE		128
+#define IOF_QUEUED		16
+#define IOF_SERVICING		64
+#define PB_EXPUNGED		7
+#define PB_IOOPENED		2
+#define PB_IOR0			0
+#define PB_IOR1			1
+#define PF_EXPUNGED		128
+#define PF_IOOPENDED		4
+#define PF_IOR0			1
+#define PF_IOR1			2
+#define PPCB_EXTENDED		2
+#define PPCB_NOSTRIP		3
+#define PPCF_EXTENDED		4
+#define PPCF_NOSTRIP		8
+#define PRTA_ColorCorrect	(PRTA_Dummy + 22)
+#define PRTA_DensityInfo	(PRTA_Dummy + 23)
+#define PRTA_DitherNames	(PRTA_Dummy + 20)
+#define PRTA_LeftBorder		(PRTA_Dummy + 30)
+#define PRTA_MixBWColor		(PRTA_Dummy + 32)
+#define PRTA_Preferences	(PRTA_Dummy + 40)
+#define PRTA_ShadingNames	(PRTA_Dummy + 21)
+#define PRTA_TopBorder		(PRTA_Dummy + 31)
+
 #endif /* DEVICES_PRTBASE_H */

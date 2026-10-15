@@ -18,4 +18,7 @@
 #define IND_SETMTYPE	(CMD_NONSTD+6)	/* mouse port controller type */
 #define IND_SETMTRIG	(CMD_NONSTD+7)	/* mouse port trigger */
 
+/* More names from the 3.2 interface */
+#define IND_ADDEVENT		24
+
 #endif /* DEVICES_INPUT_H */

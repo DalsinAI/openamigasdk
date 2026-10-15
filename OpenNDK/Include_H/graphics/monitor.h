@@ -163,4 +163,10 @@ struct SpecialMonitor
     struct AnalogSignalInterval vsync;
 };
 
+/* More names from the 3.2 interface */
+#define REQUEST_A2024		8
+#define REQUEST_NTSC		1
+#define REQUEST_PAL		2
+#define REQUEST_SPECIAL		4
+
 #endif /* GRAPHICS_MONITOR_H */

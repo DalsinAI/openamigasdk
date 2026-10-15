@@ -36,4 +36,8 @@
 #define FGJ_CENTER	1
 #define FGJ_CENTRE	FGJ_CENTER
 
+/* More names from the 3.2 interface */
+#define FUELGAUGE_HORIZONTAL	0
+#define FUELGAUGE_VERTICAL	1
+
 #endif /* GADGETS_FUELGAUGE_H */

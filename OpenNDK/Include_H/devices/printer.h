@@ -288,4 +288,34 @@ struct DRPSourceMsg {
 	ULONG	*buf;	/* width * height of 0x00RRGGBB */
 };
 
+/* PRD_READPREFS and PRD_WRITEPREFS's request: the four prefs to read or set */
+struct IOPrefsReq {
+	struct Message	io_Message;
+	struct Device	*io_Device;
+	struct Unit	*io_Unit;
+	UWORD		io_Command;
+	UBYTE		io_Flags;
+	BYTE		io_Error;
+	struct PrinterTxtPrefs *io_TxtPrefs;
+	struct PrinterUnitPrefs *io_UnitPrefs;
+	struct PrinterDeviceUnitPrefs *io_DevUnitPrefs;
+	struct PrinterGfxPrefs *io_GfxPrefs;
+};
+
+/* Room for any of the printer's requests */
+union printerIO {
+	struct IOStdReq		ios;
+	struct IODRPReq		iodrp;
+	struct IOPrtCmdReq	iopc;
+};
+
+/* More names from the 3.2 interface */
+#define PPRA_Dummy		0x80070000UL
+#define PDHOOK_STD		1
+#define PPRA_PubScreen		(PPRA_Dummy + 3)
+#define PPRA_Screen		(PPRA_Dummy + 2)
+#define PPRA_Window		(PPRA_Dummy + 1)
+#define PRD_LASTSAVEDPREFS	23
+#define PRD_PRIVATECMD		22
+
 #endif /* DEVICES_PRINTER_H */

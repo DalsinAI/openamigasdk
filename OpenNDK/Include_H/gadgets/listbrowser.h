@@ -217,6 +217,96 @@ struct LBSortMsg
 		STRPTR	Text;
 	}	lbsm_DataB;
 	APTR	lbsm_UserDataB;
+	UWORD	lbsm_Column;		/* the column being sorted */
+	ULONG	lbsm_Direction;		/* LBMSORT_ */
 };
+
+/* What a custom-draw hook is given for one cell */
+struct LBDrawMsg
+{
+	ULONG	lbdm_MethodID;		/* LV_DRAW */
+	struct RastPort *lbdm_RastPort;
+	struct DrawInfo *lbdm_DrawInfo;
+	struct Rectangle lbdm_Bounds;
+	ULONG	lbdm_State;		/* LBR_ */
+};
+
+/* LBM_HIDECHILDREN and LBM_SHOWCHILDREN's messages */
+struct lbHideChildren
+{
+	ULONG	MethodID;
+	struct GadgetInfo *lbhc_GInfo;
+	struct Node *lbhc_Node;		/* NULL for every node */
+	WORD	lbhc_Depth;
+};
+
+struct lbShowChildren
+{
+	ULONG	MethodID;
+	struct GadgetInfo *lbsc_GInfo;
+	struct Node *lbsc_Node;
+	WORD	lbsc_Depth;
+};
+
+/* More names from the 3.2 interface */
+#define CIF_CENTER		16
+#define CIF_CENTRE		16
+#define CIF_RIGHT		32
+#define LBCB_OK			0
+#define LBCB_UNKNOWN		1
+#define LBCIA_AutoSort		(LBNA_Dummy + 58)
+#define LBCIA_Column		(LBNA_Dummy + 51)
+#define LBCIA_CompareHook	(LBNA_Dummy + 60)
+#define LBCIA_CopyTitle		(LBNA_Dummy + 65)
+#define LBCIA_DraggableSeparator	(LBNA_Dummy + 62)
+#define LBCIA_Flags		(LBNA_Dummy + 55)
+#define LBCIA_HorizJustify	(LBNA_Dummy + 67)
+#define LBCIA_MemPool		(LBNA_Dummy + 50)
+#define LBCIA_Separator		(LBNA_Dummy + 63)
+#define LBCIA_SoftStyle		(LBNA_Dummy + 66)
+#define LBCIA_SortArrow		(LBNA_Dummy + 64)
+#define LBCIA_SortDirection	(LBNA_Dummy + 59)
+#define LBCIA_Sortable		(LBNA_Dummy + 61)
+#define LBCIA_Title		(LBNA_Dummy + 52)
+#define LBCIA_UserData		(LBNA_Dummy + 57)
+#define LBCIA_Weight		(LBNA_Dummy + 53)
+#define LBCIA_Width		(LBNA_Dummy + 54)
+#define LBET_DELAYEDSECOND	1
+#define LBET_DOUBLECLICK	0
+#define LBMSORT_FORWARD		0
+#define LBMSORT_REVERSE		1
+#define LBM_HIDECHILDREN	0x580006
+#define LBM_SHOWCHILDREN	0x580005
+#define LBNCA_FillPen		(LBNA_Dummy + 29)
+#define LBNCA_SoftStyle		(LBNA_Dummy + 56)
+#define LBP_PAGELEFT		14
+#define LBP_PAGERIGHT		15
+#define LBR_NORMAL		0
+#define LBR_SELECTED		1
+#define LBS_BOTH		3
+#define LBS_COLUMNS		2
+#define LBS_NONE		0
+#define LBS_ROWS		1
+#define LB_DRAW			0x202
+#define LISTBROWSER_AllowNoSelection	(LISTBROWSER_Dummy + 63)
+#define LISTBROWSER_AutoVirtualWidth	(LISTBROWSER_Dummy + 59)
+#define LISTBROWSER_AutoWheel	(LISTBROWSER_Dummy + 64)
+#define LISTBROWSER_Bottom	(LISTBROWSER_Dummy + 57)
+#define LISTBROWSER_CursorSelect	(LISTBROWSER_Dummy + 51)
+#define LISTBROWSER_EditTrigger	(LISTBROWSER_Dummy + 66)
+#define LISTBROWSER_HintInfoHook	(LISTBROWSER_Dummy + 60)
+#define LISTBROWSER_MakeNodeVisible	(LISTBROWSER_Dummy + 58)
+#define LISTBROWSER_MemPool	(LISTBROWSER_Dummy + 56)
+#define LISTBROWSER_Reserved1	(LISTBROWSER_Dummy + 2)
+#define LISTBROWSER_Reserved2	(LISTBROWSER_Dummy + 15)
+#define LISTBROWSER_Reserved6	(LISTBROWSER_Dummy + 48)
+#define LISTBROWSER_Reserved7	(LISTBROWSER_Dummy + 49)
+#define LISTBROWSER_SortColumn	(LISTBROWSER_Dummy + 61)
+#define LISTBROWSER_StayActive	(LISTBROWSER_Dummy + 65)
+#define LISTBROWSER_Striping	(LISTBROWSER_Dummy + 62)
+#define LRJ_BOTTOM		0
+#define LRJ_CENTER		1
+#define LRJ_CENTRE		1
+#define LRJ_TOP			2
 
 #endif /* GADGETS_LISTBROWSER_H */
