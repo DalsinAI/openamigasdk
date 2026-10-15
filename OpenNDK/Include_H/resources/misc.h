@@ -29,7 +29,7 @@ struct MiscResource {
 /* Vector offsets of the calls */
 #define MR_ALLOCMISCRESOURCE	(LIB_BASE)
 /* The second value is the one the OS headers have always carried. */
-#define MR_FREEMISCRESOURCE	(LIB_BASE + LIB_VECTSIZE)
+#define MR_FREEMISCRESOURCE	(-12)
 
 #define MISCNAME	"misc.resource"
 

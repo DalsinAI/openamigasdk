@@ -4,7 +4,7 @@
 
     layouts.py dump INCLUDE_DIR OUT.json      (CC, READELF from the environment)
     layouts.py measure INCLUDE_DIR PROBE.json OUT.json   (CC from the environment)
-    layouts.py compare OURS.json THEIRS.json  [--report FILE]
+    layouts.py compare OURS.json THEIRS.json  [--report FILE [--detail THEIRS_DWARF.json]]
 
 dump compiles every header under INCLUDE_DIR (leaving out proto/, inline/,
 pragmas/ and clib/) with an ELF m68k GCC and -g, reads each structure's
@@ -26,7 +26,7 @@ import subprocess
 import sys
 import tempfile
 
-SKIP_DIRS = ("proto", "inline", "pragmas", "clib", "ppcinline", "ppcpragmas", "lvo")
+SKIP_DIRS = ("proto", "inline", "pragmas", "pragma", "clib", "ppcinline", "ppcpragmas", "lvo")
 CC = os.environ.get("CC", "m68k-linux-gnu-gcc")
 READELF = os.environ.get("READELF", "readelf")
 
@@ -239,6 +239,28 @@ def struct_names(src_text):
     return set(re.findall(r"\b(struct|union)\s+(\w+)\s*\{", src_text))
 
 
+def where(root, src, tmp):
+    """The header each #define and each structure comes from, by the
+    preprocessor's line markers."""
+    r = subprocess.run([CC] + cflags(root) + ["-E", "-dD", src], capture_output=True, text=True).stdout
+    cur, consts, structs_ = None, {}, {}
+    pre = root.rstrip("/") + "/"
+    for line in r.splitlines():
+        m = re.match(r'# \d+ "([^"]+)"', line)
+        if m:
+            cur = m.group(1)[len(pre):] if m.group(1).startswith(pre) else None
+            continue
+        if cur is None:
+            continue
+        m = re.match(r"#define (\w+)", line)
+        if m:
+            consts.setdefault(m.group(1), cur)
+            continue
+        for kw, n in re.findall(r"\b(struct|union)\s+(\w+)\s*\{", line):
+            structs_.setdefault("%s %s" % (kw, n), cur)
+    return consts, structs_
+
+
 def unit(root, tmp):
     errors = {}
     hs = together(root, usable(root, headers(root), tmp, errors), tmp)
@@ -256,6 +278,7 @@ def dump(root, dest):
         subprocess.run([CC] + cflags(root) + ["-g", "-gdwarf-4", "-fno-eliminate-unused-debug-types",
                                               "-c", src, "-o", obj], check=True)
         data = {"headers": hs, "errors": errors, "structs": structs(obj), "constants": macros(root, src, tmp)}
+        data["const_headers"], data["struct_headers"] = where(root, src, tmp)
     save(data, dest)
 
 
@@ -288,6 +311,7 @@ def measure(root, probe_path, dest):
                 if "O:%s:%s" % (kk, n) in vals:
                     st[k]["members"].append([n, vals["O:%s:%s" % (kk, n)], vals.get("Z:%s:%s" % (kk, n))])
         data = {"headers": hs, "errors": errors, "structs": st, "constants": macros(root, src, tmp)}
+        data["const_headers"], data["struct_headers"] = where(root, src, tmp)
     save(data, dest)
 
 
@@ -297,8 +321,10 @@ def save(data, dest):
         dest, len(data["headers"]), len(data["errors"]), len(data["structs"]), len(data["constants"])))
 
 
-def compare(ours_path, theirs_path, report=None):
+def compare(ours_path, theirs_path, report=None, detail_path=None):
     ours, theirs = json.load(open(ours_path)), json.load(open(theirs_path))
+    detail = json.load(open(detail_path))["structs"] if detail_path and os.path.exists(detail_path) else {}
+    differing = set()
     lines, bad = [], 0
     def say(s):
         lines.append(s)
@@ -307,16 +333,17 @@ def compare(ours_path, theirs_path, report=None):
     for k in sorted(set(ours["structs"]) & set(theirs["structs"])):
         a, b = ours["structs"][k], theirs["structs"][k]
         if a["size"] != b["size"]:
-            say("- %s: size %s, NDK %s" % (k, a["size"], b["size"])); bad += 1
+            say("- %s: size %s, NDK %s" % (k, a["size"], b["size"])); bad += 1; differing.add(k)
         am = {m[0]: m for m in a["members"]}
         bm = {m[0]: m for m in b["members"]}
         for n in sorted(set(am) & set(bm), key=lambda n: bm[n][1]):
             if am[n][1:] != bm[n][1:]:
+                differing.add(k)
                 say("- %s.%s: offset %s size %s, NDK offset %s size %s" % (k, n, am[n][1], am[n][2], bm[n][1], bm[n][2])); bad += 1
         for n in sorted(set(bm) - set(am), key=lambda n: bm[n][1]):
-            say("- %s.%s: missing (NDK offset %s)" % (k, n, bm[n][1])); bad += 1
+            say("- %s.%s: missing (NDK offset %s)" % (k, n, bm[n][1])); bad += 1; differing.add(k)
         for n in sorted(set(am) - set(bm), key=lambda n: am[n][1]):
-            say("- %s.%s: not in the NDK (offset %s)" % (k, n, am[n][1])); bad += 1
+            say("- %s.%s: not in the NDK (offset %s)" % (k, n, am[n][1])); bad += 1; differing.add(k)
     for k in sorted(set(ours["constants"]) & set(theirs["constants"])):
         if ours["constants"][k] != theirs["constants"][k]:
             say("- %s = 0x%x, NDK 0x%x" % (k, ours["constants"][k], theirs["constants"][k])); bad += 1
@@ -325,7 +352,22 @@ def compare(ours_path, theirs_path, report=None):
     miss = sorted(set(theirs["structs"]) - set(ours["structs"]))
     say("\nStructures (%d): %s" % (len(miss), ", ".join("%s (%s bytes)" % (k, theirs["structs"][k]["size"]) for k in miss) or "none"))
     missc = sorted(set(theirs["constants"]) - set(ours["constants"]))
-    say("\nConstants (%d): %s" % (len(missc), ", ".join("%s=0x%x" % (k, theirs["constants"][k]) for k in missc) or "none"))
+    say("\nConstants (%d), by the NDK header that has them:" % len(missc))
+    byh = {}
+    for k in missc:
+        byh.setdefault(theirs.get("const_headers", {}).get(k, "?"), []).append(k)
+    for h in sorted(byh):
+        say("- %s: %s" % (h, ", ".join("%s=0x%x" % (k, theirs["constants"][k]) for k in byh[h])))
+    if detail:
+        say("\n## The NDK's layout of each structure that differs or is missing\n")
+        sh = theirs.get("struct_headers", {})
+        for k in sorted(differing | set(miss)):
+            d = detail.get(k)
+            if not d:
+                say("- %s (%s): no layout read" % (k, sh.get(k, "?")))
+                continue
+            say("- %s (%s), %s bytes: %s" % (k, sh.get(k, "?"), d["size"],
+                ", ".join("%s@%s/%s" % (n, o, z) for n, o, z in d["members"])))
     extra = sorted(set(ours["constants"]) - set(theirs["constants"]))
     say("\n## In OpenNDK only\n\nConstants (%d): %s" % (len(extra), ", ".join(extra) if len(extra) <= 400 else "(too many to list)"))
     for side, d in (("OpenNDK", ours), ("NDK", theirs)):
@@ -349,7 +391,8 @@ def main():
         measure(sys.argv[2], sys.argv[3], sys.argv[4])
     elif len(sys.argv) >= 4 and sys.argv[1] == "compare":
         rep = sys.argv[5] if len(sys.argv) > 5 and sys.argv[4] == "--report" else None
-        sys.exit(1 if compare(sys.argv[2], sys.argv[3], rep) else 0)
+        det = sys.argv[7] if len(sys.argv) > 7 and sys.argv[6] == "--detail" else None
+        sys.exit(1 if compare(sys.argv[2], sys.argv[3], rep, det) else 0)
     else:
         print(__doc__)
         sys.exit(2)

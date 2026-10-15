@@ -31,7 +31,7 @@
 #define SLIDER_KnobDelta	(SLIDER_Dummy + 0x000F)
 #define SLIDER_LevelFormat	(SLIDER_Dummy + 0x0010)	/* STRPTR: show the level as text */
 #define SLIDER_LevelPlace	(SLIDER_Dummy + 0x0011)
-#define SLIDER_LevelMaxLen	(SLIDER_Dummy + 0x0012)
+#define SLIDER_LevelMaxLen	(SLIDER_Dummy + 0x0016)
 
 /* The same values as propgclass's FREEHORIZ and FREEVERT */
 #define SLIDER_HORIZONTAL	0x0002

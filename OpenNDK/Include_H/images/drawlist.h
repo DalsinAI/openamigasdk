@@ -12,7 +12,7 @@
 #include <intuition/imageclass.h>
 #endif
 
-#define DRAWLIST_Dummy		(REACTION_Dummy + 0x17500)
+#define DRAWLIST_Dummy		(REACTION_Dummy + 0x17000)
 
 #define DRAWLIST_Directives	(DRAWLIST_Dummy + 1)	/* struct DrawList *, ended by DLST_END */
 #define DRAWLIST_RefHeight	(DRAWLIST_Dummy + 2)	/* the coordinates' scale */
@@ -41,6 +41,6 @@ struct DrawList
 #define DLST_AFILL	10
 #define DLST_BEVELBOX	11
 #define DLST_ARC	12
-#define DLST_LINESIZE	13
+#define DLST_LINESIZE	0xE
 
 #endif /* IMAGES_DRAWLIST_H */

@@ -22,27 +22,27 @@
 #define GETFILE_TopEdge		(GETFILE_Dummy + 3)
 #define GETFILE_Width		(GETFILE_Dummy + 4)
 #define GETFILE_Height		(GETFILE_Dummy + 5)
-#define GETFILE_FullFile	(GETFILE_Dummy + 6)	/* STRPTR: drawer and file together */
-#define GETFILE_File		(GETFILE_Dummy + 7)
-#define GETFILE_Drawer		(GETFILE_Dummy + 8)
-#define GETFILE_Pattern		(GETFILE_Dummy + 9)
-#define GETFILE_DoSaveMode	(GETFILE_Dummy + 10)
-#define GETFILE_DoMultiSelect	(GETFILE_Dummy + 11)
-#define GETFILE_DoPatterns	(GETFILE_Dummy + 12)
-#define GETFILE_DrawersOnly	(GETFILE_Dummy + 13)
-#define GETFILE_FilterFunc	(GETFILE_Dummy + 14)
-#define GETFILE_RejectIcons	(GETFILE_Dummy + 15)
-#define GETFILE_RejectPattern	(GETFILE_Dummy + 16)
-#define GETFILE_AcceptPattern	(GETFILE_Dummy + 17)
-#define GETFILE_FilterDrawers	(GETFILE_Dummy + 18)
-#define GETFILE_Filelist	(GETFILE_Dummy + 19)	/* (get) struct List *: a multi-select's files */
-#define GETFILE_LBNodeStructs	(GETFILE_Dummy + 20)	/* BOOL: that list as listbrowser nodes */
-#define GETFILE_ReadOnly	(GETFILE_Dummy + 21)
-#define GETFILE_FullFileExpand	(GETFILE_Dummy + 22)
+#define GETFILE_FullFile	(GETFILE_Dummy + 8)	/* STRPTR: drawer and file together */
+#define GETFILE_File		(GETFILE_Dummy + 6)
+#define GETFILE_Drawer		(GETFILE_Dummy + 7)
+#define GETFILE_Pattern		(GETFILE_Dummy + 10)
+#define GETFILE_DoSaveMode	(GETFILE_Dummy + 11)
+#define GETFILE_DoMultiSelect	(GETFILE_Dummy + 12)
+#define GETFILE_DoPatterns	(GETFILE_Dummy + 13)
+#define GETFILE_DrawersOnly	(GETFILE_Dummy + 14)
+#define GETFILE_FilterFunc	(GETFILE_Dummy + 15)
+#define GETFILE_RejectIcons	(GETFILE_Dummy + 16)
+#define GETFILE_RejectPattern	(GETFILE_Dummy + 17)
+#define GETFILE_AcceptPattern	(GETFILE_Dummy + 18)
+#define GETFILE_FilterDrawers	(GETFILE_Dummy + 19)
+#define GETFILE_Filelist	(GETFILE_Dummy + 20)	/* (get) struct List *: a multi-select's files */
+#define GETFILE_LBNodeStructs	(GETFILE_Dummy + 21)	/* BOOL: that list as listbrowser nodes */
+#define GETFILE_ReadOnly	(GETFILE_Dummy + 22)
+#define GETFILE_FullFileExpand	(GETFILE_Dummy + 9)
 
 /* Methods */
-#define GFILE_REQUEST	0x600001	/* open the requester */
-#define GFILE_FREELIST	0x600002	/* free a GETFILE_Filelist */
+#define GFILE_REQUEST	0x620001	/* open the requester */
+#define GFILE_FREELIST	0x620002	/* free a GETFILE_Filelist */
 
 struct gfRequest
 {

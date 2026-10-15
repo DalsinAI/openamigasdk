@@ -32,16 +32,16 @@
 
 #define ICONCTRLA_SetGlobalScreen		(ICONA_Dummy + 2)
 #define ICONCTRLA_GetGlobalScreen		(ICONA_Dummy + 3)
-#define ICONCTRLA_SetGlobalEmbossRect		(ICONA_Dummy + 4)
-#define ICONCTRLA_GetGlobalEmbossRect		(ICONA_Dummy + 5)
-#define ICONCTRLA_SetGlobalFrameless		(ICONA_Dummy + 6)
-#define ICONCTRLA_GetGlobalFrameless		(ICONA_Dummy + 7)
-#define ICONCTRLA_SetGlobalNewIconsSupport	(ICONA_Dummy + 8)
-#define ICONCTRLA_GetGlobalNewIconsSupport	(ICONA_Dummy + 9)
+#define ICONCTRLA_SetGlobalEmbossRect		(ICONA_Dummy + 6)
+#define ICONCTRLA_GetGlobalEmbossRect		(ICONA_Dummy + 7)
+#define ICONCTRLA_SetGlobalFrameless		(ICONA_Dummy + 8)
+#define ICONCTRLA_GetGlobalFrameless		(ICONA_Dummy + 9)
+#define ICONCTRLA_SetGlobalNewIconsSupport	(ICONA_Dummy + 10)
+#define ICONCTRLA_GetGlobalNewIconsSupport	(ICONA_Dummy + 11)
 #define ICONCTRLA_SetGlobalColorIconSupport	(ICONA_Dummy + 77)
 #define ICONCTRLA_GetGlobalColorIconSupport	(ICONA_Dummy + 78)
-#define ICONCTRLA_SetGlobalIdentifyHook		(ICONA_Dummy + 10)
-#define ICONCTRLA_GetGlobalIdentifyHook		(ICONA_Dummy + 11)
+#define ICONCTRLA_SetGlobalIdentifyHook		(ICONA_Dummy + 12)
+#define ICONCTRLA_GetGlobalIdentifyHook		(ICONA_Dummy + 13)
 #define ICONCTRLA_SetGlobalMaxNameLength	(ICONA_Dummy + 67)
 #define ICONCTRLA_GetGlobalMaxNameLength	(ICONA_Dummy + 68)
 
@@ -126,8 +126,8 @@
 #define ICONDRAWA_DrawInfo		(ICONA_Dummy + 66)
 #define ICONDRAWA_Frameless		(ICONA_Dummy + 70)
 #define ICONDRAWA_EraseBackground	(ICONA_Dummy + 71)
-#define ICONDRAWA_Borderless		(ICONA_Dummy + 73)
-#define ICONDRAWA_IsLink		(ICONA_Dummy + 83)
+#define ICONDRAWA_Borderless		(ICONA_Dummy + 83)
+#define ICONDRAWA_IsLink		(ICONA_Dummy + 89)
 
 /* ---- The identification hook --------------------------------------- */
 

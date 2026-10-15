@@ -35,21 +35,21 @@
 #define REQIMAGE_INSERTDISK	5
 
 /* REQTYPE_INTEGER */
-#define REQI_Minimum		(REQ_Dummy + 10)
-#define REQI_Maximum		(REQ_Dummy + 11)
-#define REQI_Invisible		(REQ_Dummy + 12)	/* BOOL: hide what is typed */
-#define REQI_Number		(REQ_Dummy + 13)	/* LONG: the value */
-#define REQI_Arrows		(REQ_Dummy + 14)
-#define REQI_MaxChars		(REQ_Dummy + 15)
+#define REQI_Minimum		(REQ_Dummy + 513)
+#define REQI_Maximum		(REQ_Dummy + 514)
+#define REQI_Invisible		(REQ_Dummy + 515)	/* BOOL: hide what is typed */
+#define REQI_Number		(REQ_Dummy + 516)	/* LONG: the value */
+#define REQI_Arrows		(REQ_Dummy + 517)
+#define REQI_MaxChars		(REQ_Dummy + 518)
 
 /* REQTYPE_STRING */
-#define REQS_AllowEmpty		(REQ_Dummy + 20)
-#define REQS_Buffer		(REQ_Dummy + 21)	/* STRPTR: the text, edited in place */
-#define REQS_ShowDefault	(REQ_Dummy + 22)
-#define REQS_MaxChars		(REQ_Dummy + 23)
-#define REQS_ChooserArray	(REQ_Dummy + 24)	/* STRPTR *: offer these in a chooser */
-#define REQS_ChooserActive	(REQ_Dummy + 25)
-#define REQS_Invisible		(REQ_Dummy + 26)	/* BOOL: hide what is typed */
+#define REQS_AllowEmpty		(REQ_Dummy + 257)
+#define REQS_Buffer		(REQ_Dummy + 258)	/* STRPTR: the text, edited in place */
+#define REQS_ShowDefault	(REQ_Dummy + 259)
+#define REQS_MaxChars		(REQ_Dummy + 260)
+#define REQS_ChooserArray	(REQ_Dummy + 261)	/* STRPTR *: offer these in a chooser */
+#define REQS_ChooserActive	(REQ_Dummy + 262)
+#define REQS_Invisible		(REQ_Dummy + 515)	/* BOOL: hide what is typed */
 
 /* REQ_Type */
 #define REQTYPE_INFO		0

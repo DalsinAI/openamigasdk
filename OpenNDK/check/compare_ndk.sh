@@ -37,7 +37,11 @@ status=0
 CC=$CC python3 "$HERE/layouts.py" dump "$HERE/../Include_H" "$OUT/probe.json"
 CC=$VCC python3 "$HERE/layouts.py" measure "$HERE/../Include_H" "$OUT/probe.json" "$OUT/openndk.json"
 CC=$VCC python3 "$HERE/layouts.py" measure "$INC" "$OUT/probe.json" "$OUT/ndk.json"
-python3 "$HERE/layouts.py" compare "$OUT/openndk.json" "$OUT/ndk.json" --report "$OUT/layouts.md" || status=1
+# the vendor's own field lists, read from the debug information, for the
+# report's layout of each structure that differs (skipped if it won't build)
+CC=$CC python3 "$HERE/layouts.py" dump "$INC" "$OUT/ndk-fields.json" || rm -f "$OUT/ndk-fields.json"
+python3 "$HERE/layouts.py" compare "$OUT/openndk.json" "$OUT/ndk.json" --report "$OUT/layouts.md" \
+    --detail "$OUT/ndk-fields.json" || status=1
 if [ -d "$SFD" ]; then
     python3 "$HERE/compare_sfd.py" "$SFD" --report "$OUT/sfd.md" || status=1
 fi
