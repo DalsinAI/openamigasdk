@@ -24,7 +24,7 @@ struct Library;
 #endif
 
 static __inline__ struct Interrupt *
-__cia_AddICRVector(struct Library * resource, LONG iCRBit, struct Interrupt * interrupt)
+__cia_AddICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * interrupt)
 {
 	register ULONG _a6 __asm("a6") = (ULONG)(resource);
 	register ULONG _d0 __asm("d0") = (ULONG)(iCRBit);
@@ -40,7 +40,7 @@ __cia_AddICRVector(struct Library * resource, LONG iCRBit, struct Interrupt * in
 #define AddICRVector(resource, iCRBit, interrupt) __cia_AddICRVector((resource), (iCRBit), (interrupt))
 
 static __inline__ VOID
-__cia_RemICRVector(struct Library * resource, LONG iCRBit, struct Interrupt * interrupt)
+__cia_RemICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * interrupt)
 {
 	register ULONG _a6 __asm("a6") = (ULONG)(resource);
 	register ULONG _d0 __asm("d0") = (ULONG)(iCRBit);
@@ -56,7 +56,7 @@ __cia_RemICRVector(struct Library * resource, LONG iCRBit, struct Interrupt * in
 #define RemICRVector(resource, iCRBit, interrupt) __cia_RemICRVector((resource), (iCRBit), (interrupt))
 
 static __inline__ WORD
-__cia_AbleICR(struct Library * resource, LONG mask)
+__cia_AbleICR(struct Library * resource, WORD mask)
 {
 	register ULONG _a6 __asm("a6") = (ULONG)(resource);
 	register ULONG _d0 __asm("d0") = (ULONG)(mask);
@@ -72,7 +72,7 @@ __cia_AbleICR(struct Library * resource, LONG mask)
 #define AbleICR(resource, mask) __cia_AbleICR((resource), (mask))
 
 static __inline__ WORD
-__cia_SetICR(struct Library * resource, LONG mask)
+__cia_SetICR(struct Library * resource, WORD mask)
 {
 	register ULONG _a6 __asm("a6") = (ULONG)(resource);
 	register ULONG _d0 __asm("d0") = (ULONG)(mask);

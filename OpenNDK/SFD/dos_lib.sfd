@@ -91,9 +91,9 @@ LONG FRead(BPTR fh, APTR block, ULONG blocklen, ULONG number) (d1,d2,d3,d4)
 LONG FWrite(BPTR fh, CONST_APTR block, ULONG blocklen, ULONG number) (d1,d2,d3,d4)
 STRPTR FGets(BPTR fh, STRPTR buf, ULONG buflen) (d1,d2,d3)
 LONG FPuts(BPTR fh, CONST_STRPTR str) (d1,d2)
-LONG VFWritef(BPTR fh, CONST_STRPTR format, CONST LONG * argarray) (d1,d2,d3)
+VOID VFWritef(BPTR fh, CONST_STRPTR format, CONST LONG * argarray) (d1,d2,d3)
 ==varargs
-LONG FWritef(BPTR fh, CONST_STRPTR format, ...) (d1,d2,d3)
+VOID FWritef(BPTR fh, CONST_STRPTR format, ...) (d1,d2,d3)
 LONG VFPrintf(BPTR fh, CONST_STRPTR format, CONST_APTR argarray) (d1,d2,d3)
 ==varargs
 LONG FPrintf(BPTR fh, CONST_STRPTR format, ...) (d1,d2,d3)
@@ -106,7 +106,7 @@ BOOL ExamineFH(BPTR fh, struct FileInfoBlock * fib) (d1,d2)
 LONG SetFileDate(CONST_STRPTR name, CONST struct DateStamp * date) (d1,d2)
 LONG NameFromLock(BPTR lock, STRPTR buffer, LONG len) (d1,d2,d3)
 LONG NameFromFH(BPTR fh, STRPTR buffer, LONG len) (d1,d2,d3)
-WORD SplitName(CONST_STRPTR name, ULONG separator, STRPTR buf, LONG oldpos, LONG size) (d1,d2,d3,d4,d5)
+WORD SplitName(CONST_STRPTR name, UBYTE separator, STRPTR buf, WORD oldpos, LONG size) (d1,d2,d3,d4,d5)
 LONG SameLock(BPTR lock1, BPTR lock2) (d1,d2)
 LONG SetMode(BPTR fh, LONG mode) (d1,d2)
 LONG ExAll(BPTR lock, struct ExAllData * buffer, LONG size, LONG data, struct ExAllControl * control) (d1,d2,d3,d4,d5)
@@ -174,7 +174,7 @@ LONG CompareDates(CONST struct DateStamp * date1, CONST struct DateStamp * date2
 LONG DateToStr(struct DateTime * datetime) (d1)
 LONG StrToDate(struct DateTime * datetime) (d1)
 BPTR InternalLoadSeg(BPTR fh, BPTR table, CONST LONG * funcarray, LONG * stack) (d0,a0,a1,a2)
-BOOL InternalUnLoadSeg(BPTR seglist, VOID (*CONST freefunc)(VOID)) (d1,a1)
+BOOL InternalUnLoadSeg(BPTR seglist, VOID (*CONST freefunc)()) (d1,a1)
 BPTR NewLoadSeg(CONST_STRPTR file, CONST struct TagItem * tags) (d1,d2)
 ==alias
 BPTR NewLoadSegTagList(CONST_STRPTR file, CONST struct TagItem * tags) (d1,d2)
@@ -191,8 +191,8 @@ LONG StrToLong(CONST_STRPTR string, LONG * value) (d1,d2)
 LONG MatchFirst(CONST_STRPTR pat, struct AnchorPath * anchor) (d1,d2)
 LONG MatchNext(struct AnchorPath * anchor) (d1)
 VOID MatchEnd(struct AnchorPath * anchor) (d1)
-LONG ParsePattern(CONST_STRPTR pat, STRPTR patbuf, LONG patbuflen) (d1,d2,d3)
-BOOL MatchPattern(CONST_STRPTR patbuf, CONST_STRPTR str) (d1,d2)
+LONG ParsePattern(CONST_STRPTR pat, UBYTE *patbuf, LONG patbuflen) (d1,d2,d3)
+BOOL MatchPattern(CONST UBYTE *patbuf, CONST_STRPTR str) (d1,d2)
 ==private
 VOID dosPrivate4() ()
 ==public
@@ -223,7 +223,7 @@ LONG Printf(CONST_STRPTR format, ...) (d1,d2)
 VOID dosPrivate7() ()
 ==public
 LONG ParsePatternNoCase(CONST_STRPTR pat, UBYTE * patbuf, LONG patbuflen) (d1,d2,d3)
-BOOL MatchPatternNoCase(CONST_STRPTR patbuf, CONST_STRPTR str) (d1,d2)
+BOOL MatchPatternNoCase(CONST UBYTE *patbuf, CONST_STRPTR str) (d1,d2)
 ==private
 VOID dosPrivate8() ()
 ==public
@@ -261,13 +261,13 @@ VOID dosPrivate26() ()
 VOID dosPrivate27() ()
 ==public
 LONG PutErrStr(CONST_STRPTR str) (d1)
-BPTR ErrorOutput() ()
-BPTR SelectError(BPTR fh) (d1)
+LONG ErrorOutput() ()
+LONG SelectError(BPTR fh) (d1)
 ==private
 VOID dosPrivate28() ()
 ==public
-LONG DoShellMethodTagList(ULONG method, CONST struct TagItem * tags) (d0,a0)
+APTR DoShellMethodTagList(ULONG method, CONST struct TagItem * tags) (d0,a0)
 ==varargs
-LONG DoShellMethod(ULONG method, Tag tag1, ...) (d0,a0)
+APTR DoShellMethod(ULONG method, Tag tag1, ...) (d0,a0)
 LONG ScanStackToken(BPTR seg, LONG defaultstack) (d1,d2)
 ==end

@@ -20,13 +20,13 @@ extern "C" {
 
 
 /* From version 33 */
-ULONG Supervisor(ULONG (*CONST userFunction)(VOID));
+ULONG Supervisor(ULONG (*CONST userFunction)());
 VOID InitCode(ULONG startClass, ULONG version);
 VOID InitStruct(CONST_APTR initTable, APTR memory, ULONG size);
-struct Library * MakeLibrary(CONST_APTR funcInit, CONST_APTR structInit, ULONG (*CONST libInit)(VOID), ULONG dataSize, BPTR segList);
-ULONG MakeFunctions(APTR target, CONST_APTR functionArray, ULONG funcDispBase);
+struct Library * MakeLibrary(CONST_APTR funcInit, CONST_APTR structInit, ULONG (*CONST libInit)(), ULONG dataSize, ULONG segList);
+VOID MakeFunctions(APTR target, CONST_APTR functionArray, ULONG funcDispBase);
 struct Resident * FindResident(CONST_STRPTR name);
-APTR InitResident(CONST struct Resident * resident, BPTR segList);
+APTR InitResident(CONST struct Resident * resident, ULONG segList);
 VOID Alert(ULONG alertNum);
 VOID Debug(ULONG flags);
 VOID Disable(VOID);
@@ -70,8 +70,8 @@ ULONG SetSignal(ULONG newSignals, ULONG signalSet);
 ULONG SetExcept(ULONG newSignals, ULONG signalSet);
 ULONG Wait(ULONG signalSet);
 VOID Signal(struct Task * task, ULONG signalSet);
-BYTE AllocSignal(LONG signalNum);
-VOID FreeSignal(LONG signalNum);
+BYTE AllocSignal(BYTE signalNum);
+VOID FreeSignal(BYTE signalNum);
 LONG AllocTrap(LONG trapNum);
 VOID FreeTrap(LONG trapNum);
 VOID AddPort(struct MsgPort * port);
@@ -85,7 +85,7 @@ VOID AddLibrary(struct Library * library);
 VOID RemLibrary(struct Library * library);
 struct Library * OldOpenLibrary(CONST_STRPTR libName);
 VOID CloseLibrary(struct Library * library);
-APTR SetFunction(struct Library * library, LONG funcOffset, ULONG (*CONST newFunction)(VOID));
+APTR SetFunction(struct Library * library, LONG funcOffset, ULONG (*CONST newFunction)());
 VOID SumLibrary(struct Library * library);
 VOID AddDevice(struct Device * device);
 VOID RemDevice(struct Device * device);
@@ -95,11 +95,11 @@ BYTE DoIO(struct IORequest * ioRequest);
 VOID SendIO(struct IORequest * ioRequest);
 struct IORequest * CheckIO(struct IORequest * ioRequest);
 BYTE WaitIO(struct IORequest * ioRequest);
-LONG AbortIO(struct IORequest * ioRequest);
+VOID AbortIO(struct IORequest * ioRequest);
 VOID AddResource(APTR resource);
 VOID RemResource(APTR resource);
 APTR OpenResource(CONST_STRPTR resName);
-APTR RawDoFmt(CONST_STRPTR formatString, CONST_APTR dataStream, VOID (*CONST putChProc)(VOID), APTR putChData);
+APTR RawDoFmt(CONST_STRPTR formatString, CONST_APTR dataStream, VOID (*CONST putChProc)(), APTR putChData);
 ULONG GetCC(VOID);
 ULONG TypeOfMem(CONST_APTR address);
 ULONG Procure(struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg);
@@ -143,7 +143,7 @@ VOID ColdReboot(VOID);
 VOID StackSwap(struct StackSwapStruct * newStack);
 
 /* From version 37 */
-VOID CachePreDMA(CONST_APTR address, ULONG * length, ULONG flags);
+APTR CachePreDMA(CONST_APTR address, ULONG * length, ULONG flags);
 VOID CachePostDMA(CONST_APTR address, ULONG * length, ULONG flags);
 
 /* From version 39 */

@@ -23,7 +23,7 @@ struct Library;
 #endif
 #endif
 
-static __inline__ BOOL
+static __inline__ VOID
 __wb_UpdateWorkbench(struct Library *__base, CONST_STRPTR name, BPTR parentLock, LONG action)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
@@ -35,7 +35,7 @@ __wb_UpdateWorkbench(struct Library *__base, CONST_STRPTR name, BPTR parentLock,
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
-	return (BOOL)_d0;
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UpdateWorkbench(name, parentLock, action) __wb_UpdateWorkbench((WB_BASE_NAME), (name), (parentLock), (action))
 

@@ -39,4 +39,21 @@ __texteditor_TEXTEDITOR_GetClass(struct Library *__base)
 }
 #define TEXTEDITOR_GetClass() __texteditor_TEXTEDITOR_GetClass((TEXTEDITOR_BASE_NAME))
 
+static __inline__ VOID
+__texteditor_HighlightSetFormat(struct Library *__base, APTR handle, ULONG first, ULONG last, UWORD format)
+{
+	register ULONG _a0 __asm("a0") = (ULONG)(handle);
+	register ULONG _d0 __asm("d0") = (ULONG)(first);
+	register ULONG _d1 __asm("d1") = (ULONG)(last);
+	register ULONG _d2 __asm("d2") = (ULONG)(format);
+	register struct Library *_a6 __asm("a6") = __base;
+	register ULONG _a1 __asm("a1");
+	__asm__ __volatile__ ("jsr -36(%/a6)"
+		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
+		: "r" (_a6), "r" (_d2)
+		: __OPENNDK_FPCLOBBER "cc", "memory");
+	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
+}
+#define HighlightSetFormat(handle, first, last, format) __texteditor_HighlightSetFormat((TEXTEDITOR_BASE_NAME), (handle), (first), (last), (format))
+
 #endif /* INLINE_TEXTEDITOR_H */

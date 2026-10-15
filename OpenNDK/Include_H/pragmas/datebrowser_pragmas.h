@@ -10,5 +10,8 @@
 #endif
 
 #pragma libcall DateBrowserBase DATEBROWSER_GetClass 1e 00
+#pragma libcall DateBrowserBase JulianWeekDay 24 21003
+#pragma libcall DateBrowserBase JulianMonthDays 2a 1002
+#pragma libcall DateBrowserBase JulianLeapYear 30 001
 
 #endif /* PRAGMAS_DATEBROWSER_PRAGMAS_H */

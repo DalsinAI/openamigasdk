@@ -131,5 +131,6 @@ _LVOHelpControl	EQU	-828
 _LVOShowWindow	EQU	-834
 _LVOHideWindow	EQU	-840
 _LVOIntuitionControlA	EQU	-1212
+_LVOReportMouse1	EQU	-234
 
 	ENDC	; LVO_INTUITION_LIB_I

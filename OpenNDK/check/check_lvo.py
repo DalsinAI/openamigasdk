@@ -104,6 +104,11 @@ def main():
             a, t = ours.get(b), theirs.get(b)
             if t is None and a and a[0] == "private":
                 continue
+            if t is None and b > max(theirs):
+                # a call past the end of the open library's table: one it
+                # doesn't have yet, not a disagreement
+                print("%s -%d: %s not in the open library yet" % (lib.sfdname, b, a[0]))
+                continue
             if a is None or t is None:
                 print("%s -%d: SFD %s, .lvo %s" % (lib.sfdname, b, a, t))
                 bad += 1

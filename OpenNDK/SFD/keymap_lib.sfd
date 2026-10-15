@@ -13,6 +13,6 @@
 ==version 36
 VOID SetKeyMapDefault(CONST struct KeyMap * keyMap) (a0)
 struct KeyMap * AskKeyMapDefault() ()
-WORD MapRawKey(CONST struct InputEvent * event, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap) (a0,a1,d1,a2)
+WORD MapRawKey(CONST struct InputEvent * event, STRPTR buffer, WORD length, CONST struct KeyMap * keyMap) (a0,a1,d1,a2)
 LONG MapANSI(CONST_STRPTR string, LONG count, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap) (a0,d0,a1,d1,a2)
 ==end

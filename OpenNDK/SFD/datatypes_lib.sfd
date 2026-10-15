@@ -23,7 +23,7 @@ struct DataType * ObtainDataTypeA(ULONG type, APTR handle, CONST struct TagItem 
 ==varargs
 struct DataType * ObtainDataType(ULONG type, APTR handle, Tag tag1, ...) (d0,a0,a1)
 VOID ReleaseDataType(struct DataType * dt) (a0)
-Object * NewDTObjectA(APTR name, CONST struct TagItem * attrs) (d0,a0)
+Object *NewDTObjectA(STRPTR name, CONST struct TagItem * attrs) (d0,a0)
 ==varargs
 Object * NewDTObject(APTR name, Tag tag1, ...) (d0,a0)
 VOID DisposeDTObject(Object * o) (a0)
@@ -36,6 +36,8 @@ ULONG GetDTAttrs(Object * o, Tag tag1, ...) (a0,a2)
 LONG AddDTObject(struct Window * win, struct Requester * req, Object * o, LONG pos) (a0,a1,a2,d0)
 VOID RefreshDTObjectA(Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs) (a0,a1,a2,a3)
 ==varargs
+VOID RefreshDTObject(Object * o, struct Window * win, struct Requester * req, Tag tag1, ...) (a0,a1,a2,a3)
+==varargs
 VOID RefreshDTObjects(Object * o, struct Window * win, struct Requester * req, Tag tag1, ...) (a0,a1,a2,a3)
 ULONG DoAsyncLayout(Object * o, struct gpLayout * gpl) (a0,a1)
 ULONG DoDTMethodA(Object * o, struct Window * win, struct Requester * req, Msg msg) (a0,a1,a2,a3)
@@ -43,7 +45,7 @@ ULONG DoDTMethodA(Object * o, struct Window * win, struct Requester * req, Msg m
 ULONG DoDTMethod(Object * o, struct Window * win, struct Requester * req, ULONG data, ...) (a0,a1,a2,a3)
 LONG RemoveDTObject(struct Window * win, Object * o) (a0,a1)
 ULONG * GetDTMethods(CONST Object * object) (a0)
-struct DTMethod * GetDTTriggerMethods(Object * object) (a0)
+struct DTMethods *GetDTTriggerMethods(Object * object) (a0)
 ULONG PrintDTObjectA(Object * o, struct Window * w, struct Requester * r, struct dtPrint * msg) (a0,a1,a2,a3)
 ==varargs
 ULONG PrintDTObject(Object * o, struct Window * w, struct Requester * r, ULONG data, ...) (a0,a1,a2,a3)
@@ -79,9 +81,9 @@ ULONG * FindMethod(ULONG * methods, ULONG searchmethodid) (a0,a1)
 struct DTMethod * FindTriggerMethod(struct DTMethod * dtm, CONST_STRPTR command, ULONG method) (a0,a1,d0)
 ULONG * CopyDTMethods(ULONG * methods, ULONG * include, ULONG * exclude) (a0,a1,a2)
 struct DTMethod * CopyDTTriggerMethods(struct DTMethod * methods, struct DTMethod * include, struct DTMethod * exclude) (a0,a1,a2)
-VOID FreeDTMethods(APTR methods) (a0)
+APTR FreeDTMethods(APTR methods) (a0)
 ULONG GetDTTriggerMethodDataFlags(ULONG method) (d0)
-ULONG SaveDTObjectA(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, CONST struct TagItem * attrs) (a0,a1,a2,a3,d0,d1,a4)
+ULONG SaveDTObjectA(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, LONG saveicon, CONST struct TagItem * attrs) (a0,a1,a2,a3,d0,d1,a4)
 ==varargs
 ULONG SaveDTObject(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, Tag tag1, ...) (a0,a1,a2,a3,d0,d1,a4)
 ULONG StartDragSelect(Object * o) (a0)

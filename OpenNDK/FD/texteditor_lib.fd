@@ -4,4 +4,5 @@
 ##bias 30
 ##public
 TEXTEDITOR_GetClass()()
+HighlightSetFormat(handle,first,last,format)(a0,d0,d1,d2)
 ##end

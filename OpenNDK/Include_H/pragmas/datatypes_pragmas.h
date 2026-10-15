@@ -21,6 +21,7 @@
 #pragma tagcall DataTypesBase GetDTAttrs 42 a802
 #pragma libcall DataTypesBase AddDTObject 48 0a9804
 #pragma libcall DataTypesBase RefreshDTObjectA 4e ba9804
+#pragma tagcall DataTypesBase RefreshDTObject 4e ba9804
 #pragma tagcall DataTypesBase RefreshDTObjects 4e ba9804
 #pragma libcall DataTypesBase DoAsyncLayout 54 9802
 #pragma libcall DataTypesBase DoDTMethodA 5a ba9804

@@ -56,7 +56,7 @@ __keymap_AskKeyMapDefault(struct Library *__base)
 #define AskKeyMapDefault() __keymap_AskKeyMapDefault((KEYMAP_BASE_NAME))
 
 static __inline__ WORD
-__keymap_MapRawKey(struct Library *__base, CONST struct InputEvent * event, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap)
+__keymap_MapRawKey(struct Library *__base, CONST struct InputEvent * event, STRPTR buffer, WORD length, CONST struct KeyMap * keyMap)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(event);
 	register ULONG _a1 __asm("a1") = (ULONG)(buffer);

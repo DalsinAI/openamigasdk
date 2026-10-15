@@ -18,6 +18,7 @@ extern "C" {
 
 /* From version 47 */
 Class * TEXTEDITOR_GetClass(VOID);
+VOID HighlightSetFormat(APTR handle, ULONG first, ULONG last, UWORD format);
 
 #ifdef __cplusplus
 }
