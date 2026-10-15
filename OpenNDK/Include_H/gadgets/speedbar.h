@@ -61,4 +61,31 @@
 #define SBH_RECESS	2
 #define SBH_IMAGE	3
 
+/* SBM_SETNODEATTRS's message */
+struct sbSetNodeAttrs
+{
+	ULONG	MethodID;
+	struct GadgetInfo *sb_GInfo;
+	struct Node *sb_Node;
+	struct TagItem *sb_AttrList;
+};
+
+/* More names from the 3.2 interface */
+#define SBM_SETNODEATTRS	0x58000A
+#define SBNA_ButtonID		(SBNA_Dummy + 20)
+#define SBNA_HintInfo		(SBNA_Dummy + 19)
+#define SBNA_Separator		(SBNA_Dummy + 18)
+#define SBNA_Spacer		(SBNA_Dummy + 17)
+#define SBTYPE_BOTH		0
+#define SBTYPE_IMAGE		2
+#define SBTYPE_TEXT		1
+#define SPEEDBAR_ButtonBevelStyle	(SPEEDBAR_Dummy + 2049)
+#define SPEEDBAR_ButtonType	(SPEEDBAR_Dummy + 20)
+#define SPEEDBAR_Font		(SPEEDBAR_Dummy + 18)
+#define SPEEDBAR_HORIZONTAL	0
+#define SPEEDBAR_HorizPadding	(SPEEDBAR_Dummy + 21)
+#define SPEEDBAR_TopNode	(SPEEDBAR_Dummy + 19)
+#define SPEEDBAR_VERTICAL	1
+#define SPEEDBAR_VertPadding	(SPEEDBAR_Dummy + 22)
+
 #endif /* GADGETS_SPEEDBAR_H */

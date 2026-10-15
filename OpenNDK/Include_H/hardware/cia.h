@@ -163,4 +163,8 @@ struct CIA {
 #define CIAF_DSKDIREC		(1L<<1)
 #define CIAF_DSKSTEP		(1L<<0)
 
+/* More names from the 3.2 interface */
+#define CIACRAB_TODIN		7
+#define CIACRAF_TODIN		128
+
 #endif /* HARDWARE_CIA_H */

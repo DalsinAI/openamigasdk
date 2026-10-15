@@ -40,4 +40,18 @@
 /* Method: open the requester */
 #define GFONT_REQUEST	0x600001
 
+/* More names from the 3.2 interface */
+#define GETFONT_CSFilterFunc	(GETFONT_Dummy + 31)
+#define GETFONT_CharSet		(GETFONT_Dummy + 25)
+#define GETFONT_DoCharSet	(GETFONT_Dummy + 24)
+#define GETFONT_DoSpecialMode	(GETFONT_Dummy + 28)
+#define GETFONT_FilterFunc	(GETFONT_Dummy + 30)
+#define GETFONT_OTagOnly	(GETFONT_Dummy + 26)
+#define GETFONT_SampleText	(GETFONT_Dummy + 23)
+#define GETFONT_ScalableOnly	(GETFONT_Dummy + 27)
+#define GETFONT_SpecialMode	(GETFONT_Dummy + 29)
+#define GETFONT_SpecialModeBitMap	(GETFONT_Dummy + 32)
+#define GETFONT_SpecialModeBitMapHeight	(GETFONT_Dummy + 34)
+#define GETFONT_SpecialModeBitMapWidth	(GETFONT_Dummy + 33)
+
 #endif /* GADGETS_GETFONT_H */

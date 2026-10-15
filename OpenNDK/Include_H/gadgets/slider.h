@@ -37,4 +37,15 @@
 #define SLIDER_HORIZONTAL	0x0002
 #define SLIDER_VERTICAL		0x0004
 
+/* More names from the 3.2 interface */
+#define SLIDER_InitDispHook	(SLIDER_Dummy + 24)
+#define SLIDER_LevelDomain	(SLIDER_Dummy + 19)
+#define SLIDER_LevelHook	(SLIDER_Dummy + 21)
+#define SLIDER_LevelJustify	(SLIDER_Dummy + 18)
+#define SLIDER_LevelSpace	(SLIDER_Dummy + 20)
+#define SLIDER_NotifyDisable	(SLIDER_Dummy + 23)
+#define SLJ_CENTER		1
+#define SLJ_LEFT		0
+#define SLJ_RIGHT		2
+
 #endif /* GADGETS_SLIDER_H */

@@ -723,13 +723,7 @@ struct EasyStruct
     CONST_STRPTR es_Title;
     CONST_STRPTR es_TextFormat;
     CONST_STRPTR es_GadgetFormat;
-    struct Screen *es_Screen;		/* V47, with ESF_SCREEN */
-    struct TagItem *es_TagList;		/* V47, with ESF_TAGGED */
 };
-
-/* EasyStruct.es_Flags */
-#define ESF_SCREEN	(1 << 0)
-#define ESF_TAGGED	(1 << 1)
 
 /* ---- Miscellany ------------------------------------------------------- */
 
@@ -800,5 +794,29 @@ struct EasyStruct
 #include <intuition/iobsolete.h>
 #endif
 #endif
+
+/* More names from the 3.2 interface */
+#define ICTRL_Dummy		0x8001C000UL
+#define ALERT_TYPE		0x80000000UL
+#define BOOLMASK		1
+#define CWCODE_HIDE		2
+#define CWCODE_SHOW		3
+#define GMORE_BOOPSIGADGET	0x400
+#define GMORE_FREEIMAGE		0x800
+#define GMORE_HIDDEN		16
+#define GMORE_PARENTHIDDEN	0x1000000
+#define GTYP_ICONIFY		144
+#define INTUIWHEELDATA_VERSION	2
+#define MIF_EXTENDED		0x8000
+#define MIF_RESERVED		0x400
+#define MIF_SHIFTCOMMSEQ	0x800
+#define SMARTKNOBIMAGE		32
+#define SUBMENU			0x200
+#define WA_Hidden		(WA_Dummy + 60)
+#define WA_IconifyGadget	(WA_Dummy + 96)
+#define WA_PointerType		(WA_Dummy + 80)
+#define WFLG_HASICONIFY		0x40000000
+#define WINDOW_BACKMOST		0
+#define WINDOW_FRONTMOST	1
 
 #endif /* INTUITION_INTUITION_H */

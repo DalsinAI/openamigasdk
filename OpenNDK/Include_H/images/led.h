@@ -21,4 +21,9 @@
 #define LED_Negative		(LED_Dummy + 4)	/* BOOL: a minus sign in front */
 #define LED_EditMode		(LED_Dummy + 6)	/* BOOL */
 
+/* More names from the 3.2 interface */
+#define LED_Raw			(LED_Dummy + 8)
+#define LED_Signed		(LED_Dummy + 5)
+#define LED_Time		(LED_Dummy + 6)
+
 #endif /* IMAGES_LED_H */

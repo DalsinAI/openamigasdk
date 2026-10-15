@@ -89,4 +89,14 @@
 #define M_ASM	">1"	/* auto scroll */
 #define M_AWM	"?7"	/* auto wrap */
 
+/* CD_SETUPSCROLLBACK's data: a scroller to drive and the lines to keep */
+struct ConsoleScrollback {
+	struct Gadget	*cs_ScrollerGadget;
+	UWORD		cs_NumLines;
+};
+
+/* More names from the 3.2 interface */
+#define CD_SETSCROLLBACKPOSITION	14
+#define CD_SETUPSCROLLBACK	13
+
 #endif /* DEVICES_CONSOLE_H */

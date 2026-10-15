@@ -126,7 +126,9 @@ struct XRef {
 	UWORD		xr_Pad;
 	struct DocFile	*xr_DF;		/* private */
 	STRPTR		xr_File;
+	STRPTR		xr_Name;	/* the node's name */
 	LONG		xr_Line;
+	ULONG		xr_Reserved[2];
 };
 
 #define XRSIZE	(sizeof (struct XRef))

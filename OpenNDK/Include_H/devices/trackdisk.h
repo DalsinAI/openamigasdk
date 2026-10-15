@@ -157,9 +157,17 @@ struct TDU_PublicUnit {
 	UWORD	tdu_CurrTrk;
 	ULONG	tdu_CalibrateDelay;
 	ULONG	tdu_Counter;		/* private */
+	ULONG	tdu_PostWriteDelay;	/* microseconds to wait after a write */
+	ULONG	tdu_SideSelectDelay;	/* microseconds to wait after choosing a side */
 };
 
 #define TDPB_NOCLICK	0	/* don't click an empty drive */
 #define TDPF_NOCLICK	(1L<<0)
+
+/* More names from the 3.2 interface */
+#define TD_FORMAT64		27
+#define TD_READ64		24
+#define TD_SEEK64		26
+#define TD_WRITE64		25
 
 #endif /* DEVICES_TRACKDISK_H */

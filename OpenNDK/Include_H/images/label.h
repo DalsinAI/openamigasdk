@@ -30,4 +30,15 @@
 #define LJ_CENTER	LJ_CENTRE
 #define LJ_RIGHT	2
 
+/* More names from the 3.2 interface */
+#define LABEL_CENTER		1
+#define LABEL_CENTRE		1
+#define LABEL_LEFT		0
+#define LABEL_MenuMode		(LABEL_Dummy + 12)
+#define LABEL_RIGHT		2
+#define LABEL_VerticalAlignment	(LABEL_Dummy + 10)
+#define LABEL_WordWrap		(LABEL_Dummy + 11)
+#define LVALIGN_BASELINE	1
+#define LVALIGN_BOTTOM		0
+
 #endif /* IMAGES_LABEL_H */

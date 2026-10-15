@@ -199,4 +199,25 @@ struct Catalog {
 	UWORD		cat_Revision;
 };
 
+/* More names from the 3.2 interface */
+#define ALTDAY_1		52
+#define ALTDAY_2		53
+#define ALTDAY_3		54
+#define ALTDAY_4		55
+#define ALTDAY_5		56
+#define ALTDAY_6		57
+#define ALTDAY_7		58
+#define ALTMON_1		59
+#define ALTMON_10		68
+#define ALTMON_11		69
+#define ALTMON_12		70
+#define ALTMON_2		60
+#define ALTMON_3		61
+#define ALTMON_4		62
+#define ALTMON_5		63
+#define ALTMON_6		64
+#define ALTMON_7		65
+#define ALTMON_8		66
+#define ALTMON_9		67
+
 #endif /* LIBRARIES_LOCALE_H */

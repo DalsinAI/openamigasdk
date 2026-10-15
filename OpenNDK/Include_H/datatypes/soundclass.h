@@ -61,4 +61,11 @@ struct VoiceHeader {
 #define ID_BODY	MAKE_ID('B','O','D','Y')
 #endif
 
+/* More names from the 3.2 interface */
+#define SAMPLETYPE_Left		2
+#define SAMPLETYPE_Right	4
+#define SAMPLETYPE_Stereo	6
+#define SDTA_BitsPerSample	(SDTA_Dummy + 18)
+#define Unity			0x10000
+
 #endif /* DATATYPES_SOUNDCLASS_H */

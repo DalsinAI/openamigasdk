@@ -49,38 +49,41 @@ its `proto/` header, and `__NOLIBBASE__` leaves out the base's declaration.
 
 ## Status, 15 October 2026
 
-- **Written:** 209 C headers in the OS's own paths and 77 SFDs: exec, dos,
+- **Written:** 220 C headers in the OS's own paths and 77 SFDs: exec, dos,
   graphics, layers, intuition, utility, gadtools, asl, icon, workbench,
   expansion, the other disk libraries (amigaguide, commodities, datatypes,
   diskfont, iffparse, keymap, locale, lowlevel, the six math libraries,
   nonvolatile, realtime, rexxsyslib, translator, bullet), the devices and
   resources with calls, and the ReAction classes. With the generated files,
-  519 headers in all.
+  530 headers in all.
 - **Checked here** (`tests/run.sh`, about 20 minutes): every header compiles
   alone in C and C++ and all together in one unit; 89 structure sizes that
   the open libraries' own tests measured against NDK 3.2; a program's calls;
   `libamiga.a` (1,278 objects). 73 SFDs match the open libraries' `.lvo`
   tables with no difference; icon, workbench, input and translator have no
   table to compare with yet.
-- **Checked against NDK 3.2** (`check/compare_ndk.sh`, run twice on
-  Daletop on 15 October; reports in `check/results/`). From the SFD
-  comparison, which now reads all 74 of the NDK's SFDs: the types of some
-  170 calls follow the NDK's, `listbrowser.gadget`'s column-info registers
-  and `UpdateWorkbench` were corrected, and the calls and SFDs OpenNDK
-  lacked were added (icon's `FreeAlloc`, `FreeFree` and
-  `BumpRevisionLength`, datebrowser's three Julian calls, texteditor's
-  `HighlightSetFormat`, `ReportMouse1`, `RefreshDTObject`, `listview` and
-  `trackfile`). From the constants: nine exec alert codes, the IDE
-  battery-backed setting and `RPTAG_OutLinePen`. The structure comparison
-  has not run yet: the NDK's `exec/types.h` includes `<stdint.h>`, which
-  the os32 stove's GCC lacks, so `check/shim/` now supplies one. Until it
-  has run clean, treat a structure or constant no open library uses as
-  unconfirmed. Still open: `WA_` tags from `WA_WindowName` on, the picture
-  tags (200 or 201), `devices/trackfile.h`, `dos/ansiio.h` and
-  `resources/ciabase.h`. OpenNDK keeps `struct timeval` in timer's calls
-  and `struct DiscResourceUnit` in `GetUnit`, which the NDK's SFDs name
-  differently; both are the same layout.
+- **Checked against NDK 3.2** (`check/compare_ndk.sh`, run four times on
+  Daletop on 15 October; reports in `check/results/`). The SFDs match in
+  every call's name, offset and registers; the types of some 170 calls
+  were brought into line along the way, and the calls and SFDs OpenNDK
+  lacked were added. The fourth run measured both header sets' structures
+  and constants with the os32 stove's GCC (`check/shim/` supplies the
+  `<stdint.h>` the NDK's `exec/types.h` wants) and listed the NDK's own
+  field layouts. Since then the 53 structure differences it found are
+  fixed (`Layer`, `Layer_Info`, `ClipRect`, `CopList`, `GfxBase`,
+  `EasyStruct`, `IControlPrefs`, `WorkbenchPrefs`, `XRef`,
+  `TDU_PublicUnit` and others), and its 62 missing structures, 1,362
+  missing constants and 11 of its 14 missing headers are added, each
+  checked against that run's figures; a fifth run on Daletop is what
+  confirms them. Still
+  open: `dos/ansiio.h`, `resources/ciabase.h`,
+  `reaction/reaction_author.h` and the TextEdit
+  `filetypes.h`. OpenNDK keeps `struct timeval` in timer's calls and
+  `struct DiscResourceUnit` in `GetUnit`, which the NDK's SFDs name
+  differently; both are the same layout. `reaction/reaction_macros.h`
+  defines `CheckMark` as the NDK's does, so a unit that includes it can't
+  name the `CheckMark` field of `struct Window` either.
 - **Not yet written:** the assembler structure includes (`Include_I` other
   than `lvo/`), `debug.lib`, autodocs, vbcc's inline headers,
-  `gadgets/sketchboard.h` and `piechart.h`, and the OS 4.1 headers (OS 4.1
+  `piechart.h`, and the OS 4.1 headers (OS 4.1
   builds keep using Hyperion's SDK for now).

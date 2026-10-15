@@ -38,4 +38,38 @@
 #define TNA_TextPen	(TNA_Dummy + 9)
 #define TNA_Disabled	(TNA_Dummy + 10)
 
+/* One tab, for CLICKTAB_Labels given as an array */
+struct tagTabLabel
+{
+	STRPTR	tl_Label;
+	WORD	tl_Pens[4];
+	struct TagItem *tl_Attrs;
+};
+
+/* More names from the 3.2 interface */
+#define CLICKTAB_AutoFit	(CLICKTAB_Dummy + 12)
+#define CLICKTAB_AutoTabNumbering	(CLICKTAB_Dummy + 13)
+#define CLICKTAB_ChooserFlagImage	(CLICKTAB_Dummy + 18)
+#define CLICKTAB_CloseImage	(CLICKTAB_Dummy + 14)
+#define CLICKTAB_ClosePlacement	(CLICKTAB_Dummy + 17)
+#define CLICKTAB_Closed		(CLICKTAB_Dummy + 15)
+#define CLICKTAB_EvenSize	(CLICKTAB_Dummy + 9)
+#define CLICKTAB_FlagImage	(CLICKTAB_Dummy + 8)
+#define CLICKTAB_LabelTruncate	(CLICKTAB_Dummy + 7)
+#define CLICKTAB_MinorLabelChange	(CLICKTAB_Dummy + 19)
+#define CLICKTAB_NodeClosed	(CLICKTAB_Dummy + 16)
+#define CLICKTAB_PageBorder	(CLICKTAB_Dummy + 11)
+#define CLICKTAB_PageGroupBorder	(CLICKTAB_Dummy + 11)
+#define CLICKTAB_TabsOffsetAsLayoutSpacing	(CLICKTAB_Dummy + 20)
+#define CLICKTAB_Total		(CLICKTAB_Dummy + 10)
+#define CTORIENT_HORIZFLIP	2
+#define CTORIENT_VERTFLIP	3
+#define PLACECLOSE_LEFT		0
+#define PLACECLOSE_RIGHT	1
+#define TNA_CloseGadget		(TNA_Dummy + 13)
+#define TNA_Flagged		(TNA_Dummy + 11)
+#define TNA_HelpText		(TNA_Dummy + 15)
+#define TNA_HintInfo		(TNA_Dummy + 12)
+#define TNA_SoftStyle		(TNA_Dummy + 14)
+
 #endif /* GADGETS_CLICKTAB_H */

@@ -17,6 +17,7 @@
 
 #define ID_WBNC		MAKE_ID('W','B','N','C')
 #define ID_WBHD		MAKE_ID('W','B','H','D')	/* a hidden device's name */
+#define ID_WBTF		MAKE_ID('W','B','T','F')	/* the screen title's format */
 
 struct WorkbenchPrefs
 {
@@ -29,11 +30,31 @@ struct WorkbenchPrefs
     LONG wbp_MaxNameLength;
     BOOL wbp_NewIconsSupport;
     BOOL wbp_ColorIconSupport;
-    /* V45 */
-    ULONG wbp_ImageMemType;
-    BOOL wbp_LockPens;
-    BOOL wbp_NoTitleBar;
-    BOOL wbp_NoGauge;
+};
+
+/* The longer form the Workbench prefs editor saves, the basic part first */
+struct WorkbenchExtendedPrefs
+{
+    struct WorkbenchPrefs wbe_BasicPrefs;
+    ULONG wbe_IconMemoryType;		/* MEMF_ for icon images */
+    BOOL wbe_LockPens;
+    BOOL wbe_DisableTitleBar;
+    BOOL wbe_DisableVolumeGauge;
+    UWORD wbe_TitleUpdateDelay;		/* seconds between title updates */
+    ULONG wbe_CopyBufferSize;
+    ULONG wbe_Flags;			/* private */
+};
+
+/* A hidden device's name (ID_WBHD) */
+struct WorkbenchHiddenDevicePrefs
+{
+    UBYTE whdp_Name[0];			/* NUL-terminated, as long as the chunk */
+};
+
+/* The screen title's format (ID_WBTF) */
+struct WorkbenchTitleFormatPrefs
+{
+    UBYTE wtfp_Format[0];		/* NUL-terminated, as long as the chunk */
 };
 
 #endif /* PREFS_WORKBENCH_H */

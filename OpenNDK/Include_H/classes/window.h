@@ -110,4 +110,66 @@ struct wmHandle
 #define WMHI_MOUSEBUTTONS	(16 << 16)
 #define WMHI_DISPOSEDWINDOW	(17 << 16)
 
+/* WM_ACTIVATEGADGET's message */
+struct wmActivateGadget
+{
+    ULONG MethodID;
+    Object *wma_Object;			/* the gadget to activate */
+};
+
+/* WM_SNAPSHOT and WM_UNSNAPSHOT's message */
+struct wmSnapshot
+{
+    ULONG MethodID;
+    ULONG How;
+};
+
+/* More names from the 3.2 interface */
+#define WA_WindowBox		0x8000009EUL
+#define WGUD_FUNC		1
+#define WGUD_HOOK		0
+#define WGUD_IGNORE		2
+#define WHOOKRSLT_CLOSEWINDOW	1
+#define WHOOKRSLT_DISPOSEWINDOW	2
+#define WHOOKRSLT_IGNORE	0
+#define WINDOW_AppWindowPtr	(WINDOW_Dummy + 50)
+#define WINDOW_Application	(WINDOW_Dummy + 45)
+#define WINDOW_BuiltInScroll	(WINDOW_Dummy + 55)
+#define WINDOW_CharSet		(WINDOW_Dummy + 54)
+#define WINDOW_HorizObject	(WINDOW_Dummy + 30)
+#define WINDOW_HorizProp	(WINDOW_Dummy + 29)
+#define WINDOW_IDCMPSnoopHook	(WINDOW_Dummy + 56)
+#define WINDOW_IconNoDispose	(WINDOW_Dummy + 51)
+#define WINDOW_Iconifiable	(WINDOW_Dummy + 59)
+#define WINDOW_InterpretIDCMPHook	(WINDOW_Dummy + 46)
+#define WINDOW_InterpretUserData	(WINDOW_Dummy + 17)
+#define WINDOW_JumpScreensMenu	(WINDOW_Dummy + 63)
+#define WINDOW_KillWindow	(WINDOW_Dummy + 44)
+#define WINDOW_MenuAddress	(WINDOW_Dummy + 65)
+#define WINDOW_MenuContext	(WINDOW_Dummy + 67)
+#define WINDOW_MenuType		(WINDOW_Dummy + 66)
+#define WINDOW_NewMenu		(WINDOW_Dummy + 52)
+#define WINDOW_NewPrefsHook	(WINDOW_Dummy + 58)
+#define WINDOW_Parent		(WINDOW_Dummy + 47)
+#define WINDOW_PopupGadget	(WINDOW_Dummy + 60)
+#define WINDOW_PopupHook	(WINDOW_Dummy + 61)
+#define WINDOW_PopupItem	(WINDOW_Dummy + 62)
+#define WINDOW_PostRefreshHook	(WINDOW_Dummy + 49)
+#define WINDOW_PreRefreshHook	(WINDOW_Dummy + 48)
+#define WINDOW_Qualifier	(WINDOW_Dummy + 53)
+#define WINDOW_ShowingHint	(WINDOW_Dummy + 57)
+#define WINDOW_UniqueID		(WINDOW_Dummy + 64)
+#define WINDOW_VertObject	(WINDOW_Dummy + 28)
+#define WINDOW_VertProp		(WINDOW_Dummy + 27)
+#define WMF_ZIPWINDOW		2
+#define WMF_ZOOMED		1
+#define WMHI_GADGETDOWN		0x140000
+#define WMHI_JUMPSCREEN		0x120000
+#define WMHI_POPUPMENU		0x130000
+#define WM_ACTIVATEGADGET	0x570007
+#define WM_RESTORE		0x570010
+#define WM_SNAPSHOT		0x570008
+#define WM_UNSNAPSHOT		0x570009
+#define WPOS_ENTIRESCREEN	6
+
 #endif /* CLASSES_WINDOW_H */

@@ -54,4 +54,28 @@
 #define BAG_POPSCREEN	11
 #define BAG_POPUP	12
 
+/* More names from the 3.2 interface */
+#define BAG_POPCOLOR		14
+#define BAG_POPCOLOUR		14
+#define BAG_POPDATE		13
+#define BALIGN_BOTTOM		2
+#define BALIGN_CENTER		1
+#define BALIGN_LEFT		0
+#define BALIGN_RIGHT		2
+#define BALIGN_TOP		0
+#define BCJ_CENTRE		1
+#define BUTTON_AddAnimImageNumber	(BUTTON_Dummy + 55)
+#define BUTTON_AnimButton	(BUTTON_Dummy + 50)
+#define BUTTON_AnimImageNumber	(BUTTON_Dummy + 54)
+#define BUTTON_AnimImages	(BUTTON_Dummy + 51)
+#define BUTTON_Array		(BUTTON_Dummy + 3)
+#define BUTTON_Current		(BUTTON_Dummy + 9)
+#define BUTTON_EraseBackground	(BUTTON_Dummy + 57)
+#define BUTTON_HorizAlignment	(BUTTON_Dummy + 58)
+#define BUTTON_MaxAnimImages	(BUTTON_Dummy + 53)
+#define BUTTON_SelAnimImages	(BUTTON_Dummy + 52)
+#define BUTTON_SubAnimImageNumber	(BUTTON_Dummy + 56)
+#define BUTTON_TextPadding	(BUTTON_Dummy + 40)
+#define BUTTON_VertAlignment	(BUTTON_Dummy + 59)
+
 #endif /* GADGETS_BUTTON_H */

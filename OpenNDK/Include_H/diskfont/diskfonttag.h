@@ -110,4 +110,23 @@
 #define OTH_Expanded		208
 #define OTH_ExtraExpanded	240
 
+/* More names from the 3.2 interface */
+#define DFCTRL_SORT_ASC		1
+#define DFCTRL_SORT_DES		(-1)
+#define OT_BMSize		0x80002021UL
+#define OT_BaseLine		0x8000801CUL
+#define OT_GlyphCode2_32	0x80000019UL
+#define OT_GlyphCode_32		0x80000018UL
+#define OT_GlyphMap8Bit		0x8000801AUL
+#define OT_GlyphName		0x80008026UL
+#define OT_HasGlyphs		0x8000801FUL
+#define OT_IsUnderlined		0x80002023UL
+#define OT_MemPtr		0x80008016UL
+#define OT_MemSize		0x80000017UL
+#define OT_NumGlyphs		0x8000801DUL
+#define OT_NumKernPairs		0x8000801EUL
+#define OT_RName		0x8000A009UL
+#define OT_WidthList32		0x8000801BUL
+#define OUTL_DoubleBroken	4
+
 #endif /* DISKFONT_DISKFONTTAG_H */

@@ -195,4 +195,19 @@ struct impDomainFrame
 #define IDOMAIN_NOMINAL	(1)
 #define IDOMAIN_MAXIMUM	(2)
 
+/* More names from the 3.2 interface */
+#define FRAMEF_MINIMAL		2
+#define FRAME_CONTEXT		7
+#define FRAME_DISPLAY		6
+#define FRAME_PROPBORDER	4
+#define FRAME_PROPKNOB		5
+#define IA_EraseBackground	(IA_Dummy + 45)
+#define IA_Label		(IA_Dummy + 40)
+#define IA_LabelPen		(IA_Dummy + 56)
+#define IA_Orientation		(IA_Dummy + 35)
+#define MENUMX			27
+#define MENUSUB			28
+#define SDOWNBACKMAGE		6
+#define SHIFTKEYIMAGE		42
+
 #endif /* INTUITION_IMAGECLASS_H */

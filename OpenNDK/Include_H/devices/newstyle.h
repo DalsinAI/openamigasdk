@@ -14,13 +14,13 @@
  * device class's own. */
 #define NSCMD_DEVICEQUERY	0x4000
 
-/* What NSCMD_DEVICEQUERY fills; set SizeAvailable to 0 before asking */
+/* What NSCMD_DEVICEQUERY fills; set nsdqr_SizeAvailable to 0 before asking */
 struct NSDeviceQueryResult {
-	ULONG	DevQueryFormat;		/* 0 */
-	ULONG	SizeAvailable;		/* bytes the device filled */
-	UWORD	DeviceType;		/* NSDEVTYPE_ */
-	UWORD	DeviceSubType;
-	UWORD	*SupportedCommands;	/* 0-terminated */
+	ULONG	nsdqr_DevQueryFormat;		/* 0 */
+	ULONG	nsdqr_SizeAvailable;		/* bytes the device filled */
+	UWORD	nsdqr_DeviceType;		/* NSDEVTYPE_ */
+	UWORD	nsdqr_DeviceSubType;
+	UWORD	*nsdqr_SupportedCommands;	/* 0-terminated */
 };
 
 #define NSDEVTYPE_UNKNOWN	0
@@ -36,5 +36,8 @@ struct NSDeviceQueryResult {
 #define NSDEVTYPE_PRINTER	10
 #define NSDEVTYPE_SERIAL	11
 #define NSDEVTYPE_PARALLEL	12
+
+/* More names from the 3.2 interface */
+#define NSDEVTYPE_AUDIOARD	8
 
 #endif /* DEVICES_NEWSTYLE_H */

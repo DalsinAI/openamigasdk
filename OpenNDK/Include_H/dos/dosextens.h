@@ -416,4 +416,9 @@ struct FileLock {
 #define ST_LINKFILE	(-4)
 #define ST_PIPEFILE	(-5)
 
+/* More names from the 3.2 interface */
+#define ACTION_UNDISK_INFO	0x201
+#define PRB_CLOSEERROR		6
+#define PRF_CLOSEERROR		64
+
 #endif /* DOS_DOSEXTENS_H */

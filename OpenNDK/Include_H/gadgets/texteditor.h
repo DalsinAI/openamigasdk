@@ -145,16 +145,141 @@ struct GP_TEXTEDITOR_Replace
 {
 	ULONG			MethodID;
 	struct GadgetInfo	*GInfo;
-	STRPTR			NewString;
-	ULONG			Flags;
+	STRPTR			newstring;
+	ULONG			flags;
 };
 
 struct GP_TEXTEDITOR_Search
 {
 	ULONG			MethodID;
 	struct GadgetInfo	*GInfo;
-	STRPTR			SearchString;
-	ULONG			Flags;		/* GF_TEXTEDITOR_Search_ */
+	STRPTR			string;
+	ULONG			flags;		/* GF_TEXTEDITOR_Search_ */
 };
+
+struct GP_TEXTEDITOR_ReplaceAll
+{
+	ULONG			MethodID;
+	struct GadgetInfo	*GInfo;
+	STRPTR			string;
+	STRPTR			newstring;
+	ULONG			flags;
+};
+
+struct GP_TEXTEDITOR_AddChangeListener
+{
+	ULONG			MethodID;
+	struct ChangeListener	*listener;	/* tools/TextEdit/extension.h */
+};
+
+struct GP_TEXTEDITOR_HandleError
+{
+	ULONG			MethodID;
+	ULONG			errorcode;	/* Error_ */
+};
+
+/* What a syntax highlighter is given for each line */
+struct HighlightMessage
+{
+	ULONG			Version;
+	STRPTR			Text;
+	ULONG			StatusOfPrevBlock;
+};
+
+/* A word to colour */
+struct WordColorEntry
+{
+	UBYTE			ColorWord[8];
+};
+
+/* More names from the 3.2 interface */
+#define TEXTEDITOR_Dummy	(GM_TEXTEDITOR_Dummy + 0)
+#define Error_BookmarkHasBeenLost	12
+#define Error_ClipboardIsEmpty	1
+#define Error_ClipboardIsNotFTXT	2
+#define Error_MacroBufferIsFull	3
+#define Error_MemoryAllocationFailed	4
+#define Error_NoAreaMarked	5
+#define Error_NoBookmarkInstalled	11
+#define Error_NoMacroDefined	6
+#define Error_NotEnoughUndoMem	9
+#define Error_NothingToRedo	7
+#define Error_NothingToUndo	8
+#define Error_StringNotFound	10
+#define GA_TEXTEDITOR_AutoIndent	(GM_TEXTEDITOR_Dummy + 59)
+#define GA_TEXTEDITOR_BevelStyle	(GM_TEXTEDITOR_Dummy + 71)
+#define GA_TEXTEDITOR_CursorBlinkSpeed	(GM_TEXTEDITOR_Dummy + 56)
+#define GA_TEXTEDITOR_CutCopyLineWhenNoSelection	(GM_TEXTEDITOR_Dummy + 60)
+#define GA_TEXTEDITOR_Dragging	(GM_TEXTEDITOR_Dummy + 68)
+#define GA_TEXTEDITOR_EOLMarker	(GM_TEXTEDITOR_Dummy + 69)
+#define GA_TEXTEDITOR_ErrorCode	(GM_TEXTEDITOR_Dummy + 54)
+#define GA_TEXTEDITOR_ExitHelp	(GM_TEXTEDITOR_Dummy + 52)
+#define GA_TEXTEDITOR_HProp_DeltaFactor	(GM_TEXTEDITOR_Dummy + 48)
+#define GA_TEXTEDITOR_HProp_Entries	(GM_TEXTEDITOR_Dummy + 49)
+#define GA_TEXTEDITOR_HProp_First	(GM_TEXTEDITOR_Dummy + 50)
+#define GA_TEXTEDITOR_HProp_Visible	(GM_TEXTEDITOR_Dummy + 51)
+#define GA_TEXTEDITOR_HighlighterHook	(GM_TEXTEDITOR_Dummy + 55)
+#define GA_TEXTEDITOR_HorizScroller	(GM_TEXTEDITOR_Dummy + 64)
+#define GA_TEXTEDITOR_HorizontalScroll	(GM_TEXTEDITOR_Dummy + 45)
+#define GA_TEXTEDITOR_IndentWidth	(GM_TEXTEDITOR_Dummy + 54)
+#define GA_TEXTEDITOR_Keymap	(GM_TEXTEDITOR_Dummy + 55)
+#define GA_TEXTEDITOR_LeftBarHook	(GM_TEXTEDITOR_Dummy + 57)
+#define GA_TEXTEDITOR_Length	(GM_TEXTEDITOR_Dummy + 58)
+#define GA_TEXTEDITOR_LineEndingExport	(GM_TEXTEDITOR_Dummy + 62)
+#define GA_TEXTEDITOR_LineEndingImported	(GM_TEXTEDITOR_Dummy + 61)
+#define GA_TEXTEDITOR_LookAhead	(GM_TEXTEDITOR_Dummy + 70)
+#define GA_TEXTEDITOR_MaxUndoLevels	(GM_TEXTEDITOR_Dummy + 73)
+#define GA_TEXTEDITOR_MaxUndoSize	(GM_TEXTEDITOR_Dummy + 74)
+#define GA_TEXTEDITOR_Prop_Release	(GM_TEXTEDITOR_Dummy + 1)
+#define GA_TEXTEDITOR_RectangularSelections	(GM_TEXTEDITOR_Dummy + 58)
+#define GA_TEXTEDITOR_ShowLineNumbers	(GM_TEXTEDITOR_Dummy + 56)
+#define GA_TEXTEDITOR_SpacesPerTAB	(GM_TEXTEDITOR_Dummy + 53)
+#define GA_TEXTEDITOR_TabKeyPolicy	(GM_TEXTEDITOR_Dummy + 63)
+#define GA_TEXTEDITOR_TabSize	(GM_TEXTEDITOR_Dummy + 53)
+#define GA_TEXTEDITOR_TabToSpaces	(GM_TEXTEDITOR_Dummy + 67)
+#define GA_TEXTEDITOR_TextAttr	(GM_TEXTEDITOR_Dummy + 66)
+#define GA_TEXTEDITOR_Transparent	(GM_TEXTEDITOR_Dummy + 72)
+#define GA_TEXTEDITOR_VertScroller	(GM_TEXTEDITOR_Dummy + 65)
+#define GF_TEXTEDITOR_Highlight_All	19
+#define GF_TEXTEDITOR_Replace_All	1
+#define GF_TEXTEDITOR_SearchType_Mask	19
+#define GF_TEXTEDITOR_Search_Cyclic	128
+#define GF_TEXTEDITOR_Search_Incremental	3
+#define GF_TEXTEDITOR_Search_WholeWord	64
+#define GF_TEXTEDITOR_Search_Wildstar	32
+#define GF_TEXTEDITOR_Search_Word	64
+#define GM_TEXTEDITOR_AddChangeListener	(GM_TEXTEDITOR_Dummy + 49)
+#define GM_TEXTEDITOR_ExportBlock	(GM_TEXTEDITOR_Dummy + 68)
+#define GM_TEXTEDITOR_ReplaceAll	(GM_TEXTEDITOR_Dummy + 75)
+#define GV_TEXTEDITOR_LengthHook_ANSI	1
+#define GV_TEXTEDITOR_LengthHook_HTML	2
+#define GV_TEXTEDITOR_LengthHook_MAIL	3
+#define GV_TEXTEDITOR_LengthHook_Plain	0
+#define GV_TEXTEDITOR_TabKey_IndentsAfter	1
+#define GV_TEXTEDITOR_TabKey_IndentsLine	0
+#define LEFTBAR_MOUSECOMMAND	1
+#define LEFTBAR_RENDERCOMMAND	0
+#define LINEENDING_ASIMPORT	3
+#define LINEENDING_CR		1
+#define LINEENDING_CRLF		2
+#define LINEENDING_LF		0
+#define LNSB_Bottom		2
+#define LNSB_Middle		1
+#define LNSB_StrikeThru		3
+#define LNSB_Thick		4
+#define LNSB_Top		0
+#define LNSF_Bottom		4
+#define LNSF_Middle		2
+#define LNSF_StrikeThru		8
+#define LNSF_Thick		16
+#define LNSF_Top		1
+#define TBSTYLE_BOLD		2
+#define TBSTYLE_COLORMASK	0xFF00
+#define TBSTYLE_ITALIC		4
+#define TBSTYLE_NOTSET		0xFF00
+#define TBSTYLE_SETCOLOR	8
+#define TBSTYLE_SPELLERROR	64
+#define TBSTYLE_STYLEMASK	255
+#define TBSTYLE_UNDERLINE	1
 
 #endif /* GADGETS_TEXTEDITOR_H */
