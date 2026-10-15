@@ -13,6 +13,8 @@
 #define DISK_BASE_NAME DiskBase
 #endif
 
+struct DiscResource;
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",

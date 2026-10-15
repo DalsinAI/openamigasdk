@@ -13,6 +13,8 @@
 #define DOS_BASE_NAME DOSBase
 #endif
 
+struct DosLibrary;
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",

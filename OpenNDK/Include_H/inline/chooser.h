@@ -13,6 +13,8 @@
 #define CHOOSER_BASE_NAME ChooserBase
 #endif
 
+struct Library;
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
