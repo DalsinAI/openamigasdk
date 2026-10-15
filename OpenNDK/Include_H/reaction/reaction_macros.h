@@ -6,7 +6,8 @@
  *
  * Each XxxObject opens a NewObject() call on the class (its library must
  * be open, or the class made by name), the tags follow, and an End macro
- * closes it. The *_GetClass() calls come from the classes' proto headers.
+ * closes it, the result an Object *. The *_GetClass() calls come from
+ * the classes' proto headers.
  */
 
 #ifndef REACTION_REACTION_H
@@ -21,9 +22,9 @@
 #define EndObject	TAG_END)
 
 /* Classes */
-#define WindowObject		NewObject(WINDOW_GetClass(), NULL
-#define RequesterObject		NewObject(REQUESTER_GetClass(), NULL
-#define ARexxObject		NewObject(AREXX_GetClass(), NULL
+#define WindowObject		(Object *)NewObject(WINDOW_GetClass(), NULL
+#define RequesterObject		(Object *)NewObject(REQUESTER_GetClass(), NULL
+#define ARexxObject		(Object *)NewObject(AREXX_GetClass(), NULL
 
 #define WindowEnd		TAG_END)
 #define EndWindow		TAG_END)
@@ -31,33 +32,33 @@
 #define ARexxEnd		TAG_END)
 
 /* Gadgets */
-#define ButtonObject		NewObject(BUTTON_GetClass(), NULL
-#define CheckBoxObject		NewObject(CHECKBOX_GetClass(), NULL
-#define ChooserObject		NewObject(CHOOSER_GetClass(), NULL
-#define ClickTabObject		NewObject(CLICKTAB_GetClass(), NULL
-#define DateBrowserObject	NewObject(DATEBROWSER_GetClass(), NULL
-#define FuelGaugeObject		NewObject(FUELGAUGE_GetClass(), NULL
-#define GetColorObject		NewObject(GETCOLOR_GetClass(), NULL
-#define GetFileObject		NewObject(GETFILE_GetClass(), NULL
-#define GetFontObject		NewObject(GETFONT_GetClass(), NULL
-#define GetScreenModeObject	NewObject(GETSCREENMODE_GetClass(), NULL
-#define IntegerObject		NewObject(INTEGER_GetClass(), NULL
-#define LayoutObject		NewObject(LAYOUT_GetClass(), NULL
-#define ListBrowserObject	NewObject(LISTBROWSER_GetClass(), NULL
-#define PageObject		NewObject(PAGE_GetClass(), NULL
-#define PaletteObject		NewObject(PALETTE_GetClass(), NULL
-#define RadioButtonObject	NewObject(RADIOBUTTON_GetClass(), NULL
-#define ScrollerObject		NewObject(SCROLLER_GetClass(), NULL
-#define SketchBoardObject	NewObject(SKETCHBOARD_GetClass(), NULL
-#define SliderObject		NewObject(SLIDER_GetClass(), NULL
-#define SpaceObject		NewObject(SPACE_GetClass(), NULL
-#define SpeedBarObject		NewObject(SPEEDBAR_GetClass(), NULL
-#define StringObject		NewObject(STRING_GetClass(), NULL
-#define TabsObject		NewObject(TABS_GetClass(), NULL
-#define TextEditorObject	NewObject(TEXTEDITOR_GetClass(), NULL
-#define VirtualObject		NewObject(VIRTUAL_GetClass(), NULL
-#define ColorWheelObject	NewObject(NULL, "colorwheel.gadget"
-#define GradientSliderObject	NewObject(NULL, "gradientslider.gadget"
+#define ButtonObject		(Object *)NewObject(BUTTON_GetClass(), NULL
+#define CheckBoxObject		(Object *)NewObject(CHECKBOX_GetClass(), NULL
+#define ChooserObject		(Object *)NewObject(CHOOSER_GetClass(), NULL
+#define ClickTabObject		(Object *)NewObject(CLICKTAB_GetClass(), NULL
+#define DateBrowserObject	(Object *)NewObject(DATEBROWSER_GetClass(), NULL
+#define FuelGaugeObject		(Object *)NewObject(FUELGAUGE_GetClass(), NULL
+#define GetColorObject		(Object *)NewObject(GETCOLOR_GetClass(), NULL
+#define GetFileObject		(Object *)NewObject(GETFILE_GetClass(), NULL
+#define GetFontObject		(Object *)NewObject(GETFONT_GetClass(), NULL
+#define GetScreenModeObject	(Object *)NewObject(GETSCREENMODE_GetClass(), NULL
+#define IntegerObject		(Object *)NewObject(INTEGER_GetClass(), NULL
+#define LayoutObject		(Object *)NewObject(LAYOUT_GetClass(), NULL
+#define ListBrowserObject	(Object *)NewObject(LISTBROWSER_GetClass(), NULL
+#define PageObject		(Object *)NewObject(PAGE_GetClass(), NULL
+#define PaletteObject		(Object *)NewObject(PALETTE_GetClass(), NULL
+#define RadioButtonObject	(Object *)NewObject(RADIOBUTTON_GetClass(), NULL
+#define ScrollerObject		(Object *)NewObject(SCROLLER_GetClass(), NULL
+#define SketchBoardObject	(Object *)NewObject(SKETCHBOARD_GetClass(), NULL
+#define SliderObject		(Object *)NewObject(SLIDER_GetClass(), NULL
+#define SpaceObject		(Object *)NewObject(SPACE_GetClass(), NULL
+#define SpeedBarObject		(Object *)NewObject(SPEEDBAR_GetClass(), NULL
+#define StringObject		(Object *)NewObject(STRING_GetClass(), NULL
+#define TabsObject		(Object *)NewObject(TABS_GetClass(), NULL
+#define TextEditorObject	(Object *)NewObject(TEXTEDITOR_GetClass(), NULL
+#define VirtualObject		(Object *)NewObject(VIRTUAL_GetClass(), NULL
+#define ColorWheelObject	(Object *)NewObject(NULL, "colorwheel.gadget"
+#define GradientSliderObject	(Object *)NewObject(NULL, "gradientslider.gadget"
 
 #define ButtonEnd		TAG_END)
 #define CheckBoxEnd		TAG_END)
@@ -88,13 +89,13 @@
 #define GradientSliderEnd	TAG_END)
 
 /* Images */
-#define BevelObject		NewObject(BEVEL_GetClass(), NULL
-#define BitMapObject		NewObject(BITMAP_GetClass(), NULL
-#define DrawListObject		NewObject(DRAWLIST_GetClass(), NULL
-#define GlyphObject		NewObject(GLYPH_GetClass(), NULL
-#define LabelObject		NewObject(LABEL_GetClass(), NULL
-#define LEDObject		NewObject(LED_GetClass(), NULL
-#define PenMapObject		NewObject(PENMAP_GetClass(), NULL
+#define BevelObject		(Object *)NewObject(BEVEL_GetClass(), NULL
+#define BitMapObject		(Object *)NewObject(BITMAP_GetClass(), NULL
+#define DrawListObject		(Object *)NewObject(DRAWLIST_GetClass(), NULL
+#define GlyphObject		(Object *)NewObject(GLYPH_GetClass(), NULL
+#define LabelObject		(Object *)NewObject(LABEL_GetClass(), NULL
+#define LEDObject		(Object *)NewObject(LED_GetClass(), NULL
+#define PenMapObject		(Object *)NewObject(PENMAP_GetClass(), NULL
 
 #define BevelEnd		TAG_END)
 #define BitMapEnd		TAG_END)

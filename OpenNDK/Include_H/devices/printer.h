@@ -241,13 +241,8 @@ struct IOPrtPrefsReq {
 	UWORD		io_Command;
 	UBYTE		io_Flags;
 	BYTE		io_Error;
-	struct TagItem	*io_TagList;	/* PPRA_ */
+	struct TagItem	*io_TagList;
 };
-
-#define PPRA_Dummy	(TAG_USER + 0x70000)
-#define PPRA_Window	(PPRA_Dummy+0)	/* the parent window */
-#define PPRA_Screen	(PPRA_Dummy+1)	/* or the screen */
-#define PPRA_PubScreen	(PPRA_Dummy+2)	/* or a public screen's name */
 
 /* PRD_SETERRHOOK's request */
 struct IOPrtErrReq {
