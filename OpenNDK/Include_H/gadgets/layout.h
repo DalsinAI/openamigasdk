@@ -76,7 +76,7 @@
 #define CHILD_WeightedWidth	(CHILD_Dummy + 5)	/* its share of spare width */
 #define CHILD_WeightedHeight	(CHILD_Dummy + 6)
 #define CHILD_ReplaceObject	(CHILD_Dummy + 7)	/* Object *: put this in its place */
-#define CHILD_ReplaceImage	(CHILD_Dummy + 8)
+#define CHILD_ReplaceImage	0x85007008
 #define CHILD_CacheDomain	(CHILD_Dummy + 9)
 #define CHILD_WeightMinimum	(CHILD_Dummy + 10)
 #define CHILD_NominalSize	(CHILD_Dummy + 11)
@@ -97,13 +97,13 @@
 #define LALIGN_BOTTOM	1
 
 /* The default spacing, in pixels */
-#define INTERSPACING	4
+#define INTERSPACING	1
 
 /* Methods */
-#define LM_ADDCHILD	0x7001
-#define LM_ADDIMAGE	0x7002
-#define LM_REMOVECHILD	0x7003
-#define LM_MODIFYCHILD	0x7004
+#define LM_ADDCHILD	0x540001
+#define LM_ADDIMAGE	0x540002
+#define LM_REMOVECHILD	0x540003
+#define LM_MODIFYCHILD	0x540004
 
 struct lmAddChild
 {

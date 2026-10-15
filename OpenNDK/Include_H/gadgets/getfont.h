@@ -38,6 +38,6 @@
 #define GETFONT_SoftStyle	(GETFONT_Dummy + 22)
 
 /* Method: open the requester */
-#define GFONT_REQUEST	0x400001
+#define GFONT_REQUEST	0x600001
 
 #endif /* GADGETS_GETFONT_H */

@@ -35,8 +35,8 @@
 #define VTAG_BITPLANEKEY_GET             0x80000016
 #define VTAG_BORDERBLANK_GET             0x80000017
 #define VTAG_BORDERNOTRANS_GET           0x80000018
-#define VTAG_CHROMA_PLANE_GET            0x80000019
-#define VTAG_CHROMA_PEN_GET              0x8000001A
+#define VTAG_CHROMA_PLANE_GET            0x8000001A
+#define VTAG_CHROMA_PEN_GET              0x80000019
 #define VTAG_ATTACH_CM_GET               0x8000001B
 #define VTAG_BATCH_CM_GET                0x8000001C
 #define VTAG_BATCH_ITEMS_GET             0x8000001D

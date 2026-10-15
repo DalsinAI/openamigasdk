@@ -16,8 +16,8 @@
 
 #define PENMAP_SelectBGPen	(PENMAP_Dummy + 1)	/* background pen when selected */
 #define PENMAP_SelectData	(PENMAP_Dummy + 2)	/* the picture for the selected state */
-#define PENMAP_Transparent	(PENMAP_Dummy + 3)	/* BOOL: colour 0 is not drawn */
-#define PENMAP_Palette		(PENMAP_Dummy + 4)	/* ULONG *: the picture's colours */
-#define PENMAP_Screen		(PENMAP_Dummy + 5)	/* struct Screen *: where pens come from */
+#define PENMAP_Transparent	(PENMAP_Dummy + 6)	/* BOOL: colour 0 is not drawn */
+#define PENMAP_Palette		(PENMAP_Dummy + 3)	/* ULONG *: the picture's colours */
+#define PENMAP_Screen		(PENMAP_Dummy + 4)	/* struct Screen *: where pens come from */
 
 #endif /* IMAGES_PENMAP_H */

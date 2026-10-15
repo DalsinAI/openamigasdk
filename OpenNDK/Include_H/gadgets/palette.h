@@ -12,7 +12,7 @@
 #include <intuition/gadgetclass.h>
 #endif
 
-#define PALETTE_Dummy		(REACTION_Dummy + 0x4A000)
+#define PALETTE_Dummy		(REACTION_Dummy + 0x4000)
 
 #define PALETTE_Colour		(PALETTE_Dummy + 1)	/* the chosen pen */
 #define PALETTE_ColourOffset	(PALETTE_Dummy + 2)	/* the first pen shown */

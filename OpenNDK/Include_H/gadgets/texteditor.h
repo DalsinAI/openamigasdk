@@ -17,39 +17,39 @@
 
 #define GA_TEXTEDITOR_Dummy		(REACTION_Dummy + 0x26000)
 
-#define GA_TEXTEDITOR_Contents		(GA_TEXTEDITOR_Dummy + 0x02)	/* STRPTR: the whole text */
-#define GA_TEXTEDITOR_PopWindow_Open	(GA_TEXTEDITOR_Dummy + 0x03)
-#define GA_TEXTEDITOR_CursorX		(GA_TEXTEDITOR_Dummy + 0x04)
-#define GA_TEXTEDITOR_CursorY		(GA_TEXTEDITOR_Dummy + 0x05)
-#define GA_TEXTEDITOR_DoubleClickHook	(GA_TEXTEDITOR_Dummy + 0x06)
-#define GA_TEXTEDITOR_TypeAndSpell	(GA_TEXTEDITOR_Dummy + 0x07)
-#define GA_TEXTEDITOR_ExportHook	(GA_TEXTEDITOR_Dummy + 0x08)
-#define GA_TEXTEDITOR_ExportWrap	(GA_TEXTEDITOR_Dummy + 0x09)
-#define GA_TEXTEDITOR_FixedFont		(GA_TEXTEDITOR_Dummy + 0x0A)
-#define GA_TEXTEDITOR_Flow		(GA_TEXTEDITOR_Dummy + 0x0B)	/* GV_TEXTEDITOR_Flow_ below */
-#define GA_TEXTEDITOR_HasChanged	(GA_TEXTEDITOR_Dummy + 0x0C)
-#define GA_TEXTEDITOR_Prop_DeltaFactor	(GA_TEXTEDITOR_Dummy + 0x0D)
-#define GA_TEXTEDITOR_ImportHook	(GA_TEXTEDITOR_Dummy + 0x0E)
-#define GA_TEXTEDITOR_InsertMode	(GA_TEXTEDITOR_Dummy + 0x0F)
-#define GA_TEXTEDITOR_ImportWrap	(GA_TEXTEDITOR_Dummy + 0x10)
-#define GA_TEXTEDITOR_KeyBindings	(GA_TEXTEDITOR_Dummy + 0x11)
-#define GA_TEXTEDITOR_UndoAvailable	(GA_TEXTEDITOR_Dummy + 0x12)
-#define GA_TEXTEDITOR_RedoAvailable	(GA_TEXTEDITOR_Dummy + 0x13)
-#define GA_TEXTEDITOR_AreaMarked	(GA_TEXTEDITOR_Dummy + 0x14)
-#define GA_TEXTEDITOR_Prop_Entries	(GA_TEXTEDITOR_Dummy + 0x15)	/* for a scroller: lines in all */
-#define GA_TEXTEDITOR_Prop_Visible	(GA_TEXTEDITOR_Dummy + 0x16)	/* lines in view */
-#define GA_TEXTEDITOR_Quiet		(GA_TEXTEDITOR_Dummy + 0x17)	/* BOOL: hold off redrawing */
-#define GA_TEXTEDITOR_NumLock		(GA_TEXTEDITOR_Dummy + 0x18)
-#define GA_TEXTEDITOR_ReadOnly		(GA_TEXTEDITOR_Dummy + 0x19)
+#define GA_TEXTEDITOR_Contents		0x45002	/* STRPTR: the whole text */
+#define GA_TEXTEDITOR_PopWindow_Open	0x45003
+#define GA_TEXTEDITOR_CursorX		0x45004
+#define GA_TEXTEDITOR_CursorY		0x45005
+#define GA_TEXTEDITOR_DoubleClickHook	0x45006
+#define GA_TEXTEDITOR_TypeAndSpell	0x45007
+#define GA_TEXTEDITOR_ExportHook	0x45008
+#define GA_TEXTEDITOR_ExportWrap	0x45009
+#define GA_TEXTEDITOR_FixedFont		0x4500A
+#define GA_TEXTEDITOR_Flow		0x4500B	/* GV_TEXTEDITOR_Flow_ below */
+#define GA_TEXTEDITOR_HasChanged	0x4500C
+#define GA_TEXTEDITOR_Prop_DeltaFactor	0x4500D
+#define GA_TEXTEDITOR_ImportHook	0x4500E
+#define GA_TEXTEDITOR_InsertMode	0x4500F
+#define GA_TEXTEDITOR_ImportWrap	0x45010
+#define GA_TEXTEDITOR_KeyBindings	0x45011
+#define GA_TEXTEDITOR_UndoAvailable	0x45012
+#define GA_TEXTEDITOR_RedoAvailable	0x45013
+#define GA_TEXTEDITOR_AreaMarked	0x45014
+#define GA_TEXTEDITOR_Prop_Entries	0x45015	/* for a scroller: lines in all */
+#define GA_TEXTEDITOR_Prop_Visible	0x45016	/* lines in view */
+#define GA_TEXTEDITOR_Quiet		0x45017	/* BOOL: hold off redrawing */
+#define GA_TEXTEDITOR_NumLock		0x45018
+#define GA_TEXTEDITOR_ReadOnly		0x45019
 #define GA_TEXTEDITOR_InVirtualGadget	(GA_TEXTEDITOR_Dummy + 0x1B)
-#define GA_TEXTEDITOR_StyleBold		(GA_TEXTEDITOR_Dummy + 0x1C)
-#define GA_TEXTEDITOR_StyleItalic	(GA_TEXTEDITOR_Dummy + 0x1D)
-#define GA_TEXTEDITOR_StyleUnderline	(GA_TEXTEDITOR_Dummy + 0x1E)
-#define GA_TEXTEDITOR_Prop_First	(GA_TEXTEDITOR_Dummy + 0x20)	/* the first line in view */
-#define GA_TEXTEDITOR_WrapBorder	(GA_TEXTEDITOR_Dummy + 0x21)
-#define GA_TEXTEDITOR_Separator		(GA_TEXTEDITOR_Dummy + 0x2C)
-#define GA_TEXTEDITOR_Pen		(GA_TEXTEDITOR_Dummy + 0x2E)
-#define GA_TEXTEDITOR_ColorMap		(GA_TEXTEDITOR_Dummy + 0x2F)
+#define GA_TEXTEDITOR_StyleBold		0x4501C
+#define GA_TEXTEDITOR_StyleItalic	0x4501D
+#define GA_TEXTEDITOR_StyleUnderline	0x4501E
+#define GA_TEXTEDITOR_Prop_First	0x45020	/* the first line in view */
+#define GA_TEXTEDITOR_WrapBorder	0x45021
+#define GA_TEXTEDITOR_Separator		0x4502C
+#define GA_TEXTEDITOR_Pen		0x4502E
+#define GA_TEXTEDITOR_ColorMap		0x4502F
 #define GA_TEXTEDITOR_Rows		(GA_TEXTEDITOR_Dummy + 0x32)
 #define GA_TEXTEDITOR_Columns		(GA_TEXTEDITOR_Dummy + 0x33)
 #define GA_TEXTEDITOR_AutoClip		(GA_TEXTEDITOR_Dummy + 0x34)
