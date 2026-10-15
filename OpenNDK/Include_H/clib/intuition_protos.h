@@ -9,6 +9,7 @@
 #include <intuition/classes.h>
 #include <intuition/cghooks.h>
 #include <intuition/classusr.h>
+#include <intuition/intuitionbase.h>
 
 #ifdef __cplusplus
 extern "C" {
