@@ -6,6 +6,7 @@
 #define CLIB_BULLET_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <utility/tagitem.h>
 #include <diskfont/glyph.h>
 

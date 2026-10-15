@@ -6,6 +6,7 @@
 #define CLIB_IFFPARSE_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <libraries/iffparse.h>
 #include <utility/hooks.h>
 

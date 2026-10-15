@@ -6,6 +6,7 @@
 #define CLIB_REALTIME_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <libraries/realtime.h>
 #include <utility/tagitem.h>
 

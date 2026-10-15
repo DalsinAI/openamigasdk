@@ -7,6 +7,7 @@
 ==bias 30
 ==public
 ==include <exec/types.h>
+==include <exec/libraries.h>
 ==version 33
 LONG SPFix(FLOAT parm) (d0)
 FLOAT SPFlt(LONG integer) (d0)

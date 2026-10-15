@@ -32,7 +32,6 @@ VOID RefreshTagItemClones(struct TagItem * clone, CONST struct TagItem * origina
 BOOL TagInArray(Tag tagValue, CONST Tag * tagArray);
 ULONG FilterTagItems(struct TagItem * tagList, CONST Tag * filterArray, ULONG logic);
 ULONG CallHookPkt(struct Hook * hook, APTR object, APTR paramPacket);
-ULONG CallHook(struct Hook * hook, APTR object, ...);
 VOID Amiga2Date(ULONG seconds, struct ClockData * result);
 ULONG Date2Amiga(CONST struct ClockData * date);
 ULONG CheckDate(CONST struct ClockData * date);

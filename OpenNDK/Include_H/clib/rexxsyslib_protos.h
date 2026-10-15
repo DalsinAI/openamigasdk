@@ -6,6 +6,7 @@
 #define CLIB_REXXSYSLIB_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <exec/ports.h>
 #include <dos/dos.h>
 #include <rexx/rxslib.h>

@@ -6,6 +6,7 @@
 #define CLIB_NONVOLATILE_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <exec/lists.h>
 #include <libraries/nonvolatile.h>
 

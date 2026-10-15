@@ -6,6 +6,7 @@
 #define CLIB_COMMODITIES_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 #include <exec/nodes.h>
 #include <libraries/commodities.h>
 #include <devices/inputevent.h>
