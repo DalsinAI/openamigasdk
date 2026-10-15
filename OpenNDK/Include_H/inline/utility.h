@@ -377,7 +377,7 @@ __utility_Strnicmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPT
 #define Strnicmp(string1, string2, length) __utility_Strnicmp((UTILITY_BASE_NAME), (string1), (string2), (length))
 
 static __inline__ UBYTE
-__utility_ToUpper(struct UtilityBase *__base, ULONG character)
+__utility_ToUpper(struct UtilityBase *__base, UBYTE character)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
 	register struct UtilityBase *_a6 __asm("a6") = __base;
@@ -393,7 +393,7 @@ __utility_ToUpper(struct UtilityBase *__base, ULONG character)
 #define ToUpper(character) __utility_ToUpper((UTILITY_BASE_NAME), (character))
 
 static __inline__ UBYTE
-__utility_ToLower(struct UtilityBase *__base, ULONG character)
+__utility_ToLower(struct UtilityBase *__base, UBYTE character)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
 	register struct UtilityBase *_a6 __asm("a6") = __base;

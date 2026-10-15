@@ -28,7 +28,7 @@ LONG MoveLayer(LONG dummy, struct Layer * layer, LONG dx, LONG dy);
 LONG SizeLayer(LONG dummy, struct Layer * layer, LONG dx, LONG dy);
 VOID ScrollLayer(LONG dummy, struct Layer * layer, LONG dx, LONG dy);
 LONG BeginUpdate(struct Layer * l);
-VOID EndUpdate(struct Layer * layer, ULONG flag);
+VOID EndUpdate(struct Layer * layer, UWORD flag);
 LONG DeleteLayer(LONG dummy, struct Layer * layer);
 VOID LockLayer(LONG dummy, struct Layer * layer);
 VOID UnlockLayer(struct Layer * layer);
@@ -36,7 +36,7 @@ VOID LockLayers(struct Layer_Info * li);
 VOID UnlockLayers(struct Layer_Info * li);
 VOID LockLayerInfo(struct Layer_Info * li);
 VOID SwapBitsRastPortClipRect(struct RastPort * rp, struct ClipRect * cr);
-struct Layer * WhichLayer(struct Layer_Info * li, LONG x, LONG y);
+struct Layer * WhichLayer(struct Layer_Info * li, WORD x, WORD y);
 VOID UnlockLayerInfo(struct Layer_Info * li);
 struct Layer_Info * NewLayerInfo(VOID);
 VOID DisposeLayerInfo(struct Layer_Info * li);
@@ -53,14 +53,14 @@ struct Hook * InstallLayerHook(struct Layer * layer, struct Hook * hook);
 
 /* From version 39 */
 struct Hook * InstallLayerInfoHook(struct Layer_Info * li, CONST struct Hook * hook);
-VOID SortLayerCR(struct Layer * layer, LONG dx, LONG dy);
+VOID SortLayerCR(struct Layer * layer, WORD dx, WORD dy);
 VOID DoHookClipRects(struct Hook * hook, struct RastPort * rport, CONST struct Rectangle * rect);
 
 /* From version 45 */
-LONG LayerOccluded(struct Layer * layer);
+BOOL LayerOccluded(struct Layer * layer);
 LONG HideLayer(struct Layer * layer);
 LONG ShowLayer(struct Layer * layer, struct Layer * in_front_of);
-LONG SetLayerInfoBounds(struct Layer_Info * li, CONST struct Rectangle * bounds);
+BOOL SetLayerInfoBounds(struct Layer_Info * li, CONST struct Rectangle * bounds);
 
 #ifdef __cplusplus
 }

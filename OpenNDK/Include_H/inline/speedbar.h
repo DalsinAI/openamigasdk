@@ -40,7 +40,7 @@ __speedbar_SPEEDBAR_GetClass(struct Library *__base)
 #define SPEEDBAR_GetClass() __speedbar_SPEEDBAR_GetClass((SPEEDBAR_BASE_NAME))
 
 static __inline__ struct Node *
-__speedbar_AllocSpeedButtonNodeA(struct Library *__base, UWORD number, struct TagItem * tags)
+__speedbar_AllocSpeedButtonNodeA(struct Library *__base, ULONG number, struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(number);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);

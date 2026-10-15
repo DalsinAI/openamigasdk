@@ -66,10 +66,10 @@
 #define AN_FreeTwice		0x01000009
 #define AN_BogusExcpt		0x8100000A
 #define AN_IOUsedTwice		0x0100000B
-#define AN_IOAfterClose		0x0100000C
-#define AN_StackProbe		0x0100000D
-#define AN_BadFreeAddr		0x0100000E
-#define AN_BadSemaphore		0x0100000F
+#define AN_IOAfterClose		0x0100000D
+#define AN_StackProbe		0x0100000E
+#define AN_BadFreeAddr		0x0100000F
+#define AN_BadSemaphore		0x01000010
 
 /* graphics.library */
 #define AN_GraphicsLib		0x02000000

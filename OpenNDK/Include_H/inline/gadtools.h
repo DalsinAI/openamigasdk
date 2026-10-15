@@ -205,7 +205,7 @@ __gadtools_GT_BeginRefresh(struct Library *__base, struct Window * win)
 #define GT_BeginRefresh(win) __gadtools_GT_BeginRefresh((GADTOOLS_BASE_NAME), (win))
 
 static __inline__ VOID
-__gadtools_GT_EndRefresh(struct Library *__base, struct Window * win, LONG complete)
+__gadtools_GT_EndRefresh(struct Library *__base, struct Window * win, BOOL complete)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(win);
 	register ULONG _d0 __asm("d0") = (ULONG)(complete);
@@ -269,7 +269,7 @@ __gadtools_CreateContext(struct Library *__base, struct Gadget ** glistptr)
 #define CreateContext(glistptr) __gadtools_CreateContext((GADTOOLS_BASE_NAME), (glistptr))
 
 static __inline__ VOID
-__gadtools_DrawBevelBoxA(struct Library *__base, struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, CONST struct TagItem * taglist)
+__gadtools_DrawBevelBoxA(struct Library *__base, struct RastPort * rport, WORD left, WORD top, WORD width, WORD height, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rport);
 	register ULONG _d0 __asm("d0") = (ULONG)(left);

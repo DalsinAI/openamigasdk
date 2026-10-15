@@ -15,7 +15,7 @@
 ==include <gadgets/radiobutton.h>
 ==version 44
 Class * RADIOBUTTON_GetClass() ()
-struct Node * AllocRadioButtonNodeA(UWORD columns, struct TagItem * tags) (d0,a0)
+struct Node * AllocRadioButtonNodeA(ULONG columns, struct TagItem * tags) (d0,a0)
 ==varargs
 struct Node * AllocRadioButtonNode(UWORD columns, Tag tag1, ...) (d0,a0)
 VOID FreeRadioButtonNode(struct Node * node) (a0)

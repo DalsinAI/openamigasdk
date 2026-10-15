@@ -10,7 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern struct Library *TextEditorBase;
+extern struct Library *TextFieldBase;
 #ifdef __cplusplus
 }
 #endif

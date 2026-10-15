@@ -43,8 +43,8 @@ ULONG UDivMod32(ULONG dividend, ULONG divisor);
 /* From version 37 */
 LONG Stricmp(CONST_STRPTR string1, CONST_STRPTR string2);
 LONG Strnicmp(CONST_STRPTR string1, CONST_STRPTR string2, LONG length);
-UBYTE ToUpper(ULONG character);
-UBYTE ToLower(ULONG character);
+UBYTE ToUpper(UBYTE character);
+UBYTE ToLower(UBYTE character);
 
 /* From version 39 */
 VOID ApplyTagChanges(struct TagItem * list, CONST struct TagItem * changeList);

@@ -22,7 +22,7 @@ BOOL BeginCardAccess(struct CardHandle * handle);
 BOOL EndCardAccess(struct CardHandle * handle);
 UBYTE ReadCardStatus(VOID);
 BOOL CardResetRemove(struct CardHandle * handle, ULONG flag);
-UBYTE CardMiscControl(struct CardHandle * handle, ULONG control_bits);
+UBYTE CardMiscControl(struct CardHandle * handle, UBYTE control_bits);
 ULONG CardAccessSpeed(struct CardHandle * handle, ULONG nanoseconds);
 LONG CardProgramVoltage(struct CardHandle * handle, ULONG voltage);
 BOOL CardResetCard(struct CardHandle * handle);

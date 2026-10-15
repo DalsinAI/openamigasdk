@@ -20,7 +20,7 @@ extern "C" {
 
 /* From version 44 */
 Class * RADIOBUTTON_GetClass(VOID);
-struct Node * AllocRadioButtonNodeA(UWORD columns, struct TagItem * tags);
+struct Node * AllocRadioButtonNodeA(ULONG columns, struct TagItem * tags);
 struct Node * AllocRadioButtonNode(UWORD columns, Tag tag1, ...);
 VOID FreeRadioButtonNode(struct Node * node);
 VOID SetRadioButtonNodeAttrsA(struct Node * node, struct TagItem * tags);

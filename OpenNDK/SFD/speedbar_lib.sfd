@@ -15,7 +15,7 @@
 ==include <gadgets/speedbar.h>
 ==version 44
 Class * SPEEDBAR_GetClass() ()
-struct Node * AllocSpeedButtonNodeA(UWORD number, struct TagItem * tags) (d0,a0)
+struct Node * AllocSpeedButtonNodeA(ULONG number, struct TagItem * tags) (d0,a0)
 ==varargs
 struct Node * AllocSpeedButtonNode(UWORD number, Tag tag1, ...) (d0,a0)
 VOID FreeSpeedButtonNode(struct Node * node) (a0)

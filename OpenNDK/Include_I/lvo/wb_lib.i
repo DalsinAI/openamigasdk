@@ -4,6 +4,7 @@
 	IFND	LVO_WB_LIB_I
 LVO_WB_LIB_I	SET	1
 
+_LVOUpdateWorkbench	EQU	-30
 _LVOAddAppWindowA	EQU	-48
 _LVORemoveAppWindow	EQU	-54
 _LVOAddAppIconA	EQU	-60

@@ -20,7 +20,7 @@ extern "C" {
 ULONG ReadJoyPort(ULONG port);
 UBYTE GetLanguageSelection(VOID);
 ULONG GetKey(VOID);
-VOID QueryKeys(struct KeyQuery * queryArray, ULONG arraySize);
+VOID QueryKeys(struct KeyQuery * queryArray, LONG arraySize);
 APTR AddKBInt(APTR intRoutine, APTR intData);
 VOID RemKBInt(APTR intHandle);
 ULONG SystemControlA(CONST struct TagItem * tagList);
@@ -28,7 +28,7 @@ ULONG SystemControl(Tag firstTag, ...);
 APTR AddTimerInt(APTR intRoutine, APTR intData);
 VOID RemTimerInt(APTR intHandle);
 VOID StopTimerInt(APTR intHandle);
-VOID StartTimerInt(APTR intHandle, ULONG timeInterval, LONG continuous);
+VOID StartTimerInt(APTR intHandle, ULONG timeInterval, BOOL continuous);
 ULONG ElapsedTime(struct EClockVal * context);
 APTR AddVBlankInt(APTR intRoutine, APTR intData);
 VOID RemVBlankInt(APTR intHandle);

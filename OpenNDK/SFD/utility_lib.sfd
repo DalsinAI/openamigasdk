@@ -41,8 +41,8 @@ ULONG UDivMod32(ULONG dividend, ULONG divisor) (d0,d1)
 ==version 37
 LONG Stricmp(CONST_STRPTR string1, CONST_STRPTR string2) (a0,a1)
 LONG Strnicmp(CONST_STRPTR string1, CONST_STRPTR string2, LONG length) (a0,a1,d0)
-UBYTE ToUpper(ULONG character) (d0)
-UBYTE ToLower(ULONG character) (d0)
+UBYTE ToUpper(UBYTE character) (d0)
+UBYTE ToLower(UBYTE character) (d0)
 ==version 39
 VOID ApplyTagChanges(struct TagItem * list, CONST struct TagItem * changeList) (a0,a1)
 ==private

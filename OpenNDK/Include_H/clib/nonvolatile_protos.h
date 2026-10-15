@@ -16,13 +16,13 @@ extern "C" {
 
 
 /* From version 40 */
-APTR GetCopyNV(CONST_STRPTR appName, CONST_STRPTR itemName, LONG killRequesters);
+APTR GetCopyNV(CONST_STRPTR appName, CONST_STRPTR itemName, BOOL killRequesters);
 VOID FreeNVData(APTR data);
-UWORD StoreNV(CONST_STRPTR appName, CONST_STRPTR itemName, CONST_APTR data, ULONG length, LONG killRequesters);
-BOOL DeleteNV(CONST_STRPTR appName, CONST_STRPTR itemName, LONG killRequesters);
-struct NVInfo * GetNVInfo(LONG killRequesters);
-struct MinList * GetNVList(CONST_STRPTR appName, LONG killRequesters);
-BOOL SetNVProtection(CONST_STRPTR appName, CONST_STRPTR itemName, LONG mask, LONG killRequesters);
+UWORD StoreNV(CONST_STRPTR appName, CONST_STRPTR itemName, CONST_APTR data, ULONG length, BOOL killRequesters);
+BOOL DeleteNV(CONST_STRPTR appName, CONST_STRPTR itemName, BOOL killRequesters);
+struct NVInfo * GetNVInfo(BOOL killRequesters);
+struct MinList * GetNVList(CONST_STRPTR appName, BOOL killRequesters);
+BOOL SetNVProtection(CONST_STRPTR appName, CONST_STRPTR itemName, LONG mask, BOOL killRequesters);
 
 #ifdef __cplusplus
 }

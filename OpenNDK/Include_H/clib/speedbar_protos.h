@@ -20,7 +20,7 @@ extern "C" {
 
 /* From version 44 */
 Class * SPEEDBAR_GetClass(VOID);
-struct Node * AllocSpeedButtonNodeA(UWORD number, struct TagItem * tags);
+struct Node * AllocSpeedButtonNodeA(ULONG number, struct TagItem * tags);
 struct Node * AllocSpeedButtonNode(UWORD number, Tag tag1, ...);
 VOID FreeSpeedButtonNode(struct Node * node);
 VOID SetSpeedButtonNodeAttrsA(struct Node * node, struct TagItem * tags);

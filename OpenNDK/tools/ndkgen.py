@@ -121,8 +121,9 @@ def split_args(text):
 
 
 class Lib:
-    def __init__(self, path):
+    def __init__(self, path, need_base=True):
         self.path = path
+        self.need_base = need_base
         self.sfdname = os.path.basename(path)
         self.stem = re.sub(r"_lib\.sfd$", "", self.sfdname)
         self.base = None
@@ -135,11 +136,7 @@ class Lib:
 
     def parse(self):
         bias, private, version, pending = 30, False, 0, None
-        lines = open(self.path, encoding="latin-1").read().splitlines()
-        for n, raw in enumerate(lines, 1):
-            line = raw.strip()
-            if not line:
-                continue
+        for n, line in self.logical_lines():
             if line.startswith("*"):
                 self.copyright.append(line.lstrip("* ").rstrip())
                 continue
@@ -191,8 +188,31 @@ class Lib:
                 f.assign_regs(n)
                 bias += 6
             self.funcs.append(f)
-        if not self.base:
+        if not self.base and self.need_base:
             raise ValueError("%s: no ==base" % self.path)
+
+    def logical_lines(self):
+        """The SFD's lines with a prototype written over several lines
+        joined into one."""
+        def whole(s):
+            return s.count("(") == s.count(")") and re.search(r"\)\s*\([^()]*\)\s*$", s)
+        buf, start = "", 0
+        for n, raw in enumerate(open(self.path, encoding="latin-1").read().splitlines(), 1):
+            line = raw.strip()
+            if buf:
+                buf += " " + line
+                if whole(buf):
+                    yield start, buf
+                    buf = ""
+                continue
+            if not line:
+                continue
+            if line.startswith(("*", "==")) or whole(line):
+                yield n, line
+            else:
+                buf, start = line, n
+        if buf:
+            raise ValueError("line %d: not a prototype: %s" % (start, buf))
 
     def slots(self):
         return [f for f in self.funcs if not f.varargs_of and not f.alias_of]
