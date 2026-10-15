@@ -1,0 +1,27 @@
+==id OpenNDK clicktab_lib.sfd 47.1
+* clicktab.gadget's calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _ClickTabBase
+==basetype struct Library *
+==libname clicktab.gadget
+==bias 30
+==public
+==include <exec/types.h>
+==include <intuition/intuition.h>
+==include <intuition/classes.h>
+==include <intuition/classusr.h>
+==include <exec/nodes.h>
+==include <gadgets/clicktab.h>
+==version 44
+Class * CLICKTAB_GetClass() ()
+struct Node * AllocClickTabNodeA(struct TagItem * tags) (a0)
+==varargs
+struct Node * AllocClickTabNode(Tag tag1, ...) (a0)
+VOID FreeClickTabNode(struct Node * node) (a0)
+VOID SetClickTabNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
+==varargs
+VOID SetClickTabNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+VOID GetClickTabNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
+==varargs
+VOID GetClickTabNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+==end

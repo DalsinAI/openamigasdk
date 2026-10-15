@@ -1,0 +1,15 @@
+==id OpenNDK string_lib.sfd 47.1
+* string.gadget's calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _StringBase
+==basetype struct Library *
+==libname string.gadget
+==bias 30
+==public
+==include <exec/types.h>
+==include <intuition/intuition.h>
+==include <intuition/classes.h>
+==include <intuition/classusr.h>
+==version 44
+Class * STRING_GetClass() ()
+==end
