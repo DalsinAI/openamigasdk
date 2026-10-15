@@ -1,0 +1,19 @@
+==id OpenNDK timer_lib.sfd 47.1
+* timer.device's function calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _TimerBase
+==basetype struct Device *
+==libname timer.device
+==bias 42
+==public
+==include <exec/types.h>
+==include <exec/devices.h>
+==include <devices/timer.h>
+==version 33
+VOID AddTime(struct timeval * dest, CONST struct timeval * src) (a0,a1)
+VOID SubTime(struct timeval * dest, CONST struct timeval * src) (a0,a1)
+LONG CmpTime(CONST struct timeval * dest, CONST struct timeval * src) (a0,a1)
+==version 36
+ULONG ReadEClock(struct EClockVal * dest) (a0)
+VOID GetSysTime(struct timeval * dest) (a0)
+==end

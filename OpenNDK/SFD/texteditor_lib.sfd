@@ -1,0 +1,17 @@
+==id OpenNDK texteditor_lib.sfd 47.1
+* texteditor.gadget's calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _TextFieldBase
+==basetype struct Library *
+==libname texteditor.gadget
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==include <intuition/intuition.h>
+==include <intuition/classes.h>
+==include <intuition/classusr.h>
+==version 47
+Class * TEXTEDITOR_GetClass() ()
+VOID HighlightSetFormat(APTR handle, ULONG first, ULONG last, UWORD format) (a0,d0,d1,d2)
+==end

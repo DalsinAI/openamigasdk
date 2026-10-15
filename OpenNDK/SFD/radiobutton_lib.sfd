@@ -1,0 +1,28 @@
+==id OpenNDK radiobutton_lib.sfd 47.1
+* radiobutton.gadget's calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _RadioButtonBase
+==basetype struct Library *
+==libname radiobutton.gadget
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==include <intuition/intuition.h>
+==include <intuition/classes.h>
+==include <intuition/classusr.h>
+==include <exec/nodes.h>
+==include <gadgets/radiobutton.h>
+==version 44
+Class * RADIOBUTTON_GetClass() ()
+struct Node * AllocRadioButtonNodeA(ULONG columns, struct TagItem * tags) (d0,a0)
+==varargs
+struct Node * AllocRadioButtonNode(UWORD columns, Tag tag1, ...) (d0,a0)
+VOID FreeRadioButtonNode(struct Node * node) (a0)
+VOID SetRadioButtonNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
+==varargs
+VOID SetRadioButtonNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+VOID GetRadioButtonNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
+==varargs
+VOID GetRadioButtonNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+==end

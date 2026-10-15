@@ -1,0 +1,23 @@
+==id OpenNDK console_lib.sfd 47.1
+* console.device's function calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _ConsoleDevice
+==basetype struct Device *
+==libname console.device
+==bias 42
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==include <exec/devices.h>
+==include <devices/inputevent.h>
+==include <devices/keymap.h>
+==version 33
+struct InputEvent * CDInputHandler(CONST struct InputEvent * events, struct Library * consoleDevice) (a0,a1)
+LONG RawKeyConvert(CONST struct InputEvent * events, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap) (a0,a1,d1,a2)
+==version 36
+==private
+VOID consolePrivate1() ()
+VOID consolePrivate2() ()
+VOID consolePrivate3() ()
+VOID consolePrivate4() ()
+==end

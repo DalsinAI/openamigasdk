@@ -1,0 +1,16 @@
+==id OpenNDK getfile_lib.sfd 47.1
+* getfile.gadget's calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _GetFileBase
+==basetype struct Library *
+==libname getfile.gadget
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==include <intuition/intuition.h>
+==include <intuition/classes.h>
+==include <intuition/classusr.h>
+==version 44
+Class * GETFILE_GetClass() ()
+==end

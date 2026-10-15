@@ -1,0 +1,31 @@
+==id OpenNDK asl_lib.sfd 47.1
+* asl.library's calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _AslBase
+==basetype struct Library *
+==libname asl.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==include <utility/tagitem.h>
+==include <libraries/asl.h>
+==version 36
+struct FileRequester * AllocFileRequest() ()
+VOID FreeFileRequest(struct FileRequester * fileReq) (a0)
+BOOL RequestFile(struct FileRequester * fileReq) (a0)
+APTR AllocAslRequest(ULONG reqType, CONST struct TagItem * tagList) (d0,a0)
+==varargs
+APTR AllocAslRequestTags(ULONG reqType, Tag tag1, ...) (d0,a0)
+VOID FreeAslRequest(APTR requester) (a0)
+BOOL AslRequest(APTR requester, CONST struct TagItem * tagList) (a0,a1)
+==varargs
+BOOL AslRequestTags(APTR requester, Tag tag1, ...) (a0,a1)
+==private
+VOID aslPrivate1() ()
+VOID aslPrivate2() ()
+==public
+==version 44
+VOID AbortAslRequest(APTR requester) (a0)
+VOID ActivateAslRequest(APTR requester) (a0)
+==end

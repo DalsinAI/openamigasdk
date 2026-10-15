@@ -1,0 +1,15 @@
+==id OpenNDK battmem_lib.sfd 47.1
+* battmem.resource's calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _BattMemBase
+==basetype struct Library *
+==libname battmem.resource
+==bias 6
+==public
+==include <exec/types.h>
+==version 36
+VOID ObtainBattSemaphore() ()
+VOID ReleaseBattSemaphore() ()
+ULONG ReadBattMem(APTR buffer, ULONG offset, ULONG length) (a0,d0,d1)
+ULONG WriteBattMem(CONST_APTR buffer, ULONG offset, ULONG length) (a0,d0,d1)
+==end

@@ -4,6 +4,11 @@ One kit for one platform to build and port towards and from: headers, function t
 
 Status, 6 October 2026: phase 1 in progress. The headers and function tables of what exists today (openrtg.library, opensocket.library, accontrol.device, oapspool.device), gathered at pinned commits by `tools/gather.py` from `manifest.json`, plus a Shell command template and a GadTools template. `Docs/PORTING.md` is where to start; `DESIGN.md` is the design.
 
+Also: **OpenNDK** (`OpenNDK/`), our own native developer kit for 68k
+AmigaOS 3.x: the C headers, SFD and FD files, proto, inline and pragma
+headers, LVO includes and `libamiga.a`, written clean-room, so the open
+libraries and third-party software build without the vendor NDK.
+
 Also: **os4compat** (`Lib/os4compat`, `Docs/PORTING-OS4.md`), which builds
 AmigaOS 4 source for OS 3.2 by giving each library OS 4's interfaces and
 adding the OS 4 calls OS 3.2 lacks.

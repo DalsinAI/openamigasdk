@@ -1,0 +1,31 @@
+==id OpenNDK chooser_lib.sfd 47.1
+* chooser.gadget's calls, for OpenNDK.
+* Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+==base _ChooserBase
+==basetype struct Library *
+==libname chooser.gadget
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==include <intuition/intuition.h>
+==include <intuition/classes.h>
+==include <intuition/classusr.h>
+==include <exec/nodes.h>
+==include <gadgets/chooser.h>
+==version 44
+Class * CHOOSER_GetClass() ()
+struct Node * AllocChooserNodeA(struct TagItem * tags) (a0)
+==varargs
+struct Node * AllocChooserNode(Tag tag1, ...) (a0)
+VOID FreeChooserNode(struct Node * node) (a0)
+VOID SetChooserNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
+==varargs
+VOID SetChooserNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+VOID GetChooserNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
+==varargs
+VOID GetChooserNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+==version 45
+ULONG ShowChooser(Object * o, struct Window * w, ULONG xpos, ULONG ypos) (a0,a1,d0,d1)
+VOID HideChooser(Object * o, struct Window * w) (a0,a1)
+==end

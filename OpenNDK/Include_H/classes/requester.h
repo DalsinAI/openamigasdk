@@ -1,0 +1,73 @@
+#ifndef CLASSES_REQUESTER_H
+#define CLASSES_REQUESTER_H
+/*
+ * OpenNDK: requester.class, message, number and text requesters.
+ * Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+ */
+
+#ifndef REACTION_REACTION_H
+#include <reaction/reaction.h>
+#endif
+#ifndef INTUITION_INTUITION_H
+#include <intuition/intuition.h>
+#endif
+#ifndef INTUITION_CLASSUSR_H
+#include <intuition/classusr.h>
+#endif
+
+#define REQ_Dummy		(REACTION_Dummy + 0x45000)
+
+#define REQ_Type		(REQ_Dummy + 1)		/* REQTYPE_ below */
+#define REQ_TitleText		(REQ_Dummy + 2)
+#define REQ_BodyText		(REQ_Dummy + 3)		/* STRPTR: may hold a format */
+#define REQ_GadgetText		(REQ_Dummy + 4)		/* STRPTR: buttons split by '|' */
+#define REQ_ReturnCode		(REQ_Dummy + 5)		/* (get) the button chosen */
+#define REQ_TabSize		(REQ_Dummy + 6)
+#define REQ_Image		(REQ_Dummy + 7)		/* REQIMAGE_ below, or struct Image * */
+#define REQ_VarArgs		(REQ_Dummy + 8)		/* APTR: REQ_BodyText's arguments */
+
+/* REQ_Image's standard pictures */
+#define REQIMAGE_DEFAULT	0
+#define REQIMAGE_INFO		1
+#define REQIMAGE_WARNING	2
+#define REQIMAGE_ERROR		3
+#define REQIMAGE_QUESTION	4
+#define REQIMAGE_INSERTDISK	5
+
+/* REQTYPE_INTEGER */
+#define REQI_Minimum		(REQ_Dummy + 10)
+#define REQI_Maximum		(REQ_Dummy + 11)
+#define REQI_Invisible		(REQ_Dummy + 12)	/* BOOL: hide what is typed */
+#define REQI_Number		(REQ_Dummy + 13)	/* LONG: the value */
+#define REQI_Arrows		(REQ_Dummy + 14)
+#define REQI_MaxChars		(REQ_Dummy + 15)
+
+/* REQTYPE_STRING */
+#define REQS_AllowEmpty		(REQ_Dummy + 20)
+#define REQS_Buffer		(REQ_Dummy + 21)	/* STRPTR: the text, edited in place */
+#define REQS_ShowDefault	(REQ_Dummy + 22)
+#define REQS_MaxChars		(REQ_Dummy + 23)
+#define REQS_ChooserArray	(REQ_Dummy + 24)	/* STRPTR *: offer these in a chooser */
+#define REQS_ChooserActive	(REQ_Dummy + 25)
+#define REQS_Invisible		(REQ_Dummy + 26)	/* BOOL: hide what is typed */
+
+/* REQ_Type */
+#define REQTYPE_INFO		0
+#define REQTYPE_INTEGER		1
+#define REQTYPE_STRING		2
+
+/* Method: show the requester and wait for an answer */
+#define RM_OPENREQ		0x650001
+
+struct orRequest
+{
+	ULONG		MethodID;	/* RM_OPENREQ */
+	struct TagItem	*or_Attrs;	/* more REQ_ tags for this time */
+	struct Window	*or_Window;	/* the window it belongs to */
+	struct Screen	*or_Screen;	/* or the screen, without a window */
+};
+
+/* Shows obj over win (amiga.lib's DoMethod) */
+#define OpenRequester(obj, win) DoMethod((Object *)(obj), RM_OPENREQ, NULL, (win), NULL)
+
+#endif /* CLASSES_REQUESTER_H */
