@@ -414,13 +414,14 @@ def inline_func(lib, f, bn):
     body.append("\t\t: %s" % ", ".join(ins) if ins else "\t\t:")
     body.append("\t\t: __OPENNDK_FPCLOBBER \"cc\", \"memory\");")
     if rk == "int":
-        body.append("\treturn (%s)_d0;" % f.ret)
+        body.append("\treturn (%s)%s;" % (f.ret, regvars["d0"]))
     elif rk == "float":
-        body.append("\t{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }")
+        body.append("\t{ union { ULONG u; FLOAT f; } _r; _r.u = %s; return _r.f; }" % regvars["d0"])
     elif rk == "double":
-        body.append("\t{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d1; return _r.d; }")
+        body.append("\t{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = %s; _r.u[1] = %s; return _r.d; }"
+                    % (regvars["d0"], regvars["d1"]))
     else:
-        body.append("\t(void)_d0; (void)_d1; (void)_a0; (void)_a1;")
+        body.append("\t" + " ".join("(void)%s;" % regvars[r] for r in SCRATCH))
     sig = "static __inline__ %s\n%s(%s)" % (f.ret, fname, ", ".join(params) or "void")
     callargs = ([] if base_arg else ["(%s)" % bn]) + ["(%s)" % a.name for a in f.args]
     macro = "#define %s(%s) %s(%s)" % (f.name, ", ".join(a.name for a in f.args), fname,

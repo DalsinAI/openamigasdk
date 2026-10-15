@@ -24,7 +24,7 @@ BOOL AslRequestTags(APTR requester, Tag tag1, ...) (a0,a1)
 VOID aslPrivate1() ()
 VOID aslPrivate2() ()
 ==public
-==version 45
+==version 44
 VOID AbortAslRequest(APTR requester) (a0)
 VOID ActivateAslRequest(APTR requester) (a0)
 ==end
