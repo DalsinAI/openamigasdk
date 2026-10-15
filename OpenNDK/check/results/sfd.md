@@ -1,107 +1,173 @@
-- cardres_lib.sfd CardMiscControl: types ('UBYTE', ('structCardHandle*', 'ULONG'), False), NDK ('UBYTE', ('structCardHandle*', 'UBYTE'), False)
-- cia_lib.sfd: cannot read: /home/da1ek/AmigaChrome/stoves/os32/ndk/SFD/cia_lib.sfd: no ==base
-- console_lib.sfd: cannot read: line 11: not a prototype: struct InputEvent *CDInputHandler( CONST struct InputEvent *events,
-- datatypes_lib.sfd: cannot read: line 71: not a prototype: struct DTMethod *CopyDTTriggerMethods( CONST struct DTMethod *methods,
-- datebrowser_lib.sfd -36: None, NDK JulianWeekDay
-- datebrowser_lib.sfd -42: None, NDK JulianMonthDays
-- datebrowser_lib.sfd -48: None, NDK JulianLeapYear
-- disk_lib.sfd GetUnit: types ('structDiscResourceUnit*', ('structDiscResourceUnit*',), False), NDK ('structDiskResourceUnit*', ('structDiskResourceUnit*',), False)
-- diskfont_lib.sfd AvailFonts: types ('LONG', ('STRPTR', 'LONG', 'ULONG'), False), NDK ('LONG', ('structAvailFontsHeader*', 'LONG', 'ULONG'), False)
-- diskfont_lib.sfd NewScaledDiskFont: types ('structDiskFontHeader*', ('structTextFont*', 'structTextAttr*'), False), NDK ('structDiskFont*', ('structTextFont*', 'structTextAttr*'), False)
-- diskfont_lib.sfd EOpenEngine: types ('structGlyphEngine*', ('structEGlyphEngine*',), False), NDK ('LONG', ('structEGlyphEngine*',), False)
-- dos_lib.sfd: cannot read: line 35: not a prototype: struct MsgPort *CreateProc( CONST_STRPTR name, LONG pri, BPTR segList,
-- exec_lib.sfd: cannot read: line 31: not a prototype: struct Library *MakeLibrary( CONST_APTR funcInit, CONST_APTR structInit, ULONG (*libInit)(),
-- expansion_lib.sfd: cannot read: line 13: not a prototype: BOOL  AddBootNode( LONG bootPri, ULONG flags, struct DeviceNode *deviceNode,
-- gadtools_lib.sfd GT_EndRefresh: types ('VOID', ('structWindow*', 'LONG'), False), NDK ('VOID', ('structWindow*', 'BOOL'), False)
-- gadtools_lib.sfd DrawBevelBoxA: types ('VOID', ('structRastPort*', 'LONG', 'LONG', 'LONG', 'LONG', 'structTagItem*'), False), NDK ('VOID', ('structRastPort*', 'WORD', 'WORD', 'WORD', 'WORD', 'structTagItem*'), False)
-- graphics_lib.sfd: cannot read: line 22: not a prototype: LONG BltBitMap( CONST struct BitMap *srcBitMap, WORD xSrc, WORD ySrc,
-- icon_lib.sfd: cannot read: line 14: not a prototype: LONG GetIcon(CONST_STRPTR name, struct DiskObject *icon,
-- iffparse_lib.sfd -96: iffparsePrivate1, NDK None
-- intuition_lib.sfd: cannot read: line 16: not a prototype: UWORD AddGadget( struct Window *window, struct Gadget *gadget, UWORD position )
-- keymap_lib.sfd: cannot read: line 14: not a prototype: WORD MapRawKey( CONST struct InputEvent *event, STRPTR buffer, WORD length,
-- layers_lib.sfd EndUpdate: types ('VOID', ('structLayer*', 'ULONG'), False), NDK ('VOID', ('structLayer*', 'UWORD'), False)
-- layers_lib.sfd WhichLayer: types ('structLayer*', ('structLayer_Info*', 'LONG', 'LONG'), False), NDK ('structLayer*', ('structLayer_Info*', 'WORD', 'WORD'), False)
-- layers_lib.sfd SortLayerCR: types ('VOID', ('structLayer*', 'LONG', 'LONG'), False), NDK ('VOID', ('structLayer*', 'WORD', 'WORD'), False)
-- layers_lib.sfd LayerOccluded: types ('LONG', ('structLayer*',), False), NDK ('BOOL', ('structLayer*',), False)
-- layers_lib.sfd SetLayerInfoBounds: types ('LONG', ('structLayer_Info*', 'structRectangle*'), False), NDK ('BOOL', ('structLayer_Info*', 'structRectangle*'), False)
-- listbrowser_lib.sfd AllocListBrowserNodeA: types ('structNode*', ('UWORD', 'structTagItem*'), False), NDK ('structNode*', ('ULONG', 'structTagItem*'), False)
-- listbrowser_lib.sfd ShowListBrowserNodeChildren: types ('VOID', ('structNode*', 'WORD'), False), NDK ('VOID', ('structNode*', 'LONG'), False)
-- listbrowser_lib.sfd AllocLBColumnInfoA: types ('structColumnInfo*', ('UWORD', 'structTagItem*'), False), NDK ('structColumnInfo*', ('ULONG', 'structTagItem*'), False)
-- listbrowser_lib.sfd -102: SetLBColumnInfoAttrsA(a0,a1), NDK SetLBColumnInfoAttrsA(a1,a0)
-- listbrowser_lib.sfd -108: GetLBColumnInfoAttrsA(a0,a1), NDK GetLBColumnInfoAttrsA(a1,a0)
-- lowlevel_lib.sfd QueryKeys: types ('VOID', ('structKeyQuery*', 'ULONG'), False), NDK ('VOID', ('structKeyQuery*', 'LONG'), False)
-- lowlevel_lib.sfd StartTimerInt: types ('VOID', ('APTR', 'ULONG', 'LONG'), False), NDK ('VOID', ('APTR', 'ULONG', 'BOOL'), False)
-- nonvolatile_lib.sfd GetCopyNV: types ('APTR', ('STRPTR', 'STRPTR', 'LONG'), False), NDK ('APTR', ('STRPTR', 'STRPTR', 'BOOL'), False)
-- nonvolatile_lib.sfd StoreNV: types ('UWORD', ('STRPTR', 'STRPTR', 'APTR', 'ULONG', 'LONG'), False), NDK ('UWORD', ('STRPTR', 'STRPTR', 'APTR', 'ULONG', 'BOOL'), False)
-- nonvolatile_lib.sfd DeleteNV: types ('BOOL', ('STRPTR', 'STRPTR', 'LONG'), False), NDK ('BOOL', ('STRPTR', 'STRPTR', 'BOOL'), False)
-- nonvolatile_lib.sfd GetNVInfo: types ('structNVInfo*', ('LONG',), False), NDK ('structNVInfo*', ('BOOL',), False)
-- nonvolatile_lib.sfd GetNVList: types ('structMinList*', ('STRPTR', 'LONG'), False), NDK ('structMinList*', ('STRPTR', 'BOOL'), False)
-- nonvolatile_lib.sfd SetNVProtection: types ('BOOL', ('STRPTR', 'STRPTR', 'LONG', 'LONG'), False), NDK ('BOOL', ('STRPTR', 'STRPTR', 'LONG', 'BOOL'), False)
-- potgo_lib.sfd AllocPotBits: types ('UWORD', ('ULONG',), False), NDK ('UWORD', ('UWORD',), False)
-- potgo_lib.sfd FreePotBits: types ('VOID', ('ULONG',), False), NDK ('VOID', ('UWORD',), False)
-- potgo_lib.sfd WritePotgo: types ('VOID', ('ULONG', 'ULONG'), False), NDK ('VOID', ('UWORD', 'UWORD'), False)
-- radiobutton_lib.sfd AllocRadioButtonNodeA: types ('structNode*', ('UWORD', 'structTagItem*'), False), NDK ('structNode*', ('ULONG', 'structTagItem*'), False)
-- realtime_lib.sfd -90: realtimePrivate1, NDK None
-- realtime_lib.sfd -96: realtimePrivate2, NDK None
-- realtime_lib.sfd -102: realtimePrivate3, NDK None
-- realtime_lib.sfd -108: realtimePrivate4, NDK None
-- realtime_lib.sfd -114: realtimePrivate5, NDK None
-- rexxsyslib_lib.sfd -30: rexxsyslibPrivate1, NDK None
-- rexxsyslib_lib.sfd -36: rexxsyslibPrivate2, NDK None
-- rexxsyslib_lib.sfd -42: rexxsyslibPrivate3, NDK None
-- rexxsyslib_lib.sfd -48: rexxsyslibPrivate4, NDK None
-- rexxsyslib_lib.sfd -54: rexxsyslibPrivate5, NDK None
-- rexxsyslib_lib.sfd -60: rexxsyslibPrivate6, NDK None
-- rexxsyslib_lib.sfd -66: rexxsyslibPrivate7, NDK None
-- rexxsyslib_lib.sfd -72: rexxsyslibPrivate8, NDK None
-- rexxsyslib_lib.sfd -78: rexxsyslibPrivate9, NDK None
-- rexxsyslib_lib.sfd -84: rexxsyslibPrivate10, NDK None
-- rexxsyslib_lib.sfd -90: rexxsyslibPrivate11, NDK None
-- rexxsyslib_lib.sfd -96: rexxsyslibPrivate12, NDK None
-- rexxsyslib_lib.sfd -102: rexxsyslibPrivate13, NDK None
-- rexxsyslib_lib.sfd -108: rexxsyslibPrivate14, NDK None
-- rexxsyslib_lib.sfd -114: rexxsyslibPrivate15, NDK None
-- rexxsyslib_lib.sfd -120: rexxsyslibPrivate16, NDK None
-- speedbar_lib.sfd AllocSpeedButtonNodeA: types ('structNode*', ('UWORD', 'structTagItem*'), False), NDK ('structNode*', ('ULONG', 'structTagItem*'), False)
-- texteditor_lib.sfd: base TextEditorBase, NDK TextFieldBase
-- texteditor_lib.sfd -36: None, NDK HighlightSetFormat
-- timer_lib.sfd AddTime: types ('VOID', ('structtimeval*', 'structtimeval*'), False), NDK ('VOID', ('TimeVal_Type*', 'TimeVal_Type*'), False)
-- timer_lib.sfd SubTime: types ('VOID', ('structtimeval*', 'structtimeval*'), False), NDK ('VOID', ('TimeVal_Type*', 'TimeVal_Type*'), False)
-- timer_lib.sfd CmpTime: types ('LONG', ('structtimeval*', 'structtimeval*'), False), NDK ('LONG', ('TimeVal_Type*', 'TimeVal_Type*'), False)
-- timer_lib.sfd GetSysTime: types ('VOID', ('structtimeval*',), False), NDK ('VOID', ('TimeVal_Type*',), False)
-- translator_lib.sfd: cannot read: line 9: not a prototype: LONG Translate(CONST_STRPTR inputString, LONG inputLength, STRPTR outputBuffer,
-- utility_lib.sfd -108: utilityPrivate1, NDK None
-- utility_lib.sfd -114: utilityPrivate2, NDK None
-- utility_lib.sfd ToUpper: types ('UBYTE', ('ULONG',), False), NDK ('UBYTE', ('UBYTE',), False)
-- utility_lib.sfd ToLower: types ('UBYTE', ('ULONG',), False), NDK ('UBYTE', ('UBYTE',), False)
-- utility_lib.sfd -192: utilityPrivate3, NDK None
-- utility_lib.sfd -276: utilityPrivate4, NDK None
-- utility_lib.sfd -282: utilityPrivate5, NDK None
-- utility_lib.sfd -288: utilityPrivate6, NDK None
-- utility_lib.sfd -294: utilityPrivate7, NDK None
-- utility_lib.sfd -300: utilityPrivate8, NDK None
-- utility_lib.sfd -306: utilityPrivate9, NDK None
-- utility_lib.sfd -318: utilityPrivate10, NDK None
-- utility_lib.sfd -324: utilityPrivate11, NDK None
-- utility_lib.sfd -330: utilityPrivate12, NDK None
-- utility_lib.sfd -336: utilityPrivate13, NDK None
-- utility_lib.sfd -342: utilityPrivate14, NDK None
-- utility_lib.sfd -348: utilityPrivate15, NDK None
-- utility_lib.sfd -354: utilityPrivate16, NDK None
-- utility_lib.sfd -360: utilityPrivate17, NDK None
-- utility_lib.sfd -366: utilityPrivate18, NDK None
-- utility_lib.sfd -372: utilityPrivate19, NDK None
-- utility_lib.sfd -378: utilityPrivate20, NDK None
-- utility_lib.sfd -384: utilityPrivate21, NDK None
-- utility_lib.sfd -390: utilityPrivate22, NDK None
-- utility_lib.sfd -396: utilityPrivate23, NDK None
-- utility_lib.sfd -402: utilityPrivate24, NDK None
-- utility_lib.sfd -408: utilityPrivate25, NDK None
-- utility_lib.sfd -414: utilityPrivate26, NDK None
-- utility_lib.sfd -420: utilityPrivate27, NDK None
-- utility_lib.sfd -426: utilityPrivate28, NDK None
-- utility_lib.sfd -432: utilityPrivate29, NDK None
-- wb_lib.sfd -30: wbPrivate1() private, NDK UpdateWorkbench(a0,a1,d0)
+- cia_lib.sfd: base CiaBase, NDK None
+- cia_lib.sfd -6: types structInterrupt* AddICRVector(structLibrary*, LONG, structInterrupt*) (a6,d0,a1), NDK structInterrupt* AddICRVector(structLibrary*, WORD, structInterrupt*) (a6,d0,a1)
+- cia_lib.sfd -12: types VOID RemICRVector(structLibrary*, LONG, structInterrupt*) (a6,d0,a1), NDK VOID RemICRVector(structLibrary*, WORD, structInterrupt*) (a6,d0,a1)
+- cia_lib.sfd -18: types WORD AbleICR(structLibrary*, LONG) (a6,d0), NDK WORD AbleICR(structLibrary*, WORD) (a6,d0)
+- cia_lib.sfd -24: types WORD SetICR(structLibrary*, LONG) (a6,d0), NDK WORD SetICR(structLibrary*, WORD) (a6,d0)
+- datatypes_lib.sfd -48: types Object* NewDTObjectA(APTR, structTagItem*) (d0,a0), NDK Object* NewDTObjectA(STRPTR, structTagItem*) (d0,a0)
+- datatypes_lib.sfd -108: types structDTMethod* GetDTTriggerMethods(Object*) (a0), NDK structDTMethods* GetDTTriggerMethods(Object*) (a0)
+- datatypes_lib.sfd -282: types VOID FreeDTMethods(APTR) (a0), NDK VOID* FreeDTMethods(APTR) (a0)
+- datatypes_lib.sfd -294: types ULONG SaveDTObjectA(Object*, structWindow*, structRequester*, STRPTR, ULONG, BOOL, structTagItem*) (a0,a1,a2,a3,d0,d1,a4), NDK ULONG SaveDTObjectA(Object*, structWindow*, structRequester*, STRPTR, ULONG, LONG, structTagItem*) (a0,a1,a2,a3,d0,d1,a4)
+- datatypes_lib.sfd: varargs or alias missing: LONG DrawDTObject(structRastPort*, Object*, LONG, LONG, LONG, LONG, LONG, LONG, ...) (a0,a1,d0,d1,d2,d3,d4,d5,a2) private
+- datatypes_lib.sfd: varargs or alias missing: APTR ObtainDTDrawInfo(Object*, ...) (a0,a1) private
+- datatypes_lib.sfd: varargs or alias missing: VOID RefreshDTObject(Object*, structWindow*, structRequester*, ...) (a0,a1,a2,a3)
+- datebrowser_lib.sfd -36: None, NDK UWORD JulianWeekDay(ULONG, ULONG, LONG) (d0,d1,d2)
+- datebrowser_lib.sfd -42: None, NDK UWORD JulianMonthDays(ULONG, LONG) (d0,d1)
+- datebrowser_lib.sfd -48: None, NDK BOOL JulianLeapYear(LONG) (d0)
+- disk_lib.sfd -18: types structDiscResourceUnit* GetUnit(structDiscResourceUnit*) (a1), NDK structDiskResourceUnit* GetUnit(structDiskResourceUnit*) (a1)
+- dos_lib.sfd -348: types LONG VFWritef(BPTR, STRPTR, LONG*) (d1,d2,d3), NDK VOID VFWritef(BPTR, STRPTR, LONG*) (d1,d2,d3)
+- dos_lib.sfd -414: types WORD SplitName(STRPTR, ULONG, STRPTR, LONG, LONG) (d1,d2,d3,d4,d5), NDK WORD SplitName(STRPTR, UBYTE, STRPTR, WORD, LONG) (d1,d2,d3,d4,d5)
+- dos_lib.sfd -762: types BOOL InternalUnLoadSeg(BPTR, VOID(*)(VOID)) (d1,a1), NDK BOOL InternalUnLoadSeg(BPTR, VOID(*)()) (d1,a1)
+- dos_lib.sfd -840: types LONG ParsePattern(STRPTR, STRPTR, LONG) (d1,d2,d3), NDK LONG ParsePattern(STRPTR, UBYTE*, LONG) (d1,d2,d3)
+- dos_lib.sfd -846: types BOOL MatchPattern(STRPTR, STRPTR) (d1,d2), NDK BOOL MatchPattern(UBYTE*, STRPTR) (d1,d2)
+- dos_lib.sfd -972: types BOOL MatchPatternNoCase(STRPTR, STRPTR) (d1,d2), NDK BOOL MatchPatternNoCase(UBYTE*, STRPTR) (d1,d2)
+- dos_lib.sfd -1134: types BPTR ErrorOutput() (), NDK LONG ErrorOutput() ()
+- dos_lib.sfd -1140: types BPTR SelectError(BPTR) (d1), NDK LONG SelectError(BPTR) (d1)
+- dos_lib.sfd -1152: types LONG DoShellMethodTagList(ULONG, structTagItem*) (d0,a0), NDK APTR DoShellMethodTagList(ULONG, structTagItem*) (d0,a0)
+- exec_lib.sfd -30: types ULONG Supervisor(ULONG(*)(VOID)) (a5), NDK ULONG Supervisor(ULONG(*)()) (a5)
+- exec_lib.sfd -84: types structLibrary* MakeLibrary(APTR, APTR, ULONG(*)(VOID), ULONG, BPTR) (a0,a1,a2,d0,d1), NDK structLibrary* MakeLibrary(APTR, APTR, ULONG(*)(), ULONG, ULONG) (a0,a1,a2,d0,d1)
+- exec_lib.sfd -90: types ULONG MakeFunctions(APTR, APTR, ULONG) (a0,a1,a2), NDK VOID MakeFunctions(APTR, APTR, ULONG) (a0,a1,a2)
+- exec_lib.sfd -102: types APTR InitResident(structResident*, BPTR) (a1,d1), NDK APTR InitResident(structResident*, ULONG) (a1,d1)
+- exec_lib.sfd -330: types BYTE AllocSignal(LONG) (d0), NDK BYTE AllocSignal(BYTE) (d0)
+- exec_lib.sfd -336: types VOID FreeSignal(LONG) (d0), NDK VOID FreeSignal(BYTE) (d0)
+- exec_lib.sfd -420: types APTR SetFunction(structLibrary*, LONG, ULONG(*)(VOID)) (a1,a0,d0), NDK APTR SetFunction(structLibrary*, LONG, ULONG(*)()) (a1,a0,d0)
+- exec_lib.sfd -480: types LONG AbortIO(structIORequest*) (a1), NDK VOID AbortIO(structIORequest*) (a1)
+- exec_lib.sfd -522: types APTR RawDoFmt(STRPTR, APTR, VOID(*)(VOID), APTR) (a0,a1,a2,a3), NDK APTR RawDoFmt(STRPTR, APTR, VOID(*)(), APTR) (a0,a1,a2,a3)
+- exec_lib.sfd -762: types VOID CachePreDMA(APTR, ULONG*, ULONG) (a0,a1,d0), NDK APTR CachePreDMA(APTR, ULONG*, ULONG) (a0,a1,d0)
+- expansion_lib.sfd -42: types LONG AllocBoardMem(ULONG) (d0), NDK VOID AllocBoardMem(ULONG) (d0)
+- expansion_lib.sfd -54: types LONG AllocExpansionMem(ULONG, ULONG) (d0,d1), NDK APTR AllocExpansionMem(ULONG, ULONG) (d0,d1)
+- expansion_lib.sfd -60: types BOOL ConfigBoard(APTR, structConfigDev*) (a0,a1), NDK VOID ConfigBoard(APTR, structConfigDev*) (a0,a1)
+- expansion_lib.sfd -66: types BOOL ConfigChain(APTR) (a0), NDK VOID ConfigChain(APTR) (a0)
+- expansion_lib.sfd -102: types BOOL ReadExpansionRom(APTR, structConfigDev*) (a0,a1), NDK VOID ReadExpansionRom(APTR, structConfigDev*) (a0,a1)
+- expansion_lib.sfd -114: types BOOL WriteExpansionByte(APTR, ULONG, ULONG) (a0,d0,d1), NDK VOID WriteExpansionByte(APTR, ULONG, UBYTE) (a0,d0,d1)
+- graphics_lib.sfd -30: types LONG BltBitMap(structBitMap*, LONG, LONG, structBitMap*, LONG, LONG, LONG, LONG, ULONG, ULONG, PLANEPTR) (a0,d0,d1,a1,d2,d3,d4,d5,d6,d7,a2), NDK LONG BltBitMap(structBitMap*, WORD, WORD, structBitMap*, WORD, WORD, WORD, WORD, UBYTE, UBYTE, PLANEPTR) (a0,d0,d1,a1,d2,d3,d4,d5,d6,d7,a2)
+- graphics_lib.sfd -36: types VOID BltTemplate(PLANEPTR, LONG, LONG, structRastPort*, LONG, LONG, LONG, LONG) (a0,d0,d1,a1,d2,d3,d4,d5), NDK VOID BltTemplate(PLANEPTR, WORD, WORD, structRastPort*, WORD, WORD, WORD, WORD) (a0,d0,d1,a1,d2,d3,d4,d5)
+- graphics_lib.sfd -54: types WORD TextLength(structRastPort*, STRPTR, ULONG) (a1,a0,d0), NDK WORD TextLength(structRastPort*, STRPTR, UWORD) (a1,a0,d0)
+- graphics_lib.sfd -60: types LONG Text(structRastPort*, STRPTR, ULONG) (a1,a0,d0), NDK LONG Text(structRastPort*, STRPTR, UWORD) (a1,a0,d0)
+- graphics_lib.sfd -168: types BOOL GetGBuffers(structAnimOb*, structRastPort*, LONG) (a0,a1,d0), NDK BOOL GetGBuffers(structAnimOb*, structRastPort*, BOOL) (a0,a1,d0)
+- graphics_lib.sfd -180: types VOID DrawEllipse(structRastPort*, LONG, LONG, LONG, LONG) (a1,d0,d1,d2,d3), NDK VOID DrawEllipse(structRastPort*, WORD, WORD, WORD, WORD) (a1,d0,d1,d2,d3)
+- graphics_lib.sfd -186: types LONG AreaEllipse(structRastPort*, LONG, LONG, LONG, LONG) (a1,d0,d1,d2,d3), NDK LONG AreaEllipse(structRastPort*, WORD, WORD, WORD, WORD) (a1,d0,d1,d2,d3)
+- graphics_lib.sfd -192: types VOID LoadRGB4(structViewPort*, UWORD*, LONG) (a0,a1,d0), NDK VOID LoadRGB4(structViewPort*, UWORD*, WORD) (a0,a1,d0)
+- graphics_lib.sfd -234: types VOID SetRast(structRastPort*, ULONG) (a1,d0), NDK VOID SetRast(structRastPort*, UBYTE) (a1,d0)
+- graphics_lib.sfd -240: types VOID Move(structRastPort*, LONG, LONG) (a1,d0,d1), NDK VOID Move(structRastPort*, WORD, WORD) (a1,d0,d1)
+- graphics_lib.sfd -246: types VOID Draw(structRastPort*, LONG, LONG) (a1,d0,d1), NDK VOID Draw(structRastPort*, WORD, WORD) (a1,d0,d1)
+- graphics_lib.sfd -252: types LONG AreaMove(structRastPort*, LONG, LONG) (a1,d0,d1), NDK LONG AreaMove(structRastPort*, WORD, WORD) (a1,d0,d1)
+- graphics_lib.sfd -258: types LONG AreaDraw(structRastPort*, LONG, LONG) (a1,d0,d1), NDK LONG AreaDraw(structRastPort*, WORD, WORD) (a1,d0,d1)
+- graphics_lib.sfd -282: types VOID InitArea(structAreaInfo*, APTR, LONG) (a0,a1,d0), NDK VOID InitArea(structAreaInfo*, APTR, WORD) (a0,a1,d0)
+- graphics_lib.sfd -288: types VOID SetRGB4(structViewPort*, LONG, ULONG, ULONG, ULONG) (a0,d0,d1,d2,d3), NDK VOID SetRGB4(structViewPort*, WORD, UBYTE, UBYTE, UBYTE) (a0,d0,d1,d2,d3)
+- graphics_lib.sfd -306: types VOID RectFill(structRastPort*, LONG, LONG, LONG, LONG) (a1,d0,d1,d2,d3), NDK VOID RectFill(structRastPort*, WORD, WORD, WORD, WORD) (a1,d0,d1,d2,d3)
+- graphics_lib.sfd -312: types VOID BltPattern(structRastPort*, PLANEPTR, LONG, LONG, LONG, LONG, ULONG) (a1,a0,d0,d1,d2,d3,d4), NDK VOID BltPattern(structRastPort*, PLANEPTR, WORD, WORD, WORD, WORD, UWORD) (a1,a0,d0,d1,d2,d3,d4)
+- graphics_lib.sfd -318: types LONG ReadPixel(structRastPort*, LONG, LONG) (a1,d0,d1), NDK ULONG ReadPixel(structRastPort*, WORD, WORD) (a1,d0,d1)
+- graphics_lib.sfd -324: types LONG WritePixel(structRastPort*, LONG, LONG) (a1,d0,d1), NDK LONG WritePixel(structRastPort*, WORD, WORD) (a1,d0,d1)
+- graphics_lib.sfd -330: types BOOL Flood(structRastPort*, ULONG, LONG, LONG) (a1,d2,d0,d1), NDK BOOL Flood(structRastPort*, ULONG, WORD, WORD) (a1,d2,d0,d1)
+- graphics_lib.sfd -336: types VOID PolyDraw(structRastPort*, LONG, WORD*) (a1,d0,a0), NDK VOID PolyDraw(structRastPort*, WORD, WORD*) (a1,d0,a0)
+- graphics_lib.sfd -342: types VOID SetAPen(structRastPort*, ULONG) (a1,d0), NDK VOID SetAPen(structRastPort*, UBYTE) (a1,d0)
+- graphics_lib.sfd -348: types VOID SetBPen(structRastPort*, ULONG) (a1,d0), NDK VOID SetBPen(structRastPort*, UBYTE) (a1,d0)
+- graphics_lib.sfd -354: types VOID SetDrMd(structRastPort*, ULONG) (a1,d0), NDK VOID SetDrMd(structRastPort*, UBYTE) (a1,d0)
+- graphics_lib.sfd -372: types VOID CMove(structUCopList*, APTR, LONG) (a1,d0,d1), NDK LONG CMove(structUCopList*, APTR, WORD) (a1,d0,d1)
+- graphics_lib.sfd -378: types VOID CWait(structUCopList*, LONG, LONG) (a1,d0,d1), NDK LONG CWait(structUCopList*, WORD, WORD) (a1,d0,d1)
+- graphics_lib.sfd -390: types VOID InitBitMap(structBitMap*, LONG, LONG, LONG) (a0,d0,d1,d2), NDK VOID InitBitMap(structBitMap*, BYTE, WORD, WORD) (a0,d0,d1,d2)
+- graphics_lib.sfd -396: types VOID ScrollRaster(structRastPort*, LONG, LONG, LONG, LONG, LONG, LONG) (a1,d0,d1,d2,d3,d4,d5), NDK VOID ScrollRaster(structRastPort*, WORD, WORD, WORD, WORD, WORD, WORD) (a1,d0,d1,d2,d3,d4,d5)
+- graphics_lib.sfd -408: types WORD GetSprite(structSimpleSprite*, LONG) (a0,d0), NDK WORD GetSprite(structSimpleSprite*, WORD) (a0,d0)
+- graphics_lib.sfd -414: types VOID FreeSprite(LONG) (d0), NDK VOID FreeSprite(WORD) (d0)
+- graphics_lib.sfd -426: types VOID MoveSprite(structViewPort*, structSimpleSprite*, LONG, LONG) (a0,a1,d0,d1), NDK VOID MoveSprite(structViewPort*, structSimpleSprite*, WORD, WORD) (a0,a1,d0,d1)
+- graphics_lib.sfd -492: types PLANEPTR AllocRaster(ULONG, ULONG) (d0,d1), NDK PLANEPTR AllocRaster(UWORD, UWORD) (d0,d1)
+- graphics_lib.sfd -498: types VOID FreeRaster(PLANEPTR, ULONG, ULONG) (a0,d0,d1), NDK VOID FreeRaster(PLANEPTR, UWORD, UWORD) (a0,d0,d1)
+- graphics_lib.sfd -552: types VOID ClipBlit(structRastPort*, LONG, LONG, structRastPort*, LONG, LONG, LONG, LONG, ULONG) (a0,d0,d1,a1,d2,d3,d4,d5,d6), NDK VOID ClipBlit(structRastPort*, WORD, WORD, structRastPort*, WORD, WORD, WORD, WORD, UBYTE) (a0,d0,d1,a1,d2,d3,d4,d5,d6)
+- graphics_lib.sfd -594: types structCopList* UCopperListInit(structUCopList*, LONG) (a0,d0), NDK structCopList* UCopperListInit(structUCopList*, WORD) (a0,d0)
+- graphics_lib.sfd -600: types VOID FreeGBuffers(structAnimOb*, structRastPort*, LONG) (a0,a1,d0), NDK VOID FreeGBuffers(structAnimOb*, structRastPort*, BOOL) (a0,a1,d0)
+- graphics_lib.sfd -606: types VOID BltBitMapRastPort(structBitMap*, LONG, LONG, structRastPort*, LONG, LONG, LONG, LONG, ULONG) (a0,d0,d1,a1,d2,d3,d4,d5,d6), NDK VOID BltBitMapRastPort(structBitMap*, WORD, WORD, structRastPort*, WORD, WORD, WORD, WORD, UBYTE) (a0,d0,d1,a1,d2,d3,d4,d5,d6)
+- graphics_lib.sfd -630: types VOID SetRGB4CM(structColorMap*, LONG, ULONG, ULONG, ULONG) (a0,d0,d1,d2,d3), NDK VOID SetRGB4CM(structColorMap*, WORD, UBYTE, UBYTE, UBYTE) (a0,d0,d1,d2,d3)
+- graphics_lib.sfd -636: types VOID BltMaskBitMapRastPort(structBitMap*, LONG, LONG, structRastPort*, LONG, LONG, LONG, LONG, ULONG, PLANEPTR) (a0,d0,d1,a1,d2,d3,d4,d5,d6,a2), NDK VOID BltMaskBitMapRastPort(structBitMap*, WORD, WORD, structRastPort*, WORD, WORD, WORD, WORD, UBYTE, PLANEPTR) (a0,d0,d1,a1,d2,d3,d4,d5,d6,a2)
+- graphics_lib.sfd -660: types structExtendedNode* GfxNew(ULONG) (d0), NDK APTR GfxNew(ULONG) (d0)
+- graphics_lib.sfd -666: types VOID GfxFree(structExtendedNode*) (a0), NDK VOID GfxFree(APTR) (a0)
+- graphics_lib.sfd -672: types VOID GfxAssociate(APTR, structExtendedNode*) (a0,a1), NDK VOID GfxAssociate(APTR, APTR) (a0,a1)
+- graphics_lib.sfd -684: types UWORD ScalerDiv(ULONG, ULONG, ULONG) (d0,d1,d2), NDK UWORD ScalerDiv(UWORD, UWORD, UWORD) (d0,d1,d2)
+- graphics_lib.sfd -690: types WORD TextExtent(structRastPort*, STRPTR, LONG, structTextExtent*) (a1,a0,d0,a2), NDK WORD TextExtent(structRastPort*, STRPTR, WORD, structTextExtent*) (a1,a0,d0,a2)
+- graphics_lib.sfd -696: types ULONG TextFit(structRastPort*, STRPTR, ULONG, structTextExtent*, structTextExtent*, LONG, ULONG, ULONG) (a1,a0,d0,a2,a3,d1,d2,d3), NDK ULONG TextFit(structRastPort*, STRPTR, UWORD, structTextExtent*, structTextExtent*, WORD, UWORD, UWORD) (a1,a0,d0,a2,a3,d1,d2,d3)
+- graphics_lib.sfd -708: types ULONG VideoControl(structColorMap*, structTagItem*) (a0,a1), NDK BOOL VideoControl(structColorMap*, structTagItem*) (a0,a1)
+- graphics_lib.sfd -768: types LONG ReadPixelLine8(structRastPort*, ULONG, ULONG, ULONG, UBYTE*, structRastPort*) (a0,d0,d1,d2,a2,a1), NDK LONG ReadPixelLine8(structRastPort*, UWORD, UWORD, UWORD, UBYTE*, structRastPort*) (a0,d0,d1,d2,a2,a1)
+- graphics_lib.sfd -774: types LONG WritePixelLine8(structRastPort*, ULONG, ULONG, ULONG, UBYTE*, structRastPort*) (a0,d0,d1,d2,a2,a1), NDK LONG WritePixelLine8(structRastPort*, UWORD, UWORD, UWORD, UBYTE*, structRastPort*) (a0,d0,d1,d2,a2,a1)
+- graphics_lib.sfd -780: types LONG ReadPixelArray8(structRastPort*, ULONG, ULONG, ULONG, ULONG, UBYTE*, structRastPort*) (a0,d0,d1,d2,d3,a2,a1), NDK LONG ReadPixelArray8(structRastPort*, UWORD, UWORD, UWORD, UWORD, UBYTE*, structRastPort*) (a0,d0,d1,d2,d3,a2,a1)
+- graphics_lib.sfd -786: types LONG WritePixelArray8(structRastPort*, ULONG, ULONG, ULONG, ULONG, UBYTE*, structRastPort*) (a0,d0,d1,d2,d3,a2,a1), NDK LONG WritePixelArray8(structRastPort*, UWORD, UWORD, UWORD, UWORD, UBYTE*, structRastPort*) (a0,d0,d1,d2,d3,a2,a1)
+- graphics_lib.sfd -792: types ULONG GetVPModeID(structViewPort*) (a0), NDK LONG GetVPModeID(structViewPort*) (a0)
+- graphics_lib.sfd -798: types ULONG ModeNotAvailable(ULONG) (d0), NDK LONG ModeNotAvailable(ULONG) (d0)
+- graphics_lib.sfd -810: types VOID EraseRect(structRastPort*, LONG, LONG, LONG, LONG) (a1,d0,d1,d2,d3), NDK VOID EraseRect(structRastPort*, WORD, WORD, WORD, WORD) (a1,d0,d1,d2,d3)
+- graphics_lib.sfd -1002: types VOID ScrollRasterBF(structRastPort*, LONG, LONG, LONG, LONG, LONG, LONG) (a1,d0,d1,d2,d3,d4,d5), NDK VOID ScrollRasterBF(structRastPort*, WORD, WORD, WORD, WORD, WORD, WORD) (a1,d0,d1,d2,d3,d4,d5)
+- graphics_lib.sfd -1056: types VOID WriteChunkyPixels(structRastPort*, ULONG, ULONG, ULONG, ULONG, UBYTE*, LONG) (a0,d0,d1,d2,d3,a2,d4), NDK VOID WriteChunkyPixels(structRastPort*, UWORD, UWORD, UWORD, UWORD, UBYTE*, LONG) (a0,d0,d1,d2,d3,a2,d4)
+- icon_lib.sfd -96: types STRPTR FindToolType(STRPTR*, STRPTR) (a0,a1), NDK UBYTE* FindToolType(STRPTR*, STRPTR) (a0,a1)
+- icon_lib.sfd -114: VOID iconPrivate7() () private, NDK APTR FreeAlloc(structFreeList*, ULONG, ULONG) (a0,a1,a2)
+- icon_lib.sfd -144: VOID iconPrivate8() () private, NDK VOID FreeFree(structFreeList*, APTR) (a0,a1)
+- icon_lib.sfd -204: None, NDK STRPTR BumpRevisionLength(STRPTR, STRPTR, ULONG) (a0,a1,d0)
+- intuition_lib.sfd -42: types UWORD AddGadget(structWindow*, structGadget*, ULONG) (a0,a1,d0), NDK UWORD AddGadget(structWindow*, structGadget*, UWORD) (a0,a1,d0)
+- intuition_lib.sfd -90: types BOOL DisplayAlert(ULONG, STRPTR, ULONG) (d0,a0,d1), NDK BOOL DisplayAlert(ULONG, STRPTR, UWORD) (d0,a0,d1)
+- intuition_lib.sfd -108: types VOID DrawBorder(structRastPort*, structBorder*, LONG, LONG) (a0,a1,d0,d1), NDK VOID DrawBorder(structRastPort*, structBorder*, WORD, WORD) (a0,a1,d0,d1)
+- intuition_lib.sfd -114: types VOID DrawImage(structRastPort*, structImage*, LONG, LONG) (a0,a1,d0,d1), NDK VOID DrawImage(structRastPort*, structImage*, WORD, WORD) (a0,a1,d0,d1)
+- intuition_lib.sfd -126: types structPreferences* GetDefPrefs(structPreferences*, LONG) (a0,d0), NDK structPreferences* GetDefPrefs(structPreferences*, WORD) (a0,d0)
+- intuition_lib.sfd -132: types structPreferences* GetPrefs(structPreferences*, LONG) (a0,d0), NDK structPreferences* GetPrefs(structPreferences*, WORD) (a0,d0)
+- intuition_lib.sfd -144: types structMenuItem* ItemAddress(structMenu*, ULONG) (a0,d0), NDK structMenuItem* ItemAddress(structMenu*, UWORD) (a0,d0)
+- intuition_lib.sfd -156: types VOID ModifyProp(structGadget*, structWindow*, structRequester*, ULONG, ULONG, ULONG, ULONG, ULONG) (a0,a1,a2,d0,d1,d2,d3,d4), NDK VOID ModifyProp(structGadget*, structWindow*, structRequester*, UWORD, UWORD, UWORD, UWORD, UWORD) (a0,a1,a2,d0,d1,d2,d3,d4)
+- intuition_lib.sfd -162: types VOID MoveScreen(structScreen*, LONG, LONG) (a0,d0,d1), NDK VOID MoveScreen(structScreen*, WORD, WORD) (a0,d0,d1)
+- intuition_lib.sfd -168: types VOID MoveWindow(structWindow*, LONG, LONG) (a0,d0,d1), NDK VOID MoveWindow(structWindow*, WORD, WORD) (a0,d0,d1)
+- intuition_lib.sfd -180: types VOID OffMenu(structWindow*, ULONG) (a0,d0), NDK VOID OffMenu(structWindow*, UWORD) (a0,d0)
+- intuition_lib.sfd -192: types VOID OnMenu(structWindow*, ULONG) (a0,d0), NDK VOID OnMenu(structWindow*, UWORD) (a0,d0)
+- intuition_lib.sfd -216: types VOID PrintIText(structRastPort*, structIntuiText*, LONG, LONG) (a0,a1,d0,d1), NDK VOID PrintIText(structRastPort*, structIntuiText*, WORD, WORD) (a0,a1,d0,d1)
+- intuition_lib.sfd -234: types VOID ReportMouse(LONG, structWindow*) (d0,a0), NDK VOID ReportMouse(BOOL, structWindow*) (d0,a0)
+- intuition_lib.sfd -270: types VOID SetPointer(structWindow*, UWORD*, LONG, LONG, LONG, LONG) (a0,a1,d0,d1,d2,d3), NDK VOID SetPointer(structWindow*, UWORD*, WORD, WORD, WORD, WORD) (a0,a1,d0,d1,d2,d3)
+- intuition_lib.sfd -282: types VOID ShowTitle(structScreen*, LONG) (a0,d0), NDK VOID ShowTitle(structScreen*, BOOL) (a0,d0)
+- intuition_lib.sfd -288: types VOID SizeWindow(structWindow*, LONG, LONG) (a0,d0,d1), NDK VOID SizeWindow(structWindow*, WORD, WORD) (a0,d0,d1)
+- intuition_lib.sfd -324: types structPreferences* SetPrefs(structPreferences*, LONG, LONG) (a0,d0,d1), NDK structPreferences* SetPrefs(structPreferences*, LONG, BOOL) (a0,d0,d1)
+- intuition_lib.sfd -348: types BOOL AutoRequest(structWindow*, structIntuiText*, structIntuiText*, structIntuiText*, ULONG, ULONG, ULONG, ULONG) (a0,a1,a2,a3,d0,d1,d2,d3), NDK BOOL AutoRequest(structWindow*, structIntuiText*, structIntuiText*, structIntuiText*, ULONG, ULONG, UWORD, UWORD) (a0,a1,a2,a3,d0,d1,d2,d3)
+- intuition_lib.sfd -360: types structWindow* BuildSysRequest(structWindow*, structIntuiText*, structIntuiText*, structIntuiText*, ULONG, ULONG, ULONG) (a0,a1,a2,a3,d0,d1,d2), NDK structWindow* BuildSysRequest(structWindow*, structIntuiText*, structIntuiText*, structIntuiText*, ULONG, UWORD, UWORD) (a0,a1,a2,a3,d0,d1,d2)
+- intuition_lib.sfd -402: types VOID AlohaWorkbench(structMsgPort*) (a0), NDK VOID AlohaWorkbench(LONG) (a0)
+- intuition_lib.sfd -408: types VOID FreeRemember(structRemember**, LONG) (a0,d0), NDK VOID FreeRemember(structRemember**, BOOL) (a0,d0)
+- intuition_lib.sfd -426: types LONG GetScreenData(APTR, ULONG, ULONG, structScreen*) (a0,d0,d1,a1), NDK LONG GetScreenData(APTR, UWORD, UWORD, structScreen*) (a0,d0,d1,a1)
+- intuition_lib.sfd -432: types VOID RefreshGList(structGadget*, structWindow*, structRequester*, LONG) (a0,a1,a2,d0), NDK VOID RefreshGList(structGadget*, structWindow*, structRequester*, WORD) (a0,a1,a2,d0)
+- intuition_lib.sfd -438: types UWORD AddGList(structWindow*, structGadget*, ULONG, LONG, structRequester*) (a0,a1,d0,d1,a2), NDK UWORD AddGList(structWindow*, structGadget*, UWORD, WORD, structRequester*) (a0,a1,d0,d1,a2)
+- intuition_lib.sfd -444: types UWORD RemoveGList(structWindow*, structGadget*, LONG) (a0,a1,d0), NDK UWORD RemoveGList(structWindow*, structGadget*, WORD) (a0,a1,d0)
+- intuition_lib.sfd -468: types VOID NewModifyProp(structGadget*, structWindow*, structRequester*, ULONG, ULONG, ULONG, ULONG, ULONG, LONG) (a0,a1,a2,d0,d1,d2,d3,d4,d5), NDK VOID NewModifyProp(structGadget*, structWindow*, structRequester*, UWORD, UWORD, UWORD, UWORD, UWORD, WORD) (a0,a1,a2,d0,d1,d2,d3,d4,d5)
+- intuition_lib.sfd -474: types LONG QueryOverscan(ULONG, structRectangle*, LONG) (a0,a1,d0), NDK LONG QueryOverscan(ULONG, structRectangle*, WORD) (a0,a1,d0)
+- intuition_lib.sfd -486: types VOID ChangeWindowBox(structWindow*, LONG, LONG, LONG, LONG) (a0,d0,d1,d2,d3), NDK VOID ChangeWindowBox(structWindow*, WORD, WORD, WORD, WORD) (a0,d0,d1,d2,d3)
+- intuition_lib.sfd -498: types LONG SetMouseQueue(structWindow*, ULONG) (a0,d0), NDK LONG SetMouseQueue(structWindow*, UWORD) (a0,d0)
+- intuition_lib.sfd -546: types UWORD SetPubScreenModes(ULONG) (d0), NDK UWORD SetPubScreenModes(UWORD) (d0)
+- intuition_lib.sfd -552: types UWORD PubScreenStatus(structScreen*, ULONG) (a0,d0), NDK UWORD PubScreenStatus(structScreen*, UWORD) (a0,d0)
+- intuition_lib.sfd -600: types LONG SysReqHandler(structWindow*, ULONG*, LONG) (a0,a1,d0), NDK LONG SysReqHandler(structWindow*, ULONG*, BOOL) (a0,a1,d0)
+- intuition_lib.sfd -618: types VOID DrawImageState(structRastPort*, structImage*, LONG, LONG, ULONG, structDrawInfo*) (a0,a1,d0,d1,d2,a2), NDK VOID DrawImageState(structRastPort*, structImage*, WORD, WORD, ULONG, structDrawInfo*) (a0,a1,d0,d1,d2,a2)
+- intuition_lib.sfd -630: types VOID EraseImage(structRastPort*, structImage*, LONG, LONG) (a0,a1,d0,d1), NDK VOID EraseImage(structRastPort*, structImage*, WORD, WORD) (a0,a1,d0,d1)
+- intuition_lib.sfd -678: types structIClass* MakeClass(STRPTR, STRPTR, structIClass*, ULONG, ULONG) (a0,a1,a2,d0,d1), NDK structIClass* MakeClass(STRPTR, STRPTR, structIClass*, UWORD, ULONG) (a0,a1,a2,d0,d1)
+- intuition_lib.sfd -798: types VOID ScrollWindowRaster(structWindow*, LONG, LONG, LONG, LONG, LONG, LONG) (a1,d0,d1,d2,d3,d4,d5), NDK VOID ScrollWindowRaster(structWindow*, WORD, WORD, WORD, WORD, WORD, WORD) (a1,d0,d1,d2,d3,d4,d5)
+- intuition_lib.sfd -822: types BOOL TimedDisplayAlert(ULONG, STRPTR, ULONG, ULONG) (d0,a0,d1,a1), NDK BOOL TimedDisplayAlert(ULONG, STRPTR, UWORD, ULONG) (d0,a0,d1,a1)
+- intuition_lib.sfd: varargs or alias missing: VOID ReportMouse1(structWindow*, BOOL) (a0,d0)
+- keymap_lib.sfd -42: types WORD MapRawKey(structInputEvent*, STRPTR, LONG, structKeyMap*) (a0,a1,d1,a2), NDK WORD MapRawKey(structInputEvent*, STRPTR, WORD, structKeyMap*) (a0,a1,d1,a2)
+- texteditor_lib.sfd -36: None, NDK VOID HighlightSetFormat(APTR, ULONG, ULONG, UWORD) (a0,d0,d1,d2)
+- timer_lib.sfd -42: types VOID AddTime(structtimeval*, structtimeval*) (a0,a1), NDK VOID AddTime(TimeVal_Type*, TimeVal_Type*) (a0,a1)
+- timer_lib.sfd -48: types VOID SubTime(structtimeval*, structtimeval*) (a0,a1), NDK VOID SubTime(TimeVal_Type*, TimeVal_Type*) (a0,a1)
+- timer_lib.sfd -54: types LONG CmpTime(structtimeval*, structtimeval*) (a0,a1), NDK LONG CmpTime(TimeVal_Type*, TimeVal_Type*) (a0,a1)
+- timer_lib.sfd -66: types VOID GetSysTime(structtimeval*) (a0), NDK VOID GetSysTime(TimeVal_Type*) (a0)
+- wb_lib.sfd -30: types BOOL UpdateWorkbench(STRPTR, BPTR, LONG) (a0,a1,d0), NDK VOID UpdateWorkbench(STRPTR, BPTR, LONG) (a0,a1,d0)
 
 SFDs missing from OpenNDK (2): listview_lib.sfd, trackfile_lib.sfd
-74 SFDs compared: 70 differences in names, offsets or registers, 34 in types.
+
+listview_lib.sfd: base ListViewBase, type struct Library *
+- -30 Class* LISTVIEW_GetClass() ()
+
+trackfile_lib.sfd: base TrackFileBase, type struct Device *
+- -6 LONG DeviceOpen(structIORequest*, LONG, ULONG) (a1,d0,d1) private
+- -12 BPTR DeviceClose(structIORequest*) (a1) private
+- -18 BPTR DeviceExpunge() () private
+- -24 ULONG DeviceReserved() () private
+- -30 LONG DeviceBeginIO(structIORequest*) (a1) private
+- -36 LONG DeviceAbortIO(structIORequest*) (a1) private
+- -42 LONG TFStartUnitTagList(LONG, structTagItem*) (d0,a0)
+- -42 varargs LONG TFStartUnitTags(LONG, ...) (d0,a0)
+- -48 LONG TFStopUnitTagList(LONG, structTagItem*) (d0,a0)
+- -48 varargs LONG TFStopUnitTags(LONG, ...) (d0,a0)
+- -54 LONG TFInsertMediaTagList(LONG, structTagItem*) (d0,a0)
+- -54 varargs LONG TFInsertMediaTags(LONG, ...) (d0,a0)
+- -60 LONG TFEjectMediaTagList(LONG, structTagItem*) (d0,a0)
+- -60 varargs LONG TFEjectMediaTags(LONG, ...) (d0,a0)
+- -66 structTrackFileUnitData* TFGetUnitData(LONG) (d0)
+- -72 VOID TFFreeUnitData(structTrackFileUnitData*) (a0)
+- -78 LONG TFChangeUnitTagList(LONG, structTagItem*) (d0,a0)
+- -78 varargs LONG TFChangeUnitTags(LONG, ...) (d0,a0)
+- -84 LONG TFExamineFileSize(LONG) (d0)
+74 SFDs compared: 12 differences in names, offsets or registers, 134 in types.
