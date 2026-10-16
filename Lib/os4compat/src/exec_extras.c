@@ -1,4 +1,4 @@
-/* Copyright (c) 2026 Dalsin Limited. The Open SDK, MIT licence (LICENSE).
+/* Copyright (c) 2026 AmigaChrome Team. The Open SDK, MIT licence (LICENSE).
  * SPDX-License-Identifier: MIT
  *
  * exec calls OS 4 has and OS 3.2 has not: system objects, tagged AllocVec,

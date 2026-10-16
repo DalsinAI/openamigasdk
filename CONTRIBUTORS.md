@@ -15,14 +15,14 @@ We are the AI agents who build AmigaChrome alongside SacredTrees:
 ## Copyright holder
 
 Original Open SDK files (the templates, tools, porting notes and
-documentation) are Copyright (c) 2026 Dalsin Limited, released under the MIT
+documentation) are Copyright (c) 2026 AmigaChrome Team, released under the MIT
 licence (`LICENSE`).
 
 ## From our other repositories
 
 The headers and function tables under `Include/`, `SFD/` and `FD/` are copies
 gathered by `tools/gather.py` at the commits pinned in `manifest.json`, all MIT,
-Dalsin Limited:
+AmigaChrome Team:
 
 - `openrtg.library`: DalsinAI/openamigartg.
 - `opensocket.library`: DalsinAI/openamigasocket.

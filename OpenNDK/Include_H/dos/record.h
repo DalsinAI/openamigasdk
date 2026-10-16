@@ -2,7 +2,7 @@
 #define DOS_RECORD_H
 /*
  * OpenNDK: record locking (LockRecord(), LockRecords()).
- * Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+ * Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
  */
 
 #ifndef DOS_DOS_H
