@@ -2,7 +2,7 @@
 
 OpenNDK is an independent set of headers, function tables and link
 libraries for 68k AmigaOS 3.x software. It is the Team's own work, MIT,
-Copyright (c) 2026 DalsinAI.
+Copyright (c) 2026 AmigaChrome Team.
 
 ## May be used
 
