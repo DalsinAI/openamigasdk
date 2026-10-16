@@ -2,7 +2,7 @@
 #define PREFS_FONT_H
 /*
  * OpenNDK: font preferences (the FONT chunk).
- * Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+ * Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
  */
 
 #ifndef EXEC_TYPES_H

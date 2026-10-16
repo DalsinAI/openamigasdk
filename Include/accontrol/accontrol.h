@@ -2,7 +2,7 @@
  *
  * OpenDevice("accontrol.device", 0, (struct IORequest *)io, 0) with a
  * struct IOStdReq, then DoIO / SendIO. The device drives the ACBridge
- * control board (Zorro II, product 1; Dalsin $DA15, or 2011 before Dalsin),
+ * control board (Zorro II, product 1; AmigaChrome Team $DA15, or 2011 before AmigaChrome Team),
  * one command at a time for every program that opens it.
  *
  *   ACCMD_GETPACE   io_Actual = the CPU's pace in Hz (0: hyper, as fast as

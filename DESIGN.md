@@ -58,8 +58,8 @@ nothing is copied. ACKitchen mounts it into instances (the tools drive idea).
 
 ## 4. Licences
 
-- **The SDK repository's own files are MIT,** Copyright (c) 2026 Dalsin
-  Limited.
+- **The SDK repository's own files are MIT,** Copyright (c) 2026 AmigaChrome
+  Team.
 - **Headers keep their library's licence:**
   - ours: MIT;
   - Zune's and GLA's: the AROS Public License;

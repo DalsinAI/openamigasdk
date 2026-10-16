@@ -2,7 +2,7 @@
 #define HARDWARE_BLIT_H
 /*
  * OpenNDK: blitter register values and the queued blit node.
- * Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+ * Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
  */
 
 #ifndef EXEC_TYPES_H
