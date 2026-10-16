@@ -2,7 +2,7 @@
 #define IMAGES_GLYPH_H
 /*
  * OpenNDK: glyph.image, the small symbols ReAction gadgets draw.
- * Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+ * Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
  */
 
 #ifndef REACTION_REACTION_H

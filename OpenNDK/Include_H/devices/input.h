@@ -2,7 +2,7 @@
 #define DEVICES_INPUT_H
 /*
  * OpenNDK: input.device's commands.
- * Copyright (c) 2026 DalsinAI. MIT licence (see OpenNDK/LICENSE).
+ * Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
  */
 
 #ifndef EXEC_IO_H
