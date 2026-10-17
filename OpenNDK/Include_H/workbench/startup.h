@@ -23,7 +23,7 @@ struct WBStartup
     struct MsgPort *sm_Process;		/* the process's port */
     BPTR sm_Segment;			/* its code */
     LONG sm_NumArgs;			/* entries in sm_ArgList */
-    char *sm_ToolWindow;		/* a window description, or NULL */
+    STRPTR	sm_ToolWindow;		/* a window description, or NULL */
     struct WBArg *sm_ArgList;		/* the tool first, then the projects */
 };
 

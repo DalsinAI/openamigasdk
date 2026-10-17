@@ -408,7 +408,7 @@ def varargs_inline(lib, f):
                                       "".join(", (%s)(%s)" % (ga.type, a.name) for a, ga in zip(fixed, g.args)) + ", " + addr)
     body = ("\t%s;" % call) if f.ret_kind() == "void" else ("\treturn %s;" % call)
     names = [a.name for a in fixed]
-    margs = ["(%s)(%s)" % (base_t(lib), "%s_BASE_NAME" % lib.guard)] + ["(%s)(%s)" % (a.type, a.name) for a in fixed]
+    margs = ["(%s)(void *)(%s)" % (base_t(lib), "%s_BASE_NAME" % lib.guard)] + ["(%s)(%s)" % (a.type, a.name) for a in fixed]
     if names:
         macro = "#define %s(%s, ...) %s(%s, ##__VA_ARGS__)" % (f.name, ", ".join(names), fname, ", ".join(margs))
     else:
@@ -516,14 +516,15 @@ def inline_func(lib, f, bn):
     # int to a ULONG, without a warning under -Werror
     # the base too, as NDK 3.2's inline headers take any pointer there (a
     # program's own struct Library *LocaleBase, say)
-    callargs = ([] if base_arg else ["(%s)(%s)" % (base_t(lib), bn)]) + ["(%s)(%s)" % (a.type, a.name) for a in f.args]
+    # (through void *, so a C++ object that converts to struct Library * works too)
+    callargs = ([] if base_arg else ["(%s)(void *)(%s)" % (base_t(lib), bn)]) + ["(%s)(%s)" % (a.type, a.name) for a in f.args]
     macro = "#define %s(%s) %s(%s)" % (f.name, ", ".join(a.name for a in f.args), fname,
                                          ", ".join(callargs))
     if not base_arg:
         # __<call>_base(base, ...): the call through a base of the caller's,
         # as the GCC packaging of NDK 3.2 (sfdc's inline headers) has it
         names = ["__ndk_b"] + [a.name for a in f.args]
-        bargs = ["(%s)(__ndk_b)" % base_t(lib)] + callargs[1:]
+        bargs = ["(%s)(void *)(__ndk_b)" % base_t(lib)] + callargs[1:]
         macro += "\n#define __%s_base(%s) %s(%s)" % (f.name, ", ".join(names), fname, ", ".join(bargs))
     return "%s\n{\n%s\n}\n%s\n" % (sig, "\n".join(body), macro)
 

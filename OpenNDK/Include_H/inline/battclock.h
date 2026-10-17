@@ -38,8 +38,8 @@ __battclock_ResetBattClock(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ResetBattClock() __battclock_ResetBattClock((__battclock_base_t)(BATTCLOCK_BASE_NAME))
-#define __ResetBattClock_base(__ndk_b) __battclock_ResetBattClock((__battclock_base_t)(__ndk_b))
+#define ResetBattClock() __battclock_ResetBattClock((__battclock_base_t)(void *)(BATTCLOCK_BASE_NAME))
+#define __ResetBattClock_base(__ndk_b) __battclock_ResetBattClock((__battclock_base_t)(void *)(__ndk_b))
 
 static __inline__ ULONG
 __battclock_ReadBattClock(struct Library *__base)
@@ -55,8 +55,8 @@ __battclock_ReadBattClock(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ReadBattClock() __battclock_ReadBattClock((__battclock_base_t)(BATTCLOCK_BASE_NAME))
-#define __ReadBattClock_base(__ndk_b) __battclock_ReadBattClock((__battclock_base_t)(__ndk_b))
+#define ReadBattClock() __battclock_ReadBattClock((__battclock_base_t)(void *)(BATTCLOCK_BASE_NAME))
+#define __ReadBattClock_base(__ndk_b) __battclock_ReadBattClock((__battclock_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __battclock_WriteBattClock(struct Library *__base, ULONG time)
@@ -72,7 +72,7 @@ __battclock_WriteBattClock(struct Library *__base, ULONG time)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WriteBattClock(time) __battclock_WriteBattClock((__battclock_base_t)(BATTCLOCK_BASE_NAME), (ULONG)(time))
-#define __WriteBattClock_base(__ndk_b, time) __battclock_WriteBattClock((__battclock_base_t)(__ndk_b), (ULONG)(time))
+#define WriteBattClock(time) __battclock_WriteBattClock((__battclock_base_t)(void *)(BATTCLOCK_BASE_NAME), (ULONG)(time))
+#define __WriteBattClock_base(__ndk_b, time) __battclock_WriteBattClock((__battclock_base_t)(void *)(__ndk_b), (ULONG)(time))
 
 #endif /* INLINE_BATTCLOCK_H */

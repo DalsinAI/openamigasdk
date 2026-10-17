@@ -24,14 +24,14 @@
 /* One entry; only the fields up to the type asked for are valid */
 struct ExAllData {
 	struct ExAllData *ed_Next;
-	UBYTE	*ed_Name;
+	STRPTR	ed_Name;
 	LONG	ed_Type;
 	ULONG	ed_Size;
 	ULONG	ed_Prot;
 	ULONG	ed_Days;
 	ULONG	ed_Mins;
 	ULONG	ed_Ticks;
-	UBYTE	*ed_Comment;
+	STRPTR	ed_Comment;
 	UWORD	ed_OwnerUID;
 	UWORD	ed_OwnerGID;
 };
@@ -40,7 +40,7 @@ struct ExAllData {
 struct ExAllControl {
 	ULONG	eac_Entries;		/* entries in this buffer */
 	ULONG	eac_LastKey;		/* 0 before the first call */
-	UBYTE	*eac_MatchString;	/* a parsed pattern, or NULL */
+	STRPTR	eac_MatchString;	/* a parsed pattern, or NULL */
 	struct Hook *eac_MatchFunc;	/* or a hook that picks entries */
 };
 

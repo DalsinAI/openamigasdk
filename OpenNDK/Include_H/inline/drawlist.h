@@ -38,7 +38,7 @@ __drawlist_DRAWLIST_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define DRAWLIST_GetClass() __drawlist_DRAWLIST_GetClass((__drawlist_base_t)(DRAWLIST_BASE_NAME))
-#define __DRAWLIST_GetClass_base(__ndk_b) __drawlist_DRAWLIST_GetClass((__drawlist_base_t)(__ndk_b))
+#define DRAWLIST_GetClass() __drawlist_DRAWLIST_GetClass((__drawlist_base_t)(void *)(DRAWLIST_BASE_NAME))
+#define __DRAWLIST_GetClass_base(__ndk_b) __drawlist_DRAWLIST_GetClass((__drawlist_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_DRAWLIST_H */

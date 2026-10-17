@@ -90,8 +90,8 @@ struct Screen
 
     UWORD Flags;
 
-    UBYTE *Title;
-    UBYTE *DefaultTitle;
+    STRPTR	Title;
+    STRPTR	DefaultTitle;
 
     /* The bar and the window borders' sizes */
     BYTE BarHeight, BarVBorder, BarHBorder, MenuVBorder, MenuHBorder;
@@ -206,7 +206,7 @@ struct NewScreen
     UWORD ViewModes;
     UWORD Type;
     struct TextAttr *Font;
-    UBYTE *DefaultTitle;
+    STRPTR	DefaultTitle;
     struct Gadget *Gadgets;
     struct BitMap *CustomBitMap;
 };
@@ -219,7 +219,7 @@ struct ExtNewScreen
     UWORD ViewModes;
     UWORD Type;
     struct TextAttr *Font;
-    UBYTE *DefaultTitle;
+    STRPTR	DefaultTitle;
     struct Gadget *Gadgets;
     struct BitMap *CustomBitMap;
     struct TagItem *Extension;

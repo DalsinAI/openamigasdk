@@ -14,7 +14,7 @@
 
 /* A string to parse in place of the command line */
 struct CSource {
-	UBYTE	*CS_Buffer;
+	STRPTR	CS_Buffer;
 	LONG	CS_Length;
 	LONG	CS_CurChr;	/* where parsing has reached */
 };
@@ -24,9 +24,9 @@ struct CSource {
 struct RDArgs {
 	struct CSource RDA_Source;	/* the input, when CS_Buffer is set */
 	LONG	RDA_DAList;		/* private */
-	UBYTE	*RDA_Buffer;		/* optional buffer for the answers */
+	STRPTR	RDA_Buffer;		/* optional buffer for the answers */
 	LONG	RDA_BufSiz;
-	UBYTE	*RDA_ExtHelp;		/* text shown for "?" */
+	STRPTR	RDA_ExtHelp;		/* text shown for "?" */
 	LONG	RDA_Flags;		/* RDAF_ */
 };
 

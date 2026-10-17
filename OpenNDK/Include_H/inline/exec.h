@@ -38,8 +38,8 @@ __exec_Supervisor(struct ExecBase *__base, ULONG (*CONST userFunction)())
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define Supervisor(userFunction) __exec_Supervisor((__exec_base_t)(EXEC_BASE_NAME), (ULONG (*CONST )())(userFunction))
-#define __Supervisor_base(__ndk_b, userFunction) __exec_Supervisor((__exec_base_t)(__ndk_b), (ULONG (*CONST )())(userFunction))
+#define Supervisor(userFunction) __exec_Supervisor((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG (*CONST )())(userFunction))
+#define __Supervisor_base(__ndk_b, userFunction) __exec_Supervisor((__exec_base_t)(void *)(__ndk_b), (ULONG (*CONST )())(userFunction))
 
 static __inline__ VOID
 __exec_InitCode(struct ExecBase *__base, ULONG startClass, ULONG version)
@@ -55,8 +55,8 @@ __exec_InitCode(struct ExecBase *__base, ULONG startClass, ULONG version)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitCode(startClass, version) __exec_InitCode((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(startClass), (ULONG)(version))
-#define __InitCode_base(__ndk_b, startClass, version) __exec_InitCode((__exec_base_t)(__ndk_b), (ULONG)(startClass), (ULONG)(version))
+#define InitCode(startClass, version) __exec_InitCode((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(startClass), (ULONG)(version))
+#define __InitCode_base(__ndk_b, startClass, version) __exec_InitCode((__exec_base_t)(void *)(__ndk_b), (ULONG)(startClass), (ULONG)(version))
 
 static __inline__ VOID
 __exec_InitStruct(struct ExecBase *__base, CONST_APTR initTable, APTR memory, ULONG size)
@@ -73,8 +73,8 @@ __exec_InitStruct(struct ExecBase *__base, CONST_APTR initTable, APTR memory, UL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitStruct(initTable, memory, size) __exec_InitStruct((__exec_base_t)(EXEC_BASE_NAME), (CONST_APTR)(initTable), (APTR)(memory), (ULONG)(size))
-#define __InitStruct_base(__ndk_b, initTable, memory, size) __exec_InitStruct((__exec_base_t)(__ndk_b), (CONST_APTR)(initTable), (APTR)(memory), (ULONG)(size))
+#define InitStruct(initTable, memory, size) __exec_InitStruct((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_APTR)(initTable), (APTR)(memory), (ULONG)(size))
+#define __InitStruct_base(__ndk_b, initTable, memory, size) __exec_InitStruct((__exec_base_t)(void *)(__ndk_b), (CONST_APTR)(initTable), (APTR)(memory), (ULONG)(size))
 
 static __inline__ struct Library *
 __exec_MakeLibrary(struct ExecBase *__base, CONST_APTR funcInit, CONST_APTR structInit, ULONG (*CONST libInit)(), ULONG dataSize, ULONG segList)
@@ -91,8 +91,8 @@ __exec_MakeLibrary(struct ExecBase *__base, CONST_APTR funcInit, CONST_APTR stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Library *)_d0;
 }
-#define MakeLibrary(funcInit, structInit, libInit, dataSize, segList) __exec_MakeLibrary((__exec_base_t)(EXEC_BASE_NAME), (CONST_APTR)(funcInit), (CONST_APTR)(structInit), (ULONG (*CONST )())(libInit), (ULONG)(dataSize), (ULONG)(segList))
-#define __MakeLibrary_base(__ndk_b, funcInit, structInit, libInit, dataSize, segList) __exec_MakeLibrary((__exec_base_t)(__ndk_b), (CONST_APTR)(funcInit), (CONST_APTR)(structInit), (ULONG (*CONST )())(libInit), (ULONG)(dataSize), (ULONG)(segList))
+#define MakeLibrary(funcInit, structInit, libInit, dataSize, segList) __exec_MakeLibrary((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_APTR)(funcInit), (CONST_APTR)(structInit), (ULONG (*CONST )())(libInit), (ULONG)(dataSize), (ULONG)(segList))
+#define __MakeLibrary_base(__ndk_b, funcInit, structInit, libInit, dataSize, segList) __exec_MakeLibrary((__exec_base_t)(void *)(__ndk_b), (CONST_APTR)(funcInit), (CONST_APTR)(structInit), (ULONG (*CONST )())(libInit), (ULONG)(dataSize), (ULONG)(segList))
 
 static __inline__ VOID
 __exec_MakeFunctions(struct ExecBase *__base, APTR target, CONST_APTR functionArray, ULONG funcDispBase)
@@ -109,8 +109,8 @@ __exec_MakeFunctions(struct ExecBase *__base, APTR target, CONST_APTR functionAr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define MakeFunctions(target, functionArray, funcDispBase) __exec_MakeFunctions((__exec_base_t)(EXEC_BASE_NAME), (APTR)(target), (CONST_APTR)(functionArray), (ULONG)(funcDispBase))
-#define __MakeFunctions_base(__ndk_b, target, functionArray, funcDispBase) __exec_MakeFunctions((__exec_base_t)(__ndk_b), (APTR)(target), (CONST_APTR)(functionArray), (ULONG)(funcDispBase))
+#define MakeFunctions(target, functionArray, funcDispBase) __exec_MakeFunctions((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(target), (CONST_APTR)(functionArray), (ULONG)(funcDispBase))
+#define __MakeFunctions_base(__ndk_b, target, functionArray, funcDispBase) __exec_MakeFunctions((__exec_base_t)(void *)(__ndk_b), (APTR)(target), (CONST_APTR)(functionArray), (ULONG)(funcDispBase))
 
 static __inline__ struct Resident *
 __exec_FindResident(struct ExecBase *__base, CONST_STRPTR name)
@@ -126,8 +126,8 @@ __exec_FindResident(struct ExecBase *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Resident *)_d0;
 }
-#define FindResident(name) __exec_FindResident((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(name))
-#define __FindResident_base(__ndk_b, name) __exec_FindResident((__exec_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define FindResident(name) __exec_FindResident((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindResident_base(__ndk_b, name) __exec_FindResident((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ APTR
 __exec_InitResident(struct ExecBase *__base, CONST struct Resident * resident, ULONG segList)
@@ -143,8 +143,8 @@ __exec_InitResident(struct ExecBase *__base, CONST struct Resident * resident, U
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define InitResident(resident, segList) __exec_InitResident((__exec_base_t)(EXEC_BASE_NAME), (CONST struct Resident *)(resident), (ULONG)(segList))
-#define __InitResident_base(__ndk_b, resident, segList) __exec_InitResident((__exec_base_t)(__ndk_b), (CONST struct Resident *)(resident), (ULONG)(segList))
+#define InitResident(resident, segList) __exec_InitResident((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST struct Resident *)(resident), (ULONG)(segList))
+#define __InitResident_base(__ndk_b, resident, segList) __exec_InitResident((__exec_base_t)(void *)(__ndk_b), (CONST struct Resident *)(resident), (ULONG)(segList))
 
 static __inline__ VOID
 __exec_Alert(struct ExecBase *__base, ULONG alertNum)
@@ -161,8 +161,8 @@ __exec_Alert(struct ExecBase *__base, ULONG alertNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Alert(alertNum) __exec_Alert((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(alertNum))
-#define __Alert_base(__ndk_b, alertNum) __exec_Alert((__exec_base_t)(__ndk_b), (ULONG)(alertNum))
+#define Alert(alertNum) __exec_Alert((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(alertNum))
+#define __Alert_base(__ndk_b, alertNum) __exec_Alert((__exec_base_t)(void *)(__ndk_b), (ULONG)(alertNum))
 
 static __inline__ VOID
 __exec_Debug(struct ExecBase *__base, ULONG flags)
@@ -178,8 +178,8 @@ __exec_Debug(struct ExecBase *__base, ULONG flags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Debug(flags) __exec_Debug((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(flags))
-#define __Debug_base(__ndk_b, flags) __exec_Debug((__exec_base_t)(__ndk_b), (ULONG)(flags))
+#define Debug(flags) __exec_Debug((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(flags))
+#define __Debug_base(__ndk_b, flags) __exec_Debug((__exec_base_t)(void *)(__ndk_b), (ULONG)(flags))
 
 static __inline__ VOID
 __exec_Disable(struct ExecBase *__base)
@@ -195,8 +195,8 @@ __exec_Disable(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Disable() __exec_Disable((__exec_base_t)(EXEC_BASE_NAME))
-#define __Disable_base(__ndk_b) __exec_Disable((__exec_base_t)(__ndk_b))
+#define Disable() __exec_Disable((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __Disable_base(__ndk_b) __exec_Disable((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __exec_Enable(struct ExecBase *__base)
@@ -212,8 +212,8 @@ __exec_Enable(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Enable() __exec_Enable((__exec_base_t)(EXEC_BASE_NAME))
-#define __Enable_base(__ndk_b) __exec_Enable((__exec_base_t)(__ndk_b))
+#define Enable() __exec_Enable((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __Enable_base(__ndk_b) __exec_Enable((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __exec_Forbid(struct ExecBase *__base)
@@ -229,8 +229,8 @@ __exec_Forbid(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Forbid() __exec_Forbid((__exec_base_t)(EXEC_BASE_NAME))
-#define __Forbid_base(__ndk_b) __exec_Forbid((__exec_base_t)(__ndk_b))
+#define Forbid() __exec_Forbid((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __Forbid_base(__ndk_b) __exec_Forbid((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __exec_Permit(struct ExecBase *__base)
@@ -246,8 +246,8 @@ __exec_Permit(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Permit() __exec_Permit((__exec_base_t)(EXEC_BASE_NAME))
-#define __Permit_base(__ndk_b) __exec_Permit((__exec_base_t)(__ndk_b))
+#define Permit() __exec_Permit((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __Permit_base(__ndk_b) __exec_Permit((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ ULONG
 __exec_SetSR(struct ExecBase *__base, ULONG newSR, ULONG mask)
@@ -263,8 +263,8 @@ __exec_SetSR(struct ExecBase *__base, ULONG newSR, ULONG mask)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetSR(newSR, mask) __exec_SetSR((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(newSR), (ULONG)(mask))
-#define __SetSR_base(__ndk_b, newSR, mask) __exec_SetSR((__exec_base_t)(__ndk_b), (ULONG)(newSR), (ULONG)(mask))
+#define SetSR(newSR, mask) __exec_SetSR((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(newSR), (ULONG)(mask))
+#define __SetSR_base(__ndk_b, newSR, mask) __exec_SetSR((__exec_base_t)(void *)(__ndk_b), (ULONG)(newSR), (ULONG)(mask))
 
 static __inline__ APTR
 __exec_SuperState(struct ExecBase *__base)
@@ -280,8 +280,8 @@ __exec_SuperState(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define SuperState() __exec_SuperState((__exec_base_t)(EXEC_BASE_NAME))
-#define __SuperState_base(__ndk_b) __exec_SuperState((__exec_base_t)(__ndk_b))
+#define SuperState() __exec_SuperState((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __SuperState_base(__ndk_b) __exec_SuperState((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __exec_UserState(struct ExecBase *__base, APTR sysStack)
@@ -297,8 +297,8 @@ __exec_UserState(struct ExecBase *__base, APTR sysStack)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UserState(sysStack) __exec_UserState((__exec_base_t)(EXEC_BASE_NAME), (APTR)(sysStack))
-#define __UserState_base(__ndk_b, sysStack) __exec_UserState((__exec_base_t)(__ndk_b), (APTR)(sysStack))
+#define UserState(sysStack) __exec_UserState((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(sysStack))
+#define __UserState_base(__ndk_b, sysStack) __exec_UserState((__exec_base_t)(void *)(__ndk_b), (APTR)(sysStack))
 
 static __inline__ struct Interrupt *
 __exec_SetIntVector(struct ExecBase *__base, LONG intNumber, struct Interrupt * interrupt)
@@ -314,8 +314,8 @@ __exec_SetIntVector(struct ExecBase *__base, LONG intNumber, struct Interrupt * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Interrupt *)_d0;
 }
-#define SetIntVector(intNumber, interrupt) __exec_SetIntVector((__exec_base_t)(EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
-#define __SetIntVector_base(__ndk_b, intNumber, interrupt) __exec_SetIntVector((__exec_base_t)(__ndk_b), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define SetIntVector(intNumber, interrupt) __exec_SetIntVector((__exec_base_t)(void *)(EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define __SetIntVector_base(__ndk_b, intNumber, interrupt) __exec_SetIntVector((__exec_base_t)(void *)(__ndk_b), (LONG)(intNumber), (struct Interrupt *)(interrupt))
 
 static __inline__ VOID
 __exec_AddIntServer(struct ExecBase *__base, LONG intNumber, struct Interrupt * interrupt)
@@ -331,8 +331,8 @@ __exec_AddIntServer(struct ExecBase *__base, LONG intNumber, struct Interrupt * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddIntServer(intNumber, interrupt) __exec_AddIntServer((__exec_base_t)(EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
-#define __AddIntServer_base(__ndk_b, intNumber, interrupt) __exec_AddIntServer((__exec_base_t)(__ndk_b), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define AddIntServer(intNumber, interrupt) __exec_AddIntServer((__exec_base_t)(void *)(EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define __AddIntServer_base(__ndk_b, intNumber, interrupt) __exec_AddIntServer((__exec_base_t)(void *)(__ndk_b), (LONG)(intNumber), (struct Interrupt *)(interrupt))
 
 static __inline__ VOID
 __exec_RemIntServer(struct ExecBase *__base, LONG intNumber, struct Interrupt * interrupt)
@@ -348,8 +348,8 @@ __exec_RemIntServer(struct ExecBase *__base, LONG intNumber, struct Interrupt * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemIntServer(intNumber, interrupt) __exec_RemIntServer((__exec_base_t)(EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
-#define __RemIntServer_base(__ndk_b, intNumber, interrupt) __exec_RemIntServer((__exec_base_t)(__ndk_b), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define RemIntServer(intNumber, interrupt) __exec_RemIntServer((__exec_base_t)(void *)(EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define __RemIntServer_base(__ndk_b, intNumber, interrupt) __exec_RemIntServer((__exec_base_t)(void *)(__ndk_b), (LONG)(intNumber), (struct Interrupt *)(interrupt))
 
 static __inline__ VOID
 __exec_Cause(struct ExecBase *__base, struct Interrupt * interrupt)
@@ -365,8 +365,8 @@ __exec_Cause(struct ExecBase *__base, struct Interrupt * interrupt)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Cause(interrupt) __exec_Cause((__exec_base_t)(EXEC_BASE_NAME), (struct Interrupt *)(interrupt))
-#define __Cause_base(__ndk_b, interrupt) __exec_Cause((__exec_base_t)(__ndk_b), (struct Interrupt *)(interrupt))
+#define Cause(interrupt) __exec_Cause((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Interrupt *)(interrupt))
+#define __Cause_base(__ndk_b, interrupt) __exec_Cause((__exec_base_t)(void *)(__ndk_b), (struct Interrupt *)(interrupt))
 
 static __inline__ APTR
 __exec_Allocate(struct ExecBase *__base, struct MemHeader * freeList, ULONG byteSize)
@@ -382,8 +382,8 @@ __exec_Allocate(struct ExecBase *__base, struct MemHeader * freeList, ULONG byte
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define Allocate(freeList, byteSize) __exec_Allocate((__exec_base_t)(EXEC_BASE_NAME), (struct MemHeader *)(freeList), (ULONG)(byteSize))
-#define __Allocate_base(__ndk_b, freeList, byteSize) __exec_Allocate((__exec_base_t)(__ndk_b), (struct MemHeader *)(freeList), (ULONG)(byteSize))
+#define Allocate(freeList, byteSize) __exec_Allocate((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MemHeader *)(freeList), (ULONG)(byteSize))
+#define __Allocate_base(__ndk_b, freeList, byteSize) __exec_Allocate((__exec_base_t)(void *)(__ndk_b), (struct MemHeader *)(freeList), (ULONG)(byteSize))
 
 static __inline__ VOID
 __exec_Deallocate(struct ExecBase *__base, struct MemHeader * freeList, APTR memoryBlock, ULONG byteSize)
@@ -399,8 +399,8 @@ __exec_Deallocate(struct ExecBase *__base, struct MemHeader * freeList, APTR mem
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Deallocate(freeList, memoryBlock, byteSize) __exec_Deallocate((__exec_base_t)(EXEC_BASE_NAME), (struct MemHeader *)(freeList), (APTR)(memoryBlock), (ULONG)(byteSize))
-#define __Deallocate_base(__ndk_b, freeList, memoryBlock, byteSize) __exec_Deallocate((__exec_base_t)(__ndk_b), (struct MemHeader *)(freeList), (APTR)(memoryBlock), (ULONG)(byteSize))
+#define Deallocate(freeList, memoryBlock, byteSize) __exec_Deallocate((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MemHeader *)(freeList), (APTR)(memoryBlock), (ULONG)(byteSize))
+#define __Deallocate_base(__ndk_b, freeList, memoryBlock, byteSize) __exec_Deallocate((__exec_base_t)(void *)(__ndk_b), (struct MemHeader *)(freeList), (APTR)(memoryBlock), (ULONG)(byteSize))
 
 static __inline__ APTR
 __exec_AllocMem(struct ExecBase *__base, ULONG byteSize, ULONG requirements)
@@ -416,8 +416,8 @@ __exec_AllocMem(struct ExecBase *__base, ULONG byteSize, ULONG requirements)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AllocMem(byteSize, requirements) __exec_AllocMem((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(byteSize), (ULONG)(requirements))
-#define __AllocMem_base(__ndk_b, byteSize, requirements) __exec_AllocMem((__exec_base_t)(__ndk_b), (ULONG)(byteSize), (ULONG)(requirements))
+#define AllocMem(byteSize, requirements) __exec_AllocMem((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(byteSize), (ULONG)(requirements))
+#define __AllocMem_base(__ndk_b, byteSize, requirements) __exec_AllocMem((__exec_base_t)(void *)(__ndk_b), (ULONG)(byteSize), (ULONG)(requirements))
 
 static __inline__ APTR
 __exec_AllocAbs(struct ExecBase *__base, ULONG byteSize, APTR location)
@@ -433,8 +433,8 @@ __exec_AllocAbs(struct ExecBase *__base, ULONG byteSize, APTR location)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AllocAbs(byteSize, location) __exec_AllocAbs((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(byteSize), (APTR)(location))
-#define __AllocAbs_base(__ndk_b, byteSize, location) __exec_AllocAbs((__exec_base_t)(__ndk_b), (ULONG)(byteSize), (APTR)(location))
+#define AllocAbs(byteSize, location) __exec_AllocAbs((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(byteSize), (APTR)(location))
+#define __AllocAbs_base(__ndk_b, byteSize, location) __exec_AllocAbs((__exec_base_t)(void *)(__ndk_b), (ULONG)(byteSize), (APTR)(location))
 
 static __inline__ VOID
 __exec_FreeMem(struct ExecBase *__base, APTR memoryBlock, ULONG byteSize)
@@ -450,8 +450,8 @@ __exec_FreeMem(struct ExecBase *__base, APTR memoryBlock, ULONG byteSize)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeMem(memoryBlock, byteSize) __exec_FreeMem((__exec_base_t)(EXEC_BASE_NAME), (APTR)(memoryBlock), (ULONG)(byteSize))
-#define __FreeMem_base(__ndk_b, memoryBlock, byteSize) __exec_FreeMem((__exec_base_t)(__ndk_b), (APTR)(memoryBlock), (ULONG)(byteSize))
+#define FreeMem(memoryBlock, byteSize) __exec_FreeMem((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(memoryBlock), (ULONG)(byteSize))
+#define __FreeMem_base(__ndk_b, memoryBlock, byteSize) __exec_FreeMem((__exec_base_t)(void *)(__ndk_b), (APTR)(memoryBlock), (ULONG)(byteSize))
 
 static __inline__ ULONG
 __exec_AvailMem(struct ExecBase *__base, ULONG requirements)
@@ -467,8 +467,8 @@ __exec_AvailMem(struct ExecBase *__base, ULONG requirements)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define AvailMem(requirements) __exec_AvailMem((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(requirements))
-#define __AvailMem_base(__ndk_b, requirements) __exec_AvailMem((__exec_base_t)(__ndk_b), (ULONG)(requirements))
+#define AvailMem(requirements) __exec_AvailMem((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(requirements))
+#define __AvailMem_base(__ndk_b, requirements) __exec_AvailMem((__exec_base_t)(void *)(__ndk_b), (ULONG)(requirements))
 
 static __inline__ struct MemList *
 __exec_AllocEntry(struct ExecBase *__base, struct MemList * entry)
@@ -484,8 +484,8 @@ __exec_AllocEntry(struct ExecBase *__base, struct MemList * entry)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MemList *)_d0;
 }
-#define AllocEntry(entry) __exec_AllocEntry((__exec_base_t)(EXEC_BASE_NAME), (struct MemList *)(entry))
-#define __AllocEntry_base(__ndk_b, entry) __exec_AllocEntry((__exec_base_t)(__ndk_b), (struct MemList *)(entry))
+#define AllocEntry(entry) __exec_AllocEntry((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MemList *)(entry))
+#define __AllocEntry_base(__ndk_b, entry) __exec_AllocEntry((__exec_base_t)(void *)(__ndk_b), (struct MemList *)(entry))
 
 static __inline__ VOID
 __exec_FreeEntry(struct ExecBase *__base, struct MemList * entry)
@@ -501,8 +501,8 @@ __exec_FreeEntry(struct ExecBase *__base, struct MemList * entry)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeEntry(entry) __exec_FreeEntry((__exec_base_t)(EXEC_BASE_NAME), (struct MemList *)(entry))
-#define __FreeEntry_base(__ndk_b, entry) __exec_FreeEntry((__exec_base_t)(__ndk_b), (struct MemList *)(entry))
+#define FreeEntry(entry) __exec_FreeEntry((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MemList *)(entry))
+#define __FreeEntry_base(__ndk_b, entry) __exec_FreeEntry((__exec_base_t)(void *)(__ndk_b), (struct MemList *)(entry))
 
 static __inline__ VOID
 __exec_Insert(struct ExecBase *__base, struct List * list, struct Node * node, struct Node * pred)
@@ -519,8 +519,8 @@ __exec_Insert(struct ExecBase *__base, struct List * list, struct Node * node, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Insert(list, node, pred) __exec_Insert((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node), (struct Node *)(pred))
-#define __Insert_base(__ndk_b, list, node, pred) __exec_Insert((__exec_base_t)(__ndk_b), (struct List *)(list), (struct Node *)(node), (struct Node *)(pred))
+#define Insert(list, node, pred) __exec_Insert((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node), (struct Node *)(pred))
+#define __Insert_base(__ndk_b, list, node, pred) __exec_Insert((__exec_base_t)(void *)(__ndk_b), (struct List *)(list), (struct Node *)(node), (struct Node *)(pred))
 
 #define InsertMinNode(...) Insert(__VA_ARGS__)
 
@@ -538,8 +538,8 @@ __exec_AddHead(struct ExecBase *__base, struct List * list, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddHead(list, node) __exec_AddHead((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
-#define __AddHead_base(__ndk_b, list, node) __exec_AddHead((__exec_base_t)(__ndk_b), (struct List *)(list), (struct Node *)(node))
+#define AddHead(list, node) __exec_AddHead((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
+#define __AddHead_base(__ndk_b, list, node) __exec_AddHead((__exec_base_t)(void *)(__ndk_b), (struct List *)(list), (struct Node *)(node))
 
 #define AddHeadMinList(...) AddHead(__VA_ARGS__)
 
@@ -557,8 +557,8 @@ __exec_AddTail(struct ExecBase *__base, struct List * list, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddTail(list, node) __exec_AddTail((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
-#define __AddTail_base(__ndk_b, list, node) __exec_AddTail((__exec_base_t)(__ndk_b), (struct List *)(list), (struct Node *)(node))
+#define AddTail(list, node) __exec_AddTail((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
+#define __AddTail_base(__ndk_b, list, node) __exec_AddTail((__exec_base_t)(void *)(__ndk_b), (struct List *)(list), (struct Node *)(node))
 
 #define AddTailMinList(...) AddTail(__VA_ARGS__)
 
@@ -576,8 +576,8 @@ __exec_Remove(struct ExecBase *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Remove(node) __exec_Remove((__exec_base_t)(EXEC_BASE_NAME), (struct Node *)(node))
-#define __Remove_base(__ndk_b, node) __exec_Remove((__exec_base_t)(__ndk_b), (struct Node *)(node))
+#define Remove(node) __exec_Remove((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Node *)(node))
+#define __Remove_base(__ndk_b, node) __exec_Remove((__exec_base_t)(void *)(__ndk_b), (struct Node *)(node))
 
 #define RemoveMinNode(...) Remove(__VA_ARGS__)
 
@@ -595,8 +595,8 @@ __exec_RemHead(struct ExecBase *__base, struct List * list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define RemHead(list) __exec_RemHead((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(list))
-#define __RemHead_base(__ndk_b, list) __exec_RemHead((__exec_base_t)(__ndk_b), (struct List *)(list))
+#define RemHead(list) __exec_RemHead((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(list))
+#define __RemHead_base(__ndk_b, list) __exec_RemHead((__exec_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 #define RemHeadMinList(...) RemHead(__VA_ARGS__)
 
@@ -614,8 +614,8 @@ __exec_RemTail(struct ExecBase *__base, struct List * list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define RemTail(list) __exec_RemTail((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(list))
-#define __RemTail_base(__ndk_b, list) __exec_RemTail((__exec_base_t)(__ndk_b), (struct List *)(list))
+#define RemTail(list) __exec_RemTail((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(list))
+#define __RemTail_base(__ndk_b, list) __exec_RemTail((__exec_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 #define RemTailMinList(...) RemTail(__VA_ARGS__)
 
@@ -633,8 +633,8 @@ __exec_Enqueue(struct ExecBase *__base, struct List * list, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Enqueue(list, node) __exec_Enqueue((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
-#define __Enqueue_base(__ndk_b, list, node) __exec_Enqueue((__exec_base_t)(__ndk_b), (struct List *)(list), (struct Node *)(node))
+#define Enqueue(list, node) __exec_Enqueue((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
+#define __Enqueue_base(__ndk_b, list, node) __exec_Enqueue((__exec_base_t)(void *)(__ndk_b), (struct List *)(list), (struct Node *)(node))
 
 static __inline__ struct Node *
 __exec_FindName(struct ExecBase *__base, struct List * list, CONST_STRPTR name)
@@ -650,8 +650,8 @@ __exec_FindName(struct ExecBase *__base, struct List * list, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define FindName(list, name) __exec_FindName((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(list), (CONST_STRPTR)(name))
-#define __FindName_base(__ndk_b, list, name) __exec_FindName((__exec_base_t)(__ndk_b), (struct List *)(list), (CONST_STRPTR)(name))
+#define FindName(list, name) __exec_FindName((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(list), (CONST_STRPTR)(name))
+#define __FindName_base(__ndk_b, list, name) __exec_FindName((__exec_base_t)(void *)(__ndk_b), (struct List *)(list), (CONST_STRPTR)(name))
 
 static __inline__ APTR
 __exec_AddTask(struct ExecBase *__base, struct Task * task, APTR initPC, APTR finalPC)
@@ -669,8 +669,8 @@ __exec_AddTask(struct ExecBase *__base, struct Task * task, APTR initPC, APTR fi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AddTask(task, initPC, finalPC) __exec_AddTask((__exec_base_t)(EXEC_BASE_NAME), (struct Task *)(task), (APTR)(initPC), (APTR)(finalPC))
-#define __AddTask_base(__ndk_b, task, initPC, finalPC) __exec_AddTask((__exec_base_t)(__ndk_b), (struct Task *)(task), (APTR)(initPC), (APTR)(finalPC))
+#define AddTask(task, initPC, finalPC) __exec_AddTask((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Task *)(task), (APTR)(initPC), (APTR)(finalPC))
+#define __AddTask_base(__ndk_b, task, initPC, finalPC) __exec_AddTask((__exec_base_t)(void *)(__ndk_b), (struct Task *)(task), (APTR)(initPC), (APTR)(finalPC))
 
 static __inline__ VOID
 __exec_RemTask(struct ExecBase *__base, struct Task * task)
@@ -686,8 +686,8 @@ __exec_RemTask(struct ExecBase *__base, struct Task * task)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemTask(task) __exec_RemTask((__exec_base_t)(EXEC_BASE_NAME), (struct Task *)(task))
-#define __RemTask_base(__ndk_b, task) __exec_RemTask((__exec_base_t)(__ndk_b), (struct Task *)(task))
+#define RemTask(task) __exec_RemTask((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Task *)(task))
+#define __RemTask_base(__ndk_b, task) __exec_RemTask((__exec_base_t)(void *)(__ndk_b), (struct Task *)(task))
 
 static __inline__ struct Task *
 __exec_FindTask(struct ExecBase *__base, CONST_STRPTR name)
@@ -703,8 +703,8 @@ __exec_FindTask(struct ExecBase *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Task *)_d0;
 }
-#define FindTask(name) __exec_FindTask((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(name))
-#define __FindTask_base(__ndk_b, name) __exec_FindTask((__exec_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define FindTask(name) __exec_FindTask((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindTask_base(__ndk_b, name) __exec_FindTask((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BYTE
 __exec_SetTaskPri(struct ExecBase *__base, struct Task * task, LONG priority)
@@ -720,8 +720,8 @@ __exec_SetTaskPri(struct ExecBase *__base, struct Task * task, LONG priority)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BYTE)_d0;
 }
-#define SetTaskPri(task, priority) __exec_SetTaskPri((__exec_base_t)(EXEC_BASE_NAME), (struct Task *)(task), (LONG)(priority))
-#define __SetTaskPri_base(__ndk_b, task, priority) __exec_SetTaskPri((__exec_base_t)(__ndk_b), (struct Task *)(task), (LONG)(priority))
+#define SetTaskPri(task, priority) __exec_SetTaskPri((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Task *)(task), (LONG)(priority))
+#define __SetTaskPri_base(__ndk_b, task, priority) __exec_SetTaskPri((__exec_base_t)(void *)(__ndk_b), (struct Task *)(task), (LONG)(priority))
 
 static __inline__ ULONG
 __exec_SetSignal(struct ExecBase *__base, ULONG newSignals, ULONG signalSet)
@@ -737,8 +737,8 @@ __exec_SetSignal(struct ExecBase *__base, ULONG newSignals, ULONG signalSet)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetSignal(newSignals, signalSet) __exec_SetSignal((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(newSignals), (ULONG)(signalSet))
-#define __SetSignal_base(__ndk_b, newSignals, signalSet) __exec_SetSignal((__exec_base_t)(__ndk_b), (ULONG)(newSignals), (ULONG)(signalSet))
+#define SetSignal(newSignals, signalSet) __exec_SetSignal((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(newSignals), (ULONG)(signalSet))
+#define __SetSignal_base(__ndk_b, newSignals, signalSet) __exec_SetSignal((__exec_base_t)(void *)(__ndk_b), (ULONG)(newSignals), (ULONG)(signalSet))
 
 static __inline__ ULONG
 __exec_SetExcept(struct ExecBase *__base, ULONG newSignals, ULONG signalSet)
@@ -754,8 +754,8 @@ __exec_SetExcept(struct ExecBase *__base, ULONG newSignals, ULONG signalSet)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetExcept(newSignals, signalSet) __exec_SetExcept((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(newSignals), (ULONG)(signalSet))
-#define __SetExcept_base(__ndk_b, newSignals, signalSet) __exec_SetExcept((__exec_base_t)(__ndk_b), (ULONG)(newSignals), (ULONG)(signalSet))
+#define SetExcept(newSignals, signalSet) __exec_SetExcept((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(newSignals), (ULONG)(signalSet))
+#define __SetExcept_base(__ndk_b, newSignals, signalSet) __exec_SetExcept((__exec_base_t)(void *)(__ndk_b), (ULONG)(newSignals), (ULONG)(signalSet))
 
 static __inline__ ULONG
 __exec_Wait(struct ExecBase *__base, ULONG signalSet)
@@ -771,8 +771,8 @@ __exec_Wait(struct ExecBase *__base, ULONG signalSet)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define Wait(signalSet) __exec_Wait((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(signalSet))
-#define __Wait_base(__ndk_b, signalSet) __exec_Wait((__exec_base_t)(__ndk_b), (ULONG)(signalSet))
+#define Wait(signalSet) __exec_Wait((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(signalSet))
+#define __Wait_base(__ndk_b, signalSet) __exec_Wait((__exec_base_t)(void *)(__ndk_b), (ULONG)(signalSet))
 
 static __inline__ VOID
 __exec_Signal(struct ExecBase *__base, struct Task * task, ULONG signalSet)
@@ -788,8 +788,8 @@ __exec_Signal(struct ExecBase *__base, struct Task * task, ULONG signalSet)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Signal(task, signalSet) __exec_Signal((__exec_base_t)(EXEC_BASE_NAME), (struct Task *)(task), (ULONG)(signalSet))
-#define __Signal_base(__ndk_b, task, signalSet) __exec_Signal((__exec_base_t)(__ndk_b), (struct Task *)(task), (ULONG)(signalSet))
+#define Signal(task, signalSet) __exec_Signal((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Task *)(task), (ULONG)(signalSet))
+#define __Signal_base(__ndk_b, task, signalSet) __exec_Signal((__exec_base_t)(void *)(__ndk_b), (struct Task *)(task), (ULONG)(signalSet))
 
 static __inline__ BYTE
 __exec_AllocSignal(struct ExecBase *__base, BYTE signalNum)
@@ -805,8 +805,8 @@ __exec_AllocSignal(struct ExecBase *__base, BYTE signalNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BYTE)_d0;
 }
-#define AllocSignal(signalNum) __exec_AllocSignal((__exec_base_t)(EXEC_BASE_NAME), (BYTE)(signalNum))
-#define __AllocSignal_base(__ndk_b, signalNum) __exec_AllocSignal((__exec_base_t)(__ndk_b), (BYTE)(signalNum))
+#define AllocSignal(signalNum) __exec_AllocSignal((__exec_base_t)(void *)(EXEC_BASE_NAME), (BYTE)(signalNum))
+#define __AllocSignal_base(__ndk_b, signalNum) __exec_AllocSignal((__exec_base_t)(void *)(__ndk_b), (BYTE)(signalNum))
 
 static __inline__ VOID
 __exec_FreeSignal(struct ExecBase *__base, BYTE signalNum)
@@ -822,8 +822,8 @@ __exec_FreeSignal(struct ExecBase *__base, BYTE signalNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeSignal(signalNum) __exec_FreeSignal((__exec_base_t)(EXEC_BASE_NAME), (BYTE)(signalNum))
-#define __FreeSignal_base(__ndk_b, signalNum) __exec_FreeSignal((__exec_base_t)(__ndk_b), (BYTE)(signalNum))
+#define FreeSignal(signalNum) __exec_FreeSignal((__exec_base_t)(void *)(EXEC_BASE_NAME), (BYTE)(signalNum))
+#define __FreeSignal_base(__ndk_b, signalNum) __exec_FreeSignal((__exec_base_t)(void *)(__ndk_b), (BYTE)(signalNum))
 
 static __inline__ LONG
 __exec_AllocTrap(struct ExecBase *__base, LONG trapNum)
@@ -839,8 +839,8 @@ __exec_AllocTrap(struct ExecBase *__base, LONG trapNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AllocTrap(trapNum) __exec_AllocTrap((__exec_base_t)(EXEC_BASE_NAME), (LONG)(trapNum))
-#define __AllocTrap_base(__ndk_b, trapNum) __exec_AllocTrap((__exec_base_t)(__ndk_b), (LONG)(trapNum))
+#define AllocTrap(trapNum) __exec_AllocTrap((__exec_base_t)(void *)(EXEC_BASE_NAME), (LONG)(trapNum))
+#define __AllocTrap_base(__ndk_b, trapNum) __exec_AllocTrap((__exec_base_t)(void *)(__ndk_b), (LONG)(trapNum))
 
 static __inline__ VOID
 __exec_FreeTrap(struct ExecBase *__base, LONG trapNum)
@@ -856,8 +856,8 @@ __exec_FreeTrap(struct ExecBase *__base, LONG trapNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeTrap(trapNum) __exec_FreeTrap((__exec_base_t)(EXEC_BASE_NAME), (LONG)(trapNum))
-#define __FreeTrap_base(__ndk_b, trapNum) __exec_FreeTrap((__exec_base_t)(__ndk_b), (LONG)(trapNum))
+#define FreeTrap(trapNum) __exec_FreeTrap((__exec_base_t)(void *)(EXEC_BASE_NAME), (LONG)(trapNum))
+#define __FreeTrap_base(__ndk_b, trapNum) __exec_FreeTrap((__exec_base_t)(void *)(__ndk_b), (LONG)(trapNum))
 
 static __inline__ VOID
 __exec_AddPort(struct ExecBase *__base, struct MsgPort * port)
@@ -873,8 +873,8 @@ __exec_AddPort(struct ExecBase *__base, struct MsgPort * port)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddPort(port) __exec_AddPort((__exec_base_t)(EXEC_BASE_NAME), (struct MsgPort *)(port))
-#define __AddPort_base(__ndk_b, port) __exec_AddPort((__exec_base_t)(__ndk_b), (struct MsgPort *)(port))
+#define AddPort(port) __exec_AddPort((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __AddPort_base(__ndk_b, port) __exec_AddPort((__exec_base_t)(void *)(__ndk_b), (struct MsgPort *)(port))
 
 static __inline__ VOID
 __exec_RemPort(struct ExecBase *__base, struct MsgPort * port)
@@ -890,8 +890,8 @@ __exec_RemPort(struct ExecBase *__base, struct MsgPort * port)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemPort(port) __exec_RemPort((__exec_base_t)(EXEC_BASE_NAME), (struct MsgPort *)(port))
-#define __RemPort_base(__ndk_b, port) __exec_RemPort((__exec_base_t)(__ndk_b), (struct MsgPort *)(port))
+#define RemPort(port) __exec_RemPort((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __RemPort_base(__ndk_b, port) __exec_RemPort((__exec_base_t)(void *)(__ndk_b), (struct MsgPort *)(port))
 
 static __inline__ VOID
 __exec_PutMsg(struct ExecBase *__base, struct MsgPort * port, struct Message * message)
@@ -907,8 +907,8 @@ __exec_PutMsg(struct ExecBase *__base, struct MsgPort * port, struct Message * m
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define PutMsg(port, message) __exec_PutMsg((__exec_base_t)(EXEC_BASE_NAME), (struct MsgPort *)(port), (struct Message *)(message))
-#define __PutMsg_base(__ndk_b, port, message) __exec_PutMsg((__exec_base_t)(__ndk_b), (struct MsgPort *)(port), (struct Message *)(message))
+#define PutMsg(port, message) __exec_PutMsg((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MsgPort *)(port), (struct Message *)(message))
+#define __PutMsg_base(__ndk_b, port, message) __exec_PutMsg((__exec_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (struct Message *)(message))
 
 static __inline__ struct Message *
 __exec_GetMsg(struct ExecBase *__base, struct MsgPort * port)
@@ -924,8 +924,8 @@ __exec_GetMsg(struct ExecBase *__base, struct MsgPort * port)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Message *)_d0;
 }
-#define GetMsg(port) __exec_GetMsg((__exec_base_t)(EXEC_BASE_NAME), (struct MsgPort *)(port))
-#define __GetMsg_base(__ndk_b, port) __exec_GetMsg((__exec_base_t)(__ndk_b), (struct MsgPort *)(port))
+#define GetMsg(port) __exec_GetMsg((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __GetMsg_base(__ndk_b, port) __exec_GetMsg((__exec_base_t)(void *)(__ndk_b), (struct MsgPort *)(port))
 
 static __inline__ VOID
 __exec_ReplyMsg(struct ExecBase *__base, struct Message * message)
@@ -941,8 +941,8 @@ __exec_ReplyMsg(struct ExecBase *__base, struct Message * message)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReplyMsg(message) __exec_ReplyMsg((__exec_base_t)(EXEC_BASE_NAME), (struct Message *)(message))
-#define __ReplyMsg_base(__ndk_b, message) __exec_ReplyMsg((__exec_base_t)(__ndk_b), (struct Message *)(message))
+#define ReplyMsg(message) __exec_ReplyMsg((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Message *)(message))
+#define __ReplyMsg_base(__ndk_b, message) __exec_ReplyMsg((__exec_base_t)(void *)(__ndk_b), (struct Message *)(message))
 
 static __inline__ struct Message *
 __exec_WaitPort(struct ExecBase *__base, struct MsgPort * port)
@@ -958,8 +958,8 @@ __exec_WaitPort(struct ExecBase *__base, struct MsgPort * port)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Message *)_d0;
 }
-#define WaitPort(port) __exec_WaitPort((__exec_base_t)(EXEC_BASE_NAME), (struct MsgPort *)(port))
-#define __WaitPort_base(__ndk_b, port) __exec_WaitPort((__exec_base_t)(__ndk_b), (struct MsgPort *)(port))
+#define WaitPort(port) __exec_WaitPort((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __WaitPort_base(__ndk_b, port) __exec_WaitPort((__exec_base_t)(void *)(__ndk_b), (struct MsgPort *)(port))
 
 static __inline__ struct MsgPort *
 __exec_FindPort(struct ExecBase *__base, CONST_STRPTR name)
@@ -975,8 +975,8 @@ __exec_FindPort(struct ExecBase *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define FindPort(name) __exec_FindPort((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(name))
-#define __FindPort_base(__ndk_b, name) __exec_FindPort((__exec_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define FindPort(name) __exec_FindPort((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindPort_base(__ndk_b, name) __exec_FindPort((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ VOID
 __exec_AddLibrary(struct ExecBase *__base, struct Library * library)
@@ -992,8 +992,8 @@ __exec_AddLibrary(struct ExecBase *__base, struct Library * library)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddLibrary(library) __exec_AddLibrary((__exec_base_t)(EXEC_BASE_NAME), (struct Library *)(library))
-#define __AddLibrary_base(__ndk_b, library) __exec_AddLibrary((__exec_base_t)(__ndk_b), (struct Library *)(library))
+#define AddLibrary(library) __exec_AddLibrary((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Library *)(library))
+#define __AddLibrary_base(__ndk_b, library) __exec_AddLibrary((__exec_base_t)(void *)(__ndk_b), (struct Library *)(library))
 
 static __inline__ VOID
 __exec_RemLibrary(struct ExecBase *__base, struct Library * library)
@@ -1009,8 +1009,8 @@ __exec_RemLibrary(struct ExecBase *__base, struct Library * library)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemLibrary(library) __exec_RemLibrary((__exec_base_t)(EXEC_BASE_NAME), (struct Library *)(library))
-#define __RemLibrary_base(__ndk_b, library) __exec_RemLibrary((__exec_base_t)(__ndk_b), (struct Library *)(library))
+#define RemLibrary(library) __exec_RemLibrary((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Library *)(library))
+#define __RemLibrary_base(__ndk_b, library) __exec_RemLibrary((__exec_base_t)(void *)(__ndk_b), (struct Library *)(library))
 
 static __inline__ struct Library *
 __exec_OldOpenLibrary(struct ExecBase *__base, CONST_STRPTR libName)
@@ -1026,8 +1026,8 @@ __exec_OldOpenLibrary(struct ExecBase *__base, CONST_STRPTR libName)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Library *)_d0;
 }
-#define OldOpenLibrary(libName) __exec_OldOpenLibrary((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(libName))
-#define __OldOpenLibrary_base(__ndk_b, libName) __exec_OldOpenLibrary((__exec_base_t)(__ndk_b), (CONST_STRPTR)(libName))
+#define OldOpenLibrary(libName) __exec_OldOpenLibrary((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(libName))
+#define __OldOpenLibrary_base(__ndk_b, libName) __exec_OldOpenLibrary((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(libName))
 
 static __inline__ VOID
 __exec_CloseLibrary(struct ExecBase *__base, struct Library * library)
@@ -1043,8 +1043,8 @@ __exec_CloseLibrary(struct ExecBase *__base, struct Library * library)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseLibrary(library) __exec_CloseLibrary((__exec_base_t)(EXEC_BASE_NAME), (struct Library *)(library))
-#define __CloseLibrary_base(__ndk_b, library) __exec_CloseLibrary((__exec_base_t)(__ndk_b), (struct Library *)(library))
+#define CloseLibrary(library) __exec_CloseLibrary((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Library *)(library))
+#define __CloseLibrary_base(__ndk_b, library) __exec_CloseLibrary((__exec_base_t)(void *)(__ndk_b), (struct Library *)(library))
 
 static __inline__ APTR
 __exec_SetFunction(struct ExecBase *__base, struct Library * library, LONG funcOffset, ULONG (*CONST newFunction)())
@@ -1060,8 +1060,8 @@ __exec_SetFunction(struct ExecBase *__base, struct Library * library, LONG funcO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define SetFunction(library, funcOffset, newFunction) __exec_SetFunction((__exec_base_t)(EXEC_BASE_NAME), (struct Library *)(library), (LONG)(funcOffset), (ULONG (*CONST )())(newFunction))
-#define __SetFunction_base(__ndk_b, library, funcOffset, newFunction) __exec_SetFunction((__exec_base_t)(__ndk_b), (struct Library *)(library), (LONG)(funcOffset), (ULONG (*CONST )())(newFunction))
+#define SetFunction(library, funcOffset, newFunction) __exec_SetFunction((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Library *)(library), (LONG)(funcOffset), (ULONG (*CONST )())(newFunction))
+#define __SetFunction_base(__ndk_b, library, funcOffset, newFunction) __exec_SetFunction((__exec_base_t)(void *)(__ndk_b), (struct Library *)(library), (LONG)(funcOffset), (ULONG (*CONST )())(newFunction))
 
 static __inline__ VOID
 __exec_SumLibrary(struct ExecBase *__base, struct Library * library)
@@ -1077,8 +1077,8 @@ __exec_SumLibrary(struct ExecBase *__base, struct Library * library)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SumLibrary(library) __exec_SumLibrary((__exec_base_t)(EXEC_BASE_NAME), (struct Library *)(library))
-#define __SumLibrary_base(__ndk_b, library) __exec_SumLibrary((__exec_base_t)(__ndk_b), (struct Library *)(library))
+#define SumLibrary(library) __exec_SumLibrary((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Library *)(library))
+#define __SumLibrary_base(__ndk_b, library) __exec_SumLibrary((__exec_base_t)(void *)(__ndk_b), (struct Library *)(library))
 
 static __inline__ VOID
 __exec_AddDevice(struct ExecBase *__base, struct Device * device)
@@ -1094,8 +1094,8 @@ __exec_AddDevice(struct ExecBase *__base, struct Device * device)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddDevice(device) __exec_AddDevice((__exec_base_t)(EXEC_BASE_NAME), (struct Device *)(device))
-#define __AddDevice_base(__ndk_b, device) __exec_AddDevice((__exec_base_t)(__ndk_b), (struct Device *)(device))
+#define AddDevice(device) __exec_AddDevice((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Device *)(device))
+#define __AddDevice_base(__ndk_b, device) __exec_AddDevice((__exec_base_t)(void *)(__ndk_b), (struct Device *)(device))
 
 static __inline__ VOID
 __exec_RemDevice(struct ExecBase *__base, struct Device * device)
@@ -1111,8 +1111,8 @@ __exec_RemDevice(struct ExecBase *__base, struct Device * device)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemDevice(device) __exec_RemDevice((__exec_base_t)(EXEC_BASE_NAME), (struct Device *)(device))
-#define __RemDevice_base(__ndk_b, device) __exec_RemDevice((__exec_base_t)(__ndk_b), (struct Device *)(device))
+#define RemDevice(device) __exec_RemDevice((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Device *)(device))
+#define __RemDevice_base(__ndk_b, device) __exec_RemDevice((__exec_base_t)(void *)(__ndk_b), (struct Device *)(device))
 
 static __inline__ BYTE
 __exec_OpenDevice(struct ExecBase *__base, CONST_STRPTR devName, ULONG unit, struct IORequest * ioRequest, ULONG flags)
@@ -1128,8 +1128,8 @@ __exec_OpenDevice(struct ExecBase *__base, CONST_STRPTR devName, ULONG unit, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BYTE)_d0;
 }
-#define OpenDevice(devName, unit, ioRequest, flags) __exec_OpenDevice((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(devName), (ULONG)(unit), (struct IORequest *)(ioRequest), (ULONG)(flags))
-#define __OpenDevice_base(__ndk_b, devName, unit, ioRequest, flags) __exec_OpenDevice((__exec_base_t)(__ndk_b), (CONST_STRPTR)(devName), (ULONG)(unit), (struct IORequest *)(ioRequest), (ULONG)(flags))
+#define OpenDevice(devName, unit, ioRequest, flags) __exec_OpenDevice((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(devName), (ULONG)(unit), (struct IORequest *)(ioRequest), (ULONG)(flags))
+#define __OpenDevice_base(__ndk_b, devName, unit, ioRequest, flags) __exec_OpenDevice((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(devName), (ULONG)(unit), (struct IORequest *)(ioRequest), (ULONG)(flags))
 
 static __inline__ VOID
 __exec_CloseDevice(struct ExecBase *__base, struct IORequest * ioRequest)
@@ -1145,8 +1145,8 @@ __exec_CloseDevice(struct ExecBase *__base, struct IORequest * ioRequest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseDevice(ioRequest) __exec_CloseDevice((__exec_base_t)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
-#define __CloseDevice_base(__ndk_b, ioRequest) __exec_CloseDevice((__exec_base_t)(__ndk_b), (struct IORequest *)(ioRequest))
+#define CloseDevice(ioRequest) __exec_CloseDevice((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __CloseDevice_base(__ndk_b, ioRequest) __exec_CloseDevice((__exec_base_t)(void *)(__ndk_b), (struct IORequest *)(ioRequest))
 
 static __inline__ BYTE
 __exec_DoIO(struct ExecBase *__base, struct IORequest * ioRequest)
@@ -1162,8 +1162,8 @@ __exec_DoIO(struct ExecBase *__base, struct IORequest * ioRequest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BYTE)_d0;
 }
-#define DoIO(ioRequest) __exec_DoIO((__exec_base_t)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
-#define __DoIO_base(__ndk_b, ioRequest) __exec_DoIO((__exec_base_t)(__ndk_b), (struct IORequest *)(ioRequest))
+#define DoIO(ioRequest) __exec_DoIO((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __DoIO_base(__ndk_b, ioRequest) __exec_DoIO((__exec_base_t)(void *)(__ndk_b), (struct IORequest *)(ioRequest))
 
 static __inline__ VOID
 __exec_SendIO(struct ExecBase *__base, struct IORequest * ioRequest)
@@ -1179,8 +1179,8 @@ __exec_SendIO(struct ExecBase *__base, struct IORequest * ioRequest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SendIO(ioRequest) __exec_SendIO((__exec_base_t)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
-#define __SendIO_base(__ndk_b, ioRequest) __exec_SendIO((__exec_base_t)(__ndk_b), (struct IORequest *)(ioRequest))
+#define SendIO(ioRequest) __exec_SendIO((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __SendIO_base(__ndk_b, ioRequest) __exec_SendIO((__exec_base_t)(void *)(__ndk_b), (struct IORequest *)(ioRequest))
 
 static __inline__ struct IORequest *
 __exec_CheckIO(struct ExecBase *__base, struct IORequest * ioRequest)
@@ -1196,8 +1196,8 @@ __exec_CheckIO(struct ExecBase *__base, struct IORequest * ioRequest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct IORequest *)_d0;
 }
-#define CheckIO(ioRequest) __exec_CheckIO((__exec_base_t)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
-#define __CheckIO_base(__ndk_b, ioRequest) __exec_CheckIO((__exec_base_t)(__ndk_b), (struct IORequest *)(ioRequest))
+#define CheckIO(ioRequest) __exec_CheckIO((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __CheckIO_base(__ndk_b, ioRequest) __exec_CheckIO((__exec_base_t)(void *)(__ndk_b), (struct IORequest *)(ioRequest))
 
 static __inline__ BYTE
 __exec_WaitIO(struct ExecBase *__base, struct IORequest * ioRequest)
@@ -1213,8 +1213,8 @@ __exec_WaitIO(struct ExecBase *__base, struct IORequest * ioRequest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BYTE)_d0;
 }
-#define WaitIO(ioRequest) __exec_WaitIO((__exec_base_t)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
-#define __WaitIO_base(__ndk_b, ioRequest) __exec_WaitIO((__exec_base_t)(__ndk_b), (struct IORequest *)(ioRequest))
+#define WaitIO(ioRequest) __exec_WaitIO((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __WaitIO_base(__ndk_b, ioRequest) __exec_WaitIO((__exec_base_t)(void *)(__ndk_b), (struct IORequest *)(ioRequest))
 
 static __inline__ VOID
 __exec_AbortIO(struct ExecBase *__base, struct IORequest * ioRequest)
@@ -1230,8 +1230,8 @@ __exec_AbortIO(struct ExecBase *__base, struct IORequest * ioRequest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AbortIO(ioRequest) __exec_AbortIO((__exec_base_t)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
-#define __AbortIO_base(__ndk_b, ioRequest) __exec_AbortIO((__exec_base_t)(__ndk_b), (struct IORequest *)(ioRequest))
+#define AbortIO(ioRequest) __exec_AbortIO((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __AbortIO_base(__ndk_b, ioRequest) __exec_AbortIO((__exec_base_t)(void *)(__ndk_b), (struct IORequest *)(ioRequest))
 
 static __inline__ VOID
 __exec_AddResource(struct ExecBase *__base, APTR resource)
@@ -1247,8 +1247,8 @@ __exec_AddResource(struct ExecBase *__base, APTR resource)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddResource(resource) __exec_AddResource((__exec_base_t)(EXEC_BASE_NAME), (APTR)(resource))
-#define __AddResource_base(__ndk_b, resource) __exec_AddResource((__exec_base_t)(__ndk_b), (APTR)(resource))
+#define AddResource(resource) __exec_AddResource((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(resource))
+#define __AddResource_base(__ndk_b, resource) __exec_AddResource((__exec_base_t)(void *)(__ndk_b), (APTR)(resource))
 
 static __inline__ VOID
 __exec_RemResource(struct ExecBase *__base, APTR resource)
@@ -1264,8 +1264,8 @@ __exec_RemResource(struct ExecBase *__base, APTR resource)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemResource(resource) __exec_RemResource((__exec_base_t)(EXEC_BASE_NAME), (APTR)(resource))
-#define __RemResource_base(__ndk_b, resource) __exec_RemResource((__exec_base_t)(__ndk_b), (APTR)(resource))
+#define RemResource(resource) __exec_RemResource((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(resource))
+#define __RemResource_base(__ndk_b, resource) __exec_RemResource((__exec_base_t)(void *)(__ndk_b), (APTR)(resource))
 
 static __inline__ APTR
 __exec_OpenResource(struct ExecBase *__base, CONST_STRPTR resName)
@@ -1281,8 +1281,8 @@ __exec_OpenResource(struct ExecBase *__base, CONST_STRPTR resName)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define OpenResource(resName) __exec_OpenResource((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(resName))
-#define __OpenResource_base(__ndk_b, resName) __exec_OpenResource((__exec_base_t)(__ndk_b), (CONST_STRPTR)(resName))
+#define OpenResource(resName) __exec_OpenResource((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(resName))
+#define __OpenResource_base(__ndk_b, resName) __exec_OpenResource((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(resName))
 
 static __inline__ APTR
 __exec_RawDoFmt(struct ExecBase *__base, CONST_STRPTR formatString, CONST_APTR dataStream, VOID (*CONST putChProc)(), APTR putChData)
@@ -1300,8 +1300,8 @@ __exec_RawDoFmt(struct ExecBase *__base, CONST_STRPTR formatString, CONST_APTR d
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define RawDoFmt(formatString, dataStream, putChProc, putChData) __exec_RawDoFmt((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(formatString), (CONST_APTR)(dataStream), (VOID (*CONST )())(putChProc), (APTR)(putChData))
-#define __RawDoFmt_base(__ndk_b, formatString, dataStream, putChProc, putChData) __exec_RawDoFmt((__exec_base_t)(__ndk_b), (CONST_STRPTR)(formatString), (CONST_APTR)(dataStream), (VOID (*CONST )())(putChProc), (APTR)(putChData))
+#define RawDoFmt(formatString, dataStream, putChProc, putChData) __exec_RawDoFmt((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(formatString), (CONST_APTR)(dataStream), (VOID (*CONST )())(putChProc), (APTR)(putChData))
+#define __RawDoFmt_base(__ndk_b, formatString, dataStream, putChProc, putChData) __exec_RawDoFmt((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(formatString), (CONST_APTR)(dataStream), (VOID (*CONST )())(putChProc), (APTR)(putChData))
 
 static __inline__ ULONG
 __exec_GetCC(struct ExecBase *__base)
@@ -1317,8 +1317,8 @@ __exec_GetCC(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetCC() __exec_GetCC((__exec_base_t)(EXEC_BASE_NAME))
-#define __GetCC_base(__ndk_b) __exec_GetCC((__exec_base_t)(__ndk_b))
+#define GetCC() __exec_GetCC((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __GetCC_base(__ndk_b) __exec_GetCC((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ ULONG
 __exec_TypeOfMem(struct ExecBase *__base, CONST_APTR address)
@@ -1334,8 +1334,8 @@ __exec_TypeOfMem(struct ExecBase *__base, CONST_APTR address)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define TypeOfMem(address) __exec_TypeOfMem((__exec_base_t)(EXEC_BASE_NAME), (CONST_APTR)(address))
-#define __TypeOfMem_base(__ndk_b, address) __exec_TypeOfMem((__exec_base_t)(__ndk_b), (CONST_APTR)(address))
+#define TypeOfMem(address) __exec_TypeOfMem((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_APTR)(address))
+#define __TypeOfMem_base(__ndk_b, address) __exec_TypeOfMem((__exec_base_t)(void *)(__ndk_b), (CONST_APTR)(address))
 
 static __inline__ ULONG
 __exec_Procure(struct ExecBase *__base, struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg)
@@ -1351,8 +1351,8 @@ __exec_Procure(struct ExecBase *__base, struct SignalSemaphore * sigSem, struct 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define Procure(sigSem, bidMsg) __exec_Procure((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
-#define __Procure_base(__ndk_b, sigSem, bidMsg) __exec_Procure((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
+#define Procure(sigSem, bidMsg) __exec_Procure((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
+#define __Procure_base(__ndk_b, sigSem, bidMsg) __exec_Procure((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
 
 static __inline__ VOID
 __exec_Vacate(struct ExecBase *__base, struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg)
@@ -1368,8 +1368,8 @@ __exec_Vacate(struct ExecBase *__base, struct SignalSemaphore * sigSem, struct S
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Vacate(sigSem, bidMsg) __exec_Vacate((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
-#define __Vacate_base(__ndk_b, sigSem, bidMsg) __exec_Vacate((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
+#define Vacate(sigSem, bidMsg) __exec_Vacate((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
+#define __Vacate_base(__ndk_b, sigSem, bidMsg) __exec_Vacate((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
 
 static __inline__ struct Library *
 __exec_OpenLibrary(struct ExecBase *__base, CONST_STRPTR libName, ULONG version)
@@ -1385,8 +1385,8 @@ __exec_OpenLibrary(struct ExecBase *__base, CONST_STRPTR libName, ULONG version)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Library *)_d0;
 }
-#define OpenLibrary(libName, version) __exec_OpenLibrary((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(libName), (ULONG)(version))
-#define __OpenLibrary_base(__ndk_b, libName, version) __exec_OpenLibrary((__exec_base_t)(__ndk_b), (CONST_STRPTR)(libName), (ULONG)(version))
+#define OpenLibrary(libName, version) __exec_OpenLibrary((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(libName), (ULONG)(version))
+#define __OpenLibrary_base(__ndk_b, libName, version) __exec_OpenLibrary((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(libName), (ULONG)(version))
 
 static __inline__ VOID
 __exec_InitSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
@@ -1402,8 +1402,8 @@ __exec_InitSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitSemaphore(sigSem) __exec_InitSemaphore((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
-#define __InitSemaphore_base(__ndk_b, sigSem) __exec_InitSemaphore((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem))
+#define InitSemaphore(sigSem) __exec_InitSemaphore((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __InitSemaphore_base(__ndk_b, sigSem) __exec_InitSemaphore((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
 __exec_ObtainSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
@@ -1419,8 +1419,8 @@ __exec_ObtainSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ObtainSemaphore(sigSem) __exec_ObtainSemaphore((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
-#define __ObtainSemaphore_base(__ndk_b, sigSem) __exec_ObtainSemaphore((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem))
+#define ObtainSemaphore(sigSem) __exec_ObtainSemaphore((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __ObtainSemaphore_base(__ndk_b, sigSem) __exec_ObtainSemaphore((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
 __exec_ReleaseSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
@@ -1436,8 +1436,8 @@ __exec_ReleaseSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseSemaphore(sigSem) __exec_ReleaseSemaphore((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
-#define __ReleaseSemaphore_base(__ndk_b, sigSem) __exec_ReleaseSemaphore((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem))
+#define ReleaseSemaphore(sigSem) __exec_ReleaseSemaphore((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __ReleaseSemaphore_base(__ndk_b, sigSem) __exec_ReleaseSemaphore((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ ULONG
 __exec_AttemptSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
@@ -1453,8 +1453,8 @@ __exec_AttemptSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define AttemptSemaphore(sigSem) __exec_AttemptSemaphore((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
-#define __AttemptSemaphore_base(__ndk_b, sigSem) __exec_AttemptSemaphore((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem))
+#define AttemptSemaphore(sigSem) __exec_AttemptSemaphore((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __AttemptSemaphore_base(__ndk_b, sigSem) __exec_AttemptSemaphore((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
 __exec_ObtainSemaphoreList(struct ExecBase *__base, struct List * sigSem)
@@ -1470,8 +1470,8 @@ __exec_ObtainSemaphoreList(struct ExecBase *__base, struct List * sigSem)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ObtainSemaphoreList(sigSem) __exec_ObtainSemaphoreList((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(sigSem))
-#define __ObtainSemaphoreList_base(__ndk_b, sigSem) __exec_ObtainSemaphoreList((__exec_base_t)(__ndk_b), (struct List *)(sigSem))
+#define ObtainSemaphoreList(sigSem) __exec_ObtainSemaphoreList((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(sigSem))
+#define __ObtainSemaphoreList_base(__ndk_b, sigSem) __exec_ObtainSemaphoreList((__exec_base_t)(void *)(__ndk_b), (struct List *)(sigSem))
 
 static __inline__ VOID
 __exec_ReleaseSemaphoreList(struct ExecBase *__base, struct List * sigSem)
@@ -1487,8 +1487,8 @@ __exec_ReleaseSemaphoreList(struct ExecBase *__base, struct List * sigSem)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseSemaphoreList(sigSem) __exec_ReleaseSemaphoreList((__exec_base_t)(EXEC_BASE_NAME), (struct List *)(sigSem))
-#define __ReleaseSemaphoreList_base(__ndk_b, sigSem) __exec_ReleaseSemaphoreList((__exec_base_t)(__ndk_b), (struct List *)(sigSem))
+#define ReleaseSemaphoreList(sigSem) __exec_ReleaseSemaphoreList((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct List *)(sigSem))
+#define __ReleaseSemaphoreList_base(__ndk_b, sigSem) __exec_ReleaseSemaphoreList((__exec_base_t)(void *)(__ndk_b), (struct List *)(sigSem))
 
 static __inline__ struct SignalSemaphore *
 __exec_FindSemaphore(struct ExecBase *__base, CONST_STRPTR name)
@@ -1504,8 +1504,8 @@ __exec_FindSemaphore(struct ExecBase *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct SignalSemaphore *)_d0;
 }
-#define FindSemaphore(name) __exec_FindSemaphore((__exec_base_t)(EXEC_BASE_NAME), (CONST_STRPTR)(name))
-#define __FindSemaphore_base(__ndk_b, name) __exec_FindSemaphore((__exec_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define FindSemaphore(name) __exec_FindSemaphore((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindSemaphore_base(__ndk_b, name) __exec_FindSemaphore((__exec_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ VOID
 __exec_AddSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
@@ -1521,8 +1521,8 @@ __exec_AddSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddSemaphore(sigSem) __exec_AddSemaphore((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
-#define __AddSemaphore_base(__ndk_b, sigSem) __exec_AddSemaphore((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem))
+#define AddSemaphore(sigSem) __exec_AddSemaphore((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __AddSemaphore_base(__ndk_b, sigSem) __exec_AddSemaphore((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
 __exec_RemSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
@@ -1538,8 +1538,8 @@ __exec_RemSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemSemaphore(sigSem) __exec_RemSemaphore((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
-#define __RemSemaphore_base(__ndk_b, sigSem) __exec_RemSemaphore((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem))
+#define RemSemaphore(sigSem) __exec_RemSemaphore((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __RemSemaphore_base(__ndk_b, sigSem) __exec_RemSemaphore((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ ULONG
 __exec_SumKickData(struct ExecBase *__base)
@@ -1555,8 +1555,8 @@ __exec_SumKickData(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SumKickData() __exec_SumKickData((__exec_base_t)(EXEC_BASE_NAME))
-#define __SumKickData_base(__ndk_b) __exec_SumKickData((__exec_base_t)(__ndk_b))
+#define SumKickData() __exec_SumKickData((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __SumKickData_base(__ndk_b) __exec_SumKickData((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __exec_AddMemList(struct ExecBase *__base, ULONG size, ULONG attributes, LONG pri, APTR base, CONST_STRPTR name)
@@ -1573,8 +1573,8 @@ __exec_AddMemList(struct ExecBase *__base, ULONG size, ULONG attributes, LONG pr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddMemList(size, attributes, pri, base, name) __exec_AddMemList((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(size), (ULONG)(attributes), (LONG)(pri), (APTR)(base), (CONST_STRPTR)(name))
-#define __AddMemList_base(__ndk_b, size, attributes, pri, base, name) __exec_AddMemList((__exec_base_t)(__ndk_b), (ULONG)(size), (ULONG)(attributes), (LONG)(pri), (APTR)(base), (CONST_STRPTR)(name))
+#define AddMemList(size, attributes, pri, base, name) __exec_AddMemList((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(size), (ULONG)(attributes), (LONG)(pri), (APTR)(base), (CONST_STRPTR)(name))
+#define __AddMemList_base(__ndk_b, size, attributes, pri, base, name) __exec_AddMemList((__exec_base_t)(void *)(__ndk_b), (ULONG)(size), (ULONG)(attributes), (LONG)(pri), (APTR)(base), (CONST_STRPTR)(name))
 
 static __inline__ VOID
 __exec_CopyMem(struct ExecBase *__base, CONST_APTR source, APTR dest, ULONG size)
@@ -1590,8 +1590,8 @@ __exec_CopyMem(struct ExecBase *__base, CONST_APTR source, APTR dest, ULONG size
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CopyMem(source, dest, size) __exec_CopyMem((__exec_base_t)(EXEC_BASE_NAME), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
-#define __CopyMem_base(__ndk_b, source, dest, size) __exec_CopyMem((__exec_base_t)(__ndk_b), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
+#define CopyMem(source, dest, size) __exec_CopyMem((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
+#define __CopyMem_base(__ndk_b, source, dest, size) __exec_CopyMem((__exec_base_t)(void *)(__ndk_b), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
 
 static __inline__ VOID
 __exec_CopyMemQuick(struct ExecBase *__base, CONST_APTR source, APTR dest, ULONG size)
@@ -1607,8 +1607,8 @@ __exec_CopyMemQuick(struct ExecBase *__base, CONST_APTR source, APTR dest, ULONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CopyMemQuick(source, dest, size) __exec_CopyMemQuick((__exec_base_t)(EXEC_BASE_NAME), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
-#define __CopyMemQuick_base(__ndk_b, source, dest, size) __exec_CopyMemQuick((__exec_base_t)(__ndk_b), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
+#define CopyMemQuick(source, dest, size) __exec_CopyMemQuick((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
+#define __CopyMemQuick_base(__ndk_b, source, dest, size) __exec_CopyMemQuick((__exec_base_t)(void *)(__ndk_b), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
 
 static __inline__ VOID
 __exec_CacheClearU(struct ExecBase *__base)
@@ -1624,8 +1624,8 @@ __exec_CacheClearU(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CacheClearU() __exec_CacheClearU((__exec_base_t)(EXEC_BASE_NAME))
-#define __CacheClearU_base(__ndk_b) __exec_CacheClearU((__exec_base_t)(__ndk_b))
+#define CacheClearU() __exec_CacheClearU((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __CacheClearU_base(__ndk_b) __exec_CacheClearU((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __exec_CacheClearE(struct ExecBase *__base, APTR address, ULONG length, ULONG caches)
@@ -1641,8 +1641,8 @@ __exec_CacheClearE(struct ExecBase *__base, APTR address, ULONG length, ULONG ca
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CacheClearE(address, length, caches) __exec_CacheClearE((__exec_base_t)(EXEC_BASE_NAME), (APTR)(address), (ULONG)(length), (ULONG)(caches))
-#define __CacheClearE_base(__ndk_b, address, length, caches) __exec_CacheClearE((__exec_base_t)(__ndk_b), (APTR)(address), (ULONG)(length), (ULONG)(caches))
+#define CacheClearE(address, length, caches) __exec_CacheClearE((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(address), (ULONG)(length), (ULONG)(caches))
+#define __CacheClearE_base(__ndk_b, address, length, caches) __exec_CacheClearE((__exec_base_t)(void *)(__ndk_b), (APTR)(address), (ULONG)(length), (ULONG)(caches))
 
 static __inline__ ULONG
 __exec_CacheControl(struct ExecBase *__base, ULONG cacheBits, ULONG cacheMask)
@@ -1658,8 +1658,8 @@ __exec_CacheControl(struct ExecBase *__base, ULONG cacheBits, ULONG cacheMask)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CacheControl(cacheBits, cacheMask) __exec_CacheControl((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(cacheBits), (ULONG)(cacheMask))
-#define __CacheControl_base(__ndk_b, cacheBits, cacheMask) __exec_CacheControl((__exec_base_t)(__ndk_b), (ULONG)(cacheBits), (ULONG)(cacheMask))
+#define CacheControl(cacheBits, cacheMask) __exec_CacheControl((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(cacheBits), (ULONG)(cacheMask))
+#define __CacheControl_base(__ndk_b, cacheBits, cacheMask) __exec_CacheControl((__exec_base_t)(void *)(__ndk_b), (ULONG)(cacheBits), (ULONG)(cacheMask))
 
 static __inline__ APTR
 __exec_CreateIORequest(struct ExecBase *__base, CONST struct MsgPort * port, ULONG size)
@@ -1675,8 +1675,8 @@ __exec_CreateIORequest(struct ExecBase *__base, CONST struct MsgPort * port, ULO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define CreateIORequest(port, size) __exec_CreateIORequest((__exec_base_t)(EXEC_BASE_NAME), (CONST struct MsgPort *)(port), (ULONG)(size))
-#define __CreateIORequest_base(__ndk_b, port, size) __exec_CreateIORequest((__exec_base_t)(__ndk_b), (CONST struct MsgPort *)(port), (ULONG)(size))
+#define CreateIORequest(port, size) __exec_CreateIORequest((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST struct MsgPort *)(port), (ULONG)(size))
+#define __CreateIORequest_base(__ndk_b, port, size) __exec_CreateIORequest((__exec_base_t)(void *)(__ndk_b), (CONST struct MsgPort *)(port), (ULONG)(size))
 
 static __inline__ VOID
 __exec_DeleteIORequest(struct ExecBase *__base, APTR iorequest)
@@ -1692,8 +1692,8 @@ __exec_DeleteIORequest(struct ExecBase *__base, APTR iorequest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeleteIORequest(iorequest) __exec_DeleteIORequest((__exec_base_t)(EXEC_BASE_NAME), (APTR)(iorequest))
-#define __DeleteIORequest_base(__ndk_b, iorequest) __exec_DeleteIORequest((__exec_base_t)(__ndk_b), (APTR)(iorequest))
+#define DeleteIORequest(iorequest) __exec_DeleteIORequest((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(iorequest))
+#define __DeleteIORequest_base(__ndk_b, iorequest) __exec_DeleteIORequest((__exec_base_t)(void *)(__ndk_b), (APTR)(iorequest))
 
 static __inline__ struct MsgPort *
 __exec_CreateMsgPort(struct ExecBase *__base)
@@ -1709,8 +1709,8 @@ __exec_CreateMsgPort(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define CreateMsgPort() __exec_CreateMsgPort((__exec_base_t)(EXEC_BASE_NAME))
-#define __CreateMsgPort_base(__ndk_b) __exec_CreateMsgPort((__exec_base_t)(__ndk_b))
+#define CreateMsgPort() __exec_CreateMsgPort((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __CreateMsgPort_base(__ndk_b) __exec_CreateMsgPort((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __exec_DeleteMsgPort(struct ExecBase *__base, struct MsgPort * port)
@@ -1726,8 +1726,8 @@ __exec_DeleteMsgPort(struct ExecBase *__base, struct MsgPort * port)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeleteMsgPort(port) __exec_DeleteMsgPort((__exec_base_t)(EXEC_BASE_NAME), (struct MsgPort *)(port))
-#define __DeleteMsgPort_base(__ndk_b, port) __exec_DeleteMsgPort((__exec_base_t)(__ndk_b), (struct MsgPort *)(port))
+#define DeleteMsgPort(port) __exec_DeleteMsgPort((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __DeleteMsgPort_base(__ndk_b, port) __exec_DeleteMsgPort((__exec_base_t)(void *)(__ndk_b), (struct MsgPort *)(port))
 
 static __inline__ VOID
 __exec_ObtainSemaphoreShared(struct ExecBase *__base, struct SignalSemaphore * sigSem)
@@ -1743,8 +1743,8 @@ __exec_ObtainSemaphoreShared(struct ExecBase *__base, struct SignalSemaphore * s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ObtainSemaphoreShared(sigSem) __exec_ObtainSemaphoreShared((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
-#define __ObtainSemaphoreShared_base(__ndk_b, sigSem) __exec_ObtainSemaphoreShared((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem))
+#define ObtainSemaphoreShared(sigSem) __exec_ObtainSemaphoreShared((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __ObtainSemaphoreShared_base(__ndk_b, sigSem) __exec_ObtainSemaphoreShared((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ APTR
 __exec_AllocVec(struct ExecBase *__base, ULONG byteSize, ULONG requirements)
@@ -1760,8 +1760,8 @@ __exec_AllocVec(struct ExecBase *__base, ULONG byteSize, ULONG requirements)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AllocVec(byteSize, requirements) __exec_AllocVec((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(byteSize), (ULONG)(requirements))
-#define __AllocVec_base(__ndk_b, byteSize, requirements) __exec_AllocVec((__exec_base_t)(__ndk_b), (ULONG)(byteSize), (ULONG)(requirements))
+#define AllocVec(byteSize, requirements) __exec_AllocVec((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(byteSize), (ULONG)(requirements))
+#define __AllocVec_base(__ndk_b, byteSize, requirements) __exec_AllocVec((__exec_base_t)(void *)(__ndk_b), (ULONG)(byteSize), (ULONG)(requirements))
 
 static __inline__ VOID
 __exec_FreeVec(struct ExecBase *__base, APTR memoryBlock)
@@ -1777,8 +1777,8 @@ __exec_FreeVec(struct ExecBase *__base, APTR memoryBlock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeVec(memoryBlock) __exec_FreeVec((__exec_base_t)(EXEC_BASE_NAME), (APTR)(memoryBlock))
-#define __FreeVec_base(__ndk_b, memoryBlock) __exec_FreeVec((__exec_base_t)(__ndk_b), (APTR)(memoryBlock))
+#define FreeVec(memoryBlock) __exec_FreeVec((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(memoryBlock))
+#define __FreeVec_base(__ndk_b, memoryBlock) __exec_FreeVec((__exec_base_t)(void *)(__ndk_b), (APTR)(memoryBlock))
 
 static __inline__ APTR
 __exec_CreatePool(struct ExecBase *__base, ULONG requirements, ULONG puddleSize, ULONG threshSize)
@@ -1795,8 +1795,8 @@ __exec_CreatePool(struct ExecBase *__base, ULONG requirements, ULONG puddleSize,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define CreatePool(requirements, puddleSize, threshSize) __exec_CreatePool((__exec_base_t)(EXEC_BASE_NAME), (ULONG)(requirements), (ULONG)(puddleSize), (ULONG)(threshSize))
-#define __CreatePool_base(__ndk_b, requirements, puddleSize, threshSize) __exec_CreatePool((__exec_base_t)(__ndk_b), (ULONG)(requirements), (ULONG)(puddleSize), (ULONG)(threshSize))
+#define CreatePool(requirements, puddleSize, threshSize) __exec_CreatePool((__exec_base_t)(void *)(EXEC_BASE_NAME), (ULONG)(requirements), (ULONG)(puddleSize), (ULONG)(threshSize))
+#define __CreatePool_base(__ndk_b, requirements, puddleSize, threshSize) __exec_CreatePool((__exec_base_t)(void *)(__ndk_b), (ULONG)(requirements), (ULONG)(puddleSize), (ULONG)(threshSize))
 
 static __inline__ VOID
 __exec_DeletePool(struct ExecBase *__base, APTR poolHeader)
@@ -1812,8 +1812,8 @@ __exec_DeletePool(struct ExecBase *__base, APTR poolHeader)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeletePool(poolHeader) __exec_DeletePool((__exec_base_t)(EXEC_BASE_NAME), (APTR)(poolHeader))
-#define __DeletePool_base(__ndk_b, poolHeader) __exec_DeletePool((__exec_base_t)(__ndk_b), (APTR)(poolHeader))
+#define DeletePool(poolHeader) __exec_DeletePool((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(poolHeader))
+#define __DeletePool_base(__ndk_b, poolHeader) __exec_DeletePool((__exec_base_t)(void *)(__ndk_b), (APTR)(poolHeader))
 
 static __inline__ APTR
 __exec_AllocPooled(struct ExecBase *__base, APTR poolHeader, ULONG memSize)
@@ -1829,8 +1829,8 @@ __exec_AllocPooled(struct ExecBase *__base, APTR poolHeader, ULONG memSize)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AllocPooled(poolHeader, memSize) __exec_AllocPooled((__exec_base_t)(EXEC_BASE_NAME), (APTR)(poolHeader), (ULONG)(memSize))
-#define __AllocPooled_base(__ndk_b, poolHeader, memSize) __exec_AllocPooled((__exec_base_t)(__ndk_b), (APTR)(poolHeader), (ULONG)(memSize))
+#define AllocPooled(poolHeader, memSize) __exec_AllocPooled((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(poolHeader), (ULONG)(memSize))
+#define __AllocPooled_base(__ndk_b, poolHeader, memSize) __exec_AllocPooled((__exec_base_t)(void *)(__ndk_b), (APTR)(poolHeader), (ULONG)(memSize))
 
 static __inline__ VOID
 __exec_FreePooled(struct ExecBase *__base, APTR poolHeader, APTR memory, ULONG memSize)
@@ -1846,8 +1846,8 @@ __exec_FreePooled(struct ExecBase *__base, APTR poolHeader, APTR memory, ULONG m
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreePooled(poolHeader, memory, memSize) __exec_FreePooled((__exec_base_t)(EXEC_BASE_NAME), (APTR)(poolHeader), (APTR)(memory), (ULONG)(memSize))
-#define __FreePooled_base(__ndk_b, poolHeader, memory, memSize) __exec_FreePooled((__exec_base_t)(__ndk_b), (APTR)(poolHeader), (APTR)(memory), (ULONG)(memSize))
+#define FreePooled(poolHeader, memory, memSize) __exec_FreePooled((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(poolHeader), (APTR)(memory), (ULONG)(memSize))
+#define __FreePooled_base(__ndk_b, poolHeader, memory, memSize) __exec_FreePooled((__exec_base_t)(void *)(__ndk_b), (APTR)(poolHeader), (APTR)(memory), (ULONG)(memSize))
 
 static __inline__ ULONG
 __exec_AttemptSemaphoreShared(struct ExecBase *__base, struct SignalSemaphore * sigSem)
@@ -1863,8 +1863,8 @@ __exec_AttemptSemaphoreShared(struct ExecBase *__base, struct SignalSemaphore * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define AttemptSemaphoreShared(sigSem) __exec_AttemptSemaphoreShared((__exec_base_t)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
-#define __AttemptSemaphoreShared_base(__ndk_b, sigSem) __exec_AttemptSemaphoreShared((__exec_base_t)(__ndk_b), (struct SignalSemaphore *)(sigSem))
+#define AttemptSemaphoreShared(sigSem) __exec_AttemptSemaphoreShared((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __AttemptSemaphoreShared_base(__ndk_b, sigSem) __exec_AttemptSemaphoreShared((__exec_base_t)(void *)(__ndk_b), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
 __exec_ColdReboot(struct ExecBase *__base)
@@ -1880,8 +1880,8 @@ __exec_ColdReboot(struct ExecBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ColdReboot() __exec_ColdReboot((__exec_base_t)(EXEC_BASE_NAME))
-#define __ColdReboot_base(__ndk_b) __exec_ColdReboot((__exec_base_t)(__ndk_b))
+#define ColdReboot() __exec_ColdReboot((__exec_base_t)(void *)(EXEC_BASE_NAME))
+#define __ColdReboot_base(__ndk_b) __exec_ColdReboot((__exec_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __exec_StackSwap(struct ExecBase *__base, struct StackSwapStruct * newStack)
@@ -1897,8 +1897,8 @@ __exec_StackSwap(struct ExecBase *__base, struct StackSwapStruct * newStack)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define StackSwap(newStack) __exec_StackSwap((__exec_base_t)(EXEC_BASE_NAME), (struct StackSwapStruct *)(newStack))
-#define __StackSwap_base(__ndk_b, newStack) __exec_StackSwap((__exec_base_t)(__ndk_b), (struct StackSwapStruct *)(newStack))
+#define StackSwap(newStack) __exec_StackSwap((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct StackSwapStruct *)(newStack))
+#define __StackSwap_base(__ndk_b, newStack) __exec_StackSwap((__exec_base_t)(void *)(__ndk_b), (struct StackSwapStruct *)(newStack))
 
 static __inline__ APTR
 __exec_CachePreDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length, ULONG flags)
@@ -1914,8 +1914,8 @@ __exec_CachePreDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define CachePreDMA(address, length, flags) __exec_CachePreDMA((__exec_base_t)(EXEC_BASE_NAME), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
-#define __CachePreDMA_base(__ndk_b, address, length, flags) __exec_CachePreDMA((__exec_base_t)(__ndk_b), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
+#define CachePreDMA(address, length, flags) __exec_CachePreDMA((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
+#define __CachePreDMA_base(__ndk_b, address, length, flags) __exec_CachePreDMA((__exec_base_t)(void *)(__ndk_b), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
 
 static __inline__ VOID
 __exec_CachePostDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length, ULONG flags)
@@ -1931,8 +1931,8 @@ __exec_CachePostDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CachePostDMA(address, length, flags) __exec_CachePostDMA((__exec_base_t)(EXEC_BASE_NAME), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
-#define __CachePostDMA_base(__ndk_b, address, length, flags) __exec_CachePostDMA((__exec_base_t)(__ndk_b), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
+#define CachePostDMA(address, length, flags) __exec_CachePostDMA((__exec_base_t)(void *)(EXEC_BASE_NAME), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
+#define __CachePostDMA_base(__ndk_b, address, length, flags) __exec_CachePostDMA((__exec_base_t)(void *)(__ndk_b), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
 
 static __inline__ VOID
 __exec_AddMemHandler(struct ExecBase *__base, struct Interrupt * memhand)
@@ -1948,8 +1948,8 @@ __exec_AddMemHandler(struct ExecBase *__base, struct Interrupt * memhand)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddMemHandler(memhand) __exec_AddMemHandler((__exec_base_t)(EXEC_BASE_NAME), (struct Interrupt *)(memhand))
-#define __AddMemHandler_base(__ndk_b, memhand) __exec_AddMemHandler((__exec_base_t)(__ndk_b), (struct Interrupt *)(memhand))
+#define AddMemHandler(memhand) __exec_AddMemHandler((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Interrupt *)(memhand))
+#define __AddMemHandler_base(__ndk_b, memhand) __exec_AddMemHandler((__exec_base_t)(void *)(__ndk_b), (struct Interrupt *)(memhand))
 
 static __inline__ VOID
 __exec_RemMemHandler(struct ExecBase *__base, struct Interrupt * memhand)
@@ -1965,8 +1965,8 @@ __exec_RemMemHandler(struct ExecBase *__base, struct Interrupt * memhand)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemMemHandler(memhand) __exec_RemMemHandler((__exec_base_t)(EXEC_BASE_NAME), (struct Interrupt *)(memhand))
-#define __RemMemHandler_base(__ndk_b, memhand) __exec_RemMemHandler((__exec_base_t)(__ndk_b), (struct Interrupt *)(memhand))
+#define RemMemHandler(memhand) __exec_RemMemHandler((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct Interrupt *)(memhand))
+#define __RemMemHandler_base(__ndk_b, memhand) __exec_RemMemHandler((__exec_base_t)(void *)(__ndk_b), (struct Interrupt *)(memhand))
 
 static __inline__ ULONG
 __exec_ObtainQuickVector(struct ExecBase *__base, APTR interruptCode)
@@ -1982,8 +1982,8 @@ __exec_ObtainQuickVector(struct ExecBase *__base, APTR interruptCode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ObtainQuickVector(interruptCode) __exec_ObtainQuickVector((__exec_base_t)(EXEC_BASE_NAME), (APTR)(interruptCode))
-#define __ObtainQuickVector_base(__ndk_b, interruptCode) __exec_ObtainQuickVector((__exec_base_t)(__ndk_b), (APTR)(interruptCode))
+#define ObtainQuickVector(interruptCode) __exec_ObtainQuickVector((__exec_base_t)(void *)(EXEC_BASE_NAME), (APTR)(interruptCode))
+#define __ObtainQuickVector_base(__ndk_b, interruptCode) __exec_ObtainQuickVector((__exec_base_t)(void *)(__ndk_b), (APTR)(interruptCode))
 
 static __inline__ VOID
 __exec_NewMinList(struct ExecBase *__base, struct MinList * minlist)
@@ -1999,7 +1999,7 @@ __exec_NewMinList(struct ExecBase *__base, struct MinList * minlist)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define NewMinList(minlist) __exec_NewMinList((__exec_base_t)(EXEC_BASE_NAME), (struct MinList *)(minlist))
-#define __NewMinList_base(__ndk_b, minlist) __exec_NewMinList((__exec_base_t)(__ndk_b), (struct MinList *)(minlist))
+#define NewMinList(minlist) __exec_NewMinList((__exec_base_t)(void *)(EXEC_BASE_NAME), (struct MinList *)(minlist))
+#define __NewMinList_base(__ndk_b, minlist) __exec_NewMinList((__exec_base_t)(void *)(__ndk_b), (struct MinList *)(minlist))
 
 #endif /* INLINE_EXEC_H */

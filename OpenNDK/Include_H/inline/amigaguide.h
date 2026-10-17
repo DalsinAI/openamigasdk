@@ -38,8 +38,8 @@ __amigaguide_LockAmigaGuideBase(struct Library *__base, APTR handle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define LockAmigaGuideBase(handle) __amigaguide_LockAmigaGuideBase((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(handle))
-#define __LockAmigaGuideBase_base(__ndk_b, handle) __amigaguide_LockAmigaGuideBase((__amigaguide_base_t)(__ndk_b), (APTR)(handle))
+#define LockAmigaGuideBase(handle) __amigaguide_LockAmigaGuideBase((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(handle))
+#define __LockAmigaGuideBase_base(__ndk_b, handle) __amigaguide_LockAmigaGuideBase((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(handle))
 
 static __inline__ VOID
 __amigaguide_UnlockAmigaGuideBase(struct Library *__base, LONG key)
@@ -55,8 +55,8 @@ __amigaguide_UnlockAmigaGuideBase(struct Library *__base, LONG key)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockAmigaGuideBase(key) __amigaguide_UnlockAmigaGuideBase((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (LONG)(key))
-#define __UnlockAmigaGuideBase_base(__ndk_b, key) __amigaguide_UnlockAmigaGuideBase((__amigaguide_base_t)(__ndk_b), (LONG)(key))
+#define UnlockAmigaGuideBase(key) __amigaguide_UnlockAmigaGuideBase((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (LONG)(key))
+#define __UnlockAmigaGuideBase_base(__ndk_b, key) __amigaguide_UnlockAmigaGuideBase((__amigaguide_base_t)(void *)(__ndk_b), (LONG)(key))
 
 static __inline__ APTR
 __amigaguide_OpenAmigaGuideA(struct Library *__base, struct NewAmigaGuide * nag, CONST struct TagItem * attrs)
@@ -72,8 +72,8 @@ __amigaguide_OpenAmigaGuideA(struct Library *__base, struct NewAmigaGuide * nag,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define OpenAmigaGuideA(nag, attrs) __amigaguide_OpenAmigaGuideA((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
-#define __OpenAmigaGuideA_base(__ndk_b, nag, attrs) __amigaguide_OpenAmigaGuideA((__amigaguide_base_t)(__ndk_b), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
+#define OpenAmigaGuideA(nag, attrs) __amigaguide_OpenAmigaGuideA((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
+#define __OpenAmigaGuideA_base(__ndk_b, nag, attrs) __amigaguide_OpenAmigaGuideA((__amigaguide_base_t)(void *)(__ndk_b), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
@@ -81,7 +81,7 @@ ___amigaguide_OpenAmigaGuide(__amigaguide_base_t __ndk_base, struct NewAmigaGuid
 {
 	return __amigaguide_OpenAmigaGuideA(__ndk_base, (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)((ULONG)&nag + sizeof(nag)));
 }
-#define OpenAmigaGuide(nag, ...) ___amigaguide_OpenAmigaGuide((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
+#define OpenAmigaGuide(nag, ...) ___amigaguide_OpenAmigaGuide((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
 #else
 #define OpenAmigaGuide(nag, ...) (OpenAmigaGuide)((struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
 #endif
@@ -100,8 +100,8 @@ __amigaguide_OpenAmigaGuideAsyncA(struct Library *__base, struct NewAmigaGuide *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define OpenAmigaGuideAsyncA(nag, attrs) __amigaguide_OpenAmigaGuideAsyncA((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
-#define __OpenAmigaGuideAsyncA_base(__ndk_b, nag, attrs) __amigaguide_OpenAmigaGuideAsyncA((__amigaguide_base_t)(__ndk_b), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
+#define OpenAmigaGuideAsyncA(nag, attrs) __amigaguide_OpenAmigaGuideAsyncA((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
+#define __OpenAmigaGuideAsyncA_base(__ndk_b, nag, attrs) __amigaguide_OpenAmigaGuideAsyncA((__amigaguide_base_t)(void *)(__ndk_b), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
@@ -109,7 +109,7 @@ ___amigaguide_OpenAmigaGuideAsync(__amigaguide_base_t __ndk_base, struct NewAmig
 {
 	return __amigaguide_OpenAmigaGuideAsyncA(__ndk_base, (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)((ULONG)&nag + sizeof(nag)));
 }
-#define OpenAmigaGuideAsync(nag, ...) ___amigaguide_OpenAmigaGuideAsync((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
+#define OpenAmigaGuideAsync(nag, ...) ___amigaguide_OpenAmigaGuideAsync((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
 #else
 #define OpenAmigaGuideAsync(nag, ...) (OpenAmigaGuideAsync)((struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
 #endif
@@ -128,8 +128,8 @@ __amigaguide_CloseAmigaGuide(struct Library *__base, APTR cl)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseAmigaGuide(cl) __amigaguide_CloseAmigaGuide((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl))
-#define __CloseAmigaGuide_base(__ndk_b, cl) __amigaguide_CloseAmigaGuide((__amigaguide_base_t)(__ndk_b), (APTR)(cl))
+#define CloseAmigaGuide(cl) __amigaguide_CloseAmigaGuide((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl))
+#define __CloseAmigaGuide_base(__ndk_b, cl) __amigaguide_CloseAmigaGuide((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(cl))
 
 static __inline__ ULONG
 __amigaguide_AmigaGuideSignal(struct Library *__base, APTR cl)
@@ -145,8 +145,8 @@ __amigaguide_AmigaGuideSignal(struct Library *__base, APTR cl)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define AmigaGuideSignal(cl) __amigaguide_AmigaGuideSignal((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl))
-#define __AmigaGuideSignal_base(__ndk_b, cl) __amigaguide_AmigaGuideSignal((__amigaguide_base_t)(__ndk_b), (APTR)(cl))
+#define AmigaGuideSignal(cl) __amigaguide_AmigaGuideSignal((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl))
+#define __AmigaGuideSignal_base(__ndk_b, cl) __amigaguide_AmigaGuideSignal((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(cl))
 
 static __inline__ struct AmigaGuideMsg *
 __amigaguide_GetAmigaGuideMsg(struct Library *__base, APTR cl)
@@ -162,8 +162,8 @@ __amigaguide_GetAmigaGuideMsg(struct Library *__base, APTR cl)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct AmigaGuideMsg *)_d0;
 }
-#define GetAmigaGuideMsg(cl) __amigaguide_GetAmigaGuideMsg((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl))
-#define __GetAmigaGuideMsg_base(__ndk_b, cl) __amigaguide_GetAmigaGuideMsg((__amigaguide_base_t)(__ndk_b), (APTR)(cl))
+#define GetAmigaGuideMsg(cl) __amigaguide_GetAmigaGuideMsg((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl))
+#define __GetAmigaGuideMsg_base(__ndk_b, cl) __amigaguide_GetAmigaGuideMsg((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(cl))
 
 static __inline__ VOID
 __amigaguide_ReplyAmigaGuideMsg(struct Library *__base, struct AmigaGuideMsg * amsg)
@@ -179,8 +179,8 @@ __amigaguide_ReplyAmigaGuideMsg(struct Library *__base, struct AmigaGuideMsg * a
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReplyAmigaGuideMsg(amsg) __amigaguide_ReplyAmigaGuideMsg((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct AmigaGuideMsg *)(amsg))
-#define __ReplyAmigaGuideMsg_base(__ndk_b, amsg) __amigaguide_ReplyAmigaGuideMsg((__amigaguide_base_t)(__ndk_b), (struct AmigaGuideMsg *)(amsg))
+#define ReplyAmigaGuideMsg(amsg) __amigaguide_ReplyAmigaGuideMsg((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (struct AmigaGuideMsg *)(amsg))
+#define __ReplyAmigaGuideMsg_base(__ndk_b, amsg) __amigaguide_ReplyAmigaGuideMsg((__amigaguide_base_t)(void *)(__ndk_b), (struct AmigaGuideMsg *)(amsg))
 
 static __inline__ LONG
 __amigaguide_SetAmigaGuideContextA(struct Library *__base, APTR cl, ULONG id, CONST struct TagItem * attrs)
@@ -196,8 +196,8 @@ __amigaguide_SetAmigaGuideContextA(struct Library *__base, APTR cl, ULONG id, CO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetAmigaGuideContextA(cl, id, attrs) __amigaguide_SetAmigaGuideContextA((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)(attrs))
-#define __SetAmigaGuideContextA_base(__ndk_b, cl, id, attrs) __amigaguide_SetAmigaGuideContextA((__amigaguide_base_t)(__ndk_b), (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)(attrs))
+#define SetAmigaGuideContextA(cl, id, attrs) __amigaguide_SetAmigaGuideContextA((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)(attrs))
+#define __SetAmigaGuideContextA_base(__ndk_b, cl, id, attrs) __amigaguide_SetAmigaGuideContextA((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -205,7 +205,7 @@ ___amigaguide_SetAmigaGuideContext(__amigaguide_base_t __ndk_base, APTR cl, ULON
 {
 	return __amigaguide_SetAmigaGuideContextA(__ndk_base, (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)((ULONG)&id + sizeof(id)));
 }
-#define SetAmigaGuideContext(cl, id, ...) ___amigaguide_SetAmigaGuideContext((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (ULONG)(id), ##__VA_ARGS__)
+#define SetAmigaGuideContext(cl, id, ...) ___amigaguide_SetAmigaGuideContext((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (ULONG)(id), ##__VA_ARGS__)
 #else
 #define SetAmigaGuideContext(cl, id, ...) (SetAmigaGuideContext)((APTR)(cl), (ULONG)(id), ##__VA_ARGS__)
 #endif
@@ -224,8 +224,8 @@ __amigaguide_SendAmigaGuideContextA(struct Library *__base, APTR cl, CONST struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SendAmigaGuideContextA(cl, attrs) __amigaguide_SendAmigaGuideContextA((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST struct TagItem *)(attrs))
-#define __SendAmigaGuideContextA_base(__ndk_b, cl, attrs) __amigaguide_SendAmigaGuideContextA((__amigaguide_base_t)(__ndk_b), (APTR)(cl), (CONST struct TagItem *)(attrs))
+#define SendAmigaGuideContextA(cl, attrs) __amigaguide_SendAmigaGuideContextA((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST struct TagItem *)(attrs))
+#define __SendAmigaGuideContextA_base(__ndk_b, cl, attrs) __amigaguide_SendAmigaGuideContextA((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(cl), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -233,7 +233,7 @@ ___amigaguide_SendAmigaGuideContext(__amigaguide_base_t __ndk_base, APTR cl, ...
 {
 	return __amigaguide_SendAmigaGuideContextA(__ndk_base, (APTR)(cl), (CONST struct TagItem *)((ULONG)&cl + sizeof(cl)));
 }
-#define SendAmigaGuideContext(cl, ...) ___amigaguide_SendAmigaGuideContext((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), ##__VA_ARGS__)
+#define SendAmigaGuideContext(cl, ...) ___amigaguide_SendAmigaGuideContext((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), ##__VA_ARGS__)
 #else
 #define SendAmigaGuideContext(cl, ...) (SendAmigaGuideContext)((APTR)(cl), ##__VA_ARGS__)
 #endif
@@ -252,8 +252,8 @@ __amigaguide_SendAmigaGuideCmdA(struct Library *__base, APTR cl, CONST_STRPTR cm
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SendAmigaGuideCmdA(cl, cmd, attrs) __amigaguide_SendAmigaGuideCmdA((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)(attrs))
-#define __SendAmigaGuideCmdA_base(__ndk_b, cl, cmd, attrs) __amigaguide_SendAmigaGuideCmdA((__amigaguide_base_t)(__ndk_b), (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)(attrs))
+#define SendAmigaGuideCmdA(cl, cmd, attrs) __amigaguide_SendAmigaGuideCmdA((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)(attrs))
+#define __SendAmigaGuideCmdA_base(__ndk_b, cl, cmd, attrs) __amigaguide_SendAmigaGuideCmdA((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -261,7 +261,7 @@ ___amigaguide_SendAmigaGuideCmd(__amigaguide_base_t __ndk_base, APTR cl, CONST_S
 {
 	return __amigaguide_SendAmigaGuideCmdA(__ndk_base, (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)((ULONG)&cmd + sizeof(cmd)));
 }
-#define SendAmigaGuideCmd(cl, cmd, ...) ___amigaguide_SendAmigaGuideCmd((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST_STRPTR)(cmd), ##__VA_ARGS__)
+#define SendAmigaGuideCmd(cl, cmd, ...) ___amigaguide_SendAmigaGuideCmd((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST_STRPTR)(cmd), ##__VA_ARGS__)
 #else
 #define SendAmigaGuideCmd(cl, cmd, ...) (SendAmigaGuideCmd)((APTR)(cl), (CONST_STRPTR)(cmd), ##__VA_ARGS__)
 #endif
@@ -280,8 +280,8 @@ __amigaguide_SetAmigaGuideAttrsA(struct Library *__base, APTR cl, CONST struct T
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetAmigaGuideAttrsA(cl, attrs) __amigaguide_SetAmigaGuideAttrsA((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST struct TagItem *)(attrs))
-#define __SetAmigaGuideAttrsA_base(__ndk_b, cl, attrs) __amigaguide_SetAmigaGuideAttrsA((__amigaguide_base_t)(__ndk_b), (APTR)(cl), (CONST struct TagItem *)(attrs))
+#define SetAmigaGuideAttrsA(cl, attrs) __amigaguide_SetAmigaGuideAttrsA((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST struct TagItem *)(attrs))
+#define __SetAmigaGuideAttrsA_base(__ndk_b, cl, attrs) __amigaguide_SetAmigaGuideAttrsA((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(cl), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -289,7 +289,7 @@ ___amigaguide_SetAmigaGuideAttrs(__amigaguide_base_t __ndk_base, APTR cl, ...)
 {
 	return __amigaguide_SetAmigaGuideAttrsA(__ndk_base, (APTR)(cl), (CONST struct TagItem *)((ULONG)&cl + sizeof(cl)));
 }
-#define SetAmigaGuideAttrs(cl, ...) ___amigaguide_SetAmigaGuideAttrs((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), ##__VA_ARGS__)
+#define SetAmigaGuideAttrs(cl, ...) ___amigaguide_SetAmigaGuideAttrs((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), ##__VA_ARGS__)
 #else
 #define SetAmigaGuideAttrs(cl, ...) (SetAmigaGuideAttrs)((APTR)(cl), ##__VA_ARGS__)
 #endif
@@ -308,8 +308,8 @@ __amigaguide_GetAmigaGuideAttr(struct Library *__base, Tag tag, APTR cl, ULONG *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetAmigaGuideAttr(tag, cl, storage) __amigaguide_GetAmigaGuideAttr((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (Tag)(tag), (APTR)(cl), (ULONG *)(storage))
-#define __GetAmigaGuideAttr_base(__ndk_b, tag, cl, storage) __amigaguide_GetAmigaGuideAttr((__amigaguide_base_t)(__ndk_b), (Tag)(tag), (APTR)(cl), (ULONG *)(storage))
+#define GetAmigaGuideAttr(tag, cl, storage) __amigaguide_GetAmigaGuideAttr((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (Tag)(tag), (APTR)(cl), (ULONG *)(storage))
+#define __GetAmigaGuideAttr_base(__ndk_b, tag, cl, storage) __amigaguide_GetAmigaGuideAttr((__amigaguide_base_t)(void *)(__ndk_b), (Tag)(tag), (APTR)(cl), (ULONG *)(storage))
 
 static __inline__ LONG
 __amigaguide_LoadXRef(struct Library *__base, BPTR lock, CONST_STRPTR name)
@@ -325,8 +325,8 @@ __amigaguide_LoadXRef(struct Library *__base, BPTR lock, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define LoadXRef(lock, name) __amigaguide_LoadXRef((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (BPTR)(lock), (CONST_STRPTR)(name))
-#define __LoadXRef_base(__ndk_b, lock, name) __amigaguide_LoadXRef((__amigaguide_base_t)(__ndk_b), (BPTR)(lock), (CONST_STRPTR)(name))
+#define LoadXRef(lock, name) __amigaguide_LoadXRef((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (BPTR)(lock), (CONST_STRPTR)(name))
+#define __LoadXRef_base(__ndk_b, lock, name) __amigaguide_LoadXRef((__amigaguide_base_t)(void *)(__ndk_b), (BPTR)(lock), (CONST_STRPTR)(name))
 
 static __inline__ VOID
 __amigaguide_ExpungeXRef(struct Library *__base)
@@ -342,8 +342,8 @@ __amigaguide_ExpungeXRef(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ExpungeXRef() __amigaguide_ExpungeXRef((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME))
-#define __ExpungeXRef_base(__ndk_b) __amigaguide_ExpungeXRef((__amigaguide_base_t)(__ndk_b))
+#define ExpungeXRef() __amigaguide_ExpungeXRef((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME))
+#define __ExpungeXRef_base(__ndk_b) __amigaguide_ExpungeXRef((__amigaguide_base_t)(void *)(__ndk_b))
 
 static __inline__ APTR
 __amigaguide_AddAmigaGuideHostA(struct Library *__base, struct Hook * h, CONST_STRPTR name, CONST struct TagItem * attrs)
@@ -359,8 +359,8 @@ __amigaguide_AddAmigaGuideHostA(struct Library *__base, struct Hook * h, CONST_S
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AddAmigaGuideHostA(h, name, attrs) __amigaguide_AddAmigaGuideHostA((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)(attrs))
-#define __AddAmigaGuideHostA_base(__ndk_b, h, name, attrs) __amigaguide_AddAmigaGuideHostA((__amigaguide_base_t)(__ndk_b), (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)(attrs))
+#define AddAmigaGuideHostA(h, name, attrs) __amigaguide_AddAmigaGuideHostA((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)(attrs))
+#define __AddAmigaGuideHostA_base(__ndk_b, h, name, attrs) __amigaguide_AddAmigaGuideHostA((__amigaguide_base_t)(void *)(__ndk_b), (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
@@ -368,7 +368,7 @@ ___amigaguide_AddAmigaGuideHost(__amigaguide_base_t __ndk_base, struct Hook * h,
 {
 	return __amigaguide_AddAmigaGuideHostA(__ndk_base, (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
-#define AddAmigaGuideHost(h, name, ...) ___amigaguide_AddAmigaGuideHost((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct Hook *)(h), (CONST_STRPTR)(name), ##__VA_ARGS__)
+#define AddAmigaGuideHost(h, name, ...) ___amigaguide_AddAmigaGuideHost((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (struct Hook *)(h), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
 #define AddAmigaGuideHost(h, name, ...) (AddAmigaGuideHost)((struct Hook *)(h), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #endif
@@ -387,8 +387,8 @@ __amigaguide_RemoveAmigaGuideHostA(struct Library *__base, APTR hh, CONST struct
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RemoveAmigaGuideHostA(hh, attrs) __amigaguide_RemoveAmigaGuideHostA((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(hh), (CONST struct TagItem *)(attrs))
-#define __RemoveAmigaGuideHostA_base(__ndk_b, hh, attrs) __amigaguide_RemoveAmigaGuideHostA((__amigaguide_base_t)(__ndk_b), (APTR)(hh), (CONST struct TagItem *)(attrs))
+#define RemoveAmigaGuideHostA(hh, attrs) __amigaguide_RemoveAmigaGuideHostA((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(hh), (CONST struct TagItem *)(attrs))
+#define __RemoveAmigaGuideHostA_base(__ndk_b, hh, attrs) __amigaguide_RemoveAmigaGuideHostA((__amigaguide_base_t)(void *)(__ndk_b), (APTR)(hh), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -396,7 +396,7 @@ ___amigaguide_RemoveAmigaGuideHost(__amigaguide_base_t __ndk_base, APTR hh, ...)
 {
 	return __amigaguide_RemoveAmigaGuideHostA(__ndk_base, (APTR)(hh), (CONST struct TagItem *)((ULONG)&hh + sizeof(hh)));
 }
-#define RemoveAmigaGuideHost(hh, ...) ___amigaguide_RemoveAmigaGuideHost((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(hh), ##__VA_ARGS__)
+#define RemoveAmigaGuideHost(hh, ...) ___amigaguide_RemoveAmigaGuideHost((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (APTR)(hh), ##__VA_ARGS__)
 #else
 #define RemoveAmigaGuideHost(hh, ...) (RemoveAmigaGuideHost)((APTR)(hh), ##__VA_ARGS__)
 #endif
@@ -415,7 +415,7 @@ __amigaguide_GetAmigaGuideString(struct Library *__base, LONG id)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (CONST_STRPTR)_d0;
 }
-#define GetAmigaGuideString(id) __amigaguide_GetAmigaGuideString((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (LONG)(id))
-#define __GetAmigaGuideString_base(__ndk_b, id) __amigaguide_GetAmigaGuideString((__amigaguide_base_t)(__ndk_b), (LONG)(id))
+#define GetAmigaGuideString(id) __amigaguide_GetAmigaGuideString((__amigaguide_base_t)(void *)(AMIGAGUIDE_BASE_NAME), (LONG)(id))
+#define __GetAmigaGuideString_base(__ndk_b, id) __amigaguide_GetAmigaGuideString((__amigaguide_base_t)(void *)(__ndk_b), (LONG)(id))
 
 #endif /* INLINE_AMIGAGUIDE_H */

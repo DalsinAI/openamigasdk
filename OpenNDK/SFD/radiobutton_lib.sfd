@@ -17,12 +17,12 @@
 Class * RADIOBUTTON_GetClass() ()
 struct Node * AllocRadioButtonNodeA(ULONG columns, struct TagItem * tags) (d0,a0)
 ==varargs
-struct Node * AllocRadioButtonNode(UWORD columns, Tag tag1, ...) (d0,a0)
+struct Node * AllocRadioButtonNode(UWORD columns, ...) (d0,a0)
 VOID FreeRadioButtonNode(struct Node * node) (a0)
 VOID SetRadioButtonNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
 ==varargs
-VOID SetRadioButtonNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+VOID SetRadioButtonNodeAttrs(struct Node * node, ...) (a0,a1)
 VOID GetRadioButtonNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
 ==varargs
-VOID GetRadioButtonNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+VOID GetRadioButtonNodeAttrs(struct Node * node, ...) (a0,a1)
 ==end

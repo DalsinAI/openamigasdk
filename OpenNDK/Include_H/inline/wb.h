@@ -38,8 +38,8 @@ __wb_UpdateWorkbench(struct Library *__base, CONST_STRPTR name, BPTR parentLock,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UpdateWorkbench(name, parentLock, action) __wb_UpdateWorkbench((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(parentLock), (LONG)(action))
-#define __UpdateWorkbench_base(__ndk_b, name, parentLock, action) __wb_UpdateWorkbench((__wb_base_t)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(parentLock), (LONG)(action))
+#define UpdateWorkbench(name, parentLock, action) __wb_UpdateWorkbench((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(parentLock), (LONG)(action))
+#define __UpdateWorkbench_base(__ndk_b, name, parentLock, action) __wb_UpdateWorkbench((__wb_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(parentLock), (LONG)(action))
 
 static __inline__ struct AppWindow *
 __wb_AddAppWindowA(struct Library *__base, ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, CONST struct TagItem * taglist)
@@ -56,8 +56,8 @@ __wb_AddAppWindowA(struct Library *__base, ULONG id, ULONG userdata, struct Wind
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct AppWindow *)_d0;
 }
-#define AddAppWindowA(id, userdata, window, msgport, taglist) __wb_AddAppWindowA((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
-#define __AddAppWindowA_base(__ndk_b, id, userdata, window, msgport, taglist) __wb_AddAppWindowA((__wb_base_t)(__ndk_b), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
+#define AddAppWindowA(id, userdata, window, msgport, taglist) __wb_AddAppWindowA((__wb_base_t)(void *)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
+#define __AddAppWindowA_base(__ndk_b, id, userdata, window, msgport, taglist) __wb_AddAppWindowA((__wb_base_t)(void *)(__ndk_b), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct AppWindow *
@@ -65,7 +65,7 @@ ___wb_AddAppWindow(__wb_base_t __ndk_base, ULONG id, ULONG userdata, struct Wind
 {
 	return __wb_AddAppWindowA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)((ULONG)&msgport + sizeof(msgport)));
 }
-#define AddAppWindow(id, userdata, window, msgport, ...) ___wb_AddAppWindow((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), ##__VA_ARGS__)
+#define AddAppWindow(id, userdata, window, msgport, ...) ___wb_AddAppWindow((__wb_base_t)(void *)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), ##__VA_ARGS__)
 #else
 #define AddAppWindow(id, userdata, window, msgport, ...) (AddAppWindow)((ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), ##__VA_ARGS__)
 #endif
@@ -84,8 +84,8 @@ __wb_RemoveAppWindow(struct Library *__base, struct AppWindow * appWindow)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define RemoveAppWindow(appWindow) __wb_RemoveAppWindow((__wb_base_t)(WB_BASE_NAME), (struct AppWindow *)(appWindow))
-#define __RemoveAppWindow_base(__ndk_b, appWindow) __wb_RemoveAppWindow((__wb_base_t)(__ndk_b), (struct AppWindow *)(appWindow))
+#define RemoveAppWindow(appWindow) __wb_RemoveAppWindow((__wb_base_t)(void *)(WB_BASE_NAME), (struct AppWindow *)(appWindow))
+#define __RemoveAppWindow_base(__ndk_b, appWindow) __wb_RemoveAppWindow((__wb_base_t)(void *)(__ndk_b), (struct AppWindow *)(appWindow))
 
 static __inline__ struct AppIcon *
 __wb_AddAppIconA(struct Library *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, CONST struct TagItem * taglist)
@@ -103,8 +103,8 @@ __wb_AddAppIconA(struct Library *__base, ULONG id, ULONG userdata, CONST_STRPTR 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct AppIcon *)_d0;
 }
-#define AddAppIconA(id, userdata, text, msgport, lock, diskobj, taglist) __wb_AddAppIconA((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)(taglist))
-#define __AddAppIconA_base(__ndk_b, id, userdata, text, msgport, lock, diskobj, taglist) __wb_AddAppIconA((__wb_base_t)(__ndk_b), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)(taglist))
+#define AddAppIconA(id, userdata, text, msgport, lock, diskobj, taglist) __wb_AddAppIconA((__wb_base_t)(void *)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)(taglist))
+#define __AddAppIconA_base(__ndk_b, id, userdata, text, msgport, lock, diskobj, taglist) __wb_AddAppIconA((__wb_base_t)(void *)(__ndk_b), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)(taglist))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct AppIcon *
@@ -112,7 +112,7 @@ ___wb_AddAppIcon(__wb_base_t __ndk_base, ULONG id, ULONG userdata, CONST_STRPTR 
 {
 	return __wb_AddAppIconA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)((ULONG)&diskobj + sizeof(diskobj)));
 }
-#define AddAppIcon(id, userdata, text, msgport, lock, diskobj, ...) ___wb_AddAppIcon((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), ##__VA_ARGS__)
+#define AddAppIcon(id, userdata, text, msgport, lock, diskobj, ...) ___wb_AddAppIcon((__wb_base_t)(void *)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), ##__VA_ARGS__)
 #else
 #define AddAppIcon(id, userdata, text, msgport, lock, diskobj, ...) (AddAppIcon)((ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), ##__VA_ARGS__)
 #endif
@@ -131,8 +131,8 @@ __wb_RemoveAppIcon(struct Library *__base, struct AppIcon * appIcon)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define RemoveAppIcon(appIcon) __wb_RemoveAppIcon((__wb_base_t)(WB_BASE_NAME), (struct AppIcon *)(appIcon))
-#define __RemoveAppIcon_base(__ndk_b, appIcon) __wb_RemoveAppIcon((__wb_base_t)(__ndk_b), (struct AppIcon *)(appIcon))
+#define RemoveAppIcon(appIcon) __wb_RemoveAppIcon((__wb_base_t)(void *)(WB_BASE_NAME), (struct AppIcon *)(appIcon))
+#define __RemoveAppIcon_base(__ndk_b, appIcon) __wb_RemoveAppIcon((__wb_base_t)(void *)(__ndk_b), (struct AppIcon *)(appIcon))
 
 static __inline__ struct AppMenuItem *
 __wb_AddAppMenuItemA(struct Library *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, CONST struct TagItem * taglist)
@@ -149,8 +149,8 @@ __wb_AddAppMenuItemA(struct Library *__base, ULONG id, ULONG userdata, CONST_STR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct AppMenuItem *)_d0;
 }
-#define AddAppMenuItemA(id, userdata, text, msgport, taglist) __wb_AddAppMenuItemA((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
-#define __AddAppMenuItemA_base(__ndk_b, id, userdata, text, msgport, taglist) __wb_AddAppMenuItemA((__wb_base_t)(__ndk_b), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
+#define AddAppMenuItemA(id, userdata, text, msgport, taglist) __wb_AddAppMenuItemA((__wb_base_t)(void *)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
+#define __AddAppMenuItemA_base(__ndk_b, id, userdata, text, msgport, taglist) __wb_AddAppMenuItemA((__wb_base_t)(void *)(__ndk_b), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct AppMenuItem *
@@ -158,7 +158,7 @@ ___wb_AddAppMenuItem(__wb_base_t __ndk_base, ULONG id, ULONG userdata, CONST_STR
 {
 	return __wb_AddAppMenuItemA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)((ULONG)&msgport + sizeof(msgport)));
 }
-#define AddAppMenuItem(id, userdata, text, msgport, ...) ___wb_AddAppMenuItem((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), ##__VA_ARGS__)
+#define AddAppMenuItem(id, userdata, text, msgport, ...) ___wb_AddAppMenuItem((__wb_base_t)(void *)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), ##__VA_ARGS__)
 #else
 #define AddAppMenuItem(id, userdata, text, msgport, ...) (AddAppMenuItem)((ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), ##__VA_ARGS__)
 #endif
@@ -177,8 +177,8 @@ __wb_RemoveAppMenuItem(struct Library *__base, struct AppMenuItem * appMenuItem)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define RemoveAppMenuItem(appMenuItem) __wb_RemoveAppMenuItem((__wb_base_t)(WB_BASE_NAME), (struct AppMenuItem *)(appMenuItem))
-#define __RemoveAppMenuItem_base(__ndk_b, appMenuItem) __wb_RemoveAppMenuItem((__wb_base_t)(__ndk_b), (struct AppMenuItem *)(appMenuItem))
+#define RemoveAppMenuItem(appMenuItem) __wb_RemoveAppMenuItem((__wb_base_t)(void *)(WB_BASE_NAME), (struct AppMenuItem *)(appMenuItem))
+#define __RemoveAppMenuItem_base(__ndk_b, appMenuItem) __wb_RemoveAppMenuItem((__wb_base_t)(void *)(__ndk_b), (struct AppMenuItem *)(appMenuItem))
 
 static __inline__ ULONG
 __wb_WBInfo(struct Library *__base, BPTR lock, CONST_STRPTR name, struct Screen * screen)
@@ -195,8 +195,8 @@ __wb_WBInfo(struct Library *__base, BPTR lock, CONST_STRPTR name, struct Screen 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define WBInfo(lock, name, screen) __wb_WBInfo((__wb_base_t)(WB_BASE_NAME), (BPTR)(lock), (CONST_STRPTR)(name), (struct Screen *)(screen))
-#define __WBInfo_base(__ndk_b, lock, name, screen) __wb_WBInfo((__wb_base_t)(__ndk_b), (BPTR)(lock), (CONST_STRPTR)(name), (struct Screen *)(screen))
+#define WBInfo(lock, name, screen) __wb_WBInfo((__wb_base_t)(void *)(WB_BASE_NAME), (BPTR)(lock), (CONST_STRPTR)(name), (struct Screen *)(screen))
+#define __WBInfo_base(__ndk_b, lock, name, screen) __wb_WBInfo((__wb_base_t)(void *)(__ndk_b), (BPTR)(lock), (CONST_STRPTR)(name), (struct Screen *)(screen))
 
 static __inline__ BOOL
 __wb_OpenWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST struct TagItem * tags)
@@ -212,8 +212,8 @@ __wb_OpenWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define OpenWorkbenchObjectA(name, tags) __wb_OpenWorkbenchObjectA((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
-#define __OpenWorkbenchObjectA_base(__ndk_b, name, tags) __wb_OpenWorkbenchObjectA((__wb_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define OpenWorkbenchObjectA(name, tags) __wb_OpenWorkbenchObjectA((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __OpenWorkbenchObjectA_base(__ndk_b, name, tags) __wb_OpenWorkbenchObjectA((__wb_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
@@ -221,7 +221,7 @@ ___wb_OpenWorkbenchObject(__wb_base_t __ndk_base, CONST_STRPTR name, ...)
 {
 	return __wb_OpenWorkbenchObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
-#define OpenWorkbenchObject(name, ...) ___wb_OpenWorkbenchObject((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
+#define OpenWorkbenchObject(name, ...) ___wb_OpenWorkbenchObject((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
 #define OpenWorkbenchObject(name, ...) (OpenWorkbenchObject)((CONST_STRPTR)(name), ##__VA_ARGS__)
 #endif
@@ -240,8 +240,8 @@ __wb_CloseWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define CloseWorkbenchObjectA(name, tags) __wb_CloseWorkbenchObjectA((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
-#define __CloseWorkbenchObjectA_base(__ndk_b, name, tags) __wb_CloseWorkbenchObjectA((__wb_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define CloseWorkbenchObjectA(name, tags) __wb_CloseWorkbenchObjectA((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __CloseWorkbenchObjectA_base(__ndk_b, name, tags) __wb_CloseWorkbenchObjectA((__wb_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
@@ -249,7 +249,7 @@ ___wb_CloseWorkbenchObject(__wb_base_t __ndk_base, CONST_STRPTR name, ...)
 {
 	return __wb_CloseWorkbenchObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
-#define CloseWorkbenchObject(name, ...) ___wb_CloseWorkbenchObject((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
+#define CloseWorkbenchObject(name, ...) ___wb_CloseWorkbenchObject((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
 #define CloseWorkbenchObject(name, ...) (CloseWorkbenchObject)((CONST_STRPTR)(name), ##__VA_ARGS__)
 #endif
@@ -268,8 +268,8 @@ __wb_WorkbenchControlA(struct Library *__base, CONST_STRPTR name, CONST struct T
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define WorkbenchControlA(name, tags) __wb_WorkbenchControlA((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
-#define __WorkbenchControlA_base(__ndk_b, name, tags) __wb_WorkbenchControlA((__wb_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define WorkbenchControlA(name, tags) __wb_WorkbenchControlA((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __WorkbenchControlA_base(__ndk_b, name, tags) __wb_WorkbenchControlA((__wb_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
@@ -277,7 +277,7 @@ ___wb_WorkbenchControl(__wb_base_t __ndk_base, CONST_STRPTR name, ...)
 {
 	return __wb_WorkbenchControlA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
-#define WorkbenchControl(name, ...) ___wb_WorkbenchControl((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
+#define WorkbenchControl(name, ...) ___wb_WorkbenchControl((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
 #define WorkbenchControl(name, ...) (WorkbenchControl)((CONST_STRPTR)(name), ##__VA_ARGS__)
 #endif
@@ -296,8 +296,8 @@ __wb_AddAppWindowDropZoneA(struct Library *__base, struct AppWindow * aw, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct AppWindowDropZone *)_d0;
 }
-#define AddAppWindowDropZoneA(aw, id, userdata, tags) __wb_AddAppWindowDropZoneA((__wb_base_t)(WB_BASE_NAME), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)(tags))
-#define __AddAppWindowDropZoneA_base(__ndk_b, aw, id, userdata, tags) __wb_AddAppWindowDropZoneA((__wb_base_t)(__ndk_b), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)(tags))
+#define AddAppWindowDropZoneA(aw, id, userdata, tags) __wb_AddAppWindowDropZoneA((__wb_base_t)(void *)(WB_BASE_NAME), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)(tags))
+#define __AddAppWindowDropZoneA_base(__ndk_b, aw, id, userdata, tags) __wb_AddAppWindowDropZoneA((__wb_base_t)(void *)(__ndk_b), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct AppWindowDropZone *
@@ -305,7 +305,7 @@ ___wb_AddAppWindowDropZone(__wb_base_t __ndk_base, struct AppWindow * aw, ULONG 
 {
 	return __wb_AddAppWindowDropZoneA(__ndk_base, (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)((ULONG)&userdata + sizeof(userdata)));
 }
-#define AddAppWindowDropZone(aw, id, userdata, ...) ___wb_AddAppWindowDropZone((__wb_base_t)(WB_BASE_NAME), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), ##__VA_ARGS__)
+#define AddAppWindowDropZone(aw, id, userdata, ...) ___wb_AddAppWindowDropZone((__wb_base_t)(void *)(WB_BASE_NAME), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), ##__VA_ARGS__)
 #else
 #define AddAppWindowDropZone(aw, id, userdata, ...) (AddAppWindowDropZone)((struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), ##__VA_ARGS__)
 #endif
@@ -324,8 +324,8 @@ __wb_RemoveAppWindowDropZone(struct Library *__base, struct AppWindow * aw, stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define RemoveAppWindowDropZone(aw, dropZone) __wb_RemoveAppWindowDropZone((__wb_base_t)(WB_BASE_NAME), (struct AppWindow *)(aw), (struct AppWindowDropZone *)(dropZone))
-#define __RemoveAppWindowDropZone_base(__ndk_b, aw, dropZone) __wb_RemoveAppWindowDropZone((__wb_base_t)(__ndk_b), (struct AppWindow *)(aw), (struct AppWindowDropZone *)(dropZone))
+#define RemoveAppWindowDropZone(aw, dropZone) __wb_RemoveAppWindowDropZone((__wb_base_t)(void *)(WB_BASE_NAME), (struct AppWindow *)(aw), (struct AppWindowDropZone *)(dropZone))
+#define __RemoveAppWindowDropZone_base(__ndk_b, aw, dropZone) __wb_RemoveAppWindowDropZone((__wb_base_t)(void *)(__ndk_b), (struct AppWindow *)(aw), (struct AppWindowDropZone *)(dropZone))
 
 static __inline__ BOOL
 __wb_ChangeWorkbenchSelectionA(struct Library *__base, CONST_STRPTR name, struct Hook * hook, CONST struct TagItem * tags)
@@ -342,8 +342,8 @@ __wb_ChangeWorkbenchSelectionA(struct Library *__base, CONST_STRPTR name, struct
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ChangeWorkbenchSelectionA(name, hook, tags) __wb_ChangeWorkbenchSelectionA((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)(tags))
-#define __ChangeWorkbenchSelectionA_base(__ndk_b, name, hook, tags) __wb_ChangeWorkbenchSelectionA((__wb_base_t)(__ndk_b), (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)(tags))
+#define ChangeWorkbenchSelectionA(name, hook, tags) __wb_ChangeWorkbenchSelectionA((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)(tags))
+#define __ChangeWorkbenchSelectionA_base(__ndk_b, name, hook, tags) __wb_ChangeWorkbenchSelectionA((__wb_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
@@ -351,7 +351,7 @@ ___wb_ChangeWorkbenchSelection(__wb_base_t __ndk_base, CONST_STRPTR name, struct
 {
 	return __wb_ChangeWorkbenchSelectionA(__ndk_base, (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)((ULONG)&hook + sizeof(hook)));
 }
-#define ChangeWorkbenchSelection(name, hook, ...) ___wb_ChangeWorkbenchSelection((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), (struct Hook *)(hook), ##__VA_ARGS__)
+#define ChangeWorkbenchSelection(name, hook, ...) ___wb_ChangeWorkbenchSelection((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), (struct Hook *)(hook), ##__VA_ARGS__)
 #else
 #define ChangeWorkbenchSelection(name, hook, ...) (ChangeWorkbenchSelection)((CONST_STRPTR)(name), (struct Hook *)(hook), ##__VA_ARGS__)
 #endif
@@ -370,8 +370,8 @@ __wb_MakeWorkbenchObjectVisibleA(struct Library *__base, CONST_STRPTR name, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define MakeWorkbenchObjectVisibleA(name, tags) __wb_MakeWorkbenchObjectVisibleA((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
-#define __MakeWorkbenchObjectVisibleA_base(__ndk_b, name, tags) __wb_MakeWorkbenchObjectVisibleA((__wb_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define MakeWorkbenchObjectVisibleA(name, tags) __wb_MakeWorkbenchObjectVisibleA((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __MakeWorkbenchObjectVisibleA_base(__ndk_b, name, tags) __wb_MakeWorkbenchObjectVisibleA((__wb_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
@@ -379,7 +379,7 @@ ___wb_MakeWorkbenchObjectVisible(__wb_base_t __ndk_base, CONST_STRPTR name, ...)
 {
 	return __wb_MakeWorkbenchObjectVisibleA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
-#define MakeWorkbenchObjectVisible(name, ...) ___wb_MakeWorkbenchObjectVisible((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
+#define MakeWorkbenchObjectVisible(name, ...) ___wb_MakeWorkbenchObjectVisible((__wb_base_t)(void *)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
 #define MakeWorkbenchObjectVisible(name, ...) (MakeWorkbenchObjectVisible)((CONST_STRPTR)(name), ##__VA_ARGS__)
 #endif
@@ -398,8 +398,8 @@ __wb_WhichWorkbenchObjectA(struct Library *__base, struct Window * window, LONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define WhichWorkbenchObjectA(window, x, y, tags) __wb_WhichWorkbenchObjectA((__wb_base_t)(WB_BASE_NAME), (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)(tags))
-#define __WhichWorkbenchObjectA_base(__ndk_b, window, x, y, tags) __wb_WhichWorkbenchObjectA((__wb_base_t)(__ndk_b), (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)(tags))
+#define WhichWorkbenchObjectA(window, x, y, tags) __wb_WhichWorkbenchObjectA((__wb_base_t)(void *)(WB_BASE_NAME), (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)(tags))
+#define __WhichWorkbenchObjectA_base(__ndk_b, window, x, y, tags) __wb_WhichWorkbenchObjectA((__wb_base_t)(void *)(__ndk_b), (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
@@ -407,7 +407,7 @@ ___wb_WhichWorkbenchObject(__wb_base_t __ndk_base, struct Window * window, LONG 
 {
 	return __wb_WhichWorkbenchObjectA(__ndk_base, (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)((ULONG)&y + sizeof(y)));
 }
-#define WhichWorkbenchObject(window, x, y, ...) ___wb_WhichWorkbenchObject((__wb_base_t)(WB_BASE_NAME), (struct Window *)(window), (LONG)(x), (LONG)(y), ##__VA_ARGS__)
+#define WhichWorkbenchObject(window, x, y, ...) ___wb_WhichWorkbenchObject((__wb_base_t)(void *)(WB_BASE_NAME), (struct Window *)(window), (LONG)(x), (LONG)(y), ##__VA_ARGS__)
 #else
 #define WhichWorkbenchObject(window, x, y, ...) (WhichWorkbenchObject)((struct Window *)(window), (LONG)(x), (LONG)(y), ##__VA_ARGS__)
 #endif

@@ -22,13 +22,13 @@ struct Player * CreatePlayerA(CONST struct TagItem * tagList);
 struct Player * CreatePlayer(Tag tag1, ...);
 VOID DeletePlayer(struct Player * player);
 BOOL SetPlayerAttrsA(struct Player * player, CONST struct TagItem * tagList);
-BOOL SetPlayerAttrs(struct Player * player, Tag tag1, ...);
+BOOL SetPlayerAttrs(struct Player * player, ...);
 LONG SetConductorState(struct Player * player, ULONG state, LONG time);
 BOOL ExternalSync(struct Player * player, LONG minTime, LONG maxTime);
 struct Conductor * NextConductor(CONST struct Conductor * previousConductor);
 struct Conductor * FindConductor(CONST_STRPTR name);
 ULONG GetPlayerAttrsA(CONST struct Player * player, CONST struct TagItem * tagList);
-ULONG GetPlayerAttrs(CONST struct Player * player, Tag tag1, ...);
+ULONG GetPlayerAttrs(CONST struct Player * player, ...);
 
 #ifdef __cplusplus
 }

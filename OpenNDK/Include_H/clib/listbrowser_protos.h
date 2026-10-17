@@ -21,12 +21,12 @@ extern "C" {
 /* From version 44 */
 Class * LISTBROWSER_GetClass(VOID);
 struct Node * AllocListBrowserNodeA(ULONG columns, struct TagItem * tags);
-struct Node * AllocListBrowserNode(UWORD columns, Tag tag1, ...);
+struct Node * AllocListBrowserNode(UWORD columns, ...);
 VOID FreeListBrowserNode(struct Node * node);
 VOID SetListBrowserNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID SetListBrowserNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID SetListBrowserNodeAttrs(struct Node * node, ...);
 VOID GetListBrowserNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID GetListBrowserNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID GetListBrowserNodeAttrs(struct Node * node, ...);
 VOID ListBrowserSelectAll(struct List * list);
 VOID ShowListBrowserNodeChildren(struct Node * node, LONG depth);
 VOID HideListBrowserNodeChildren(struct Node * node);
@@ -36,11 +36,11 @@ VOID FreeListBrowserList(struct List * list);
 
 /* From version 45 */
 struct ColumnInfo * AllocLBColumnInfoA(ULONG columns, struct TagItem * tags);
-struct ColumnInfo * AllocLBColumnInfo(UWORD columns, Tag tag1, ...);
+struct ColumnInfo * AllocLBColumnInfo(UWORD columns, ...);
 LONG SetLBColumnInfoAttrsA(struct ColumnInfo * columninfo, struct TagItem * tags);
-LONG SetLBColumnInfoAttrs(struct ColumnInfo * columninfo, Tag tag1, ...);
+LONG SetLBColumnInfoAttrs(struct ColumnInfo * columninfo, ...);
 LONG GetLBColumnInfoAttrsA(struct ColumnInfo * columninfo, struct TagItem * tags);
-LONG GetLBColumnInfoAttrs(struct ColumnInfo * columninfo, Tag tag1, ...);
+LONG GetLBColumnInfoAttrs(struct ColumnInfo * columninfo, ...);
 VOID FreeLBColumnInfo(struct ColumnInfo * columninfo);
 VOID ListBrowserClearAll(struct List * list);
 

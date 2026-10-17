@@ -38,8 +38,8 @@ __asl_AllocFileRequest(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct FileRequester *)_d0;
 }
-#define AllocFileRequest() __asl_AllocFileRequest((__asl_base_t)(ASL_BASE_NAME))
-#define __AllocFileRequest_base(__ndk_b) __asl_AllocFileRequest((__asl_base_t)(__ndk_b))
+#define AllocFileRequest() __asl_AllocFileRequest((__asl_base_t)(void *)(ASL_BASE_NAME))
+#define __AllocFileRequest_base(__ndk_b) __asl_AllocFileRequest((__asl_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __asl_FreeFileRequest(struct Library *__base, struct FileRequester * fileReq)
@@ -55,8 +55,8 @@ __asl_FreeFileRequest(struct Library *__base, struct FileRequester * fileReq)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeFileRequest(fileReq) __asl_FreeFileRequest((__asl_base_t)(ASL_BASE_NAME), (struct FileRequester *)(fileReq))
-#define __FreeFileRequest_base(__ndk_b, fileReq) __asl_FreeFileRequest((__asl_base_t)(__ndk_b), (struct FileRequester *)(fileReq))
+#define FreeFileRequest(fileReq) __asl_FreeFileRequest((__asl_base_t)(void *)(ASL_BASE_NAME), (struct FileRequester *)(fileReq))
+#define __FreeFileRequest_base(__ndk_b, fileReq) __asl_FreeFileRequest((__asl_base_t)(void *)(__ndk_b), (struct FileRequester *)(fileReq))
 
 static __inline__ BOOL
 __asl_RequestFile(struct Library *__base, struct FileRequester * fileReq)
@@ -72,8 +72,8 @@ __asl_RequestFile(struct Library *__base, struct FileRequester * fileReq)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define RequestFile(fileReq) __asl_RequestFile((__asl_base_t)(ASL_BASE_NAME), (struct FileRequester *)(fileReq))
-#define __RequestFile_base(__ndk_b, fileReq) __asl_RequestFile((__asl_base_t)(__ndk_b), (struct FileRequester *)(fileReq))
+#define RequestFile(fileReq) __asl_RequestFile((__asl_base_t)(void *)(ASL_BASE_NAME), (struct FileRequester *)(fileReq))
+#define __RequestFile_base(__ndk_b, fileReq) __asl_RequestFile((__asl_base_t)(void *)(__ndk_b), (struct FileRequester *)(fileReq))
 
 static __inline__ APTR
 __asl_AllocAslRequest(struct Library *__base, ULONG reqType, CONST struct TagItem * tagList)
@@ -89,8 +89,8 @@ __asl_AllocAslRequest(struct Library *__base, ULONG reqType, CONST struct TagIte
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AllocAslRequest(reqType, tagList) __asl_AllocAslRequest((__asl_base_t)(ASL_BASE_NAME), (ULONG)(reqType), (CONST struct TagItem *)(tagList))
-#define __AllocAslRequest_base(__ndk_b, reqType, tagList) __asl_AllocAslRequest((__asl_base_t)(__ndk_b), (ULONG)(reqType), (CONST struct TagItem *)(tagList))
+#define AllocAslRequest(reqType, tagList) __asl_AllocAslRequest((__asl_base_t)(void *)(ASL_BASE_NAME), (ULONG)(reqType), (CONST struct TagItem *)(tagList))
+#define __AllocAslRequest_base(__ndk_b, reqType, tagList) __asl_AllocAslRequest((__asl_base_t)(void *)(__ndk_b), (ULONG)(reqType), (CONST struct TagItem *)(tagList))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
@@ -98,7 +98,7 @@ ___asl_AllocAslRequestTags(__asl_base_t __ndk_base, ULONG reqType, ...)
 {
 	return __asl_AllocAslRequest(__ndk_base, (ULONG)(reqType), (CONST struct TagItem *)((ULONG)&reqType + sizeof(reqType)));
 }
-#define AllocAslRequestTags(reqType, ...) ___asl_AllocAslRequestTags((__asl_base_t)(ASL_BASE_NAME), (ULONG)(reqType), ##__VA_ARGS__)
+#define AllocAslRequestTags(reqType, ...) ___asl_AllocAslRequestTags((__asl_base_t)(void *)(ASL_BASE_NAME), (ULONG)(reqType), ##__VA_ARGS__)
 #else
 #define AllocAslRequestTags(reqType, ...) (AllocAslRequestTags)((ULONG)(reqType), ##__VA_ARGS__)
 #endif
@@ -117,8 +117,8 @@ __asl_FreeAslRequest(struct Library *__base, APTR requester)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeAslRequest(requester) __asl_FreeAslRequest((__asl_base_t)(ASL_BASE_NAME), (APTR)(requester))
-#define __FreeAslRequest_base(__ndk_b, requester) __asl_FreeAslRequest((__asl_base_t)(__ndk_b), (APTR)(requester))
+#define FreeAslRequest(requester) __asl_FreeAslRequest((__asl_base_t)(void *)(ASL_BASE_NAME), (APTR)(requester))
+#define __FreeAslRequest_base(__ndk_b, requester) __asl_FreeAslRequest((__asl_base_t)(void *)(__ndk_b), (APTR)(requester))
 
 static __inline__ BOOL
 __asl_AslRequest(struct Library *__base, APTR requester, CONST struct TagItem * tagList)
@@ -134,8 +134,8 @@ __asl_AslRequest(struct Library *__base, APTR requester, CONST struct TagItem * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AslRequest(requester, tagList) __asl_AslRequest((__asl_base_t)(ASL_BASE_NAME), (APTR)(requester), (CONST struct TagItem *)(tagList))
-#define __AslRequest_base(__ndk_b, requester, tagList) __asl_AslRequest((__asl_base_t)(__ndk_b), (APTR)(requester), (CONST struct TagItem *)(tagList))
+#define AslRequest(requester, tagList) __asl_AslRequest((__asl_base_t)(void *)(ASL_BASE_NAME), (APTR)(requester), (CONST struct TagItem *)(tagList))
+#define __AslRequest_base(__ndk_b, requester, tagList) __asl_AslRequest((__asl_base_t)(void *)(__ndk_b), (APTR)(requester), (CONST struct TagItem *)(tagList))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
@@ -143,7 +143,7 @@ ___asl_AslRequestTags(__asl_base_t __ndk_base, APTR requester, ...)
 {
 	return __asl_AslRequest(__ndk_base, (APTR)(requester), (CONST struct TagItem *)((ULONG)&requester + sizeof(requester)));
 }
-#define AslRequestTags(requester, ...) ___asl_AslRequestTags((__asl_base_t)(ASL_BASE_NAME), (APTR)(requester), ##__VA_ARGS__)
+#define AslRequestTags(requester, ...) ___asl_AslRequestTags((__asl_base_t)(void *)(ASL_BASE_NAME), (APTR)(requester), ##__VA_ARGS__)
 #else
 #define AslRequestTags(requester, ...) (AslRequestTags)((APTR)(requester), ##__VA_ARGS__)
 #endif
@@ -162,8 +162,8 @@ __asl_AbortAslRequest(struct Library *__base, APTR requester)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AbortAslRequest(requester) __asl_AbortAslRequest((__asl_base_t)(ASL_BASE_NAME), (APTR)(requester))
-#define __AbortAslRequest_base(__ndk_b, requester) __asl_AbortAslRequest((__asl_base_t)(__ndk_b), (APTR)(requester))
+#define AbortAslRequest(requester) __asl_AbortAslRequest((__asl_base_t)(void *)(ASL_BASE_NAME), (APTR)(requester))
+#define __AbortAslRequest_base(__ndk_b, requester) __asl_AbortAslRequest((__asl_base_t)(void *)(__ndk_b), (APTR)(requester))
 
 static __inline__ VOID
 __asl_ActivateAslRequest(struct Library *__base, APTR requester)
@@ -179,7 +179,7 @@ __asl_ActivateAslRequest(struct Library *__base, APTR requester)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ActivateAslRequest(requester) __asl_ActivateAslRequest((__asl_base_t)(ASL_BASE_NAME), (APTR)(requester))
-#define __ActivateAslRequest_base(__ndk_b, requester) __asl_ActivateAslRequest((__asl_base_t)(__ndk_b), (APTR)(requester))
+#define ActivateAslRequest(requester) __asl_ActivateAslRequest((__asl_base_t)(void *)(ASL_BASE_NAME), (APTR)(requester))
+#define __ActivateAslRequest_base(__ndk_b, requester) __asl_ActivateAslRequest((__asl_base_t)(void *)(__ndk_b), (APTR)(requester))
 
 #endif /* INLINE_ASL_H */

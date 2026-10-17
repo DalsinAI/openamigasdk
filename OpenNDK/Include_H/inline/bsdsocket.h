@@ -39,8 +39,8 @@ __bsdsocket_socket(struct Library *__base, int domain, int type, int protocol)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define socket(domain, type, protocol) __bsdsocket_socket((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(domain), (int)(type), (int)(protocol))
-#define __socket_base(__ndk_b, domain, type, protocol) __bsdsocket_socket((__bsdsocket_base_t)(__ndk_b), (int)(domain), (int)(type), (int)(protocol))
+#define socket(domain, type, protocol) __bsdsocket_socket((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(domain), (int)(type), (int)(protocol))
+#define __socket_base(__ndk_b, domain, type, protocol) __bsdsocket_socket((__bsdsocket_base_t)(void *)(__ndk_b), (int)(domain), (int)(type), (int)(protocol))
 
 static __inline__ int
 __bsdsocket_bind(struct Library *__base, int sock, const struct sockaddr *name, socklen_t namelen)
@@ -56,8 +56,8 @@ __bsdsocket_bind(struct Library *__base, int sock, const struct sockaddr *name, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define bind(sock, name, namelen) __bsdsocket_bind((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (const struct sockaddr *)(name), (socklen_t)(namelen))
-#define __bind_base(__ndk_b, sock, name, namelen) __bsdsocket_bind((__bsdsocket_base_t)(__ndk_b), (int)(sock), (const struct sockaddr *)(name), (socklen_t)(namelen))
+#define bind(sock, name, namelen) __bsdsocket_bind((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (const struct sockaddr *)(name), (socklen_t)(namelen))
+#define __bind_base(__ndk_b, sock, name, namelen) __bsdsocket_bind((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (const struct sockaddr *)(name), (socklen_t)(namelen))
 
 static __inline__ int
 __bsdsocket_listen(struct Library *__base, int sock, int backlog)
@@ -73,8 +73,8 @@ __bsdsocket_listen(struct Library *__base, int sock, int backlog)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define listen(sock, backlog) __bsdsocket_listen((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (int)(backlog))
-#define __listen_base(__ndk_b, sock, backlog) __bsdsocket_listen((__bsdsocket_base_t)(__ndk_b), (int)(sock), (int)(backlog))
+#define listen(sock, backlog) __bsdsocket_listen((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (int)(backlog))
+#define __listen_base(__ndk_b, sock, backlog) __bsdsocket_listen((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (int)(backlog))
 
 static __inline__ int
 __bsdsocket_accept(struct Library *__base, int sock, struct sockaddr *addr, socklen_t *addrlen)
@@ -90,8 +90,8 @@ __bsdsocket_accept(struct Library *__base, int sock, struct sockaddr *addr, sock
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define accept(sock, addr, addrlen) __bsdsocket_accept((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (struct sockaddr *)(addr), (socklen_t *)(addrlen))
-#define __accept_base(__ndk_b, sock, addr, addrlen) __bsdsocket_accept((__bsdsocket_base_t)(__ndk_b), (int)(sock), (struct sockaddr *)(addr), (socklen_t *)(addrlen))
+#define accept(sock, addr, addrlen) __bsdsocket_accept((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (struct sockaddr *)(addr), (socklen_t *)(addrlen))
+#define __accept_base(__ndk_b, sock, addr, addrlen) __bsdsocket_accept((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (struct sockaddr *)(addr), (socklen_t *)(addrlen))
 
 static __inline__ int
 __bsdsocket_connect(struct Library *__base, int sock, const struct sockaddr *name, socklen_t namelen)
@@ -107,8 +107,8 @@ __bsdsocket_connect(struct Library *__base, int sock, const struct sockaddr *nam
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define connect(sock, name, namelen) __bsdsocket_connect((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (const struct sockaddr *)(name), (socklen_t)(namelen))
-#define __connect_base(__ndk_b, sock, name, namelen) __bsdsocket_connect((__bsdsocket_base_t)(__ndk_b), (int)(sock), (const struct sockaddr *)(name), (socklen_t)(namelen))
+#define connect(sock, name, namelen) __bsdsocket_connect((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (const struct sockaddr *)(name), (socklen_t)(namelen))
+#define __connect_base(__ndk_b, sock, name, namelen) __bsdsocket_connect((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (const struct sockaddr *)(name), (socklen_t)(namelen))
 
 static __inline__ ssize_t
 __bsdsocket_sendto(struct Library *__base, int sock, const void *buf, size_t len, int flags, const struct sockaddr *to, socklen_t tolen)
@@ -126,8 +126,8 @@ __bsdsocket_sendto(struct Library *__base, int sock, const void *buf, size_t len
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ssize_t)_d0;
 }
-#define sendto(sock, buf, len, flags, to, tolen) __bsdsocket_sendto((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (const void *)(buf), (size_t)(len), (int)(flags), (const struct sockaddr *)(to), (socklen_t)(tolen))
-#define __sendto_base(__ndk_b, sock, buf, len, flags, to, tolen) __bsdsocket_sendto((__bsdsocket_base_t)(__ndk_b), (int)(sock), (const void *)(buf), (size_t)(len), (int)(flags), (const struct sockaddr *)(to), (socklen_t)(tolen))
+#define sendto(sock, buf, len, flags, to, tolen) __bsdsocket_sendto((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (const void *)(buf), (size_t)(len), (int)(flags), (const struct sockaddr *)(to), (socklen_t)(tolen))
+#define __sendto_base(__ndk_b, sock, buf, len, flags, to, tolen) __bsdsocket_sendto((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (const void *)(buf), (size_t)(len), (int)(flags), (const struct sockaddr *)(to), (socklen_t)(tolen))
 
 static __inline__ ssize_t
 __bsdsocket_send(struct Library *__base, int sock, const void *buf, size_t len, int flags)
@@ -144,8 +144,8 @@ __bsdsocket_send(struct Library *__base, int sock, const void *buf, size_t len, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ssize_t)_d0;
 }
-#define send(sock, buf, len, flags) __bsdsocket_send((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (const void *)(buf), (size_t)(len), (int)(flags))
-#define __send_base(__ndk_b, sock, buf, len, flags) __bsdsocket_send((__bsdsocket_base_t)(__ndk_b), (int)(sock), (const void *)(buf), (size_t)(len), (int)(flags))
+#define send(sock, buf, len, flags) __bsdsocket_send((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (const void *)(buf), (size_t)(len), (int)(flags))
+#define __send_base(__ndk_b, sock, buf, len, flags) __bsdsocket_send((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (const void *)(buf), (size_t)(len), (int)(flags))
 
 static __inline__ ssize_t
 __bsdsocket_recvfrom(struct Library *__base, int sock, void *buf, size_t len, int flags, struct sockaddr *addr, socklen_t *addrlen)
@@ -163,8 +163,8 @@ __bsdsocket_recvfrom(struct Library *__base, int sock, void *buf, size_t len, in
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ssize_t)_d0;
 }
-#define recvfrom(sock, buf, len, flags, addr, addrlen) __bsdsocket_recvfrom((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (void *)(buf), (size_t)(len), (int)(flags), (struct sockaddr *)(addr), (socklen_t *)(addrlen))
-#define __recvfrom_base(__ndk_b, sock, buf, len, flags, addr, addrlen) __bsdsocket_recvfrom((__bsdsocket_base_t)(__ndk_b), (int)(sock), (void *)(buf), (size_t)(len), (int)(flags), (struct sockaddr *)(addr), (socklen_t *)(addrlen))
+#define recvfrom(sock, buf, len, flags, addr, addrlen) __bsdsocket_recvfrom((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (void *)(buf), (size_t)(len), (int)(flags), (struct sockaddr *)(addr), (socklen_t *)(addrlen))
+#define __recvfrom_base(__ndk_b, sock, buf, len, flags, addr, addrlen) __bsdsocket_recvfrom((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (void *)(buf), (size_t)(len), (int)(flags), (struct sockaddr *)(addr), (socklen_t *)(addrlen))
 
 static __inline__ ssize_t
 __bsdsocket_recv(struct Library *__base, int sock, void *buf, size_t len, int flags)
@@ -181,8 +181,8 @@ __bsdsocket_recv(struct Library *__base, int sock, void *buf, size_t len, int fl
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ssize_t)_d0;
 }
-#define recv(sock, buf, len, flags) __bsdsocket_recv((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (void *)(buf), (size_t)(len), (int)(flags))
-#define __recv_base(__ndk_b, sock, buf, len, flags) __bsdsocket_recv((__bsdsocket_base_t)(__ndk_b), (int)(sock), (void *)(buf), (size_t)(len), (int)(flags))
+#define recv(sock, buf, len, flags) __bsdsocket_recv((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (void *)(buf), (size_t)(len), (int)(flags))
+#define __recv_base(__ndk_b, sock, buf, len, flags) __bsdsocket_recv((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (void *)(buf), (size_t)(len), (int)(flags))
 
 static __inline__ int
 __bsdsocket_shutdown(struct Library *__base, int sock, int how)
@@ -198,8 +198,8 @@ __bsdsocket_shutdown(struct Library *__base, int sock, int how)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define shutdown(sock, how) __bsdsocket_shutdown((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (int)(how))
-#define __shutdown_base(__ndk_b, sock, how) __bsdsocket_shutdown((__bsdsocket_base_t)(__ndk_b), (int)(sock), (int)(how))
+#define shutdown(sock, how) __bsdsocket_shutdown((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (int)(how))
+#define __shutdown_base(__ndk_b, sock, how) __bsdsocket_shutdown((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (int)(how))
 
 static __inline__ int
 __bsdsocket_setsockopt(struct Library *__base, int sock, int level, int optname, const void *optval, socklen_t optlen)
@@ -217,8 +217,8 @@ __bsdsocket_setsockopt(struct Library *__base, int sock, int level, int optname,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define setsockopt(sock, level, optname, optval, optlen) __bsdsocket_setsockopt((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (int)(level), (int)(optname), (const void *)(optval), (socklen_t)(optlen))
-#define __setsockopt_base(__ndk_b, sock, level, optname, optval, optlen) __bsdsocket_setsockopt((__bsdsocket_base_t)(__ndk_b), (int)(sock), (int)(level), (int)(optname), (const void *)(optval), (socklen_t)(optlen))
+#define setsockopt(sock, level, optname, optval, optlen) __bsdsocket_setsockopt((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (int)(level), (int)(optname), (const void *)(optval), (socklen_t)(optlen))
+#define __setsockopt_base(__ndk_b, sock, level, optname, optval, optlen) __bsdsocket_setsockopt((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (int)(level), (int)(optname), (const void *)(optval), (socklen_t)(optlen))
 
 static __inline__ int
 __bsdsocket_getsockopt(struct Library *__base, int sock, int level, int optname, void *optval, socklen_t *optlen)
@@ -235,8 +235,8 @@ __bsdsocket_getsockopt(struct Library *__base, int sock, int level, int optname,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define getsockopt(sock, level, optname, optval, optlen) __bsdsocket_getsockopt((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (int)(level), (int)(optname), (void *)(optval), (socklen_t *)(optlen))
-#define __getsockopt_base(__ndk_b, sock, level, optname, optval, optlen) __bsdsocket_getsockopt((__bsdsocket_base_t)(__ndk_b), (int)(sock), (int)(level), (int)(optname), (void *)(optval), (socklen_t *)(optlen))
+#define getsockopt(sock, level, optname, optval, optlen) __bsdsocket_getsockopt((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (int)(level), (int)(optname), (void *)(optval), (socklen_t *)(optlen))
+#define __getsockopt_base(__ndk_b, sock, level, optname, optval, optlen) __bsdsocket_getsockopt((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (int)(level), (int)(optname), (void *)(optval), (socklen_t *)(optlen))
 
 static __inline__ int
 __bsdsocket_getsockname(struct Library *__base, int sock, struct sockaddr *name, socklen_t *namelen)
@@ -252,8 +252,8 @@ __bsdsocket_getsockname(struct Library *__base, int sock, struct sockaddr *name,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define getsockname(sock, name, namelen) __bsdsocket_getsockname((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (struct sockaddr *)(name), (socklen_t *)(namelen))
-#define __getsockname_base(__ndk_b, sock, name, namelen) __bsdsocket_getsockname((__bsdsocket_base_t)(__ndk_b), (int)(sock), (struct sockaddr *)(name), (socklen_t *)(namelen))
+#define getsockname(sock, name, namelen) __bsdsocket_getsockname((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (struct sockaddr *)(name), (socklen_t *)(namelen))
+#define __getsockname_base(__ndk_b, sock, name, namelen) __bsdsocket_getsockname((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (struct sockaddr *)(name), (socklen_t *)(namelen))
 
 static __inline__ int
 __bsdsocket_getpeername(struct Library *__base, int sock, struct sockaddr *name, socklen_t *namelen)
@@ -269,8 +269,8 @@ __bsdsocket_getpeername(struct Library *__base, int sock, struct sockaddr *name,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define getpeername(sock, name, namelen) __bsdsocket_getpeername((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (struct sockaddr *)(name), (socklen_t *)(namelen))
-#define __getpeername_base(__ndk_b, sock, name, namelen) __bsdsocket_getpeername((__bsdsocket_base_t)(__ndk_b), (int)(sock), (struct sockaddr *)(name), (socklen_t *)(namelen))
+#define getpeername(sock, name, namelen) __bsdsocket_getpeername((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (struct sockaddr *)(name), (socklen_t *)(namelen))
+#define __getpeername_base(__ndk_b, sock, name, namelen) __bsdsocket_getpeername((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (struct sockaddr *)(name), (socklen_t *)(namelen))
 
 static __inline__ LONG
 __bsdsocket_IoctlSocket(struct Library *__base, LONG sock, ULONG req, APTR argp)
@@ -286,8 +286,8 @@ __bsdsocket_IoctlSocket(struct Library *__base, LONG sock, ULONG req, APTR argp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IoctlSocket(sock, req, argp) __bsdsocket_IoctlSocket((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(sock), (ULONG)(req), (APTR)(argp))
-#define __IoctlSocket_base(__ndk_b, sock, req, argp) __bsdsocket_IoctlSocket((__bsdsocket_base_t)(__ndk_b), (LONG)(sock), (ULONG)(req), (APTR)(argp))
+#define IoctlSocket(sock, req, argp) __bsdsocket_IoctlSocket((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(sock), (ULONG)(req), (APTR)(argp))
+#define __IoctlSocket_base(__ndk_b, sock, req, argp) __bsdsocket_IoctlSocket((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(sock), (ULONG)(req), (APTR)(argp))
 
 static __inline__ LONG
 __bsdsocket_CloseSocket(struct Library *__base, LONG sock)
@@ -303,8 +303,8 @@ __bsdsocket_CloseSocket(struct Library *__base, LONG sock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CloseSocket(sock) __bsdsocket_CloseSocket((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(sock))
-#define __CloseSocket_base(__ndk_b, sock) __bsdsocket_CloseSocket((__bsdsocket_base_t)(__ndk_b), (LONG)(sock))
+#define CloseSocket(sock) __bsdsocket_CloseSocket((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(sock))
+#define __CloseSocket_base(__ndk_b, sock) __bsdsocket_CloseSocket((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(sock))
 
 static __inline__ LONG
 __bsdsocket_WaitSelect(struct Library *__base, LONG nfds, APTR read_fds, APTR write_fds, APTR except_fds, struct timeval *_timeout, ULONG *signals)
@@ -322,8 +322,8 @@ __bsdsocket_WaitSelect(struct Library *__base, LONG nfds, APTR read_fds, APTR wr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WaitSelect(nfds, read_fds, write_fds, except_fds, _timeout, signals) __bsdsocket_WaitSelect((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(nfds), (APTR)(read_fds), (APTR)(write_fds), (APTR)(except_fds), (struct timeval *)(_timeout), (ULONG *)(signals))
-#define __WaitSelect_base(__ndk_b, nfds, read_fds, write_fds, except_fds, _timeout, signals) __bsdsocket_WaitSelect((__bsdsocket_base_t)(__ndk_b), (LONG)(nfds), (APTR)(read_fds), (APTR)(write_fds), (APTR)(except_fds), (struct timeval *)(_timeout), (ULONG *)(signals))
+#define WaitSelect(nfds, read_fds, write_fds, except_fds, _timeout, signals) __bsdsocket_WaitSelect((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(nfds), (APTR)(read_fds), (APTR)(write_fds), (APTR)(except_fds), (struct timeval *)(_timeout), (ULONG *)(signals))
+#define __WaitSelect_base(__ndk_b, nfds, read_fds, write_fds, except_fds, _timeout, signals) __bsdsocket_WaitSelect((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(nfds), (APTR)(read_fds), (APTR)(write_fds), (APTR)(except_fds), (struct timeval *)(_timeout), (ULONG *)(signals))
 
 static __inline__ VOID
 __bsdsocket_SetSocketSignals(struct Library *__base, ULONG int_mask, ULONG io_mask, ULONG urgent_mask)
@@ -340,8 +340,8 @@ __bsdsocket_SetSocketSignals(struct Library *__base, ULONG int_mask, ULONG io_ma
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetSocketSignals(int_mask, io_mask, urgent_mask) __bsdsocket_SetSocketSignals((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (ULONG)(int_mask), (ULONG)(io_mask), (ULONG)(urgent_mask))
-#define __SetSocketSignals_base(__ndk_b, int_mask, io_mask, urgent_mask) __bsdsocket_SetSocketSignals((__bsdsocket_base_t)(__ndk_b), (ULONG)(int_mask), (ULONG)(io_mask), (ULONG)(urgent_mask))
+#define SetSocketSignals(int_mask, io_mask, urgent_mask) __bsdsocket_SetSocketSignals((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (ULONG)(int_mask), (ULONG)(io_mask), (ULONG)(urgent_mask))
+#define __SetSocketSignals_base(__ndk_b, int_mask, io_mask, urgent_mask) __bsdsocket_SetSocketSignals((__bsdsocket_base_t)(void *)(__ndk_b), (ULONG)(int_mask), (ULONG)(io_mask), (ULONG)(urgent_mask))
 
 static __inline__ int
 __bsdsocket_getdtablesize(struct Library *__base)
@@ -357,8 +357,8 @@ __bsdsocket_getdtablesize(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define getdtablesize() __bsdsocket_getdtablesize((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __getdtablesize_base(__ndk_b) __bsdsocket_getdtablesize((__bsdsocket_base_t)(__ndk_b))
+#define getdtablesize() __bsdsocket_getdtablesize((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __getdtablesize_base(__ndk_b) __bsdsocket_getdtablesize((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ LONG
 __bsdsocket_ObtainSocket(struct Library *__base, LONG id, LONG domain, LONG type, LONG protocol)
@@ -376,8 +376,8 @@ __bsdsocket_ObtainSocket(struct Library *__base, LONG id, LONG domain, LONG type
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ObtainSocket(id, domain, type, protocol) __bsdsocket_ObtainSocket((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(id), (LONG)(domain), (LONG)(type), (LONG)(protocol))
-#define __ObtainSocket_base(__ndk_b, id, domain, type, protocol) __bsdsocket_ObtainSocket((__bsdsocket_base_t)(__ndk_b), (LONG)(id), (LONG)(domain), (LONG)(type), (LONG)(protocol))
+#define ObtainSocket(id, domain, type, protocol) __bsdsocket_ObtainSocket((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(id), (LONG)(domain), (LONG)(type), (LONG)(protocol))
+#define __ObtainSocket_base(__ndk_b, id, domain, type, protocol) __bsdsocket_ObtainSocket((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(id), (LONG)(domain), (LONG)(type), (LONG)(protocol))
 
 static __inline__ LONG
 __bsdsocket_ReleaseSocket(struct Library *__base, LONG sock, LONG id)
@@ -393,8 +393,8 @@ __bsdsocket_ReleaseSocket(struct Library *__base, LONG sock, LONG id)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReleaseSocket(sock, id) __bsdsocket_ReleaseSocket((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(sock), (LONG)(id))
-#define __ReleaseSocket_base(__ndk_b, sock, id) __bsdsocket_ReleaseSocket((__bsdsocket_base_t)(__ndk_b), (LONG)(sock), (LONG)(id))
+#define ReleaseSocket(sock, id) __bsdsocket_ReleaseSocket((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(sock), (LONG)(id))
+#define __ReleaseSocket_base(__ndk_b, sock, id) __bsdsocket_ReleaseSocket((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(sock), (LONG)(id))
 
 static __inline__ LONG
 __bsdsocket_ReleaseCopyOfSocket(struct Library *__base, LONG sock, LONG id)
@@ -410,8 +410,8 @@ __bsdsocket_ReleaseCopyOfSocket(struct Library *__base, LONG sock, LONG id)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReleaseCopyOfSocket(sock, id) __bsdsocket_ReleaseCopyOfSocket((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(sock), (LONG)(id))
-#define __ReleaseCopyOfSocket_base(__ndk_b, sock, id) __bsdsocket_ReleaseCopyOfSocket((__bsdsocket_base_t)(__ndk_b), (LONG)(sock), (LONG)(id))
+#define ReleaseCopyOfSocket(sock, id) __bsdsocket_ReleaseCopyOfSocket((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(sock), (LONG)(id))
+#define __ReleaseCopyOfSocket_base(__ndk_b, sock, id) __bsdsocket_ReleaseCopyOfSocket((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(sock), (LONG)(id))
 
 static __inline__ LONG
 __bsdsocket_Errno(struct Library *__base)
@@ -427,8 +427,8 @@ __bsdsocket_Errno(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Errno() __bsdsocket_Errno((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __Errno_base(__ndk_b) __bsdsocket_Errno((__bsdsocket_base_t)(__ndk_b))
+#define Errno() __bsdsocket_Errno((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __Errno_base(__ndk_b) __bsdsocket_Errno((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __bsdsocket_SetErrnoPtr(struct Library *__base, APTR errno_ptr, LONG size)
@@ -444,8 +444,8 @@ __bsdsocket_SetErrnoPtr(struct Library *__base, APTR errno_ptr, LONG size)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetErrnoPtr(errno_ptr, size) __bsdsocket_SetErrnoPtr((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (APTR)(errno_ptr), (LONG)(size))
-#define __SetErrnoPtr_base(__ndk_b, errno_ptr, size) __bsdsocket_SetErrnoPtr((__bsdsocket_base_t)(__ndk_b), (APTR)(errno_ptr), (LONG)(size))
+#define SetErrnoPtr(errno_ptr, size) __bsdsocket_SetErrnoPtr((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (APTR)(errno_ptr), (LONG)(size))
+#define __SetErrnoPtr_base(__ndk_b, errno_ptr, size) __bsdsocket_SetErrnoPtr((__bsdsocket_base_t)(void *)(__ndk_b), (APTR)(errno_ptr), (LONG)(size))
 
 static __inline__ STRPTR
 __bsdsocket_Inet_NtoA(struct Library *__base, in_addr_t ip)
@@ -461,8 +461,8 @@ __bsdsocket_Inet_NtoA(struct Library *__base, in_addr_t ip)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define Inet_NtoA(ip) __bsdsocket_Inet_NtoA((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (in_addr_t)(ip))
-#define __Inet_NtoA_base(__ndk_b, ip) __bsdsocket_Inet_NtoA((__bsdsocket_base_t)(__ndk_b), (in_addr_t)(ip))
+#define Inet_NtoA(ip) __bsdsocket_Inet_NtoA((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (in_addr_t)(ip))
+#define __Inet_NtoA_base(__ndk_b, ip) __bsdsocket_Inet_NtoA((__bsdsocket_base_t)(void *)(__ndk_b), (in_addr_t)(ip))
 
 static __inline__ in_addr_t
 __bsdsocket_inet_addr(struct Library *__base, const char *cp)
@@ -478,8 +478,8 @@ __bsdsocket_inet_addr(struct Library *__base, const char *cp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (in_addr_t)_d0;
 }
-#define inet_addr(cp) __bsdsocket_inet_addr((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (const char *)(cp))
-#define __inet_addr_base(__ndk_b, cp) __bsdsocket_inet_addr((__bsdsocket_base_t)(__ndk_b), (const char *)(cp))
+#define inet_addr(cp) __bsdsocket_inet_addr((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (const char *)(cp))
+#define __inet_addr_base(__ndk_b, cp) __bsdsocket_inet_addr((__bsdsocket_base_t)(void *)(__ndk_b), (const char *)(cp))
 
 static __inline__ in_addr_t
 __bsdsocket_Inet_LnaOf(struct Library *__base, in_addr_t in)
@@ -495,8 +495,8 @@ __bsdsocket_Inet_LnaOf(struct Library *__base, in_addr_t in)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (in_addr_t)_d0;
 }
-#define Inet_LnaOf(in) __bsdsocket_Inet_LnaOf((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (in_addr_t)(in))
-#define __Inet_LnaOf_base(__ndk_b, in) __bsdsocket_Inet_LnaOf((__bsdsocket_base_t)(__ndk_b), (in_addr_t)(in))
+#define Inet_LnaOf(in) __bsdsocket_Inet_LnaOf((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (in_addr_t)(in))
+#define __Inet_LnaOf_base(__ndk_b, in) __bsdsocket_Inet_LnaOf((__bsdsocket_base_t)(void *)(__ndk_b), (in_addr_t)(in))
 
 static __inline__ in_addr_t
 __bsdsocket_Inet_NetOf(struct Library *__base, in_addr_t in)
@@ -512,8 +512,8 @@ __bsdsocket_Inet_NetOf(struct Library *__base, in_addr_t in)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (in_addr_t)_d0;
 }
-#define Inet_NetOf(in) __bsdsocket_Inet_NetOf((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (in_addr_t)(in))
-#define __Inet_NetOf_base(__ndk_b, in) __bsdsocket_Inet_NetOf((__bsdsocket_base_t)(__ndk_b), (in_addr_t)(in))
+#define Inet_NetOf(in) __bsdsocket_Inet_NetOf((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (in_addr_t)(in))
+#define __Inet_NetOf_base(__ndk_b, in) __bsdsocket_Inet_NetOf((__bsdsocket_base_t)(void *)(__ndk_b), (in_addr_t)(in))
 
 static __inline__ in_addr_t
 __bsdsocket_Inet_MakeAddr(struct Library *__base, in_addr_t net, in_addr_t host)
@@ -529,8 +529,8 @@ __bsdsocket_Inet_MakeAddr(struct Library *__base, in_addr_t net, in_addr_t host)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (in_addr_t)_d0;
 }
-#define Inet_MakeAddr(net, host) __bsdsocket_Inet_MakeAddr((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (in_addr_t)(net), (in_addr_t)(host))
-#define __Inet_MakeAddr_base(__ndk_b, net, host) __bsdsocket_Inet_MakeAddr((__bsdsocket_base_t)(__ndk_b), (in_addr_t)(net), (in_addr_t)(host))
+#define Inet_MakeAddr(net, host) __bsdsocket_Inet_MakeAddr((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (in_addr_t)(net), (in_addr_t)(host))
+#define __Inet_MakeAddr_base(__ndk_b, net, host) __bsdsocket_Inet_MakeAddr((__bsdsocket_base_t)(void *)(__ndk_b), (in_addr_t)(net), (in_addr_t)(host))
 
 static __inline__ in_addr_t
 __bsdsocket_inet_network(struct Library *__base, const char *cp)
@@ -546,8 +546,8 @@ __bsdsocket_inet_network(struct Library *__base, const char *cp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (in_addr_t)_d0;
 }
-#define inet_network(cp) __bsdsocket_inet_network((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (const char *)(cp))
-#define __inet_network_base(__ndk_b, cp) __bsdsocket_inet_network((__bsdsocket_base_t)(__ndk_b), (const char *)(cp))
+#define inet_network(cp) __bsdsocket_inet_network((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (const char *)(cp))
+#define __inet_network_base(__ndk_b, cp) __bsdsocket_inet_network((__bsdsocket_base_t)(void *)(__ndk_b), (const char *)(cp))
 
 static __inline__ struct hostent *
 __bsdsocket_gethostbyname(struct Library *__base, const char *name)
@@ -563,8 +563,8 @@ __bsdsocket_gethostbyname(struct Library *__base, const char *name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct hostent *)_d0;
 }
-#define gethostbyname(name) __bsdsocket_gethostbyname((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (const char *)(name))
-#define __gethostbyname_base(__ndk_b, name) __bsdsocket_gethostbyname((__bsdsocket_base_t)(__ndk_b), (const char *)(name))
+#define gethostbyname(name) __bsdsocket_gethostbyname((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (const char *)(name))
+#define __gethostbyname_base(__ndk_b, name) __bsdsocket_gethostbyname((__bsdsocket_base_t)(void *)(__ndk_b), (const char *)(name))
 
 static __inline__ struct hostent *
 __bsdsocket_gethostbyaddr(struct Library *__base, const void *addr, socklen_t len, int type)
@@ -580,8 +580,8 @@ __bsdsocket_gethostbyaddr(struct Library *__base, const void *addr, socklen_t le
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct hostent *)_d0;
 }
-#define gethostbyaddr(addr, len, type) __bsdsocket_gethostbyaddr((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (const void *)(addr), (socklen_t)(len), (int)(type))
-#define __gethostbyaddr_base(__ndk_b, addr, len, type) __bsdsocket_gethostbyaddr((__bsdsocket_base_t)(__ndk_b), (const void *)(addr), (socklen_t)(len), (int)(type))
+#define gethostbyaddr(addr, len, type) __bsdsocket_gethostbyaddr((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (const void *)(addr), (socklen_t)(len), (int)(type))
+#define __gethostbyaddr_base(__ndk_b, addr, len, type) __bsdsocket_gethostbyaddr((__bsdsocket_base_t)(void *)(__ndk_b), (const void *)(addr), (socklen_t)(len), (int)(type))
 
 static __inline__ struct netent *
 __bsdsocket_getnetbyname(struct Library *__base, const char *name)
@@ -597,8 +597,8 @@ __bsdsocket_getnetbyname(struct Library *__base, const char *name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct netent *)_d0;
 }
-#define getnetbyname(name) __bsdsocket_getnetbyname((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (const char *)(name))
-#define __getnetbyname_base(__ndk_b, name) __bsdsocket_getnetbyname((__bsdsocket_base_t)(__ndk_b), (const char *)(name))
+#define getnetbyname(name) __bsdsocket_getnetbyname((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (const char *)(name))
+#define __getnetbyname_base(__ndk_b, name) __bsdsocket_getnetbyname((__bsdsocket_base_t)(void *)(__ndk_b), (const char *)(name))
 
 static __inline__ struct netent *
 __bsdsocket_getnetbyaddr(struct Library *__base, in_addr_t net, int type)
@@ -614,8 +614,8 @@ __bsdsocket_getnetbyaddr(struct Library *__base, in_addr_t net, int type)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct netent *)_d0;
 }
-#define getnetbyaddr(net, type) __bsdsocket_getnetbyaddr((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (in_addr_t)(net), (int)(type))
-#define __getnetbyaddr_base(__ndk_b, net, type) __bsdsocket_getnetbyaddr((__bsdsocket_base_t)(__ndk_b), (in_addr_t)(net), (int)(type))
+#define getnetbyaddr(net, type) __bsdsocket_getnetbyaddr((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (in_addr_t)(net), (int)(type))
+#define __getnetbyaddr_base(__ndk_b, net, type) __bsdsocket_getnetbyaddr((__bsdsocket_base_t)(void *)(__ndk_b), (in_addr_t)(net), (int)(type))
 
 static __inline__ struct servent *
 __bsdsocket_getservbyname(struct Library *__base, const char *name, const char *proto)
@@ -631,8 +631,8 @@ __bsdsocket_getservbyname(struct Library *__base, const char *name, const char *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct servent *)_d0;
 }
-#define getservbyname(name, proto) __bsdsocket_getservbyname((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (const char *)(name), (const char *)(proto))
-#define __getservbyname_base(__ndk_b, name, proto) __bsdsocket_getservbyname((__bsdsocket_base_t)(__ndk_b), (const char *)(name), (const char *)(proto))
+#define getservbyname(name, proto) __bsdsocket_getservbyname((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (const char *)(name), (const char *)(proto))
+#define __getservbyname_base(__ndk_b, name, proto) __bsdsocket_getservbyname((__bsdsocket_base_t)(void *)(__ndk_b), (const char *)(name), (const char *)(proto))
 
 static __inline__ struct servent *
 __bsdsocket_getservbyport(struct Library *__base, int port, const char *proto)
@@ -648,8 +648,8 @@ __bsdsocket_getservbyport(struct Library *__base, int port, const char *proto)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct servent *)_d0;
 }
-#define getservbyport(port, proto) __bsdsocket_getservbyport((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(port), (const char *)(proto))
-#define __getservbyport_base(__ndk_b, port, proto) __bsdsocket_getservbyport((__bsdsocket_base_t)(__ndk_b), (int)(port), (const char *)(proto))
+#define getservbyport(port, proto) __bsdsocket_getservbyport((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(port), (const char *)(proto))
+#define __getservbyport_base(__ndk_b, port, proto) __bsdsocket_getservbyport((__bsdsocket_base_t)(void *)(__ndk_b), (int)(port), (const char *)(proto))
 
 static __inline__ struct protoent *
 __bsdsocket_getprotobyname(struct Library *__base, const char *name)
@@ -665,8 +665,8 @@ __bsdsocket_getprotobyname(struct Library *__base, const char *name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct protoent *)_d0;
 }
-#define getprotobyname(name) __bsdsocket_getprotobyname((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (const char *)(name))
-#define __getprotobyname_base(__ndk_b, name) __bsdsocket_getprotobyname((__bsdsocket_base_t)(__ndk_b), (const char *)(name))
+#define getprotobyname(name) __bsdsocket_getprotobyname((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (const char *)(name))
+#define __getprotobyname_base(__ndk_b, name) __bsdsocket_getprotobyname((__bsdsocket_base_t)(void *)(__ndk_b), (const char *)(name))
 
 static __inline__ struct protoent *
 __bsdsocket_getprotobynumber(struct Library *__base, int proto)
@@ -682,8 +682,8 @@ __bsdsocket_getprotobynumber(struct Library *__base, int proto)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct protoent *)_d0;
 }
-#define getprotobynumber(proto) __bsdsocket_getprotobynumber((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(proto))
-#define __getprotobynumber_base(__ndk_b, proto) __bsdsocket_getprotobynumber((__bsdsocket_base_t)(__ndk_b), (int)(proto))
+#define getprotobynumber(proto) __bsdsocket_getprotobynumber((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(proto))
+#define __getprotobynumber_base(__ndk_b, proto) __bsdsocket_getprotobynumber((__bsdsocket_base_t)(void *)(__ndk_b), (int)(proto))
 
 static __inline__ void
 __bsdsocket_vsyslog(struct Library *__base, int pri, const char *msg, va_list args)
@@ -699,8 +699,8 @@ __bsdsocket_vsyslog(struct Library *__base, int pri, const char *msg, va_list ar
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define vsyslog(pri, msg, args) __bsdsocket_vsyslog((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(pri), (const char *)(msg), (va_list)(args))
-#define __vsyslog_base(__ndk_b, pri, msg, args) __bsdsocket_vsyslog((__bsdsocket_base_t)(__ndk_b), (int)(pri), (const char *)(msg), (va_list)(args))
+#define vsyslog(pri, msg, args) __bsdsocket_vsyslog((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(pri), (const char *)(msg), (va_list)(args))
+#define __vsyslog_base(__ndk_b, pri, msg, args) __bsdsocket_vsyslog((__bsdsocket_base_t)(void *)(__ndk_b), (int)(pri), (const char *)(msg), (va_list)(args))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) void
@@ -708,7 +708,7 @@ ___bsdsocket_syslog(__bsdsocket_base_t __ndk_base, int pri, const char *msg, ...
 {
 	__bsdsocket_vsyslog(__ndk_base, (int)(pri), (const char *)(msg), (va_list)((ULONG)&msg + sizeof(msg)));
 }
-#define syslog(pri, msg, ...) ___bsdsocket_syslog((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(pri), (const char *)(msg), ##__VA_ARGS__)
+#define syslog(pri, msg, ...) ___bsdsocket_syslog((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(pri), (const char *)(msg), ##__VA_ARGS__)
 #else
 #define syslog(pri, msg, ...) (syslog)((int)(pri), (const char *)(msg), ##__VA_ARGS__)
 #endif
@@ -727,8 +727,8 @@ __bsdsocket_Dup2Socket(struct Library *__base, LONG old_socket, LONG new_socket)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Dup2Socket(old_socket, new_socket) __bsdsocket_Dup2Socket((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(old_socket), (LONG)(new_socket))
-#define __Dup2Socket_base(__ndk_b, old_socket, new_socket) __bsdsocket_Dup2Socket((__bsdsocket_base_t)(__ndk_b), (LONG)(old_socket), (LONG)(new_socket))
+#define Dup2Socket(old_socket, new_socket) __bsdsocket_Dup2Socket((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(old_socket), (LONG)(new_socket))
+#define __Dup2Socket_base(__ndk_b, old_socket, new_socket) __bsdsocket_Dup2Socket((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(old_socket), (LONG)(new_socket))
 
 static __inline__ ssize_t
 __bsdsocket_sendmsg(struct Library *__base, int sock, const struct msghdr *msg, int flags)
@@ -744,8 +744,8 @@ __bsdsocket_sendmsg(struct Library *__base, int sock, const struct msghdr *msg, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ssize_t)_d0;
 }
-#define sendmsg(sock, msg, flags) __bsdsocket_sendmsg((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (const struct msghdr *)(msg), (int)(flags))
-#define __sendmsg_base(__ndk_b, sock, msg, flags) __bsdsocket_sendmsg((__bsdsocket_base_t)(__ndk_b), (int)(sock), (const struct msghdr *)(msg), (int)(flags))
+#define sendmsg(sock, msg, flags) __bsdsocket_sendmsg((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (const struct msghdr *)(msg), (int)(flags))
+#define __sendmsg_base(__ndk_b, sock, msg, flags) __bsdsocket_sendmsg((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (const struct msghdr *)(msg), (int)(flags))
 
 static __inline__ ssize_t
 __bsdsocket_recvmsg(struct Library *__base, int sock, struct msghdr *msg, int flags)
@@ -761,8 +761,8 @@ __bsdsocket_recvmsg(struct Library *__base, int sock, struct msghdr *msg, int fl
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ssize_t)_d0;
 }
-#define recvmsg(sock, msg, flags) __bsdsocket_recvmsg((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (int)(sock), (struct msghdr *)(msg), (int)(flags))
-#define __recvmsg_base(__ndk_b, sock, msg, flags) __bsdsocket_recvmsg((__bsdsocket_base_t)(__ndk_b), (int)(sock), (struct msghdr *)(msg), (int)(flags))
+#define recvmsg(sock, msg, flags) __bsdsocket_recvmsg((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (int)(sock), (struct msghdr *)(msg), (int)(flags))
+#define __recvmsg_base(__ndk_b, sock, msg, flags) __bsdsocket_recvmsg((__bsdsocket_base_t)(void *)(__ndk_b), (int)(sock), (struct msghdr *)(msg), (int)(flags))
 
 static __inline__ int
 __bsdsocket_gethostname(struct Library *__base, char *name, size_t namelen)
@@ -778,8 +778,8 @@ __bsdsocket_gethostname(struct Library *__base, char *name, size_t namelen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define gethostname(name, namelen) __bsdsocket_gethostname((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (char *)(name), (size_t)(namelen))
-#define __gethostname_base(__ndk_b, name, namelen) __bsdsocket_gethostname((__bsdsocket_base_t)(__ndk_b), (char *)(name), (size_t)(namelen))
+#define gethostname(name, namelen) __bsdsocket_gethostname((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (char *)(name), (size_t)(namelen))
+#define __gethostname_base(__ndk_b, name, namelen) __bsdsocket_gethostname((__bsdsocket_base_t)(void *)(__ndk_b), (char *)(name), (size_t)(namelen))
 
 static __inline__ long
 __bsdsocket_gethostid(struct Library *__base)
@@ -795,8 +795,8 @@ __bsdsocket_gethostid(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (long)_d0;
 }
-#define gethostid() __bsdsocket_gethostid((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __gethostid_base(__ndk_b) __bsdsocket_gethostid((__bsdsocket_base_t)(__ndk_b))
+#define gethostid() __bsdsocket_gethostid((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __gethostid_base(__ndk_b) __bsdsocket_gethostid((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ LONG
 __bsdsocket_SocketBaseTagList(struct Library *__base, struct TagItem *tags)
@@ -812,8 +812,8 @@ __bsdsocket_SocketBaseTagList(struct Library *__base, struct TagItem *tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SocketBaseTagList(tags) __bsdsocket_SocketBaseTagList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct TagItem *)(tags))
-#define __SocketBaseTagList_base(__ndk_b, tags) __bsdsocket_SocketBaseTagList((__bsdsocket_base_t)(__ndk_b), (struct TagItem *)(tags))
+#define SocketBaseTagList(tags) __bsdsocket_SocketBaseTagList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct TagItem *)(tags))
+#define __SocketBaseTagList_base(__ndk_b, tags) __bsdsocket_SocketBaseTagList((__bsdsocket_base_t)(void *)(__ndk_b), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -821,7 +821,7 @@ ___bsdsocket_SocketBaseTags(__bsdsocket_base_t __ndk_base, Tag tag1, ...)
 {
 	return __bsdsocket_SocketBaseTagList(__ndk_base, (struct TagItem *)&tag1);
 }
-#define SocketBaseTags(...) ___bsdsocket_SocketBaseTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), __VA_ARGS__)
+#define SocketBaseTags(...) ___bsdsocket_SocketBaseTags((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), __VA_ARGS__)
 #else
 #endif
 
@@ -839,8 +839,8 @@ __bsdsocket_GetSocketEvents(struct Library *__base, ULONG *event_ptr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetSocketEvents(event_ptr) __bsdsocket_GetSocketEvents((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (ULONG *)(event_ptr))
-#define __GetSocketEvents_base(__ndk_b, event_ptr) __bsdsocket_GetSocketEvents((__bsdsocket_base_t)(__ndk_b), (ULONG *)(event_ptr))
+#define GetSocketEvents(event_ptr) __bsdsocket_GetSocketEvents((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (ULONG *)(event_ptr))
+#define __GetSocketEvents_base(__ndk_b, event_ptr) __bsdsocket_GetSocketEvents((__bsdsocket_base_t)(void *)(__ndk_b), (ULONG *)(event_ptr))
 
 static __inline__ LONG
 __bsdsocket_bpf_open(struct Library *__base, LONG channel)
@@ -856,8 +856,8 @@ __bsdsocket_bpf_open(struct Library *__base, LONG channel)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define bpf_open(channel) __bsdsocket_bpf_open((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel))
-#define __bpf_open_base(__ndk_b, channel) __bsdsocket_bpf_open((__bsdsocket_base_t)(__ndk_b), (LONG)(channel))
+#define bpf_open(channel) __bsdsocket_bpf_open((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel))
+#define __bpf_open_base(__ndk_b, channel) __bsdsocket_bpf_open((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel))
 
 static __inline__ LONG
 __bsdsocket_bpf_close(struct Library *__base, LONG channel)
@@ -873,8 +873,8 @@ __bsdsocket_bpf_close(struct Library *__base, LONG channel)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define bpf_close(channel) __bsdsocket_bpf_close((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel))
-#define __bpf_close_base(__ndk_b, channel) __bsdsocket_bpf_close((__bsdsocket_base_t)(__ndk_b), (LONG)(channel))
+#define bpf_close(channel) __bsdsocket_bpf_close((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel))
+#define __bpf_close_base(__ndk_b, channel) __bsdsocket_bpf_close((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel))
 
 static __inline__ LONG
 __bsdsocket_bpf_read(struct Library *__base, LONG channel, APTR buffer, LONG len)
@@ -890,8 +890,8 @@ __bsdsocket_bpf_read(struct Library *__base, LONG channel, APTR buffer, LONG len
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define bpf_read(channel, buffer, len) __bsdsocket_bpf_read((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (APTR)(buffer), (LONG)(len))
-#define __bpf_read_base(__ndk_b, channel, buffer, len) __bsdsocket_bpf_read((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (APTR)(buffer), (LONG)(len))
+#define bpf_read(channel, buffer, len) __bsdsocket_bpf_read((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (APTR)(buffer), (LONG)(len))
+#define __bpf_read_base(__ndk_b, channel, buffer, len) __bsdsocket_bpf_read((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (APTR)(buffer), (LONG)(len))
 
 static __inline__ LONG
 __bsdsocket_bpf_write(struct Library *__base, LONG channel, APTR buffer, LONG len)
@@ -907,8 +907,8 @@ __bsdsocket_bpf_write(struct Library *__base, LONG channel, APTR buffer, LONG le
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define bpf_write(channel, buffer, len) __bsdsocket_bpf_write((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (APTR)(buffer), (LONG)(len))
-#define __bpf_write_base(__ndk_b, channel, buffer, len) __bsdsocket_bpf_write((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (APTR)(buffer), (LONG)(len))
+#define bpf_write(channel, buffer, len) __bsdsocket_bpf_write((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (APTR)(buffer), (LONG)(len))
+#define __bpf_write_base(__ndk_b, channel, buffer, len) __bsdsocket_bpf_write((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (APTR)(buffer), (LONG)(len))
 
 static __inline__ LONG
 __bsdsocket_bpf_set_notify_mask(struct Library *__base, LONG channel, ULONG signal_mask)
@@ -924,8 +924,8 @@ __bsdsocket_bpf_set_notify_mask(struct Library *__base, LONG channel, ULONG sign
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define bpf_set_notify_mask(channel, signal_mask) __bsdsocket_bpf_set_notify_mask((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(signal_mask))
-#define __bpf_set_notify_mask_base(__ndk_b, channel, signal_mask) __bsdsocket_bpf_set_notify_mask((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (ULONG)(signal_mask))
+#define bpf_set_notify_mask(channel, signal_mask) __bsdsocket_bpf_set_notify_mask((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(signal_mask))
+#define __bpf_set_notify_mask_base(__ndk_b, channel, signal_mask) __bsdsocket_bpf_set_notify_mask((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (ULONG)(signal_mask))
 
 static __inline__ LONG
 __bsdsocket_bpf_set_interrupt_mask(struct Library *__base, LONG channel, ULONG signal_mask)
@@ -941,8 +941,8 @@ __bsdsocket_bpf_set_interrupt_mask(struct Library *__base, LONG channel, ULONG s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define bpf_set_interrupt_mask(channel, signal_mask) __bsdsocket_bpf_set_interrupt_mask((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(signal_mask))
-#define __bpf_set_interrupt_mask_base(__ndk_b, channel, signal_mask) __bsdsocket_bpf_set_interrupt_mask((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (ULONG)(signal_mask))
+#define bpf_set_interrupt_mask(channel, signal_mask) __bsdsocket_bpf_set_interrupt_mask((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(signal_mask))
+#define __bpf_set_interrupt_mask_base(__ndk_b, channel, signal_mask) __bsdsocket_bpf_set_interrupt_mask((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (ULONG)(signal_mask))
 
 static __inline__ LONG
 __bsdsocket_bpf_ioctl(struct Library *__base, LONG channel, ULONG command, APTR buffer)
@@ -958,8 +958,8 @@ __bsdsocket_bpf_ioctl(struct Library *__base, LONG channel, ULONG command, APTR 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define bpf_ioctl(channel, command, buffer) __bsdsocket_bpf_ioctl((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(command), (APTR)(buffer))
-#define __bpf_ioctl_base(__ndk_b, channel, command, buffer) __bsdsocket_bpf_ioctl((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (ULONG)(command), (APTR)(buffer))
+#define bpf_ioctl(channel, command, buffer) __bsdsocket_bpf_ioctl((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(command), (APTR)(buffer))
+#define __bpf_ioctl_base(__ndk_b, channel, command, buffer) __bsdsocket_bpf_ioctl((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (ULONG)(command), (APTR)(buffer))
 
 static __inline__ LONG
 __bsdsocket_bpf_data_waiting(struct Library *__base, LONG channel)
@@ -975,8 +975,8 @@ __bsdsocket_bpf_data_waiting(struct Library *__base, LONG channel)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define bpf_data_waiting(channel) __bsdsocket_bpf_data_waiting((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel))
-#define __bpf_data_waiting_base(__ndk_b, channel) __bsdsocket_bpf_data_waiting((__bsdsocket_base_t)(__ndk_b), (LONG)(channel))
+#define bpf_data_waiting(channel) __bsdsocket_bpf_data_waiting((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel))
+#define __bpf_data_waiting_base(__ndk_b, channel) __bsdsocket_bpf_data_waiting((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel))
 
 static __inline__ LONG
 __bsdsocket_AddRouteTagList(struct Library *__base, struct TagItem *tags)
@@ -992,8 +992,8 @@ __bsdsocket_AddRouteTagList(struct Library *__base, struct TagItem *tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AddRouteTagList(tags) __bsdsocket_AddRouteTagList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct TagItem *)(tags))
-#define __AddRouteTagList_base(__ndk_b, tags) __bsdsocket_AddRouteTagList((__bsdsocket_base_t)(__ndk_b), (struct TagItem *)(tags))
+#define AddRouteTagList(tags) __bsdsocket_AddRouteTagList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct TagItem *)(tags))
+#define __AddRouteTagList_base(__ndk_b, tags) __bsdsocket_AddRouteTagList((__bsdsocket_base_t)(void *)(__ndk_b), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1001,7 +1001,7 @@ ___bsdsocket_AddRouteTags(__bsdsocket_base_t __ndk_base, Tag tag1, ...)
 {
 	return __bsdsocket_AddRouteTagList(__ndk_base, (struct TagItem *)&tag1);
 }
-#define AddRouteTags(...) ___bsdsocket_AddRouteTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), __VA_ARGS__)
+#define AddRouteTags(...) ___bsdsocket_AddRouteTags((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), __VA_ARGS__)
 #else
 #endif
 
@@ -1019,8 +1019,8 @@ __bsdsocket_DeleteRouteTagList(struct Library *__base, struct TagItem *tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DeleteRouteTagList(tags) __bsdsocket_DeleteRouteTagList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct TagItem *)(tags))
-#define __DeleteRouteTagList_base(__ndk_b, tags) __bsdsocket_DeleteRouteTagList((__bsdsocket_base_t)(__ndk_b), (struct TagItem *)(tags))
+#define DeleteRouteTagList(tags) __bsdsocket_DeleteRouteTagList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct TagItem *)(tags))
+#define __DeleteRouteTagList_base(__ndk_b, tags) __bsdsocket_DeleteRouteTagList((__bsdsocket_base_t)(void *)(__ndk_b), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1028,7 +1028,7 @@ ___bsdsocket_DeleteRouteTags(__bsdsocket_base_t __ndk_base, Tag tag1, ...)
 {
 	return __bsdsocket_DeleteRouteTagList(__ndk_base, (struct TagItem *)&tag1);
 }
-#define DeleteRouteTags(...) ___bsdsocket_DeleteRouteTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), __VA_ARGS__)
+#define DeleteRouteTags(...) ___bsdsocket_DeleteRouteTags((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), __VA_ARGS__)
 #else
 #endif
 
@@ -1046,8 +1046,8 @@ __bsdsocket_ChangeRouteTagList(struct Library *__base, struct TagItem *tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ChangeRouteTagList(tags) __bsdsocket_ChangeRouteTagList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct TagItem *)(tags))
-#define __ChangeRouteTagList_base(__ndk_b, tags) __bsdsocket_ChangeRouteTagList((__bsdsocket_base_t)(__ndk_b), (struct TagItem *)(tags))
+#define ChangeRouteTagList(tags) __bsdsocket_ChangeRouteTagList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct TagItem *)(tags))
+#define __ChangeRouteTagList_base(__ndk_b, tags) __bsdsocket_ChangeRouteTagList((__bsdsocket_base_t)(void *)(__ndk_b), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1055,7 +1055,7 @@ ___bsdsocket_ChangeRouteTags(__bsdsocket_base_t __ndk_base, Tag tag1, ...)
 {
 	return __bsdsocket_ChangeRouteTagList(__ndk_base, (struct TagItem *)&tag1);
 }
-#define ChangeRouteTags(...) ___bsdsocket_ChangeRouteTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), __VA_ARGS__)
+#define ChangeRouteTags(...) ___bsdsocket_ChangeRouteTags((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), __VA_ARGS__)
 #else
 #endif
 
@@ -1073,8 +1073,8 @@ __bsdsocket_FreeRouteInfo(struct Library *__base, struct rt_msghdr *buf)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeRouteInfo(buf) __bsdsocket_FreeRouteInfo((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct rt_msghdr *)(buf))
-#define __FreeRouteInfo_base(__ndk_b, buf) __bsdsocket_FreeRouteInfo((__bsdsocket_base_t)(__ndk_b), (struct rt_msghdr *)(buf))
+#define FreeRouteInfo(buf) __bsdsocket_FreeRouteInfo((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct rt_msghdr *)(buf))
+#define __FreeRouteInfo_base(__ndk_b, buf) __bsdsocket_FreeRouteInfo((__bsdsocket_base_t)(void *)(__ndk_b), (struct rt_msghdr *)(buf))
 
 static __inline__ struct rt_msghdr *
 __bsdsocket_GetRouteInfo(struct Library *__base, LONG address_family, LONG flags)
@@ -1090,8 +1090,8 @@ __bsdsocket_GetRouteInfo(struct Library *__base, LONG address_family, LONG flags
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct rt_msghdr *)_d0;
 }
-#define GetRouteInfo(address_family, flags) __bsdsocket_GetRouteInfo((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(address_family), (LONG)(flags))
-#define __GetRouteInfo_base(__ndk_b, address_family, flags) __bsdsocket_GetRouteInfo((__bsdsocket_base_t)(__ndk_b), (LONG)(address_family), (LONG)(flags))
+#define GetRouteInfo(address_family, flags) __bsdsocket_GetRouteInfo((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(address_family), (LONG)(flags))
+#define __GetRouteInfo_base(__ndk_b, address_family, flags) __bsdsocket_GetRouteInfo((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(address_family), (LONG)(flags))
 
 static __inline__ LONG
 __bsdsocket_AddInterfaceTagList(struct Library *__base, STRPTR interface_name, STRPTR device_name, LONG unit, struct TagItem *tags)
@@ -1108,8 +1108,8 @@ __bsdsocket_AddInterfaceTagList(struct Library *__base, STRPTR interface_name, S
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AddInterfaceTagList(interface_name, device_name, unit, tags) __bsdsocket_AddInterfaceTagList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), (struct TagItem *)(tags))
-#define __AddInterfaceTagList_base(__ndk_b, interface_name, device_name, unit, tags) __bsdsocket_AddInterfaceTagList((__bsdsocket_base_t)(__ndk_b), (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), (struct TagItem *)(tags))
+#define AddInterfaceTagList(interface_name, device_name, unit, tags) __bsdsocket_AddInterfaceTagList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), (struct TagItem *)(tags))
+#define __AddInterfaceTagList_base(__ndk_b, interface_name, device_name, unit, tags) __bsdsocket_AddInterfaceTagList((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1117,7 +1117,7 @@ ___bsdsocket_AddInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR interface_na
 {
 	return __bsdsocket_AddInterfaceTagList(__ndk_base, (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), (struct TagItem *)((ULONG)&unit + sizeof(unit)));
 }
-#define AddInterfaceTags(interface_name, device_name, unit, ...) ___bsdsocket_AddInterfaceTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), ##__VA_ARGS__)
+#define AddInterfaceTags(interface_name, device_name, unit, ...) ___bsdsocket_AddInterfaceTags((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), ##__VA_ARGS__)
 #else
 #define AddInterfaceTags(interface_name, device_name, unit, ...) (AddInterfaceTags)((STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), ##__VA_ARGS__)
 #endif
@@ -1136,8 +1136,8 @@ __bsdsocket_ConfigureInterfaceTagList(struct Library *__base, STRPTR interface_n
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ConfigureInterfaceTagList(interface_name, tags) __bsdsocket_ConfigureInterfaceTagList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (struct TagItem *)(tags))
-#define __ConfigureInterfaceTagList_base(__ndk_b, interface_name, tags) __bsdsocket_ConfigureInterfaceTagList((__bsdsocket_base_t)(__ndk_b), (STRPTR)(interface_name), (struct TagItem *)(tags))
+#define ConfigureInterfaceTagList(interface_name, tags) __bsdsocket_ConfigureInterfaceTagList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (struct TagItem *)(tags))
+#define __ConfigureInterfaceTagList_base(__ndk_b, interface_name, tags) __bsdsocket_ConfigureInterfaceTagList((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(interface_name), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1145,7 +1145,7 @@ ___bsdsocket_ConfigureInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR interf
 {
 	return __bsdsocket_ConfigureInterfaceTagList(__ndk_base, (STRPTR)(interface_name), (struct TagItem *)((ULONG)&interface_name + sizeof(interface_name)));
 }
-#define ConfigureInterfaceTags(interface_name, ...) ___bsdsocket_ConfigureInterfaceTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), ##__VA_ARGS__)
+#define ConfigureInterfaceTags(interface_name, ...) ___bsdsocket_ConfigureInterfaceTags((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), ##__VA_ARGS__)
 #else
 #define ConfigureInterfaceTags(interface_name, ...) (ConfigureInterfaceTags)((STRPTR)(interface_name), ##__VA_ARGS__)
 #endif
@@ -1164,8 +1164,8 @@ __bsdsocket_ReleaseInterfaceList(struct Library *__base, struct List *list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseInterfaceList(list) __bsdsocket_ReleaseInterfaceList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct List *)(list))
-#define __ReleaseInterfaceList_base(__ndk_b, list) __bsdsocket_ReleaseInterfaceList((__bsdsocket_base_t)(__ndk_b), (struct List *)(list))
+#define ReleaseInterfaceList(list) __bsdsocket_ReleaseInterfaceList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct List *)(list))
+#define __ReleaseInterfaceList_base(__ndk_b, list) __bsdsocket_ReleaseInterfaceList((__bsdsocket_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 static __inline__ struct List *
 __bsdsocket_ObtainInterfaceList(struct Library *__base)
@@ -1181,8 +1181,8 @@ __bsdsocket_ObtainInterfaceList(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct List *)_d0;
 }
-#define ObtainInterfaceList() __bsdsocket_ObtainInterfaceList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __ObtainInterfaceList_base(__ndk_b) __bsdsocket_ObtainInterfaceList((__bsdsocket_base_t)(__ndk_b))
+#define ObtainInterfaceList() __bsdsocket_ObtainInterfaceList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __ObtainInterfaceList_base(__ndk_b) __bsdsocket_ObtainInterfaceList((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ LONG
 __bsdsocket_QueryInterfaceTagList(struct Library *__base, STRPTR name, struct TagItem *tags)
@@ -1198,8 +1198,8 @@ __bsdsocket_QueryInterfaceTagList(struct Library *__base, STRPTR name, struct Ta
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define QueryInterfaceTagList(name, tags) __bsdsocket_QueryInterfaceTagList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(name), (struct TagItem *)(tags))
-#define __QueryInterfaceTagList_base(__ndk_b, name, tags) __bsdsocket_QueryInterfaceTagList((__bsdsocket_base_t)(__ndk_b), (STRPTR)(name), (struct TagItem *)(tags))
+#define QueryInterfaceTagList(name, tags) __bsdsocket_QueryInterfaceTagList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(name), (struct TagItem *)(tags))
+#define __QueryInterfaceTagList_base(__ndk_b, name, tags) __bsdsocket_QueryInterfaceTagList((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(name), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1207,7 +1207,7 @@ ___bsdsocket_QueryInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR name, ...)
 {
 	return __bsdsocket_QueryInterfaceTagList(__ndk_base, (STRPTR)(name), (struct TagItem *)((ULONG)&name + sizeof(name)));
 }
-#define QueryInterfaceTags(name, ...) ___bsdsocket_QueryInterfaceTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(name), ##__VA_ARGS__)
+#define QueryInterfaceTags(name, ...) ___bsdsocket_QueryInterfaceTags((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(name), ##__VA_ARGS__)
 #else
 #define QueryInterfaceTags(name, ...) (QueryInterfaceTags)((STRPTR)(name), ##__VA_ARGS__)
 #endif
@@ -1227,8 +1227,8 @@ __bsdsocket_CreateAddrAllocMessageA(struct Library *__base, LONG version, LONG p
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CreateAddrAllocMessageA(version, protocol, interface_name, result_ptr, tags) __bsdsocket_CreateAddrAllocMessageA((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), (struct TagItem *)(tags))
-#define __CreateAddrAllocMessageA_base(__ndk_b, version, protocol, interface_name, result_ptr, tags) __bsdsocket_CreateAddrAllocMessageA((__bsdsocket_base_t)(__ndk_b), (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), (struct TagItem *)(tags))
+#define CreateAddrAllocMessageA(version, protocol, interface_name, result_ptr, tags) __bsdsocket_CreateAddrAllocMessageA((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), (struct TagItem *)(tags))
+#define __CreateAddrAllocMessageA_base(__ndk_b, version, protocol, interface_name, result_ptr, tags) __bsdsocket_CreateAddrAllocMessageA((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1236,7 +1236,7 @@ ___bsdsocket_CreateAddrAllocMessage(__bsdsocket_base_t __ndk_base, LONG version,
 {
 	return __bsdsocket_CreateAddrAllocMessageA(__ndk_base, (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), (struct TagItem *)((ULONG)&result_ptr + sizeof(result_ptr)));
 }
-#define CreateAddrAllocMessage(version, protocol, interface_name, result_ptr, ...) ___bsdsocket_CreateAddrAllocMessage((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), ##__VA_ARGS__)
+#define CreateAddrAllocMessage(version, protocol, interface_name, result_ptr, ...) ___bsdsocket_CreateAddrAllocMessage((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), ##__VA_ARGS__)
 #else
 #define CreateAddrAllocMessage(version, protocol, interface_name, result_ptr, ...) (CreateAddrAllocMessage)((LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), ##__VA_ARGS__)
 #endif
@@ -1255,8 +1255,8 @@ __bsdsocket_DeleteAddrAllocMessage(struct Library *__base, struct AddressAllocat
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeleteAddrAllocMessage(aam) __bsdsocket_DeleteAddrAllocMessage((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct AddressAllocationMessage *)(aam))
-#define __DeleteAddrAllocMessage_base(__ndk_b, aam) __bsdsocket_DeleteAddrAllocMessage((__bsdsocket_base_t)(__ndk_b), (struct AddressAllocationMessage *)(aam))
+#define DeleteAddrAllocMessage(aam) __bsdsocket_DeleteAddrAllocMessage((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct AddressAllocationMessage *)(aam))
+#define __DeleteAddrAllocMessage_base(__ndk_b, aam) __bsdsocket_DeleteAddrAllocMessage((__bsdsocket_base_t)(void *)(__ndk_b), (struct AddressAllocationMessage *)(aam))
 
 static __inline__ VOID
 __bsdsocket_BeginInterfaceConfig(struct Library *__base, struct AddressAllocationMessage *message)
@@ -1272,8 +1272,8 @@ __bsdsocket_BeginInterfaceConfig(struct Library *__base, struct AddressAllocatio
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define BeginInterfaceConfig(message) __bsdsocket_BeginInterfaceConfig((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct AddressAllocationMessage *)(message))
-#define __BeginInterfaceConfig_base(__ndk_b, message) __bsdsocket_BeginInterfaceConfig((__bsdsocket_base_t)(__ndk_b), (struct AddressAllocationMessage *)(message))
+#define BeginInterfaceConfig(message) __bsdsocket_BeginInterfaceConfig((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct AddressAllocationMessage *)(message))
+#define __BeginInterfaceConfig_base(__ndk_b, message) __bsdsocket_BeginInterfaceConfig((__bsdsocket_base_t)(void *)(__ndk_b), (struct AddressAllocationMessage *)(message))
 
 static __inline__ VOID
 __bsdsocket_AbortInterfaceConfig(struct Library *__base, struct AddressAllocationMessage *message)
@@ -1289,8 +1289,8 @@ __bsdsocket_AbortInterfaceConfig(struct Library *__base, struct AddressAllocatio
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AbortInterfaceConfig(message) __bsdsocket_AbortInterfaceConfig((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct AddressAllocationMessage *)(message))
-#define __AbortInterfaceConfig_base(__ndk_b, message) __bsdsocket_AbortInterfaceConfig((__bsdsocket_base_t)(__ndk_b), (struct AddressAllocationMessage *)(message))
+#define AbortInterfaceConfig(message) __bsdsocket_AbortInterfaceConfig((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct AddressAllocationMessage *)(message))
+#define __AbortInterfaceConfig_base(__ndk_b, message) __bsdsocket_AbortInterfaceConfig((__bsdsocket_base_t)(void *)(__ndk_b), (struct AddressAllocationMessage *)(message))
 
 static __inline__ LONG
 __bsdsocket_AddNetMonitorHookTagList(struct Library *__base, LONG type, struct Hook *hook, struct TagItem *tags)
@@ -1306,8 +1306,8 @@ __bsdsocket_AddNetMonitorHookTagList(struct Library *__base, LONG type, struct H
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AddNetMonitorHookTagList(type, hook, tags) __bsdsocket_AddNetMonitorHookTagList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(type), (struct Hook *)(hook), (struct TagItem *)(tags))
-#define __AddNetMonitorHookTagList_base(__ndk_b, type, hook, tags) __bsdsocket_AddNetMonitorHookTagList((__bsdsocket_base_t)(__ndk_b), (LONG)(type), (struct Hook *)(hook), (struct TagItem *)(tags))
+#define AddNetMonitorHookTagList(type, hook, tags) __bsdsocket_AddNetMonitorHookTagList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(type), (struct Hook *)(hook), (struct TagItem *)(tags))
+#define __AddNetMonitorHookTagList_base(__ndk_b, type, hook, tags) __bsdsocket_AddNetMonitorHookTagList((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(type), (struct Hook *)(hook), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1315,7 +1315,7 @@ ___bsdsocket_AddNetMonitorHookTags(__bsdsocket_base_t __ndk_base, LONG type, str
 {
 	return __bsdsocket_AddNetMonitorHookTagList(__ndk_base, (LONG)(type), (struct Hook *)(hook), (struct TagItem *)((ULONG)&hook + sizeof(hook)));
 }
-#define AddNetMonitorHookTags(type, hook, ...) ___bsdsocket_AddNetMonitorHookTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(type), (struct Hook *)(hook), ##__VA_ARGS__)
+#define AddNetMonitorHookTags(type, hook, ...) ___bsdsocket_AddNetMonitorHookTags((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(type), (struct Hook *)(hook), ##__VA_ARGS__)
 #else
 #define AddNetMonitorHookTags(type, hook, ...) (AddNetMonitorHookTags)((LONG)(type), (struct Hook *)(hook), ##__VA_ARGS__)
 #endif
@@ -1334,8 +1334,8 @@ __bsdsocket_RemoveNetMonitorHook(struct Library *__base, struct Hook *hook)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemoveNetMonitorHook(hook) __bsdsocket_RemoveNetMonitorHook((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct Hook *)(hook))
-#define __RemoveNetMonitorHook_base(__ndk_b, hook) __bsdsocket_RemoveNetMonitorHook((__bsdsocket_base_t)(__ndk_b), (struct Hook *)(hook))
+#define RemoveNetMonitorHook(hook) __bsdsocket_RemoveNetMonitorHook((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct Hook *)(hook))
+#define __RemoveNetMonitorHook_base(__ndk_b, hook) __bsdsocket_RemoveNetMonitorHook((__bsdsocket_base_t)(void *)(__ndk_b), (struct Hook *)(hook))
 
 static __inline__ LONG
 __bsdsocket_GetNetworkStatistics(struct Library *__base, LONG type, LONG version, APTR destination, LONG size)
@@ -1352,8 +1352,8 @@ __bsdsocket_GetNetworkStatistics(struct Library *__base, LONG type, LONG version
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetNetworkStatistics(type, version, destination, size) __bsdsocket_GetNetworkStatistics((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(type), (LONG)(version), (APTR)(destination), (LONG)(size))
-#define __GetNetworkStatistics_base(__ndk_b, type, version, destination, size) __bsdsocket_GetNetworkStatistics((__bsdsocket_base_t)(__ndk_b), (LONG)(type), (LONG)(version), (APTR)(destination), (LONG)(size))
+#define GetNetworkStatistics(type, version, destination, size) __bsdsocket_GetNetworkStatistics((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(type), (LONG)(version), (APTR)(destination), (LONG)(size))
+#define __GetNetworkStatistics_base(__ndk_b, type, version, destination, size) __bsdsocket_GetNetworkStatistics((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(type), (LONG)(version), (APTR)(destination), (LONG)(size))
 
 static __inline__ LONG
 __bsdsocket_AddDomainNameServer(struct Library *__base, STRPTR address)
@@ -1369,8 +1369,8 @@ __bsdsocket_AddDomainNameServer(struct Library *__base, STRPTR address)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AddDomainNameServer(address) __bsdsocket_AddDomainNameServer((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(address))
-#define __AddDomainNameServer_base(__ndk_b, address) __bsdsocket_AddDomainNameServer((__bsdsocket_base_t)(__ndk_b), (STRPTR)(address))
+#define AddDomainNameServer(address) __bsdsocket_AddDomainNameServer((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(address))
+#define __AddDomainNameServer_base(__ndk_b, address) __bsdsocket_AddDomainNameServer((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(address))
 
 static __inline__ LONG
 __bsdsocket_RemoveDomainNameServer(struct Library *__base, STRPTR address)
@@ -1386,8 +1386,8 @@ __bsdsocket_RemoveDomainNameServer(struct Library *__base, STRPTR address)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RemoveDomainNameServer(address) __bsdsocket_RemoveDomainNameServer((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(address))
-#define __RemoveDomainNameServer_base(__ndk_b, address) __bsdsocket_RemoveDomainNameServer((__bsdsocket_base_t)(__ndk_b), (STRPTR)(address))
+#define RemoveDomainNameServer(address) __bsdsocket_RemoveDomainNameServer((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(address))
+#define __RemoveDomainNameServer_base(__ndk_b, address) __bsdsocket_RemoveDomainNameServer((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(address))
 
 static __inline__ VOID
 __bsdsocket_ReleaseDomainNameServerList(struct Library *__base, struct List *list)
@@ -1403,8 +1403,8 @@ __bsdsocket_ReleaseDomainNameServerList(struct Library *__base, struct List *lis
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseDomainNameServerList(list) __bsdsocket_ReleaseDomainNameServerList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct List *)(list))
-#define __ReleaseDomainNameServerList_base(__ndk_b, list) __bsdsocket_ReleaseDomainNameServerList((__bsdsocket_base_t)(__ndk_b), (struct List *)(list))
+#define ReleaseDomainNameServerList(list) __bsdsocket_ReleaseDomainNameServerList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct List *)(list))
+#define __ReleaseDomainNameServerList_base(__ndk_b, list) __bsdsocket_ReleaseDomainNameServerList((__bsdsocket_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 static __inline__ struct List *
 __bsdsocket_ObtainDomainNameServerList(struct Library *__base)
@@ -1420,8 +1420,8 @@ __bsdsocket_ObtainDomainNameServerList(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct List *)_d0;
 }
-#define ObtainDomainNameServerList() __bsdsocket_ObtainDomainNameServerList((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __ObtainDomainNameServerList_base(__ndk_b) __bsdsocket_ObtainDomainNameServerList((__bsdsocket_base_t)(__ndk_b))
+#define ObtainDomainNameServerList() __bsdsocket_ObtainDomainNameServerList((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __ObtainDomainNameServerList_base(__ndk_b) __bsdsocket_ObtainDomainNameServerList((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __bsdsocket_setnetent(struct Library *__base, LONG stay_open)
@@ -1437,8 +1437,8 @@ __bsdsocket_setnetent(struct Library *__base, LONG stay_open)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define setnetent(stay_open) __bsdsocket_setnetent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(stay_open))
-#define __setnetent_base(__ndk_b, stay_open) __bsdsocket_setnetent((__bsdsocket_base_t)(__ndk_b), (LONG)(stay_open))
+#define setnetent(stay_open) __bsdsocket_setnetent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(stay_open))
+#define __setnetent_base(__ndk_b, stay_open) __bsdsocket_setnetent((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(stay_open))
 
 static __inline__ VOID
 __bsdsocket_endnetent(struct Library *__base)
@@ -1454,8 +1454,8 @@ __bsdsocket_endnetent(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define endnetent() __bsdsocket_endnetent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __endnetent_base(__ndk_b) __bsdsocket_endnetent((__bsdsocket_base_t)(__ndk_b))
+#define endnetent() __bsdsocket_endnetent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __endnetent_base(__ndk_b) __bsdsocket_endnetent((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ struct netent *
 __bsdsocket_getnetent(struct Library *__base)
@@ -1471,8 +1471,8 @@ __bsdsocket_getnetent(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct netent *)_d0;
 }
-#define getnetent() __bsdsocket_getnetent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __getnetent_base(__ndk_b) __bsdsocket_getnetent((__bsdsocket_base_t)(__ndk_b))
+#define getnetent() __bsdsocket_getnetent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __getnetent_base(__ndk_b) __bsdsocket_getnetent((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __bsdsocket_setprotoent(struct Library *__base, LONG stay_open)
@@ -1488,8 +1488,8 @@ __bsdsocket_setprotoent(struct Library *__base, LONG stay_open)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define setprotoent(stay_open) __bsdsocket_setprotoent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(stay_open))
-#define __setprotoent_base(__ndk_b, stay_open) __bsdsocket_setprotoent((__bsdsocket_base_t)(__ndk_b), (LONG)(stay_open))
+#define setprotoent(stay_open) __bsdsocket_setprotoent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(stay_open))
+#define __setprotoent_base(__ndk_b, stay_open) __bsdsocket_setprotoent((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(stay_open))
 
 static __inline__ VOID
 __bsdsocket_endprotoent(struct Library *__base)
@@ -1505,8 +1505,8 @@ __bsdsocket_endprotoent(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define endprotoent() __bsdsocket_endprotoent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __endprotoent_base(__ndk_b) __bsdsocket_endprotoent((__bsdsocket_base_t)(__ndk_b))
+#define endprotoent() __bsdsocket_endprotoent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __endprotoent_base(__ndk_b) __bsdsocket_endprotoent((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ struct protoent *
 __bsdsocket_getprotoent(struct Library *__base)
@@ -1522,8 +1522,8 @@ __bsdsocket_getprotoent(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct protoent *)_d0;
 }
-#define getprotoent() __bsdsocket_getprotoent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __getprotoent_base(__ndk_b) __bsdsocket_getprotoent((__bsdsocket_base_t)(__ndk_b))
+#define getprotoent() __bsdsocket_getprotoent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __getprotoent_base(__ndk_b) __bsdsocket_getprotoent((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __bsdsocket_setservent(struct Library *__base, LONG stay_open)
@@ -1539,8 +1539,8 @@ __bsdsocket_setservent(struct Library *__base, LONG stay_open)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define setservent(stay_open) __bsdsocket_setservent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(stay_open))
-#define __setservent_base(__ndk_b, stay_open) __bsdsocket_setservent((__bsdsocket_base_t)(__ndk_b), (LONG)(stay_open))
+#define setservent(stay_open) __bsdsocket_setservent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(stay_open))
+#define __setservent_base(__ndk_b, stay_open) __bsdsocket_setservent((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(stay_open))
 
 static __inline__ VOID
 __bsdsocket_endservent(struct Library *__base)
@@ -1556,8 +1556,8 @@ __bsdsocket_endservent(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define endservent() __bsdsocket_endservent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __endservent_base(__ndk_b) __bsdsocket_endservent((__bsdsocket_base_t)(__ndk_b))
+#define endservent() __bsdsocket_endservent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __endservent_base(__ndk_b) __bsdsocket_endservent((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ struct servent *
 __bsdsocket_getservent(struct Library *__base)
@@ -1573,8 +1573,8 @@ __bsdsocket_getservent(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct servent *)_d0;
 }
-#define getservent() __bsdsocket_getservent((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __getservent_base(__ndk_b) __bsdsocket_getservent((__bsdsocket_base_t)(__ndk_b))
+#define getservent() __bsdsocket_getservent((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __getservent_base(__ndk_b) __bsdsocket_getservent((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ int
 __bsdsocket_inet_aton(struct Library *__base, const char *cp, struct in_addr *addr)
@@ -1590,8 +1590,8 @@ __bsdsocket_inet_aton(struct Library *__base, const char *cp, struct in_addr *ad
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (int)_d0;
 }
-#define inet_aton(cp, addr) __bsdsocket_inet_aton((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (const char *)(cp), (struct in_addr *)(addr))
-#define __inet_aton_base(__ndk_b, cp, addr) __bsdsocket_inet_aton((__bsdsocket_base_t)(__ndk_b), (const char *)(cp), (struct in_addr *)(addr))
+#define inet_aton(cp, addr) __bsdsocket_inet_aton((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (const char *)(cp), (struct in_addr *)(addr))
+#define __inet_aton_base(__ndk_b, cp, addr) __bsdsocket_inet_aton((__bsdsocket_base_t)(void *)(__ndk_b), (const char *)(cp), (struct in_addr *)(addr))
 
 static __inline__ STRPTR
 __bsdsocket_inet_ntop(struct Library *__base, LONG af, APTR src, STRPTR dst, LONG size)
@@ -1607,8 +1607,8 @@ __bsdsocket_inet_ntop(struct Library *__base, LONG af, APTR src, STRPTR dst, LON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define inet_ntop(af, src, dst, size) __bsdsocket_inet_ntop((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(af), (APTR)(src), (STRPTR)(dst), (LONG)(size))
-#define __inet_ntop_base(__ndk_b, af, src, dst, size) __bsdsocket_inet_ntop((__bsdsocket_base_t)(__ndk_b), (LONG)(af), (APTR)(src), (STRPTR)(dst), (LONG)(size))
+#define inet_ntop(af, src, dst, size) __bsdsocket_inet_ntop((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(af), (APTR)(src), (STRPTR)(dst), (LONG)(size))
+#define __inet_ntop_base(__ndk_b, af, src, dst, size) __bsdsocket_inet_ntop((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(af), (APTR)(src), (STRPTR)(dst), (LONG)(size))
 
 static __inline__ LONG
 __bsdsocket_inet_pton(struct Library *__base, LONG af, STRPTR src, APTR dst)
@@ -1624,8 +1624,8 @@ __bsdsocket_inet_pton(struct Library *__base, LONG af, STRPTR src, APTR dst)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define inet_pton(af, src, dst) __bsdsocket_inet_pton((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(af), (STRPTR)(src), (APTR)(dst))
-#define __inet_pton_base(__ndk_b, af, src, dst) __bsdsocket_inet_pton((__bsdsocket_base_t)(__ndk_b), (LONG)(af), (STRPTR)(src), (APTR)(dst))
+#define inet_pton(af, src, dst) __bsdsocket_inet_pton((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(af), (STRPTR)(src), (APTR)(dst))
+#define __inet_pton_base(__ndk_b, af, src, dst) __bsdsocket_inet_pton((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(af), (STRPTR)(src), (APTR)(dst))
 
 static __inline__ LONG
 __bsdsocket_In_LocalAddr(struct Library *__base, in_addr_t address)
@@ -1641,8 +1641,8 @@ __bsdsocket_In_LocalAddr(struct Library *__base, in_addr_t address)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define In_LocalAddr(address) __bsdsocket_In_LocalAddr((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (in_addr_t)(address))
-#define __In_LocalAddr_base(__ndk_b, address) __bsdsocket_In_LocalAddr((__bsdsocket_base_t)(__ndk_b), (in_addr_t)(address))
+#define In_LocalAddr(address) __bsdsocket_In_LocalAddr((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (in_addr_t)(address))
+#define __In_LocalAddr_base(__ndk_b, address) __bsdsocket_In_LocalAddr((__bsdsocket_base_t)(void *)(__ndk_b), (in_addr_t)(address))
 
 static __inline__ LONG
 __bsdsocket_In_CanForward(struct Library *__base, in_addr_t address)
@@ -1658,8 +1658,8 @@ __bsdsocket_In_CanForward(struct Library *__base, in_addr_t address)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define In_CanForward(address) __bsdsocket_In_CanForward((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (in_addr_t)(address))
-#define __In_CanForward_base(__ndk_b, address) __bsdsocket_In_CanForward((__bsdsocket_base_t)(__ndk_b), (in_addr_t)(address))
+#define In_CanForward(address) __bsdsocket_In_CanForward((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (in_addr_t)(address))
+#define __In_CanForward_base(__ndk_b, address) __bsdsocket_In_CanForward((__bsdsocket_base_t)(void *)(__ndk_b), (in_addr_t)(address))
 
 static __inline__ struct mbuf *
 __bsdsocket_mbuf_copym(struct Library *__base, struct mbuf *m, LONG off, LONG len)
@@ -1675,8 +1675,8 @@ __bsdsocket_mbuf_copym(struct Library *__base, struct mbuf *m, LONG off, LONG le
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct mbuf *)_d0;
 }
-#define mbuf_copym(m, off, len) __bsdsocket_mbuf_copym((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(off), (LONG)(len))
-#define __mbuf_copym_base(__ndk_b, m, off, len) __bsdsocket_mbuf_copym((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(m), (LONG)(off), (LONG)(len))
+#define mbuf_copym(m, off, len) __bsdsocket_mbuf_copym((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(off), (LONG)(len))
+#define __mbuf_copym_base(__ndk_b, m, off, len) __bsdsocket_mbuf_copym((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(m), (LONG)(off), (LONG)(len))
 
 static __inline__ LONG
 __bsdsocket_mbuf_copyback(struct Library *__base, struct mbuf *m, LONG off, LONG len, APTR cp)
@@ -1692,8 +1692,8 @@ __bsdsocket_mbuf_copyback(struct Library *__base, struct mbuf *m, LONG off, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define mbuf_copyback(m, off, len, cp) __bsdsocket_mbuf_copyback((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(off), (LONG)(len), (APTR)(cp))
-#define __mbuf_copyback_base(__ndk_b, m, off, len, cp) __bsdsocket_mbuf_copyback((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(m), (LONG)(off), (LONG)(len), (APTR)(cp))
+#define mbuf_copyback(m, off, len, cp) __bsdsocket_mbuf_copyback((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(off), (LONG)(len), (APTR)(cp))
+#define __mbuf_copyback_base(__ndk_b, m, off, len, cp) __bsdsocket_mbuf_copyback((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(m), (LONG)(off), (LONG)(len), (APTR)(cp))
 
 static __inline__ LONG
 __bsdsocket_mbuf_copydata(struct Library *__base, struct mbuf *m, LONG off, LONG len, APTR cp)
@@ -1709,8 +1709,8 @@ __bsdsocket_mbuf_copydata(struct Library *__base, struct mbuf *m, LONG off, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define mbuf_copydata(m, off, len, cp) __bsdsocket_mbuf_copydata((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(off), (LONG)(len), (APTR)(cp))
-#define __mbuf_copydata_base(__ndk_b, m, off, len, cp) __bsdsocket_mbuf_copydata((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(m), (LONG)(off), (LONG)(len), (APTR)(cp))
+#define mbuf_copydata(m, off, len, cp) __bsdsocket_mbuf_copydata((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(off), (LONG)(len), (APTR)(cp))
+#define __mbuf_copydata_base(__ndk_b, m, off, len, cp) __bsdsocket_mbuf_copydata((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(m), (LONG)(off), (LONG)(len), (APTR)(cp))
 
 static __inline__ struct mbuf *
 __bsdsocket_mbuf_free(struct Library *__base, struct mbuf *m)
@@ -1726,8 +1726,8 @@ __bsdsocket_mbuf_free(struct Library *__base, struct mbuf *m)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct mbuf *)_d0;
 }
-#define mbuf_free(m) __bsdsocket_mbuf_free((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m))
-#define __mbuf_free_base(__ndk_b, m) __bsdsocket_mbuf_free((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(m))
+#define mbuf_free(m) __bsdsocket_mbuf_free((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m))
+#define __mbuf_free_base(__ndk_b, m) __bsdsocket_mbuf_free((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(m))
 
 static __inline__ VOID
 __bsdsocket_mbuf_freem(struct Library *__base, struct mbuf *m)
@@ -1743,8 +1743,8 @@ __bsdsocket_mbuf_freem(struct Library *__base, struct mbuf *m)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define mbuf_freem(m) __bsdsocket_mbuf_freem((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m))
-#define __mbuf_freem_base(__ndk_b, m) __bsdsocket_mbuf_freem((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(m))
+#define mbuf_freem(m) __bsdsocket_mbuf_freem((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m))
+#define __mbuf_freem_base(__ndk_b, m) __bsdsocket_mbuf_freem((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(m))
 
 static __inline__ struct mbuf *
 __bsdsocket_mbuf_get(struct Library *__base)
@@ -1760,8 +1760,8 @@ __bsdsocket_mbuf_get(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct mbuf *)_d0;
 }
-#define mbuf_get() __bsdsocket_mbuf_get((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __mbuf_get_base(__ndk_b) __bsdsocket_mbuf_get((__bsdsocket_base_t)(__ndk_b))
+#define mbuf_get() __bsdsocket_mbuf_get((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __mbuf_get_base(__ndk_b) __bsdsocket_mbuf_get((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ struct mbuf *
 __bsdsocket_mbuf_gethdr(struct Library *__base)
@@ -1777,8 +1777,8 @@ __bsdsocket_mbuf_gethdr(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct mbuf *)_d0;
 }
-#define mbuf_gethdr() __bsdsocket_mbuf_gethdr((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __mbuf_gethdr_base(__ndk_b) __bsdsocket_mbuf_gethdr((__bsdsocket_base_t)(__ndk_b))
+#define mbuf_gethdr() __bsdsocket_mbuf_gethdr((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __mbuf_gethdr_base(__ndk_b) __bsdsocket_mbuf_gethdr((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ struct mbuf *
 __bsdsocket_mbuf_prepend(struct Library *__base, struct mbuf *m, LONG len)
@@ -1794,8 +1794,8 @@ __bsdsocket_mbuf_prepend(struct Library *__base, struct mbuf *m, LONG len)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct mbuf *)_d0;
 }
-#define mbuf_prepend(m, len) __bsdsocket_mbuf_prepend((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(len))
-#define __mbuf_prepend_base(__ndk_b, m, len) __bsdsocket_mbuf_prepend((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(m), (LONG)(len))
+#define mbuf_prepend(m, len) __bsdsocket_mbuf_prepend((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(len))
+#define __mbuf_prepend_base(__ndk_b, m, len) __bsdsocket_mbuf_prepend((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(m), (LONG)(len))
 
 static __inline__ LONG
 __bsdsocket_mbuf_cat(struct Library *__base, struct mbuf *m, struct mbuf *n)
@@ -1811,8 +1811,8 @@ __bsdsocket_mbuf_cat(struct Library *__base, struct mbuf *m, struct mbuf *n)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define mbuf_cat(m, n) __bsdsocket_mbuf_cat((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (struct mbuf *)(n))
-#define __mbuf_cat_base(__ndk_b, m, n) __bsdsocket_mbuf_cat((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(m), (struct mbuf *)(n))
+#define mbuf_cat(m, n) __bsdsocket_mbuf_cat((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (struct mbuf *)(n))
+#define __mbuf_cat_base(__ndk_b, m, n) __bsdsocket_mbuf_cat((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(m), (struct mbuf *)(n))
 
 static __inline__ LONG
 __bsdsocket_mbuf_adj(struct Library *__base, struct mbuf *mp, LONG req_len)
@@ -1828,8 +1828,8 @@ __bsdsocket_mbuf_adj(struct Library *__base, struct mbuf *mp, LONG req_len)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define mbuf_adj(mp, req_len) __bsdsocket_mbuf_adj((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(mp), (LONG)(req_len))
-#define __mbuf_adj_base(__ndk_b, mp, req_len) __bsdsocket_mbuf_adj((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(mp), (LONG)(req_len))
+#define mbuf_adj(mp, req_len) __bsdsocket_mbuf_adj((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(mp), (LONG)(req_len))
+#define __mbuf_adj_base(__ndk_b, mp, req_len) __bsdsocket_mbuf_adj((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(mp), (LONG)(req_len))
 
 static __inline__ struct mbuf *
 __bsdsocket_mbuf_pullup(struct Library *__base, struct mbuf *m, LONG len)
@@ -1845,8 +1845,8 @@ __bsdsocket_mbuf_pullup(struct Library *__base, struct mbuf *m, LONG len)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct mbuf *)_d0;
 }
-#define mbuf_pullup(m, len) __bsdsocket_mbuf_pullup((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(len))
-#define __mbuf_pullup_base(__ndk_b, m, len) __bsdsocket_mbuf_pullup((__bsdsocket_base_t)(__ndk_b), (struct mbuf *)(m), (LONG)(len))
+#define mbuf_pullup(m, len) __bsdsocket_mbuf_pullup((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct mbuf *)(m), (LONG)(len))
+#define __mbuf_pullup_base(__ndk_b, m, len) __bsdsocket_mbuf_pullup((__bsdsocket_base_t)(void *)(__ndk_b), (struct mbuf *)(m), (LONG)(len))
 
 static __inline__ BOOL
 __bsdsocket_ProcessIsServer(struct Library *__base, struct Process *pr)
@@ -1862,8 +1862,8 @@ __bsdsocket_ProcessIsServer(struct Library *__base, struct Process *pr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ProcessIsServer(pr) __bsdsocket_ProcessIsServer((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct Process *)(pr))
-#define __ProcessIsServer_base(__ndk_b, pr) __bsdsocket_ProcessIsServer((__bsdsocket_base_t)(__ndk_b), (struct Process *)(pr))
+#define ProcessIsServer(pr) __bsdsocket_ProcessIsServer((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct Process *)(pr))
+#define __ProcessIsServer_base(__ndk_b, pr) __bsdsocket_ProcessIsServer((__bsdsocket_base_t)(void *)(__ndk_b), (struct Process *)(pr))
 
 static __inline__ LONG
 __bsdsocket_ObtainServerSocket(struct Library *__base)
@@ -1879,8 +1879,8 @@ __bsdsocket_ObtainServerSocket(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ObtainServerSocket() __bsdsocket_ObtainServerSocket((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME))
-#define __ObtainServerSocket_base(__ndk_b) __bsdsocket_ObtainServerSocket((__bsdsocket_base_t)(__ndk_b))
+#define ObtainServerSocket() __bsdsocket_ObtainServerSocket((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME))
+#define __ObtainServerSocket_base(__ndk_b) __bsdsocket_ObtainServerSocket((__bsdsocket_base_t)(void *)(__ndk_b))
 
 static __inline__ BOOL
 __bsdsocket_GetDefaultDomainName(struct Library *__base, STRPTR buffer, LONG buffer_size)
@@ -1896,8 +1896,8 @@ __bsdsocket_GetDefaultDomainName(struct Library *__base, STRPTR buffer, LONG buf
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define GetDefaultDomainName(buffer, buffer_size) __bsdsocket_GetDefaultDomainName((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(buffer), (LONG)(buffer_size))
-#define __GetDefaultDomainName_base(__ndk_b, buffer, buffer_size) __bsdsocket_GetDefaultDomainName((__bsdsocket_base_t)(__ndk_b), (STRPTR)(buffer), (LONG)(buffer_size))
+#define GetDefaultDomainName(buffer, buffer_size) __bsdsocket_GetDefaultDomainName((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(buffer), (LONG)(buffer_size))
+#define __GetDefaultDomainName_base(__ndk_b, buffer, buffer_size) __bsdsocket_GetDefaultDomainName((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(buffer), (LONG)(buffer_size))
 
 static __inline__ VOID
 __bsdsocket_SetDefaultDomainName(struct Library *__base, STRPTR buffer)
@@ -1913,8 +1913,8 @@ __bsdsocket_SetDefaultDomainName(struct Library *__base, STRPTR buffer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetDefaultDomainName(buffer) __bsdsocket_SetDefaultDomainName((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(buffer))
-#define __SetDefaultDomainName_base(__ndk_b, buffer) __bsdsocket_SetDefaultDomainName((__bsdsocket_base_t)(__ndk_b), (STRPTR)(buffer))
+#define SetDefaultDomainName(buffer) __bsdsocket_SetDefaultDomainName((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(buffer))
+#define __SetDefaultDomainName_base(__ndk_b, buffer) __bsdsocket_SetDefaultDomainName((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(buffer))
 
 static __inline__ struct List *
 __bsdsocket_ObtainRoadshowData(struct Library *__base, LONG access)
@@ -1930,8 +1930,8 @@ __bsdsocket_ObtainRoadshowData(struct Library *__base, LONG access)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct List *)_d0;
 }
-#define ObtainRoadshowData(access) __bsdsocket_ObtainRoadshowData((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(access))
-#define __ObtainRoadshowData_base(__ndk_b, access) __bsdsocket_ObtainRoadshowData((__bsdsocket_base_t)(__ndk_b), (LONG)(access))
+#define ObtainRoadshowData(access) __bsdsocket_ObtainRoadshowData((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(access))
+#define __ObtainRoadshowData_base(__ndk_b, access) __bsdsocket_ObtainRoadshowData((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(access))
 
 static __inline__ VOID
 __bsdsocket_ReleaseRoadshowData(struct Library *__base, struct List *list)
@@ -1947,8 +1947,8 @@ __bsdsocket_ReleaseRoadshowData(struct Library *__base, struct List *list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseRoadshowData(list) __bsdsocket_ReleaseRoadshowData((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct List *)(list))
-#define __ReleaseRoadshowData_base(__ndk_b, list) __bsdsocket_ReleaseRoadshowData((__bsdsocket_base_t)(__ndk_b), (struct List *)(list))
+#define ReleaseRoadshowData(list) __bsdsocket_ReleaseRoadshowData((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct List *)(list))
+#define __ReleaseRoadshowData_base(__ndk_b, list) __bsdsocket_ReleaseRoadshowData((__bsdsocket_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 static __inline__ BOOL
 __bsdsocket_ChangeRoadshowData(struct Library *__base, struct List *list, STRPTR name, ULONG length, APTR data)
@@ -1965,8 +1965,8 @@ __bsdsocket_ChangeRoadshowData(struct Library *__base, struct List *list, STRPTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ChangeRoadshowData(list, name, length, data) __bsdsocket_ChangeRoadshowData((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct List *)(list), (STRPTR)(name), (ULONG)(length), (APTR)(data))
-#define __ChangeRoadshowData_base(__ndk_b, list, name, length, data) __bsdsocket_ChangeRoadshowData((__bsdsocket_base_t)(__ndk_b), (struct List *)(list), (STRPTR)(name), (ULONG)(length), (APTR)(data))
+#define ChangeRoadshowData(list, name, length, data) __bsdsocket_ChangeRoadshowData((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct List *)(list), (STRPTR)(name), (ULONG)(length), (APTR)(data))
+#define __ChangeRoadshowData_base(__ndk_b, list, name, length, data) __bsdsocket_ChangeRoadshowData((__bsdsocket_base_t)(void *)(__ndk_b), (struct List *)(list), (STRPTR)(name), (ULONG)(length), (APTR)(data))
 
 static __inline__ LONG
 __bsdsocket_RemoveInterface(struct Library *__base, STRPTR interface_name, LONG force)
@@ -1982,8 +1982,8 @@ __bsdsocket_RemoveInterface(struct Library *__base, STRPTR interface_name, LONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RemoveInterface(interface_name, force) __bsdsocket_RemoveInterface((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (LONG)(force))
-#define __RemoveInterface_base(__ndk_b, interface_name, force) __bsdsocket_RemoveInterface((__bsdsocket_base_t)(__ndk_b), (STRPTR)(interface_name), (LONG)(force))
+#define RemoveInterface(interface_name, force) __bsdsocket_RemoveInterface((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (LONG)(force))
+#define __RemoveInterface_base(__ndk_b, interface_name, force) __bsdsocket_RemoveInterface((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(interface_name), (LONG)(force))
 
 static __inline__ struct hostent *
 __bsdsocket_gethostbyname_r(struct Library *__base, STRPTR name, struct hostent *hp, APTR buf, ULONG buflen, LONG *he)
@@ -2001,8 +2001,8 @@ __bsdsocket_gethostbyname_r(struct Library *__base, STRPTR name, struct hostent 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct hostent *)_d0;
 }
-#define gethostbyname_r(name, hp, buf, buflen, he) __bsdsocket_gethostbyname_r((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(name), (struct hostent *)(hp), (APTR)(buf), (ULONG)(buflen), (LONG *)(he))
-#define __gethostbyname_r_base(__ndk_b, name, hp, buf, buflen, he) __bsdsocket_gethostbyname_r((__bsdsocket_base_t)(__ndk_b), (STRPTR)(name), (struct hostent *)(hp), (APTR)(buf), (ULONG)(buflen), (LONG *)(he))
+#define gethostbyname_r(name, hp, buf, buflen, he) __bsdsocket_gethostbyname_r((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(name), (struct hostent *)(hp), (APTR)(buf), (ULONG)(buflen), (LONG *)(he))
+#define __gethostbyname_r_base(__ndk_b, name, hp, buf, buflen, he) __bsdsocket_gethostbyname_r((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(name), (struct hostent *)(hp), (APTR)(buf), (ULONG)(buflen), (LONG *)(he))
 
 static __inline__ struct hostent *
 __bsdsocket_gethostbyaddr_r(struct Library *__base, STRPTR addr, LONG len, LONG type, struct hostent *hp, APTR buf, ULONG buflen, LONG *he)
@@ -2021,8 +2021,8 @@ __bsdsocket_gethostbyaddr_r(struct Library *__base, STRPTR addr, LONG len, LONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct hostent *)_d0;
 }
-#define gethostbyaddr_r(addr, len, type, hp, buf, buflen, he) __bsdsocket_gethostbyaddr_r((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(addr), (LONG)(len), (LONG)(type), (struct hostent *)(hp), (APTR)(buf), (ULONG)(buflen), (LONG *)(he))
-#define __gethostbyaddr_r_base(__ndk_b, addr, len, type, hp, buf, buflen, he) __bsdsocket_gethostbyaddr_r((__bsdsocket_base_t)(__ndk_b), (STRPTR)(addr), (LONG)(len), (LONG)(type), (struct hostent *)(hp), (APTR)(buf), (ULONG)(buflen), (LONG *)(he))
+#define gethostbyaddr_r(addr, len, type, hp, buf, buflen, he) __bsdsocket_gethostbyaddr_r((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(addr), (LONG)(len), (LONG)(type), (struct hostent *)(hp), (APTR)(buf), (ULONG)(buflen), (LONG *)(he))
+#define __gethostbyaddr_r_base(__ndk_b, addr, len, type, hp, buf, buflen, he) __bsdsocket_gethostbyaddr_r((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(addr), (LONG)(len), (LONG)(type), (struct hostent *)(hp), (APTR)(buf), (ULONG)(buflen), (LONG *)(he))
 
 static __inline__ LONG
 __bsdsocket_ipf_open(struct Library *__base, LONG channel)
@@ -2038,8 +2038,8 @@ __bsdsocket_ipf_open(struct Library *__base, LONG channel)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ipf_open(channel) __bsdsocket_ipf_open((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel))
-#define __ipf_open_base(__ndk_b, channel) __bsdsocket_ipf_open((__bsdsocket_base_t)(__ndk_b), (LONG)(channel))
+#define ipf_open(channel) __bsdsocket_ipf_open((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel))
+#define __ipf_open_base(__ndk_b, channel) __bsdsocket_ipf_open((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel))
 
 static __inline__ LONG
 __bsdsocket_ipf_close(struct Library *__base, LONG channel)
@@ -2055,8 +2055,8 @@ __bsdsocket_ipf_close(struct Library *__base, LONG channel)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ipf_close(channel) __bsdsocket_ipf_close((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel))
-#define __ipf_close_base(__ndk_b, channel) __bsdsocket_ipf_close((__bsdsocket_base_t)(__ndk_b), (LONG)(channel))
+#define ipf_close(channel) __bsdsocket_ipf_close((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel))
+#define __ipf_close_base(__ndk_b, channel) __bsdsocket_ipf_close((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel))
 
 static __inline__ LONG
 __bsdsocket_ipf_ioctl(struct Library *__base, LONG channel, ULONG command, APTR buffer)
@@ -2072,8 +2072,8 @@ __bsdsocket_ipf_ioctl(struct Library *__base, LONG channel, ULONG command, APTR 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ipf_ioctl(channel, command, buffer) __bsdsocket_ipf_ioctl((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(command), (APTR)(buffer))
-#define __ipf_ioctl_base(__ndk_b, channel, command, buffer) __bsdsocket_ipf_ioctl((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (ULONG)(command), (APTR)(buffer))
+#define ipf_ioctl(channel, command, buffer) __bsdsocket_ipf_ioctl((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(command), (APTR)(buffer))
+#define __ipf_ioctl_base(__ndk_b, channel, command, buffer) __bsdsocket_ipf_ioctl((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (ULONG)(command), (APTR)(buffer))
 
 static __inline__ LONG
 __bsdsocket_ipf_log_read(struct Library *__base, LONG channel, APTR buffer, LONG len)
@@ -2089,8 +2089,8 @@ __bsdsocket_ipf_log_read(struct Library *__base, LONG channel, APTR buffer, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ipf_log_read(channel, buffer, len) __bsdsocket_ipf_log_read((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (APTR)(buffer), (LONG)(len))
-#define __ipf_log_read_base(__ndk_b, channel, buffer, len) __bsdsocket_ipf_log_read((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (APTR)(buffer), (LONG)(len))
+#define ipf_log_read(channel, buffer, len) __bsdsocket_ipf_log_read((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (APTR)(buffer), (LONG)(len))
+#define __ipf_log_read_base(__ndk_b, channel, buffer, len) __bsdsocket_ipf_log_read((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (APTR)(buffer), (LONG)(len))
 
 static __inline__ LONG
 __bsdsocket_ipf_log_data_waiting(struct Library *__base, LONG channel)
@@ -2106,8 +2106,8 @@ __bsdsocket_ipf_log_data_waiting(struct Library *__base, LONG channel)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ipf_log_data_waiting(channel) __bsdsocket_ipf_log_data_waiting((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel))
-#define __ipf_log_data_waiting_base(__ndk_b, channel) __bsdsocket_ipf_log_data_waiting((__bsdsocket_base_t)(__ndk_b), (LONG)(channel))
+#define ipf_log_data_waiting(channel) __bsdsocket_ipf_log_data_waiting((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel))
+#define __ipf_log_data_waiting_base(__ndk_b, channel) __bsdsocket_ipf_log_data_waiting((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel))
 
 static __inline__ LONG
 __bsdsocket_ipf_set_notify_mask(struct Library *__base, LONG channel, ULONG mask)
@@ -2123,8 +2123,8 @@ __bsdsocket_ipf_set_notify_mask(struct Library *__base, LONG channel, ULONG mask
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ipf_set_notify_mask(channel, mask) __bsdsocket_ipf_set_notify_mask((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(mask))
-#define __ipf_set_notify_mask_base(__ndk_b, channel, mask) __bsdsocket_ipf_set_notify_mask((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (ULONG)(mask))
+#define ipf_set_notify_mask(channel, mask) __bsdsocket_ipf_set_notify_mask((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(mask))
+#define __ipf_set_notify_mask_base(__ndk_b, channel, mask) __bsdsocket_ipf_set_notify_mask((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (ULONG)(mask))
 
 static __inline__ LONG
 __bsdsocket_ipf_set_interrupt_mask(struct Library *__base, LONG channel, ULONG mask)
@@ -2140,8 +2140,8 @@ __bsdsocket_ipf_set_interrupt_mask(struct Library *__base, LONG channel, ULONG m
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ipf_set_interrupt_mask(channel, mask) __bsdsocket_ipf_set_interrupt_mask((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(mask))
-#define __ipf_set_interrupt_mask_base(__ndk_b, channel, mask) __bsdsocket_ipf_set_interrupt_mask((__bsdsocket_base_t)(__ndk_b), (LONG)(channel), (ULONG)(mask))
+#define ipf_set_interrupt_mask(channel, mask) __bsdsocket_ipf_set_interrupt_mask((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(channel), (ULONG)(mask))
+#define __ipf_set_interrupt_mask_base(__ndk_b, channel, mask) __bsdsocket_ipf_set_interrupt_mask((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(channel), (ULONG)(mask))
 
 static __inline__ VOID
 __bsdsocket_freeaddrinfo(struct Library *__base, struct addrinfo *ai)
@@ -2157,8 +2157,8 @@ __bsdsocket_freeaddrinfo(struct Library *__base, struct addrinfo *ai)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define freeaddrinfo(ai) __bsdsocket_freeaddrinfo((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct addrinfo *)(ai))
-#define __freeaddrinfo_base(__ndk_b, ai) __bsdsocket_freeaddrinfo((__bsdsocket_base_t)(__ndk_b), (struct addrinfo *)(ai))
+#define freeaddrinfo(ai) __bsdsocket_freeaddrinfo((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct addrinfo *)(ai))
+#define __freeaddrinfo_base(__ndk_b, ai) __bsdsocket_freeaddrinfo((__bsdsocket_base_t)(void *)(__ndk_b), (struct addrinfo *)(ai))
 
 static __inline__ LONG
 __bsdsocket_getaddrinfo(struct Library *__base, STRPTR hostname, STRPTR servname, struct addrinfo *hints, struct addrinfo **res)
@@ -2176,8 +2176,8 @@ __bsdsocket_getaddrinfo(struct Library *__base, STRPTR hostname, STRPTR servname
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define getaddrinfo(hostname, servname, hints, res) __bsdsocket_getaddrinfo((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(hostname), (STRPTR)(servname), (struct addrinfo *)(hints), (struct addrinfo **)(res))
-#define __getaddrinfo_base(__ndk_b, hostname, servname, hints, res) __bsdsocket_getaddrinfo((__bsdsocket_base_t)(__ndk_b), (STRPTR)(hostname), (STRPTR)(servname), (struct addrinfo *)(hints), (struct addrinfo **)(res))
+#define getaddrinfo(hostname, servname, hints, res) __bsdsocket_getaddrinfo((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (STRPTR)(hostname), (STRPTR)(servname), (struct addrinfo *)(hints), (struct addrinfo **)(res))
+#define __getaddrinfo_base(__ndk_b, hostname, servname, hints, res) __bsdsocket_getaddrinfo((__bsdsocket_base_t)(void *)(__ndk_b), (STRPTR)(hostname), (STRPTR)(servname), (struct addrinfo *)(hints), (struct addrinfo **)(res))
 
 static __inline__ STRPTR
 __bsdsocket_gai_strerror(struct Library *__base, LONG errnum)
@@ -2193,8 +2193,8 @@ __bsdsocket_gai_strerror(struct Library *__base, LONG errnum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define gai_strerror(errnum) __bsdsocket_gai_strerror((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(errnum))
-#define __gai_strerror_base(__ndk_b, errnum) __bsdsocket_gai_strerror((__bsdsocket_base_t)(__ndk_b), (LONG)(errnum))
+#define gai_strerror(errnum) __bsdsocket_gai_strerror((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (LONG)(errnum))
+#define __gai_strerror_base(__ndk_b, errnum) __bsdsocket_gai_strerror((__bsdsocket_base_t)(void *)(__ndk_b), (LONG)(errnum))
 
 static __inline__ LONG
 __bsdsocket_getnameinfo(struct Library *__base, struct sockaddr *sa, ULONG salen, STRPTR host, ULONG hostlen, STRPTR serv, ULONG servlen, ULONG flags)
@@ -2213,7 +2213,7 @@ __bsdsocket_getnameinfo(struct Library *__base, struct sockaddr *sa, ULONG salen
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define getnameinfo(sa, salen, host, hostlen, serv, servlen, flags) __bsdsocket_getnameinfo((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (struct sockaddr *)(sa), (ULONG)(salen), (STRPTR)(host), (ULONG)(hostlen), (STRPTR)(serv), (ULONG)(servlen), (ULONG)(flags))
-#define __getnameinfo_base(__ndk_b, sa, salen, host, hostlen, serv, servlen, flags) __bsdsocket_getnameinfo((__bsdsocket_base_t)(__ndk_b), (struct sockaddr *)(sa), (ULONG)(salen), (STRPTR)(host), (ULONG)(hostlen), (STRPTR)(serv), (ULONG)(servlen), (ULONG)(flags))
+#define getnameinfo(sa, salen, host, hostlen, serv, servlen, flags) __bsdsocket_getnameinfo((__bsdsocket_base_t)(void *)(BSDSOCKET_BASE_NAME), (struct sockaddr *)(sa), (ULONG)(salen), (STRPTR)(host), (ULONG)(hostlen), (STRPTR)(serv), (ULONG)(servlen), (ULONG)(flags))
+#define __getnameinfo_base(__ndk_b, sa, salen, host, hostlen, serv, servlen, flags) __bsdsocket_getnameinfo((__bsdsocket_base_t)(void *)(__ndk_b), (struct sockaddr *)(sa), (ULONG)(salen), (STRPTR)(host), (ULONG)(hostlen), (STRPTR)(serv), (ULONG)(servlen), (ULONG)(flags))
 
 #endif /* INLINE_BSDSOCKET_H */

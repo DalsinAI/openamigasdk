@@ -38,7 +38,7 @@ __input_PeekQualifier(struct Device *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define PeekQualifier() __input_PeekQualifier((__input_base_t)(INPUT_BASE_NAME))
-#define __PeekQualifier_base(__ndk_b) __input_PeekQualifier((__input_base_t)(__ndk_b))
+#define PeekQualifier() __input_PeekQualifier((__input_base_t)(void *)(INPUT_BASE_NAME))
+#define __PeekQualifier_base(__ndk_b) __input_PeekQualifier((__input_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_INPUT_H */

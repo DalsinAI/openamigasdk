@@ -38,7 +38,7 @@ __label_LABEL_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define LABEL_GetClass() __label_LABEL_GetClass((__label_base_t)(LABEL_BASE_NAME))
-#define __LABEL_GetClass_base(__ndk_b) __label_LABEL_GetClass((__label_base_t)(__ndk_b))
+#define LABEL_GetClass() __label_LABEL_GetClass((__label_base_t)(void *)(LABEL_BASE_NAME))
+#define __LABEL_GetClass_base(__ndk_b) __label_LABEL_GetClass((__label_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_LABEL_H */

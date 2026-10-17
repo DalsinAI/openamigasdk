@@ -38,8 +38,8 @@ __disk_AllocUnit(struct DiscResource *__base, LONG unitNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AllocUnit(unitNum) __disk_AllocUnit((__disk_base_t)(DISK_BASE_NAME), (LONG)(unitNum))
-#define __AllocUnit_base(__ndk_b, unitNum) __disk_AllocUnit((__disk_base_t)(__ndk_b), (LONG)(unitNum))
+#define AllocUnit(unitNum) __disk_AllocUnit((__disk_base_t)(void *)(DISK_BASE_NAME), (LONG)(unitNum))
+#define __AllocUnit_base(__ndk_b, unitNum) __disk_AllocUnit((__disk_base_t)(void *)(__ndk_b), (LONG)(unitNum))
 
 static __inline__ VOID
 __disk_FreeUnit(struct DiscResource *__base, LONG unitNum)
@@ -55,8 +55,8 @@ __disk_FreeUnit(struct DiscResource *__base, LONG unitNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeUnit(unitNum) __disk_FreeUnit((__disk_base_t)(DISK_BASE_NAME), (LONG)(unitNum))
-#define __FreeUnit_base(__ndk_b, unitNum) __disk_FreeUnit((__disk_base_t)(__ndk_b), (LONG)(unitNum))
+#define FreeUnit(unitNum) __disk_FreeUnit((__disk_base_t)(void *)(DISK_BASE_NAME), (LONG)(unitNum))
+#define __FreeUnit_base(__ndk_b, unitNum) __disk_FreeUnit((__disk_base_t)(void *)(__ndk_b), (LONG)(unitNum))
 
 static __inline__ struct DiscResourceUnit *
 __disk_GetUnit(struct DiscResource *__base, struct DiscResourceUnit * unitPointer)
@@ -72,8 +72,8 @@ __disk_GetUnit(struct DiscResource *__base, struct DiscResourceUnit * unitPointe
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DiscResourceUnit *)_d0;
 }
-#define GetUnit(unitPointer) __disk_GetUnit((__disk_base_t)(DISK_BASE_NAME), (struct DiscResourceUnit *)(unitPointer))
-#define __GetUnit_base(__ndk_b, unitPointer) __disk_GetUnit((__disk_base_t)(__ndk_b), (struct DiscResourceUnit *)(unitPointer))
+#define GetUnit(unitPointer) __disk_GetUnit((__disk_base_t)(void *)(DISK_BASE_NAME), (struct DiscResourceUnit *)(unitPointer))
+#define __GetUnit_base(__ndk_b, unitPointer) __disk_GetUnit((__disk_base_t)(void *)(__ndk_b), (struct DiscResourceUnit *)(unitPointer))
 
 static __inline__ VOID
 __disk_GiveUnit(struct DiscResource *__base)
@@ -89,8 +89,8 @@ __disk_GiveUnit(struct DiscResource *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GiveUnit() __disk_GiveUnit((__disk_base_t)(DISK_BASE_NAME))
-#define __GiveUnit_base(__ndk_b) __disk_GiveUnit((__disk_base_t)(__ndk_b))
+#define GiveUnit() __disk_GiveUnit((__disk_base_t)(void *)(DISK_BASE_NAME))
+#define __GiveUnit_base(__ndk_b) __disk_GiveUnit((__disk_base_t)(void *)(__ndk_b))
 
 static __inline__ LONG
 __disk_GetUnitID(struct DiscResource *__base, LONG unitNum)
@@ -106,8 +106,8 @@ __disk_GetUnitID(struct DiscResource *__base, LONG unitNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetUnitID(unitNum) __disk_GetUnitID((__disk_base_t)(DISK_BASE_NAME), (LONG)(unitNum))
-#define __GetUnitID_base(__ndk_b, unitNum) __disk_GetUnitID((__disk_base_t)(__ndk_b), (LONG)(unitNum))
+#define GetUnitID(unitNum) __disk_GetUnitID((__disk_base_t)(void *)(DISK_BASE_NAME), (LONG)(unitNum))
+#define __GetUnitID_base(__ndk_b, unitNum) __disk_GetUnitID((__disk_base_t)(void *)(__ndk_b), (LONG)(unitNum))
 
 static __inline__ LONG
 __disk_ReadUnitID(struct DiscResource *__base, LONG unitNum)
@@ -123,7 +123,7 @@ __disk_ReadUnitID(struct DiscResource *__base, LONG unitNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReadUnitID(unitNum) __disk_ReadUnitID((__disk_base_t)(DISK_BASE_NAME), (LONG)(unitNum))
-#define __ReadUnitID_base(__ndk_b, unitNum) __disk_ReadUnitID((__disk_base_t)(__ndk_b), (LONG)(unitNum))
+#define ReadUnitID(unitNum) __disk_ReadUnitID((__disk_base_t)(void *)(DISK_BASE_NAME), (LONG)(unitNum))
+#define __ReadUnitID_base(__ndk_b, unitNum) __disk_ReadUnitID((__disk_base_t)(void *)(__ndk_b), (LONG)(unitNum))
 
 #endif /* INLINE_DISK_H */

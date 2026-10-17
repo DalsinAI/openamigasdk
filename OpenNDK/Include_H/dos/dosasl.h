@@ -60,7 +60,7 @@ struct AChain {
 	BPTR		an_Lock;
 	struct FileInfoBlock an_Info;
 	BYTE		an_Flags;	/* DDF_ */
-	UBYTE		an_String[1];	/* this level's pattern */
+	TEXT	an_String[1];	/* this level's pattern */
 };
 
 #define DDB_PatternBit	0

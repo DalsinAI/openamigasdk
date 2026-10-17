@@ -38,7 +38,7 @@ __bitmap_BITMAP_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define BITMAP_GetClass() __bitmap_BITMAP_GetClass((__bitmap_base_t)(BITMAP_BASE_NAME))
-#define __BITMAP_GetClass_base(__ndk_b) __bitmap_BITMAP_GetClass((__bitmap_base_t)(__ndk_b))
+#define BITMAP_GetClass() __bitmap_BITMAP_GetClass((__bitmap_base_t)(void *)(BITMAP_BASE_NAME))
+#define __BITMAP_GetClass_base(__ndk_b) __bitmap_BITMAP_GetClass((__bitmap_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_BITMAP_H */

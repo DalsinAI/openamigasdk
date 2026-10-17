@@ -38,8 +38,8 @@ __datatypes_ObtainDataTypeA(struct Library *__base, ULONG type, APTR handle, CON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DataType *)_d0;
 }
-#define ObtainDataTypeA(type, handle, attrs) __datatypes_ObtainDataTypeA((__datatypes_base_t)(DATATYPES_BASE_NAME), (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)(attrs))
-#define __ObtainDataTypeA_base(__ndk_b, type, handle, attrs) __datatypes_ObtainDataTypeA((__datatypes_base_t)(__ndk_b), (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)(attrs))
+#define ObtainDataTypeA(type, handle, attrs) __datatypes_ObtainDataTypeA((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)(attrs))
+#define __ObtainDataTypeA_base(__ndk_b, type, handle, attrs) __datatypes_ObtainDataTypeA((__datatypes_base_t)(void *)(__ndk_b), (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct DataType *
@@ -47,7 +47,7 @@ ___datatypes_ObtainDataType(__datatypes_base_t __ndk_base, ULONG type, APTR hand
 {
 	return __datatypes_ObtainDataTypeA(__ndk_base, (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)((ULONG)&handle + sizeof(handle)));
 }
-#define ObtainDataType(type, handle, ...) ___datatypes_ObtainDataType((__datatypes_base_t)(DATATYPES_BASE_NAME), (ULONG)(type), (APTR)(handle), ##__VA_ARGS__)
+#define ObtainDataType(type, handle, ...) ___datatypes_ObtainDataType((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (ULONG)(type), (APTR)(handle), ##__VA_ARGS__)
 #else
 #define ObtainDataType(type, handle, ...) (ObtainDataType)((ULONG)(type), (APTR)(handle), ##__VA_ARGS__)
 #endif
@@ -66,8 +66,8 @@ __datatypes_ReleaseDataType(struct Library *__base, struct DataType * dt)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseDataType(dt) __datatypes_ReleaseDataType((__datatypes_base_t)(DATATYPES_BASE_NAME), (struct DataType *)(dt))
-#define __ReleaseDataType_base(__ndk_b, dt) __datatypes_ReleaseDataType((__datatypes_base_t)(__ndk_b), (struct DataType *)(dt))
+#define ReleaseDataType(dt) __datatypes_ReleaseDataType((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (struct DataType *)(dt))
+#define __ReleaseDataType_base(__ndk_b, dt) __datatypes_ReleaseDataType((__datatypes_base_t)(void *)(__ndk_b), (struct DataType *)(dt))
 
 static __inline__ Object *
 __datatypes_NewDTObjectA(struct Library *__base, STRPTR name, CONST struct TagItem * attrs)
@@ -83,8 +83,8 @@ __datatypes_NewDTObjectA(struct Library *__base, STRPTR name, CONST struct TagIt
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Object *)_d0;
 }
-#define NewDTObjectA(name, attrs) __datatypes_NewDTObjectA((__datatypes_base_t)(DATATYPES_BASE_NAME), (STRPTR)(name), (CONST struct TagItem *)(attrs))
-#define __NewDTObjectA_base(__ndk_b, name, attrs) __datatypes_NewDTObjectA((__datatypes_base_t)(__ndk_b), (STRPTR)(name), (CONST struct TagItem *)(attrs))
+#define NewDTObjectA(name, attrs) __datatypes_NewDTObjectA((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (STRPTR)(name), (CONST struct TagItem *)(attrs))
+#define __NewDTObjectA_base(__ndk_b, name, attrs) __datatypes_NewDTObjectA((__datatypes_base_t)(void *)(__ndk_b), (STRPTR)(name), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) Object *
@@ -92,7 +92,7 @@ ___datatypes_NewDTObject(__datatypes_base_t __ndk_base, APTR name, ...)
 {
 	return __datatypes_NewDTObjectA(__ndk_base, (STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
-#define NewDTObject(name, ...) ___datatypes_NewDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (APTR)(name), ##__VA_ARGS__)
+#define NewDTObject(name, ...) ___datatypes_NewDTObject((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (APTR)(name), ##__VA_ARGS__)
 #else
 #define NewDTObject(name, ...) (NewDTObject)((APTR)(name), ##__VA_ARGS__)
 #endif
@@ -111,8 +111,8 @@ __datatypes_DisposeDTObject(struct Library *__base, Object * o)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DisposeDTObject(o) __datatypes_DisposeDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o))
-#define __DisposeDTObject_base(__ndk_b, o) __datatypes_DisposeDTObject((__datatypes_base_t)(__ndk_b), (Object *)(o))
+#define DisposeDTObject(o) __datatypes_DisposeDTObject((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o))
+#define __DisposeDTObject_base(__ndk_b, o) __datatypes_DisposeDTObject((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o))
 
 static __inline__ ULONG
 __datatypes_SetDTAttrsA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs)
@@ -130,8 +130,8 @@ __datatypes_SetDTAttrsA(struct Library *__base, Object * o, struct Window * win,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetDTAttrsA(o, win, req, attrs) __datatypes_SetDTAttrsA((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
-#define __SetDTAttrsA_base(__ndk_b, o, win, req, attrs) __datatypes_SetDTAttrsA((__datatypes_base_t)(__ndk_b), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
+#define SetDTAttrsA(o, win, req, attrs) __datatypes_SetDTAttrsA((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
+#define __SetDTAttrsA_base(__ndk_b, o, win, req, attrs) __datatypes_SetDTAttrsA((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
@@ -139,7 +139,7 @@ ___datatypes_SetDTAttrs(__datatypes_base_t __ndk_base, Object * o, struct Window
 {
 	return __datatypes_SetDTAttrsA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)((ULONG)&req + sizeof(req)));
 }
-#define SetDTAttrs(o, win, req, ...) ___datatypes_SetDTAttrs((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+#define SetDTAttrs(o, win, req, ...) ___datatypes_SetDTAttrs((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
 #define SetDTAttrs(o, win, req, ...) (SetDTAttrs)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #endif
@@ -159,8 +159,8 @@ __datatypes_GetDTAttrsA(struct Library *__base, Object * o, CONST struct TagItem
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetDTAttrsA(o, attrs) __datatypes_GetDTAttrsA((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (CONST struct TagItem *)(attrs))
-#define __GetDTAttrsA_base(__ndk_b, o, attrs) __datatypes_GetDTAttrsA((__datatypes_base_t)(__ndk_b), (Object *)(o), (CONST struct TagItem *)(attrs))
+#define GetDTAttrsA(o, attrs) __datatypes_GetDTAttrsA((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (CONST struct TagItem *)(attrs))
+#define __GetDTAttrsA_base(__ndk_b, o, attrs) __datatypes_GetDTAttrsA((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
@@ -168,7 +168,7 @@ ___datatypes_GetDTAttrs(__datatypes_base_t __ndk_base, Object * o, ...)
 {
 	return __datatypes_GetDTAttrsA(__ndk_base, (Object *)(o), (CONST struct TagItem *)((ULONG)&o + sizeof(o)));
 }
-#define GetDTAttrs(o, ...) ___datatypes_GetDTAttrs((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), ##__VA_ARGS__)
+#define GetDTAttrs(o, ...) ___datatypes_GetDTAttrs((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), ##__VA_ARGS__)
 #else
 #define GetDTAttrs(o, ...) (GetDTAttrs)((Object *)(o), ##__VA_ARGS__)
 #endif
@@ -188,8 +188,8 @@ __datatypes_AddDTObject(struct Library *__base, struct Window * win, struct Requ
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AddDTObject(win, req, o, pos) __datatypes_AddDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (struct Window *)(win), (struct Requester *)(req), (Object *)(o), (LONG)(pos))
-#define __AddDTObject_base(__ndk_b, win, req, o, pos) __datatypes_AddDTObject((__datatypes_base_t)(__ndk_b), (struct Window *)(win), (struct Requester *)(req), (Object *)(o), (LONG)(pos))
+#define AddDTObject(win, req, o, pos) __datatypes_AddDTObject((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (struct Window *)(win), (struct Requester *)(req), (Object *)(o), (LONG)(pos))
+#define __AddDTObject_base(__ndk_b, win, req, o, pos) __datatypes_AddDTObject((__datatypes_base_t)(void *)(__ndk_b), (struct Window *)(win), (struct Requester *)(req), (Object *)(o), (LONG)(pos))
 
 static __inline__ VOID
 __datatypes_RefreshDTObjectA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs)
@@ -207,8 +207,8 @@ __datatypes_RefreshDTObjectA(struct Library *__base, Object * o, struct Window *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RefreshDTObjectA(o, win, req, attrs) __datatypes_RefreshDTObjectA((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
-#define __RefreshDTObjectA_base(__ndk_b, o, win, req, attrs) __datatypes_RefreshDTObjectA((__datatypes_base_t)(__ndk_b), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
+#define RefreshDTObjectA(o, win, req, attrs) __datatypes_RefreshDTObjectA((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
+#define __RefreshDTObjectA_base(__ndk_b, o, win, req, attrs) __datatypes_RefreshDTObjectA((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
@@ -216,7 +216,7 @@ ___datatypes_RefreshDTObject(__datatypes_base_t __ndk_base, Object * o, struct W
 {
 	__datatypes_RefreshDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)((ULONG)&req + sizeof(req)));
 }
-#define RefreshDTObject(o, win, req, ...) ___datatypes_RefreshDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+#define RefreshDTObject(o, win, req, ...) ___datatypes_RefreshDTObject((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
 #define RefreshDTObject(o, win, req, ...) (RefreshDTObject)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #endif
@@ -227,7 +227,7 @@ ___datatypes_RefreshDTObjects(__datatypes_base_t __ndk_base, Object * o, struct 
 {
 	__datatypes_RefreshDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)((ULONG)&req + sizeof(req)));
 }
-#define RefreshDTObjects(o, win, req, ...) ___datatypes_RefreshDTObjects((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+#define RefreshDTObjects(o, win, req, ...) ___datatypes_RefreshDTObjects((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
 #define RefreshDTObjects(o, win, req, ...) (RefreshDTObjects)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #endif
@@ -246,8 +246,8 @@ __datatypes_DoAsyncLayout(struct Library *__base, Object * o, struct gpLayout * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define DoAsyncLayout(o, gpl) __datatypes_DoAsyncLayout((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct gpLayout *)(gpl))
-#define __DoAsyncLayout_base(__ndk_b, o, gpl) __datatypes_DoAsyncLayout((__datatypes_base_t)(__ndk_b), (Object *)(o), (struct gpLayout *)(gpl))
+#define DoAsyncLayout(o, gpl) __datatypes_DoAsyncLayout((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct gpLayout *)(gpl))
+#define __DoAsyncLayout_base(__ndk_b, o, gpl) __datatypes_DoAsyncLayout((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o), (struct gpLayout *)(gpl))
 
 static __inline__ ULONG
 __datatypes_DoDTMethodA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, Msg msg)
@@ -265,8 +265,8 @@ __datatypes_DoDTMethodA(struct Library *__base, Object * o, struct Window * win,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define DoDTMethodA(o, win, req, msg) __datatypes_DoDTMethodA((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)(msg))
-#define __DoDTMethodA_base(__ndk_b, o, win, req, msg) __datatypes_DoDTMethodA((__datatypes_base_t)(__ndk_b), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)(msg))
+#define DoDTMethodA(o, win, req, msg) __datatypes_DoDTMethodA((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)(msg))
+#define __DoDTMethodA_base(__ndk_b, o, win, req, msg) __datatypes_DoDTMethodA((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)(msg))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
@@ -274,7 +274,7 @@ ___datatypes_DoDTMethod(__datatypes_base_t __ndk_base, Object * o, struct Window
 {
 	return __datatypes_DoDTMethodA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)((ULONG)&req + sizeof(req)));
 }
-#define DoDTMethod(o, win, req, ...) ___datatypes_DoDTMethod((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+#define DoDTMethod(o, win, req, ...) ___datatypes_DoDTMethod((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
 #define DoDTMethod(o, win, req, ...) (DoDTMethod)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #endif
@@ -293,8 +293,8 @@ __datatypes_RemoveDTObject(struct Library *__base, struct Window * win, Object *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RemoveDTObject(win, o) __datatypes_RemoveDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (struct Window *)(win), (Object *)(o))
-#define __RemoveDTObject_base(__ndk_b, win, o) __datatypes_RemoveDTObject((__datatypes_base_t)(__ndk_b), (struct Window *)(win), (Object *)(o))
+#define RemoveDTObject(win, o) __datatypes_RemoveDTObject((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (struct Window *)(win), (Object *)(o))
+#define __RemoveDTObject_base(__ndk_b, win, o) __datatypes_RemoveDTObject((__datatypes_base_t)(void *)(__ndk_b), (struct Window *)(win), (Object *)(o))
 
 static __inline__ ULONG *
 __datatypes_GetDTMethods(struct Library *__base, CONST Object * object)
@@ -310,8 +310,8 @@ __datatypes_GetDTMethods(struct Library *__base, CONST Object * object)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG *)_d0;
 }
-#define GetDTMethods(object) __datatypes_GetDTMethods((__datatypes_base_t)(DATATYPES_BASE_NAME), (CONST Object *)(object))
-#define __GetDTMethods_base(__ndk_b, object) __datatypes_GetDTMethods((__datatypes_base_t)(__ndk_b), (CONST Object *)(object))
+#define GetDTMethods(object) __datatypes_GetDTMethods((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (CONST Object *)(object))
+#define __GetDTMethods_base(__ndk_b, object) __datatypes_GetDTMethods((__datatypes_base_t)(void *)(__ndk_b), (CONST Object *)(object))
 
 static __inline__ struct DTMethods *
 __datatypes_GetDTTriggerMethods(struct Library *__base, Object * object)
@@ -327,8 +327,8 @@ __datatypes_GetDTTriggerMethods(struct Library *__base, Object * object)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DTMethods *)_d0;
 }
-#define GetDTTriggerMethods(object) __datatypes_GetDTTriggerMethods((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(object))
-#define __GetDTTriggerMethods_base(__ndk_b, object) __datatypes_GetDTTriggerMethods((__datatypes_base_t)(__ndk_b), (Object *)(object))
+#define GetDTTriggerMethods(object) __datatypes_GetDTTriggerMethods((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(object))
+#define __GetDTTriggerMethods_base(__ndk_b, object) __datatypes_GetDTTriggerMethods((__datatypes_base_t)(void *)(__ndk_b), (Object *)(object))
 
 static __inline__ ULONG
 __datatypes_PrintDTObjectA(struct Library *__base, Object * o, struct Window * w, struct Requester * r, struct dtPrint * msg)
@@ -346,8 +346,8 @@ __datatypes_PrintDTObjectA(struct Library *__base, Object * o, struct Window * w
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define PrintDTObjectA(o, w, r, msg) __datatypes_PrintDTObjectA((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)(msg))
-#define __PrintDTObjectA_base(__ndk_b, o, w, r, msg) __datatypes_PrintDTObjectA((__datatypes_base_t)(__ndk_b), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)(msg))
+#define PrintDTObjectA(o, w, r, msg) __datatypes_PrintDTObjectA((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)(msg))
+#define __PrintDTObjectA_base(__ndk_b, o, w, r, msg) __datatypes_PrintDTObjectA((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)(msg))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
@@ -355,7 +355,7 @@ ___datatypes_PrintDTObject(__datatypes_base_t __ndk_base, Object * o, struct Win
 {
 	return __datatypes_PrintDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)((ULONG)&r + sizeof(r)));
 }
-#define PrintDTObject(o, w, r, ...) ___datatypes_PrintDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), ##__VA_ARGS__)
+#define PrintDTObject(o, w, r, ...) ___datatypes_PrintDTObject((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), ##__VA_ARGS__)
 #else
 #define PrintDTObject(o, w, r, ...) (PrintDTObject)((Object *)(o), (struct Window *)(w), (struct Requester *)(r), ##__VA_ARGS__)
 #endif
@@ -374,8 +374,8 @@ __datatypes_GetDTString(struct Library *__base, ULONG id)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (CONST_STRPTR)_d0;
 }
-#define GetDTString(id) __datatypes_GetDTString((__datatypes_base_t)(DATATYPES_BASE_NAME), (ULONG)(id))
-#define __GetDTString_base(__ndk_b, id) __datatypes_GetDTString((__datatypes_base_t)(__ndk_b), (ULONG)(id))
+#define GetDTString(id) __datatypes_GetDTString((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (ULONG)(id))
+#define __GetDTString_base(__ndk_b, id) __datatypes_GetDTString((__datatypes_base_t)(void *)(__ndk_b), (ULONG)(id))
 
 static __inline__ ULONG *
 __datatypes_FindMethod(struct Library *__base, ULONG * methods, ULONG searchmethodid)
@@ -391,8 +391,8 @@ __datatypes_FindMethod(struct Library *__base, ULONG * methods, ULONG searchmeth
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG *)_d0;
 }
-#define FindMethod(methods, searchmethodid) __datatypes_FindMethod((__datatypes_base_t)(DATATYPES_BASE_NAME), (ULONG *)(methods), (ULONG)(searchmethodid))
-#define __FindMethod_base(__ndk_b, methods, searchmethodid) __datatypes_FindMethod((__datatypes_base_t)(__ndk_b), (ULONG *)(methods), (ULONG)(searchmethodid))
+#define FindMethod(methods, searchmethodid) __datatypes_FindMethod((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (ULONG *)(methods), (ULONG)(searchmethodid))
+#define __FindMethod_base(__ndk_b, methods, searchmethodid) __datatypes_FindMethod((__datatypes_base_t)(void *)(__ndk_b), (ULONG *)(methods), (ULONG)(searchmethodid))
 
 static __inline__ struct DTMethod *
 __datatypes_FindTriggerMethod(struct Library *__base, struct DTMethod * dtm, CONST_STRPTR command, ULONG method)
@@ -408,8 +408,8 @@ __datatypes_FindTriggerMethod(struct Library *__base, struct DTMethod * dtm, CON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DTMethod *)_d0;
 }
-#define FindTriggerMethod(dtm, command, method) __datatypes_FindTriggerMethod((__datatypes_base_t)(DATATYPES_BASE_NAME), (struct DTMethod *)(dtm), (CONST_STRPTR)(command), (ULONG)(method))
-#define __FindTriggerMethod_base(__ndk_b, dtm, command, method) __datatypes_FindTriggerMethod((__datatypes_base_t)(__ndk_b), (struct DTMethod *)(dtm), (CONST_STRPTR)(command), (ULONG)(method))
+#define FindTriggerMethod(dtm, command, method) __datatypes_FindTriggerMethod((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (struct DTMethod *)(dtm), (CONST_STRPTR)(command), (ULONG)(method))
+#define __FindTriggerMethod_base(__ndk_b, dtm, command, method) __datatypes_FindTriggerMethod((__datatypes_base_t)(void *)(__ndk_b), (struct DTMethod *)(dtm), (CONST_STRPTR)(command), (ULONG)(method))
 
 static __inline__ ULONG *
 __datatypes_CopyDTMethods(struct Library *__base, ULONG * methods, ULONG * include, ULONG * exclude)
@@ -426,8 +426,8 @@ __datatypes_CopyDTMethods(struct Library *__base, ULONG * methods, ULONG * inclu
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG *)_d0;
 }
-#define CopyDTMethods(methods, include, exclude) __datatypes_CopyDTMethods((__datatypes_base_t)(DATATYPES_BASE_NAME), (ULONG *)(methods), (ULONG *)(include), (ULONG *)(exclude))
-#define __CopyDTMethods_base(__ndk_b, methods, include, exclude) __datatypes_CopyDTMethods((__datatypes_base_t)(__ndk_b), (ULONG *)(methods), (ULONG *)(include), (ULONG *)(exclude))
+#define CopyDTMethods(methods, include, exclude) __datatypes_CopyDTMethods((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (ULONG *)(methods), (ULONG *)(include), (ULONG *)(exclude))
+#define __CopyDTMethods_base(__ndk_b, methods, include, exclude) __datatypes_CopyDTMethods((__datatypes_base_t)(void *)(__ndk_b), (ULONG *)(methods), (ULONG *)(include), (ULONG *)(exclude))
 
 static __inline__ struct DTMethod *
 __datatypes_CopyDTTriggerMethods(struct Library *__base, struct DTMethod * methods, struct DTMethod * include, struct DTMethod * exclude)
@@ -444,8 +444,8 @@ __datatypes_CopyDTTriggerMethods(struct Library *__base, struct DTMethod * metho
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DTMethod *)_d0;
 }
-#define CopyDTTriggerMethods(methods, include, exclude) __datatypes_CopyDTTriggerMethods((__datatypes_base_t)(DATATYPES_BASE_NAME), (struct DTMethod *)(methods), (struct DTMethod *)(include), (struct DTMethod *)(exclude))
-#define __CopyDTTriggerMethods_base(__ndk_b, methods, include, exclude) __datatypes_CopyDTTriggerMethods((__datatypes_base_t)(__ndk_b), (struct DTMethod *)(methods), (struct DTMethod *)(include), (struct DTMethod *)(exclude))
+#define CopyDTTriggerMethods(methods, include, exclude) __datatypes_CopyDTTriggerMethods((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (struct DTMethod *)(methods), (struct DTMethod *)(include), (struct DTMethod *)(exclude))
+#define __CopyDTTriggerMethods_base(__ndk_b, methods, include, exclude) __datatypes_CopyDTTriggerMethods((__datatypes_base_t)(void *)(__ndk_b), (struct DTMethod *)(methods), (struct DTMethod *)(include), (struct DTMethod *)(exclude))
 
 static __inline__ APTR
 __datatypes_FreeDTMethods(struct Library *__base, APTR methods)
@@ -461,8 +461,8 @@ __datatypes_FreeDTMethods(struct Library *__base, APTR methods)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define FreeDTMethods(methods) __datatypes_FreeDTMethods((__datatypes_base_t)(DATATYPES_BASE_NAME), (APTR)(methods))
-#define __FreeDTMethods_base(__ndk_b, methods) __datatypes_FreeDTMethods((__datatypes_base_t)(__ndk_b), (APTR)(methods))
+#define FreeDTMethods(methods) __datatypes_FreeDTMethods((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (APTR)(methods))
+#define __FreeDTMethods_base(__ndk_b, methods) __datatypes_FreeDTMethods((__datatypes_base_t)(void *)(__ndk_b), (APTR)(methods))
 
 static __inline__ ULONG
 __datatypes_GetDTTriggerMethodDataFlags(struct Library *__base, ULONG method)
@@ -478,8 +478,8 @@ __datatypes_GetDTTriggerMethodDataFlags(struct Library *__base, ULONG method)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetDTTriggerMethodDataFlags(method) __datatypes_GetDTTriggerMethodDataFlags((__datatypes_base_t)(DATATYPES_BASE_NAME), (ULONG)(method))
-#define __GetDTTriggerMethodDataFlags_base(__ndk_b, method) __datatypes_GetDTTriggerMethodDataFlags((__datatypes_base_t)(__ndk_b), (ULONG)(method))
+#define GetDTTriggerMethodDataFlags(method) __datatypes_GetDTTriggerMethodDataFlags((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (ULONG)(method))
+#define __GetDTTriggerMethodDataFlags_base(__ndk_b, method) __datatypes_GetDTTriggerMethodDataFlags((__datatypes_base_t)(void *)(__ndk_b), (ULONG)(method))
 
 static __inline__ ULONG
 __datatypes_SaveDTObjectA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, LONG saveicon, CONST struct TagItem * attrs)
@@ -497,8 +497,8 @@ __datatypes_SaveDTObjectA(struct Library *__base, Object * o, struct Window * wi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SaveDTObjectA(o, win, req, file, mode, saveicon, attrs) __datatypes_SaveDTObjectA((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)(attrs))
-#define __SaveDTObjectA_base(__ndk_b, o, win, req, file, mode, saveicon, attrs) __datatypes_SaveDTObjectA((__datatypes_base_t)(__ndk_b), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)(attrs))
+#define SaveDTObjectA(o, win, req, file, mode, saveicon, attrs) __datatypes_SaveDTObjectA((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)(attrs))
+#define __SaveDTObjectA_base(__ndk_b, o, win, req, file, mode, saveicon, attrs) __datatypes_SaveDTObjectA((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)(attrs))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
@@ -506,7 +506,7 @@ ___datatypes_SaveDTObject(__datatypes_base_t __ndk_base, Object * o, struct Wind
 {
 	return __datatypes_SaveDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)((ULONG)&saveicon + sizeof(saveicon)));
 }
-#define SaveDTObject(o, win, req, file, mode, saveicon, ...) ___datatypes_SaveDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (BOOL)(saveicon), ##__VA_ARGS__)
+#define SaveDTObject(o, win, req, file, mode, saveicon, ...) ___datatypes_SaveDTObject((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (BOOL)(saveicon), ##__VA_ARGS__)
 #else
 #define SaveDTObject(o, win, req, file, mode, saveicon, ...) (SaveDTObject)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (BOOL)(saveicon), ##__VA_ARGS__)
 #endif
@@ -525,7 +525,7 @@ __datatypes_StartDragSelect(struct Library *__base, Object * o)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define StartDragSelect(o) __datatypes_StartDragSelect((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o))
-#define __StartDragSelect_base(__ndk_b, o) __datatypes_StartDragSelect((__datatypes_base_t)(__ndk_b), (Object *)(o))
+#define StartDragSelect(o) __datatypes_StartDragSelect((__datatypes_base_t)(void *)(DATATYPES_BASE_NAME), (Object *)(o))
+#define __StartDragSelect_base(__ndk_b, o) __datatypes_StartDragSelect((__datatypes_base_t)(void *)(__ndk_b), (Object *)(o))
 
 #endif /* INLINE_DATATYPES_H */

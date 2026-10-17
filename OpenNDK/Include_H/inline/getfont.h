@@ -38,7 +38,7 @@ __getfont_GETFONT_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define GETFONT_GetClass() __getfont_GETFONT_GetClass((__getfont_base_t)(GETFONT_BASE_NAME))
-#define __GETFONT_GetClass_base(__ndk_b) __getfont_GETFONT_GetClass((__getfont_base_t)(__ndk_b))
+#define GETFONT_GetClass() __getfont_GETFONT_GetClass((__getfont_base_t)(void *)(GETFONT_BASE_NAME))
+#define __GETFONT_GetClass_base(__ndk_b) __getfont_GETFONT_GetClass((__getfont_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_GETFONT_H */
