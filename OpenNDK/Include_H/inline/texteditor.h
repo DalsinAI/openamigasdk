@@ -54,6 +54,6 @@ __texteditor_HighlightSetFormat(struct Library *__base, APTR handle, ULONG first
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HighlightSetFormat(handle, first, last, format) __texteditor_HighlightSetFormat((TEXTEDITOR_BASE_NAME), (handle), (first), (last), (format))
+#define HighlightSetFormat(handle, first, last, format) __texteditor_HighlightSetFormat((TEXTEDITOR_BASE_NAME), (APTR)(handle), (ULONG)(first), (ULONG)(last), (UWORD)(format))
 
 #endif /* INLINE_TEXTEDITOR_H */

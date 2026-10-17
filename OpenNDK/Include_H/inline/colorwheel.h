@@ -37,7 +37,7 @@ __colorwheel_ConvertHSBToRGB(struct Library *__base, struct ColorWheelHSB * hsb,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ConvertHSBToRGB(hsb, rgb) __colorwheel_ConvertHSBToRGB((COLORWHEEL_BASE_NAME), (hsb), (rgb))
+#define ConvertHSBToRGB(hsb, rgb) __colorwheel_ConvertHSBToRGB((COLORWHEEL_BASE_NAME), (struct ColorWheelHSB *)(hsb), (struct ColorWheelRGB *)(rgb))
 
 static __inline__ VOID
 __colorwheel_ConvertRGBToHSB(struct Library *__base, struct ColorWheelRGB * rgb, struct ColorWheelHSB * hsb)
@@ -53,6 +53,6 @@ __colorwheel_ConvertRGBToHSB(struct Library *__base, struct ColorWheelRGB * rgb,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ConvertRGBToHSB(rgb, hsb) __colorwheel_ConvertRGBToHSB((COLORWHEEL_BASE_NAME), (rgb), (hsb))
+#define ConvertRGBToHSB(rgb, hsb) __colorwheel_ConvertRGBToHSB((COLORWHEEL_BASE_NAME), (struct ColorWheelRGB *)(rgb), (struct ColorWheelHSB *)(hsb))
 
 #endif /* INLINE_COLORWHEEL_H */

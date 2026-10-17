@@ -37,7 +37,7 @@ __nonvolatile_GetCopyNV(struct Library *__base, CONST_STRPTR appName, CONST_STRP
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define GetCopyNV(appName, itemName, killRequesters) __nonvolatile_GetCopyNV((NONVOLATILE_BASE_NAME), (appName), (itemName), (killRequesters))
+#define GetCopyNV(appName, itemName, killRequesters) __nonvolatile_GetCopyNV((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (BOOL)(killRequesters))
 
 static __inline__ VOID
 __nonvolatile_FreeNVData(struct Library *__base, APTR data)
@@ -53,7 +53,7 @@ __nonvolatile_FreeNVData(struct Library *__base, APTR data)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeNVData(data) __nonvolatile_FreeNVData((NONVOLATILE_BASE_NAME), (data))
+#define FreeNVData(data) __nonvolatile_FreeNVData((NONVOLATILE_BASE_NAME), (APTR)(data))
 
 static __inline__ UWORD
 __nonvolatile_StoreNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR itemName, CONST_APTR data, ULONG length, BOOL killRequesters)
@@ -70,7 +70,7 @@ __nonvolatile_StoreNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define StoreNV(appName, itemName, data, length, killRequesters) __nonvolatile_StoreNV((NONVOLATILE_BASE_NAME), (appName), (itemName), (data), (length), (killRequesters))
+#define StoreNV(appName, itemName, data, length, killRequesters) __nonvolatile_StoreNV((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (CONST_APTR)(data), (ULONG)(length), (BOOL)(killRequesters))
 
 static __inline__ BOOL
 __nonvolatile_DeleteNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR itemName, BOOL killRequesters)
@@ -86,7 +86,7 @@ __nonvolatile_DeleteNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPT
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define DeleteNV(appName, itemName, killRequesters) __nonvolatile_DeleteNV((NONVOLATILE_BASE_NAME), (appName), (itemName), (killRequesters))
+#define DeleteNV(appName, itemName, killRequesters) __nonvolatile_DeleteNV((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (BOOL)(killRequesters))
 
 static __inline__ struct NVInfo *
 __nonvolatile_GetNVInfo(struct Library *__base, BOOL killRequesters)
@@ -102,7 +102,7 @@ __nonvolatile_GetNVInfo(struct Library *__base, BOOL killRequesters)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct NVInfo *)_d0;
 }
-#define GetNVInfo(killRequesters) __nonvolatile_GetNVInfo((NONVOLATILE_BASE_NAME), (killRequesters))
+#define GetNVInfo(killRequesters) __nonvolatile_GetNVInfo((NONVOLATILE_BASE_NAME), (BOOL)(killRequesters))
 
 static __inline__ struct MinList *
 __nonvolatile_GetNVList(struct Library *__base, CONST_STRPTR appName, BOOL killRequesters)
@@ -118,7 +118,7 @@ __nonvolatile_GetNVList(struct Library *__base, CONST_STRPTR appName, BOOL killR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MinList *)_d0;
 }
-#define GetNVList(appName, killRequesters) __nonvolatile_GetNVList((NONVOLATILE_BASE_NAME), (appName), (killRequesters))
+#define GetNVList(appName, killRequesters) __nonvolatile_GetNVList((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (BOOL)(killRequesters))
 
 static __inline__ BOOL
 __nonvolatile_SetNVProtection(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR itemName, LONG mask, BOOL killRequesters)
@@ -135,6 +135,6 @@ __nonvolatile_SetNVProtection(struct Library *__base, CONST_STRPTR appName, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetNVProtection(appName, itemName, mask, killRequesters) __nonvolatile_SetNVProtection((NONVOLATILE_BASE_NAME), (appName), (itemName), (mask), (killRequesters))
+#define SetNVProtection(appName, itemName, mask, killRequesters) __nonvolatile_SetNVProtection((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (LONG)(mask), (BOOL)(killRequesters))
 
 #endif /* INLINE_NONVOLATILE_H */

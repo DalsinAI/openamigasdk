@@ -69,7 +69,7 @@ __battmem_ReadBattMem(struct Library *__base, APTR buffer, ULONG offset, ULONG l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ReadBattMem(buffer, offset, length) __battmem_ReadBattMem((BATTMEM_BASE_NAME), (buffer), (offset), (length))
+#define ReadBattMem(buffer, offset, length) __battmem_ReadBattMem((BATTMEM_BASE_NAME), (APTR)(buffer), (ULONG)(offset), (ULONG)(length))
 
 static __inline__ ULONG
 __battmem_WriteBattMem(struct Library *__base, CONST_APTR buffer, ULONG offset, ULONG length)
@@ -85,6 +85,6 @@ __battmem_WriteBattMem(struct Library *__base, CONST_APTR buffer, ULONG offset, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define WriteBattMem(buffer, offset, length) __battmem_WriteBattMem((BATTMEM_BASE_NAME), (buffer), (offset), (length))
+#define WriteBattMem(buffer, offset, length) __battmem_WriteBattMem((BATTMEM_BASE_NAME), (CONST_APTR)(buffer), (ULONG)(offset), (ULONG)(length))
 
 #endif /* INLINE_BATTMEM_H */

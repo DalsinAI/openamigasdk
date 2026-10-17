@@ -37,6 +37,6 @@ __translator_Translate(struct Library *__base, CONST_STRPTR inputString, LONG in
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Translate(inputString, inputLength, outputBuffer, bufferSize) __translator_Translate((TRANSLATOR_BASE_NAME), (inputString), (inputLength), (outputBuffer), (bufferSize))
+#define Translate(inputString, inputLength, outputBuffer, bufferSize) __translator_Translate((TRANSLATOR_BASE_NAME), (CONST_STRPTR)(inputString), (LONG)(inputLength), (STRPTR)(outputBuffer), (LONG)(bufferSize))
 
 #endif /* INLINE_TRANSLATOR_H */

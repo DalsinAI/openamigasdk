@@ -53,7 +53,8 @@ __clicktab_AllocClickTabNodeA(struct Library *__base, struct TagItem * tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define AllocClickTabNodeA(tags) __clicktab_AllocClickTabNodeA((CLICKTAB_BASE_NAME), (tags))
+#define AllocClickTabNodeA(tags) __clicktab_AllocClickTabNodeA((CLICKTAB_BASE_NAME), (struct TagItem *)(tags))
+
 
 static __inline__ VOID
 __clicktab_FreeClickTabNode(struct Library *__base, struct Node * node)
@@ -69,7 +70,7 @@ __clicktab_FreeClickTabNode(struct Library *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeClickTabNode(node) __clicktab_FreeClickTabNode((CLICKTAB_BASE_NAME), (node))
+#define FreeClickTabNode(node) __clicktab_FreeClickTabNode((CLICKTAB_BASE_NAME), (struct Node *)(node))
 
 static __inline__ VOID
 __clicktab_SetClickTabNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -85,7 +86,9 @@ __clicktab_SetClickTabNodeAttrsA(struct Library *__base, struct Node * node, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetClickTabNodeAttrsA(node, tags) __clicktab_SetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (node), (tags))
+#define SetClickTabNodeAttrsA(node, tags) __clicktab_SetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define SetClickTabNodeAttrs(node, ...) (SetClickTabNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
 __clicktab_GetClickTabNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -101,6 +104,8 @@ __clicktab_GetClickTabNodeAttrsA(struct Library *__base, struct Node * node, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetClickTabNodeAttrsA(node, tags) __clicktab_GetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (node), (tags))
+#define GetClickTabNodeAttrsA(node, tags) __clicktab_GetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define GetClickTabNodeAttrs(node, ...) (GetClickTabNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 #endif /* INLINE_CLICKTAB_H */

@@ -37,7 +37,7 @@ __expansion_AddConfigDev(struct ExpansionBase *__base, struct ConfigDev * config
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddConfigDev(configDev) __expansion_AddConfigDev((EXPANSION_BASE_NAME), (configDev))
+#define AddConfigDev(configDev) __expansion_AddConfigDev((EXPANSION_BASE_NAME), (struct ConfigDev *)(configDev))
 
 static __inline__ BOOL
 __expansion_AddBootNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags, struct DeviceNode * deviceNode, struct ConfigDev * configDev)
@@ -53,7 +53,7 @@ __expansion_AddBootNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AddBootNode(bootPri, flags, deviceNode, configDev) __expansion_AddBootNode((EXPANSION_BASE_NAME), (bootPri), (flags), (deviceNode), (configDev))
+#define AddBootNode(bootPri, flags, deviceNode, configDev) __expansion_AddBootNode((EXPANSION_BASE_NAME), (LONG)(bootPri), (ULONG)(flags), (struct DeviceNode *)(deviceNode), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
 __expansion_AllocBoardMem(struct ExpansionBase *__base, ULONG slotSpec)
@@ -69,7 +69,7 @@ __expansion_AllocBoardMem(struct ExpansionBase *__base, ULONG slotSpec)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AllocBoardMem(slotSpec) __expansion_AllocBoardMem((EXPANSION_BASE_NAME), (slotSpec))
+#define AllocBoardMem(slotSpec) __expansion_AllocBoardMem((EXPANSION_BASE_NAME), (ULONG)(slotSpec))
 
 static __inline__ struct ConfigDev *
 __expansion_AllocConfigDev(struct ExpansionBase *__base)
@@ -101,7 +101,7 @@ __expansion_AllocExpansionMem(struct ExpansionBase *__base, ULONG numSlots, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AllocExpansionMem(numSlots, slotAlign) __expansion_AllocExpansionMem((EXPANSION_BASE_NAME), (numSlots), (slotAlign))
+#define AllocExpansionMem(numSlots, slotAlign) __expansion_AllocExpansionMem((EXPANSION_BASE_NAME), (ULONG)(numSlots), (ULONG)(slotAlign))
 
 static __inline__ VOID
 __expansion_ConfigBoard(struct ExpansionBase *__base, APTR board, struct ConfigDev * configDev)
@@ -117,7 +117,7 @@ __expansion_ConfigBoard(struct ExpansionBase *__base, APTR board, struct ConfigD
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ConfigBoard(board, configDev) __expansion_ConfigBoard((EXPANSION_BASE_NAME), (board), (configDev))
+#define ConfigBoard(board, configDev) __expansion_ConfigBoard((EXPANSION_BASE_NAME), (APTR)(board), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
 __expansion_ConfigChain(struct ExpansionBase *__base, APTR baseAddr)
@@ -133,7 +133,7 @@ __expansion_ConfigChain(struct ExpansionBase *__base, APTR baseAddr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ConfigChain(baseAddr) __expansion_ConfigChain((EXPANSION_BASE_NAME), (baseAddr))
+#define ConfigChain(baseAddr) __expansion_ConfigChain((EXPANSION_BASE_NAME), (APTR)(baseAddr))
 
 static __inline__ struct ConfigDev *
 __expansion_FindConfigDev(struct ExpansionBase *__base, CONST struct ConfigDev * oldConfigDev, LONG manufacturer, LONG product)
@@ -149,7 +149,7 @@ __expansion_FindConfigDev(struct ExpansionBase *__base, CONST struct ConfigDev *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ConfigDev *)_d0;
 }
-#define FindConfigDev(oldConfigDev, manufacturer, product) __expansion_FindConfigDev((EXPANSION_BASE_NAME), (oldConfigDev), (manufacturer), (product))
+#define FindConfigDev(oldConfigDev, manufacturer, product) __expansion_FindConfigDev((EXPANSION_BASE_NAME), (CONST struct ConfigDev *)(oldConfigDev), (LONG)(manufacturer), (LONG)(product))
 
 static __inline__ VOID
 __expansion_FreeBoardMem(struct ExpansionBase *__base, ULONG startSlot, ULONG slotSpec)
@@ -165,7 +165,7 @@ __expansion_FreeBoardMem(struct ExpansionBase *__base, ULONG startSlot, ULONG sl
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeBoardMem(startSlot, slotSpec) __expansion_FreeBoardMem((EXPANSION_BASE_NAME), (startSlot), (slotSpec))
+#define FreeBoardMem(startSlot, slotSpec) __expansion_FreeBoardMem((EXPANSION_BASE_NAME), (ULONG)(startSlot), (ULONG)(slotSpec))
 
 static __inline__ VOID
 __expansion_FreeConfigDev(struct ExpansionBase *__base, struct ConfigDev * configDev)
@@ -181,7 +181,7 @@ __expansion_FreeConfigDev(struct ExpansionBase *__base, struct ConfigDev * confi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeConfigDev(configDev) __expansion_FreeConfigDev((EXPANSION_BASE_NAME), (configDev))
+#define FreeConfigDev(configDev) __expansion_FreeConfigDev((EXPANSION_BASE_NAME), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
 __expansion_FreeExpansionMem(struct ExpansionBase *__base, ULONG startSlot, ULONG numSlots)
@@ -197,7 +197,7 @@ __expansion_FreeExpansionMem(struct ExpansionBase *__base, ULONG startSlot, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeExpansionMem(startSlot, numSlots) __expansion_FreeExpansionMem((EXPANSION_BASE_NAME), (startSlot), (numSlots))
+#define FreeExpansionMem(startSlot, numSlots) __expansion_FreeExpansionMem((EXPANSION_BASE_NAME), (ULONG)(startSlot), (ULONG)(numSlots))
 
 static __inline__ UBYTE
 __expansion_ReadExpansionByte(struct ExpansionBase *__base, CONST_APTR board, ULONG offset)
@@ -213,7 +213,7 @@ __expansion_ReadExpansionByte(struct ExpansionBase *__base, CONST_APTR board, UL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE)_d0;
 }
-#define ReadExpansionByte(board, offset) __expansion_ReadExpansionByte((EXPANSION_BASE_NAME), (board), (offset))
+#define ReadExpansionByte(board, offset) __expansion_ReadExpansionByte((EXPANSION_BASE_NAME), (CONST_APTR)(board), (ULONG)(offset))
 
 static __inline__ VOID
 __expansion_ReadExpansionRom(struct ExpansionBase *__base, CONST_APTR board, struct ConfigDev * configDev)
@@ -229,7 +229,7 @@ __expansion_ReadExpansionRom(struct ExpansionBase *__base, CONST_APTR board, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReadExpansionRom(board, configDev) __expansion_ReadExpansionRom((EXPANSION_BASE_NAME), (board), (configDev))
+#define ReadExpansionRom(board, configDev) __expansion_ReadExpansionRom((EXPANSION_BASE_NAME), (CONST_APTR)(board), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
 __expansion_RemConfigDev(struct ExpansionBase *__base, struct ConfigDev * configDev)
@@ -245,7 +245,7 @@ __expansion_RemConfigDev(struct ExpansionBase *__base, struct ConfigDev * config
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemConfigDev(configDev) __expansion_RemConfigDev((EXPANSION_BASE_NAME), (configDev))
+#define RemConfigDev(configDev) __expansion_RemConfigDev((EXPANSION_BASE_NAME), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
 __expansion_WriteExpansionByte(struct ExpansionBase *__base, APTR board, ULONG offset, UBYTE byte)
@@ -261,7 +261,7 @@ __expansion_WriteExpansionByte(struct ExpansionBase *__base, APTR board, ULONG o
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WriteExpansionByte(board, offset, byte) __expansion_WriteExpansionByte((EXPANSION_BASE_NAME), (board), (offset), (byte))
+#define WriteExpansionByte(board, offset, byte) __expansion_WriteExpansionByte((EXPANSION_BASE_NAME), (APTR)(board), (ULONG)(offset), (UBYTE)(byte))
 
 static __inline__ VOID
 __expansion_ObtainConfigBinding(struct ExpansionBase *__base)
@@ -309,7 +309,7 @@ __expansion_SetCurrentBinding(struct ExpansionBase *__base, struct CurrentBindin
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetCurrentBinding(currentBinding, bindingSize) __expansion_SetCurrentBinding((EXPANSION_BASE_NAME), (currentBinding), (bindingSize))
+#define SetCurrentBinding(currentBinding, bindingSize) __expansion_SetCurrentBinding((EXPANSION_BASE_NAME), (struct CurrentBinding *)(currentBinding), (ULONG)(bindingSize))
 
 static __inline__ ULONG
 __expansion_GetCurrentBinding(struct ExpansionBase *__base, CONST struct CurrentBinding * currentBinding, ULONG bindingSize)
@@ -325,7 +325,7 @@ __expansion_GetCurrentBinding(struct ExpansionBase *__base, CONST struct Current
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetCurrentBinding(currentBinding, bindingSize) __expansion_GetCurrentBinding((EXPANSION_BASE_NAME), (currentBinding), (bindingSize))
+#define GetCurrentBinding(currentBinding, bindingSize) __expansion_GetCurrentBinding((EXPANSION_BASE_NAME), (CONST struct CurrentBinding *)(currentBinding), (ULONG)(bindingSize))
 
 static __inline__ struct DeviceNode *
 __expansion_MakeDosNode(struct ExpansionBase *__base, CONST_APTR parmPacket)
@@ -341,7 +341,7 @@ __expansion_MakeDosNode(struct ExpansionBase *__base, CONST_APTR parmPacket)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DeviceNode *)_d0;
 }
-#define MakeDosNode(parmPacket) __expansion_MakeDosNode((EXPANSION_BASE_NAME), (parmPacket))
+#define MakeDosNode(parmPacket) __expansion_MakeDosNode((EXPANSION_BASE_NAME), (CONST_APTR)(parmPacket))
 
 static __inline__ BOOL
 __expansion_AddDosNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags, struct DeviceNode * deviceNode)
@@ -357,6 +357,6 @@ __expansion_AddDosNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AddDosNode(bootPri, flags, deviceNode) __expansion_AddDosNode((EXPANSION_BASE_NAME), (bootPri), (flags), (deviceNode))
+#define AddDosNode(bootPri, flags, deviceNode) __expansion_AddDosNode((EXPANSION_BASE_NAME), (LONG)(bootPri), (ULONG)(flags), (struct DeviceNode *)(deviceNode))
 
 #endif /* INLINE_EXPANSION_H */
