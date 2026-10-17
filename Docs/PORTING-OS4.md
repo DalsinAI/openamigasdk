@@ -40,6 +40,10 @@ prog: prog.c
 	m68k-amigaos-gcc -m68040 -noixemul -O2 -fno-delete-null-pointer-checks $(OS4COMPAT_CFLAGS) -o $@ prog.c $(OS4COMPAT_LIBS)
 ```
 
+`OS4COMPAT_LIBS` carries `-specs=` for the SDK's `Lib/m68k-soft-m68040.specs`,
+so the link takes libnix's soft-float maths (the build is `-m68040` without
+`-m68881`: one binary for 68040s with and without an FPU).
+
 `Examples/os4compat-hello` is a complete OS 4 style program that builds this
 way, and prints PASS or FAIL for each call it tries.
 

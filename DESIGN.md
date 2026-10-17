@@ -32,7 +32,7 @@ first.
 | --- | --- |
 | `Include/` | Each Open library's headers, with `proto/`, `inline/` and `pragmas/` for GCC (vbcc later): `openrtg/` (modes, OS 4's RTG calls, the `os4` header), `opengpu/`, `opensocket/` (beyond the standard bsdsocket calls), `openmedia/`, `opengadtools/`, `openprint/` (oapspool.device), `openmulticore/`, `accontrol/` (clipboard, files, pace). Also: Zune's `mui.h` for `zunemaster.library` (AROS Public License), AROS's `gl/gla.h` (APL), SDL 2 and 3 (Zlib), and Mesa's GL (MIT) |
 | `SFD/`, `FD/` | Each library's function table |
-| `Lib/` | Link libraries: static SDL, our glue, and stubs that open each library automatically, as libnix does for the OS's. `Lib/os4compat`: OS 4's interfaces and calls for OS 3.2, made from the NDK's SFD files at build time (`Docs/PORTING-OS4.md`) |
+| `Lib/` | Link libraries: static SDL, our glue, and stubs that open each library automatically, as libnix does for the OS's. `Lib/os4compat`: OS 4's interfaces and calls for OS 3.2, made from the NDK's SFD files at build time (`Docs/PORTING-OS4.md`). `Lib/m68k-soft-m68040.specs`: the soft-float 68040 link, used by the templates and os4compat |
 | `Autodocs/` | One per library, generated from the sources' comments |
 | `Examples/` | One small program per library, each building for OS 3.2 and AROS |
 | `Templates/` | ACKitchen project templates: a Shell command, a GadTools app, a Zune (MUI-style) app, an SDL app, a GL app, a library, a device, a datatype, and an Installer package with its Aminet readme. Each builds two binaries, OS 3.2 and AROS: separate binaries, no `#ifdef` maze |
