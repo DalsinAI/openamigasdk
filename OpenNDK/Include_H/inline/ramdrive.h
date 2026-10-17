@@ -53,6 +53,6 @@ __ramdrive_KillRAD(struct Device *__base, ULONG unit)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define KillRAD(unit) __ramdrive_KillRAD((RAMDRIVE_BASE_NAME), (unit))
+#define KillRAD(unit) __ramdrive_KillRAD((RAMDRIVE_BASE_NAME), (ULONG)(unit))
 
 #endif /* INLINE_RAMDRIVE_H */

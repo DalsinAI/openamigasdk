@@ -69,6 +69,6 @@ __battclock_WriteBattClock(struct Library *__base, ULONG time)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WriteBattClock(time) __battclock_WriteBattClock((BATTCLOCK_BASE_NAME), (time))
+#define WriteBattClock(time) __battclock_WriteBattClock((BATTCLOCK_BASE_NAME), (ULONG)(time))
 
 #endif /* INLINE_BATTCLOCK_H */

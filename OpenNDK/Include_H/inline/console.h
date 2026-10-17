@@ -37,7 +37,7 @@ __console_CDInputHandler(struct Device *__base, CONST struct InputEvent * events
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct InputEvent *)_d0;
 }
-#define CDInputHandler(events, consoleDevice) __console_CDInputHandler((CONSOLE_BASE_NAME), (events), (consoleDevice))
+#define CDInputHandler(events, consoleDevice) __console_CDInputHandler((CONSOLE_BASE_NAME), (CONST struct InputEvent *)(events), (struct Library *)(consoleDevice))
 
 static __inline__ LONG
 __console_RawKeyConvert(struct Device *__base, CONST struct InputEvent * events, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap)
@@ -54,6 +54,6 @@ __console_RawKeyConvert(struct Device *__base, CONST struct InputEvent * events,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RawKeyConvert(events, buffer, length, keyMap) __console_RawKeyConvert((CONSOLE_BASE_NAME), (events), (buffer), (length), (keyMap))
+#define RawKeyConvert(events, buffer, length, keyMap) __console_RawKeyConvert((CONSOLE_BASE_NAME), (CONST struct InputEvent *)(events), (STRPTR)(buffer), (LONG)(length), (CONST struct KeyMap *)(keyMap))
 
 #endif /* INLINE_CONSOLE_H */

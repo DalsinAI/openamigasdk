@@ -53,7 +53,7 @@ __bullet_CloseEngine(struct Library *__base, struct GlyphEngine * glyphEngine)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseEngine(glyphEngine) __bullet_CloseEngine((BULLET_BASE_NAME), (glyphEngine))
+#define CloseEngine(glyphEngine) __bullet_CloseEngine((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine))
 
 static __inline__ ULONG
 __bullet_SetInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
@@ -69,7 +69,9 @@ __bullet_SetInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetInfoA(glyphEngine, tagList) __bullet_SetInfoA((BULLET_BASE_NAME), (glyphEngine), (tagList))
+#define SetInfoA(glyphEngine, tagList) __bullet_SetInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+
+#define SetInfo(glyphEngine, ...) (SetInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 
 static __inline__ ULONG
 __bullet_ObtainInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
@@ -85,7 +87,9 @@ __bullet_ObtainInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ObtainInfoA(glyphEngine, tagList) __bullet_ObtainInfoA((BULLET_BASE_NAME), (glyphEngine), (tagList))
+#define ObtainInfoA(glyphEngine, tagList) __bullet_ObtainInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+
+#define ObtainInfo(glyphEngine, ...) (ObtainInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 
 static __inline__ ULONG
 __bullet_ReleaseInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
@@ -101,6 +105,8 @@ __bullet_ReleaseInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ReleaseInfoA(glyphEngine, tagList) __bullet_ReleaseInfoA((BULLET_BASE_NAME), (glyphEngine), (tagList))
+#define ReleaseInfoA(glyphEngine, tagList) __bullet_ReleaseInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+
+#define ReleaseInfo(glyphEngine, ...) (ReleaseInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 
 #endif /* INLINE_BULLET_H */

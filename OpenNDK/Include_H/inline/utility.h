@@ -37,7 +37,7 @@ __utility_FindTagItem(struct UtilityBase *__base, Tag tagVal, CONST struct TagIt
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TagItem *)_d0;
 }
-#define FindTagItem(tagVal, tagList) __utility_FindTagItem((UTILITY_BASE_NAME), (tagVal), (tagList))
+#define FindTagItem(tagVal, tagList) __utility_FindTagItem((UTILITY_BASE_NAME), (Tag)(tagVal), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
 __utility_GetTagData(struct UtilityBase *__base, Tag tagValue, ULONG defaultVal, CONST struct TagItem * tagList)
@@ -53,7 +53,7 @@ __utility_GetTagData(struct UtilityBase *__base, Tag tagValue, ULONG defaultVal,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetTagData(tagValue, defaultVal, tagList) __utility_GetTagData((UTILITY_BASE_NAME), (tagValue), (defaultVal), (tagList))
+#define GetTagData(tagValue, defaultVal, tagList) __utility_GetTagData((UTILITY_BASE_NAME), (Tag)(tagValue), (ULONG)(defaultVal), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
 __utility_PackBoolTags(struct UtilityBase *__base, ULONG initialFlags, CONST struct TagItem * tagList, CONST struct TagItem * boolMap)
@@ -69,7 +69,7 @@ __utility_PackBoolTags(struct UtilityBase *__base, ULONG initialFlags, CONST str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define PackBoolTags(initialFlags, tagList, boolMap) __utility_PackBoolTags((UTILITY_BASE_NAME), (initialFlags), (tagList), (boolMap))
+#define PackBoolTags(initialFlags, tagList, boolMap) __utility_PackBoolTags((UTILITY_BASE_NAME), (ULONG)(initialFlags), (CONST struct TagItem *)(tagList), (CONST struct TagItem *)(boolMap))
 
 static __inline__ struct TagItem *
 __utility_NextTagItem(struct UtilityBase *__base, struct TagItem ** tagListPtr)
@@ -85,7 +85,7 @@ __utility_NextTagItem(struct UtilityBase *__base, struct TagItem ** tagListPtr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TagItem *)_d0;
 }
-#define NextTagItem(tagListPtr) __utility_NextTagItem((UTILITY_BASE_NAME), (tagListPtr))
+#define NextTagItem(tagListPtr) __utility_NextTagItem((UTILITY_BASE_NAME), (struct TagItem **)(tagListPtr))
 
 static __inline__ VOID
 __utility_FilterTagChanges(struct UtilityBase *__base, struct TagItem * changeList, CONST struct TagItem * originalList, ULONG apply)
@@ -101,7 +101,7 @@ __utility_FilterTagChanges(struct UtilityBase *__base, struct TagItem * changeLi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FilterTagChanges(changeList, originalList, apply) __utility_FilterTagChanges((UTILITY_BASE_NAME), (changeList), (originalList), (apply))
+#define FilterTagChanges(changeList, originalList, apply) __utility_FilterTagChanges((UTILITY_BASE_NAME), (struct TagItem *)(changeList), (CONST struct TagItem *)(originalList), (ULONG)(apply))
 
 static __inline__ VOID
 __utility_MapTags(struct UtilityBase *__base, struct TagItem * tagList, CONST struct TagItem * mapList, ULONG mapType)
@@ -117,7 +117,7 @@ __utility_MapTags(struct UtilityBase *__base, struct TagItem * tagList, CONST st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define MapTags(tagList, mapList, mapType) __utility_MapTags((UTILITY_BASE_NAME), (tagList), (mapList), (mapType))
+#define MapTags(tagList, mapList, mapType) __utility_MapTags((UTILITY_BASE_NAME), (struct TagItem *)(tagList), (CONST struct TagItem *)(mapList), (ULONG)(mapType))
 
 static __inline__ struct TagItem *
 __utility_AllocateTagItems(struct UtilityBase *__base, ULONG numTags)
@@ -133,7 +133,7 @@ __utility_AllocateTagItems(struct UtilityBase *__base, ULONG numTags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TagItem *)_d0;
 }
-#define AllocateTagItems(numTags) __utility_AllocateTagItems((UTILITY_BASE_NAME), (numTags))
+#define AllocateTagItems(numTags) __utility_AllocateTagItems((UTILITY_BASE_NAME), (ULONG)(numTags))
 
 static __inline__ struct TagItem *
 __utility_CloneTagItems(struct UtilityBase *__base, CONST struct TagItem * tagList)
@@ -149,7 +149,7 @@ __utility_CloneTagItems(struct UtilityBase *__base, CONST struct TagItem * tagLi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TagItem *)_d0;
 }
-#define CloneTagItems(tagList) __utility_CloneTagItems((UTILITY_BASE_NAME), (tagList))
+#define CloneTagItems(tagList) __utility_CloneTagItems((UTILITY_BASE_NAME), (CONST struct TagItem *)(tagList))
 
 static __inline__ VOID
 __utility_FreeTagItems(struct UtilityBase *__base, struct TagItem * tagList)
@@ -165,7 +165,7 @@ __utility_FreeTagItems(struct UtilityBase *__base, struct TagItem * tagList)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeTagItems(tagList) __utility_FreeTagItems((UTILITY_BASE_NAME), (tagList))
+#define FreeTagItems(tagList) __utility_FreeTagItems((UTILITY_BASE_NAME), (struct TagItem *)(tagList))
 
 static __inline__ VOID
 __utility_RefreshTagItemClones(struct UtilityBase *__base, struct TagItem * clone, CONST struct TagItem * original)
@@ -181,7 +181,7 @@ __utility_RefreshTagItemClones(struct UtilityBase *__base, struct TagItem * clon
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RefreshTagItemClones(clone, original) __utility_RefreshTagItemClones((UTILITY_BASE_NAME), (clone), (original))
+#define RefreshTagItemClones(clone, original) __utility_RefreshTagItemClones((UTILITY_BASE_NAME), (struct TagItem *)(clone), (CONST struct TagItem *)(original))
 
 static __inline__ BOOL
 __utility_TagInArray(struct UtilityBase *__base, Tag tagValue, CONST Tag * tagArray)
@@ -197,7 +197,7 @@ __utility_TagInArray(struct UtilityBase *__base, Tag tagValue, CONST Tag * tagAr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define TagInArray(tagValue, tagArray) __utility_TagInArray((UTILITY_BASE_NAME), (tagValue), (tagArray))
+#define TagInArray(tagValue, tagArray) __utility_TagInArray((UTILITY_BASE_NAME), (Tag)(tagValue), (CONST Tag *)(tagArray))
 
 static __inline__ ULONG
 __utility_FilterTagItems(struct UtilityBase *__base, struct TagItem * tagList, CONST Tag * filterArray, ULONG logic)
@@ -213,7 +213,7 @@ __utility_FilterTagItems(struct UtilityBase *__base, struct TagItem * tagList, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define FilterTagItems(tagList, filterArray, logic) __utility_FilterTagItems((UTILITY_BASE_NAME), (tagList), (filterArray), (logic))
+#define FilterTagItems(tagList, filterArray, logic) __utility_FilterTagItems((UTILITY_BASE_NAME), (struct TagItem *)(tagList), (CONST Tag *)(filterArray), (ULONG)(logic))
 
 static __inline__ ULONG
 __utility_CallHookPkt(struct UtilityBase *__base, struct Hook * hook, APTR object, APTR paramPacket)
@@ -230,7 +230,7 @@ __utility_CallHookPkt(struct UtilityBase *__base, struct Hook * hook, APTR objec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CallHookPkt(hook, object, paramPacket) __utility_CallHookPkt((UTILITY_BASE_NAME), (hook), (object), (paramPacket))
+#define CallHookPkt(hook, object, paramPacket) __utility_CallHookPkt((UTILITY_BASE_NAME), (struct Hook *)(hook), (APTR)(object), (APTR)(paramPacket))
 
 static __inline__ VOID
 __utility_Amiga2Date(struct UtilityBase *__base, ULONG seconds, struct ClockData * result)
@@ -246,7 +246,7 @@ __utility_Amiga2Date(struct UtilityBase *__base, ULONG seconds, struct ClockData
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Amiga2Date(seconds, result) __utility_Amiga2Date((UTILITY_BASE_NAME), (seconds), (result))
+#define Amiga2Date(seconds, result) __utility_Amiga2Date((UTILITY_BASE_NAME), (ULONG)(seconds), (struct ClockData *)(result))
 
 static __inline__ ULONG
 __utility_Date2Amiga(struct UtilityBase *__base, CONST struct ClockData * date)
@@ -262,7 +262,7 @@ __utility_Date2Amiga(struct UtilityBase *__base, CONST struct ClockData * date)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define Date2Amiga(date) __utility_Date2Amiga((UTILITY_BASE_NAME), (date))
+#define Date2Amiga(date) __utility_Date2Amiga((UTILITY_BASE_NAME), (CONST struct ClockData *)(date))
 
 static __inline__ ULONG
 __utility_CheckDate(struct UtilityBase *__base, CONST struct ClockData * date)
@@ -278,7 +278,7 @@ __utility_CheckDate(struct UtilityBase *__base, CONST struct ClockData * date)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CheckDate(date) __utility_CheckDate((UTILITY_BASE_NAME), (date))
+#define CheckDate(date) __utility_CheckDate((UTILITY_BASE_NAME), (CONST struct ClockData *)(date))
 
 static __inline__ LONG
 __utility_SMult32(struct UtilityBase *__base, LONG arg1, LONG arg2)
@@ -294,7 +294,7 @@ __utility_SMult32(struct UtilityBase *__base, LONG arg1, LONG arg2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SMult32(arg1, arg2) __utility_SMult32((UTILITY_BASE_NAME), (arg1), (arg2))
+#define SMult32(arg1, arg2) __utility_SMult32((UTILITY_BASE_NAME), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ ULONG
 __utility_UMult32(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
@@ -310,7 +310,7 @@ __utility_UMult32(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UMult32(arg1, arg2) __utility_UMult32((UTILITY_BASE_NAME), (arg1), (arg2))
+#define UMult32(arg1, arg2) __utility_UMult32((UTILITY_BASE_NAME), (ULONG)(arg1), (ULONG)(arg2))
 
 static __inline__ LONG
 __utility_SDivMod32(struct UtilityBase *__base, LONG dividend, LONG divisor)
@@ -326,7 +326,7 @@ __utility_SDivMod32(struct UtilityBase *__base, LONG dividend, LONG divisor)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SDivMod32(dividend, divisor) __utility_SDivMod32((UTILITY_BASE_NAME), (dividend), (divisor))
+#define SDivMod32(dividend, divisor) __utility_SDivMod32((UTILITY_BASE_NAME), (LONG)(dividend), (LONG)(divisor))
 
 static __inline__ ULONG
 __utility_UDivMod32(struct UtilityBase *__base, ULONG dividend, ULONG divisor)
@@ -342,7 +342,7 @@ __utility_UDivMod32(struct UtilityBase *__base, ULONG dividend, ULONG divisor)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UDivMod32(dividend, divisor) __utility_UDivMod32((UTILITY_BASE_NAME), (dividend), (divisor))
+#define UDivMod32(dividend, divisor) __utility_UDivMod32((UTILITY_BASE_NAME), (ULONG)(dividend), (ULONG)(divisor))
 
 static __inline__ LONG
 __utility_Stricmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR string2)
@@ -358,7 +358,7 @@ __utility_Stricmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Stricmp(string1, string2) __utility_Stricmp((UTILITY_BASE_NAME), (string1), (string2))
+#define Stricmp(string1, string2) __utility_Stricmp((UTILITY_BASE_NAME), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2))
 
 static __inline__ LONG
 __utility_Strnicmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR string2, LONG length)
@@ -374,7 +374,7 @@ __utility_Strnicmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPT
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Strnicmp(string1, string2, length) __utility_Strnicmp((UTILITY_BASE_NAME), (string1), (string2), (length))
+#define Strnicmp(string1, string2, length) __utility_Strnicmp((UTILITY_BASE_NAME), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length))
 
 static __inline__ UBYTE
 __utility_ToUpper(struct UtilityBase *__base, UBYTE character)
@@ -390,7 +390,7 @@ __utility_ToUpper(struct UtilityBase *__base, UBYTE character)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE)_d0;
 }
-#define ToUpper(character) __utility_ToUpper((UTILITY_BASE_NAME), (character))
+#define ToUpper(character) __utility_ToUpper((UTILITY_BASE_NAME), (UBYTE)(character))
 
 static __inline__ UBYTE
 __utility_ToLower(struct UtilityBase *__base, UBYTE character)
@@ -406,7 +406,7 @@ __utility_ToLower(struct UtilityBase *__base, UBYTE character)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE)_d0;
 }
-#define ToLower(character) __utility_ToLower((UTILITY_BASE_NAME), (character))
+#define ToLower(character) __utility_ToLower((UTILITY_BASE_NAME), (UBYTE)(character))
 
 static __inline__ VOID
 __utility_ApplyTagChanges(struct UtilityBase *__base, struct TagItem * list, CONST struct TagItem * changeList)
@@ -422,7 +422,7 @@ __utility_ApplyTagChanges(struct UtilityBase *__base, struct TagItem * list, CON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ApplyTagChanges(list, changeList) __utility_ApplyTagChanges((UTILITY_BASE_NAME), (list), (changeList))
+#define ApplyTagChanges(list, changeList) __utility_ApplyTagChanges((UTILITY_BASE_NAME), (struct TagItem *)(list), (CONST struct TagItem *)(changeList))
 
 static __inline__ LONG
 __utility_SMult64(struct UtilityBase *__base, LONG arg1, LONG arg2)
@@ -438,7 +438,7 @@ __utility_SMult64(struct UtilityBase *__base, LONG arg1, LONG arg2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SMult64(arg1, arg2) __utility_SMult64((UTILITY_BASE_NAME), (arg1), (arg2))
+#define SMult64(arg1, arg2) __utility_SMult64((UTILITY_BASE_NAME), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ ULONG
 __utility_UMult64(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
@@ -454,7 +454,7 @@ __utility_UMult64(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UMult64(arg1, arg2) __utility_UMult64((UTILITY_BASE_NAME), (arg1), (arg2))
+#define UMult64(arg1, arg2) __utility_UMult64((UTILITY_BASE_NAME), (ULONG)(arg1), (ULONG)(arg2))
 
 static __inline__ ULONG
 __utility_PackStructureTags(struct UtilityBase *__base, APTR pack, CONST ULONG * packTable, CONST struct TagItem * tagList)
@@ -471,7 +471,7 @@ __utility_PackStructureTags(struct UtilityBase *__base, APTR pack, CONST ULONG *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define PackStructureTags(pack, packTable, tagList) __utility_PackStructureTags((UTILITY_BASE_NAME), (pack), (packTable), (tagList))
+#define PackStructureTags(pack, packTable, tagList) __utility_PackStructureTags((UTILITY_BASE_NAME), (APTR)(pack), (CONST ULONG *)(packTable), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
 __utility_UnpackStructureTags(struct UtilityBase *__base, CONST_APTR pack, CONST ULONG * packTable, struct TagItem * tagList)
@@ -488,7 +488,7 @@ __utility_UnpackStructureTags(struct UtilityBase *__base, CONST_APTR pack, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UnpackStructureTags(pack, packTable, tagList) __utility_UnpackStructureTags((UTILITY_BASE_NAME), (pack), (packTable), (tagList))
+#define UnpackStructureTags(pack, packTable, tagList) __utility_UnpackStructureTags((UTILITY_BASE_NAME), (CONST_APTR)(pack), (CONST ULONG *)(packTable), (struct TagItem *)(tagList))
 
 static __inline__ BOOL
 __utility_AddNamedObject(struct UtilityBase *__base, struct NamedObject * nameSpace, struct NamedObject * object)
@@ -504,7 +504,7 @@ __utility_AddNamedObject(struct UtilityBase *__base, struct NamedObject * nameSp
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AddNamedObject(nameSpace, object) __utility_AddNamedObject((UTILITY_BASE_NAME), (nameSpace), (object))
+#define AddNamedObject(nameSpace, object) __utility_AddNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(nameSpace), (struct NamedObject *)(object))
 
 static __inline__ struct NamedObject *
 __utility_AllocNamedObjectA(struct UtilityBase *__base, CONST_STRPTR name, CONST struct TagItem * tagList)
@@ -520,7 +520,9 @@ __utility_AllocNamedObjectA(struct UtilityBase *__base, CONST_STRPTR name, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct NamedObject *)_d0;
 }
-#define AllocNamedObjectA(name, tagList) __utility_AllocNamedObjectA((UTILITY_BASE_NAME), (name), (tagList))
+#define AllocNamedObjectA(name, tagList) __utility_AllocNamedObjectA((UTILITY_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tagList))
+
+#define AllocNamedObject(name, ...) (AllocNamedObject)((CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ LONG
 __utility_AttemptRemNamedObject(struct UtilityBase *__base, struct NamedObject * object)
@@ -536,7 +538,7 @@ __utility_AttemptRemNamedObject(struct UtilityBase *__base, struct NamedObject *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AttemptRemNamedObject(object) __utility_AttemptRemNamedObject((UTILITY_BASE_NAME), (object))
+#define AttemptRemNamedObject(object) __utility_AttemptRemNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
 
 static __inline__ struct NamedObject *
 __utility_FindNamedObject(struct UtilityBase *__base, struct NamedObject * nameSpace, CONST_STRPTR name, struct NamedObject * lastObject)
@@ -553,7 +555,7 @@ __utility_FindNamedObject(struct UtilityBase *__base, struct NamedObject * nameS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct NamedObject *)_d0;
 }
-#define FindNamedObject(nameSpace, name, lastObject) __utility_FindNamedObject((UTILITY_BASE_NAME), (nameSpace), (name), (lastObject))
+#define FindNamedObject(nameSpace, name, lastObject) __utility_FindNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(nameSpace), (CONST_STRPTR)(name), (struct NamedObject *)(lastObject))
 
 static __inline__ VOID
 __utility_FreeNamedObject(struct UtilityBase *__base, struct NamedObject * object)
@@ -569,7 +571,7 @@ __utility_FreeNamedObject(struct UtilityBase *__base, struct NamedObject * objec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeNamedObject(object) __utility_FreeNamedObject((UTILITY_BASE_NAME), (object))
+#define FreeNamedObject(object) __utility_FreeNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
 
 static __inline__ STRPTR
 __utility_NamedObjectName(struct UtilityBase *__base, struct NamedObject * object)
@@ -585,7 +587,7 @@ __utility_NamedObjectName(struct UtilityBase *__base, struct NamedObject * objec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define NamedObjectName(object) __utility_NamedObjectName((UTILITY_BASE_NAME), (object))
+#define NamedObjectName(object) __utility_NamedObjectName((UTILITY_BASE_NAME), (struct NamedObject *)(object))
 
 static __inline__ VOID
 __utility_ReleaseNamedObject(struct UtilityBase *__base, struct NamedObject * object)
@@ -601,7 +603,7 @@ __utility_ReleaseNamedObject(struct UtilityBase *__base, struct NamedObject * ob
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseNamedObject(object) __utility_ReleaseNamedObject((UTILITY_BASE_NAME), (object))
+#define ReleaseNamedObject(object) __utility_ReleaseNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
 
 static __inline__ VOID
 __utility_RemNamedObject(struct UtilityBase *__base, struct NamedObject * object, struct Message * message)
@@ -617,7 +619,7 @@ __utility_RemNamedObject(struct UtilityBase *__base, struct NamedObject * object
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemNamedObject(object, message) __utility_RemNamedObject((UTILITY_BASE_NAME), (object), (message))
+#define RemNamedObject(object, message) __utility_RemNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object), (struct Message *)(message))
 
 static __inline__ ULONG
 __utility_GetUniqueID(struct UtilityBase *__base)
@@ -650,7 +652,9 @@ __utility_VSNPrintf(struct UtilityBase *__base, STRPTR buffer, ULONG bufferSize,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define VSNPrintf(buffer, bufferSize, format, args) __utility_VSNPrintf((UTILITY_BASE_NAME), (buffer), (bufferSize), (format), (args))
+#define VSNPrintf(buffer, bufferSize, format, args) __utility_VSNPrintf((UTILITY_BASE_NAME), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)(args))
+
+#define SNPrintf(buffer, bufferSize, format, ...) (SNPrintf)((STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), ##__VA_ARGS__)
 
 static __inline__ STRPTR
 __utility_Strncpy(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
@@ -666,7 +670,7 @@ __utility_Strncpy(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define Strncpy(dst, src, size) __utility_Strncpy((UTILITY_BASE_NAME), (dst), (src), (size))
+#define Strncpy(dst, src, size) __utility_Strncpy((UTILITY_BASE_NAME), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
 
 static __inline__ STRPTR
 __utility_Strncat(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
@@ -682,7 +686,7 @@ __utility_Strncat(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define Strncat(dst, src, size) __utility_Strncat((UTILITY_BASE_NAME), (dst), (src), (size))
+#define Strncat(dst, src, size) __utility_Strncat((UTILITY_BASE_NAME), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
 
 static __inline__ LONG
 __utility_SDivMod64(struct UtilityBase *__base, LONG hi, LONG lo, LONG divisor)
@@ -699,7 +703,7 @@ __utility_SDivMod64(struct UtilityBase *__base, LONG hi, LONG lo, LONG divisor)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SDivMod64(hi, lo, divisor) __utility_SDivMod64((UTILITY_BASE_NAME), (hi), (lo), (divisor))
+#define SDivMod64(hi, lo, divisor) __utility_SDivMod64((UTILITY_BASE_NAME), (LONG)(hi), (LONG)(lo), (LONG)(divisor))
 
 static __inline__ ULONG
 __utility_UDivMod64(struct UtilityBase *__base, ULONG hi, ULONG lo, ULONG divisor)
@@ -716,6 +720,6 @@ __utility_UDivMod64(struct UtilityBase *__base, ULONG hi, ULONG lo, ULONG diviso
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UDivMod64(hi, lo, divisor) __utility_UDivMod64((UTILITY_BASE_NAME), (hi), (lo), (divisor))
+#define UDivMod64(hi, lo, divisor) __utility_UDivMod64((UTILITY_BASE_NAME), (ULONG)(hi), (ULONG)(lo), (ULONG)(divisor))
 
 #endif /* INLINE_UTILITY_H */

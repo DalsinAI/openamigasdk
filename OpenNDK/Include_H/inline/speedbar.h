@@ -53,7 +53,9 @@ __speedbar_AllocSpeedButtonNodeA(struct Library *__base, ULONG number, struct Ta
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define AllocSpeedButtonNodeA(number, tags) __speedbar_AllocSpeedButtonNodeA((SPEEDBAR_BASE_NAME), (number), (tags))
+#define AllocSpeedButtonNodeA(number, tags) __speedbar_AllocSpeedButtonNodeA((SPEEDBAR_BASE_NAME), (ULONG)(number), (struct TagItem *)(tags))
+
+#define AllocSpeedButtonNode(number, ...) (AllocSpeedButtonNode)((UWORD)(number), ##__VA_ARGS__)
 
 static __inline__ VOID
 __speedbar_FreeSpeedButtonNode(struct Library *__base, struct Node * node)
@@ -69,7 +71,7 @@ __speedbar_FreeSpeedButtonNode(struct Library *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeSpeedButtonNode(node) __speedbar_FreeSpeedButtonNode((SPEEDBAR_BASE_NAME), (node))
+#define FreeSpeedButtonNode(node) __speedbar_FreeSpeedButtonNode((SPEEDBAR_BASE_NAME), (struct Node *)(node))
 
 static __inline__ VOID
 __speedbar_SetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -85,7 +87,9 @@ __speedbar_SetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetSpeedButtonNodeAttrsA(node, tags) __speedbar_SetSpeedButtonNodeAttrsA((SPEEDBAR_BASE_NAME), (node), (tags))
+#define SetSpeedButtonNodeAttrsA(node, tags) __speedbar_SetSpeedButtonNodeAttrsA((SPEEDBAR_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define SetSpeedButtonNodeAttrs(node, ...) (SetSpeedButtonNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
 __speedbar_GetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -101,6 +105,8 @@ __speedbar_GetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetSpeedButtonNodeAttrsA(node, tags) __speedbar_GetSpeedButtonNodeAttrsA((SPEEDBAR_BASE_NAME), (node), (tags))
+#define GetSpeedButtonNodeAttrsA(node, tags) __speedbar_GetSpeedButtonNodeAttrsA((SPEEDBAR_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define GetSpeedButtonNodeAttrs(node, ...) (GetSpeedButtonNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 #endif /* INLINE_SPEEDBAR_H */
