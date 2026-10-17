@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -99,7 +99,7 @@ __asl_AllocAslRequest(void *__base, ULONG reqType, CONST struct TagItem * tagLis
 #define AllocAslRequest(reqType, tagList) __asl_AllocAslRequest((ASL_BASE_NAME), (ULONG)(reqType), (CONST struct TagItem *)(tagList))
 #define __AllocAslRequest_base(__in_base, reqType, tagList) __asl_AllocAslRequest((__in_base), (ULONG)(reqType), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR APTR
+static __OPENNDK_VA_ATTR APTR
 __AllocAslRequestTags_va(void *__base, ULONG reqType, ...)
 {
 	__builtin_va_list _ap;
@@ -144,7 +144,7 @@ __asl_AslRequest(void *__base, APTR requester, CONST struct TagItem * tagList)
 #define AslRequest(requester, tagList) __asl_AslRequest((ASL_BASE_NAME), (APTR)(requester), (CONST struct TagItem *)(tagList))
 #define __AslRequest_base(__in_base, requester, tagList) __asl_AslRequest((__in_base), (APTR)(requester), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __AslRequestTags_va(void *__base, APTR requester, ...)
 {
 	__builtin_va_list _ap;

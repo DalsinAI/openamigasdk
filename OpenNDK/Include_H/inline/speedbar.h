@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -65,7 +65,7 @@ __speedbar_AllocSpeedButtonNodeA(void *__base, ULONG number, struct TagItem * ta
 #define AllocSpeedButtonNodeA(number, tags) __speedbar_AllocSpeedButtonNodeA((SPEEDBAR_BASE_NAME), (ULONG)(number), (struct TagItem *)(tags))
 #define __AllocSpeedButtonNodeA_base(__in_base, number, tags) __speedbar_AllocSpeedButtonNodeA((__in_base), (ULONG)(number), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct Node *
+static __OPENNDK_VA_ATTR struct Node *
 __AllocSpeedButtonNode_va(void *__base, UWORD number, ...)
 {
 	__builtin_va_list _ap;
@@ -110,7 +110,7 @@ __speedbar_SetSpeedButtonNodeAttrsA(void *__base, struct Node * node, struct Tag
 #define SetSpeedButtonNodeAttrsA(node, tags) __speedbar_SetSpeedButtonNodeAttrsA((SPEEDBAR_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
 #define __SetSpeedButtonNodeAttrsA_base(__in_base, node, tags) __speedbar_SetSpeedButtonNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __SetSpeedButtonNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
@@ -137,7 +137,7 @@ __speedbar_GetSpeedButtonNodeAttrsA(void *__base, struct Node * node, struct Tag
 #define GetSpeedButtonNodeAttrsA(node, tags) __speedbar_GetSpeedButtonNodeAttrsA((SPEEDBAR_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
 #define __GetSpeedButtonNodeAttrsA_base(__in_base, node, tags) __speedbar_GetSpeedButtonNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __GetSpeedButtonNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;

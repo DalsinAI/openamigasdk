@@ -372,9 +372,9 @@ def inline(lib):
 
 VA_ATTR = """#ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 """
@@ -418,11 +418,14 @@ def varargs_inline(lib, f, bn):
     else:
         body += ["\t%s _r = (%s)%s(%s);" % (f.ret, f.ret, target, ", ".join(call)),
                  "\t__builtin_va_end(_ap);", "\treturn _r;"]
-    out = "static __inline__ __OPENNDK_VA_ATTR %s\n%s(%s)\n{\n%s\n}\n" % (
+    out = "static __OPENNDK_VA_ATTR %s\n%s(%s)\n{\n%s\n}\n" % (
         f.ret, fn, ", ".join(params), "\n".join(body))
     args = ([] if base_arg else ["(%s)" % bn]) + ["(%s)(%s)" % (a.type, a.name) for a in fixed]
     if glob:
-        out += "#define %s %s\n" % (f.name, fn)
+        # the global base is only declared by the proto header
+        guard = "PROTO_%s_H" % lib.stem.split(".")[0].upper()
+        out = "#if defined(%s) && !defined(__NOLIBBASE__)\n%s#define %s %s\n#endif\n" % (
+            guard, out, f.name, fn)
     elif fixed:
         out += "#define %s(%s, ...) %s(%s, ##__VA_ARGS__)\n" % (
             f.name, ", ".join(a.name for a in fixed), fn, ", ".join(args))

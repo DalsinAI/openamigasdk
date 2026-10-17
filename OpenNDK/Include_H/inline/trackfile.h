@@ -17,9 +17,9 @@ struct Device;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -48,7 +48,7 @@ __trackfile_TFStartUnitTagList(void *__base, LONG unitNumber, CONST struct TagIt
 #define TFStartUnitTagList(unitNumber, tags) __trackfile_TFStartUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 #define __TFStartUnitTagList_base(__in_base, unitNumber, tags) __trackfile_TFStartUnitTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __TFStartUnitTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
@@ -76,7 +76,7 @@ __trackfile_TFStopUnitTagList(void *__base, LONG unitNumber, CONST struct TagIte
 #define TFStopUnitTagList(unitNumber, tags) __trackfile_TFStopUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 #define __TFStopUnitTagList_base(__in_base, unitNumber, tags) __trackfile_TFStopUnitTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __TFStopUnitTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
@@ -104,7 +104,7 @@ __trackfile_TFInsertMediaTagList(void *__base, LONG unitNumber, CONST struct Tag
 #define TFInsertMediaTagList(unitNumber, tags) __trackfile_TFInsertMediaTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 #define __TFInsertMediaTagList_base(__in_base, unitNumber, tags) __trackfile_TFInsertMediaTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __TFInsertMediaTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
@@ -132,7 +132,7 @@ __trackfile_TFEjectMediaTagList(void *__base, LONG unitNumber, CONST struct TagI
 #define TFEjectMediaTagList(unitNumber, tags) __trackfile_TFEjectMediaTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 #define __TFEjectMediaTagList_base(__in_base, unitNumber, tags) __trackfile_TFEjectMediaTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __TFEjectMediaTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
@@ -194,7 +194,7 @@ __trackfile_TFChangeUnitTagList(void *__base, LONG unitNumber, CONST struct TagI
 #define TFChangeUnitTagList(unitNumber, tags) __trackfile_TFChangeUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 #define __TFChangeUnitTagList_base(__in_base, unitNumber, tags) __trackfile_TFChangeUnitTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __TFChangeUnitTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;

@@ -17,9 +17,9 @@ struct IntuitionBase;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -1663,7 +1663,7 @@ __intuition_EasyRequestArgs(void *__base, struct Window * window, CONST struct E
 #define EasyRequestArgs(window, easyStruct, idcmpPtr, args) __intuition_EasyRequestArgs((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)(args))
 #define __EasyRequestArgs_base(__in_base, window, easyStruct, idcmpPtr, args) __intuition_EasyRequestArgs((__in_base), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)(args))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __EasyRequest_va(void *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG * idcmpPtr, ...)
 {
 	__builtin_va_list _ap;
@@ -1692,7 +1692,7 @@ __intuition_BuildEasyRequestArgs(void *__base, struct Window * window, CONST str
 #define BuildEasyRequestArgs(window, easyStruct, idcmp, args) __intuition_BuildEasyRequestArgs((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)(args))
 #define __BuildEasyRequestArgs_base(__in_base, window, easyStruct, idcmp, args) __intuition_BuildEasyRequestArgs((__in_base), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)(args))
 
-static __inline__ __OPENNDK_VA_ATTR struct Window *
+static __OPENNDK_VA_ATTR struct Window *
 __BuildEasyRequest_va(void *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG idcmp, ...)
 {
 	__builtin_va_list _ap;
@@ -1737,7 +1737,7 @@ __intuition_OpenWindowTagList(void *__base, CONST struct NewWindow * newWindow, 
 #define OpenWindowTagList(newWindow, tagList) __intuition_OpenWindowTagList((INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)(tagList))
 #define __OpenWindowTagList_base(__in_base, newWindow, tagList) __intuition_OpenWindowTagList((__in_base), (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR struct Window *
+static __OPENNDK_VA_ATTR struct Window *
 __OpenWindowTags_va(void *__base, CONST struct NewWindow * newWindow, ...)
 {
 	__builtin_va_list _ap;
@@ -1765,7 +1765,7 @@ __intuition_OpenScreenTagList(void *__base, CONST struct NewScreen * newScreen, 
 #define OpenScreenTagList(newScreen, tagList) __intuition_OpenScreenTagList((INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)(tagList))
 #define __OpenScreenTagList_base(__in_base, newScreen, tagList) __intuition_OpenScreenTagList((__in_base), (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR struct Screen *
+static __OPENNDK_VA_ATTR struct Screen *
 __OpenScreenTags_va(void *__base, CONST struct NewScreen * newScreen, ...)
 {
 	__builtin_va_list _ap;
@@ -1847,7 +1847,8 @@ __intuition_NewObjectA(void *__base, struct IClass * classPtr, CONST_STRPTR clas
 #define NewObjectA(classPtr, classID, tagList) __intuition_NewObjectA((INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)(tagList))
 #define __NewObjectA_base(__in_base, classPtr, classID, tagList) __intuition_NewObjectA((__in_base), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR APTR
+#if defined(PROTO_INTUITION_H) && !defined(__NOLIBBASE__)
+static __OPENNDK_VA_ATTR APTR
 __NewObject_va(struct IClass * classPtr, CONST_STRPTR classID, ...)
 {
 	__builtin_va_list _ap;
@@ -1857,6 +1858,7 @@ __NewObject_va(struct IClass * classPtr, CONST_STRPTR classID, ...)
 	return _r;
 }
 #define NewObject __NewObject_va
+#endif
 
 static __inline__ VOID
 __intuition_DisposeObject(void *__base, APTR object)
@@ -1892,7 +1894,7 @@ __intuition_SetAttrsA(void *__base, APTR object, CONST struct TagItem * tagList)
 #define SetAttrsA(object, tagList) __intuition_SetAttrsA((INTUITION_BASE_NAME), (APTR)(object), (CONST struct TagItem *)(tagList))
 #define __SetAttrsA_base(__in_base, object, tagList) __intuition_SetAttrsA((__in_base), (APTR)(object), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __SetAttrs_va(void *__base, APTR object, ...)
 {
 	__builtin_va_list _ap;
@@ -1939,7 +1941,7 @@ __intuition_SetGadgetAttrsA(void *__base, struct Gadget * gadget, struct Window 
 #define SetGadgetAttrsA(gadget, window, requester, tagList) __intuition_SetGadgetAttrsA((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)(tagList))
 #define __SetGadgetAttrsA_base(__in_base, gadget, window, requester, tagList) __intuition_SetGadgetAttrsA((__in_base), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __SetGadgetAttrs_va(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, ...)
 {
 	__builtin_va_list _ap;
@@ -2232,7 +2234,7 @@ __intuition_DoGadgetMethodA(void *__base, struct Gadget * gad, struct Window * w
 #define DoGadgetMethodA(gad, win, req, message) __intuition_DoGadgetMethodA((INTUITION_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)(message))
 #define __DoGadgetMethodA_base(__in_base, gad, win, req, message) __intuition_DoGadgetMethodA((__in_base), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)(message))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __DoGadgetMethod_va(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
 {
 	__builtin_va_list _ap;
@@ -2260,7 +2262,7 @@ __intuition_SetWindowPointerA(void *__base, struct Window * win, CONST struct Ta
 #define SetWindowPointerA(win, taglist) __intuition_SetWindowPointerA((INTUITION_BASE_NAME), (struct Window *)(win), (CONST struct TagItem *)(taglist))
 #define __SetWindowPointerA_base(__in_base, win, taglist) __intuition_SetWindowPointerA((__in_base), (struct Window *)(win), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __SetWindowPointer_va(void *__base, struct Window * win, ...)
 {
 	__builtin_va_list _ap;
@@ -2355,7 +2357,7 @@ __intuition_IntuitionControlA(void *__base, APTR object, CONST struct TagItem * 
 #define IntuitionControlA(object, taglist) __intuition_IntuitionControlA((INTUITION_BASE_NAME), (APTR)(object), (CONST struct TagItem *)(taglist))
 #define __IntuitionControlA_base(__in_base, object, taglist) __intuition_IntuitionControlA((__in_base), (APTR)(object), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __IntuitionControl_va(void *__base, APTR object, ...)
 {
 	__builtin_va_list _ap;

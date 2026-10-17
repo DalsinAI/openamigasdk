@@ -17,9 +17,9 @@ struct RealTimeBase;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -82,7 +82,7 @@ __realtime_CreatePlayerA(void *__base, CONST struct TagItem * tagList)
 #define CreatePlayerA(tagList) __realtime_CreatePlayerA((REALTIME_BASE_NAME), (CONST struct TagItem *)(tagList))
 #define __CreatePlayerA_base(__in_base, tagList) __realtime_CreatePlayerA((__in_base), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR struct Player *
+static __OPENNDK_VA_ATTR struct Player *
 __CreatePlayer_va(void *__base, ...)
 {
 	__builtin_va_list _ap;
@@ -127,7 +127,7 @@ __realtime_SetPlayerAttrsA(void *__base, struct Player * player, CONST struct Ta
 #define SetPlayerAttrsA(player, tagList) __realtime_SetPlayerAttrsA((REALTIME_BASE_NAME), (struct Player *)(player), (CONST struct TagItem *)(tagList))
 #define __SetPlayerAttrsA_base(__in_base, player, tagList) __realtime_SetPlayerAttrsA((__in_base), (struct Player *)(player), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __SetPlayerAttrs_va(void *__base, struct Player * player, ...)
 {
 	__builtin_va_list _ap;
@@ -223,7 +223,7 @@ __realtime_GetPlayerAttrsA(void *__base, CONST struct Player * player, CONST str
 #define GetPlayerAttrsA(player, tagList) __realtime_GetPlayerAttrsA((REALTIME_BASE_NAME), (CONST struct Player *)(player), (CONST struct TagItem *)(tagList))
 #define __GetPlayerAttrsA_base(__in_base, player, tagList) __realtime_GetPlayerAttrsA((__in_base), (CONST struct Player *)(player), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __GetPlayerAttrs_va(void *__base, CONST struct Player * player, ...)
 {
 	__builtin_va_list _ap;
