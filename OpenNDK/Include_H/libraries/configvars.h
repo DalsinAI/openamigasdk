@@ -40,9 +40,9 @@ struct ConfigDev {
 /* What a driver loaded by BindDrivers finds with GetCurrentBinding() */
 struct CurrentBinding {
 	struct ConfigDev *cb_ConfigDev;	/* the first board to drive */
-	UBYTE	*cb_FileName;		/* the driver's file */
-	UBYTE	*cb_ProductString;	/* its PRODUCT tool type */
-	UBYTE	**cb_ToolTypes;		/* its icon's tool types */
+	STRPTR	cb_FileName;		/* the driver's file */
+	STRPTR	cb_ProductString;	/* its PRODUCT tool type */
+	STRPTR	*cb_ToolTypes;		/* its icon's tool types */
 };
 
 #endif /* LIBRARIES_CONFIGVARS_H */

@@ -193,7 +193,7 @@ struct StandardPacket {
 /* A table of dos error numbers and their messages */
 struct ErrorString {
 	LONG	*estr_Nums;
-	UBYTE	*estr_Strings;
+	STRPTR	estr_Strings;
 };
 
 /* The library base */
@@ -330,7 +330,7 @@ struct DosList {
 			LONG	dol_DiskType;
 		} dol_volume;
 		struct {
-			UBYTE	*dol_AssignName;	/* late and non-binding assigns */
+			STRPTR	dol_AssignName;	/* late and non-binding assigns */
 			struct AssignList *dol_List;	/* further directories */
 		} dol_assign;
 	} dol_misc;

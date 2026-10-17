@@ -18,7 +18,7 @@
 /* An engine's handle, from OpenEngine(); the engine's own data follows */
 struct GlyphEngine {
 	struct Library	*gle_Library;	/* the engine library */
-	char		*gle_Name;	/* its name, such as "bullet" */
+	STRPTR	gle_Name;	/* its name, such as "bullet" */
 	/* private fields follow */
 };
 

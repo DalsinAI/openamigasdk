@@ -90,8 +90,8 @@ struct Screen
 
     UWORD Flags;
 
-    UBYTE *Title;
-    UBYTE *DefaultTitle;
+    STRPTR	Title;
+    STRPTR	DefaultTitle;
 
     /* The bar and the window borders' sizes */
     BYTE BarHeight, BarVBorder, BarHBorder, MenuVBorder, MenuHBorder;
