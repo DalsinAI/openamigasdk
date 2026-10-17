@@ -16,7 +16,7 @@ if [ $# -eq 0 ]; then
     set -- $(cd "$INC" && find . -name '*.h' | sed 's|^\./||' | sort)
 fi
 FLAGS="-nostdinc -isystem $($CC -print-file-name=include) -I$INC -fsyntax-only
-  -Wall -Wextra -Werror -Wno-unused-function -fomit-frame-pointer -m68020"
+  -Wall -Wextra -Werror -Wno-unused-function -fomit-frame-pointer -m68040"
 bad=0 n=0
 for h in "$@"; do
     n=$((n + 1))

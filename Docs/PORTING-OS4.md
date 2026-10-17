@@ -37,7 +37,7 @@ own calls use them.
 SDK := path/to/openamigasdk
 include $(SDK)/Lib/os4compat/os4compat.mk
 prog: prog.c
-	m68k-amigaos-gcc -m68020 -noixemul -O2 -fno-delete-null-pointer-checks $(OS4COMPAT_CFLAGS) -o $@ prog.c $(OS4COMPAT_LIBS)
+	m68k-amigaos-gcc -m68040 -noixemul -O2 -fno-delete-null-pointer-checks $(OS4COMPAT_CFLAGS) -o $@ prog.c $(OS4COMPAT_LIBS)
 ```
 
 `Examples/os4compat-hello` is a complete OS 4 style program that builds this
