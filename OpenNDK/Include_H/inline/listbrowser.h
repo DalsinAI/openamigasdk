@@ -38,8 +38,8 @@ __listbrowser_LISTBROWSER_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define LISTBROWSER_GetClass() __listbrowser_LISTBROWSER_GetClass((__listbrowser_base_t)(LISTBROWSER_BASE_NAME))
-#define __LISTBROWSER_GetClass_base(__ndk_b) __listbrowser_LISTBROWSER_GetClass((__listbrowser_base_t)(__ndk_b))
+#define LISTBROWSER_GetClass() __listbrowser_LISTBROWSER_GetClass((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME))
+#define __LISTBROWSER_GetClass_base(__ndk_b) __listbrowser_LISTBROWSER_GetClass((__listbrowser_base_t)(void *)(__ndk_b))
 
 static __inline__ struct Node *
 __listbrowser_AllocListBrowserNodeA(struct Library *__base, ULONG columns, struct TagItem * tags)
@@ -55,8 +55,8 @@ __listbrowser_AllocListBrowserNodeA(struct Library *__base, ULONG columns, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define AllocListBrowserNodeA(columns, tags) __listbrowser_AllocListBrowserNodeA((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
-#define __AllocListBrowserNodeA_base(__ndk_b, columns, tags) __listbrowser_AllocListBrowserNodeA((__listbrowser_base_t)(__ndk_b), (ULONG)(columns), (struct TagItem *)(tags))
+#define AllocListBrowserNodeA(columns, tags) __listbrowser_AllocListBrowserNodeA((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
+#define __AllocListBrowserNodeA_base(__ndk_b, columns, tags) __listbrowser_AllocListBrowserNodeA((__listbrowser_base_t)(void *)(__ndk_b), (ULONG)(columns), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Node *
@@ -64,7 +64,7 @@ ___listbrowser_AllocListBrowserNode(__listbrowser_base_t __ndk_base, UWORD colum
 {
 	return __listbrowser_AllocListBrowserNodeA(__ndk_base, (ULONG)(columns), (struct TagItem *)((ULONG)&columns + sizeof(columns)));
 }
-#define AllocListBrowserNode(columns, ...) ___listbrowser_AllocListBrowserNode((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
+#define AllocListBrowserNode(columns, ...) ___listbrowser_AllocListBrowserNode((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
 #else
 #define AllocListBrowserNode(columns, ...) (AllocListBrowserNode)((UWORD)(columns), ##__VA_ARGS__)
 #endif
@@ -83,8 +83,8 @@ __listbrowser_FreeListBrowserNode(struct Library *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeListBrowserNode(node) __listbrowser_FreeListBrowserNode((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node))
-#define __FreeListBrowserNode_base(__ndk_b, node) __listbrowser_FreeListBrowserNode((__listbrowser_base_t)(__ndk_b), (struct Node *)(node))
+#define FreeListBrowserNode(node) __listbrowser_FreeListBrowserNode((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct Node *)(node))
+#define __FreeListBrowserNode_base(__ndk_b, node) __listbrowser_FreeListBrowserNode((__listbrowser_base_t)(void *)(__ndk_b), (struct Node *)(node))
 
 static __inline__ VOID
 __listbrowser_SetListBrowserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -100,8 +100,8 @@ __listbrowser_SetListBrowserNodeAttrsA(struct Library *__base, struct Node * nod
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetListBrowserNodeAttrsA(node, tags) __listbrowser_SetListBrowserNodeAttrsA((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
-#define __SetListBrowserNodeAttrsA_base(__ndk_b, node, tags) __listbrowser_SetListBrowserNodeAttrsA((__listbrowser_base_t)(__ndk_b), (struct Node *)(node), (struct TagItem *)(tags))
+#define SetListBrowserNodeAttrsA(node, tags) __listbrowser_SetListBrowserNodeAttrsA((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __SetListBrowserNodeAttrsA_base(__ndk_b, node, tags) __listbrowser_SetListBrowserNodeAttrsA((__listbrowser_base_t)(void *)(__ndk_b), (struct Node *)(node), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
@@ -109,7 +109,7 @@ ___listbrowser_SetListBrowserNodeAttrs(__listbrowser_base_t __ndk_base, struct N
 {
 	__listbrowser_SetListBrowserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
-#define SetListBrowserNodeAttrs(node, ...) ___listbrowser_SetListBrowserNodeAttrs((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
+#define SetListBrowserNodeAttrs(node, ...) ___listbrowser_SetListBrowserNodeAttrs((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else
 #define SetListBrowserNodeAttrs(node, ...) (SetListBrowserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 #endif
@@ -128,8 +128,8 @@ __listbrowser_GetListBrowserNodeAttrsA(struct Library *__base, struct Node * nod
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetListBrowserNodeAttrsA(node, tags) __listbrowser_GetListBrowserNodeAttrsA((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
-#define __GetListBrowserNodeAttrsA_base(__ndk_b, node, tags) __listbrowser_GetListBrowserNodeAttrsA((__listbrowser_base_t)(__ndk_b), (struct Node *)(node), (struct TagItem *)(tags))
+#define GetListBrowserNodeAttrsA(node, tags) __listbrowser_GetListBrowserNodeAttrsA((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __GetListBrowserNodeAttrsA_base(__ndk_b, node, tags) __listbrowser_GetListBrowserNodeAttrsA((__listbrowser_base_t)(void *)(__ndk_b), (struct Node *)(node), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
@@ -137,7 +137,7 @@ ___listbrowser_GetListBrowserNodeAttrs(__listbrowser_base_t __ndk_base, struct N
 {
 	__listbrowser_GetListBrowserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
-#define GetListBrowserNodeAttrs(node, ...) ___listbrowser_GetListBrowserNodeAttrs((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
+#define GetListBrowserNodeAttrs(node, ...) ___listbrowser_GetListBrowserNodeAttrs((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else
 #define GetListBrowserNodeAttrs(node, ...) (GetListBrowserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 #endif
@@ -156,8 +156,8 @@ __listbrowser_ListBrowserSelectAll(struct Library *__base, struct List * list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ListBrowserSelectAll(list) __listbrowser_ListBrowserSelectAll((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct List *)(list))
-#define __ListBrowserSelectAll_base(__ndk_b, list) __listbrowser_ListBrowserSelectAll((__listbrowser_base_t)(__ndk_b), (struct List *)(list))
+#define ListBrowserSelectAll(list) __listbrowser_ListBrowserSelectAll((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __ListBrowserSelectAll_base(__ndk_b, list) __listbrowser_ListBrowserSelectAll((__listbrowser_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 static __inline__ VOID
 __listbrowser_ShowListBrowserNodeChildren(struct Library *__base, struct Node * node, LONG depth)
@@ -173,8 +173,8 @@ __listbrowser_ShowListBrowserNodeChildren(struct Library *__base, struct Node * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ShowListBrowserNodeChildren(node, depth) __listbrowser_ShowListBrowserNodeChildren((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node), (LONG)(depth))
-#define __ShowListBrowserNodeChildren_base(__ndk_b, node, depth) __listbrowser_ShowListBrowserNodeChildren((__listbrowser_base_t)(__ndk_b), (struct Node *)(node), (LONG)(depth))
+#define ShowListBrowserNodeChildren(node, depth) __listbrowser_ShowListBrowserNodeChildren((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct Node *)(node), (LONG)(depth))
+#define __ShowListBrowserNodeChildren_base(__ndk_b, node, depth) __listbrowser_ShowListBrowserNodeChildren((__listbrowser_base_t)(void *)(__ndk_b), (struct Node *)(node), (LONG)(depth))
 
 static __inline__ VOID
 __listbrowser_HideListBrowserNodeChildren(struct Library *__base, struct Node * node)
@@ -190,8 +190,8 @@ __listbrowser_HideListBrowserNodeChildren(struct Library *__base, struct Node * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HideListBrowserNodeChildren(node) __listbrowser_HideListBrowserNodeChildren((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node))
-#define __HideListBrowserNodeChildren_base(__ndk_b, node) __listbrowser_HideListBrowserNodeChildren((__listbrowser_base_t)(__ndk_b), (struct Node *)(node))
+#define HideListBrowserNodeChildren(node) __listbrowser_HideListBrowserNodeChildren((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct Node *)(node))
+#define __HideListBrowserNodeChildren_base(__ndk_b, node) __listbrowser_HideListBrowserNodeChildren((__listbrowser_base_t)(void *)(__ndk_b), (struct Node *)(node))
 
 static __inline__ VOID
 __listbrowser_ShowAllListBrowserChildren(struct Library *__base, struct List * list)
@@ -207,8 +207,8 @@ __listbrowser_ShowAllListBrowserChildren(struct Library *__base, struct List * l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ShowAllListBrowserChildren(list) __listbrowser_ShowAllListBrowserChildren((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct List *)(list))
-#define __ShowAllListBrowserChildren_base(__ndk_b, list) __listbrowser_ShowAllListBrowserChildren((__listbrowser_base_t)(__ndk_b), (struct List *)(list))
+#define ShowAllListBrowserChildren(list) __listbrowser_ShowAllListBrowserChildren((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __ShowAllListBrowserChildren_base(__ndk_b, list) __listbrowser_ShowAllListBrowserChildren((__listbrowser_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 static __inline__ VOID
 __listbrowser_HideAllListBrowserChildren(struct Library *__base, struct List * list)
@@ -224,8 +224,8 @@ __listbrowser_HideAllListBrowserChildren(struct Library *__base, struct List * l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HideAllListBrowserChildren(list) __listbrowser_HideAllListBrowserChildren((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct List *)(list))
-#define __HideAllListBrowserChildren_base(__ndk_b, list) __listbrowser_HideAllListBrowserChildren((__listbrowser_base_t)(__ndk_b), (struct List *)(list))
+#define HideAllListBrowserChildren(list) __listbrowser_HideAllListBrowserChildren((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __HideAllListBrowserChildren_base(__ndk_b, list) __listbrowser_HideAllListBrowserChildren((__listbrowser_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 static __inline__ VOID
 __listbrowser_FreeListBrowserList(struct Library *__base, struct List * list)
@@ -241,8 +241,8 @@ __listbrowser_FreeListBrowserList(struct Library *__base, struct List * list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeListBrowserList(list) __listbrowser_FreeListBrowserList((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct List *)(list))
-#define __FreeListBrowserList_base(__ndk_b, list) __listbrowser_FreeListBrowserList((__listbrowser_base_t)(__ndk_b), (struct List *)(list))
+#define FreeListBrowserList(list) __listbrowser_FreeListBrowserList((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __FreeListBrowserList_base(__ndk_b, list) __listbrowser_FreeListBrowserList((__listbrowser_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 static __inline__ struct ColumnInfo *
 __listbrowser_AllocLBColumnInfoA(struct Library *__base, ULONG columns, struct TagItem * tags)
@@ -258,8 +258,8 @@ __listbrowser_AllocLBColumnInfoA(struct Library *__base, ULONG columns, struct T
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ColumnInfo *)_d0;
 }
-#define AllocLBColumnInfoA(columns, tags) __listbrowser_AllocLBColumnInfoA((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
-#define __AllocLBColumnInfoA_base(__ndk_b, columns, tags) __listbrowser_AllocLBColumnInfoA((__listbrowser_base_t)(__ndk_b), (ULONG)(columns), (struct TagItem *)(tags))
+#define AllocLBColumnInfoA(columns, tags) __listbrowser_AllocLBColumnInfoA((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
+#define __AllocLBColumnInfoA_base(__ndk_b, columns, tags) __listbrowser_AllocLBColumnInfoA((__listbrowser_base_t)(void *)(__ndk_b), (ULONG)(columns), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct ColumnInfo *
@@ -267,7 +267,7 @@ ___listbrowser_AllocLBColumnInfo(__listbrowser_base_t __ndk_base, UWORD columns,
 {
 	return __listbrowser_AllocLBColumnInfoA(__ndk_base, (ULONG)(columns), (struct TagItem *)((ULONG)&columns + sizeof(columns)));
 }
-#define AllocLBColumnInfo(columns, ...) ___listbrowser_AllocLBColumnInfo((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
+#define AllocLBColumnInfo(columns, ...) ___listbrowser_AllocLBColumnInfo((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
 #else
 #define AllocLBColumnInfo(columns, ...) (AllocLBColumnInfo)((UWORD)(columns), ##__VA_ARGS__)
 #endif
@@ -286,8 +286,8 @@ __listbrowser_SetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
-#define __SetLBColumnInfoAttrsA_base(__ndk_b, columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((__listbrowser_base_t)(__ndk_b), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
+#define SetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
+#define __SetLBColumnInfoAttrsA_base(__ndk_b, columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((__listbrowser_base_t)(void *)(__ndk_b), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -295,7 +295,7 @@ ___listbrowser_SetLBColumnInfoAttrs(__listbrowser_base_t __ndk_base, struct Colu
 {
 	return __listbrowser_SetLBColumnInfoAttrsA(__ndk_base, (struct ColumnInfo *)(columninfo), (struct TagItem *)((ULONG)&columninfo + sizeof(columninfo)));
 }
-#define SetLBColumnInfoAttrs(columninfo, ...) ___listbrowser_SetLBColumnInfoAttrs((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
+#define SetLBColumnInfoAttrs(columninfo, ...) ___listbrowser_SetLBColumnInfoAttrs((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 #else
 #define SetLBColumnInfoAttrs(columninfo, ...) (SetLBColumnInfoAttrs)((struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 #endif
@@ -314,8 +314,8 @@ __listbrowser_GetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
-#define __GetLBColumnInfoAttrsA_base(__ndk_b, columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((__listbrowser_base_t)(__ndk_b), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
+#define GetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
+#define __GetLBColumnInfoAttrsA_base(__ndk_b, columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((__listbrowser_base_t)(void *)(__ndk_b), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -323,7 +323,7 @@ ___listbrowser_GetLBColumnInfoAttrs(__listbrowser_base_t __ndk_base, struct Colu
 {
 	return __listbrowser_GetLBColumnInfoAttrsA(__ndk_base, (struct ColumnInfo *)(columninfo), (struct TagItem *)((ULONG)&columninfo + sizeof(columninfo)));
 }
-#define GetLBColumnInfoAttrs(columninfo, ...) ___listbrowser_GetLBColumnInfoAttrs((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
+#define GetLBColumnInfoAttrs(columninfo, ...) ___listbrowser_GetLBColumnInfoAttrs((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 #else
 #define GetLBColumnInfoAttrs(columninfo, ...) (GetLBColumnInfoAttrs)((struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 #endif
@@ -342,8 +342,8 @@ __listbrowser_FreeLBColumnInfo(struct Library *__base, struct ColumnInfo * colum
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeLBColumnInfo(columninfo) __listbrowser_FreeLBColumnInfo((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo))
-#define __FreeLBColumnInfo_base(__ndk_b, columninfo) __listbrowser_FreeLBColumnInfo((__listbrowser_base_t)(__ndk_b), (struct ColumnInfo *)(columninfo))
+#define FreeLBColumnInfo(columninfo) __listbrowser_FreeLBColumnInfo((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo))
+#define __FreeLBColumnInfo_base(__ndk_b, columninfo) __listbrowser_FreeLBColumnInfo((__listbrowser_base_t)(void *)(__ndk_b), (struct ColumnInfo *)(columninfo))
 
 static __inline__ VOID
 __listbrowser_ListBrowserClearAll(struct Library *__base, struct List * list)
@@ -359,7 +359,7 @@ __listbrowser_ListBrowserClearAll(struct Library *__base, struct List * list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ListBrowserClearAll(list) __listbrowser_ListBrowserClearAll((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct List *)(list))
-#define __ListBrowserClearAll_base(__ndk_b, list) __listbrowser_ListBrowserClearAll((__listbrowser_base_t)(__ndk_b), (struct List *)(list))
+#define ListBrowserClearAll(list) __listbrowser_ListBrowserClearAll((__listbrowser_base_t)(void *)(LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __ListBrowserClearAll_base(__ndk_b, list) __listbrowser_ListBrowserClearAll((__listbrowser_base_t)(void *)(__ndk_b), (struct List *)(list))
 
 #endif /* INLINE_LISTBROWSER_H */

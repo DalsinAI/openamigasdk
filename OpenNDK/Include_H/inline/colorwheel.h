@@ -38,8 +38,8 @@ __colorwheel_ConvertHSBToRGB(struct Library *__base, struct ColorWheelHSB * hsb,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ConvertHSBToRGB(hsb, rgb) __colorwheel_ConvertHSBToRGB((__colorwheel_base_t)(COLORWHEEL_BASE_NAME), (struct ColorWheelHSB *)(hsb), (struct ColorWheelRGB *)(rgb))
-#define __ConvertHSBToRGB_base(__ndk_b, hsb, rgb) __colorwheel_ConvertHSBToRGB((__colorwheel_base_t)(__ndk_b), (struct ColorWheelHSB *)(hsb), (struct ColorWheelRGB *)(rgb))
+#define ConvertHSBToRGB(hsb, rgb) __colorwheel_ConvertHSBToRGB((__colorwheel_base_t)(void *)(COLORWHEEL_BASE_NAME), (struct ColorWheelHSB *)(hsb), (struct ColorWheelRGB *)(rgb))
+#define __ConvertHSBToRGB_base(__ndk_b, hsb, rgb) __colorwheel_ConvertHSBToRGB((__colorwheel_base_t)(void *)(__ndk_b), (struct ColorWheelHSB *)(hsb), (struct ColorWheelRGB *)(rgb))
 
 static __inline__ VOID
 __colorwheel_ConvertRGBToHSB(struct Library *__base, struct ColorWheelRGB * rgb, struct ColorWheelHSB * hsb)
@@ -55,7 +55,7 @@ __colorwheel_ConvertRGBToHSB(struct Library *__base, struct ColorWheelRGB * rgb,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ConvertRGBToHSB(rgb, hsb) __colorwheel_ConvertRGBToHSB((__colorwheel_base_t)(COLORWHEEL_BASE_NAME), (struct ColorWheelRGB *)(rgb), (struct ColorWheelHSB *)(hsb))
-#define __ConvertRGBToHSB_base(__ndk_b, rgb, hsb) __colorwheel_ConvertRGBToHSB((__colorwheel_base_t)(__ndk_b), (struct ColorWheelRGB *)(rgb), (struct ColorWheelHSB *)(hsb))
+#define ConvertRGBToHSB(rgb, hsb) __colorwheel_ConvertRGBToHSB((__colorwheel_base_t)(void *)(COLORWHEEL_BASE_NAME), (struct ColorWheelRGB *)(rgb), (struct ColorWheelHSB *)(hsb))
+#define __ConvertRGBToHSB_base(__ndk_b, rgb, hsb) __colorwheel_ConvertRGBToHSB((__colorwheel_base_t)(void *)(__ndk_b), (struct ColorWheelRGB *)(rgb), (struct ColorWheelHSB *)(hsb))
 
 #endif /* INLINE_COLORWHEEL_H */

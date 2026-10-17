@@ -38,8 +38,8 @@ __ramdrive_KillRAD0(struct Device *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define KillRAD0() __ramdrive_KillRAD0((__ramdrive_base_t)(RAMDRIVE_BASE_NAME))
-#define __KillRAD0_base(__ndk_b) __ramdrive_KillRAD0((__ramdrive_base_t)(__ndk_b))
+#define KillRAD0() __ramdrive_KillRAD0((__ramdrive_base_t)(void *)(RAMDRIVE_BASE_NAME))
+#define __KillRAD0_base(__ndk_b) __ramdrive_KillRAD0((__ramdrive_base_t)(void *)(__ndk_b))
 
 static __inline__ STRPTR
 __ramdrive_KillRAD(struct Device *__base, ULONG unit)
@@ -55,7 +55,7 @@ __ramdrive_KillRAD(struct Device *__base, ULONG unit)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define KillRAD(unit) __ramdrive_KillRAD((__ramdrive_base_t)(RAMDRIVE_BASE_NAME), (ULONG)(unit))
-#define __KillRAD_base(__ndk_b, unit) __ramdrive_KillRAD((__ramdrive_base_t)(__ndk_b), (ULONG)(unit))
+#define KillRAD(unit) __ramdrive_KillRAD((__ramdrive_base_t)(void *)(RAMDRIVE_BASE_NAME), (ULONG)(unit))
+#define __KillRAD_base(__ndk_b, unit) __ramdrive_KillRAD((__ramdrive_base_t)(void *)(__ndk_b), (ULONG)(unit))
 
 #endif /* INLINE_RAMDRIVE_H */

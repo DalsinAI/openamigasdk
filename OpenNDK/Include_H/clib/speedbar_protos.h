@@ -21,12 +21,12 @@ extern "C" {
 /* From version 44 */
 Class * SPEEDBAR_GetClass(VOID);
 struct Node * AllocSpeedButtonNodeA(ULONG number, struct TagItem * tags);
-struct Node * AllocSpeedButtonNode(UWORD number, Tag tag1, ...);
+struct Node * AllocSpeedButtonNode(UWORD number, ...);
 VOID FreeSpeedButtonNode(struct Node * node);
 VOID SetSpeedButtonNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID SetSpeedButtonNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID SetSpeedButtonNodeAttrs(struct Node * node, ...);
 VOID GetSpeedButtonNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID GetSpeedButtonNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID GetSpeedButtonNodeAttrs(struct Node * node, ...);
 
 #ifdef __cplusplus
 }

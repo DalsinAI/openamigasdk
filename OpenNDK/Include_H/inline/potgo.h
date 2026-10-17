@@ -38,8 +38,8 @@ __potgo_AllocPotBits(struct Library *__base, UWORD bits)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define AllocPotBits(bits) __potgo_AllocPotBits((__potgo_base_t)(POTGO_BASE_NAME), (UWORD)(bits))
-#define __AllocPotBits_base(__ndk_b, bits) __potgo_AllocPotBits((__potgo_base_t)(__ndk_b), (UWORD)(bits))
+#define AllocPotBits(bits) __potgo_AllocPotBits((__potgo_base_t)(void *)(POTGO_BASE_NAME), (UWORD)(bits))
+#define __AllocPotBits_base(__ndk_b, bits) __potgo_AllocPotBits((__potgo_base_t)(void *)(__ndk_b), (UWORD)(bits))
 
 static __inline__ VOID
 __potgo_FreePotBits(struct Library *__base, UWORD bits)
@@ -55,8 +55,8 @@ __potgo_FreePotBits(struct Library *__base, UWORD bits)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreePotBits(bits) __potgo_FreePotBits((__potgo_base_t)(POTGO_BASE_NAME), (UWORD)(bits))
-#define __FreePotBits_base(__ndk_b, bits) __potgo_FreePotBits((__potgo_base_t)(__ndk_b), (UWORD)(bits))
+#define FreePotBits(bits) __potgo_FreePotBits((__potgo_base_t)(void *)(POTGO_BASE_NAME), (UWORD)(bits))
+#define __FreePotBits_base(__ndk_b, bits) __potgo_FreePotBits((__potgo_base_t)(void *)(__ndk_b), (UWORD)(bits))
 
 static __inline__ VOID
 __potgo_WritePotgo(struct Library *__base, UWORD word, UWORD mask)
@@ -72,7 +72,7 @@ __potgo_WritePotgo(struct Library *__base, UWORD word, UWORD mask)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WritePotgo(word, mask) __potgo_WritePotgo((__potgo_base_t)(POTGO_BASE_NAME), (UWORD)(word), (UWORD)(mask))
-#define __WritePotgo_base(__ndk_b, word, mask) __potgo_WritePotgo((__potgo_base_t)(__ndk_b), (UWORD)(word), (UWORD)(mask))
+#define WritePotgo(word, mask) __potgo_WritePotgo((__potgo_base_t)(void *)(POTGO_BASE_NAME), (UWORD)(word), (UWORD)(mask))
+#define __WritePotgo_base(__ndk_b, word, mask) __potgo_WritePotgo((__potgo_base_t)(void *)(__ndk_b), (UWORD)(word), (UWORD)(mask))
 
 #endif /* INLINE_POTGO_H */

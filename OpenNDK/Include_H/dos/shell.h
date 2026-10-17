@@ -38,8 +38,8 @@ struct ExtendedCommandLineInterface
 	BPTR	cle_StandardOutput;
 	BPTR	cle_Module;
 	struct Hook cle_Hook;		/* the SHELL_METH_ methods */
-	APTR	cle_This;		/* private */
-	ULONG	cle_Version;
+	struct ExtendedCommandLineInterface *cle_This;	/* itself, when the fields after it are there */
+	LONG	cle_Version;
 };
 
 /* One line of the history */

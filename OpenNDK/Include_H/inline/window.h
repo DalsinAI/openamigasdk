@@ -38,7 +38,7 @@ __window_WINDOW_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define WINDOW_GetClass() __window_WINDOW_GetClass((__window_base_t)(WINDOW_BASE_NAME))
-#define __WINDOW_GetClass_base(__ndk_b) __window_WINDOW_GetClass((__window_base_t)(__ndk_b))
+#define WINDOW_GetClass() __window_WINDOW_GetClass((__window_base_t)(void *)(WINDOW_BASE_NAME))
+#define __WINDOW_GetClass_base(__ndk_b) __window_WINDOW_GetClass((__window_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_WINDOW_H */

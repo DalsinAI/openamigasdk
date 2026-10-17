@@ -39,8 +39,8 @@ __mathieeesingbas_IEEESPFix(struct MathIEEEBase *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IEEESPFix(parm) __mathieeesingbas_IEEESPFix((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
-#define __IEEESPFix_base(__ndk_b, parm) __mathieeesingbas_IEEESPFix((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(parm))
+#define IEEESPFix(parm) __mathieeesingbas_IEEESPFix((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPFix_base(__ndk_b, parm) __mathieeesingbas_IEEESPFix((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPFlt(struct MathIEEEBase *__base, LONG integer)
@@ -56,8 +56,8 @@ __mathieeesingbas_IEEESPFlt(struct MathIEEEBase *__base, LONG integer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPFlt(integer) __mathieeesingbas_IEEESPFlt((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (LONG)(integer))
-#define __IEEESPFlt_base(__ndk_b, integer) __mathieeesingbas_IEEESPFlt((__mathieeesingbas_base_t)(__ndk_b), (LONG)(integer))
+#define IEEESPFlt(integer) __mathieeesingbas_IEEESPFlt((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (LONG)(integer))
+#define __IEEESPFlt_base(__ndk_b, integer) __mathieeesingbas_IEEESPFlt((__mathieeesingbas_base_t)(void *)(__ndk_b), (LONG)(integer))
 
 static __inline__ LONG
 __mathieeesingbas_IEEESPCmp(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT rightParm)
@@ -75,8 +75,8 @@ __mathieeesingbas_IEEESPCmp(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT r
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IEEESPCmp(leftParm, rightParm) __mathieeesingbas_IEEESPCmp((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __IEEESPCmp_base(__ndk_b, leftParm, rightParm) __mathieeesingbas_IEEESPCmp((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define IEEESPCmp(leftParm, rightParm) __mathieeesingbas_IEEESPCmp((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __IEEESPCmp_base(__ndk_b, leftParm, rightParm) __mathieeesingbas_IEEESPCmp((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ LONG
 __mathieeesingbas_IEEESPTst(struct MathIEEEBase *__base, FLOAT parm)
@@ -93,8 +93,8 @@ __mathieeesingbas_IEEESPTst(struct MathIEEEBase *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IEEESPTst(parm) __mathieeesingbas_IEEESPTst((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
-#define __IEEESPTst_base(__ndk_b, parm) __mathieeesingbas_IEEESPTst((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(parm))
+#define IEEESPTst(parm) __mathieeesingbas_IEEESPTst((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPTst_base(__ndk_b, parm) __mathieeesingbas_IEEESPTst((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPAbs(struct MathIEEEBase *__base, FLOAT parm)
@@ -111,8 +111,8 @@ __mathieeesingbas_IEEESPAbs(struct MathIEEEBase *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPAbs(parm) __mathieeesingbas_IEEESPAbs((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
-#define __IEEESPAbs_base(__ndk_b, parm) __mathieeesingbas_IEEESPAbs((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(parm))
+#define IEEESPAbs(parm) __mathieeesingbas_IEEESPAbs((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPAbs_base(__ndk_b, parm) __mathieeesingbas_IEEESPAbs((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPNeg(struct MathIEEEBase *__base, FLOAT parm)
@@ -129,8 +129,8 @@ __mathieeesingbas_IEEESPNeg(struct MathIEEEBase *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPNeg(parm) __mathieeesingbas_IEEESPNeg((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
-#define __IEEESPNeg_base(__ndk_b, parm) __mathieeesingbas_IEEESPNeg((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(parm))
+#define IEEESPNeg(parm) __mathieeesingbas_IEEESPNeg((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPNeg_base(__ndk_b, parm) __mathieeesingbas_IEEESPNeg((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPAdd(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT rightParm)
@@ -148,8 +148,8 @@ __mathieeesingbas_IEEESPAdd(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT r
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPAdd(leftParm, rightParm) __mathieeesingbas_IEEESPAdd((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __IEEESPAdd_base(__ndk_b, leftParm, rightParm) __mathieeesingbas_IEEESPAdd((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define IEEESPAdd(leftParm, rightParm) __mathieeesingbas_IEEESPAdd((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __IEEESPAdd_base(__ndk_b, leftParm, rightParm) __mathieeesingbas_IEEESPAdd((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPSub(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT rightParm)
@@ -167,8 +167,8 @@ __mathieeesingbas_IEEESPSub(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT r
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPSub(leftParm, rightParm) __mathieeesingbas_IEEESPSub((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __IEEESPSub_base(__ndk_b, leftParm, rightParm) __mathieeesingbas_IEEESPSub((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define IEEESPSub(leftParm, rightParm) __mathieeesingbas_IEEESPSub((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __IEEESPSub_base(__ndk_b, leftParm, rightParm) __mathieeesingbas_IEEESPSub((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPMul(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT rightParm)
@@ -186,8 +186,8 @@ __mathieeesingbas_IEEESPMul(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT r
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPMul(leftParm, rightParm) __mathieeesingbas_IEEESPMul((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __IEEESPMul_base(__ndk_b, leftParm, rightParm) __mathieeesingbas_IEEESPMul((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define IEEESPMul(leftParm, rightParm) __mathieeesingbas_IEEESPMul((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __IEEESPMul_base(__ndk_b, leftParm, rightParm) __mathieeesingbas_IEEESPMul((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPDiv(struct MathIEEEBase *__base, FLOAT dividend, FLOAT divisor)
@@ -205,8 +205,8 @@ __mathieeesingbas_IEEESPDiv(struct MathIEEEBase *__base, FLOAT dividend, FLOAT d
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPDiv(dividend, divisor) __mathieeesingbas_IEEESPDiv((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(dividend), (FLOAT)(divisor))
-#define __IEEESPDiv_base(__ndk_b, dividend, divisor) __mathieeesingbas_IEEESPDiv((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(dividend), (FLOAT)(divisor))
+#define IEEESPDiv(dividend, divisor) __mathieeesingbas_IEEESPDiv((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(dividend), (FLOAT)(divisor))
+#define __IEEESPDiv_base(__ndk_b, dividend, divisor) __mathieeesingbas_IEEESPDiv((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(dividend), (FLOAT)(divisor))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPFloor(struct MathIEEEBase *__base, FLOAT parm)
@@ -223,8 +223,8 @@ __mathieeesingbas_IEEESPFloor(struct MathIEEEBase *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPFloor(parm) __mathieeesingbas_IEEESPFloor((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
-#define __IEEESPFloor_base(__ndk_b, parm) __mathieeesingbas_IEEESPFloor((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(parm))
+#define IEEESPFloor(parm) __mathieeesingbas_IEEESPFloor((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPFloor_base(__ndk_b, parm) __mathieeesingbas_IEEESPFloor((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingbas_IEEESPCeil(struct MathIEEEBase *__base, FLOAT parm)
@@ -241,7 +241,7 @@ __mathieeesingbas_IEEESPCeil(struct MathIEEEBase *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPCeil(parm) __mathieeesingbas_IEEESPCeil((__mathieeesingbas_base_t)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
-#define __IEEESPCeil_base(__ndk_b, parm) __mathieeesingbas_IEEESPCeil((__mathieeesingbas_base_t)(__ndk_b), (FLOAT)(parm))
+#define IEEESPCeil(parm) __mathieeesingbas_IEEESPCeil((__mathieeesingbas_base_t)(void *)(MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPCeil_base(__ndk_b, parm) __mathieeesingbas_IEEESPCeil((__mathieeesingbas_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 #endif /* INLINE_MATHIEEESINGBAS_H */

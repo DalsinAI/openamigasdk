@@ -23,19 +23,19 @@ extern "C" {
 
 /* From version 39 */
 struct DataType * ObtainDataTypeA(ULONG type, APTR handle, CONST struct TagItem * attrs);
-struct DataType * ObtainDataType(ULONG type, APTR handle, Tag tag1, ...);
+struct DataType * ObtainDataType(ULONG type, APTR handle, ...);
 VOID ReleaseDataType(struct DataType * dt);
 Object * NewDTObjectA(STRPTR name, CONST struct TagItem * attrs);
-Object * NewDTObject(APTR name, Tag tag1, ...);
+Object * NewDTObject(APTR name, ...);
 VOID DisposeDTObject(Object * o);
 ULONG SetDTAttrsA(Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs);
-ULONG SetDTAttrs(Object * o, struct Window * win, struct Requester * req, Tag tag1, ...);
+ULONG SetDTAttrs(Object * o, struct Window * win, struct Requester * req, ...);
 ULONG GetDTAttrsA(Object * o, CONST struct TagItem * attrs);
-ULONG GetDTAttrs(Object * o, Tag tag1, ...);
+ULONG GetDTAttrs(Object * o, ...);
 LONG AddDTObject(struct Window * win, struct Requester * req, Object * o, LONG pos);
 VOID RefreshDTObjectA(Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs);
-VOID RefreshDTObject(Object * o, struct Window * win, struct Requester * req, Tag tag1, ...);
-VOID RefreshDTObjects(Object * o, struct Window * win, struct Requester * req, Tag tag1, ...);
+VOID RefreshDTObject(Object * o, struct Window * win, struct Requester * req, ...);
+VOID RefreshDTObjects(Object * o, struct Window * win, struct Requester * req, ...);
 ULONG DoAsyncLayout(Object * o, struct gpLayout * gpl);
 ULONG DoDTMethodA(Object * o, struct Window * win, struct Requester * req, Msg msg);
 ULONG DoDTMethod(Object * o, struct Window * win, struct Requester * req, ULONG data, ...);
@@ -54,7 +54,7 @@ struct DTMethod * CopyDTTriggerMethods(struct DTMethod * methods, struct DTMetho
 APTR FreeDTMethods(APTR methods);
 ULONG GetDTTriggerMethodDataFlags(ULONG method);
 ULONG SaveDTObjectA(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, LONG saveicon, CONST struct TagItem * attrs);
-ULONG SaveDTObject(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, Tag tag1, ...);
+ULONG SaveDTObject(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, ...);
 ULONG StartDragSelect(Object * o);
 
 #ifdef __cplusplus

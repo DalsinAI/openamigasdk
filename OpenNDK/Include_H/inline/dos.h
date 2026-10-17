@@ -39,8 +39,8 @@ __dos_Open(struct DosLibrary *__base, CONST_STRPTR name, LONG accessMode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define Open(name, accessMode) __dos_Open((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(accessMode))
-#define __Open_base(__ndk_b, name, accessMode) __dos_Open((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(accessMode))
+#define Open(name, accessMode) __dos_Open((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(accessMode))
+#define __Open_base(__ndk_b, name, accessMode) __dos_Open((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(accessMode))
 
 static __inline__ LONG
 __dos_Close(struct DosLibrary *__base, BPTR file)
@@ -56,8 +56,8 @@ __dos_Close(struct DosLibrary *__base, BPTR file)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Close(file) __dos_Close((__dos_base_t)(DOS_BASE_NAME), (BPTR)(file))
-#define __Close_base(__ndk_b, file) __dos_Close((__dos_base_t)(__ndk_b), (BPTR)(file))
+#define Close(file) __dos_Close((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(file))
+#define __Close_base(__ndk_b, file) __dos_Close((__dos_base_t)(void *)(__ndk_b), (BPTR)(file))
 
 static __inline__ LONG
 __dos_Read(struct DosLibrary *__base, BPTR file, APTR buffer, LONG length)
@@ -75,8 +75,8 @@ __dos_Read(struct DosLibrary *__base, BPTR file, APTR buffer, LONG length)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Read(file, buffer, length) __dos_Read((__dos_base_t)(DOS_BASE_NAME), (BPTR)(file), (APTR)(buffer), (LONG)(length))
-#define __Read_base(__ndk_b, file, buffer, length) __dos_Read((__dos_base_t)(__ndk_b), (BPTR)(file), (APTR)(buffer), (LONG)(length))
+#define Read(file, buffer, length) __dos_Read((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(file), (APTR)(buffer), (LONG)(length))
+#define __Read_base(__ndk_b, file, buffer, length) __dos_Read((__dos_base_t)(void *)(__ndk_b), (BPTR)(file), (APTR)(buffer), (LONG)(length))
 
 static __inline__ LONG
 __dos_Write(struct DosLibrary *__base, BPTR file, CONST_APTR buffer, LONG length)
@@ -94,8 +94,8 @@ __dos_Write(struct DosLibrary *__base, BPTR file, CONST_APTR buffer, LONG length
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Write(file, buffer, length) __dos_Write((__dos_base_t)(DOS_BASE_NAME), (BPTR)(file), (CONST_APTR)(buffer), (LONG)(length))
-#define __Write_base(__ndk_b, file, buffer, length) __dos_Write((__dos_base_t)(__ndk_b), (BPTR)(file), (CONST_APTR)(buffer), (LONG)(length))
+#define Write(file, buffer, length) __dos_Write((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(file), (CONST_APTR)(buffer), (LONG)(length))
+#define __Write_base(__ndk_b, file, buffer, length) __dos_Write((__dos_base_t)(void *)(__ndk_b), (BPTR)(file), (CONST_APTR)(buffer), (LONG)(length))
 
 static __inline__ BPTR
 __dos_Input(struct DosLibrary *__base)
@@ -111,8 +111,8 @@ __dos_Input(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define Input() __dos_Input((__dos_base_t)(DOS_BASE_NAME))
-#define __Input_base(__ndk_b) __dos_Input((__dos_base_t)(__ndk_b))
+#define Input() __dos_Input((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __Input_base(__ndk_b) __dos_Input((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ BPTR
 __dos_Output(struct DosLibrary *__base)
@@ -128,8 +128,8 @@ __dos_Output(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define Output() __dos_Output((__dos_base_t)(DOS_BASE_NAME))
-#define __Output_base(__ndk_b) __dos_Output((__dos_base_t)(__ndk_b))
+#define Output() __dos_Output((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __Output_base(__ndk_b) __dos_Output((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ LONG
 __dos_Seek(struct DosLibrary *__base, BPTR file, LONG position, LONG offset)
@@ -147,8 +147,8 @@ __dos_Seek(struct DosLibrary *__base, BPTR file, LONG position, LONG offset)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Seek(file, position, offset) __dos_Seek((__dos_base_t)(DOS_BASE_NAME), (BPTR)(file), (LONG)(position), (LONG)(offset))
-#define __Seek_base(__ndk_b, file, position, offset) __dos_Seek((__dos_base_t)(__ndk_b), (BPTR)(file), (LONG)(position), (LONG)(offset))
+#define Seek(file, position, offset) __dos_Seek((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(file), (LONG)(position), (LONG)(offset))
+#define __Seek_base(__ndk_b, file, position, offset) __dos_Seek((__dos_base_t)(void *)(__ndk_b), (BPTR)(file), (LONG)(position), (LONG)(offset))
 
 static __inline__ LONG
 __dos_DeleteFile(struct DosLibrary *__base, CONST_STRPTR name)
@@ -164,8 +164,8 @@ __dos_DeleteFile(struct DosLibrary *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DeleteFile(name) __dos_DeleteFile((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name))
-#define __DeleteFile_base(__ndk_b, name) __dos_DeleteFile((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define DeleteFile(name) __dos_DeleteFile((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __DeleteFile_base(__ndk_b, name) __dos_DeleteFile((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ LONG
 __dos_Rename(struct DosLibrary *__base, CONST_STRPTR oldName, CONST_STRPTR newName)
@@ -182,8 +182,8 @@ __dos_Rename(struct DosLibrary *__base, CONST_STRPTR oldName, CONST_STRPTR newNa
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Rename(oldName, newName) __dos_Rename((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(oldName), (CONST_STRPTR)(newName))
-#define __Rename_base(__ndk_b, oldName, newName) __dos_Rename((__dos_base_t)(__ndk_b), (CONST_STRPTR)(oldName), (CONST_STRPTR)(newName))
+#define Rename(oldName, newName) __dos_Rename((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(oldName), (CONST_STRPTR)(newName))
+#define __Rename_base(__ndk_b, oldName, newName) __dos_Rename((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(oldName), (CONST_STRPTR)(newName))
 
 static __inline__ BPTR
 __dos_Lock(struct DosLibrary *__base, CONST_STRPTR name, LONG type)
@@ -200,8 +200,8 @@ __dos_Lock(struct DosLibrary *__base, CONST_STRPTR name, LONG type)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define Lock(name, type) __dos_Lock((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(type))
-#define __Lock_base(__ndk_b, name, type) __dos_Lock((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(type))
+#define Lock(name, type) __dos_Lock((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(type))
+#define __Lock_base(__ndk_b, name, type) __dos_Lock((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(type))
 
 static __inline__ VOID
 __dos_UnLock(struct DosLibrary *__base, BPTR lock)
@@ -217,8 +217,8 @@ __dos_UnLock(struct DosLibrary *__base, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnLock(lock) __dos_UnLock((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock))
-#define __UnLock_base(__ndk_b, lock) __dos_UnLock((__dos_base_t)(__ndk_b), (BPTR)(lock))
+#define UnLock(lock) __dos_UnLock((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock))
+#define __UnLock_base(__ndk_b, lock) __dos_UnLock((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock))
 
 static __inline__ BPTR
 __dos_DupLock(struct DosLibrary *__base, BPTR lock)
@@ -234,8 +234,8 @@ __dos_DupLock(struct DosLibrary *__base, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define DupLock(lock) __dos_DupLock((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock))
-#define __DupLock_base(__ndk_b, lock) __dos_DupLock((__dos_base_t)(__ndk_b), (BPTR)(lock))
+#define DupLock(lock) __dos_DupLock((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock))
+#define __DupLock_base(__ndk_b, lock) __dos_DupLock((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock))
 
 static __inline__ LONG
 __dos_Examine(struct DosLibrary *__base, BPTR lock, struct FileInfoBlock * fileInfoBlock)
@@ -252,8 +252,8 @@ __dos_Examine(struct DosLibrary *__base, BPTR lock, struct FileInfoBlock * fileI
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Examine(lock, fileInfoBlock) __dos_Examine((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
-#define __Examine_base(__ndk_b, lock, fileInfoBlock) __dos_Examine((__dos_base_t)(__ndk_b), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
+#define Examine(lock, fileInfoBlock) __dos_Examine((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
+#define __Examine_base(__ndk_b, lock, fileInfoBlock) __dos_Examine((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
 
 static __inline__ LONG
 __dos_ExNext(struct DosLibrary *__base, BPTR lock, struct FileInfoBlock * fileInfoBlock)
@@ -270,8 +270,8 @@ __dos_ExNext(struct DosLibrary *__base, BPTR lock, struct FileInfoBlock * fileIn
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ExNext(lock, fileInfoBlock) __dos_ExNext((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
-#define __ExNext_base(__ndk_b, lock, fileInfoBlock) __dos_ExNext((__dos_base_t)(__ndk_b), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
+#define ExNext(lock, fileInfoBlock) __dos_ExNext((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
+#define __ExNext_base(__ndk_b, lock, fileInfoBlock) __dos_ExNext((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
 
 static __inline__ LONG
 __dos_Info(struct DosLibrary *__base, BPTR lock, struct InfoData * parameterBlock)
@@ -288,8 +288,8 @@ __dos_Info(struct DosLibrary *__base, BPTR lock, struct InfoData * parameterBloc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Info(lock, parameterBlock) __dos_Info((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock), (struct InfoData *)(parameterBlock))
-#define __Info_base(__ndk_b, lock, parameterBlock) __dos_Info((__dos_base_t)(__ndk_b), (BPTR)(lock), (struct InfoData *)(parameterBlock))
+#define Info(lock, parameterBlock) __dos_Info((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock), (struct InfoData *)(parameterBlock))
+#define __Info_base(__ndk_b, lock, parameterBlock) __dos_Info((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock), (struct InfoData *)(parameterBlock))
 
 static __inline__ BPTR
 __dos_CreateDir(struct DosLibrary *__base, CONST_STRPTR name)
@@ -305,8 +305,8 @@ __dos_CreateDir(struct DosLibrary *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define CreateDir(name) __dos_CreateDir((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name))
-#define __CreateDir_base(__ndk_b, name) __dos_CreateDir((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define CreateDir(name) __dos_CreateDir((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __CreateDir_base(__ndk_b, name) __dos_CreateDir((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BPTR
 __dos_CurrentDir(struct DosLibrary *__base, BPTR lock)
@@ -322,8 +322,8 @@ __dos_CurrentDir(struct DosLibrary *__base, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define CurrentDir(lock) __dos_CurrentDir((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock))
-#define __CurrentDir_base(__ndk_b, lock) __dos_CurrentDir((__dos_base_t)(__ndk_b), (BPTR)(lock))
+#define CurrentDir(lock) __dos_CurrentDir((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock))
+#define __CurrentDir_base(__ndk_b, lock) __dos_CurrentDir((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock))
 
 static __inline__ LONG
 __dos_IoErr(struct DosLibrary *__base)
@@ -339,8 +339,8 @@ __dos_IoErr(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IoErr() __dos_IoErr((__dos_base_t)(DOS_BASE_NAME))
-#define __IoErr_base(__ndk_b) __dos_IoErr((__dos_base_t)(__ndk_b))
+#define IoErr() __dos_IoErr((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __IoErr_base(__ndk_b) __dos_IoErr((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ struct MsgPort *
 __dos_CreateProc(struct DosLibrary *__base, CONST_STRPTR name, LONG pri, BPTR segList, LONG stackSize)
@@ -359,8 +359,8 @@ __dos_CreateProc(struct DosLibrary *__base, CONST_STRPTR name, LONG pri, BPTR se
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define CreateProc(name, pri, segList, stackSize) __dos_CreateProc((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(pri), (BPTR)(segList), (LONG)(stackSize))
-#define __CreateProc_base(__ndk_b, name, pri, segList, stackSize) __dos_CreateProc((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(pri), (BPTR)(segList), (LONG)(stackSize))
+#define CreateProc(name, pri, segList, stackSize) __dos_CreateProc((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(pri), (BPTR)(segList), (LONG)(stackSize))
+#define __CreateProc_base(__ndk_b, name, pri, segList, stackSize) __dos_CreateProc((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(pri), (BPTR)(segList), (LONG)(stackSize))
 
 static __inline__ VOID
 __dos_Exit(struct DosLibrary *__base, LONG returnCode)
@@ -376,8 +376,8 @@ __dos_Exit(struct DosLibrary *__base, LONG returnCode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Exit(returnCode) __dos_Exit((__dos_base_t)(DOS_BASE_NAME), (LONG)(returnCode))
-#define __Exit_base(__ndk_b, returnCode) __dos_Exit((__dos_base_t)(__ndk_b), (LONG)(returnCode))
+#define Exit(returnCode) __dos_Exit((__dos_base_t)(void *)(DOS_BASE_NAME), (LONG)(returnCode))
+#define __Exit_base(__ndk_b, returnCode) __dos_Exit((__dos_base_t)(void *)(__ndk_b), (LONG)(returnCode))
 
 static __inline__ BPTR
 __dos_LoadSeg(struct DosLibrary *__base, CONST_STRPTR name)
@@ -393,8 +393,8 @@ __dos_LoadSeg(struct DosLibrary *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define LoadSeg(name) __dos_LoadSeg((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name))
-#define __LoadSeg_base(__ndk_b, name) __dos_LoadSeg((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define LoadSeg(name) __dos_LoadSeg((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __LoadSeg_base(__ndk_b, name) __dos_LoadSeg((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ VOID
 __dos_UnLoadSeg(struct DosLibrary *__base, BPTR seglist)
@@ -410,8 +410,8 @@ __dos_UnLoadSeg(struct DosLibrary *__base, BPTR seglist)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnLoadSeg(seglist) __dos_UnLoadSeg((__dos_base_t)(DOS_BASE_NAME), (BPTR)(seglist))
-#define __UnLoadSeg_base(__ndk_b, seglist) __dos_UnLoadSeg((__dos_base_t)(__ndk_b), (BPTR)(seglist))
+#define UnLoadSeg(seglist) __dos_UnLoadSeg((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(seglist))
+#define __UnLoadSeg_base(__ndk_b, seglist) __dos_UnLoadSeg((__dos_base_t)(void *)(__ndk_b), (BPTR)(seglist))
 
 static __inline__ struct MsgPort *
 __dos_DeviceProc(struct DosLibrary *__base, CONST_STRPTR name)
@@ -427,8 +427,8 @@ __dos_DeviceProc(struct DosLibrary *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define DeviceProc(name) __dos_DeviceProc((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name))
-#define __DeviceProc_base(__ndk_b, name) __dos_DeviceProc((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define DeviceProc(name) __dos_DeviceProc((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __DeviceProc_base(__ndk_b, name) __dos_DeviceProc((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ LONG
 __dos_SetComment(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR comment)
@@ -445,8 +445,8 @@ __dos_SetComment(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR comm
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetComment(name, comment) __dos_SetComment((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(comment))
-#define __SetComment_base(__ndk_b, name, comment) __dos_SetComment((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST_STRPTR)(comment))
+#define SetComment(name, comment) __dos_SetComment((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(comment))
+#define __SetComment_base(__ndk_b, name, comment) __dos_SetComment((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST_STRPTR)(comment))
 
 static __inline__ LONG
 __dos_SetProtection(struct DosLibrary *__base, CONST_STRPTR name, LONG protect)
@@ -463,8 +463,8 @@ __dos_SetProtection(struct DosLibrary *__base, CONST_STRPTR name, LONG protect)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetProtection(name, protect) __dos_SetProtection((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(protect))
-#define __SetProtection_base(__ndk_b, name, protect) __dos_SetProtection((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(protect))
+#define SetProtection(name, protect) __dos_SetProtection((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(protect))
+#define __SetProtection_base(__ndk_b, name, protect) __dos_SetProtection((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(protect))
 
 static __inline__ struct DateStamp *
 __dos_DateStamp(struct DosLibrary *__base, struct DateStamp * date)
@@ -480,8 +480,8 @@ __dos_DateStamp(struct DosLibrary *__base, struct DateStamp * date)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DateStamp *)_d0;
 }
-#define DateStamp(date) __dos_DateStamp((__dos_base_t)(DOS_BASE_NAME), (struct DateStamp *)(date))
-#define __DateStamp_base(__ndk_b, date) __dos_DateStamp((__dos_base_t)(__ndk_b), (struct DateStamp *)(date))
+#define DateStamp(date) __dos_DateStamp((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DateStamp *)(date))
+#define __DateStamp_base(__ndk_b, date) __dos_DateStamp((__dos_base_t)(void *)(__ndk_b), (struct DateStamp *)(date))
 
 static __inline__ VOID
 __dos_Delay(struct DosLibrary *__base, LONG timeout)
@@ -497,8 +497,8 @@ __dos_Delay(struct DosLibrary *__base, LONG timeout)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Delay(timeout) __dos_Delay((__dos_base_t)(DOS_BASE_NAME), (LONG)(timeout))
-#define __Delay_base(__ndk_b, timeout) __dos_Delay((__dos_base_t)(__ndk_b), (LONG)(timeout))
+#define Delay(timeout) __dos_Delay((__dos_base_t)(void *)(DOS_BASE_NAME), (LONG)(timeout))
+#define __Delay_base(__ndk_b, timeout) __dos_Delay((__dos_base_t)(void *)(__ndk_b), (LONG)(timeout))
 
 static __inline__ LONG
 __dos_WaitForChar(struct DosLibrary *__base, BPTR file, LONG timeout)
@@ -515,8 +515,8 @@ __dos_WaitForChar(struct DosLibrary *__base, BPTR file, LONG timeout)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WaitForChar(file, timeout) __dos_WaitForChar((__dos_base_t)(DOS_BASE_NAME), (BPTR)(file), (LONG)(timeout))
-#define __WaitForChar_base(__ndk_b, file, timeout) __dos_WaitForChar((__dos_base_t)(__ndk_b), (BPTR)(file), (LONG)(timeout))
+#define WaitForChar(file, timeout) __dos_WaitForChar((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(file), (LONG)(timeout))
+#define __WaitForChar_base(__ndk_b, file, timeout) __dos_WaitForChar((__dos_base_t)(void *)(__ndk_b), (BPTR)(file), (LONG)(timeout))
 
 static __inline__ BPTR
 __dos_ParentDir(struct DosLibrary *__base, BPTR lock)
@@ -532,8 +532,8 @@ __dos_ParentDir(struct DosLibrary *__base, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define ParentDir(lock) __dos_ParentDir((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock))
-#define __ParentDir_base(__ndk_b, lock) __dos_ParentDir((__dos_base_t)(__ndk_b), (BPTR)(lock))
+#define ParentDir(lock) __dos_ParentDir((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock))
+#define __ParentDir_base(__ndk_b, lock) __dos_ParentDir((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock))
 
 static __inline__ LONG
 __dos_IsInteractive(struct DosLibrary *__base, BPTR file)
@@ -549,8 +549,8 @@ __dos_IsInteractive(struct DosLibrary *__base, BPTR file)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IsInteractive(file) __dos_IsInteractive((__dos_base_t)(DOS_BASE_NAME), (BPTR)(file))
-#define __IsInteractive_base(__ndk_b, file) __dos_IsInteractive((__dos_base_t)(__ndk_b), (BPTR)(file))
+#define IsInteractive(file) __dos_IsInteractive((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(file))
+#define __IsInteractive_base(__ndk_b, file) __dos_IsInteractive((__dos_base_t)(void *)(__ndk_b), (BPTR)(file))
 
 static __inline__ LONG
 __dos_Execute(struct DosLibrary *__base, CONST_STRPTR string, BPTR file, BPTR file2)
@@ -568,8 +568,8 @@ __dos_Execute(struct DosLibrary *__base, CONST_STRPTR string, BPTR file, BPTR fi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Execute(string, file, file2) __dos_Execute((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(string), (BPTR)(file), (BPTR)(file2))
-#define __Execute_base(__ndk_b, string, file, file2) __dos_Execute((__dos_base_t)(__ndk_b), (CONST_STRPTR)(string), (BPTR)(file), (BPTR)(file2))
+#define Execute(string, file, file2) __dos_Execute((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(string), (BPTR)(file), (BPTR)(file2))
+#define __Execute_base(__ndk_b, string, file, file2) __dos_Execute((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(string), (BPTR)(file), (BPTR)(file2))
 
 static __inline__ APTR
 __dos_AllocDosObject(struct DosLibrary *__base, ULONG type, CONST struct TagItem * tags)
@@ -586,8 +586,8 @@ __dos_AllocDosObject(struct DosLibrary *__base, ULONG type, CONST struct TagItem
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AllocDosObject(type, tags) __dos_AllocDosObject((__dos_base_t)(DOS_BASE_NAME), (ULONG)(type), (CONST struct TagItem *)(tags))
-#define __AllocDosObject_base(__ndk_b, type, tags) __dos_AllocDosObject((__dos_base_t)(__ndk_b), (ULONG)(type), (CONST struct TagItem *)(tags))
+#define AllocDosObject(type, tags) __dos_AllocDosObject((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(type), (CONST struct TagItem *)(tags))
+#define __AllocDosObject_base(__ndk_b, type, tags) __dos_AllocDosObject((__dos_base_t)(void *)(__ndk_b), (ULONG)(type), (CONST struct TagItem *)(tags))
 
 #define AllocDosObjectTagList(...) AllocDosObject(__VA_ARGS__)
 
@@ -597,7 +597,7 @@ ___dos_AllocDosObjectTags(__dos_base_t __ndk_base, ULONG type, ...)
 {
 	return __dos_AllocDosObject(__ndk_base, (ULONG)(type), (CONST struct TagItem *)((ULONG)&type + sizeof(type)));
 }
-#define AllocDosObjectTags(type, ...) ___dos_AllocDosObjectTags((__dos_base_t)(DOS_BASE_NAME), (ULONG)(type), ##__VA_ARGS__)
+#define AllocDosObjectTags(type, ...) ___dos_AllocDosObjectTags((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(type), ##__VA_ARGS__)
 #else
 #define AllocDosObjectTags(type, ...) (AllocDosObjectTags)((ULONG)(type), ##__VA_ARGS__)
 #endif
@@ -617,8 +617,8 @@ __dos_FreeDosObject(struct DosLibrary *__base, ULONG type, APTR ptr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeDosObject(type, ptr) __dos_FreeDosObject((__dos_base_t)(DOS_BASE_NAME), (ULONG)(type), (APTR)(ptr))
-#define __FreeDosObject_base(__ndk_b, type, ptr) __dos_FreeDosObject((__dos_base_t)(__ndk_b), (ULONG)(type), (APTR)(ptr))
+#define FreeDosObject(type, ptr) __dos_FreeDosObject((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(type), (APTR)(ptr))
+#define __FreeDosObject_base(__ndk_b, type, ptr) __dos_FreeDosObject((__dos_base_t)(void *)(__ndk_b), (ULONG)(type), (APTR)(ptr))
 
 static __inline__ LONG
 __dos_DoPkt(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3, LONG arg4, LONG arg5)
@@ -640,8 +640,8 @@ __dos_DoPkt(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DoPkt(port, action, arg1, arg2, arg3, arg4, arg5) __dos_DoPkt((__dos_base_t)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4), (LONG)(arg5))
-#define __DoPkt_base(__ndk_b, port, action, arg1, arg2, arg3, arg4, arg5) __dos_DoPkt((__dos_base_t)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4), (LONG)(arg5))
+#define DoPkt(port, action, arg1, arg2, arg3, arg4, arg5) __dos_DoPkt((__dos_base_t)(void *)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4), (LONG)(arg5))
+#define __DoPkt_base(__ndk_b, port, action, arg1, arg2, arg3, arg4, arg5) __dos_DoPkt((__dos_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4), (LONG)(arg5))
 
 static __inline__ LONG
 __dos_DoPkt0(struct DosLibrary *__base, struct MsgPort * port, LONG action)
@@ -658,8 +658,8 @@ __dos_DoPkt0(struct DosLibrary *__base, struct MsgPort * port, LONG action)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DoPkt0(port, action) __dos_DoPkt0((__dos_base_t)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action))
-#define __DoPkt0_base(__ndk_b, port, action) __dos_DoPkt0((__dos_base_t)(__ndk_b), (struct MsgPort *)(port), (LONG)(action))
+#define DoPkt0(port, action) __dos_DoPkt0((__dos_base_t)(void *)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action))
+#define __DoPkt0_base(__ndk_b, port, action) __dos_DoPkt0((__dos_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (LONG)(action))
 
 static __inline__ LONG
 __dos_DoPkt1(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1)
@@ -677,8 +677,8 @@ __dos_DoPkt1(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DoPkt1(port, action, arg1) __dos_DoPkt1((__dos_base_t)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1))
-#define __DoPkt1_base(__ndk_b, port, action, arg1) __dos_DoPkt1((__dos_base_t)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1))
+#define DoPkt1(port, action, arg1) __dos_DoPkt1((__dos_base_t)(void *)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1))
+#define __DoPkt1_base(__ndk_b, port, action, arg1) __dos_DoPkt1((__dos_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1))
 
 static __inline__ LONG
 __dos_DoPkt2(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2)
@@ -697,8 +697,8 @@ __dos_DoPkt2(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DoPkt2(port, action, arg1, arg2) __dos_DoPkt2((__dos_base_t)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2))
-#define __DoPkt2_base(__ndk_b, port, action, arg1, arg2) __dos_DoPkt2((__dos_base_t)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2))
+#define DoPkt2(port, action, arg1, arg2) __dos_DoPkt2((__dos_base_t)(void *)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2))
+#define __DoPkt2_base(__ndk_b, port, action, arg1, arg2) __dos_DoPkt2((__dos_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ LONG
 __dos_DoPkt3(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3)
@@ -718,8 +718,8 @@ __dos_DoPkt3(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DoPkt3(port, action, arg1, arg2, arg3) __dos_DoPkt3((__dos_base_t)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3))
-#define __DoPkt3_base(__ndk_b, port, action, arg1, arg2, arg3) __dos_DoPkt3((__dos_base_t)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3))
+#define DoPkt3(port, action, arg1, arg2, arg3) __dos_DoPkt3((__dos_base_t)(void *)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3))
+#define __DoPkt3_base(__ndk_b, port, action, arg1, arg2, arg3) __dos_DoPkt3((__dos_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3))
 
 static __inline__ LONG
 __dos_DoPkt4(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3, LONG arg4)
@@ -740,8 +740,8 @@ __dos_DoPkt4(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DoPkt4(port, action, arg1, arg2, arg3, arg4) __dos_DoPkt4((__dos_base_t)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4))
-#define __DoPkt4_base(__ndk_b, port, action, arg1, arg2, arg3, arg4) __dos_DoPkt4((__dos_base_t)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4))
+#define DoPkt4(port, action, arg1, arg2, arg3, arg4) __dos_DoPkt4((__dos_base_t)(void *)(DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4))
+#define __DoPkt4_base(__ndk_b, port, action, arg1, arg2, arg3, arg4) __dos_DoPkt4((__dos_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4))
 
 static __inline__ VOID
 __dos_SendPkt(struct DosLibrary *__base, struct DosPacket * dp, struct MsgPort * port, struct MsgPort * replyport)
@@ -759,8 +759,8 @@ __dos_SendPkt(struct DosLibrary *__base, struct DosPacket * dp, struct MsgPort *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SendPkt(dp, port, replyport) __dos_SendPkt((__dos_base_t)(DOS_BASE_NAME), (struct DosPacket *)(dp), (struct MsgPort *)(port), (struct MsgPort *)(replyport))
-#define __SendPkt_base(__ndk_b, dp, port, replyport) __dos_SendPkt((__dos_base_t)(__ndk_b), (struct DosPacket *)(dp), (struct MsgPort *)(port), (struct MsgPort *)(replyport))
+#define SendPkt(dp, port, replyport) __dos_SendPkt((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DosPacket *)(dp), (struct MsgPort *)(port), (struct MsgPort *)(replyport))
+#define __SendPkt_base(__ndk_b, dp, port, replyport) __dos_SendPkt((__dos_base_t)(void *)(__ndk_b), (struct DosPacket *)(dp), (struct MsgPort *)(port), (struct MsgPort *)(replyport))
 
 static __inline__ struct DosPacket *
 __dos_WaitPkt(struct DosLibrary *__base)
@@ -776,8 +776,8 @@ __dos_WaitPkt(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DosPacket *)_d0;
 }
-#define WaitPkt() __dos_WaitPkt((__dos_base_t)(DOS_BASE_NAME))
-#define __WaitPkt_base(__ndk_b) __dos_WaitPkt((__dos_base_t)(__ndk_b))
+#define WaitPkt() __dos_WaitPkt((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __WaitPkt_base(__ndk_b) __dos_WaitPkt((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ VOID
 __dos_ReplyPkt(struct DosLibrary *__base, struct DosPacket * dp, LONG res1, LONG res2)
@@ -795,8 +795,8 @@ __dos_ReplyPkt(struct DosLibrary *__base, struct DosPacket * dp, LONG res1, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReplyPkt(dp, res1, res2) __dos_ReplyPkt((__dos_base_t)(DOS_BASE_NAME), (struct DosPacket *)(dp), (LONG)(res1), (LONG)(res2))
-#define __ReplyPkt_base(__ndk_b, dp, res1, res2) __dos_ReplyPkt((__dos_base_t)(__ndk_b), (struct DosPacket *)(dp), (LONG)(res1), (LONG)(res2))
+#define ReplyPkt(dp, res1, res2) __dos_ReplyPkt((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DosPacket *)(dp), (LONG)(res1), (LONG)(res2))
+#define __ReplyPkt_base(__ndk_b, dp, res1, res2) __dos_ReplyPkt((__dos_base_t)(void *)(__ndk_b), (struct DosPacket *)(dp), (LONG)(res1), (LONG)(res2))
 
 static __inline__ VOID
 __dos_AbortPkt(struct DosLibrary *__base, struct MsgPort * port, struct DosPacket * pkt)
@@ -813,8 +813,8 @@ __dos_AbortPkt(struct DosLibrary *__base, struct MsgPort * port, struct DosPacke
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AbortPkt(port, pkt) __dos_AbortPkt((__dos_base_t)(DOS_BASE_NAME), (struct MsgPort *)(port), (struct DosPacket *)(pkt))
-#define __AbortPkt_base(__ndk_b, port, pkt) __dos_AbortPkt((__dos_base_t)(__ndk_b), (struct MsgPort *)(port), (struct DosPacket *)(pkt))
+#define AbortPkt(port, pkt) __dos_AbortPkt((__dos_base_t)(void *)(DOS_BASE_NAME), (struct MsgPort *)(port), (struct DosPacket *)(pkt))
+#define __AbortPkt_base(__ndk_b, port, pkt) __dos_AbortPkt((__dos_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (struct DosPacket *)(pkt))
 
 static __inline__ BOOL
 __dos_LockRecord(struct DosLibrary *__base, BPTR fh, ULONG offset, ULONG length, ULONG mode, ULONG timeout)
@@ -834,8 +834,8 @@ __dos_LockRecord(struct DosLibrary *__base, BPTR fh, ULONG offset, ULONG length,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define LockRecord(fh, offset, length, mode, timeout) __dos_LockRecord((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (ULONG)(offset), (ULONG)(length), (ULONG)(mode), (ULONG)(timeout))
-#define __LockRecord_base(__ndk_b, fh, offset, length, mode, timeout) __dos_LockRecord((__dos_base_t)(__ndk_b), (BPTR)(fh), (ULONG)(offset), (ULONG)(length), (ULONG)(mode), (ULONG)(timeout))
+#define LockRecord(fh, offset, length, mode, timeout) __dos_LockRecord((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (ULONG)(offset), (ULONG)(length), (ULONG)(mode), (ULONG)(timeout))
+#define __LockRecord_base(__ndk_b, fh, offset, length, mode, timeout) __dos_LockRecord((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (ULONG)(offset), (ULONG)(length), (ULONG)(mode), (ULONG)(timeout))
 
 static __inline__ BOOL
 __dos_LockRecords(struct DosLibrary *__base, struct RecordLock * recArray, ULONG timeout)
@@ -852,8 +852,8 @@ __dos_LockRecords(struct DosLibrary *__base, struct RecordLock * recArray, ULONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define LockRecords(recArray, timeout) __dos_LockRecords((__dos_base_t)(DOS_BASE_NAME), (struct RecordLock *)(recArray), (ULONG)(timeout))
-#define __LockRecords_base(__ndk_b, recArray, timeout) __dos_LockRecords((__dos_base_t)(__ndk_b), (struct RecordLock *)(recArray), (ULONG)(timeout))
+#define LockRecords(recArray, timeout) __dos_LockRecords((__dos_base_t)(void *)(DOS_BASE_NAME), (struct RecordLock *)(recArray), (ULONG)(timeout))
+#define __LockRecords_base(__ndk_b, recArray, timeout) __dos_LockRecords((__dos_base_t)(void *)(__ndk_b), (struct RecordLock *)(recArray), (ULONG)(timeout))
 
 static __inline__ BOOL
 __dos_UnLockRecord(struct DosLibrary *__base, BPTR fh, ULONG offset, ULONG length)
@@ -871,8 +871,8 @@ __dos_UnLockRecord(struct DosLibrary *__base, BPTR fh, ULONG offset, ULONG lengt
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define UnLockRecord(fh, offset, length) __dos_UnLockRecord((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (ULONG)(offset), (ULONG)(length))
-#define __UnLockRecord_base(__ndk_b, fh, offset, length) __dos_UnLockRecord((__dos_base_t)(__ndk_b), (BPTR)(fh), (ULONG)(offset), (ULONG)(length))
+#define UnLockRecord(fh, offset, length) __dos_UnLockRecord((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (ULONG)(offset), (ULONG)(length))
+#define __UnLockRecord_base(__ndk_b, fh, offset, length) __dos_UnLockRecord((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (ULONG)(offset), (ULONG)(length))
 
 static __inline__ BOOL
 __dos_UnLockRecords(struct DosLibrary *__base, struct RecordLock * recArray)
@@ -888,8 +888,8 @@ __dos_UnLockRecords(struct DosLibrary *__base, struct RecordLock * recArray)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define UnLockRecords(recArray) __dos_UnLockRecords((__dos_base_t)(DOS_BASE_NAME), (struct RecordLock *)(recArray))
-#define __UnLockRecords_base(__ndk_b, recArray) __dos_UnLockRecords((__dos_base_t)(__ndk_b), (struct RecordLock *)(recArray))
+#define UnLockRecords(recArray) __dos_UnLockRecords((__dos_base_t)(void *)(DOS_BASE_NAME), (struct RecordLock *)(recArray))
+#define __UnLockRecords_base(__ndk_b, recArray) __dos_UnLockRecords((__dos_base_t)(void *)(__ndk_b), (struct RecordLock *)(recArray))
 
 static __inline__ BPTR
 __dos_SelectInput(struct DosLibrary *__base, BPTR fh)
@@ -905,8 +905,8 @@ __dos_SelectInput(struct DosLibrary *__base, BPTR fh)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define SelectInput(fh) __dos_SelectInput((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh))
-#define __SelectInput_base(__ndk_b, fh) __dos_SelectInput((__dos_base_t)(__ndk_b), (BPTR)(fh))
+#define SelectInput(fh) __dos_SelectInput((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh))
+#define __SelectInput_base(__ndk_b, fh) __dos_SelectInput((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh))
 
 static __inline__ BPTR
 __dos_SelectOutput(struct DosLibrary *__base, BPTR fh)
@@ -922,8 +922,8 @@ __dos_SelectOutput(struct DosLibrary *__base, BPTR fh)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define SelectOutput(fh) __dos_SelectOutput((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh))
-#define __SelectOutput_base(__ndk_b, fh) __dos_SelectOutput((__dos_base_t)(__ndk_b), (BPTR)(fh))
+#define SelectOutput(fh) __dos_SelectOutput((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh))
+#define __SelectOutput_base(__ndk_b, fh) __dos_SelectOutput((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh))
 
 static __inline__ LONG
 __dos_FGetC(struct DosLibrary *__base, BPTR fh)
@@ -939,8 +939,8 @@ __dos_FGetC(struct DosLibrary *__base, BPTR fh)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define FGetC(fh) __dos_FGetC((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh))
-#define __FGetC_base(__ndk_b, fh) __dos_FGetC((__dos_base_t)(__ndk_b), (BPTR)(fh))
+#define FGetC(fh) __dos_FGetC((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh))
+#define __FGetC_base(__ndk_b, fh) __dos_FGetC((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh))
 
 static __inline__ LONG
 __dos_FPutC(struct DosLibrary *__base, BPTR fh, LONG ch)
@@ -957,8 +957,8 @@ __dos_FPutC(struct DosLibrary *__base, BPTR fh, LONG ch)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define FPutC(fh, ch) __dos_FPutC((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (LONG)(ch))
-#define __FPutC_base(__ndk_b, fh, ch) __dos_FPutC((__dos_base_t)(__ndk_b), (BPTR)(fh), (LONG)(ch))
+#define FPutC(fh, ch) __dos_FPutC((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (LONG)(ch))
+#define __FPutC_base(__ndk_b, fh, ch) __dos_FPutC((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (LONG)(ch))
 
 static __inline__ LONG
 __dos_UnGetC(struct DosLibrary *__base, BPTR fh, LONG character)
@@ -975,8 +975,8 @@ __dos_UnGetC(struct DosLibrary *__base, BPTR fh, LONG character)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define UnGetC(fh, character) __dos_UnGetC((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (LONG)(character))
-#define __UnGetC_base(__ndk_b, fh, character) __dos_UnGetC((__dos_base_t)(__ndk_b), (BPTR)(fh), (LONG)(character))
+#define UnGetC(fh, character) __dos_UnGetC((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (LONG)(character))
+#define __UnGetC_base(__ndk_b, fh, character) __dos_UnGetC((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (LONG)(character))
 
 static __inline__ LONG
 __dos_FRead(struct DosLibrary *__base, BPTR fh, APTR block, ULONG blocklen, ULONG number)
@@ -995,8 +995,8 @@ __dos_FRead(struct DosLibrary *__base, BPTR fh, APTR block, ULONG blocklen, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define FRead(fh, block, blocklen, number) __dos_FRead((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (APTR)(block), (ULONG)(blocklen), (ULONG)(number))
-#define __FRead_base(__ndk_b, fh, block, blocklen, number) __dos_FRead((__dos_base_t)(__ndk_b), (BPTR)(fh), (APTR)(block), (ULONG)(blocklen), (ULONG)(number))
+#define FRead(fh, block, blocklen, number) __dos_FRead((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (APTR)(block), (ULONG)(blocklen), (ULONG)(number))
+#define __FRead_base(__ndk_b, fh, block, blocklen, number) __dos_FRead((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (APTR)(block), (ULONG)(blocklen), (ULONG)(number))
 
 static __inline__ LONG
 __dos_FWrite(struct DosLibrary *__base, BPTR fh, CONST_APTR block, ULONG blocklen, ULONG number)
@@ -1015,8 +1015,8 @@ __dos_FWrite(struct DosLibrary *__base, BPTR fh, CONST_APTR block, ULONG blockle
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define FWrite(fh, block, blocklen, number) __dos_FWrite((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (CONST_APTR)(block), (ULONG)(blocklen), (ULONG)(number))
-#define __FWrite_base(__ndk_b, fh, block, blocklen, number) __dos_FWrite((__dos_base_t)(__ndk_b), (BPTR)(fh), (CONST_APTR)(block), (ULONG)(blocklen), (ULONG)(number))
+#define FWrite(fh, block, blocklen, number) __dos_FWrite((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (CONST_APTR)(block), (ULONG)(blocklen), (ULONG)(number))
+#define __FWrite_base(__ndk_b, fh, block, blocklen, number) __dos_FWrite((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (CONST_APTR)(block), (ULONG)(blocklen), (ULONG)(number))
 
 static __inline__ STRPTR
 __dos_FGets(struct DosLibrary *__base, BPTR fh, STRPTR buf, ULONG buflen)
@@ -1034,8 +1034,8 @@ __dos_FGets(struct DosLibrary *__base, BPTR fh, STRPTR buf, ULONG buflen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define FGets(fh, buf, buflen) __dos_FGets((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buf), (ULONG)(buflen))
-#define __FGets_base(__ndk_b, fh, buf, buflen) __dos_FGets((__dos_base_t)(__ndk_b), (BPTR)(fh), (STRPTR)(buf), (ULONG)(buflen))
+#define FGets(fh, buf, buflen) __dos_FGets((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buf), (ULONG)(buflen))
+#define __FGets_base(__ndk_b, fh, buf, buflen) __dos_FGets((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (STRPTR)(buf), (ULONG)(buflen))
 
 static __inline__ LONG
 __dos_FPuts(struct DosLibrary *__base, BPTR fh, CONST_STRPTR str)
@@ -1052,8 +1052,8 @@ __dos_FPuts(struct DosLibrary *__base, BPTR fh, CONST_STRPTR str)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define FPuts(fh, str) __dos_FPuts((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(str))
-#define __FPuts_base(__ndk_b, fh, str) __dos_FPuts((__dos_base_t)(__ndk_b), (BPTR)(fh), (CONST_STRPTR)(str))
+#define FPuts(fh, str) __dos_FPuts((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(str))
+#define __FPuts_base(__ndk_b, fh, str) __dos_FPuts((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (CONST_STRPTR)(str))
 
 static __inline__ VOID
 __dos_VFWritef(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST LONG * argarray)
@@ -1071,8 +1071,8 @@ __dos_VFWritef(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST LO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define VFWritef(fh, format, argarray) __dos_VFWritef((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)(argarray))
-#define __VFWritef_base(__ndk_b, fh, format, argarray) __dos_VFWritef((__dos_base_t)(__ndk_b), (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)(argarray))
+#define VFWritef(fh, format, argarray) __dos_VFWritef((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)(argarray))
+#define __VFWritef_base(__ndk_b, fh, format, argarray) __dos_VFWritef((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)(argarray))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
@@ -1080,7 +1080,7 @@ ___dos_FWritef(__dos_base_t __ndk_base, BPTR fh, CONST_STRPTR format, ...)
 {
 	__dos_VFWritef(__ndk_base, (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)((ULONG)&format + sizeof(format)));
 }
-#define FWritef(fh, format, ...) ___dos_FWritef((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
+#define FWritef(fh, format, ...) ___dos_FWritef((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
 #else
 #define FWritef(fh, format, ...) (FWritef)((BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
 #endif
@@ -1101,8 +1101,8 @@ __dos_VFPrintf(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST_AP
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define VFPrintf(fh, format, argarray) __dos_VFPrintf((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
-#define __VFPrintf_base(__ndk_b, fh, format, argarray) __dos_VFPrintf((__dos_base_t)(__ndk_b), (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
+#define VFPrintf(fh, format, argarray) __dos_VFPrintf((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
+#define __VFPrintf_base(__ndk_b, fh, format, argarray) __dos_VFPrintf((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -1110,7 +1110,7 @@ ___dos_FPrintf(__dos_base_t __ndk_base, BPTR fh, CONST_STRPTR format, ...)
 {
 	return __dos_VFPrintf(__ndk_base, (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)((ULONG)&format + sizeof(format)));
 }
-#define FPrintf(fh, format, ...) ___dos_FPrintf((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
+#define FPrintf(fh, format, ...) ___dos_FPrintf((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
 #else
 #define FPrintf(fh, format, ...) (FPrintf)((BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
 #endif
@@ -1129,8 +1129,8 @@ __dos_Flush(struct DosLibrary *__base, BPTR fh)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Flush(fh) __dos_Flush((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh))
-#define __Flush_base(__ndk_b, fh) __dos_Flush((__dos_base_t)(__ndk_b), (BPTR)(fh))
+#define Flush(fh) __dos_Flush((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh))
+#define __Flush_base(__ndk_b, fh) __dos_Flush((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh))
 
 static __inline__ LONG
 __dos_SetVBuf(struct DosLibrary *__base, BPTR fh, STRPTR buff, LONG type, LONG size)
@@ -1149,8 +1149,8 @@ __dos_SetVBuf(struct DosLibrary *__base, BPTR fh, STRPTR buff, LONG type, LONG s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetVBuf(fh, buff, type, size) __dos_SetVBuf((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buff), (LONG)(type), (LONG)(size))
-#define __SetVBuf_base(__ndk_b, fh, buff, type, size) __dos_SetVBuf((__dos_base_t)(__ndk_b), (BPTR)(fh), (STRPTR)(buff), (LONG)(type), (LONG)(size))
+#define SetVBuf(fh, buff, type, size) __dos_SetVBuf((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buff), (LONG)(type), (LONG)(size))
+#define __SetVBuf_base(__ndk_b, fh, buff, type, size) __dos_SetVBuf((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (STRPTR)(buff), (LONG)(type), (LONG)(size))
 
 static __inline__ BPTR
 __dos_DupLockFromFH(struct DosLibrary *__base, BPTR fh)
@@ -1166,8 +1166,8 @@ __dos_DupLockFromFH(struct DosLibrary *__base, BPTR fh)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define DupLockFromFH(fh) __dos_DupLockFromFH((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh))
-#define __DupLockFromFH_base(__ndk_b, fh) __dos_DupLockFromFH((__dos_base_t)(__ndk_b), (BPTR)(fh))
+#define DupLockFromFH(fh) __dos_DupLockFromFH((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh))
+#define __DupLockFromFH_base(__ndk_b, fh) __dos_DupLockFromFH((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh))
 
 static __inline__ BPTR
 __dos_OpenFromLock(struct DosLibrary *__base, BPTR lock)
@@ -1183,8 +1183,8 @@ __dos_OpenFromLock(struct DosLibrary *__base, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define OpenFromLock(lock) __dos_OpenFromLock((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock))
-#define __OpenFromLock_base(__ndk_b, lock) __dos_OpenFromLock((__dos_base_t)(__ndk_b), (BPTR)(lock))
+#define OpenFromLock(lock) __dos_OpenFromLock((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock))
+#define __OpenFromLock_base(__ndk_b, lock) __dos_OpenFromLock((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock))
 
 static __inline__ BPTR
 __dos_ParentOfFH(struct DosLibrary *__base, BPTR fh)
@@ -1200,8 +1200,8 @@ __dos_ParentOfFH(struct DosLibrary *__base, BPTR fh)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define ParentOfFH(fh) __dos_ParentOfFH((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh))
-#define __ParentOfFH_base(__ndk_b, fh) __dos_ParentOfFH((__dos_base_t)(__ndk_b), (BPTR)(fh))
+#define ParentOfFH(fh) __dos_ParentOfFH((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh))
+#define __ParentOfFH_base(__ndk_b, fh) __dos_ParentOfFH((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh))
 
 static __inline__ BOOL
 __dos_ExamineFH(struct DosLibrary *__base, BPTR fh, struct FileInfoBlock * fib)
@@ -1218,8 +1218,8 @@ __dos_ExamineFH(struct DosLibrary *__base, BPTR fh, struct FileInfoBlock * fib)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ExamineFH(fh, fib) __dos_ExamineFH((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (struct FileInfoBlock *)(fib))
-#define __ExamineFH_base(__ndk_b, fh, fib) __dos_ExamineFH((__dos_base_t)(__ndk_b), (BPTR)(fh), (struct FileInfoBlock *)(fib))
+#define ExamineFH(fh, fib) __dos_ExamineFH((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (struct FileInfoBlock *)(fib))
+#define __ExamineFH_base(__ndk_b, fh, fib) __dos_ExamineFH((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (struct FileInfoBlock *)(fib))
 
 static __inline__ LONG
 __dos_SetFileDate(struct DosLibrary *__base, CONST_STRPTR name, CONST struct DateStamp * date)
@@ -1236,8 +1236,8 @@ __dos_SetFileDate(struct DosLibrary *__base, CONST_STRPTR name, CONST struct Dat
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetFileDate(name, date) __dos_SetFileDate((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DateStamp *)(date))
-#define __SetFileDate_base(__ndk_b, name, date) __dos_SetFileDate((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct DateStamp *)(date))
+#define SetFileDate(name, date) __dos_SetFileDate((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DateStamp *)(date))
+#define __SetFileDate_base(__ndk_b, name, date) __dos_SetFileDate((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST struct DateStamp *)(date))
 
 static __inline__ LONG
 __dos_NameFromLock(struct DosLibrary *__base, BPTR lock, STRPTR buffer, LONG len)
@@ -1255,8 +1255,8 @@ __dos_NameFromLock(struct DosLibrary *__base, BPTR lock, STRPTR buffer, LONG len
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define NameFromLock(lock, buffer, len) __dos_NameFromLock((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock), (STRPTR)(buffer), (LONG)(len))
-#define __NameFromLock_base(__ndk_b, lock, buffer, len) __dos_NameFromLock((__dos_base_t)(__ndk_b), (BPTR)(lock), (STRPTR)(buffer), (LONG)(len))
+#define NameFromLock(lock, buffer, len) __dos_NameFromLock((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock), (STRPTR)(buffer), (LONG)(len))
+#define __NameFromLock_base(__ndk_b, lock, buffer, len) __dos_NameFromLock((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock), (STRPTR)(buffer), (LONG)(len))
 
 static __inline__ LONG
 __dos_NameFromFH(struct DosLibrary *__base, BPTR fh, STRPTR buffer, LONG len)
@@ -1274,8 +1274,8 @@ __dos_NameFromFH(struct DosLibrary *__base, BPTR fh, STRPTR buffer, LONG len)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define NameFromFH(fh, buffer, len) __dos_NameFromFH((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buffer), (LONG)(len))
-#define __NameFromFH_base(__ndk_b, fh, buffer, len) __dos_NameFromFH((__dos_base_t)(__ndk_b), (BPTR)(fh), (STRPTR)(buffer), (LONG)(len))
+#define NameFromFH(fh, buffer, len) __dos_NameFromFH((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buffer), (LONG)(len))
+#define __NameFromFH_base(__ndk_b, fh, buffer, len) __dos_NameFromFH((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (STRPTR)(buffer), (LONG)(len))
 
 static __inline__ WORD
 __dos_SplitName(struct DosLibrary *__base, CONST_STRPTR name, UBYTE separator, STRPTR buf, WORD oldpos, LONG size)
@@ -1295,8 +1295,8 @@ __dos_SplitName(struct DosLibrary *__base, CONST_STRPTR name, UBYTE separator, S
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (WORD)_d0;
 }
-#define SplitName(name, separator, buf, oldpos, size) __dos_SplitName((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (UBYTE)(separator), (STRPTR)(buf), (WORD)(oldpos), (LONG)(size))
-#define __SplitName_base(__ndk_b, name, separator, buf, oldpos, size) __dos_SplitName((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (UBYTE)(separator), (STRPTR)(buf), (WORD)(oldpos), (LONG)(size))
+#define SplitName(name, separator, buf, oldpos, size) __dos_SplitName((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (UBYTE)(separator), (STRPTR)(buf), (WORD)(oldpos), (LONG)(size))
+#define __SplitName_base(__ndk_b, name, separator, buf, oldpos, size) __dos_SplitName((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (UBYTE)(separator), (STRPTR)(buf), (WORD)(oldpos), (LONG)(size))
 
 static __inline__ LONG
 __dos_SameLock(struct DosLibrary *__base, BPTR lock1, BPTR lock2)
@@ -1313,8 +1313,8 @@ __dos_SameLock(struct DosLibrary *__base, BPTR lock1, BPTR lock2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SameLock(lock1, lock2) __dos_SameLock((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock1), (BPTR)(lock2))
-#define __SameLock_base(__ndk_b, lock1, lock2) __dos_SameLock((__dos_base_t)(__ndk_b), (BPTR)(lock1), (BPTR)(lock2))
+#define SameLock(lock1, lock2) __dos_SameLock((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock1), (BPTR)(lock2))
+#define __SameLock_base(__ndk_b, lock1, lock2) __dos_SameLock((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock1), (BPTR)(lock2))
 
 static __inline__ LONG
 __dos_SetMode(struct DosLibrary *__base, BPTR fh, LONG mode)
@@ -1331,8 +1331,8 @@ __dos_SetMode(struct DosLibrary *__base, BPTR fh, LONG mode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetMode(fh, mode) __dos_SetMode((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (LONG)(mode))
-#define __SetMode_base(__ndk_b, fh, mode) __dos_SetMode((__dos_base_t)(__ndk_b), (BPTR)(fh), (LONG)(mode))
+#define SetMode(fh, mode) __dos_SetMode((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (LONG)(mode))
+#define __SetMode_base(__ndk_b, fh, mode) __dos_SetMode((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (LONG)(mode))
 
 static __inline__ LONG
 __dos_ExAll(struct DosLibrary *__base, BPTR lock, struct ExAllData * buffer, LONG size, LONG data, struct ExAllControl * control)
@@ -1352,8 +1352,8 @@ __dos_ExAll(struct DosLibrary *__base, BPTR lock, struct ExAllData * buffer, LON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ExAll(lock, buffer, size, data, control) __dos_ExAll((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
-#define __ExAll_base(__ndk_b, lock, buffer, size, data, control) __dos_ExAll((__dos_base_t)(__ndk_b), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
+#define ExAll(lock, buffer, size, data, control) __dos_ExAll((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
+#define __ExAll_base(__ndk_b, lock, buffer, size, data, control) __dos_ExAll((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
 
 static __inline__ LONG
 __dos_ReadLink(struct DosLibrary *__base, struct MsgPort * port, BPTR lock, CONST_STRPTR path, STRPTR buffer, ULONG size)
@@ -1373,8 +1373,8 @@ __dos_ReadLink(struct DosLibrary *__base, struct MsgPort * port, BPTR lock, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReadLink(port, lock, path, buffer, size) __dos_ReadLink((__dos_base_t)(DOS_BASE_NAME), (struct MsgPort *)(port), (BPTR)(lock), (CONST_STRPTR)(path), (STRPTR)(buffer), (ULONG)(size))
-#define __ReadLink_base(__ndk_b, port, lock, path, buffer, size) __dos_ReadLink((__dos_base_t)(__ndk_b), (struct MsgPort *)(port), (BPTR)(lock), (CONST_STRPTR)(path), (STRPTR)(buffer), (ULONG)(size))
+#define ReadLink(port, lock, path, buffer, size) __dos_ReadLink((__dos_base_t)(void *)(DOS_BASE_NAME), (struct MsgPort *)(port), (BPTR)(lock), (CONST_STRPTR)(path), (STRPTR)(buffer), (ULONG)(size))
+#define __ReadLink_base(__ndk_b, port, lock, path, buffer, size) __dos_ReadLink((__dos_base_t)(void *)(__ndk_b), (struct MsgPort *)(port), (BPTR)(lock), (CONST_STRPTR)(path), (STRPTR)(buffer), (ULONG)(size))
 
 static __inline__ LONG
 __dos_MakeLink(struct DosLibrary *__base, CONST_STRPTR name, LONG dest, LONG soft)
@@ -1392,8 +1392,8 @@ __dos_MakeLink(struct DosLibrary *__base, CONST_STRPTR name, LONG dest, LONG sof
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define MakeLink(name, dest, soft) __dos_MakeLink((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(dest), (LONG)(soft))
-#define __MakeLink_base(__ndk_b, name, dest, soft) __dos_MakeLink((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(dest), (LONG)(soft))
+#define MakeLink(name, dest, soft) __dos_MakeLink((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(dest), (LONG)(soft))
+#define __MakeLink_base(__ndk_b, name, dest, soft) __dos_MakeLink((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(dest), (LONG)(soft))
 
 static __inline__ LONG
 __dos_ChangeMode(struct DosLibrary *__base, LONG type, BPTR fh, LONG newmode)
@@ -1411,8 +1411,8 @@ __dos_ChangeMode(struct DosLibrary *__base, LONG type, BPTR fh, LONG newmode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ChangeMode(type, fh, newmode) __dos_ChangeMode((__dos_base_t)(DOS_BASE_NAME), (LONG)(type), (BPTR)(fh), (LONG)(newmode))
-#define __ChangeMode_base(__ndk_b, type, fh, newmode) __dos_ChangeMode((__dos_base_t)(__ndk_b), (LONG)(type), (BPTR)(fh), (LONG)(newmode))
+#define ChangeMode(type, fh, newmode) __dos_ChangeMode((__dos_base_t)(void *)(DOS_BASE_NAME), (LONG)(type), (BPTR)(fh), (LONG)(newmode))
+#define __ChangeMode_base(__ndk_b, type, fh, newmode) __dos_ChangeMode((__dos_base_t)(void *)(__ndk_b), (LONG)(type), (BPTR)(fh), (LONG)(newmode))
 
 static __inline__ LONG
 __dos_SetFileSize(struct DosLibrary *__base, BPTR fh, LONG pos, LONG mode)
@@ -1430,8 +1430,8 @@ __dos_SetFileSize(struct DosLibrary *__base, BPTR fh, LONG pos, LONG mode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetFileSize(fh, pos, mode) __dos_SetFileSize((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (LONG)(pos), (LONG)(mode))
-#define __SetFileSize_base(__ndk_b, fh, pos, mode) __dos_SetFileSize((__dos_base_t)(__ndk_b), (BPTR)(fh), (LONG)(pos), (LONG)(mode))
+#define SetFileSize(fh, pos, mode) __dos_SetFileSize((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (LONG)(pos), (LONG)(mode))
+#define __SetFileSize_base(__ndk_b, fh, pos, mode) __dos_SetFileSize((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (LONG)(pos), (LONG)(mode))
 
 static __inline__ LONG
 __dos_SetIoErr(struct DosLibrary *__base, LONG result)
@@ -1447,8 +1447,8 @@ __dos_SetIoErr(struct DosLibrary *__base, LONG result)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetIoErr(result) __dos_SetIoErr((__dos_base_t)(DOS_BASE_NAME), (LONG)(result))
-#define __SetIoErr_base(__ndk_b, result) __dos_SetIoErr((__dos_base_t)(__ndk_b), (LONG)(result))
+#define SetIoErr(result) __dos_SetIoErr((__dos_base_t)(void *)(DOS_BASE_NAME), (LONG)(result))
+#define __SetIoErr_base(__ndk_b, result) __dos_SetIoErr((__dos_base_t)(void *)(__ndk_b), (LONG)(result))
 
 static __inline__ BOOL
 __dos_Fault(struct DosLibrary *__base, LONG code, CONST_STRPTR header, STRPTR buffer, LONG len)
@@ -1467,8 +1467,8 @@ __dos_Fault(struct DosLibrary *__base, LONG code, CONST_STRPTR header, STRPTR bu
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define Fault(code, header, buffer, len) __dos_Fault((__dos_base_t)(DOS_BASE_NAME), (LONG)(code), (CONST_STRPTR)(header), (STRPTR)(buffer), (LONG)(len))
-#define __Fault_base(__ndk_b, code, header, buffer, len) __dos_Fault((__dos_base_t)(__ndk_b), (LONG)(code), (CONST_STRPTR)(header), (STRPTR)(buffer), (LONG)(len))
+#define Fault(code, header, buffer, len) __dos_Fault((__dos_base_t)(void *)(DOS_BASE_NAME), (LONG)(code), (CONST_STRPTR)(header), (STRPTR)(buffer), (LONG)(len))
+#define __Fault_base(__ndk_b, code, header, buffer, len) __dos_Fault((__dos_base_t)(void *)(__ndk_b), (LONG)(code), (CONST_STRPTR)(header), (STRPTR)(buffer), (LONG)(len))
 
 static __inline__ BOOL
 __dos_PrintFault(struct DosLibrary *__base, LONG code, CONST_STRPTR header)
@@ -1485,8 +1485,8 @@ __dos_PrintFault(struct DosLibrary *__base, LONG code, CONST_STRPTR header)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define PrintFault(code, header) __dos_PrintFault((__dos_base_t)(DOS_BASE_NAME), (LONG)(code), (CONST_STRPTR)(header))
-#define __PrintFault_base(__ndk_b, code, header) __dos_PrintFault((__dos_base_t)(__ndk_b), (LONG)(code), (CONST_STRPTR)(header))
+#define PrintFault(code, header) __dos_PrintFault((__dos_base_t)(void *)(DOS_BASE_NAME), (LONG)(code), (CONST_STRPTR)(header))
+#define __PrintFault_base(__ndk_b, code, header) __dos_PrintFault((__dos_base_t)(void *)(__ndk_b), (LONG)(code), (CONST_STRPTR)(header))
 
 static __inline__ LONG
 __dos_ErrorReport(struct DosLibrary *__base, LONG code, LONG type, ULONG arg1, struct MsgPort * device)
@@ -1505,8 +1505,8 @@ __dos_ErrorReport(struct DosLibrary *__base, LONG code, LONG type, ULONG arg1, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ErrorReport(code, type, arg1, device) __dos_ErrorReport((__dos_base_t)(DOS_BASE_NAME), (LONG)(code), (LONG)(type), (ULONG)(arg1), (struct MsgPort *)(device))
-#define __ErrorReport_base(__ndk_b, code, type, arg1, device) __dos_ErrorReport((__dos_base_t)(__ndk_b), (LONG)(code), (LONG)(type), (ULONG)(arg1), (struct MsgPort *)(device))
+#define ErrorReport(code, type, arg1, device) __dos_ErrorReport((__dos_base_t)(void *)(DOS_BASE_NAME), (LONG)(code), (LONG)(type), (ULONG)(arg1), (struct MsgPort *)(device))
+#define __ErrorReport_base(__ndk_b, code, type, arg1, device) __dos_ErrorReport((__dos_base_t)(void *)(__ndk_b), (LONG)(code), (LONG)(type), (ULONG)(arg1), (struct MsgPort *)(device))
 
 static __inline__ struct CommandLineInterface *
 __dos_Cli(struct DosLibrary *__base)
@@ -1522,8 +1522,8 @@ __dos_Cli(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct CommandLineInterface *)_d0;
 }
-#define Cli() __dos_Cli((__dos_base_t)(DOS_BASE_NAME))
-#define __Cli_base(__ndk_b) __dos_Cli((__dos_base_t)(__ndk_b))
+#define Cli() __dos_Cli((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __Cli_base(__ndk_b) __dos_Cli((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ struct Process *
 __dos_CreateNewProc(struct DosLibrary *__base, CONST struct TagItem * tags)
@@ -1539,8 +1539,8 @@ __dos_CreateNewProc(struct DosLibrary *__base, CONST struct TagItem * tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Process *)_d0;
 }
-#define CreateNewProc(tags) __dos_CreateNewProc((__dos_base_t)(DOS_BASE_NAME), (CONST struct TagItem *)(tags))
-#define __CreateNewProc_base(__ndk_b, tags) __dos_CreateNewProc((__dos_base_t)(__ndk_b), (CONST struct TagItem *)(tags))
+#define CreateNewProc(tags) __dos_CreateNewProc((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST struct TagItem *)(tags))
+#define __CreateNewProc_base(__ndk_b, tags) __dos_CreateNewProc((__dos_base_t)(void *)(__ndk_b), (CONST struct TagItem *)(tags))
 
 #define CreateNewProcTagList(...) CreateNewProc(__VA_ARGS__)
 
@@ -1550,7 +1550,7 @@ ___dos_CreateNewProcTags(__dos_base_t __ndk_base, Tag tag1, ...)
 {
 	return __dos_CreateNewProc(__ndk_base, (CONST struct TagItem *)&tag1);
 }
-#define CreateNewProcTags(...) ___dos_CreateNewProcTags((__dos_base_t)(DOS_BASE_NAME), __VA_ARGS__)
+#define CreateNewProcTags(...) ___dos_CreateNewProcTags((__dos_base_t)(void *)(DOS_BASE_NAME), __VA_ARGS__)
 #else
 #endif
 
@@ -1571,8 +1571,8 @@ __dos_RunCommand(struct DosLibrary *__base, BPTR seg, LONG stack, CONST_STRPTR p
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RunCommand(seg, stack, paramptr, paramlen) __dos_RunCommand((__dos_base_t)(DOS_BASE_NAME), (BPTR)(seg), (LONG)(stack), (CONST_STRPTR)(paramptr), (LONG)(paramlen))
-#define __RunCommand_base(__ndk_b, seg, stack, paramptr, paramlen) __dos_RunCommand((__dos_base_t)(__ndk_b), (BPTR)(seg), (LONG)(stack), (CONST_STRPTR)(paramptr), (LONG)(paramlen))
+#define RunCommand(seg, stack, paramptr, paramlen) __dos_RunCommand((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(seg), (LONG)(stack), (CONST_STRPTR)(paramptr), (LONG)(paramlen))
+#define __RunCommand_base(__ndk_b, seg, stack, paramptr, paramlen) __dos_RunCommand((__dos_base_t)(void *)(__ndk_b), (BPTR)(seg), (LONG)(stack), (CONST_STRPTR)(paramptr), (LONG)(paramlen))
 
 static __inline__ struct MsgPort *
 __dos_GetConsoleTask(struct DosLibrary *__base)
@@ -1588,8 +1588,8 @@ __dos_GetConsoleTask(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define GetConsoleTask() __dos_GetConsoleTask((__dos_base_t)(DOS_BASE_NAME))
-#define __GetConsoleTask_base(__ndk_b) __dos_GetConsoleTask((__dos_base_t)(__ndk_b))
+#define GetConsoleTask() __dos_GetConsoleTask((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __GetConsoleTask_base(__ndk_b) __dos_GetConsoleTask((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ struct MsgPort *
 __dos_SetConsoleTask(struct DosLibrary *__base, CONST struct MsgPort * task)
@@ -1605,8 +1605,8 @@ __dos_SetConsoleTask(struct DosLibrary *__base, CONST struct MsgPort * task)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define SetConsoleTask(task) __dos_SetConsoleTask((__dos_base_t)(DOS_BASE_NAME), (CONST struct MsgPort *)(task))
-#define __SetConsoleTask_base(__ndk_b, task) __dos_SetConsoleTask((__dos_base_t)(__ndk_b), (CONST struct MsgPort *)(task))
+#define SetConsoleTask(task) __dos_SetConsoleTask((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST struct MsgPort *)(task))
+#define __SetConsoleTask_base(__ndk_b, task) __dos_SetConsoleTask((__dos_base_t)(void *)(__ndk_b), (CONST struct MsgPort *)(task))
 
 static __inline__ struct MsgPort *
 __dos_GetFileSysTask(struct DosLibrary *__base)
@@ -1622,8 +1622,8 @@ __dos_GetFileSysTask(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define GetFileSysTask() __dos_GetFileSysTask((__dos_base_t)(DOS_BASE_NAME))
-#define __GetFileSysTask_base(__ndk_b) __dos_GetFileSysTask((__dos_base_t)(__ndk_b))
+#define GetFileSysTask() __dos_GetFileSysTask((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __GetFileSysTask_base(__ndk_b) __dos_GetFileSysTask((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ struct MsgPort *
 __dos_SetFileSysTask(struct DosLibrary *__base, CONST struct MsgPort * task)
@@ -1639,8 +1639,8 @@ __dos_SetFileSysTask(struct DosLibrary *__base, CONST struct MsgPort * task)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define SetFileSysTask(task) __dos_SetFileSysTask((__dos_base_t)(DOS_BASE_NAME), (CONST struct MsgPort *)(task))
-#define __SetFileSysTask_base(__ndk_b, task) __dos_SetFileSysTask((__dos_base_t)(__ndk_b), (CONST struct MsgPort *)(task))
+#define SetFileSysTask(task) __dos_SetFileSysTask((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST struct MsgPort *)(task))
+#define __SetFileSysTask_base(__ndk_b, task) __dos_SetFileSysTask((__dos_base_t)(void *)(__ndk_b), (CONST struct MsgPort *)(task))
 
 static __inline__ STRPTR
 __dos_GetArgStr(struct DosLibrary *__base)
@@ -1656,8 +1656,8 @@ __dos_GetArgStr(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define GetArgStr() __dos_GetArgStr((__dos_base_t)(DOS_BASE_NAME))
-#define __GetArgStr_base(__ndk_b) __dos_GetArgStr((__dos_base_t)(__ndk_b))
+#define GetArgStr() __dos_GetArgStr((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __GetArgStr_base(__ndk_b) __dos_GetArgStr((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ STRPTR
 __dos_SetArgStr(struct DosLibrary *__base, CONST_STRPTR string)
@@ -1673,8 +1673,8 @@ __dos_SetArgStr(struct DosLibrary *__base, CONST_STRPTR string)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define SetArgStr(string) __dos_SetArgStr((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(string))
-#define __SetArgStr_base(__ndk_b, string) __dos_SetArgStr((__dos_base_t)(__ndk_b), (CONST_STRPTR)(string))
+#define SetArgStr(string) __dos_SetArgStr((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(string))
+#define __SetArgStr_base(__ndk_b, string) __dos_SetArgStr((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(string))
 
 static __inline__ struct Process *
 __dos_FindCliProc(struct DosLibrary *__base, ULONG num)
@@ -1690,8 +1690,8 @@ __dos_FindCliProc(struct DosLibrary *__base, ULONG num)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Process *)_d0;
 }
-#define FindCliProc(num) __dos_FindCliProc((__dos_base_t)(DOS_BASE_NAME), (ULONG)(num))
-#define __FindCliProc_base(__ndk_b, num) __dos_FindCliProc((__dos_base_t)(__ndk_b), (ULONG)(num))
+#define FindCliProc(num) __dos_FindCliProc((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(num))
+#define __FindCliProc_base(__ndk_b, num) __dos_FindCliProc((__dos_base_t)(void *)(__ndk_b), (ULONG)(num))
 
 static __inline__ ULONG
 __dos_MaxCli(struct DosLibrary *__base)
@@ -1707,8 +1707,8 @@ __dos_MaxCli(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define MaxCli() __dos_MaxCli((__dos_base_t)(DOS_BASE_NAME))
-#define __MaxCli_base(__ndk_b) __dos_MaxCli((__dos_base_t)(__ndk_b))
+#define MaxCli() __dos_MaxCli((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __MaxCli_base(__ndk_b) __dos_MaxCli((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ BOOL
 __dos_SetCurrentDirName(struct DosLibrary *__base, CONST_STRPTR name)
@@ -1724,8 +1724,8 @@ __dos_SetCurrentDirName(struct DosLibrary *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetCurrentDirName(name) __dos_SetCurrentDirName((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name))
-#define __SetCurrentDirName_base(__ndk_b, name) __dos_SetCurrentDirName((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define SetCurrentDirName(name) __dos_SetCurrentDirName((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __SetCurrentDirName_base(__ndk_b, name) __dos_SetCurrentDirName((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
 __dos_GetCurrentDirName(struct DosLibrary *__base, STRPTR buf, LONG len)
@@ -1742,8 +1742,8 @@ __dos_GetCurrentDirName(struct DosLibrary *__base, STRPTR buf, LONG len)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define GetCurrentDirName(buf, len) __dos_GetCurrentDirName((__dos_base_t)(DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
-#define __GetCurrentDirName_base(__ndk_b, buf, len) __dos_GetCurrentDirName((__dos_base_t)(__ndk_b), (STRPTR)(buf), (LONG)(len))
+#define GetCurrentDirName(buf, len) __dos_GetCurrentDirName((__dos_base_t)(void *)(DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
+#define __GetCurrentDirName_base(__ndk_b, buf, len) __dos_GetCurrentDirName((__dos_base_t)(void *)(__ndk_b), (STRPTR)(buf), (LONG)(len))
 
 static __inline__ BOOL
 __dos_SetProgramName(struct DosLibrary *__base, CONST_STRPTR name)
@@ -1759,8 +1759,8 @@ __dos_SetProgramName(struct DosLibrary *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetProgramName(name) __dos_SetProgramName((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name))
-#define __SetProgramName_base(__ndk_b, name) __dos_SetProgramName((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define SetProgramName(name) __dos_SetProgramName((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __SetProgramName_base(__ndk_b, name) __dos_SetProgramName((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
 __dos_GetProgramName(struct DosLibrary *__base, STRPTR buf, LONG len)
@@ -1777,8 +1777,8 @@ __dos_GetProgramName(struct DosLibrary *__base, STRPTR buf, LONG len)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define GetProgramName(buf, len) __dos_GetProgramName((__dos_base_t)(DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
-#define __GetProgramName_base(__ndk_b, buf, len) __dos_GetProgramName((__dos_base_t)(__ndk_b), (STRPTR)(buf), (LONG)(len))
+#define GetProgramName(buf, len) __dos_GetProgramName((__dos_base_t)(void *)(DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
+#define __GetProgramName_base(__ndk_b, buf, len) __dos_GetProgramName((__dos_base_t)(void *)(__ndk_b), (STRPTR)(buf), (LONG)(len))
 
 static __inline__ BOOL
 __dos_SetPrompt(struct DosLibrary *__base, CONST_STRPTR name)
@@ -1794,8 +1794,8 @@ __dos_SetPrompt(struct DosLibrary *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetPrompt(name) __dos_SetPrompt((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name))
-#define __SetPrompt_base(__ndk_b, name) __dos_SetPrompt((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define SetPrompt(name) __dos_SetPrompt((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __SetPrompt_base(__ndk_b, name) __dos_SetPrompt((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
 __dos_GetPrompt(struct DosLibrary *__base, STRPTR buf, LONG len)
@@ -1812,8 +1812,8 @@ __dos_GetPrompt(struct DosLibrary *__base, STRPTR buf, LONG len)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define GetPrompt(buf, len) __dos_GetPrompt((__dos_base_t)(DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
-#define __GetPrompt_base(__ndk_b, buf, len) __dos_GetPrompt((__dos_base_t)(__ndk_b), (STRPTR)(buf), (LONG)(len))
+#define GetPrompt(buf, len) __dos_GetPrompt((__dos_base_t)(void *)(DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
+#define __GetPrompt_base(__ndk_b, buf, len) __dos_GetPrompt((__dos_base_t)(void *)(__ndk_b), (STRPTR)(buf), (LONG)(len))
 
 static __inline__ BPTR
 __dos_SetProgramDir(struct DosLibrary *__base, BPTR lock)
@@ -1829,8 +1829,8 @@ __dos_SetProgramDir(struct DosLibrary *__base, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define SetProgramDir(lock) __dos_SetProgramDir((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock))
-#define __SetProgramDir_base(__ndk_b, lock) __dos_SetProgramDir((__dos_base_t)(__ndk_b), (BPTR)(lock))
+#define SetProgramDir(lock) __dos_SetProgramDir((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock))
+#define __SetProgramDir_base(__ndk_b, lock) __dos_SetProgramDir((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock))
 
 static __inline__ BPTR
 __dos_GetProgramDir(struct DosLibrary *__base)
@@ -1846,8 +1846,8 @@ __dos_GetProgramDir(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define GetProgramDir() __dos_GetProgramDir((__dos_base_t)(DOS_BASE_NAME))
-#define __GetProgramDir_base(__ndk_b) __dos_GetProgramDir((__dos_base_t)(__ndk_b))
+#define GetProgramDir() __dos_GetProgramDir((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __GetProgramDir_base(__ndk_b) __dos_GetProgramDir((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ LONG
 __dos_SystemTagList(struct DosLibrary *__base, CONST_STRPTR command, CONST struct TagItem * tags)
@@ -1864,8 +1864,8 @@ __dos_SystemTagList(struct DosLibrary *__base, CONST_STRPTR command, CONST struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SystemTagList(command, tags) __dos_SystemTagList((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(command), (CONST struct TagItem *)(tags))
-#define __SystemTagList_base(__ndk_b, command, tags) __dos_SystemTagList((__dos_base_t)(__ndk_b), (CONST_STRPTR)(command), (CONST struct TagItem *)(tags))
+#define SystemTagList(command, tags) __dos_SystemTagList((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(command), (CONST struct TagItem *)(tags))
+#define __SystemTagList_base(__ndk_b, command, tags) __dos_SystemTagList((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(command), (CONST struct TagItem *)(tags))
 
 #define System(...) SystemTagList(__VA_ARGS__)
 
@@ -1875,7 +1875,7 @@ ___dos_SystemTags(__dos_base_t __ndk_base, CONST_STRPTR command, ...)
 {
 	return __dos_SystemTagList(__ndk_base, (CONST_STRPTR)(command), (CONST struct TagItem *)((ULONG)&command + sizeof(command)));
 }
-#define SystemTags(command, ...) ___dos_SystemTags((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(command), ##__VA_ARGS__)
+#define SystemTags(command, ...) ___dos_SystemTags((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(command), ##__VA_ARGS__)
 #else
 #define SystemTags(command, ...) (SystemTags)((CONST_STRPTR)(command), ##__VA_ARGS__)
 #endif
@@ -1895,8 +1895,8 @@ __dos_AssignLock(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AssignLock(name, lock) __dos_AssignLock((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
-#define __AssignLock_base(__ndk_b, name, lock) __dos_AssignLock((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(lock))
+#define AssignLock(name, lock) __dos_AssignLock((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
+#define __AssignLock_base(__ndk_b, name, lock) __dos_AssignLock((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(lock))
 
 static __inline__ BOOL
 __dos_AssignLate(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR path)
@@ -1913,8 +1913,8 @@ __dos_AssignLate(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR path
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AssignLate(name, path) __dos_AssignLate((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
-#define __AssignLate_base(__ndk_b, name, path) __dos_AssignLate((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
+#define AssignLate(name, path) __dos_AssignLate((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
+#define __AssignLate_base(__ndk_b, name, path) __dos_AssignLate((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
 
 static __inline__ BOOL
 __dos_AssignPath(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR path)
@@ -1931,8 +1931,8 @@ __dos_AssignPath(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR path
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AssignPath(name, path) __dos_AssignPath((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
-#define __AssignPath_base(__ndk_b, name, path) __dos_AssignPath((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
+#define AssignPath(name, path) __dos_AssignPath((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
+#define __AssignPath_base(__ndk_b, name, path) __dos_AssignPath((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
 
 static __inline__ BOOL
 __dos_AssignAdd(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
@@ -1949,8 +1949,8 @@ __dos_AssignAdd(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AssignAdd(name, lock) __dos_AssignAdd((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
-#define __AssignAdd_base(__ndk_b, name, lock) __dos_AssignAdd((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(lock))
+#define AssignAdd(name, lock) __dos_AssignAdd((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
+#define __AssignAdd_base(__ndk_b, name, lock) __dos_AssignAdd((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(lock))
 
 static __inline__ LONG
 __dos_RemAssignList(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
@@ -1967,8 +1967,8 @@ __dos_RemAssignList(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RemAssignList(name, lock) __dos_RemAssignList((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
-#define __RemAssignList_base(__ndk_b, name, lock) __dos_RemAssignList((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(lock))
+#define RemAssignList(name, lock) __dos_RemAssignList((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
+#define __RemAssignList_base(__ndk_b, name, lock) __dos_RemAssignList((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(lock))
 
 static __inline__ struct DevProc *
 __dos_GetDeviceProc(struct DosLibrary *__base, CONST_STRPTR name, struct DevProc * dp)
@@ -1985,8 +1985,8 @@ __dos_GetDeviceProc(struct DosLibrary *__base, CONST_STRPTR name, struct DevProc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DevProc *)_d0;
 }
-#define GetDeviceProc(name, dp) __dos_GetDeviceProc((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (struct DevProc *)(dp))
-#define __GetDeviceProc_base(__ndk_b, name, dp) __dos_GetDeviceProc((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (struct DevProc *)(dp))
+#define GetDeviceProc(name, dp) __dos_GetDeviceProc((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (struct DevProc *)(dp))
+#define __GetDeviceProc_base(__ndk_b, name, dp) __dos_GetDeviceProc((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (struct DevProc *)(dp))
 
 static __inline__ VOID
 __dos_FreeDeviceProc(struct DosLibrary *__base, struct DevProc * dp)
@@ -2002,8 +2002,8 @@ __dos_FreeDeviceProc(struct DosLibrary *__base, struct DevProc * dp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeDeviceProc(dp) __dos_FreeDeviceProc((__dos_base_t)(DOS_BASE_NAME), (struct DevProc *)(dp))
-#define __FreeDeviceProc_base(__ndk_b, dp) __dos_FreeDeviceProc((__dos_base_t)(__ndk_b), (struct DevProc *)(dp))
+#define FreeDeviceProc(dp) __dos_FreeDeviceProc((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DevProc *)(dp))
+#define __FreeDeviceProc_base(__ndk_b, dp) __dos_FreeDeviceProc((__dos_base_t)(void *)(__ndk_b), (struct DevProc *)(dp))
 
 static __inline__ struct DosList *
 __dos_LockDosList(struct DosLibrary *__base, ULONG flags)
@@ -2019,8 +2019,8 @@ __dos_LockDosList(struct DosLibrary *__base, ULONG flags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DosList *)_d0;
 }
-#define LockDosList(flags) __dos_LockDosList((__dos_base_t)(DOS_BASE_NAME), (ULONG)(flags))
-#define __LockDosList_base(__ndk_b, flags) __dos_LockDosList((__dos_base_t)(__ndk_b), (ULONG)(flags))
+#define LockDosList(flags) __dos_LockDosList((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(flags))
+#define __LockDosList_base(__ndk_b, flags) __dos_LockDosList((__dos_base_t)(void *)(__ndk_b), (ULONG)(flags))
 
 static __inline__ VOID
 __dos_UnLockDosList(struct DosLibrary *__base, ULONG flags)
@@ -2036,8 +2036,8 @@ __dos_UnLockDosList(struct DosLibrary *__base, ULONG flags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnLockDosList(flags) __dos_UnLockDosList((__dos_base_t)(DOS_BASE_NAME), (ULONG)(flags))
-#define __UnLockDosList_base(__ndk_b, flags) __dos_UnLockDosList((__dos_base_t)(__ndk_b), (ULONG)(flags))
+#define UnLockDosList(flags) __dos_UnLockDosList((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(flags))
+#define __UnLockDosList_base(__ndk_b, flags) __dos_UnLockDosList((__dos_base_t)(void *)(__ndk_b), (ULONG)(flags))
 
 static __inline__ struct DosList *
 __dos_AttemptLockDosList(struct DosLibrary *__base, ULONG flags)
@@ -2053,8 +2053,8 @@ __dos_AttemptLockDosList(struct DosLibrary *__base, ULONG flags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DosList *)_d0;
 }
-#define AttemptLockDosList(flags) __dos_AttemptLockDosList((__dos_base_t)(DOS_BASE_NAME), (ULONG)(flags))
-#define __AttemptLockDosList_base(__ndk_b, flags) __dos_AttemptLockDosList((__dos_base_t)(__ndk_b), (ULONG)(flags))
+#define AttemptLockDosList(flags) __dos_AttemptLockDosList((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(flags))
+#define __AttemptLockDosList_base(__ndk_b, flags) __dos_AttemptLockDosList((__dos_base_t)(void *)(__ndk_b), (ULONG)(flags))
 
 static __inline__ BOOL
 __dos_RemDosEntry(struct DosLibrary *__base, struct DosList * dlist)
@@ -2070,8 +2070,8 @@ __dos_RemDosEntry(struct DosLibrary *__base, struct DosList * dlist)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define RemDosEntry(dlist) __dos_RemDosEntry((__dos_base_t)(DOS_BASE_NAME), (struct DosList *)(dlist))
-#define __RemDosEntry_base(__ndk_b, dlist) __dos_RemDosEntry((__dos_base_t)(__ndk_b), (struct DosList *)(dlist))
+#define RemDosEntry(dlist) __dos_RemDosEntry((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DosList *)(dlist))
+#define __RemDosEntry_base(__ndk_b, dlist) __dos_RemDosEntry((__dos_base_t)(void *)(__ndk_b), (struct DosList *)(dlist))
 
 static __inline__ LONG
 __dos_AddDosEntry(struct DosLibrary *__base, struct DosList * dlist)
@@ -2087,8 +2087,8 @@ __dos_AddDosEntry(struct DosLibrary *__base, struct DosList * dlist)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AddDosEntry(dlist) __dos_AddDosEntry((__dos_base_t)(DOS_BASE_NAME), (struct DosList *)(dlist))
-#define __AddDosEntry_base(__ndk_b, dlist) __dos_AddDosEntry((__dos_base_t)(__ndk_b), (struct DosList *)(dlist))
+#define AddDosEntry(dlist) __dos_AddDosEntry((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DosList *)(dlist))
+#define __AddDosEntry_base(__ndk_b, dlist) __dos_AddDosEntry((__dos_base_t)(void *)(__ndk_b), (struct DosList *)(dlist))
 
 static __inline__ struct DosList *
 __dos_FindDosEntry(struct DosLibrary *__base, CONST struct DosList * dlist, CONST_STRPTR name, ULONG flags)
@@ -2106,8 +2106,8 @@ __dos_FindDosEntry(struct DosLibrary *__base, CONST struct DosList * dlist, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DosList *)_d0;
 }
-#define FindDosEntry(dlist, name, flags) __dos_FindDosEntry((__dos_base_t)(DOS_BASE_NAME), (CONST struct DosList *)(dlist), (CONST_STRPTR)(name), (ULONG)(flags))
-#define __FindDosEntry_base(__ndk_b, dlist, name, flags) __dos_FindDosEntry((__dos_base_t)(__ndk_b), (CONST struct DosList *)(dlist), (CONST_STRPTR)(name), (ULONG)(flags))
+#define FindDosEntry(dlist, name, flags) __dos_FindDosEntry((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST struct DosList *)(dlist), (CONST_STRPTR)(name), (ULONG)(flags))
+#define __FindDosEntry_base(__ndk_b, dlist, name, flags) __dos_FindDosEntry((__dos_base_t)(void *)(__ndk_b), (CONST struct DosList *)(dlist), (CONST_STRPTR)(name), (ULONG)(flags))
 
 static __inline__ struct DosList *
 __dos_NextDosEntry(struct DosLibrary *__base, CONST struct DosList * dlist, ULONG flags)
@@ -2124,8 +2124,8 @@ __dos_NextDosEntry(struct DosLibrary *__base, CONST struct DosList * dlist, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DosList *)_d0;
 }
-#define NextDosEntry(dlist, flags) __dos_NextDosEntry((__dos_base_t)(DOS_BASE_NAME), (CONST struct DosList *)(dlist), (ULONG)(flags))
-#define __NextDosEntry_base(__ndk_b, dlist, flags) __dos_NextDosEntry((__dos_base_t)(__ndk_b), (CONST struct DosList *)(dlist), (ULONG)(flags))
+#define NextDosEntry(dlist, flags) __dos_NextDosEntry((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST struct DosList *)(dlist), (ULONG)(flags))
+#define __NextDosEntry_base(__ndk_b, dlist, flags) __dos_NextDosEntry((__dos_base_t)(void *)(__ndk_b), (CONST struct DosList *)(dlist), (ULONG)(flags))
 
 static __inline__ struct DosList *
 __dos_MakeDosEntry(struct DosLibrary *__base, CONST_STRPTR name, LONG type)
@@ -2142,8 +2142,8 @@ __dos_MakeDosEntry(struct DosLibrary *__base, CONST_STRPTR name, LONG type)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DosList *)_d0;
 }
-#define MakeDosEntry(name, type) __dos_MakeDosEntry((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(type))
-#define __MakeDosEntry_base(__ndk_b, name, type) __dos_MakeDosEntry((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(type))
+#define MakeDosEntry(name, type) __dos_MakeDosEntry((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(type))
+#define __MakeDosEntry_base(__ndk_b, name, type) __dos_MakeDosEntry((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(type))
 
 static __inline__ VOID
 __dos_FreeDosEntry(struct DosLibrary *__base, struct DosList * dlist)
@@ -2159,8 +2159,8 @@ __dos_FreeDosEntry(struct DosLibrary *__base, struct DosList * dlist)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeDosEntry(dlist) __dos_FreeDosEntry((__dos_base_t)(DOS_BASE_NAME), (struct DosList *)(dlist))
-#define __FreeDosEntry_base(__ndk_b, dlist) __dos_FreeDosEntry((__dos_base_t)(__ndk_b), (struct DosList *)(dlist))
+#define FreeDosEntry(dlist) __dos_FreeDosEntry((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DosList *)(dlist))
+#define __FreeDosEntry_base(__ndk_b, dlist) __dos_FreeDosEntry((__dos_base_t)(void *)(__ndk_b), (struct DosList *)(dlist))
 
 static __inline__ BOOL
 __dos_IsFileSystem(struct DosLibrary *__base, CONST_STRPTR name)
@@ -2176,8 +2176,8 @@ __dos_IsFileSystem(struct DosLibrary *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsFileSystem(name) __dos_IsFileSystem((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name))
-#define __IsFileSystem_base(__ndk_b, name) __dos_IsFileSystem((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define IsFileSystem(name) __dos_IsFileSystem((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __IsFileSystem_base(__ndk_b, name) __dos_IsFileSystem((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
 __dos_Format(struct DosLibrary *__base, CONST_STRPTR filesystem, CONST_STRPTR volumename, ULONG dostype)
@@ -2195,8 +2195,8 @@ __dos_Format(struct DosLibrary *__base, CONST_STRPTR filesystem, CONST_STRPTR vo
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define Format(filesystem, volumename, dostype) __dos_Format((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(filesystem), (CONST_STRPTR)(volumename), (ULONG)(dostype))
-#define __Format_base(__ndk_b, filesystem, volumename, dostype) __dos_Format((__dos_base_t)(__ndk_b), (CONST_STRPTR)(filesystem), (CONST_STRPTR)(volumename), (ULONG)(dostype))
+#define Format(filesystem, volumename, dostype) __dos_Format((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(filesystem), (CONST_STRPTR)(volumename), (ULONG)(dostype))
+#define __Format_base(__ndk_b, filesystem, volumename, dostype) __dos_Format((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(filesystem), (CONST_STRPTR)(volumename), (ULONG)(dostype))
 
 static __inline__ LONG
 __dos_Relabel(struct DosLibrary *__base, CONST_STRPTR drive, CONST_STRPTR newname)
@@ -2213,8 +2213,8 @@ __dos_Relabel(struct DosLibrary *__base, CONST_STRPTR drive, CONST_STRPTR newnam
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Relabel(drive, newname) __dos_Relabel((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(drive), (CONST_STRPTR)(newname))
-#define __Relabel_base(__ndk_b, drive, newname) __dos_Relabel((__dos_base_t)(__ndk_b), (CONST_STRPTR)(drive), (CONST_STRPTR)(newname))
+#define Relabel(drive, newname) __dos_Relabel((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(drive), (CONST_STRPTR)(newname))
+#define __Relabel_base(__ndk_b, drive, newname) __dos_Relabel((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(drive), (CONST_STRPTR)(newname))
 
 static __inline__ LONG
 __dos_Inhibit(struct DosLibrary *__base, CONST_STRPTR name, LONG onoff)
@@ -2231,8 +2231,8 @@ __dos_Inhibit(struct DosLibrary *__base, CONST_STRPTR name, LONG onoff)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Inhibit(name, onoff) __dos_Inhibit((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(onoff))
-#define __Inhibit_base(__ndk_b, name, onoff) __dos_Inhibit((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(onoff))
+#define Inhibit(name, onoff) __dos_Inhibit((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(onoff))
+#define __Inhibit_base(__ndk_b, name, onoff) __dos_Inhibit((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(onoff))
 
 static __inline__ LONG
 __dos_AddBuffers(struct DosLibrary *__base, CONST_STRPTR name, LONG number)
@@ -2249,8 +2249,8 @@ __dos_AddBuffers(struct DosLibrary *__base, CONST_STRPTR name, LONG number)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AddBuffers(name, number) __dos_AddBuffers((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(number))
-#define __AddBuffers_base(__ndk_b, name, number) __dos_AddBuffers((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(number))
+#define AddBuffers(name, number) __dos_AddBuffers((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(number))
+#define __AddBuffers_base(__ndk_b, name, number) __dos_AddBuffers((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(number))
 
 static __inline__ LONG
 __dos_CompareDates(struct DosLibrary *__base, CONST struct DateStamp * date1, CONST struct DateStamp * date2)
@@ -2267,8 +2267,8 @@ __dos_CompareDates(struct DosLibrary *__base, CONST struct DateStamp * date1, CO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CompareDates(date1, date2) __dos_CompareDates((__dos_base_t)(DOS_BASE_NAME), (CONST struct DateStamp *)(date1), (CONST struct DateStamp *)(date2))
-#define __CompareDates_base(__ndk_b, date1, date2) __dos_CompareDates((__dos_base_t)(__ndk_b), (CONST struct DateStamp *)(date1), (CONST struct DateStamp *)(date2))
+#define CompareDates(date1, date2) __dos_CompareDates((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST struct DateStamp *)(date1), (CONST struct DateStamp *)(date2))
+#define __CompareDates_base(__ndk_b, date1, date2) __dos_CompareDates((__dos_base_t)(void *)(__ndk_b), (CONST struct DateStamp *)(date1), (CONST struct DateStamp *)(date2))
 
 static __inline__ LONG
 __dos_DateToStr(struct DosLibrary *__base, struct DateTime * datetime)
@@ -2284,8 +2284,8 @@ __dos_DateToStr(struct DosLibrary *__base, struct DateTime * datetime)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DateToStr(datetime) __dos_DateToStr((__dos_base_t)(DOS_BASE_NAME), (struct DateTime *)(datetime))
-#define __DateToStr_base(__ndk_b, datetime) __dos_DateToStr((__dos_base_t)(__ndk_b), (struct DateTime *)(datetime))
+#define DateToStr(datetime) __dos_DateToStr((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DateTime *)(datetime))
+#define __DateToStr_base(__ndk_b, datetime) __dos_DateToStr((__dos_base_t)(void *)(__ndk_b), (struct DateTime *)(datetime))
 
 static __inline__ LONG
 __dos_StrToDate(struct DosLibrary *__base, struct DateTime * datetime)
@@ -2301,8 +2301,8 @@ __dos_StrToDate(struct DosLibrary *__base, struct DateTime * datetime)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define StrToDate(datetime) __dos_StrToDate((__dos_base_t)(DOS_BASE_NAME), (struct DateTime *)(datetime))
-#define __StrToDate_base(__ndk_b, datetime) __dos_StrToDate((__dos_base_t)(__ndk_b), (struct DateTime *)(datetime))
+#define StrToDate(datetime) __dos_StrToDate((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DateTime *)(datetime))
+#define __StrToDate_base(__ndk_b, datetime) __dos_StrToDate((__dos_base_t)(void *)(__ndk_b), (struct DateTime *)(datetime))
 
 static __inline__ BPTR
 __dos_InternalLoadSeg(struct DosLibrary *__base, BPTR fh, BPTR table, CONST LONG * funcarray, LONG * stack)
@@ -2319,8 +2319,8 @@ __dos_InternalLoadSeg(struct DosLibrary *__base, BPTR fh, BPTR table, CONST LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define InternalLoadSeg(fh, table, funcarray, stack) __dos_InternalLoadSeg((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh), (BPTR)(table), (CONST LONG *)(funcarray), (LONG *)(stack))
-#define __InternalLoadSeg_base(__ndk_b, fh, table, funcarray, stack) __dos_InternalLoadSeg((__dos_base_t)(__ndk_b), (BPTR)(fh), (BPTR)(table), (CONST LONG *)(funcarray), (LONG *)(stack))
+#define InternalLoadSeg(fh, table, funcarray, stack) __dos_InternalLoadSeg((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh), (BPTR)(table), (CONST LONG *)(funcarray), (LONG *)(stack))
+#define __InternalLoadSeg_base(__ndk_b, fh, table, funcarray, stack) __dos_InternalLoadSeg((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh), (BPTR)(table), (CONST LONG *)(funcarray), (LONG *)(stack))
 
 static __inline__ BOOL
 __dos_InternalUnLoadSeg(struct DosLibrary *__base, BPTR seglist, VOID (*CONST freefunc)())
@@ -2336,8 +2336,8 @@ __dos_InternalUnLoadSeg(struct DosLibrary *__base, BPTR seglist, VOID (*CONST fr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define InternalUnLoadSeg(seglist, freefunc) __dos_InternalUnLoadSeg((__dos_base_t)(DOS_BASE_NAME), (BPTR)(seglist), (VOID (*CONST )())(freefunc))
-#define __InternalUnLoadSeg_base(__ndk_b, seglist, freefunc) __dos_InternalUnLoadSeg((__dos_base_t)(__ndk_b), (BPTR)(seglist), (VOID (*CONST )())(freefunc))
+#define InternalUnLoadSeg(seglist, freefunc) __dos_InternalUnLoadSeg((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(seglist), (VOID (*CONST )())(freefunc))
+#define __InternalUnLoadSeg_base(__ndk_b, seglist, freefunc) __dos_InternalUnLoadSeg((__dos_base_t)(void *)(__ndk_b), (BPTR)(seglist), (VOID (*CONST )())(freefunc))
 
 static __inline__ BPTR
 __dos_NewLoadSeg(struct DosLibrary *__base, CONST_STRPTR file, CONST struct TagItem * tags)
@@ -2354,8 +2354,8 @@ __dos_NewLoadSeg(struct DosLibrary *__base, CONST_STRPTR file, CONST struct TagI
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define NewLoadSeg(file, tags) __dos_NewLoadSeg((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(file), (CONST struct TagItem *)(tags))
-#define __NewLoadSeg_base(__ndk_b, file, tags) __dos_NewLoadSeg((__dos_base_t)(__ndk_b), (CONST_STRPTR)(file), (CONST struct TagItem *)(tags))
+#define NewLoadSeg(file, tags) __dos_NewLoadSeg((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(file), (CONST struct TagItem *)(tags))
+#define __NewLoadSeg_base(__ndk_b, file, tags) __dos_NewLoadSeg((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(file), (CONST struct TagItem *)(tags))
 
 #define NewLoadSegTagList(...) NewLoadSeg(__VA_ARGS__)
 
@@ -2365,7 +2365,7 @@ ___dos_NewLoadSegTags(__dos_base_t __ndk_base, CONST_STRPTR file, ...)
 {
 	return __dos_NewLoadSeg(__ndk_base, (CONST_STRPTR)(file), (CONST struct TagItem *)((ULONG)&file + sizeof(file)));
 }
-#define NewLoadSegTags(file, ...) ___dos_NewLoadSegTags((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(file), ##__VA_ARGS__)
+#define NewLoadSegTags(file, ...) ___dos_NewLoadSegTags((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(file), ##__VA_ARGS__)
 #else
 #define NewLoadSegTags(file, ...) (NewLoadSegTags)((CONST_STRPTR)(file), ##__VA_ARGS__)
 #endif
@@ -2386,8 +2386,8 @@ __dos_AddSegment(struct DosLibrary *__base, CONST_STRPTR name, BPTR seg, LONG sy
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AddSegment(name, seg, system) __dos_AddSegment((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(seg), (LONG)(system))
-#define __AddSegment_base(__ndk_b, name, seg, system) __dos_AddSegment((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(seg), (LONG)(system))
+#define AddSegment(name, seg, system) __dos_AddSegment((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(seg), (LONG)(system))
+#define __AddSegment_base(__ndk_b, name, seg, system) __dos_AddSegment((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (BPTR)(seg), (LONG)(system))
 
 static __inline__ struct Segment *
 __dos_FindSegment(struct DosLibrary *__base, CONST_STRPTR name, CONST struct Segment * seg, LONG system)
@@ -2405,8 +2405,8 @@ __dos_FindSegment(struct DosLibrary *__base, CONST_STRPTR name, CONST struct Seg
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Segment *)_d0;
 }
-#define FindSegment(name, seg, system) __dos_FindSegment((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST struct Segment *)(seg), (LONG)(system))
-#define __FindSegment_base(__ndk_b, name, seg, system) __dos_FindSegment((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct Segment *)(seg), (LONG)(system))
+#define FindSegment(name, seg, system) __dos_FindSegment((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST struct Segment *)(seg), (LONG)(system))
+#define __FindSegment_base(__ndk_b, name, seg, system) __dos_FindSegment((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST struct Segment *)(seg), (LONG)(system))
 
 static __inline__ LONG
 __dos_RemSegment(struct DosLibrary *__base, struct Segment * seg)
@@ -2422,8 +2422,8 @@ __dos_RemSegment(struct DosLibrary *__base, struct Segment * seg)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RemSegment(seg) __dos_RemSegment((__dos_base_t)(DOS_BASE_NAME), (struct Segment *)(seg))
-#define __RemSegment_base(__ndk_b, seg) __dos_RemSegment((__dos_base_t)(__ndk_b), (struct Segment *)(seg))
+#define RemSegment(seg) __dos_RemSegment((__dos_base_t)(void *)(DOS_BASE_NAME), (struct Segment *)(seg))
+#define __RemSegment_base(__ndk_b, seg) __dos_RemSegment((__dos_base_t)(void *)(__ndk_b), (struct Segment *)(seg))
 
 static __inline__ LONG
 __dos_CheckSignal(struct DosLibrary *__base, LONG mask)
@@ -2439,8 +2439,8 @@ __dos_CheckSignal(struct DosLibrary *__base, LONG mask)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CheckSignal(mask) __dos_CheckSignal((__dos_base_t)(DOS_BASE_NAME), (LONG)(mask))
-#define __CheckSignal_base(__ndk_b, mask) __dos_CheckSignal((__dos_base_t)(__ndk_b), (LONG)(mask))
+#define CheckSignal(mask) __dos_CheckSignal((__dos_base_t)(void *)(DOS_BASE_NAME), (LONG)(mask))
+#define __CheckSignal_base(__ndk_b, mask) __dos_CheckSignal((__dos_base_t)(void *)(__ndk_b), (LONG)(mask))
 
 static __inline__ struct RDArgs *
 __dos_ReadArgs(struct DosLibrary *__base, CONST_STRPTR arg_template, LONG * array, struct RDArgs * args)
@@ -2458,8 +2458,8 @@ __dos_ReadArgs(struct DosLibrary *__base, CONST_STRPTR arg_template, LONG * arra
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct RDArgs *)_d0;
 }
-#define ReadArgs(arg_template, array, args) __dos_ReadArgs((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(arg_template), (LONG *)(array), (struct RDArgs *)(args))
-#define __ReadArgs_base(__ndk_b, arg_template, array, args) __dos_ReadArgs((__dos_base_t)(__ndk_b), (CONST_STRPTR)(arg_template), (LONG *)(array), (struct RDArgs *)(args))
+#define ReadArgs(arg_template, array, args) __dos_ReadArgs((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(arg_template), (LONG *)(array), (struct RDArgs *)(args))
+#define __ReadArgs_base(__ndk_b, arg_template, array, args) __dos_ReadArgs((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(arg_template), (LONG *)(array), (struct RDArgs *)(args))
 
 static __inline__ LONG
 __dos_FindArg(struct DosLibrary *__base, CONST_STRPTR arg_template, CONST_STRPTR keyword)
@@ -2476,8 +2476,8 @@ __dos_FindArg(struct DosLibrary *__base, CONST_STRPTR arg_template, CONST_STRPTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define FindArg(arg_template, keyword) __dos_FindArg((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(arg_template), (CONST_STRPTR)(keyword))
-#define __FindArg_base(__ndk_b, arg_template, keyword) __dos_FindArg((__dos_base_t)(__ndk_b), (CONST_STRPTR)(arg_template), (CONST_STRPTR)(keyword))
+#define FindArg(arg_template, keyword) __dos_FindArg((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(arg_template), (CONST_STRPTR)(keyword))
+#define __FindArg_base(__ndk_b, arg_template, keyword) __dos_FindArg((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(arg_template), (CONST_STRPTR)(keyword))
 
 static __inline__ LONG
 __dos_ReadItem(struct DosLibrary *__base, STRPTR name, LONG maxchars, struct CSource * cSource)
@@ -2495,8 +2495,8 @@ __dos_ReadItem(struct DosLibrary *__base, STRPTR name, LONG maxchars, struct CSo
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReadItem(name, maxchars, cSource) __dos_ReadItem((__dos_base_t)(DOS_BASE_NAME), (STRPTR)(name), (LONG)(maxchars), (struct CSource *)(cSource))
-#define __ReadItem_base(__ndk_b, name, maxchars, cSource) __dos_ReadItem((__dos_base_t)(__ndk_b), (STRPTR)(name), (LONG)(maxchars), (struct CSource *)(cSource))
+#define ReadItem(name, maxchars, cSource) __dos_ReadItem((__dos_base_t)(void *)(DOS_BASE_NAME), (STRPTR)(name), (LONG)(maxchars), (struct CSource *)(cSource))
+#define __ReadItem_base(__ndk_b, name, maxchars, cSource) __dos_ReadItem((__dos_base_t)(void *)(__ndk_b), (STRPTR)(name), (LONG)(maxchars), (struct CSource *)(cSource))
 
 static __inline__ LONG
 __dos_StrToLong(struct DosLibrary *__base, CONST_STRPTR string, LONG * value)
@@ -2513,8 +2513,8 @@ __dos_StrToLong(struct DosLibrary *__base, CONST_STRPTR string, LONG * value)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define StrToLong(string, value) __dos_StrToLong((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(string), (LONG *)(value))
-#define __StrToLong_base(__ndk_b, string, value) __dos_StrToLong((__dos_base_t)(__ndk_b), (CONST_STRPTR)(string), (LONG *)(value))
+#define StrToLong(string, value) __dos_StrToLong((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(string), (LONG *)(value))
+#define __StrToLong_base(__ndk_b, string, value) __dos_StrToLong((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(string), (LONG *)(value))
 
 static __inline__ LONG
 __dos_MatchFirst(struct DosLibrary *__base, CONST_STRPTR pat, struct AnchorPath * anchor)
@@ -2531,8 +2531,8 @@ __dos_MatchFirst(struct DosLibrary *__base, CONST_STRPTR pat, struct AnchorPath 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define MatchFirst(pat, anchor) __dos_MatchFirst((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(pat), (struct AnchorPath *)(anchor))
-#define __MatchFirst_base(__ndk_b, pat, anchor) __dos_MatchFirst((__dos_base_t)(__ndk_b), (CONST_STRPTR)(pat), (struct AnchorPath *)(anchor))
+#define MatchFirst(pat, anchor) __dos_MatchFirst((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(pat), (struct AnchorPath *)(anchor))
+#define __MatchFirst_base(__ndk_b, pat, anchor) __dos_MatchFirst((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(pat), (struct AnchorPath *)(anchor))
 
 static __inline__ LONG
 __dos_MatchNext(struct DosLibrary *__base, struct AnchorPath * anchor)
@@ -2548,8 +2548,8 @@ __dos_MatchNext(struct DosLibrary *__base, struct AnchorPath * anchor)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define MatchNext(anchor) __dos_MatchNext((__dos_base_t)(DOS_BASE_NAME), (struct AnchorPath *)(anchor))
-#define __MatchNext_base(__ndk_b, anchor) __dos_MatchNext((__dos_base_t)(__ndk_b), (struct AnchorPath *)(anchor))
+#define MatchNext(anchor) __dos_MatchNext((__dos_base_t)(void *)(DOS_BASE_NAME), (struct AnchorPath *)(anchor))
+#define __MatchNext_base(__ndk_b, anchor) __dos_MatchNext((__dos_base_t)(void *)(__ndk_b), (struct AnchorPath *)(anchor))
 
 static __inline__ VOID
 __dos_MatchEnd(struct DosLibrary *__base, struct AnchorPath * anchor)
@@ -2565,8 +2565,8 @@ __dos_MatchEnd(struct DosLibrary *__base, struct AnchorPath * anchor)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define MatchEnd(anchor) __dos_MatchEnd((__dos_base_t)(DOS_BASE_NAME), (struct AnchorPath *)(anchor))
-#define __MatchEnd_base(__ndk_b, anchor) __dos_MatchEnd((__dos_base_t)(__ndk_b), (struct AnchorPath *)(anchor))
+#define MatchEnd(anchor) __dos_MatchEnd((__dos_base_t)(void *)(DOS_BASE_NAME), (struct AnchorPath *)(anchor))
+#define __MatchEnd_base(__ndk_b, anchor) __dos_MatchEnd((__dos_base_t)(void *)(__ndk_b), (struct AnchorPath *)(anchor))
 
 static __inline__ LONG
 __dos_ParsePattern(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE *patbuf, LONG patbuflen)
@@ -2584,8 +2584,8 @@ __dos_ParsePattern(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE *patbuf, L
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ParsePattern(pat, patbuf, patbuflen) __dos_ParsePattern((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
-#define __ParsePattern_base(__ndk_b, pat, patbuf, patbuflen) __dos_ParsePattern((__dos_base_t)(__ndk_b), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
+#define ParsePattern(pat, patbuf, patbuflen) __dos_ParsePattern((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
+#define __ParsePattern_base(__ndk_b, pat, patbuf, patbuflen) __dos_ParsePattern((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
 
 static __inline__ BOOL
 __dos_MatchPattern(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_STRPTR str)
@@ -2602,8 +2602,8 @@ __dos_MatchPattern(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_STRPTR 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define MatchPattern(patbuf, str) __dos_MatchPattern((__dos_base_t)(DOS_BASE_NAME), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
-#define __MatchPattern_base(__ndk_b, patbuf, str) __dos_MatchPattern((__dos_base_t)(__ndk_b), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
+#define MatchPattern(patbuf, str) __dos_MatchPattern((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
+#define __MatchPattern_base(__ndk_b, patbuf, str) __dos_MatchPattern((__dos_base_t)(void *)(__ndk_b), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
 
 static __inline__ VOID
 __dos_FreeArgs(struct DosLibrary *__base, struct RDArgs * args)
@@ -2619,8 +2619,8 @@ __dos_FreeArgs(struct DosLibrary *__base, struct RDArgs * args)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeArgs(args) __dos_FreeArgs((__dos_base_t)(DOS_BASE_NAME), (struct RDArgs *)(args))
-#define __FreeArgs_base(__ndk_b, args) __dos_FreeArgs((__dos_base_t)(__ndk_b), (struct RDArgs *)(args))
+#define FreeArgs(args) __dos_FreeArgs((__dos_base_t)(void *)(DOS_BASE_NAME), (struct RDArgs *)(args))
+#define __FreeArgs_base(__ndk_b, args) __dos_FreeArgs((__dos_base_t)(void *)(__ndk_b), (struct RDArgs *)(args))
 
 static __inline__ STRPTR
 __dos_FilePart(struct DosLibrary *__base, CONST_STRPTR path)
@@ -2636,8 +2636,8 @@ __dos_FilePart(struct DosLibrary *__base, CONST_STRPTR path)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define FilePart(path) __dos_FilePart((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(path))
-#define __FilePart_base(__ndk_b, path) __dos_FilePart((__dos_base_t)(__ndk_b), (CONST_STRPTR)(path))
+#define FilePart(path) __dos_FilePart((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(path))
+#define __FilePart_base(__ndk_b, path) __dos_FilePart((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(path))
 
 static __inline__ STRPTR
 __dos_PathPart(struct DosLibrary *__base, CONST_STRPTR path)
@@ -2653,8 +2653,8 @@ __dos_PathPart(struct DosLibrary *__base, CONST_STRPTR path)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define PathPart(path) __dos_PathPart((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(path))
-#define __PathPart_base(__ndk_b, path) __dos_PathPart((__dos_base_t)(__ndk_b), (CONST_STRPTR)(path))
+#define PathPart(path) __dos_PathPart((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(path))
+#define __PathPart_base(__ndk_b, path) __dos_PathPart((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(path))
 
 static __inline__ BOOL
 __dos_AddPart(struct DosLibrary *__base, STRPTR dirname, CONST_STRPTR filename, ULONG size)
@@ -2672,8 +2672,8 @@ __dos_AddPart(struct DosLibrary *__base, STRPTR dirname, CONST_STRPTR filename, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AddPart(dirname, filename, size) __dos_AddPart((__dos_base_t)(DOS_BASE_NAME), (STRPTR)(dirname), (CONST_STRPTR)(filename), (ULONG)(size))
-#define __AddPart_base(__ndk_b, dirname, filename, size) __dos_AddPart((__dos_base_t)(__ndk_b), (STRPTR)(dirname), (CONST_STRPTR)(filename), (ULONG)(size))
+#define AddPart(dirname, filename, size) __dos_AddPart((__dos_base_t)(void *)(DOS_BASE_NAME), (STRPTR)(dirname), (CONST_STRPTR)(filename), (ULONG)(size))
+#define __AddPart_base(__ndk_b, dirname, filename, size) __dos_AddPart((__dos_base_t)(void *)(__ndk_b), (STRPTR)(dirname), (CONST_STRPTR)(filename), (ULONG)(size))
 
 static __inline__ BOOL
 __dos_StartNotify(struct DosLibrary *__base, struct NotifyRequest * notify)
@@ -2689,8 +2689,8 @@ __dos_StartNotify(struct DosLibrary *__base, struct NotifyRequest * notify)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define StartNotify(notify) __dos_StartNotify((__dos_base_t)(DOS_BASE_NAME), (struct NotifyRequest *)(notify))
-#define __StartNotify_base(__ndk_b, notify) __dos_StartNotify((__dos_base_t)(__ndk_b), (struct NotifyRequest *)(notify))
+#define StartNotify(notify) __dos_StartNotify((__dos_base_t)(void *)(DOS_BASE_NAME), (struct NotifyRequest *)(notify))
+#define __StartNotify_base(__ndk_b, notify) __dos_StartNotify((__dos_base_t)(void *)(__ndk_b), (struct NotifyRequest *)(notify))
 
 static __inline__ VOID
 __dos_EndNotify(struct DosLibrary *__base, struct NotifyRequest * notify)
@@ -2706,8 +2706,8 @@ __dos_EndNotify(struct DosLibrary *__base, struct NotifyRequest * notify)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define EndNotify(notify) __dos_EndNotify((__dos_base_t)(DOS_BASE_NAME), (struct NotifyRequest *)(notify))
-#define __EndNotify_base(__ndk_b, notify) __dos_EndNotify((__dos_base_t)(__ndk_b), (struct NotifyRequest *)(notify))
+#define EndNotify(notify) __dos_EndNotify((__dos_base_t)(void *)(DOS_BASE_NAME), (struct NotifyRequest *)(notify))
+#define __EndNotify_base(__ndk_b, notify) __dos_EndNotify((__dos_base_t)(void *)(__ndk_b), (struct NotifyRequest *)(notify))
 
 static __inline__ BOOL
 __dos_SetVar(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR buffer, LONG size, LONG flags)
@@ -2726,8 +2726,8 @@ __dos_SetVar(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR buffer, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetVar(name, buffer, size, flags) __dos_SetVar((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(buffer), (LONG)(size), (LONG)(flags))
-#define __SetVar_base(__ndk_b, name, buffer, size, flags) __dos_SetVar((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST_STRPTR)(buffer), (LONG)(size), (LONG)(flags))
+#define SetVar(name, buffer, size, flags) __dos_SetVar((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(buffer), (LONG)(size), (LONG)(flags))
+#define __SetVar_base(__ndk_b, name, buffer, size, flags) __dos_SetVar((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (CONST_STRPTR)(buffer), (LONG)(size), (LONG)(flags))
 
 static __inline__ LONG
 __dos_GetVar(struct DosLibrary *__base, CONST_STRPTR name, STRPTR buffer, LONG size, LONG flags)
@@ -2746,8 +2746,8 @@ __dos_GetVar(struct DosLibrary *__base, CONST_STRPTR name, STRPTR buffer, LONG s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetVar(name, buffer, size, flags) __dos_GetVar((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (STRPTR)(buffer), (LONG)(size), (LONG)(flags))
-#define __GetVar_base(__ndk_b, name, buffer, size, flags) __dos_GetVar((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (STRPTR)(buffer), (LONG)(size), (LONG)(flags))
+#define GetVar(name, buffer, size, flags) __dos_GetVar((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (STRPTR)(buffer), (LONG)(size), (LONG)(flags))
+#define __GetVar_base(__ndk_b, name, buffer, size, flags) __dos_GetVar((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (STRPTR)(buffer), (LONG)(size), (LONG)(flags))
 
 static __inline__ LONG
 __dos_DeleteVar(struct DosLibrary *__base, CONST_STRPTR name, ULONG flags)
@@ -2764,8 +2764,8 @@ __dos_DeleteVar(struct DosLibrary *__base, CONST_STRPTR name, ULONG flags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DeleteVar(name, flags) __dos_DeleteVar((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (ULONG)(flags))
-#define __DeleteVar_base(__ndk_b, name, flags) __dos_DeleteVar((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (ULONG)(flags))
+#define DeleteVar(name, flags) __dos_DeleteVar((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (ULONG)(flags))
+#define __DeleteVar_base(__ndk_b, name, flags) __dos_DeleteVar((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (ULONG)(flags))
 
 static __inline__ struct LocalVar *
 __dos_FindVar(struct DosLibrary *__base, CONST_STRPTR name, ULONG type)
@@ -2782,8 +2782,8 @@ __dos_FindVar(struct DosLibrary *__base, CONST_STRPTR name, ULONG type)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct LocalVar *)_d0;
 }
-#define FindVar(name, type) __dos_FindVar((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (ULONG)(type))
-#define __FindVar_base(__ndk_b, name, type) __dos_FindVar((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (ULONG)(type))
+#define FindVar(name, type) __dos_FindVar((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (ULONG)(type))
+#define __FindVar_base(__ndk_b, name, type) __dos_FindVar((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (ULONG)(type))
 
 static __inline__ LONG
 __dos_CliInitNewcli(struct DosLibrary *__base, struct DosPacket * dp)
@@ -2799,8 +2799,8 @@ __dos_CliInitNewcli(struct DosLibrary *__base, struct DosPacket * dp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CliInitNewcli(dp) __dos_CliInitNewcli((__dos_base_t)(DOS_BASE_NAME), (struct DosPacket *)(dp))
-#define __CliInitNewcli_base(__ndk_b, dp) __dos_CliInitNewcli((__dos_base_t)(__ndk_b), (struct DosPacket *)(dp))
+#define CliInitNewcli(dp) __dos_CliInitNewcli((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DosPacket *)(dp))
+#define __CliInitNewcli_base(__ndk_b, dp) __dos_CliInitNewcli((__dos_base_t)(void *)(__ndk_b), (struct DosPacket *)(dp))
 
 static __inline__ LONG
 __dos_CliInitRun(struct DosLibrary *__base, struct DosPacket * dp)
@@ -2816,8 +2816,8 @@ __dos_CliInitRun(struct DosLibrary *__base, struct DosPacket * dp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CliInitRun(dp) __dos_CliInitRun((__dos_base_t)(DOS_BASE_NAME), (struct DosPacket *)(dp))
-#define __CliInitRun_base(__ndk_b, dp) __dos_CliInitRun((__dos_base_t)(__ndk_b), (struct DosPacket *)(dp))
+#define CliInitRun(dp) __dos_CliInitRun((__dos_base_t)(void *)(DOS_BASE_NAME), (struct DosPacket *)(dp))
+#define __CliInitRun_base(__ndk_b, dp) __dos_CliInitRun((__dos_base_t)(void *)(__ndk_b), (struct DosPacket *)(dp))
 
 static __inline__ LONG
 __dos_WriteChars(struct DosLibrary *__base, CONST_STRPTR buf, ULONG buflen)
@@ -2834,8 +2834,8 @@ __dos_WriteChars(struct DosLibrary *__base, CONST_STRPTR buf, ULONG buflen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WriteChars(buf, buflen) __dos_WriteChars((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(buf), (ULONG)(buflen))
-#define __WriteChars_base(__ndk_b, buf, buflen) __dos_WriteChars((__dos_base_t)(__ndk_b), (CONST_STRPTR)(buf), (ULONG)(buflen))
+#define WriteChars(buf, buflen) __dos_WriteChars((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(buf), (ULONG)(buflen))
+#define __WriteChars_base(__ndk_b, buf, buflen) __dos_WriteChars((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(buf), (ULONG)(buflen))
 
 static __inline__ LONG
 __dos_PutStr(struct DosLibrary *__base, CONST_STRPTR str)
@@ -2851,8 +2851,8 @@ __dos_PutStr(struct DosLibrary *__base, CONST_STRPTR str)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define PutStr(str) __dos_PutStr((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(str))
-#define __PutStr_base(__ndk_b, str) __dos_PutStr((__dos_base_t)(__ndk_b), (CONST_STRPTR)(str))
+#define PutStr(str) __dos_PutStr((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(str))
+#define __PutStr_base(__ndk_b, str) __dos_PutStr((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(str))
 
 static __inline__ LONG
 __dos_VPrintf(struct DosLibrary *__base, CONST_STRPTR format, CONST_APTR argarray)
@@ -2869,8 +2869,8 @@ __dos_VPrintf(struct DosLibrary *__base, CONST_STRPTR format, CONST_APTR argarra
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define VPrintf(format, argarray) __dos_VPrintf((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
-#define __VPrintf_base(__ndk_b, format, argarray) __dos_VPrintf((__dos_base_t)(__ndk_b), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
+#define VPrintf(format, argarray) __dos_VPrintf((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
+#define __VPrintf_base(__ndk_b, format, argarray) __dos_VPrintf((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
@@ -2878,7 +2878,7 @@ ___dos_Printf(__dos_base_t __ndk_base, CONST_STRPTR format, ...)
 {
 	return __dos_VPrintf(__ndk_base, (CONST_STRPTR)(format), (CONST_APTR)((ULONG)&format + sizeof(format)));
 }
-#define Printf(format, ...) ___dos_Printf((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(format), ##__VA_ARGS__)
+#define Printf(format, ...) ___dos_Printf((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(format), ##__VA_ARGS__)
 #else
 #define Printf(format, ...) (Printf)((CONST_STRPTR)(format), ##__VA_ARGS__)
 #endif
@@ -2899,8 +2899,8 @@ __dos_ParsePatternNoCase(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE * pa
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ParsePatternNoCase(pat, patbuf, patbuflen) __dos_ParsePatternNoCase((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
-#define __ParsePatternNoCase_base(__ndk_b, pat, patbuf, patbuflen) __dos_ParsePatternNoCase((__dos_base_t)(__ndk_b), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
+#define ParsePatternNoCase(pat, patbuf, patbuflen) __dos_ParsePatternNoCase((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
+#define __ParsePatternNoCase_base(__ndk_b, pat, patbuf, patbuflen) __dos_ParsePatternNoCase((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
 
 static __inline__ BOOL
 __dos_MatchPatternNoCase(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_STRPTR str)
@@ -2917,8 +2917,8 @@ __dos_MatchPatternNoCase(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_S
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define MatchPatternNoCase(patbuf, str) __dos_MatchPatternNoCase((__dos_base_t)(DOS_BASE_NAME), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
-#define __MatchPatternNoCase_base(__ndk_b, patbuf, str) __dos_MatchPatternNoCase((__dos_base_t)(__ndk_b), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
+#define MatchPatternNoCase(patbuf, str) __dos_MatchPatternNoCase((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
+#define __MatchPatternNoCase_base(__ndk_b, patbuf, str) __dos_MatchPatternNoCase((__dos_base_t)(void *)(__ndk_b), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
 
 static __inline__ BOOL
 __dos_SameDevice(struct DosLibrary *__base, BPTR lock1, BPTR lock2)
@@ -2935,8 +2935,8 @@ __dos_SameDevice(struct DosLibrary *__base, BPTR lock1, BPTR lock2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SameDevice(lock1, lock2) __dos_SameDevice((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock1), (BPTR)(lock2))
-#define __SameDevice_base(__ndk_b, lock1, lock2) __dos_SameDevice((__dos_base_t)(__ndk_b), (BPTR)(lock1), (BPTR)(lock2))
+#define SameDevice(lock1, lock2) __dos_SameDevice((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock1), (BPTR)(lock2))
+#define __SameDevice_base(__ndk_b, lock1, lock2) __dos_SameDevice((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock1), (BPTR)(lock2))
 
 static __inline__ VOID
 __dos_ExAllEnd(struct DosLibrary *__base, BPTR lock, struct ExAllData * buffer, LONG size, LONG data, struct ExAllControl * control)
@@ -2956,8 +2956,8 @@ __dos_ExAllEnd(struct DosLibrary *__base, BPTR lock, struct ExAllData * buffer, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ExAllEnd(lock, buffer, size, data, control) __dos_ExAllEnd((__dos_base_t)(DOS_BASE_NAME), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
-#define __ExAllEnd_base(__ndk_b, lock, buffer, size, data, control) __dos_ExAllEnd((__dos_base_t)(__ndk_b), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
+#define ExAllEnd(lock, buffer, size, data, control) __dos_ExAllEnd((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
+#define __ExAllEnd_base(__ndk_b, lock, buffer, size, data, control) __dos_ExAllEnd((__dos_base_t)(void *)(__ndk_b), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
 
 static __inline__ BOOL
 __dos_SetOwner(struct DosLibrary *__base, CONST_STRPTR name, LONG owner_info)
@@ -2974,8 +2974,8 @@ __dos_SetOwner(struct DosLibrary *__base, CONST_STRPTR name, LONG owner_info)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetOwner(name, owner_info) __dos_SetOwner((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(owner_info))
-#define __SetOwner_base(__ndk_b, name, owner_info) __dos_SetOwner((__dos_base_t)(__ndk_b), (CONST_STRPTR)(name), (LONG)(owner_info))
+#define SetOwner(name, owner_info) __dos_SetOwner((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(owner_info))
+#define __SetOwner_base(__ndk_b, name, owner_info) __dos_SetOwner((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name), (LONG)(owner_info))
 
 static __inline__ LONG
 __dos_VolumeRequestHook(struct DosLibrary *__base, CONST_STRPTR vol)
@@ -2991,8 +2991,8 @@ __dos_VolumeRequestHook(struct DosLibrary *__base, CONST_STRPTR vol)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define VolumeRequestHook(vol) __dos_VolumeRequestHook((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(vol))
-#define __VolumeRequestHook_base(__ndk_b, vol) __dos_VolumeRequestHook((__dos_base_t)(__ndk_b), (CONST_STRPTR)(vol))
+#define VolumeRequestHook(vol) __dos_VolumeRequestHook((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(vol))
+#define __VolumeRequestHook_base(__ndk_b, vol) __dos_VolumeRequestHook((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(vol))
 
 static __inline__ BPTR
 __dos_GetCurrentDir(struct DosLibrary *__base)
@@ -3008,8 +3008,8 @@ __dos_GetCurrentDir(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BPTR)_d0;
 }
-#define GetCurrentDir() __dos_GetCurrentDir((__dos_base_t)(DOS_BASE_NAME))
-#define __GetCurrentDir_base(__ndk_b) __dos_GetCurrentDir((__dos_base_t)(__ndk_b))
+#define GetCurrentDir() __dos_GetCurrentDir((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __GetCurrentDir_base(__ndk_b) __dos_GetCurrentDir((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ LONG
 __dos_PutErrStr(struct DosLibrary *__base, CONST_STRPTR str)
@@ -3025,8 +3025,8 @@ __dos_PutErrStr(struct DosLibrary *__base, CONST_STRPTR str)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define PutErrStr(str) __dos_PutErrStr((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(str))
-#define __PutErrStr_base(__ndk_b, str) __dos_PutErrStr((__dos_base_t)(__ndk_b), (CONST_STRPTR)(str))
+#define PutErrStr(str) __dos_PutErrStr((__dos_base_t)(void *)(DOS_BASE_NAME), (CONST_STRPTR)(str))
+#define __PutErrStr_base(__ndk_b, str) __dos_PutErrStr((__dos_base_t)(void *)(__ndk_b), (CONST_STRPTR)(str))
 
 static __inline__ LONG
 __dos_ErrorOutput(struct DosLibrary *__base)
@@ -3042,8 +3042,8 @@ __dos_ErrorOutput(struct DosLibrary *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ErrorOutput() __dos_ErrorOutput((__dos_base_t)(DOS_BASE_NAME))
-#define __ErrorOutput_base(__ndk_b) __dos_ErrorOutput((__dos_base_t)(__ndk_b))
+#define ErrorOutput() __dos_ErrorOutput((__dos_base_t)(void *)(DOS_BASE_NAME))
+#define __ErrorOutput_base(__ndk_b) __dos_ErrorOutput((__dos_base_t)(void *)(__ndk_b))
 
 static __inline__ LONG
 __dos_SelectError(struct DosLibrary *__base, BPTR fh)
@@ -3059,8 +3059,8 @@ __dos_SelectError(struct DosLibrary *__base, BPTR fh)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SelectError(fh) __dos_SelectError((__dos_base_t)(DOS_BASE_NAME), (BPTR)(fh))
-#define __SelectError_base(__ndk_b, fh) __dos_SelectError((__dos_base_t)(__ndk_b), (BPTR)(fh))
+#define SelectError(fh) __dos_SelectError((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(fh))
+#define __SelectError_base(__ndk_b, fh) __dos_SelectError((__dos_base_t)(void *)(__ndk_b), (BPTR)(fh))
 
 static __inline__ APTR
 __dos_DoShellMethodTagList(struct DosLibrary *__base, ULONG method, CONST struct TagItem * tags)
@@ -3076,8 +3076,8 @@ __dos_DoShellMethodTagList(struct DosLibrary *__base, ULONG method, CONST struct
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define DoShellMethodTagList(method, tags) __dos_DoShellMethodTagList((__dos_base_t)(DOS_BASE_NAME), (ULONG)(method), (CONST struct TagItem *)(tags))
-#define __DoShellMethodTagList_base(__ndk_b, method, tags) __dos_DoShellMethodTagList((__dos_base_t)(__ndk_b), (ULONG)(method), (CONST struct TagItem *)(tags))
+#define DoShellMethodTagList(method, tags) __dos_DoShellMethodTagList((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(method), (CONST struct TagItem *)(tags))
+#define __DoShellMethodTagList_base(__ndk_b, method, tags) __dos_DoShellMethodTagList((__dos_base_t)(void *)(__ndk_b), (ULONG)(method), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
@@ -3085,7 +3085,7 @@ ___dos_DoShellMethod(__dos_base_t __ndk_base, ULONG method, ...)
 {
 	return __dos_DoShellMethodTagList(__ndk_base, (ULONG)(method), (CONST struct TagItem *)((ULONG)&method + sizeof(method)));
 }
-#define DoShellMethod(method, ...) ___dos_DoShellMethod((__dos_base_t)(DOS_BASE_NAME), (ULONG)(method), ##__VA_ARGS__)
+#define DoShellMethod(method, ...) ___dos_DoShellMethod((__dos_base_t)(void *)(DOS_BASE_NAME), (ULONG)(method), ##__VA_ARGS__)
 #else
 #define DoShellMethod(method, ...) (DoShellMethod)((ULONG)(method), ##__VA_ARGS__)
 #endif
@@ -3105,7 +3105,7 @@ __dos_ScanStackToken(struct DosLibrary *__base, BPTR seg, LONG defaultstack)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ScanStackToken(seg, defaultstack) __dos_ScanStackToken((__dos_base_t)(DOS_BASE_NAME), (BPTR)(seg), (LONG)(defaultstack))
-#define __ScanStackToken_base(__ndk_b, seg, defaultstack) __dos_ScanStackToken((__dos_base_t)(__ndk_b), (BPTR)(seg), (LONG)(defaultstack))
+#define ScanStackToken(seg, defaultstack) __dos_ScanStackToken((__dos_base_t)(void *)(DOS_BASE_NAME), (BPTR)(seg), (LONG)(defaultstack))
+#define __ScanStackToken_base(__ndk_b, seg, defaultstack) __dos_ScanStackToken((__dos_base_t)(void *)(__ndk_b), (BPTR)(seg), (LONG)(defaultstack))
 
 #endif /* INLINE_DOS_H */

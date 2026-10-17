@@ -23,7 +23,7 @@ struct SoundPrefs
     UWORD sop_AudioVolume;
     UWORD sop_AudioPeriod;
     UWORD sop_AudioDuration;
-    char sop_AudioFileName[256];	/* with SPTYPE_SAMPLE */
+    TEXT	sop_AudioFileName[256];	/* with SPTYPE_SAMPLE */
 };
 
 /* sop_AudioType */

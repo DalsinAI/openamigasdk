@@ -22,24 +22,24 @@ VOID datatypesPrivate1() ()
 ==public
 struct DataType * ObtainDataTypeA(ULONG type, APTR handle, CONST struct TagItem * attrs) (d0,a0,a1)
 ==varargs
-struct DataType * ObtainDataType(ULONG type, APTR handle, Tag tag1, ...) (d0,a0,a1)
+struct DataType * ObtainDataType(ULONG type, APTR handle, ...) (d0,a0,a1)
 VOID ReleaseDataType(struct DataType * dt) (a0)
 Object *NewDTObjectA(STRPTR name, CONST struct TagItem * attrs) (d0,a0)
 ==varargs
-Object * NewDTObject(APTR name, Tag tag1, ...) (d0,a0)
+Object * NewDTObject(APTR name, ...) (d0,a0)
 VOID DisposeDTObject(Object * o) (a0)
 ULONG SetDTAttrsA(Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs) (a0,a1,a2,a3)
 ==varargs
-ULONG SetDTAttrs(Object * o, struct Window * win, struct Requester * req, Tag tag1, ...) (a0,a1,a2,a3)
+ULONG SetDTAttrs(Object * o, struct Window * win, struct Requester * req, ...) (a0,a1,a2,a3)
 ULONG GetDTAttrsA(Object * o, CONST struct TagItem * attrs) (a0,a2)
 ==varargs
-ULONG GetDTAttrs(Object * o, Tag tag1, ...) (a0,a2)
+ULONG GetDTAttrs(Object * o, ...) (a0,a2)
 LONG AddDTObject(struct Window * win, struct Requester * req, Object * o, LONG pos) (a0,a1,a2,d0)
 VOID RefreshDTObjectA(Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs) (a0,a1,a2,a3)
 ==varargs
-VOID RefreshDTObject(Object * o, struct Window * win, struct Requester * req, Tag tag1, ...) (a0,a1,a2,a3)
+VOID RefreshDTObject(Object * o, struct Window * win, struct Requester * req, ...) (a0,a1,a2,a3)
 ==varargs
-VOID RefreshDTObjects(Object * o, struct Window * win, struct Requester * req, Tag tag1, ...) (a0,a1,a2,a3)
+VOID RefreshDTObjects(Object * o, struct Window * win, struct Requester * req, ...) (a0,a1,a2,a3)
 ULONG DoAsyncLayout(Object * o, struct gpLayout * gpl) (a0,a1)
 ULONG DoDTMethodA(Object * o, struct Window * win, struct Requester * req, Msg msg) (a0,a1,a2,a3)
 ==varargs
@@ -86,6 +86,6 @@ APTR FreeDTMethods(APTR methods) (a0)
 ULONG GetDTTriggerMethodDataFlags(ULONG method) (d0)
 ULONG SaveDTObjectA(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, LONG saveicon, CONST struct TagItem * attrs) (a0,a1,a2,a3,d0,d1,a4)
 ==varargs
-ULONG SaveDTObject(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, Tag tag1, ...) (a0,a1,a2,a3,d0,d1,a4)
+ULONG SaveDTObject(Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, ...) (a0,a1,a2,a3,d0,d1,a4)
 ULONG StartDragSelect(Object * o) (a0)
 ==end

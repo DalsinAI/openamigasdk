@@ -35,8 +35,15 @@
 /* Pointers */
 typedef void		*APTR;		/* any pointer */
 typedef const void	*CONST_APTR;	/* any pointer to data not written */
+/* strings: char in C++ (string literals convert without a cast), unsigned
+ * char in C, as the OS 3.2 header has them */
+#ifdef __cplusplus
+typedef char		*STRPTR;	/* a NUL-terminated string */
+typedef const char	*CONST_STRPTR;
+#else
 typedef unsigned char	*STRPTR;	/* a NUL-terminated string */
 typedef const unsigned char *CONST_STRPTR;
+#endif
 
 /* 32 bits */
 typedef int		LONG;
@@ -77,7 +84,11 @@ typedef short		BOOL;
 #endif
 
 /* Text */
+#ifdef __cplusplus
+typedef char		TEXT;
+#else
 typedef unsigned char	TEXT;
+#endif
 
 #ifndef NULL
 #ifdef __cplusplus

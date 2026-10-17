@@ -23,7 +23,7 @@
 struct PrinterTxtPrefs
 {
     LONG pt_Reserved[4];
-    UBYTE pt_Driver[DRIVERNAMESIZE];
+    TEXT	pt_Driver[DRIVERNAMESIZE];
     UBYTE pt_Port;			/* PP_PARALLEL or PP_SERIAL */
 
     UWORD pt_PaperType;
@@ -80,7 +80,7 @@ struct PrinterUnitPrefs
     LONG pu_Reserved[4];
     LONG pu_UnitNum;
     ULONG pu_OpenDeviceFlags;
-    UBYTE pu_DeviceName[DEVICENAMESIZE];	/* without ".device" */
+    TEXT	pu_DeviceName[DEVICENAMESIZE];	/* without ".device" */
 };
 
 /* A printer unit's name (V44) */
@@ -88,7 +88,7 @@ struct PrinterDeviceUnitPrefs
 {
     LONG pd_Reserved[4];
     LONG pd_UnitNum;
-    UBYTE pd_UnitName[UNITNAMESIZE];
+    TEXT	pd_UnitName[UNITNAMESIZE];
 };
 
 #endif /* PREFS_PRINTERTXT_H */

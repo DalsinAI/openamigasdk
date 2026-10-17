@@ -38,7 +38,7 @@ __listview_LISTVIEW_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define LISTVIEW_GetClass() __listview_LISTVIEW_GetClass((__listview_base_t)(LISTVIEW_BASE_NAME))
-#define __LISTVIEW_GetClass_base(__ndk_b) __listview_LISTVIEW_GetClass((__listview_base_t)(__ndk_b))
+#define LISTVIEW_GetClass() __listview_LISTVIEW_GetClass((__listview_base_t)(void *)(LISTVIEW_BASE_NAME))
+#define __LISTVIEW_GetClass_base(__ndk_b) __listview_LISTVIEW_GetClass((__listview_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_LISTVIEW_H */

@@ -38,7 +38,7 @@ __penmap_PENMAP_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define PENMAP_GetClass() __penmap_PENMAP_GetClass((__penmap_base_t)(PENMAP_BASE_NAME))
-#define __PENMAP_GetClass_base(__ndk_b) __penmap_PENMAP_GetClass((__penmap_base_t)(__ndk_b))
+#define PENMAP_GetClass() __penmap_PENMAP_GetClass((__penmap_base_t)(void *)(PENMAP_BASE_NAME))
+#define __PENMAP_GetClass_base(__ndk_b) __penmap_PENMAP_GetClass((__penmap_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_PENMAP_H */

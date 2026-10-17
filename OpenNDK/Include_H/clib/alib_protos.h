@@ -90,6 +90,12 @@ LONG ArgInt(CONST_STRPTR *tt, CONST_STRPTR entry, LONG defaultVal);
 CxObj *HotKey(CONST_STRPTR description, struct MsgPort *port, LONG id);
 VOID FreeIEvents(struct InputEvent *events);
 
+/* ARexx variables of the script that sent a message (SetRexxVarFromMsg
+ * in rexxsyslib.library V45 is the newer way) */
+struct RexxMsg;
+BOOL CheckRexxMsg(CONST struct RexxMsg *rexxmsg);
+LONG SetRexxVar(struct RexxMsg *rexxmsg, CONST_STRPTR name, CONST_STRPTR value, LONG length);
+
 #ifdef __cplusplus
 }
 #endif

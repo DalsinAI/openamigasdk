@@ -38,7 +38,7 @@ __tabs_TABS_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define TABS_GetClass() __tabs_TABS_GetClass((__tabs_base_t)(TABS_BASE_NAME))
-#define __TABS_GetClass_base(__ndk_b) __tabs_TABS_GetClass((__tabs_base_t)(__ndk_b))
+#define TABS_GetClass() __tabs_TABS_GetClass((__tabs_base_t)(void *)(TABS_BASE_NAME))
+#define __TABS_GetClass_base(__ndk_b) __tabs_TABS_GetClass((__tabs_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_TABS_H */

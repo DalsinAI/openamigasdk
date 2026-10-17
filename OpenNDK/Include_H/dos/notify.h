@@ -21,8 +21,8 @@
 
 /* What the caller fills in to watch a file or directory */
 struct NotifyRequest {
-	UBYTE	*nr_Name;		/* the object to watch */
-	UBYTE	*nr_FullName;		/* dos's: the full path */
+	STRPTR	nr_Name;		/* the object to watch */
+	STRPTR	nr_FullName;		/* dos's: the full path */
 	ULONG	nr_UserData;
 	ULONG	nr_Flags;		/* NRF_ */
 	union {

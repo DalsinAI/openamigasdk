@@ -21,12 +21,12 @@ extern "C" {
 /* From version 44 */
 Class * RADIOBUTTON_GetClass(VOID);
 struct Node * AllocRadioButtonNodeA(ULONG columns, struct TagItem * tags);
-struct Node * AllocRadioButtonNode(UWORD columns, Tag tag1, ...);
+struct Node * AllocRadioButtonNode(UWORD columns, ...);
 VOID FreeRadioButtonNode(struct Node * node);
 VOID SetRadioButtonNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID SetRadioButtonNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID SetRadioButtonNodeAttrs(struct Node * node, ...);
 VOID GetRadioButtonNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID GetRadioButtonNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID GetRadioButtonNodeAttrs(struct Node * node, ...);
 
 #ifdef __cplusplus
 }

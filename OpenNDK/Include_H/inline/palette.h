@@ -38,7 +38,7 @@ __palette_PALETTE_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define PALETTE_GetClass() __palette_PALETTE_GetClass((__palette_base_t)(PALETTE_BASE_NAME))
-#define __PALETTE_GetClass_base(__ndk_b) __palette_PALETTE_GetClass((__palette_base_t)(__ndk_b))
+#define PALETTE_GetClass() __palette_PALETTE_GetClass((__palette_base_t)(void *)(PALETTE_BASE_NAME))
+#define __PALETTE_GetClass_base(__ndk_b) __palette_PALETTE_GetClass((__palette_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_PALETTE_H */

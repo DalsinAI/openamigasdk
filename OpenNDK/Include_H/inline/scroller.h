@@ -38,7 +38,7 @@ __scroller_SCROLLER_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define SCROLLER_GetClass() __scroller_SCROLLER_GetClass((__scroller_base_t)(SCROLLER_BASE_NAME))
-#define __SCROLLER_GetClass_base(__ndk_b) __scroller_SCROLLER_GetClass((__scroller_base_t)(__ndk_b))
+#define SCROLLER_GetClass() __scroller_SCROLLER_GetClass((__scroller_base_t)(void *)(SCROLLER_BASE_NAME))
+#define __SCROLLER_GetClass_base(__ndk_b) __scroller_SCROLLER_GetClass((__scroller_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_SCROLLER_H */

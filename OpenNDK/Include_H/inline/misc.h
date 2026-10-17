@@ -38,8 +38,8 @@ __misc_AllocMiscResource(struct Library *__base, ULONG unitNum, CONST_STRPTR nam
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE *)_d0;
 }
-#define AllocMiscResource(unitNum, name) __misc_AllocMiscResource((__misc_base_t)(MISC_BASE_NAME), (ULONG)(unitNum), (CONST_STRPTR)(name))
-#define __AllocMiscResource_base(__ndk_b, unitNum, name) __misc_AllocMiscResource((__misc_base_t)(__ndk_b), (ULONG)(unitNum), (CONST_STRPTR)(name))
+#define AllocMiscResource(unitNum, name) __misc_AllocMiscResource((__misc_base_t)(void *)(MISC_BASE_NAME), (ULONG)(unitNum), (CONST_STRPTR)(name))
+#define __AllocMiscResource_base(__ndk_b, unitNum, name) __misc_AllocMiscResource((__misc_base_t)(void *)(__ndk_b), (ULONG)(unitNum), (CONST_STRPTR)(name))
 
 static __inline__ VOID
 __misc_FreeMiscResource(struct Library *__base, ULONG unitNum)
@@ -55,7 +55,7 @@ __misc_FreeMiscResource(struct Library *__base, ULONG unitNum)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeMiscResource(unitNum) __misc_FreeMiscResource((__misc_base_t)(MISC_BASE_NAME), (ULONG)(unitNum))
-#define __FreeMiscResource_base(__ndk_b, unitNum) __misc_FreeMiscResource((__misc_base_t)(__ndk_b), (ULONG)(unitNum))
+#define FreeMiscResource(unitNum) __misc_FreeMiscResource((__misc_base_t)(void *)(MISC_BASE_NAME), (ULONG)(unitNum))
+#define __FreeMiscResource_base(__ndk_b, unitNum) __misc_FreeMiscResource((__misc_base_t)(void *)(__ndk_b), (ULONG)(unitNum))
 
 #endif /* INLINE_MISC_H */

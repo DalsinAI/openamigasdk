@@ -38,7 +38,7 @@ VOID lowlevelPrivate3() ()
 ==public
 BOOL SetJoyPortAttrsA(ULONG portNumber, CONST struct TagItem * tagList) (d0,a1)
 ==varargs
-BOOL SetJoyPortAttrs(ULONG portNumber, Tag firstTag, ...) (d0,a1)
+BOOL SetJoyPortAttrs(ULONG portNumber, ...) (d0,a1)
 ==private
 VOID lowlevelPrivate4() ()
 VOID lowlevelPrivate5() ()

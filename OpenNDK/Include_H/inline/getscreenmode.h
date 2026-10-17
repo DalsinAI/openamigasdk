@@ -38,7 +38,7 @@ __getscreenmode_GETSCREENMODE_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define GETSCREENMODE_GetClass() __getscreenmode_GETSCREENMODE_GetClass((__getscreenmode_base_t)(GETSCREENMODE_BASE_NAME))
-#define __GETSCREENMODE_GetClass_base(__ndk_b) __getscreenmode_GETSCREENMODE_GetClass((__getscreenmode_base_t)(__ndk_b))
+#define GETSCREENMODE_GetClass() __getscreenmode_GETSCREENMODE_GetClass((__getscreenmode_base_t)(void *)(GETSCREENMODE_BASE_NAME))
+#define __GETSCREENMODE_GetClass_base(__ndk_b) __getscreenmode_GETSCREENMODE_GetClass((__getscreenmode_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_GETSCREENMODE_H */

@@ -38,7 +38,7 @@ __piechart_PIECHART_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define PIECHART_GetClass() __piechart_PIECHART_GetClass((__piechart_base_t)(PIECHART_BASE_NAME))
-#define __PIECHART_GetClass_base(__ndk_b) __piechart_PIECHART_GetClass((__piechart_base_t)(__ndk_b))
+#define PIECHART_GetClass() __piechart_PIECHART_GetClass((__piechart_base_t)(void *)(PIECHART_BASE_NAME))
+#define __PIECHART_GetClass_base(__ndk_b) __piechart_PIECHART_GetClass((__piechart_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_PIECHART_H */

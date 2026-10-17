@@ -22,6 +22,6 @@ VOID LayoutLimits(struct Gadget * gadget, struct LayoutLimits * limits, struct T
 Class * PAGE_GetClass() ()
 ULONG SetPageGadgetAttrsA(struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, struct TagItem * tags) (a0,a1,a2,a3,a4)
 ==varargs
-ULONG SetPageGadgetAttrs(struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, Tag tag1, ...) (a0,a1,a2,a3,a4)
+ULONG SetPageGadgetAttrs(struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, ...) (a0,a1,a2,a3,a4)
 VOID RefreshPageGadget(struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester) (a0,a1,a2,a3)
 ==end

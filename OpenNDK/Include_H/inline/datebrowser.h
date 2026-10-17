@@ -38,8 +38,8 @@ __datebrowser_DATEBROWSER_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define DATEBROWSER_GetClass() __datebrowser_DATEBROWSER_GetClass((__datebrowser_base_t)(DATEBROWSER_BASE_NAME))
-#define __DATEBROWSER_GetClass_base(__ndk_b) __datebrowser_DATEBROWSER_GetClass((__datebrowser_base_t)(__ndk_b))
+#define DATEBROWSER_GetClass() __datebrowser_DATEBROWSER_GetClass((__datebrowser_base_t)(void *)(DATEBROWSER_BASE_NAME))
+#define __DATEBROWSER_GetClass_base(__ndk_b) __datebrowser_DATEBROWSER_GetClass((__datebrowser_base_t)(void *)(__ndk_b))
 
 static __inline__ UWORD
 __datebrowser_JulianWeekDay(struct Library *__base, ULONG day, ULONG month, LONG year)
@@ -56,8 +56,8 @@ __datebrowser_JulianWeekDay(struct Library *__base, ULONG day, ULONG month, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define JulianWeekDay(day, month, year) __datebrowser_JulianWeekDay((__datebrowser_base_t)(DATEBROWSER_BASE_NAME), (ULONG)(day), (ULONG)(month), (LONG)(year))
-#define __JulianWeekDay_base(__ndk_b, day, month, year) __datebrowser_JulianWeekDay((__datebrowser_base_t)(__ndk_b), (ULONG)(day), (ULONG)(month), (LONG)(year))
+#define JulianWeekDay(day, month, year) __datebrowser_JulianWeekDay((__datebrowser_base_t)(void *)(DATEBROWSER_BASE_NAME), (ULONG)(day), (ULONG)(month), (LONG)(year))
+#define __JulianWeekDay_base(__ndk_b, day, month, year) __datebrowser_JulianWeekDay((__datebrowser_base_t)(void *)(__ndk_b), (ULONG)(day), (ULONG)(month), (LONG)(year))
 
 static __inline__ UWORD
 __datebrowser_JulianMonthDays(struct Library *__base, ULONG month, LONG year)
@@ -73,8 +73,8 @@ __datebrowser_JulianMonthDays(struct Library *__base, ULONG month, LONG year)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define JulianMonthDays(month, year) __datebrowser_JulianMonthDays((__datebrowser_base_t)(DATEBROWSER_BASE_NAME), (ULONG)(month), (LONG)(year))
-#define __JulianMonthDays_base(__ndk_b, month, year) __datebrowser_JulianMonthDays((__datebrowser_base_t)(__ndk_b), (ULONG)(month), (LONG)(year))
+#define JulianMonthDays(month, year) __datebrowser_JulianMonthDays((__datebrowser_base_t)(void *)(DATEBROWSER_BASE_NAME), (ULONG)(month), (LONG)(year))
+#define __JulianMonthDays_base(__ndk_b, month, year) __datebrowser_JulianMonthDays((__datebrowser_base_t)(void *)(__ndk_b), (ULONG)(month), (LONG)(year))
 
 static __inline__ BOOL
 __datebrowser_JulianLeapYear(struct Library *__base, LONG year)
@@ -90,7 +90,7 @@ __datebrowser_JulianLeapYear(struct Library *__base, LONG year)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define JulianLeapYear(year) __datebrowser_JulianLeapYear((__datebrowser_base_t)(DATEBROWSER_BASE_NAME), (LONG)(year))
-#define __JulianLeapYear_base(__ndk_b, year) __datebrowser_JulianLeapYear((__datebrowser_base_t)(__ndk_b), (LONG)(year))
+#define JulianLeapYear(year) __datebrowser_JulianLeapYear((__datebrowser_base_t)(void *)(DATEBROWSER_BASE_NAME), (LONG)(year))
+#define __JulianLeapYear_base(__ndk_b, year) __datebrowser_JulianLeapYear((__datebrowser_base_t)(void *)(__ndk_b), (LONG)(year))
 
 #endif /* INLINE_DATEBROWSER_H */

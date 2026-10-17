@@ -38,8 +38,8 @@ __locale_CloseCatalog(struct LocaleBase *__base, struct Catalog * catalog)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseCatalog(catalog) __locale_CloseCatalog((__locale_base_t)(LOCALE_BASE_NAME), (struct Catalog *)(catalog))
-#define __CloseCatalog_base(__ndk_b, catalog) __locale_CloseCatalog((__locale_base_t)(__ndk_b), (struct Catalog *)(catalog))
+#define CloseCatalog(catalog) __locale_CloseCatalog((__locale_base_t)(void *)(LOCALE_BASE_NAME), (struct Catalog *)(catalog))
+#define __CloseCatalog_base(__ndk_b, catalog) __locale_CloseCatalog((__locale_base_t)(void *)(__ndk_b), (struct Catalog *)(catalog))
 
 static __inline__ VOID
 __locale_CloseLocale(struct LocaleBase *__base, struct Locale * locale)
@@ -55,8 +55,8 @@ __locale_CloseLocale(struct LocaleBase *__base, struct Locale * locale)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseLocale(locale) __locale_CloseLocale((__locale_base_t)(LOCALE_BASE_NAME), (struct Locale *)(locale))
-#define __CloseLocale_base(__ndk_b, locale) __locale_CloseLocale((__locale_base_t)(__ndk_b), (struct Locale *)(locale))
+#define CloseLocale(locale) __locale_CloseLocale((__locale_base_t)(void *)(LOCALE_BASE_NAME), (struct Locale *)(locale))
+#define __CloseLocale_base(__ndk_b, locale) __locale_CloseLocale((__locale_base_t)(void *)(__ndk_b), (struct Locale *)(locale))
 
 static __inline__ ULONG
 __locale_ConvToLower(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -72,8 +72,8 @@ __locale_ConvToLower(struct LocaleBase *__base, CONST struct Locale * locale, UL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ConvToLower(locale, character) __locale_ConvToLower((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __ConvToLower_base(__ndk_b, locale, character) __locale_ConvToLower((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define ConvToLower(locale, character) __locale_ConvToLower((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __ConvToLower_base(__ndk_b, locale, character) __locale_ConvToLower((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ ULONG
 __locale_ConvToUpper(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -89,8 +89,8 @@ __locale_ConvToUpper(struct LocaleBase *__base, CONST struct Locale * locale, UL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ConvToUpper(locale, character) __locale_ConvToUpper((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __ConvToUpper_base(__ndk_b, locale, character) __locale_ConvToUpper((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define ConvToUpper(locale, character) __locale_ConvToUpper((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __ConvToUpper_base(__ndk_b, locale, character) __locale_ConvToUpper((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ VOID
 __locale_FormatDate(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR fmtTemplate, CONST struct DateStamp * date, CONST struct Hook * putCharFunc)
@@ -108,8 +108,8 @@ __locale_FormatDate(struct LocaleBase *__base, CONST struct Locale * locale, CON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FormatDate(locale, fmtTemplate, date, putCharFunc) __locale_FormatDate((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST struct DateStamp *)(date), (CONST struct Hook *)(putCharFunc))
-#define __FormatDate_base(__ndk_b, locale, fmtTemplate, date, putCharFunc) __locale_FormatDate((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST struct DateStamp *)(date), (CONST struct Hook *)(putCharFunc))
+#define FormatDate(locale, fmtTemplate, date, putCharFunc) __locale_FormatDate((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST struct DateStamp *)(date), (CONST struct Hook *)(putCharFunc))
+#define __FormatDate_base(__ndk_b, locale, fmtTemplate, date, putCharFunc) __locale_FormatDate((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST struct DateStamp *)(date), (CONST struct Hook *)(putCharFunc))
 
 static __inline__ APTR
 __locale_FormatString(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR fmtTemplate, CONST_APTR dataStream, CONST struct Hook * putCharFunc)
@@ -127,8 +127,8 @@ __locale_FormatString(struct LocaleBase *__base, CONST struct Locale * locale, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define FormatString(locale, fmtTemplate, dataStream, putCharFunc) __locale_FormatString((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST_APTR)(dataStream), (CONST struct Hook *)(putCharFunc))
-#define __FormatString_base(__ndk_b, locale, fmtTemplate, dataStream, putCharFunc) __locale_FormatString((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST_APTR)(dataStream), (CONST struct Hook *)(putCharFunc))
+#define FormatString(locale, fmtTemplate, dataStream, putCharFunc) __locale_FormatString((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST_APTR)(dataStream), (CONST struct Hook *)(putCharFunc))
+#define __FormatString_base(__ndk_b, locale, fmtTemplate, dataStream, putCharFunc) __locale_FormatString((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST_APTR)(dataStream), (CONST struct Hook *)(putCharFunc))
 
 static __inline__ CONST_STRPTR
 __locale_GetCatalogStr(struct LocaleBase *__base, CONST struct Catalog * catalog, LONG stringNum, CONST_STRPTR defaultString)
@@ -144,8 +144,8 @@ __locale_GetCatalogStr(struct LocaleBase *__base, CONST struct Catalog * catalog
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (CONST_STRPTR)_d0;
 }
-#define GetCatalogStr(catalog, stringNum, defaultString) __locale_GetCatalogStr((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Catalog *)(catalog), (LONG)(stringNum), (CONST_STRPTR)(defaultString))
-#define __GetCatalogStr_base(__ndk_b, catalog, stringNum, defaultString) __locale_GetCatalogStr((__locale_base_t)(__ndk_b), (CONST struct Catalog *)(catalog), (LONG)(stringNum), (CONST_STRPTR)(defaultString))
+#define GetCatalogStr(catalog, stringNum, defaultString) __locale_GetCatalogStr((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Catalog *)(catalog), (LONG)(stringNum), (CONST_STRPTR)(defaultString))
+#define __GetCatalogStr_base(__ndk_b, catalog, stringNum, defaultString) __locale_GetCatalogStr((__locale_base_t)(void *)(__ndk_b), (CONST struct Catalog *)(catalog), (LONG)(stringNum), (CONST_STRPTR)(defaultString))
 
 static __inline__ CONST_STRPTR
 __locale_GetLocaleStr(struct LocaleBase *__base, CONST struct Locale * locale, ULONG stringNum)
@@ -161,8 +161,8 @@ __locale_GetLocaleStr(struct LocaleBase *__base, CONST struct Locale * locale, U
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (CONST_STRPTR)_d0;
 }
-#define GetLocaleStr(locale, stringNum) __locale_GetLocaleStr((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(stringNum))
-#define __GetLocaleStr_base(__ndk_b, locale, stringNum) __locale_GetLocaleStr((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(stringNum))
+#define GetLocaleStr(locale, stringNum) __locale_GetLocaleStr((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(stringNum))
+#define __GetLocaleStr_base(__ndk_b, locale, stringNum) __locale_GetLocaleStr((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(stringNum))
 
 static __inline__ BOOL
 __locale_IsAlNum(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -178,8 +178,8 @@ __locale_IsAlNum(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsAlNum(locale, character) __locale_IsAlNum((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsAlNum_base(__ndk_b, locale, character) __locale_IsAlNum((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsAlNum(locale, character) __locale_IsAlNum((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsAlNum_base(__ndk_b, locale, character) __locale_IsAlNum((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsAlpha(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -195,8 +195,8 @@ __locale_IsAlpha(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsAlpha(locale, character) __locale_IsAlpha((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsAlpha_base(__ndk_b, locale, character) __locale_IsAlpha((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsAlpha(locale, character) __locale_IsAlpha((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsAlpha_base(__ndk_b, locale, character) __locale_IsAlpha((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsCntrl(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -212,8 +212,8 @@ __locale_IsCntrl(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsCntrl(locale, character) __locale_IsCntrl((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsCntrl_base(__ndk_b, locale, character) __locale_IsCntrl((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsCntrl(locale, character) __locale_IsCntrl((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsCntrl_base(__ndk_b, locale, character) __locale_IsCntrl((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsDigit(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -229,8 +229,8 @@ __locale_IsDigit(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsDigit(locale, character) __locale_IsDigit((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsDigit_base(__ndk_b, locale, character) __locale_IsDigit((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsDigit(locale, character) __locale_IsDigit((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsDigit_base(__ndk_b, locale, character) __locale_IsDigit((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsGraph(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -246,8 +246,8 @@ __locale_IsGraph(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsGraph(locale, character) __locale_IsGraph((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsGraph_base(__ndk_b, locale, character) __locale_IsGraph((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsGraph(locale, character) __locale_IsGraph((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsGraph_base(__ndk_b, locale, character) __locale_IsGraph((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsLower(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -263,8 +263,8 @@ __locale_IsLower(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsLower(locale, character) __locale_IsLower((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsLower_base(__ndk_b, locale, character) __locale_IsLower((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsLower(locale, character) __locale_IsLower((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsLower_base(__ndk_b, locale, character) __locale_IsLower((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsPrint(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -280,8 +280,8 @@ __locale_IsPrint(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsPrint(locale, character) __locale_IsPrint((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsPrint_base(__ndk_b, locale, character) __locale_IsPrint((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsPrint(locale, character) __locale_IsPrint((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsPrint_base(__ndk_b, locale, character) __locale_IsPrint((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsPunct(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -297,8 +297,8 @@ __locale_IsPunct(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsPunct(locale, character) __locale_IsPunct((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsPunct_base(__ndk_b, locale, character) __locale_IsPunct((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsPunct(locale, character) __locale_IsPunct((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsPunct_base(__ndk_b, locale, character) __locale_IsPunct((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsSpace(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -314,8 +314,8 @@ __locale_IsSpace(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsSpace(locale, character) __locale_IsSpace((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsSpace_base(__ndk_b, locale, character) __locale_IsSpace((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsSpace(locale, character) __locale_IsSpace((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsSpace_base(__ndk_b, locale, character) __locale_IsSpace((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsUpper(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -331,8 +331,8 @@ __locale_IsUpper(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsUpper(locale, character) __locale_IsUpper((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsUpper_base(__ndk_b, locale, character) __locale_IsUpper((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsUpper(locale, character) __locale_IsUpper((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsUpper_base(__ndk_b, locale, character) __locale_IsUpper((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
 __locale_IsXDigit(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
@@ -348,8 +348,8 @@ __locale_IsXDigit(struct LocaleBase *__base, CONST struct Locale * locale, ULONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsXDigit(locale, character) __locale_IsXDigit((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
-#define __IsXDigit_base(__ndk_b, locale, character) __locale_IsXDigit((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
+#define IsXDigit(locale, character) __locale_IsXDigit((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsXDigit_base(__ndk_b, locale, character) __locale_IsXDigit((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ struct Catalog *
 __locale_OpenCatalogA(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR name, CONST struct TagItem * tags)
@@ -366,8 +366,8 @@ __locale_OpenCatalogA(struct LocaleBase *__base, CONST struct Locale * locale, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Catalog *)_d0;
 }
-#define OpenCatalogA(locale, name, tags) __locale_OpenCatalogA((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
-#define __OpenCatalogA_base(__ndk_b, locale, name, tags) __locale_OpenCatalogA((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define OpenCatalogA(locale, name, tags) __locale_OpenCatalogA((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __OpenCatalogA_base(__ndk_b, locale, name, tags) __locale_OpenCatalogA((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Catalog *
@@ -375,7 +375,7 @@ ___locale_OpenCatalog(__locale_base_t __ndk_base, CONST struct Locale * locale, 
 {
 	return __locale_OpenCatalogA(__ndk_base, (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
-#define OpenCatalog(locale, name, ...) ___locale_OpenCatalog((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), ##__VA_ARGS__)
+#define OpenCatalog(locale, name, ...) ___locale_OpenCatalog((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
 #define OpenCatalog(locale, name, ...) (OpenCatalog)((CONST struct Locale *)(locale), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #endif
@@ -394,8 +394,8 @@ __locale_OpenLocale(struct LocaleBase *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Locale *)_d0;
 }
-#define OpenLocale(name) __locale_OpenLocale((__locale_base_t)(LOCALE_BASE_NAME), (CONST_STRPTR)(name))
-#define __OpenLocale_base(__ndk_b, name) __locale_OpenLocale((__locale_base_t)(__ndk_b), (CONST_STRPTR)(name))
+#define OpenLocale(name) __locale_OpenLocale((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST_STRPTR)(name))
+#define __OpenLocale_base(__ndk_b, name) __locale_OpenLocale((__locale_base_t)(void *)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
 __locale_ParseDate(struct LocaleBase *__base, CONST struct Locale * locale, struct DateStamp * date, CONST_STRPTR fmtTemplate, CONST struct Hook * getCharFunc)
@@ -413,8 +413,8 @@ __locale_ParseDate(struct LocaleBase *__base, CONST struct Locale * locale, stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ParseDate(locale, date, fmtTemplate, getCharFunc) __locale_ParseDate((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (struct DateStamp *)(date), (CONST_STRPTR)(fmtTemplate), (CONST struct Hook *)(getCharFunc))
-#define __ParseDate_base(__ndk_b, locale, date, fmtTemplate, getCharFunc) __locale_ParseDate((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (struct DateStamp *)(date), (CONST_STRPTR)(fmtTemplate), (CONST struct Hook *)(getCharFunc))
+#define ParseDate(locale, date, fmtTemplate, getCharFunc) __locale_ParseDate((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (struct DateStamp *)(date), (CONST_STRPTR)(fmtTemplate), (CONST struct Hook *)(getCharFunc))
+#define __ParseDate_base(__ndk_b, locale, date, fmtTemplate, getCharFunc) __locale_ParseDate((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (struct DateStamp *)(date), (CONST_STRPTR)(fmtTemplate), (CONST struct Hook *)(getCharFunc))
 
 static __inline__ ULONG
 __locale_StrConvert(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR string, APTR buffer, ULONG bufferSize, ULONG type)
@@ -431,8 +431,8 @@ __locale_StrConvert(struct LocaleBase *__base, CONST struct Locale * locale, CON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define StrConvert(locale, string, buffer, bufferSize, type) __locale_StrConvert((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(string), (APTR)(buffer), (ULONG)(bufferSize), (ULONG)(type))
-#define __StrConvert_base(__ndk_b, locale, string, buffer, bufferSize, type) __locale_StrConvert((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(string), (APTR)(buffer), (ULONG)(bufferSize), (ULONG)(type))
+#define StrConvert(locale, string, buffer, bufferSize, type) __locale_StrConvert((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(string), (APTR)(buffer), (ULONG)(bufferSize), (ULONG)(type))
+#define __StrConvert_base(__ndk_b, locale, string, buffer, bufferSize, type) __locale_StrConvert((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(string), (APTR)(buffer), (ULONG)(bufferSize), (ULONG)(type))
 
 static __inline__ LONG
 __locale_StrnCmp(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR string1, CONST_STRPTR string2, LONG length, ULONG type)
@@ -449,7 +449,7 @@ __locale_StrnCmp(struct LocaleBase *__base, CONST struct Locale * locale, CONST_
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define StrnCmp(locale, string1, string2, length, type) __locale_StrnCmp((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length), (ULONG)(type))
-#define __StrnCmp_base(__ndk_b, locale, string1, string2, length, type) __locale_StrnCmp((__locale_base_t)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length), (ULONG)(type))
+#define StrnCmp(locale, string1, string2, length, type) __locale_StrnCmp((__locale_base_t)(void *)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length), (ULONG)(type))
+#define __StrnCmp_base(__ndk_b, locale, string1, string2, length, type) __locale_StrnCmp((__locale_base_t)(void *)(__ndk_b), (CONST struct Locale *)(locale), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length), (ULONG)(type))
 
 #endif /* INLINE_LOCALE_H */

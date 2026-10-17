@@ -38,7 +38,7 @@ __sketchboard_SKETCHBOARD_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define SKETCHBOARD_GetClass() __sketchboard_SKETCHBOARD_GetClass((__sketchboard_base_t)(SKETCHBOARD_BASE_NAME))
-#define __SKETCHBOARD_GetClass_base(__ndk_b) __sketchboard_SKETCHBOARD_GetClass((__sketchboard_base_t)(__ndk_b))
+#define SKETCHBOARD_GetClass() __sketchboard_SKETCHBOARD_GetClass((__sketchboard_base_t)(void *)(SKETCHBOARD_BASE_NAME))
+#define __SKETCHBOARD_GetClass_base(__ndk_b) __sketchboard_SKETCHBOARD_GetClass((__sketchboard_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_SKETCHBOARD_H */

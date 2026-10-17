@@ -39,8 +39,8 @@ __mathffp_SPFix(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SPFix(parm) __mathffp_SPFix((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(parm))
-#define __SPFix_base(__ndk_b, parm) __mathffp_SPFix((__mathffp_base_t)(__ndk_b), (FLOAT)(parm))
+#define SPFix(parm) __mathffp_SPFix((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPFix_base(__ndk_b, parm) __mathffp_SPFix((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathffp_SPFlt(struct Library *__base, LONG integer)
@@ -56,8 +56,8 @@ __mathffp_SPFlt(struct Library *__base, LONG integer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPFlt(integer) __mathffp_SPFlt((__mathffp_base_t)(MATHFFP_BASE_NAME), (LONG)(integer))
-#define __SPFlt_base(__ndk_b, integer) __mathffp_SPFlt((__mathffp_base_t)(__ndk_b), (LONG)(integer))
+#define SPFlt(integer) __mathffp_SPFlt((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (LONG)(integer))
+#define __SPFlt_base(__ndk_b, integer) __mathffp_SPFlt((__mathffp_base_t)(void *)(__ndk_b), (LONG)(integer))
 
 static __inline__ LONG
 __mathffp_SPCmp(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
@@ -75,8 +75,8 @@ __mathffp_SPCmp(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SPCmp(leftParm, rightParm) __mathffp_SPCmp((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __SPCmp_base(__ndk_b, leftParm, rightParm) __mathffp_SPCmp((__mathffp_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define SPCmp(leftParm, rightParm) __mathffp_SPCmp((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPCmp_base(__ndk_b, leftParm, rightParm) __mathffp_SPCmp((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ LONG
 __mathffp_SPTst(struct Library *__base, FLOAT parm)
@@ -93,8 +93,8 @@ __mathffp_SPTst(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SPTst(parm) __mathffp_SPTst((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(parm))
-#define __SPTst_base(__ndk_b, parm) __mathffp_SPTst((__mathffp_base_t)(__ndk_b), (FLOAT)(parm))
+#define SPTst(parm) __mathffp_SPTst((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPTst_base(__ndk_b, parm) __mathffp_SPTst((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathffp_SPAbs(struct Library *__base, FLOAT parm)
@@ -111,8 +111,8 @@ __mathffp_SPAbs(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPAbs(parm) __mathffp_SPAbs((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(parm))
-#define __SPAbs_base(__ndk_b, parm) __mathffp_SPAbs((__mathffp_base_t)(__ndk_b), (FLOAT)(parm))
+#define SPAbs(parm) __mathffp_SPAbs((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPAbs_base(__ndk_b, parm) __mathffp_SPAbs((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathffp_SPNeg(struct Library *__base, FLOAT parm)
@@ -129,8 +129,8 @@ __mathffp_SPNeg(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPNeg(parm) __mathffp_SPNeg((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(parm))
-#define __SPNeg_base(__ndk_b, parm) __mathffp_SPNeg((__mathffp_base_t)(__ndk_b), (FLOAT)(parm))
+#define SPNeg(parm) __mathffp_SPNeg((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPNeg_base(__ndk_b, parm) __mathffp_SPNeg((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathffp_SPAdd(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
@@ -148,8 +148,8 @@ __mathffp_SPAdd(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPAdd(leftParm, rightParm) __mathffp_SPAdd((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __SPAdd_base(__ndk_b, leftParm, rightParm) __mathffp_SPAdd((__mathffp_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define SPAdd(leftParm, rightParm) __mathffp_SPAdd((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPAdd_base(__ndk_b, leftParm, rightParm) __mathffp_SPAdd((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
 __mathffp_SPSub(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
@@ -167,8 +167,8 @@ __mathffp_SPSub(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPSub(leftParm, rightParm) __mathffp_SPSub((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __SPSub_base(__ndk_b, leftParm, rightParm) __mathffp_SPSub((__mathffp_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define SPSub(leftParm, rightParm) __mathffp_SPSub((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPSub_base(__ndk_b, leftParm, rightParm) __mathffp_SPSub((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
 __mathffp_SPMul(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
@@ -186,8 +186,8 @@ __mathffp_SPMul(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPMul(leftParm, rightParm) __mathffp_SPMul((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __SPMul_base(__ndk_b, leftParm, rightParm) __mathffp_SPMul((__mathffp_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define SPMul(leftParm, rightParm) __mathffp_SPMul((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPMul_base(__ndk_b, leftParm, rightParm) __mathffp_SPMul((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
 __mathffp_SPDiv(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
@@ -205,8 +205,8 @@ __mathffp_SPDiv(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPDiv(leftParm, rightParm) __mathffp_SPDiv((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
-#define __SPDiv_base(__ndk_b, leftParm, rightParm) __mathffp_SPDiv((__mathffp_base_t)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define SPDiv(leftParm, rightParm) __mathffp_SPDiv((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPDiv_base(__ndk_b, leftParm, rightParm) __mathffp_SPDiv((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
 __mathffp_SPFloor(struct Library *__base, FLOAT parm)
@@ -223,8 +223,8 @@ __mathffp_SPFloor(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPFloor(parm) __mathffp_SPFloor((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(parm))
-#define __SPFloor_base(__ndk_b, parm) __mathffp_SPFloor((__mathffp_base_t)(__ndk_b), (FLOAT)(parm))
+#define SPFloor(parm) __mathffp_SPFloor((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPFloor_base(__ndk_b, parm) __mathffp_SPFloor((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathffp_SPCeil(struct Library *__base, FLOAT parm)
@@ -241,7 +241,7 @@ __mathffp_SPCeil(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPCeil(parm) __mathffp_SPCeil((__mathffp_base_t)(MATHFFP_BASE_NAME), (FLOAT)(parm))
-#define __SPCeil_base(__ndk_b, parm) __mathffp_SPCeil((__mathffp_base_t)(__ndk_b), (FLOAT)(parm))
+#define SPCeil(parm) __mathffp_SPCeil((__mathffp_base_t)(void *)(MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPCeil_base(__ndk_b, parm) __mathffp_SPCeil((__mathffp_base_t)(void *)(__ndk_b), (FLOAT)(parm))
 
 #endif /* INLINE_MATHFFP_H */

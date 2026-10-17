@@ -17,7 +17,7 @@ struct StringExtend
     UBYTE ActivePens[2];		/* the same, active */
     ULONG InitialModes;			/* SGM_ */
     struct Hook *EditHook;
-    UBYTE *WorkBuffer;			/* as big as the gadget's buffer */
+    STRPTR	WorkBuffer;			/* as big as the gadget's buffer */
     ULONG Reserved[4];
 };
 
@@ -26,8 +26,8 @@ struct SGWork
 {
     struct Gadget *Gadget;
     struct StringInfo *StringInfo;
-    UBYTE *WorkBuffer;
-    UBYTE *PrevBuffer;
+    STRPTR	WorkBuffer;
+    STRPTR	PrevBuffer;
     ULONG Modes;
     struct InputEvent *IEvent;
     UWORD Code;

@@ -38,16 +38,16 @@ VOID SetDiskFontCtrl(Tag tag1, ...);
 LONG EOpenEngine(struct EGlyphEngine * eEngine);
 VOID ECloseEngine(struct EGlyphEngine * eEngine);
 ULONG ESetInfoA(struct EGlyphEngine * eEngine, CONST struct TagItem * taglist);
-ULONG ESetInfo(struct EGlyphEngine * eEngine, Tag tag1, ...);
+ULONG ESetInfo(struct EGlyphEngine * eEngine, ...);
 ULONG EObtainInfoA(struct EGlyphEngine * eEngine, CONST struct TagItem * taglist);
-ULONG EObtainInfo(struct EGlyphEngine * eEngine, Tag tag1, ...);
+ULONG EObtainInfo(struct EGlyphEngine * eEngine, ...);
 ULONG EReleaseInfoA(struct EGlyphEngine * eEngine, CONST struct TagItem * taglist);
-ULONG EReleaseInfo(struct EGlyphEngine * eEngine, Tag tag1, ...);
+ULONG EReleaseInfo(struct EGlyphEngine * eEngine, ...);
 struct OutlineFont * OpenOutlineFont(CONST_STRPTR name, struct List * list, ULONG flags);
 VOID CloseOutlineFont(struct OutlineFont * olf, struct List * list);
 LONG WriteFontContents(BPTR fontsLock, CONST_STRPTR fontName, CONST struct FontContentsHeader * fontContentsHeader);
 LONG WriteDiskFontHeaderA(CONST struct TextFont * font, CONST_STRPTR fileName, CONST struct TagItem * tagList);
-LONG WriteDiskFontHeader(CONST struct TextFont * font, CONST_STRPTR fileName, Tag tag1, ...);
+LONG WriteDiskFontHeader(CONST struct TextFont * font, CONST_STRPTR fileName, ...);
 ULONG ObtainCharsetInfo(ULONG knownTag, ULONG knownValue, ULONG wantedTag);
 
 #ifdef __cplusplus

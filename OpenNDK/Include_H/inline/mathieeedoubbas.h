@@ -39,8 +39,8 @@ __mathieeedoubbas_IEEEDPFix(struct MathIEEEBase *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IEEEDPFix(parm) __mathieeedoubbas_IEEEDPFix((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
-#define __IEEEDPFix_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPFix((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(parm))
+#define IEEEDPFix(parm) __mathieeedoubbas_IEEEDPFix((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPFix_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPFix((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPFlt(struct MathIEEEBase *__base, LONG integer)
@@ -56,8 +56,8 @@ __mathieeedoubbas_IEEEDPFlt(struct MathIEEEBase *__base, LONG integer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d1; return _r.d; }
 }
-#define IEEEDPFlt(integer) __mathieeedoubbas_IEEEDPFlt((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (LONG)(integer))
-#define __IEEEDPFlt_base(__ndk_b, integer) __mathieeedoubbas_IEEEDPFlt((__mathieeedoubbas_base_t)(__ndk_b), (LONG)(integer))
+#define IEEEDPFlt(integer) __mathieeedoubbas_IEEEDPFlt((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (LONG)(integer))
+#define __IEEEDPFlt_base(__ndk_b, integer) __mathieeedoubbas_IEEEDPFlt((__mathieeedoubbas_base_t)(void *)(__ndk_b), (LONG)(integer))
 
 static __inline__ LONG
 __mathieeedoubbas_IEEEDPCmp(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE rightParm)
@@ -77,8 +77,8 @@ __mathieeedoubbas_IEEEDPCmp(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IEEEDPCmp(leftParm, rightParm) __mathieeedoubbas_IEEEDPCmp((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
-#define __IEEEDPCmp_base(__ndk_b, leftParm, rightParm) __mathieeedoubbas_IEEEDPCmp((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define IEEEDPCmp(leftParm, rightParm) __mathieeedoubbas_IEEEDPCmp((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define __IEEEDPCmp_base(__ndk_b, leftParm, rightParm) __mathieeedoubbas_IEEEDPCmp((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
 
 static __inline__ LONG
 __mathieeedoubbas_IEEEDPTst(struct MathIEEEBase *__base, DOUBLE parm)
@@ -95,8 +95,8 @@ __mathieeedoubbas_IEEEDPTst(struct MathIEEEBase *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IEEEDPTst(parm) __mathieeedoubbas_IEEEDPTst((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
-#define __IEEEDPTst_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPTst((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(parm))
+#define IEEEDPTst(parm) __mathieeedoubbas_IEEEDPTst((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPTst_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPTst((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPAbs(struct MathIEEEBase *__base, DOUBLE parm)
@@ -113,8 +113,8 @@ __mathieeedoubbas_IEEEDPAbs(struct MathIEEEBase *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPAbs(parm) __mathieeedoubbas_IEEEDPAbs((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
-#define __IEEEDPAbs_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPAbs((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(parm))
+#define IEEEDPAbs(parm) __mathieeedoubbas_IEEEDPAbs((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPAbs_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPAbs((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPNeg(struct MathIEEEBase *__base, DOUBLE parm)
@@ -131,8 +131,8 @@ __mathieeedoubbas_IEEEDPNeg(struct MathIEEEBase *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPNeg(parm) __mathieeedoubbas_IEEEDPNeg((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
-#define __IEEEDPNeg_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPNeg((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(parm))
+#define IEEEDPNeg(parm) __mathieeedoubbas_IEEEDPNeg((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPNeg_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPNeg((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPAdd(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE rightParm)
@@ -152,8 +152,8 @@ __mathieeedoubbas_IEEEDPAdd(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPAdd(leftParm, rightParm) __mathieeedoubbas_IEEEDPAdd((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
-#define __IEEEDPAdd_base(__ndk_b, leftParm, rightParm) __mathieeedoubbas_IEEEDPAdd((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define IEEEDPAdd(leftParm, rightParm) __mathieeedoubbas_IEEEDPAdd((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define __IEEEDPAdd_base(__ndk_b, leftParm, rightParm) __mathieeedoubbas_IEEEDPAdd((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPSub(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE rightParm)
@@ -173,8 +173,8 @@ __mathieeedoubbas_IEEEDPSub(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPSub(leftParm, rightParm) __mathieeedoubbas_IEEEDPSub((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
-#define __IEEEDPSub_base(__ndk_b, leftParm, rightParm) __mathieeedoubbas_IEEEDPSub((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define IEEEDPSub(leftParm, rightParm) __mathieeedoubbas_IEEEDPSub((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define __IEEEDPSub_base(__ndk_b, leftParm, rightParm) __mathieeedoubbas_IEEEDPSub((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPMul(struct MathIEEEBase *__base, DOUBLE factor1, DOUBLE factor2)
@@ -194,8 +194,8 @@ __mathieeedoubbas_IEEEDPMul(struct MathIEEEBase *__base, DOUBLE factor1, DOUBLE 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPMul(factor1, factor2) __mathieeedoubbas_IEEEDPMul((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(factor1), (DOUBLE)(factor2))
-#define __IEEEDPMul_base(__ndk_b, factor1, factor2) __mathieeedoubbas_IEEEDPMul((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(factor1), (DOUBLE)(factor2))
+#define IEEEDPMul(factor1, factor2) __mathieeedoubbas_IEEEDPMul((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(factor1), (DOUBLE)(factor2))
+#define __IEEEDPMul_base(__ndk_b, factor1, factor2) __mathieeedoubbas_IEEEDPMul((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(factor1), (DOUBLE)(factor2))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPDiv(struct MathIEEEBase *__base, DOUBLE dividend, DOUBLE divisor)
@@ -215,8 +215,8 @@ __mathieeedoubbas_IEEEDPDiv(struct MathIEEEBase *__base, DOUBLE dividend, DOUBLE
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPDiv(dividend, divisor) __mathieeedoubbas_IEEEDPDiv((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(dividend), (DOUBLE)(divisor))
-#define __IEEEDPDiv_base(__ndk_b, dividend, divisor) __mathieeedoubbas_IEEEDPDiv((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(dividend), (DOUBLE)(divisor))
+#define IEEEDPDiv(dividend, divisor) __mathieeedoubbas_IEEEDPDiv((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(dividend), (DOUBLE)(divisor))
+#define __IEEEDPDiv_base(__ndk_b, dividend, divisor) __mathieeedoubbas_IEEEDPDiv((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(dividend), (DOUBLE)(divisor))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPFloor(struct MathIEEEBase *__base, DOUBLE parm)
@@ -233,8 +233,8 @@ __mathieeedoubbas_IEEEDPFloor(struct MathIEEEBase *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPFloor(parm) __mathieeedoubbas_IEEEDPFloor((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
-#define __IEEEDPFloor_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPFloor((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(parm))
+#define IEEEDPFloor(parm) __mathieeedoubbas_IEEEDPFloor((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPFloor_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPFloor((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubbas_IEEEDPCeil(struct MathIEEEBase *__base, DOUBLE parm)
@@ -251,7 +251,7 @@ __mathieeedoubbas_IEEEDPCeil(struct MathIEEEBase *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPCeil(parm) __mathieeedoubbas_IEEEDPCeil((__mathieeedoubbas_base_t)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
-#define __IEEEDPCeil_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPCeil((__mathieeedoubbas_base_t)(__ndk_b), (DOUBLE)(parm))
+#define IEEEDPCeil(parm) __mathieeedoubbas_IEEEDPCeil((__mathieeedoubbas_base_t)(void *)(MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPCeil_base(__ndk_b, parm) __mathieeedoubbas_IEEEDPCeil((__mathieeedoubbas_base_t)(void *)(__ndk_b), (DOUBLE)(parm))
 
 #endif /* INLINE_MATHIEEEDOUBBAS_H */

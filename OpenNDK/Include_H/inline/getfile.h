@@ -38,7 +38,7 @@ __getfile_GETFILE_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define GETFILE_GetClass() __getfile_GETFILE_GetClass((__getfile_base_t)(GETFILE_BASE_NAME))
-#define __GETFILE_GetClass_base(__ndk_b) __getfile_GETFILE_GetClass((__getfile_base_t)(__ndk_b))
+#define GETFILE_GetClass() __getfile_GETFILE_GetClass((__getfile_base_t)(void *)(GETFILE_BASE_NAME))
+#define __GETFILE_GetClass_base(__ndk_b) __getfile_GETFILE_GetClass((__getfile_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_GETFILE_H */

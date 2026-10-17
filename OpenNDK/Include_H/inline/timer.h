@@ -38,8 +38,8 @@ __timer_AddTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddTime(dest, src) __timer_AddTime((__timer_base_t)(TIMER_BASE_NAME), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
-#define __AddTime_base(__ndk_b, dest, src) __timer_AddTime((__timer_base_t)(__ndk_b), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define AddTime(dest, src) __timer_AddTime((__timer_base_t)(void *)(TIMER_BASE_NAME), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define __AddTime_base(__ndk_b, dest, src) __timer_AddTime((__timer_base_t)(void *)(__ndk_b), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ VOID
 __timer_SubTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type * src)
@@ -55,8 +55,8 @@ __timer_SubTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SubTime(dest, src) __timer_SubTime((__timer_base_t)(TIMER_BASE_NAME), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
-#define __SubTime_base(__ndk_b, dest, src) __timer_SubTime((__timer_base_t)(__ndk_b), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define SubTime(dest, src) __timer_SubTime((__timer_base_t)(void *)(TIMER_BASE_NAME), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define __SubTime_base(__ndk_b, dest, src) __timer_SubTime((__timer_base_t)(void *)(__ndk_b), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ LONG
 __timer_CmpTime(struct Device *__base, CONST TimeVal_Type * dest, CONST TimeVal_Type * src)
@@ -72,8 +72,8 @@ __timer_CmpTime(struct Device *__base, CONST TimeVal_Type * dest, CONST TimeVal_
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CmpTime(dest, src) __timer_CmpTime((__timer_base_t)(TIMER_BASE_NAME), (CONST TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
-#define __CmpTime_base(__ndk_b, dest, src) __timer_CmpTime((__timer_base_t)(__ndk_b), (CONST TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define CmpTime(dest, src) __timer_CmpTime((__timer_base_t)(void *)(TIMER_BASE_NAME), (CONST TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define __CmpTime_base(__ndk_b, dest, src) __timer_CmpTime((__timer_base_t)(void *)(__ndk_b), (CONST TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ ULONG
 __timer_ReadEClock(struct Device *__base, struct EClockVal * dest)
@@ -89,8 +89,8 @@ __timer_ReadEClock(struct Device *__base, struct EClockVal * dest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ReadEClock(dest) __timer_ReadEClock((__timer_base_t)(TIMER_BASE_NAME), (struct EClockVal *)(dest))
-#define __ReadEClock_base(__ndk_b, dest) __timer_ReadEClock((__timer_base_t)(__ndk_b), (struct EClockVal *)(dest))
+#define ReadEClock(dest) __timer_ReadEClock((__timer_base_t)(void *)(TIMER_BASE_NAME), (struct EClockVal *)(dest))
+#define __ReadEClock_base(__ndk_b, dest) __timer_ReadEClock((__timer_base_t)(void *)(__ndk_b), (struct EClockVal *)(dest))
 
 static __inline__ VOID
 __timer_GetSysTime(struct Device *__base, TimeVal_Type * dest)
@@ -106,7 +106,7 @@ __timer_GetSysTime(struct Device *__base, TimeVal_Type * dest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetSysTime(dest) __timer_GetSysTime((__timer_base_t)(TIMER_BASE_NAME), (TimeVal_Type *)(dest))
-#define __GetSysTime_base(__ndk_b, dest) __timer_GetSysTime((__timer_base_t)(__ndk_b), (TimeVal_Type *)(dest))
+#define GetSysTime(dest) __timer_GetSysTime((__timer_base_t)(void *)(TIMER_BASE_NAME), (TimeVal_Type *)(dest))
+#define __GetSysTime_base(__ndk_b, dest) __timer_GetSysTime((__timer_base_t)(void *)(__ndk_b), (TimeVal_Type *)(dest))
 
 #endif /* INLINE_TIMER_H */

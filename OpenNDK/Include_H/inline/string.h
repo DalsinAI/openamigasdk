@@ -38,7 +38,7 @@ __string_STRING_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define STRING_GetClass() __string_STRING_GetClass((__string_base_t)(STRING_BASE_NAME))
-#define __STRING_GetClass_base(__ndk_b) __string_STRING_GetClass((__string_base_t)(__ndk_b))
+#define STRING_GetClass() __string_STRING_GetClass((__string_base_t)(void *)(STRING_BASE_NAME))
+#define __STRING_GetClass_base(__ndk_b) __string_STRING_GetClass((__string_base_t)(void *)(__ndk_b))
 
 #endif /* INLINE_STRING_H */

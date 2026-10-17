@@ -330,8 +330,8 @@ struct PropInfo
 /* A string gadget */
 struct StringInfo
 {
-    UBYTE *Buffer;
-    UBYTE *UndoBuffer;
+    STRPTR	Buffer;
+    STRPTR	UndoBuffer;
     WORD BufferPos;
     WORD MaxChars;			/* buffer size, the NUL included */
     WORD DispPos;
@@ -486,7 +486,7 @@ struct Window
     UWORD MaxWidth, MaxHeight;
     ULONG Flags;
     struct Menu *MenuStrip;
-    UBYTE *Title;
+    STRPTR	Title;
     struct Requester *FirstRequest;
     struct Requester *DMRequest;
     WORD ReqCount;
@@ -505,7 +505,7 @@ struct Window
     struct IntuiMessage *MessageKey;
     UBYTE DetailPen, BlockPen;
     struct Image *CheckMark;
-    UBYTE *ScreenTitle;
+    STRPTR	ScreenTitle;
     WORD GZZMouseX;			/* a GimmeZeroZero window's inner values */
     WORD GZZMouseY;
     WORD GZZWidth;
@@ -571,7 +571,7 @@ struct NewWindow
     ULONG Flags;
     struct Gadget *FirstGadget;
     struct Image *CheckMark;
-    UBYTE *Title;
+    STRPTR	Title;
     struct Screen *Screen;		/* with Type CUSTOMSCREEN */
     struct BitMap *BitMap;		/* with WFLG_SUPER_BITMAP */
     WORD MinWidth, MinHeight;
@@ -589,7 +589,7 @@ struct ExtNewWindow
     ULONG Flags;
     struct Gadget *FirstGadget;
     struct Image *CheckMark;
-    UBYTE *Title;
+    STRPTR	Title;
     struct Screen *Screen;
     struct BitMap *BitMap;
     WORD MinWidth, MinHeight;
