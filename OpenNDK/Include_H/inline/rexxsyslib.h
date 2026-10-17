@@ -15,6 +15,7 @@
 
 struct RxsLib;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +25,11 @@ struct RxsLib;
 #endif
 
 static __inline__ UBYTE *
-__rexxsyslib_CreateArgstring(struct RxsLib *__base, CONST_STRPTR string, ULONG length)
+__rexxsyslib_CreateArgstring(void *__base, CONST_STRPTR string, ULONG length)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
 	register ULONG _d0 __asm("d0") = (ULONG)(length);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -38,12 +39,13 @@ __rexxsyslib_CreateArgstring(struct RxsLib *__base, CONST_STRPTR string, ULONG l
 	return (UBYTE *)_d0;
 }
 #define CreateArgstring(string, length) __rexxsyslib_CreateArgstring((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(string), (ULONG)(length))
+#define __CreateArgstring_base(__in_base, string, length) __rexxsyslib_CreateArgstring((__in_base), (CONST_STRPTR)(string), (ULONG)(length))
 
 static __inline__ VOID
-__rexxsyslib_DeleteArgstring(struct RxsLib *__base, UBYTE * argstring)
+__rexxsyslib_DeleteArgstring(void *__base, UBYTE * argstring)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(argstring);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,12 +56,13 @@ __rexxsyslib_DeleteArgstring(struct RxsLib *__base, UBYTE * argstring)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeleteArgstring(argstring) __rexxsyslib_DeleteArgstring((REXXSYSLIB_BASE_NAME), (UBYTE *)(argstring))
+#define __DeleteArgstring_base(__in_base, argstring) __rexxsyslib_DeleteArgstring((__in_base), (UBYTE *)(argstring))
 
 static __inline__ ULONG
-__rexxsyslib_LengthArgstring(struct RxsLib *__base, CONST UBYTE * argstring)
+__rexxsyslib_LengthArgstring(void *__base, CONST UBYTE * argstring)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(argstring);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -70,14 +73,15 @@ __rexxsyslib_LengthArgstring(struct RxsLib *__base, CONST UBYTE * argstring)
 	return (ULONG)_d0;
 }
 #define LengthArgstring(argstring) __rexxsyslib_LengthArgstring((REXXSYSLIB_BASE_NAME), (CONST UBYTE *)(argstring))
+#define __LengthArgstring_base(__in_base, argstring) __rexxsyslib_LengthArgstring((__in_base), (CONST UBYTE *)(argstring))
 
 static __inline__ struct RexxMsg *
-__rexxsyslib_CreateRexxMsg(struct RxsLib *__base, CONST struct MsgPort * port, CONST_STRPTR extension, CONST_STRPTR host)
+__rexxsyslib_CreateRexxMsg(void *__base, CONST struct MsgPort * port, CONST_STRPTR extension, CONST_STRPTR host)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(port);
 	register ULONG _a1 __asm("a1") = (ULONG)(extension);
 	register ULONG _d0 __asm("d0") = (ULONG)(host);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -86,12 +90,13 @@ __rexxsyslib_CreateRexxMsg(struct RxsLib *__base, CONST struct MsgPort * port, C
 	return (struct RexxMsg *)_d0;
 }
 #define CreateRexxMsg(port, extension, host) __rexxsyslib_CreateRexxMsg((REXXSYSLIB_BASE_NAME), (CONST struct MsgPort *)(port), (CONST_STRPTR)(extension), (CONST_STRPTR)(host))
+#define __CreateRexxMsg_base(__in_base, port, extension, host) __rexxsyslib_CreateRexxMsg((__in_base), (CONST struct MsgPort *)(port), (CONST_STRPTR)(extension), (CONST_STRPTR)(host))
 
 static __inline__ VOID
-__rexxsyslib_DeleteRexxMsg(struct RxsLib *__base, struct RexxMsg * packet)
+__rexxsyslib_DeleteRexxMsg(void *__base, struct RexxMsg * packet)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(packet);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -102,13 +107,14 @@ __rexxsyslib_DeleteRexxMsg(struct RxsLib *__base, struct RexxMsg * packet)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeleteRexxMsg(packet) __rexxsyslib_DeleteRexxMsg((REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(packet))
+#define __DeleteRexxMsg_base(__in_base, packet) __rexxsyslib_DeleteRexxMsg((__in_base), (struct RexxMsg *)(packet))
 
 static __inline__ VOID
-__rexxsyslib_ClearRexxMsg(struct RxsLib *__base, struct RexxMsg * msgptr, ULONG count)
+__rexxsyslib_ClearRexxMsg(void *__base, struct RexxMsg * msgptr, ULONG count)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(msgptr);
 	register ULONG _d0 __asm("d0") = (ULONG)(count);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -156(%/a6)"
@@ -118,14 +124,15 @@ __rexxsyslib_ClearRexxMsg(struct RxsLib *__base, struct RexxMsg * msgptr, ULONG 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ClearRexxMsg(msgptr, count) __rexxsyslib_ClearRexxMsg((REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(msgptr), (ULONG)(count))
+#define __ClearRexxMsg_base(__in_base, msgptr, count) __rexxsyslib_ClearRexxMsg((__in_base), (struct RexxMsg *)(msgptr), (ULONG)(count))
 
 static __inline__ BOOL
-__rexxsyslib_FillRexxMsg(struct RxsLib *__base, struct RexxMsg * msgptr, ULONG count, ULONG mask)
+__rexxsyslib_FillRexxMsg(void *__base, struct RexxMsg * msgptr, ULONG count, ULONG mask)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(msgptr);
 	register ULONG _d0 __asm("d0") = (ULONG)(count);
 	register ULONG _d1 __asm("d1") = (ULONG)(mask);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -134,12 +141,13 @@ __rexxsyslib_FillRexxMsg(struct RxsLib *__base, struct RexxMsg * msgptr, ULONG c
 	return (BOOL)_d0;
 }
 #define FillRexxMsg(msgptr, count, mask) __rexxsyslib_FillRexxMsg((REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(msgptr), (ULONG)(count), (ULONG)(mask))
+#define __FillRexxMsg_base(__in_base, msgptr, count, mask) __rexxsyslib_FillRexxMsg((__in_base), (struct RexxMsg *)(msgptr), (ULONG)(count), (ULONG)(mask))
 
 static __inline__ BOOL
-__rexxsyslib_IsRexxMsg(struct RxsLib *__base, CONST struct RexxMsg * msgptr)
+__rexxsyslib_IsRexxMsg(void *__base, CONST struct RexxMsg * msgptr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(msgptr);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -150,12 +158,13 @@ __rexxsyslib_IsRexxMsg(struct RxsLib *__base, CONST struct RexxMsg * msgptr)
 	return (BOOL)_d0;
 }
 #define IsRexxMsg(msgptr) __rexxsyslib_IsRexxMsg((REXXSYSLIB_BASE_NAME), (CONST struct RexxMsg *)(msgptr))
+#define __IsRexxMsg_base(__in_base, msgptr) __rexxsyslib_IsRexxMsg((__in_base), (CONST struct RexxMsg *)(msgptr))
 
 static __inline__ VOID
-__rexxsyslib_LockRexxBase(struct RxsLib *__base, ULONG resource)
+__rexxsyslib_LockRexxBase(void *__base, ULONG resource)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(resource);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -166,12 +175,13 @@ __rexxsyslib_LockRexxBase(struct RxsLib *__base, ULONG resource)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LockRexxBase(resource) __rexxsyslib_LockRexxBase((REXXSYSLIB_BASE_NAME), (ULONG)(resource))
+#define __LockRexxBase_base(__in_base, resource) __rexxsyslib_LockRexxBase((__in_base), (ULONG)(resource))
 
 static __inline__ VOID
-__rexxsyslib_UnlockRexxBase(struct RxsLib *__base, ULONG resource)
+__rexxsyslib_UnlockRexxBase(void *__base, ULONG resource)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(resource);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -182,12 +192,13 @@ __rexxsyslib_UnlockRexxBase(struct RxsLib *__base, ULONG resource)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockRexxBase(resource) __rexxsyslib_UnlockRexxBase((REXXSYSLIB_BASE_NAME), (ULONG)(resource))
+#define __UnlockRexxBase_base(__in_base, resource) __rexxsyslib_UnlockRexxBase((__in_base), (ULONG)(resource))
 
 static __inline__ struct MsgPort *
-__rexxsyslib_CreateRexxHostPort(struct RxsLib *__base, CONST_STRPTR basename)
+__rexxsyslib_CreateRexxHostPort(void *__base, CONST_STRPTR basename)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(basename);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -198,12 +209,13 @@ __rexxsyslib_CreateRexxHostPort(struct RxsLib *__base, CONST_STRPTR basename)
 	return (struct MsgPort *)_d0;
 }
 #define CreateRexxHostPort(basename) __rexxsyslib_CreateRexxHostPort((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(basename))
+#define __CreateRexxHostPort_base(__in_base, basename) __rexxsyslib_CreateRexxHostPort((__in_base), (CONST_STRPTR)(basename))
 
 static __inline__ VOID
-__rexxsyslib_DeleteRexxHostPort(struct RxsLib *__base, struct MsgPort * port)
+__rexxsyslib_DeleteRexxHostPort(void *__base, struct MsgPort * port)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(port);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -214,14 +226,15 @@ __rexxsyslib_DeleteRexxHostPort(struct RxsLib *__base, struct MsgPort * port)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeleteRexxHostPort(port) __rexxsyslib_DeleteRexxHostPort((REXXSYSLIB_BASE_NAME), (struct MsgPort *)(port))
+#define __DeleteRexxHostPort_base(__in_base, port) __rexxsyslib_DeleteRexxHostPort((__in_base), (struct MsgPort *)(port))
 
 static __inline__ LONG
-__rexxsyslib_GetRexxVarFromMsg(struct RxsLib *__base, CONST_STRPTR var, CONST struct RexxMsg * msgptr, STRPTR value)
+__rexxsyslib_GetRexxVarFromMsg(void *__base, CONST_STRPTR var, CONST struct RexxMsg * msgptr, STRPTR value)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(var);
 	register ULONG _a2 __asm("a2") = (ULONG)(msgptr);
 	register ULONG _a1 __asm("a1") = (ULONG)(value);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -492(%/a6)"
@@ -231,14 +244,15 @@ __rexxsyslib_GetRexxVarFromMsg(struct RxsLib *__base, CONST_STRPTR var, CONST st
 	return (LONG)_d0;
 }
 #define GetRexxVarFromMsg(var, msgptr, value) __rexxsyslib_GetRexxVarFromMsg((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(value))
+#define __GetRexxVarFromMsg_base(__in_base, var, msgptr, value) __rexxsyslib_GetRexxVarFromMsg((__in_base), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(value))
 
 static __inline__ LONG
-__rexxsyslib_SetRexxVarFromMsg(struct RxsLib *__base, CONST_STRPTR var, struct RexxMsg * msgptr, CONST_STRPTR value)
+__rexxsyslib_SetRexxVarFromMsg(void *__base, CONST_STRPTR var, struct RexxMsg * msgptr, CONST_STRPTR value)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(var);
 	register ULONG _a2 __asm("a2") = (ULONG)(msgptr);
 	register ULONG _a1 __asm("a1") = (ULONG)(value);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -498(%/a6)"
@@ -248,16 +262,17 @@ __rexxsyslib_SetRexxVarFromMsg(struct RxsLib *__base, CONST_STRPTR var, struct R
 	return (LONG)_d0;
 }
 #define SetRexxVarFromMsg(var, msgptr, value) __rexxsyslib_SetRexxVarFromMsg((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (struct RexxMsg *)(msgptr), (CONST_STRPTR)(value))
+#define __SetRexxVarFromMsg_base(__in_base, var, msgptr, value) __rexxsyslib_SetRexxVarFromMsg((__in_base), (CONST_STRPTR)(var), (struct RexxMsg *)(msgptr), (CONST_STRPTR)(value))
 
 static __inline__ struct RexxMsg *
-__rexxsyslib_LaunchRexxScript(struct RxsLib *__base, CONST_STRPTR script, struct MsgPort * replyport, CONST_STRPTR extension, BPTR input, BPTR output)
+__rexxsyslib_LaunchRexxScript(void *__base, CONST_STRPTR script, struct MsgPort * replyport, CONST_STRPTR extension, BPTR input, BPTR output)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(script);
 	register ULONG _a1 __asm("a1") = (ULONG)(replyport);
 	register ULONG _a2 __asm("a2") = (ULONG)(extension);
 	register ULONG _d1 __asm("d1") = (ULONG)(input);
 	register ULONG _d2 __asm("d2") = (ULONG)(output);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	__asm__ __volatile__ ("jsr -504(%/a6)"
 		: "=r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -266,12 +281,13 @@ __rexxsyslib_LaunchRexxScript(struct RxsLib *__base, CONST_STRPTR script, struct
 	return (struct RexxMsg *)_d0;
 }
 #define LaunchRexxScript(script, replyport, extension, input, output) __rexxsyslib_LaunchRexxScript((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(script), (struct MsgPort *)(replyport), (CONST_STRPTR)(extension), (BPTR)(input), (BPTR)(output))
+#define __LaunchRexxScript_base(__in_base, script, replyport, extension, input, output) __rexxsyslib_LaunchRexxScript((__in_base), (CONST_STRPTR)(script), (struct MsgPort *)(replyport), (CONST_STRPTR)(extension), (BPTR)(input), (BPTR)(output))
 
 static __inline__ VOID
-__rexxsyslib_FreeRexxMsg(struct RxsLib *__base, struct RexxMsg * rxm)
+__rexxsyslib_FreeRexxMsg(void *__base, struct RexxMsg * rxm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rxm);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -282,15 +298,16 @@ __rexxsyslib_FreeRexxMsg(struct RxsLib *__base, struct RexxMsg * rxm)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeRexxMsg(rxm) __rexxsyslib_FreeRexxMsg((REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(rxm))
+#define __FreeRexxMsg_base(__in_base, rxm) __rexxsyslib_FreeRexxMsg((__in_base), (struct RexxMsg *)(rxm))
 
 static __inline__ LONG
-__rexxsyslib_GetRexxBufferFromMsg(struct RxsLib *__base, CONST_STRPTR var, CONST struct RexxMsg * msgptr, STRPTR buffer, ULONG buffer_size)
+__rexxsyslib_GetRexxBufferFromMsg(void *__base, CONST_STRPTR var, CONST struct RexxMsg * msgptr, STRPTR buffer, ULONG buffer_size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(var);
 	register ULONG _a2 __asm("a2") = (ULONG)(msgptr);
 	register ULONG _a1 __asm("a1") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(buffer_size);
-	register struct RxsLib *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -516(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -299,5 +316,6 @@ __rexxsyslib_GetRexxBufferFromMsg(struct RxsLib *__base, CONST_STRPTR var, CONST
 	return (LONG)_d0;
 }
 #define GetRexxBufferFromMsg(var, msgptr, buffer, buffer_size) __rexxsyslib_GetRexxBufferFromMsg((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(buffer), (ULONG)(buffer_size))
+#define __GetRexxBufferFromMsg_base(__in_base, var, msgptr, buffer, buffer_size) __rexxsyslib_GetRexxBufferFromMsg((__in_base), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(buffer), (ULONG)(buffer_size))
 
 #endif /* INLINE_REXXSYSLIB_H */

@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +32,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__layout_LAYOUT_GetClass(struct Library *__base)
+__layout_LAYOUT_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,15 +46,16 @@ __layout_LAYOUT_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define LAYOUT_GetClass() __layout_LAYOUT_GetClass((LAYOUT_BASE_NAME))
+#define __LAYOUT_GetClass_base(__in_base) __layout_LAYOUT_GetClass((__in_base))
 
 static __inline__ BOOL
-__layout_ActivateLayoutGadget(struct Library *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, ULONG object)
+__layout_ActivateLayoutGadget(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, ULONG object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
 	register ULONG _d0 __asm("d0") = (ULONG)(object);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -55,12 +64,13 @@ __layout_ActivateLayoutGadget(struct Library *__base, struct Gadget * gadget, st
 	return (BOOL)_d0;
 }
 #define ActivateLayoutGadget(gadget, window, requester, object) __layout_ActivateLayoutGadget((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (ULONG)(object))
+#define __ActivateLayoutGadget_base(__in_base, gadget, window, requester, object) __layout_ActivateLayoutGadget((__in_base), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (ULONG)(object))
 
 static __inline__ VOID
-__layout_FlushLayoutDomainCache(struct Library *__base, struct Gadget * gadget)
+__layout_FlushLayoutDomainCache(void *__base, struct Gadget * gadget)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -71,15 +81,16 @@ __layout_FlushLayoutDomainCache(struct Library *__base, struct Gadget * gadget)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FlushLayoutDomainCache(gadget) __layout_FlushLayoutDomainCache((LAYOUT_BASE_NAME), (struct Gadget *)(gadget))
+#define __FlushLayoutDomainCache_base(__in_base, gadget) __layout_FlushLayoutDomainCache((__in_base), (struct Gadget *)(gadget))
 
 static __inline__ BOOL
-__layout_RethinkLayout(struct Library *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, LONG refresh)
+__layout_RethinkLayout(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, LONG refresh)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
 	register ULONG _d0 __asm("d0") = (ULONG)(refresh);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -88,15 +99,16 @@ __layout_RethinkLayout(struct Library *__base, struct Gadget * gadget, struct Wi
 	return (BOOL)_d0;
 }
 #define RethinkLayout(gadget, window, requester, refresh) __layout_RethinkLayout((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (LONG)(refresh))
+#define __RethinkLayout_base(__in_base, gadget, window, requester, refresh) __layout_RethinkLayout((__in_base), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (LONG)(refresh))
 
 static __inline__ VOID
-__layout_LayoutLimits(struct Library *__base, struct Gadget * gadget, struct LayoutLimits * limits, struct TextFont * font, struct Screen * screen)
+__layout_LayoutLimits(void *__base, struct Gadget * gadget, struct LayoutLimits * limits, struct TextFont * font, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(limits);
 	register ULONG _a2 __asm("a2") = (ULONG)(font);
 	register ULONG _a3 __asm("a3") = (ULONG)(screen);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -106,11 +118,12 @@ __layout_LayoutLimits(struct Library *__base, struct Gadget * gadget, struct Lay
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LayoutLimits(gadget, limits, font, screen) __layout_LayoutLimits((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (struct LayoutLimits *)(limits), (struct TextFont *)(font), (struct Screen *)(screen))
+#define __LayoutLimits_base(__in_base, gadget, limits, font, screen) __layout_LayoutLimits((__in_base), (struct Gadget *)(gadget), (struct LayoutLimits *)(limits), (struct TextFont *)(font), (struct Screen *)(screen))
 
 static __inline__ Class *
-__layout_PAGE_GetClass(struct Library *__base)
+__layout_PAGE_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -122,15 +135,16 @@ __layout_PAGE_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define PAGE_GetClass() __layout_PAGE_GetClass((LAYOUT_BASE_NAME))
+#define __PAGE_GetClass_base(__in_base) __layout_PAGE_GetClass((__in_base))
 
 static __inline__ ULONG
-__layout_SetPageGadgetAttrsA(struct Library *__base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, struct TagItem * tags)
+__layout_SetPageGadgetAttrsA(void *__base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(object);
 	register ULONG _a2 __asm("a2") = (ULONG)(window);
 	register ULONG _a3 __asm("a3") = (ULONG)(requester);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("move.l %/a4,-(%/sp)\n\tmove.l %[s0],%/a4\n\tjsr -66(%/a6)\n\tmove.l (%/sp)+,%/a4"
@@ -140,17 +154,27 @@ __layout_SetPageGadgetAttrsA(struct Library *__base, struct Gadget * gadget, Obj
 	return (ULONG)_d0;
 }
 #define SetPageGadgetAttrsA(gadget, object, window, requester, tags) __layout_SetPageGadgetAttrsA((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), (struct TagItem *)(tags))
+#define __SetPageGadgetAttrsA_base(__in_base, gadget, object, window, requester, tags) __layout_SetPageGadgetAttrsA((__in_base), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), (struct TagItem *)(tags))
 
-#define SetPageGadgetAttrs(gadget, object, window, requester, ...) (SetPageGadgetAttrs)((struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__SetPageGadgetAttrs_va(void *__base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, requester);
+	ULONG _r = (ULONG)__layout_SetPageGadgetAttrsA(__base, gadget, object, window, requester, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetPageGadgetAttrs(gadget, object, window, requester, ...) __SetPageGadgetAttrs_va((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
 
 static __inline__ VOID
-__layout_RefreshPageGadget(struct Library *__base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester)
+__layout_RefreshPageGadget(void *__base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(object);
 	register ULONG _a2 __asm("a2") = (ULONG)(window);
 	register ULONG _a3 __asm("a3") = (ULONG)(requester);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
@@ -160,5 +184,6 @@ __layout_RefreshPageGadget(struct Library *__base, struct Gadget * gadget, Objec
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RefreshPageGadget(gadget, object, window, requester) __layout_RefreshPageGadget((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester))
+#define __RefreshPageGadget_base(__in_base, gadget, object, window, requester) __layout_RefreshPageGadget((__in_base), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester))
 
 #endif /* INLINE_LAYOUT_H */

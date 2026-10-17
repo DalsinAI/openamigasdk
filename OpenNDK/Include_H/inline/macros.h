@@ -19,7 +19,7 @@
 
 #define LP0(offs, rt, name, bt, bn) \
 ({ \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register ULONG __ndk_d0 __asm("d0"); \
 	register ULONG __ndk_d1 __asm("d1"); \
 	register ULONG __ndk_a0 __asm("a0"); \
@@ -34,7 +34,7 @@
 
 #define LP0NR(offs, name, bt, bn) \
 ({ \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register ULONG __ndk_d0 __asm("d0"); \
 	register ULONG __ndk_d1 __asm("d1"); \
 	register ULONG __ndk_a0 __asm("a0"); \
@@ -50,7 +50,7 @@
 #define LP1(offs, rt, name, t1, v1, r1, bt, bn) \
 ({ \
 	t1 __ndk_v1 = (v1); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register ULONG __ndk_d0 __asm("d0"); \
 	register ULONG __ndk_d1 __asm("d1"); \
@@ -67,7 +67,7 @@
 #define LP1NR(offs, name, t1, v1, r1, bt, bn) \
 ({ \
 	t1 __ndk_v1 = (v1); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register ULONG __ndk_d0 __asm("d0"); \
 	register ULONG __ndk_d1 __asm("d1"); \
@@ -85,7 +85,7 @@
 ({ \
 	t1 __ndk_v1 = (v1); \
 	t2 __ndk_v2 = (v2); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register ULONG __ndk_d0 __asm("d0"); \
@@ -104,7 +104,7 @@
 ({ \
 	t1 __ndk_v1 = (v1); \
 	t2 __ndk_v2 = (v2); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register ULONG __ndk_d0 __asm("d0"); \
@@ -124,7 +124,7 @@
 	t1 __ndk_v1 = (v1); \
 	t2 __ndk_v2 = (v2); \
 	t3 __ndk_v3 = (v3); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -145,7 +145,7 @@
 	t1 __ndk_v1 = (v1); \
 	t2 __ndk_v2 = (v2); \
 	t3 __ndk_v3 = (v3); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -167,7 +167,7 @@
 	t2 __ndk_v2 = (v2); \
 	t3 __ndk_v3 = (v3); \
 	t4 __ndk_v4 = (v4); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -190,7 +190,7 @@
 	t2 __ndk_v2 = (v2); \
 	t3 __ndk_v3 = (v3); \
 	t4 __ndk_v4 = (v4); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -214,7 +214,7 @@
 	t3 __ndk_v3 = (v3); \
 	t4 __ndk_v4 = (v4); \
 	t5 __ndk_v5 = (v5); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -239,7 +239,7 @@
 	t3 __ndk_v3 = (v3); \
 	t4 __ndk_v4 = (v4); \
 	t5 __ndk_v5 = (v5); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -265,7 +265,7 @@
 	t4 __ndk_v4 = (v4); \
 	t5 __ndk_v5 = (v5); \
 	t6 __ndk_v6 = (v6); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -292,7 +292,7 @@
 	t4 __ndk_v4 = (v4); \
 	t5 __ndk_v5 = (v5); \
 	t6 __ndk_v6 = (v6); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -320,7 +320,7 @@
 	t5 __ndk_v5 = (v5); \
 	t6 __ndk_v6 = (v6); \
 	t7 __ndk_v7 = (v7); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -349,7 +349,7 @@
 	t5 __ndk_v5 = (v5); \
 	t6 __ndk_v6 = (v6); \
 	t7 __ndk_v7 = (v7); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -379,7 +379,7 @@
 	t6 __ndk_v6 = (v6); \
 	t7 __ndk_v7 = (v7); \
 	t8 __ndk_v8 = (v8); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -410,7 +410,7 @@
 	t6 __ndk_v6 = (v6); \
 	t7 __ndk_v7 = (v7); \
 	t8 __ndk_v8 = (v8); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -442,7 +442,7 @@
 	t7 __ndk_v7 = (v7); \
 	t8 __ndk_v8 = (v8); \
 	t9 __ndk_v9 = (v9); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -475,7 +475,7 @@
 	t7 __ndk_v7 = (v7); \
 	t8 __ndk_v8 = (v8); \
 	t9 __ndk_v9 = (v9); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -509,7 +509,7 @@
 	t8 __ndk_v8 = (v8); \
 	t9 __ndk_v9 = (v9); \
 	t10 __ndk_v10 = (v10); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -544,7 +544,7 @@
 	t8 __ndk_v8 = (v8); \
 	t9 __ndk_v9 = (v9); \
 	t10 __ndk_v10 = (v10); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -580,7 +580,7 @@
 	t9 __ndk_v9 = (v9); \
 	t10 __ndk_v10 = (v10); \
 	t11 __ndk_v11 = (v11); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -617,7 +617,7 @@
 	t9 __ndk_v9 = (v9); \
 	t10 __ndk_v10 = (v10); \
 	t11 __ndk_v11 = (v11); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -655,7 +655,7 @@
 	t10 __ndk_v10 = (v10); \
 	t11 __ndk_v11 = (v11); \
 	t12 __ndk_v12 = (v12); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -694,7 +694,7 @@
 	t10 __ndk_v10 = (v10); \
 	t11 __ndk_v11 = (v11); \
 	t12 __ndk_v12 = (v12); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \

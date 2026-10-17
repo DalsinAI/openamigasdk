@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,13 +25,13 @@ struct Library;
 #endif
 
 static __inline__ LONG
-__translator_Translate(struct Library *__base, CONST_STRPTR inputString, LONG inputLength, STRPTR outputBuffer, LONG bufferSize)
+__translator_Translate(void *__base, CONST_STRPTR inputString, LONG inputLength, STRPTR outputBuffer, LONG bufferSize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(inputString);
 	register ULONG _d0 __asm("d0") = (ULONG)(inputLength);
 	register ULONG _a1 __asm("a1") = (ULONG)(outputBuffer);
 	register ULONG _d1 __asm("d1") = (ULONG)(bufferSize);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -30(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -38,5 +39,6 @@ __translator_Translate(struct Library *__base, CONST_STRPTR inputString, LONG in
 	return (LONG)_d0;
 }
 #define Translate(inputString, inputLength, outputBuffer, bufferSize) __translator_Translate((TRANSLATOR_BASE_NAME), (CONST_STRPTR)(inputString), (LONG)(inputLength), (STRPTR)(outputBuffer), (LONG)(bufferSize))
+#define __Translate_base(__in_base, inputString, inputLength, outputBuffer, bufferSize) __translator_Translate((__in_base), (CONST_STRPTR)(inputString), (LONG)(inputLength), (STRPTR)(outputBuffer), (LONG)(bufferSize))
 
 #endif /* INLINE_TRANSLATOR_H */

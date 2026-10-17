@@ -2,7 +2,7 @@
 * mathieeesingtrans.library's calls (IEEE single precision functions), for OpenNDK.
 * Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
 ==base _MathIeeeSingTransBase
-==basetype struct Library *
+==basetype struct MathIEEEBase *
 ==libname mathieeesingtrans.library
 ==bias 30
 ==public

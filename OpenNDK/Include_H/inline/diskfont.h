@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +32,10 @@ struct Library;
 #endif
 
 static __inline__ struct TextFont *
-__diskfont_OpenDiskFont(struct Library *__base, CONST struct TextAttr * textAttr)
+__diskfont_OpenDiskFont(void *__base, CONST struct TextAttr * textAttr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(textAttr);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -38,14 +46,15 @@ __diskfont_OpenDiskFont(struct Library *__base, CONST struct TextAttr * textAttr
 	return (struct TextFont *)_d0;
 }
 #define OpenDiskFont(textAttr) __diskfont_OpenDiskFont((DISKFONT_BASE_NAME), (CONST struct TextAttr *)(textAttr))
+#define __OpenDiskFont_base(__in_base, textAttr) __diskfont_OpenDiskFont((__in_base), (CONST struct TextAttr *)(textAttr))
 
 static __inline__ LONG
-__diskfont_AvailFonts(struct Library *__base, struct AvailFontsHeader * buffer, LONG bufBytes, ULONG flags)
+__diskfont_AvailFonts(void *__base, struct AvailFontsHeader * buffer, LONG bufBytes, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(bufBytes);
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -54,13 +63,14 @@ __diskfont_AvailFonts(struct Library *__base, struct AvailFontsHeader * buffer, 
 	return (LONG)_d0;
 }
 #define AvailFonts(buffer, bufBytes, flags) __diskfont_AvailFonts((DISKFONT_BASE_NAME), (struct AvailFontsHeader *)(buffer), (LONG)(bufBytes), (ULONG)(flags))
+#define __AvailFonts_base(__in_base, buffer, bufBytes, flags) __diskfont_AvailFonts((__in_base), (struct AvailFontsHeader *)(buffer), (LONG)(bufBytes), (ULONG)(flags))
 
 static __inline__ struct FontContentsHeader *
-__diskfont_NewFontContents(struct Library *__base, BPTR fontsLock, CONST_STRPTR fontName)
+__diskfont_NewFontContents(void *__base, BPTR fontsLock, CONST_STRPTR fontName)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(fontsLock);
 	register ULONG _a1 __asm("a1") = (ULONG)(fontName);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -70,12 +80,13 @@ __diskfont_NewFontContents(struct Library *__base, BPTR fontsLock, CONST_STRPTR 
 	return (struct FontContentsHeader *)_d0;
 }
 #define NewFontContents(fontsLock, fontName) __diskfont_NewFontContents((DISKFONT_BASE_NAME), (BPTR)(fontsLock), (CONST_STRPTR)(fontName))
+#define __NewFontContents_base(__in_base, fontsLock, fontName) __diskfont_NewFontContents((__in_base), (BPTR)(fontsLock), (CONST_STRPTR)(fontName))
 
 static __inline__ VOID
-__diskfont_DisposeFontContents(struct Library *__base, struct FontContentsHeader * fontContentsHeader)
+__diskfont_DisposeFontContents(void *__base, struct FontContentsHeader * fontContentsHeader)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(fontContentsHeader);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -86,13 +97,14 @@ __diskfont_DisposeFontContents(struct Library *__base, struct FontContentsHeader
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DisposeFontContents(fontContentsHeader) __diskfont_DisposeFontContents((DISKFONT_BASE_NAME), (struct FontContentsHeader *)(fontContentsHeader))
+#define __DisposeFontContents_base(__in_base, fontContentsHeader) __diskfont_DisposeFontContents((__in_base), (struct FontContentsHeader *)(fontContentsHeader))
 
 static __inline__ struct DiskFont *
-__diskfont_NewScaledDiskFont(struct Library *__base, struct TextFont * sourceFont, CONST struct TextAttr * destTextAttr)
+__diskfont_NewScaledDiskFont(void *__base, struct TextFont * sourceFont, CONST struct TextAttr * destTextAttr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sourceFont);
 	register ULONG _a1 __asm("a1") = (ULONG)(destTextAttr);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -102,12 +114,13 @@ __diskfont_NewScaledDiskFont(struct Library *__base, struct TextFont * sourceFon
 	return (struct DiskFont *)_d0;
 }
 #define NewScaledDiskFont(sourceFont, destTextAttr) __diskfont_NewScaledDiskFont((DISKFONT_BASE_NAME), (struct TextFont *)(sourceFont), (CONST struct TextAttr *)(destTextAttr))
+#define __NewScaledDiskFont_base(__in_base, sourceFont, destTextAttr) __diskfont_NewScaledDiskFont((__in_base), (struct TextFont *)(sourceFont), (CONST struct TextAttr *)(destTextAttr))
 
 static __inline__ LONG
-__diskfont_GetDiskFontCtrl(struct Library *__base, LONG tagid)
+__diskfont_GetDiskFontCtrl(void *__base, LONG tagid)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(tagid);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -118,12 +131,13 @@ __diskfont_GetDiskFontCtrl(struct Library *__base, LONG tagid)
 	return (LONG)_d0;
 }
 #define GetDiskFontCtrl(tagid) __diskfont_GetDiskFontCtrl((DISKFONT_BASE_NAME), (LONG)(tagid))
+#define __GetDiskFontCtrl_base(__in_base, tagid) __diskfont_GetDiskFontCtrl((__in_base), (LONG)(tagid))
 
 static __inline__ VOID
-__diskfont_SetDiskFontCtrlA(struct Library *__base, CONST struct TagItem * taglist)
+__diskfont_SetDiskFontCtrlA(void *__base, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -134,13 +148,23 @@ __diskfont_SetDiskFontCtrlA(struct Library *__base, CONST struct TagItem * tagli
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetDiskFontCtrlA(taglist) __diskfont_SetDiskFontCtrlA((DISKFONT_BASE_NAME), (CONST struct TagItem *)(taglist))
+#define __SetDiskFontCtrlA_base(__in_base, taglist) __diskfont_SetDiskFontCtrlA((__in_base), (CONST struct TagItem *)(taglist))
 
+static __inline__ __OPENNDK_VA_ATTR VOID
+__SetDiskFontCtrl_va(void *__base, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, __base);
+	__diskfont_SetDiskFontCtrlA(__base, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define SetDiskFontCtrl(...) __SetDiskFontCtrl_va((DISKFONT_BASE_NAME), ##__VA_ARGS__)
 
 static __inline__ LONG
-__diskfont_EOpenEngine(struct Library *__base, struct EGlyphEngine * eEngine)
+__diskfont_EOpenEngine(void *__base, struct EGlyphEngine * eEngine)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(eEngine);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -151,12 +175,13 @@ __diskfont_EOpenEngine(struct Library *__base, struct EGlyphEngine * eEngine)
 	return (LONG)_d0;
 }
 #define EOpenEngine(eEngine) __diskfont_EOpenEngine((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine))
+#define __EOpenEngine_base(__in_base, eEngine) __diskfont_EOpenEngine((__in_base), (struct EGlyphEngine *)(eEngine))
 
 static __inline__ VOID
-__diskfont_ECloseEngine(struct Library *__base, struct EGlyphEngine * eEngine)
+__diskfont_ECloseEngine(void *__base, struct EGlyphEngine * eEngine)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(eEngine);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -167,13 +192,14 @@ __diskfont_ECloseEngine(struct Library *__base, struct EGlyphEngine * eEngine)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ECloseEngine(eEngine) __diskfont_ECloseEngine((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine))
+#define __ECloseEngine_base(__in_base, eEngine) __diskfont_ECloseEngine((__in_base), (struct EGlyphEngine *)(eEngine))
 
 static __inline__ ULONG
-__diskfont_ESetInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
+__diskfont_ESetInfoA(void *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(eEngine);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -183,15 +209,25 @@ __diskfont_ESetInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONS
 	return (ULONG)_d0;
 }
 #define ESetInfoA(eEngine, taglist) __diskfont_ESetInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define __ESetInfoA_base(__in_base, eEngine, taglist) __diskfont_ESetInfoA((__in_base), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
-#define ESetInfo(eEngine, ...) (ESetInfo)((struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__ESetInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, eEngine);
+	ULONG _r = (ULONG)__diskfont_ESetInfoA(__base, eEngine, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ESetInfo(eEngine, ...) __ESetInfo_va((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__diskfont_EObtainInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
+__diskfont_EObtainInfoA(void *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(eEngine);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -201,15 +237,25 @@ __diskfont_EObtainInfoA(struct Library *__base, struct EGlyphEngine * eEngine, C
 	return (ULONG)_d0;
 }
 #define EObtainInfoA(eEngine, taglist) __diskfont_EObtainInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define __EObtainInfoA_base(__in_base, eEngine, taglist) __diskfont_EObtainInfoA((__in_base), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
-#define EObtainInfo(eEngine, ...) (EObtainInfo)((struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__EObtainInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, eEngine);
+	ULONG _r = (ULONG)__diskfont_EObtainInfoA(__base, eEngine, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define EObtainInfo(eEngine, ...) __EObtainInfo_va((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__diskfont_EReleaseInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
+__diskfont_EReleaseInfoA(void *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(eEngine);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -219,16 +265,26 @@ __diskfont_EReleaseInfoA(struct Library *__base, struct EGlyphEngine * eEngine, 
 	return (ULONG)_d0;
 }
 #define EReleaseInfoA(eEngine, taglist) __diskfont_EReleaseInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define __EReleaseInfoA_base(__in_base, eEngine, taglist) __diskfont_EReleaseInfoA((__in_base), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
-#define EReleaseInfo(eEngine, ...) (EReleaseInfo)((struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__EReleaseInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, eEngine);
+	ULONG _r = (ULONG)__diskfont_EReleaseInfoA(__base, eEngine, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define EReleaseInfo(eEngine, ...) __EReleaseInfo_va((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
 
 static __inline__ struct OutlineFont *
-__diskfont_OpenOutlineFont(struct Library *__base, CONST_STRPTR name, struct List * list, ULONG flags)
+__diskfont_OpenOutlineFont(void *__base, CONST_STRPTR name, struct List * list, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(list);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -237,13 +293,14 @@ __diskfont_OpenOutlineFont(struct Library *__base, CONST_STRPTR name, struct Lis
 	return (struct OutlineFont *)_d0;
 }
 #define OpenOutlineFont(name, list, flags) __diskfont_OpenOutlineFont((DISKFONT_BASE_NAME), (CONST_STRPTR)(name), (struct List *)(list), (ULONG)(flags))
+#define __OpenOutlineFont_base(__in_base, name, list, flags) __diskfont_OpenOutlineFont((__in_base), (CONST_STRPTR)(name), (struct List *)(list), (ULONG)(flags))
 
 static __inline__ VOID
-__diskfont_CloseOutlineFont(struct Library *__base, struct OutlineFont * olf, struct List * list)
+__diskfont_CloseOutlineFont(void *__base, struct OutlineFont * olf, struct List * list)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(olf);
 	register ULONG _a1 __asm("a1") = (ULONG)(list);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -108(%/a6)"
@@ -253,14 +310,15 @@ __diskfont_CloseOutlineFont(struct Library *__base, struct OutlineFont * olf, st
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseOutlineFont(olf, list) __diskfont_CloseOutlineFont((DISKFONT_BASE_NAME), (struct OutlineFont *)(olf), (struct List *)(list))
+#define __CloseOutlineFont_base(__in_base, olf, list) __diskfont_CloseOutlineFont((__in_base), (struct OutlineFont *)(olf), (struct List *)(list))
 
 static __inline__ LONG
-__diskfont_WriteFontContents(struct Library *__base, BPTR fontsLock, CONST_STRPTR fontName, CONST struct FontContentsHeader * fontContentsHeader)
+__diskfont_WriteFontContents(void *__base, BPTR fontsLock, CONST_STRPTR fontName, CONST struct FontContentsHeader * fontContentsHeader)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(fontsLock);
 	register ULONG _a1 __asm("a1") = (ULONG)(fontName);
 	register ULONG _a2 __asm("a2") = (ULONG)(fontContentsHeader);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
@@ -270,14 +328,15 @@ __diskfont_WriteFontContents(struct Library *__base, BPTR fontsLock, CONST_STRPT
 	return (LONG)_d0;
 }
 #define WriteFontContents(fontsLock, fontName, fontContentsHeader) __diskfont_WriteFontContents((DISKFONT_BASE_NAME), (BPTR)(fontsLock), (CONST_STRPTR)(fontName), (CONST struct FontContentsHeader *)(fontContentsHeader))
+#define __WriteFontContents_base(__in_base, fontsLock, fontName, fontContentsHeader) __diskfont_WriteFontContents((__in_base), (BPTR)(fontsLock), (CONST_STRPTR)(fontName), (CONST struct FontContentsHeader *)(fontContentsHeader))
 
 static __inline__ LONG
-__diskfont_WriteDiskFontHeaderA(struct Library *__base, CONST struct TextFont * font, CONST_STRPTR fileName, CONST struct TagItem * tagList)
+__diskfont_WriteDiskFontHeaderA(void *__base, CONST struct TextFont * font, CONST_STRPTR fileName, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(font);
 	register ULONG _a1 __asm("a1") = (ULONG)(fileName);
 	register ULONG _a2 __asm("a2") = (ULONG)(tagList);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -287,16 +346,26 @@ __diskfont_WriteDiskFontHeaderA(struct Library *__base, CONST struct TextFont * 
 	return (LONG)_d0;
 }
 #define WriteDiskFontHeaderA(font, fileName, tagList) __diskfont_WriteDiskFontHeaderA((DISKFONT_BASE_NAME), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)(tagList))
+#define __WriteDiskFontHeaderA_base(__in_base, font, fileName, tagList) __diskfont_WriteDiskFontHeaderA((__in_base), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)(tagList))
 
-#define WriteDiskFontHeader(font, fileName, ...) (WriteDiskFontHeader)((CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__WriteDiskFontHeader_va(void *__base, CONST struct TextFont * font, CONST_STRPTR fileName, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, fileName);
+	LONG _r = (LONG)__diskfont_WriteDiskFontHeaderA(__base, font, fileName, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define WriteDiskFontHeader(font, fileName, ...) __WriteDiskFontHeader_va((DISKFONT_BASE_NAME), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__diskfont_ObtainCharsetInfo(struct Library *__base, ULONG knownTag, ULONG knownValue, ULONG wantedTag)
+__diskfont_ObtainCharsetInfo(void *__base, ULONG knownTag, ULONG knownValue, ULONG wantedTag)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(knownTag);
 	register ULONG _d1 __asm("d1") = (ULONG)(knownValue);
 	register ULONG _d2 __asm("d2") = (ULONG)(wantedTag);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -306,5 +375,6 @@ __diskfont_ObtainCharsetInfo(struct Library *__base, ULONG knownTag, ULONG known
 	return (ULONG)_d0;
 }
 #define ObtainCharsetInfo(knownTag, knownValue, wantedTag) __diskfont_ObtainCharsetInfo((DISKFONT_BASE_NAME), (ULONG)(knownTag), (ULONG)(knownValue), (ULONG)(wantedTag))
+#define __ObtainCharsetInfo_base(__in_base, knownTag, knownValue, wantedTag) __diskfont_ObtainCharsetInfo((__in_base), (ULONG)(knownTag), (ULONG)(knownValue), (ULONG)(wantedTag))
 
 #endif /* INLINE_DISKFONT_H */

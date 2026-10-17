@@ -15,6 +15,7 @@
 
 struct Device;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Device;
 #endif
 
 static __inline__ STRPTR
-__ramdrive_KillRAD0(struct Device *__base)
+__ramdrive_KillRAD0(void *__base)
 {
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,12 +39,13 @@ __ramdrive_KillRAD0(struct Device *__base)
 	return (STRPTR)_d0;
 }
 #define KillRAD0() __ramdrive_KillRAD0((RAMDRIVE_BASE_NAME))
+#define __KillRAD0_base(__in_base) __ramdrive_KillRAD0((__in_base))
 
 static __inline__ STRPTR
-__ramdrive_KillRAD(struct Device *__base, ULONG unit)
+__ramdrive_KillRAD(void *__base, ULONG unit)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unit);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -54,5 +56,6 @@ __ramdrive_KillRAD(struct Device *__base, ULONG unit)
 	return (STRPTR)_d0;
 }
 #define KillRAD(unit) __ramdrive_KillRAD((RAMDRIVE_BASE_NAME), (ULONG)(unit))
+#define __KillRAD_base(__in_base, unit) __ramdrive_KillRAD((__in_base), (ULONG)(unit))
 
 #endif /* INLINE_RAMDRIVE_H */

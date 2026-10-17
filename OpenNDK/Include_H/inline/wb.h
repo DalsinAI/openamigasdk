@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,12 +32,12 @@ struct Library;
 #endif
 
 static __inline__ VOID
-__wb_UpdateWorkbench(struct Library *__base, CONST_STRPTR name, BPTR parentLock, LONG action)
+__wb_UpdateWorkbench(void *__base, CONST_STRPTR name, BPTR parentLock, LONG action)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(parentLock);
 	register ULONG _d0 __asm("d0") = (ULONG)(action);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -38,16 +46,17 @@ __wb_UpdateWorkbench(struct Library *__base, CONST_STRPTR name, BPTR parentLock,
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UpdateWorkbench(name, parentLock, action) __wb_UpdateWorkbench((WB_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(parentLock), (LONG)(action))
+#define __UpdateWorkbench_base(__in_base, name, parentLock, action) __wb_UpdateWorkbench((__in_base), (CONST_STRPTR)(name), (BPTR)(parentLock), (LONG)(action))
 
 static __inline__ struct AppWindow *
-__wb_AddAppWindowA(struct Library *__base, ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, CONST struct TagItem * taglist)
+__wb_AddAppWindowA(void *__base, ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, CONST struct TagItem * taglist)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
 	register ULONG _d1 __asm("d1") = (ULONG)(userdata);
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(msgport);
 	register ULONG _a2 __asm("a2") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -48(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
@@ -55,14 +64,24 @@ __wb_AddAppWindowA(struct Library *__base, ULONG id, ULONG userdata, struct Wind
 	return (struct AppWindow *)_d0;
 }
 #define AddAppWindowA(id, userdata, window, msgport, taglist) __wb_AddAppWindowA((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
+#define __AddAppWindowA_base(__in_base, id, userdata, window, msgport, taglist) __wb_AddAppWindowA((__in_base), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
 
-#define AddAppWindow(id, userdata, window, msgport, ...) (AddAppWindow)((ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct AppWindow *
+__AddAppWindow_va(void *__base, ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, msgport);
+	struct AppWindow * _r = (struct AppWindow *)__wb_AddAppWindowA(__base, id, userdata, window, msgport, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AddAppWindow(id, userdata, window, msgport, ...) __AddAppWindow_va((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__wb_RemoveAppWindow(struct Library *__base, struct AppWindow * appWindow)
+__wb_RemoveAppWindow(void *__base, struct AppWindow * appWindow)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(appWindow);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -73,9 +92,10 @@ __wb_RemoveAppWindow(struct Library *__base, struct AppWindow * appWindow)
 	return (BOOL)_d0;
 }
 #define RemoveAppWindow(appWindow) __wb_RemoveAppWindow((WB_BASE_NAME), (struct AppWindow *)(appWindow))
+#define __RemoveAppWindow_base(__in_base, appWindow) __wb_RemoveAppWindow((__in_base), (struct AppWindow *)(appWindow))
 
 static __inline__ struct AppIcon *
-__wb_AddAppIconA(struct Library *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, CONST struct TagItem * taglist)
+__wb_AddAppIconA(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, CONST struct TagItem * taglist)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
 	register ULONG _d1 __asm("d1") = (ULONG)(userdata);
@@ -83,7 +103,7 @@ __wb_AddAppIconA(struct Library *__base, ULONG id, ULONG userdata, CONST_STRPTR 
 	register ULONG _a1 __asm("a1") = (ULONG)(msgport);
 	register ULONG _a2 __asm("a2") = (ULONG)(lock);
 	register ULONG _a3 __asm("a3") = (ULONG)(diskobj);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("move.l %/a4,-(%/sp)\n\tmove.l %[s0],%/a4\n\tjsr -60(%/a6)\n\tmove.l (%/sp)+,%/a4"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a3), "r" (_a6), [s0] "r" ((ULONG)(taglist))
@@ -91,14 +111,24 @@ __wb_AddAppIconA(struct Library *__base, ULONG id, ULONG userdata, CONST_STRPTR 
 	return (struct AppIcon *)_d0;
 }
 #define AddAppIconA(id, userdata, text, msgport, lock, diskobj, taglist) __wb_AddAppIconA((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)(taglist))
+#define __AddAppIconA_base(__in_base, id, userdata, text, msgport, lock, diskobj, taglist) __wb_AddAppIconA((__in_base), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)(taglist))
 
-#define AddAppIcon(id, userdata, text, msgport, lock, diskobj, ...) (AddAppIcon)((ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct AppIcon *
+__AddAppIcon_va(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, diskobj);
+	struct AppIcon * _r = (struct AppIcon *)__wb_AddAppIconA(__base, id, userdata, text, msgport, lock, diskobj, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AddAppIcon(id, userdata, text, msgport, lock, diskobj, ...) __AddAppIcon_va((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__wb_RemoveAppIcon(struct Library *__base, struct AppIcon * appIcon)
+__wb_RemoveAppIcon(void *__base, struct AppIcon * appIcon)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(appIcon);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -109,16 +139,17 @@ __wb_RemoveAppIcon(struct Library *__base, struct AppIcon * appIcon)
 	return (BOOL)_d0;
 }
 #define RemoveAppIcon(appIcon) __wb_RemoveAppIcon((WB_BASE_NAME), (struct AppIcon *)(appIcon))
+#define __RemoveAppIcon_base(__in_base, appIcon) __wb_RemoveAppIcon((__in_base), (struct AppIcon *)(appIcon))
 
 static __inline__ struct AppMenuItem *
-__wb_AddAppMenuItemA(struct Library *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, CONST struct TagItem * taglist)
+__wb_AddAppMenuItemA(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, CONST struct TagItem * taglist)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
 	register ULONG _d1 __asm("d1") = (ULONG)(userdata);
 	register ULONG _a0 __asm("a0") = (ULONG)(text);
 	register ULONG _a1 __asm("a1") = (ULONG)(msgport);
 	register ULONG _a2 __asm("a2") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -72(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
@@ -126,14 +157,24 @@ __wb_AddAppMenuItemA(struct Library *__base, ULONG id, ULONG userdata, CONST_STR
 	return (struct AppMenuItem *)_d0;
 }
 #define AddAppMenuItemA(id, userdata, text, msgport, taglist) __wb_AddAppMenuItemA((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
+#define __AddAppMenuItemA_base(__in_base, id, userdata, text, msgport, taglist) __wb_AddAppMenuItemA((__in_base), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
 
-#define AddAppMenuItem(id, userdata, text, msgport, ...) (AddAppMenuItem)((ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct AppMenuItem *
+__AddAppMenuItem_va(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, msgport);
+	struct AppMenuItem * _r = (struct AppMenuItem *)__wb_AddAppMenuItemA(__base, id, userdata, text, msgport, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AddAppMenuItem(id, userdata, text, msgport, ...) __AddAppMenuItem_va((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__wb_RemoveAppMenuItem(struct Library *__base, struct AppMenuItem * appMenuItem)
+__wb_RemoveAppMenuItem(void *__base, struct AppMenuItem * appMenuItem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(appMenuItem);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -144,14 +185,15 @@ __wb_RemoveAppMenuItem(struct Library *__base, struct AppMenuItem * appMenuItem)
 	return (BOOL)_d0;
 }
 #define RemoveAppMenuItem(appMenuItem) __wb_RemoveAppMenuItem((WB_BASE_NAME), (struct AppMenuItem *)(appMenuItem))
+#define __RemoveAppMenuItem_base(__in_base, appMenuItem) __wb_RemoveAppMenuItem((__in_base), (struct AppMenuItem *)(appMenuItem))
 
 static __inline__ ULONG
-__wb_WBInfo(struct Library *__base, BPTR lock, CONST_STRPTR name, struct Screen * screen)
+__wb_WBInfo(void *__base, BPTR lock, CONST_STRPTR name, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(lock);
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
 	register ULONG _a2 __asm("a2") = (ULONG)(screen);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -161,13 +203,14 @@ __wb_WBInfo(struct Library *__base, BPTR lock, CONST_STRPTR name, struct Screen 
 	return (ULONG)_d0;
 }
 #define WBInfo(lock, name, screen) __wb_WBInfo((WB_BASE_NAME), (BPTR)(lock), (CONST_STRPTR)(name), (struct Screen *)(screen))
+#define __WBInfo_base(__in_base, lock, name, screen) __wb_WBInfo((__in_base), (BPTR)(lock), (CONST_STRPTR)(name), (struct Screen *)(screen))
 
 static __inline__ BOOL
-__wb_OpenWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST struct TagItem * tags)
+__wb_OpenWorkbenchObjectA(void *__base, CONST_STRPTR name, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -177,15 +220,25 @@ __wb_OpenWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST struc
 	return (BOOL)_d0;
 }
 #define OpenWorkbenchObjectA(name, tags) __wb_OpenWorkbenchObjectA((WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __OpenWorkbenchObjectA_base(__in_base, name, tags) __wb_OpenWorkbenchObjectA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-#define OpenWorkbenchObject(name, ...) (OpenWorkbenchObject)((CONST_STRPTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__OpenWorkbenchObject_va(void *__base, CONST_STRPTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	BOOL _r = (BOOL)__wb_OpenWorkbenchObjectA(__base, name, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define OpenWorkbenchObject(name, ...) __OpenWorkbenchObject_va((WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__wb_CloseWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST struct TagItem * tags)
+__wb_CloseWorkbenchObjectA(void *__base, CONST_STRPTR name, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -195,15 +248,25 @@ __wb_CloseWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST stru
 	return (BOOL)_d0;
 }
 #define CloseWorkbenchObjectA(name, tags) __wb_CloseWorkbenchObjectA((WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __CloseWorkbenchObjectA_base(__in_base, name, tags) __wb_CloseWorkbenchObjectA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-#define CloseWorkbenchObject(name, ...) (CloseWorkbenchObject)((CONST_STRPTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__CloseWorkbenchObject_va(void *__base, CONST_STRPTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	BOOL _r = (BOOL)__wb_CloseWorkbenchObjectA(__base, name, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define CloseWorkbenchObject(name, ...) __CloseWorkbenchObject_va((WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__wb_WorkbenchControlA(struct Library *__base, CONST_STRPTR name, CONST struct TagItem * tags)
+__wb_WorkbenchControlA(void *__base, CONST_STRPTR name, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -108(%/a6)"
@@ -213,17 +276,27 @@ __wb_WorkbenchControlA(struct Library *__base, CONST_STRPTR name, CONST struct T
 	return (BOOL)_d0;
 }
 #define WorkbenchControlA(name, tags) __wb_WorkbenchControlA((WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __WorkbenchControlA_base(__in_base, name, tags) __wb_WorkbenchControlA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-#define WorkbenchControl(name, ...) (WorkbenchControl)((CONST_STRPTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__WorkbenchControl_va(void *__base, CONST_STRPTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	BOOL _r = (BOOL)__wb_WorkbenchControlA(__base, name, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define WorkbenchControl(name, ...) __WorkbenchControl_va((WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ struct AppWindowDropZone *
-__wb_AddAppWindowDropZoneA(struct Library *__base, struct AppWindow * aw, ULONG id, ULONG userdata, CONST struct TagItem * tags)
+__wb_AddAppWindowDropZoneA(void *__base, struct AppWindow * aw, ULONG id, ULONG userdata, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(aw);
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
 	register ULONG _d1 __asm("d1") = (ULONG)(userdata);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -114(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -231,15 +304,25 @@ __wb_AddAppWindowDropZoneA(struct Library *__base, struct AppWindow * aw, ULONG 
 	return (struct AppWindowDropZone *)_d0;
 }
 #define AddAppWindowDropZoneA(aw, id, userdata, tags) __wb_AddAppWindowDropZoneA((WB_BASE_NAME), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)(tags))
+#define __AddAppWindowDropZoneA_base(__in_base, aw, id, userdata, tags) __wb_AddAppWindowDropZoneA((__in_base), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)(tags))
 
-#define AddAppWindowDropZone(aw, id, userdata, ...) (AddAppWindowDropZone)((struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct AppWindowDropZone *
+__AddAppWindowDropZone_va(void *__base, struct AppWindow * aw, ULONG id, ULONG userdata, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, userdata);
+	struct AppWindowDropZone * _r = (struct AppWindowDropZone *)__wb_AddAppWindowDropZoneA(__base, aw, id, userdata, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AddAppWindowDropZone(aw, id, userdata, ...) __AddAppWindowDropZone_va((WB_BASE_NAME), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__wb_RemoveAppWindowDropZone(struct Library *__base, struct AppWindow * aw, struct AppWindowDropZone * dropZone)
+__wb_RemoveAppWindowDropZone(void *__base, struct AppWindow * aw, struct AppWindowDropZone * dropZone)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(aw);
 	register ULONG _a1 __asm("a1") = (ULONG)(dropZone);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -249,14 +332,15 @@ __wb_RemoveAppWindowDropZone(struct Library *__base, struct AppWindow * aw, stru
 	return (BOOL)_d0;
 }
 #define RemoveAppWindowDropZone(aw, dropZone) __wb_RemoveAppWindowDropZone((WB_BASE_NAME), (struct AppWindow *)(aw), (struct AppWindowDropZone *)(dropZone))
+#define __RemoveAppWindowDropZone_base(__in_base, aw, dropZone) __wb_RemoveAppWindowDropZone((__in_base), (struct AppWindow *)(aw), (struct AppWindowDropZone *)(dropZone))
 
 static __inline__ BOOL
-__wb_ChangeWorkbenchSelectionA(struct Library *__base, CONST_STRPTR name, struct Hook * hook, CONST struct TagItem * tags)
+__wb_ChangeWorkbenchSelectionA(void *__base, CONST_STRPTR name, struct Hook * hook, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(hook);
 	register ULONG _a2 __asm("a2") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -266,15 +350,25 @@ __wb_ChangeWorkbenchSelectionA(struct Library *__base, CONST_STRPTR name, struct
 	return (BOOL)_d0;
 }
 #define ChangeWorkbenchSelectionA(name, hook, tags) __wb_ChangeWorkbenchSelectionA((WB_BASE_NAME), (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)(tags))
+#define __ChangeWorkbenchSelectionA_base(__in_base, name, hook, tags) __wb_ChangeWorkbenchSelectionA((__in_base), (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)(tags))
 
-#define ChangeWorkbenchSelection(name, hook, ...) (ChangeWorkbenchSelection)((CONST_STRPTR)(name), (struct Hook *)(hook), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__ChangeWorkbenchSelection_va(void *__base, CONST_STRPTR name, struct Hook * hook, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, hook);
+	BOOL _r = (BOOL)__wb_ChangeWorkbenchSelectionA(__base, name, hook, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ChangeWorkbenchSelection(name, hook, ...) __ChangeWorkbenchSelection_va((WB_BASE_NAME), (CONST_STRPTR)(name), (struct Hook *)(hook), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__wb_MakeWorkbenchObjectVisibleA(struct Library *__base, CONST_STRPTR name, CONST struct TagItem * tags)
+__wb_MakeWorkbenchObjectVisibleA(void *__base, CONST_STRPTR name, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
@@ -284,17 +378,27 @@ __wb_MakeWorkbenchObjectVisibleA(struct Library *__base, CONST_STRPTR name, CONS
 	return (BOOL)_d0;
 }
 #define MakeWorkbenchObjectVisibleA(name, tags) __wb_MakeWorkbenchObjectVisibleA((WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __MakeWorkbenchObjectVisibleA_base(__in_base, name, tags) __wb_MakeWorkbenchObjectVisibleA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-#define MakeWorkbenchObjectVisible(name, ...) (MakeWorkbenchObjectVisible)((CONST_STRPTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__MakeWorkbenchObjectVisible_va(void *__base, CONST_STRPTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	BOOL _r = (BOOL)__wb_MakeWorkbenchObjectVisibleA(__base, name, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define MakeWorkbenchObjectVisible(name, ...) __MakeWorkbenchObjectVisible_va((WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__wb_WhichWorkbenchObjectA(struct Library *__base, struct Window * window, LONG x, LONG y, CONST struct TagItem * tags)
+__wb_WhichWorkbenchObjectA(void *__base, struct Window * window, LONG x, LONG y, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -138(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -302,7 +406,17 @@ __wb_WhichWorkbenchObjectA(struct Library *__base, struct Window * window, LONG 
 	return (ULONG)_d0;
 }
 #define WhichWorkbenchObjectA(window, x, y, tags) __wb_WhichWorkbenchObjectA((WB_BASE_NAME), (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)(tags))
+#define __WhichWorkbenchObjectA_base(__in_base, window, x, y, tags) __wb_WhichWorkbenchObjectA((__in_base), (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)(tags))
 
-#define WhichWorkbenchObject(window, x, y, ...) (WhichWorkbenchObject)((struct Window *)(window), (LONG)(x), (LONG)(y), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__WhichWorkbenchObject_va(void *__base, struct Window * window, LONG x, LONG y, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, y);
+	ULONG _r = (ULONG)__wb_WhichWorkbenchObjectA(__base, window, x, y, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define WhichWorkbenchObject(window, x, y, ...) __WhichWorkbenchObject_va((WB_BASE_NAME), (struct Window *)(window), (LONG)(x), (LONG)(y), ##__VA_ARGS__)
 
 #endif /* INLINE_WB_H */

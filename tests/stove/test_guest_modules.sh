@@ -19,8 +19,11 @@ trap 'rm -rf "$tmp"' EXIT
 
 fake_stove() { # $1 name, $2 include folder
     s="$tmp/stove-$1"
-    mkdir -p "$s/prefix/bin"
-    for e in "$REAL/prefix"/*; do [ "$(basename "$e")" = bin ] || ln -s "$e" "$s/prefix/"; done
+    # a tree of links (not one link per folder), so that the scripts'
+    # find "$P" -name ... still finds the .fd files
+    mkdir -p "$s"
+    cp -as "$REAL/prefix" "$s/prefix" || exit 2
+    rm -rf "$s/prefix/bin"; mkdir -p "$s/prefix/bin"
     for b in "$REAL/prefix/bin"/*; do
         n=$(basename "$b")
         case $n in
@@ -36,7 +39,7 @@ fake_stove openndk "$HERE/OpenNDK/Include_H"
 [ -d "$REAL/prefix/m68k-amigaos/ndk-include.vendor" ] || { echo "no vendor NDK kept in $REAL"; exit 2; }
 
 for m in vendor openndk; do
-    git clone -q --shared "$SRC" "$tmp/guest-$m" || exit 2
+    git -c advice.detachedHead=false clone -q --shared "$SRC" "$tmp/guest-$m" || exit 2
 done
 echo "guest at $(git -C "$tmp/guest-vendor" log --oneline -1), OpenNDK at $(git -C "$HERE" log --oneline -1)"
 if [ -n "${ONLY:-}" ]; then targets=$ONLY; else
@@ -50,7 +53,7 @@ cat > "$tmp/one.sh" <<SH
 #!/bin/sh
 m=\$1; t=\$2; k=\$(echo "\$m-\$t" | tr / _)
 cd "$tmp/guest-\$m/\$t" || exit 0
-if STOVE="$tmp/stove-\$m" OUT="$tmp/out/\$k" timeout 600 sh ./build-amiga.sh > "$tmp/log/\$k" 2>&1; then echo ok > "$tmp/log/\$k.rc"; else echo fail > "$tmp/log/\$k.rc"; fi
+if PATH="$tmp/stove-\$m/prefix/bin:\$PATH" STOVE="$tmp/stove-\$m" OUT="$tmp/out/\$k" timeout 600 sh ./build-amiga.sh > "$tmp/log/\$k" 2>&1; then echo ok > "$tmp/log/\$k.rc"; else echo fail > "$tmp/log/\$k.rc"; fi
 SH
 xargs -P "$JOBS" -L 1 sh "$tmp/one.sh" < "$tmp/list"
 
@@ -63,7 +66,7 @@ for t in $targets; do
     elif [ "$v" = ok ]; then
         bad=$((bad+1)); echo "== $t: builds with the vendor NDK, not with OpenNDK"
         grep -m 12 -E 'error|undefined reference|In file included|fatal' "$tmp/log/openndk-$k" | sed "s|$tmp/guest-openndk/||g;s|$HERE/||g"
-    else both=$((both+1)); echo "-- $t: fails with both:"; grep -m 3 -E 'error|undefined|fatal|not' "$tmp/log/vendor-$k" | sed "s|$tmp/guest-vendor/||g"
+    else both=$((both+1)); echo "-- $t: fails with both:"; { grep -m 3 -E 'error|undefined|fatal|not' "$tmp/log/vendor-$k" || tail -n 3 "$tmp/log/vendor-$k"; } | sed "s|$tmp/guest-vendor/||g"
     fi
 done
 [ -z "$vend" ] || echo "builds with OpenNDK only:$vend"

@@ -13,7 +13,15 @@
 #define UTILITY_BASE_NAME UtilityBase
 #endif
 
-struct UtilityBase;
+struct Library;
+
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -24,11 +32,11 @@ struct UtilityBase;
 #endif
 
 static __inline__ struct TagItem *
-__utility_FindTagItem(struct UtilityBase *__base, Tag tagVal, CONST struct TagItem * tagList)
+__utility_FindTagItem(void *__base, Tag tagVal, CONST struct TagItem * tagList)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(tagVal);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
@@ -38,14 +46,15 @@ __utility_FindTagItem(struct UtilityBase *__base, Tag tagVal, CONST struct TagIt
 	return (struct TagItem *)_d0;
 }
 #define FindTagItem(tagVal, tagList) __utility_FindTagItem((UTILITY_BASE_NAME), (Tag)(tagVal), (CONST struct TagItem *)(tagList))
+#define __FindTagItem_base(__in_base, tagVal, tagList) __utility_FindTagItem((__in_base), (Tag)(tagVal), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
-__utility_GetTagData(struct UtilityBase *__base, Tag tagValue, ULONG defaultVal, CONST struct TagItem * tagList)
+__utility_GetTagData(void *__base, Tag tagValue, ULONG defaultVal, CONST struct TagItem * tagList)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(tagValue);
 	register ULONG _d1 __asm("d1") = (ULONG)(defaultVal);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -54,14 +63,15 @@ __utility_GetTagData(struct UtilityBase *__base, Tag tagValue, ULONG defaultVal,
 	return (ULONG)_d0;
 }
 #define GetTagData(tagValue, defaultVal, tagList) __utility_GetTagData((UTILITY_BASE_NAME), (Tag)(tagValue), (ULONG)(defaultVal), (CONST struct TagItem *)(tagList))
+#define __GetTagData_base(__in_base, tagValue, defaultVal, tagList) __utility_GetTagData((__in_base), (Tag)(tagValue), (ULONG)(defaultVal), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
-__utility_PackBoolTags(struct UtilityBase *__base, ULONG initialFlags, CONST struct TagItem * tagList, CONST struct TagItem * boolMap)
+__utility_PackBoolTags(void *__base, ULONG initialFlags, CONST struct TagItem * tagList, CONST struct TagItem * boolMap)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(initialFlags);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
 	register ULONG _a1 __asm("a1") = (ULONG)(boolMap);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -70,12 +80,13 @@ __utility_PackBoolTags(struct UtilityBase *__base, ULONG initialFlags, CONST str
 	return (ULONG)_d0;
 }
 #define PackBoolTags(initialFlags, tagList, boolMap) __utility_PackBoolTags((UTILITY_BASE_NAME), (ULONG)(initialFlags), (CONST struct TagItem *)(tagList), (CONST struct TagItem *)(boolMap))
+#define __PackBoolTags_base(__in_base, initialFlags, tagList, boolMap) __utility_PackBoolTags((__in_base), (ULONG)(initialFlags), (CONST struct TagItem *)(tagList), (CONST struct TagItem *)(boolMap))
 
 static __inline__ struct TagItem *
-__utility_NextTagItem(struct UtilityBase *__base, struct TagItem ** tagListPtr)
+__utility_NextTagItem(void *__base, struct TagItem ** tagListPtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagListPtr);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -86,14 +97,15 @@ __utility_NextTagItem(struct UtilityBase *__base, struct TagItem ** tagListPtr)
 	return (struct TagItem *)_d0;
 }
 #define NextTagItem(tagListPtr) __utility_NextTagItem((UTILITY_BASE_NAME), (struct TagItem **)(tagListPtr))
+#define __NextTagItem_base(__in_base, tagListPtr) __utility_NextTagItem((__in_base), (struct TagItem **)(tagListPtr))
 
 static __inline__ VOID
-__utility_FilterTagChanges(struct UtilityBase *__base, struct TagItem * changeList, CONST struct TagItem * originalList, ULONG apply)
+__utility_FilterTagChanges(void *__base, struct TagItem * changeList, CONST struct TagItem * originalList, ULONG apply)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(changeList);
 	register ULONG _a1 __asm("a1") = (ULONG)(originalList);
 	register ULONG _d0 __asm("d0") = (ULONG)(apply);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -102,14 +114,15 @@ __utility_FilterTagChanges(struct UtilityBase *__base, struct TagItem * changeLi
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FilterTagChanges(changeList, originalList, apply) __utility_FilterTagChanges((UTILITY_BASE_NAME), (struct TagItem *)(changeList), (CONST struct TagItem *)(originalList), (ULONG)(apply))
+#define __FilterTagChanges_base(__in_base, changeList, originalList, apply) __utility_FilterTagChanges((__in_base), (struct TagItem *)(changeList), (CONST struct TagItem *)(originalList), (ULONG)(apply))
 
 static __inline__ VOID
-__utility_MapTags(struct UtilityBase *__base, struct TagItem * tagList, CONST struct TagItem * mapList, ULONG mapType)
+__utility_MapTags(void *__base, struct TagItem * tagList, CONST struct TagItem * mapList, ULONG mapType)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
 	register ULONG _a1 __asm("a1") = (ULONG)(mapList);
 	register ULONG _d0 __asm("d0") = (ULONG)(mapType);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -118,12 +131,13 @@ __utility_MapTags(struct UtilityBase *__base, struct TagItem * tagList, CONST st
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define MapTags(tagList, mapList, mapType) __utility_MapTags((UTILITY_BASE_NAME), (struct TagItem *)(tagList), (CONST struct TagItem *)(mapList), (ULONG)(mapType))
+#define __MapTags_base(__in_base, tagList, mapList, mapType) __utility_MapTags((__in_base), (struct TagItem *)(tagList), (CONST struct TagItem *)(mapList), (ULONG)(mapType))
 
 static __inline__ struct TagItem *
-__utility_AllocateTagItems(struct UtilityBase *__base, ULONG numTags)
+__utility_AllocateTagItems(void *__base, ULONG numTags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(numTags);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -134,12 +148,13 @@ __utility_AllocateTagItems(struct UtilityBase *__base, ULONG numTags)
 	return (struct TagItem *)_d0;
 }
 #define AllocateTagItems(numTags) __utility_AllocateTagItems((UTILITY_BASE_NAME), (ULONG)(numTags))
+#define __AllocateTagItems_base(__in_base, numTags) __utility_AllocateTagItems((__in_base), (ULONG)(numTags))
 
 static __inline__ struct TagItem *
-__utility_CloneTagItems(struct UtilityBase *__base, CONST struct TagItem * tagList)
+__utility_CloneTagItems(void *__base, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -150,12 +165,13 @@ __utility_CloneTagItems(struct UtilityBase *__base, CONST struct TagItem * tagLi
 	return (struct TagItem *)_d0;
 }
 #define CloneTagItems(tagList) __utility_CloneTagItems((UTILITY_BASE_NAME), (CONST struct TagItem *)(tagList))
+#define __CloneTagItems_base(__in_base, tagList) __utility_CloneTagItems((__in_base), (CONST struct TagItem *)(tagList))
 
 static __inline__ VOID
-__utility_FreeTagItems(struct UtilityBase *__base, struct TagItem * tagList)
+__utility_FreeTagItems(void *__base, struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -166,13 +182,14 @@ __utility_FreeTagItems(struct UtilityBase *__base, struct TagItem * tagList)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeTagItems(tagList) __utility_FreeTagItems((UTILITY_BASE_NAME), (struct TagItem *)(tagList))
+#define __FreeTagItems_base(__in_base, tagList) __utility_FreeTagItems((__in_base), (struct TagItem *)(tagList))
 
 static __inline__ VOID
-__utility_RefreshTagItemClones(struct UtilityBase *__base, struct TagItem * clone, CONST struct TagItem * original)
+__utility_RefreshTagItemClones(void *__base, struct TagItem * clone, CONST struct TagItem * original)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(clone);
 	register ULONG _a1 __asm("a1") = (ULONG)(original);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -182,13 +199,14 @@ __utility_RefreshTagItemClones(struct UtilityBase *__base, struct TagItem * clon
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RefreshTagItemClones(clone, original) __utility_RefreshTagItemClones((UTILITY_BASE_NAME), (struct TagItem *)(clone), (CONST struct TagItem *)(original))
+#define __RefreshTagItemClones_base(__in_base, clone, original) __utility_RefreshTagItemClones((__in_base), (struct TagItem *)(clone), (CONST struct TagItem *)(original))
 
 static __inline__ BOOL
-__utility_TagInArray(struct UtilityBase *__base, Tag tagValue, CONST Tag * tagArray)
+__utility_TagInArray(void *__base, Tag tagValue, CONST Tag * tagArray)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(tagValue);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagArray);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -198,14 +216,15 @@ __utility_TagInArray(struct UtilityBase *__base, Tag tagValue, CONST Tag * tagAr
 	return (BOOL)_d0;
 }
 #define TagInArray(tagValue, tagArray) __utility_TagInArray((UTILITY_BASE_NAME), (Tag)(tagValue), (CONST Tag *)(tagArray))
+#define __TagInArray_base(__in_base, tagValue, tagArray) __utility_TagInArray((__in_base), (Tag)(tagValue), (CONST Tag *)(tagArray))
 
 static __inline__ ULONG
-__utility_FilterTagItems(struct UtilityBase *__base, struct TagItem * tagList, CONST Tag * filterArray, ULONG logic)
+__utility_FilterTagItems(void *__base, struct TagItem * tagList, CONST Tag * filterArray, ULONG logic)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
 	register ULONG _a1 __asm("a1") = (ULONG)(filterArray);
 	register ULONG _d0 __asm("d0") = (ULONG)(logic);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -214,14 +233,15 @@ __utility_FilterTagItems(struct UtilityBase *__base, struct TagItem * tagList, C
 	return (ULONG)_d0;
 }
 #define FilterTagItems(tagList, filterArray, logic) __utility_FilterTagItems((UTILITY_BASE_NAME), (struct TagItem *)(tagList), (CONST Tag *)(filterArray), (ULONG)(logic))
+#define __FilterTagItems_base(__in_base, tagList, filterArray, logic) __utility_FilterTagItems((__in_base), (struct TagItem *)(tagList), (CONST Tag *)(filterArray), (ULONG)(logic))
 
 static __inline__ ULONG
-__utility_CallHookPkt(struct UtilityBase *__base, struct Hook * hook, APTR object, APTR paramPacket)
+__utility_CallHookPkt(void *__base, struct Hook * hook, APTR object, APTR paramPacket)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(hook);
 	register ULONG _a2 __asm("a2") = (ULONG)(object);
 	register ULONG _a1 __asm("a1") = (ULONG)(paramPacket);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -231,13 +251,14 @@ __utility_CallHookPkt(struct UtilityBase *__base, struct Hook * hook, APTR objec
 	return (ULONG)_d0;
 }
 #define CallHookPkt(hook, object, paramPacket) __utility_CallHookPkt((UTILITY_BASE_NAME), (struct Hook *)(hook), (APTR)(object), (APTR)(paramPacket))
+#define __CallHookPkt_base(__in_base, hook, object, paramPacket) __utility_CallHookPkt((__in_base), (struct Hook *)(hook), (APTR)(object), (APTR)(paramPacket))
 
 static __inline__ VOID
-__utility_Amiga2Date(struct UtilityBase *__base, ULONG seconds, struct ClockData * result)
+__utility_Amiga2Date(void *__base, ULONG seconds, struct ClockData * result)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(seconds);
 	register ULONG _a0 __asm("a0") = (ULONG)(result);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -247,12 +268,13 @@ __utility_Amiga2Date(struct UtilityBase *__base, ULONG seconds, struct ClockData
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Amiga2Date(seconds, result) __utility_Amiga2Date((UTILITY_BASE_NAME), (ULONG)(seconds), (struct ClockData *)(result))
+#define __Amiga2Date_base(__in_base, seconds, result) __utility_Amiga2Date((__in_base), (ULONG)(seconds), (struct ClockData *)(result))
 
 static __inline__ ULONG
-__utility_Date2Amiga(struct UtilityBase *__base, CONST struct ClockData * date)
+__utility_Date2Amiga(void *__base, CONST struct ClockData * date)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(date);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -263,12 +285,13 @@ __utility_Date2Amiga(struct UtilityBase *__base, CONST struct ClockData * date)
 	return (ULONG)_d0;
 }
 #define Date2Amiga(date) __utility_Date2Amiga((UTILITY_BASE_NAME), (CONST struct ClockData *)(date))
+#define __Date2Amiga_base(__in_base, date) __utility_Date2Amiga((__in_base), (CONST struct ClockData *)(date))
 
 static __inline__ ULONG
-__utility_CheckDate(struct UtilityBase *__base, CONST struct ClockData * date)
+__utility_CheckDate(void *__base, CONST struct ClockData * date)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(date);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -279,13 +302,14 @@ __utility_CheckDate(struct UtilityBase *__base, CONST struct ClockData * date)
 	return (ULONG)_d0;
 }
 #define CheckDate(date) __utility_CheckDate((UTILITY_BASE_NAME), (CONST struct ClockData *)(date))
+#define __CheckDate_base(__in_base, date) __utility_CheckDate((__in_base), (CONST struct ClockData *)(date))
 
 static __inline__ LONG
-__utility_SMult32(struct UtilityBase *__base, LONG arg1, LONG arg2)
+__utility_SMult32(void *__base, LONG arg1, LONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(arg1);
 	register ULONG _d1 __asm("d1") = (ULONG)(arg2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -138(%/a6)"
@@ -295,13 +319,14 @@ __utility_SMult32(struct UtilityBase *__base, LONG arg1, LONG arg2)
 	return (LONG)_d0;
 }
 #define SMult32(arg1, arg2) __utility_SMult32((UTILITY_BASE_NAME), (LONG)(arg1), (LONG)(arg2))
+#define __SMult32_base(__in_base, arg1, arg2) __utility_SMult32((__in_base), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ ULONG
-__utility_UMult32(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
+__utility_UMult32(void *__base, ULONG arg1, ULONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(arg1);
 	register ULONG _d1 __asm("d1") = (ULONG)(arg2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
@@ -311,13 +336,14 @@ __utility_UMult32(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
 	return (ULONG)_d0;
 }
 #define UMult32(arg1, arg2) __utility_UMult32((UTILITY_BASE_NAME), (ULONG)(arg1), (ULONG)(arg2))
+#define __UMult32_base(__in_base, arg1, arg2) __utility_UMult32((__in_base), (ULONG)(arg1), (ULONG)(arg2))
 
 static __inline__ LONG
-__utility_SDivMod32(struct UtilityBase *__base, LONG dividend, LONG divisor)
+__utility_SDivMod32(void *__base, LONG dividend, LONG divisor)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(dividend);
 	register ULONG _d1 __asm("d1") = (ULONG)(divisor);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -150(%/a6)"
@@ -327,13 +353,14 @@ __utility_SDivMod32(struct UtilityBase *__base, LONG dividend, LONG divisor)
 	return (LONG)_d0;
 }
 #define SDivMod32(dividend, divisor) __utility_SDivMod32((UTILITY_BASE_NAME), (LONG)(dividend), (LONG)(divisor))
+#define __SDivMod32_base(__in_base, dividend, divisor) __utility_SDivMod32((__in_base), (LONG)(dividend), (LONG)(divisor))
 
 static __inline__ ULONG
-__utility_UDivMod32(struct UtilityBase *__base, ULONG dividend, ULONG divisor)
+__utility_UDivMod32(void *__base, ULONG dividend, ULONG divisor)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(dividend);
 	register ULONG _d1 __asm("d1") = (ULONG)(divisor);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -156(%/a6)"
@@ -343,13 +370,14 @@ __utility_UDivMod32(struct UtilityBase *__base, ULONG dividend, ULONG divisor)
 	return (ULONG)_d0;
 }
 #define UDivMod32(dividend, divisor) __utility_UDivMod32((UTILITY_BASE_NAME), (ULONG)(dividend), (ULONG)(divisor))
+#define __UDivMod32_base(__in_base, dividend, divisor) __utility_UDivMod32((__in_base), (ULONG)(dividend), (ULONG)(divisor))
 
 static __inline__ LONG
-__utility_Stricmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR string2)
+__utility_Stricmp(void *__base, CONST_STRPTR string1, CONST_STRPTR string2)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(string1);
 	register ULONG _a1 __asm("a1") = (ULONG)(string2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
@@ -359,14 +387,15 @@ __utility_Stricmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR
 	return (LONG)_d0;
 }
 #define Stricmp(string1, string2) __utility_Stricmp((UTILITY_BASE_NAME), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2))
+#define __Stricmp_base(__in_base, string1, string2) __utility_Stricmp((__in_base), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2))
 
 static __inline__ LONG
-__utility_Strnicmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR string2, LONG length)
+__utility_Strnicmp(void *__base, CONST_STRPTR string1, CONST_STRPTR string2, LONG length)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(string1);
 	register ULONG _a1 __asm("a1") = (ULONG)(string2);
 	register ULONG _d0 __asm("d0") = (ULONG)(length);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -168(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -375,12 +404,13 @@ __utility_Strnicmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPT
 	return (LONG)_d0;
 }
 #define Strnicmp(string1, string2, length) __utility_Strnicmp((UTILITY_BASE_NAME), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length))
+#define __Strnicmp_base(__in_base, string1, string2, length) __utility_Strnicmp((__in_base), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length))
 
 static __inline__ UBYTE
-__utility_ToUpper(struct UtilityBase *__base, UBYTE character)
+__utility_ToUpper(void *__base, UBYTE character)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -391,12 +421,13 @@ __utility_ToUpper(struct UtilityBase *__base, UBYTE character)
 	return (UBYTE)_d0;
 }
 #define ToUpper(character) __utility_ToUpper((UTILITY_BASE_NAME), (UBYTE)(character))
+#define __ToUpper_base(__in_base, character) __utility_ToUpper((__in_base), (UBYTE)(character))
 
 static __inline__ UBYTE
-__utility_ToLower(struct UtilityBase *__base, UBYTE character)
+__utility_ToLower(void *__base, UBYTE character)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -407,13 +438,14 @@ __utility_ToLower(struct UtilityBase *__base, UBYTE character)
 	return (UBYTE)_d0;
 }
 #define ToLower(character) __utility_ToLower((UTILITY_BASE_NAME), (UBYTE)(character))
+#define __ToLower_base(__in_base, character) __utility_ToLower((__in_base), (UBYTE)(character))
 
 static __inline__ VOID
-__utility_ApplyTagChanges(struct UtilityBase *__base, struct TagItem * list, CONST struct TagItem * changeList)
+__utility_ApplyTagChanges(void *__base, struct TagItem * list, CONST struct TagItem * changeList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
 	register ULONG _a1 __asm("a1") = (ULONG)(changeList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -186(%/a6)"
@@ -423,13 +455,14 @@ __utility_ApplyTagChanges(struct UtilityBase *__base, struct TagItem * list, CON
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ApplyTagChanges(list, changeList) __utility_ApplyTagChanges((UTILITY_BASE_NAME), (struct TagItem *)(list), (CONST struct TagItem *)(changeList))
+#define __ApplyTagChanges_base(__in_base, list, changeList) __utility_ApplyTagChanges((__in_base), (struct TagItem *)(list), (CONST struct TagItem *)(changeList))
 
 static __inline__ LONG
-__utility_SMult64(struct UtilityBase *__base, LONG arg1, LONG arg2)
+__utility_SMult64(void *__base, LONG arg1, LONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(arg1);
 	register ULONG _d1 __asm("d1") = (ULONG)(arg2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -198(%/a6)"
@@ -439,13 +472,14 @@ __utility_SMult64(struct UtilityBase *__base, LONG arg1, LONG arg2)
 	return (LONG)_d0;
 }
 #define SMult64(arg1, arg2) __utility_SMult64((UTILITY_BASE_NAME), (LONG)(arg1), (LONG)(arg2))
+#define __SMult64_base(__in_base, arg1, arg2) __utility_SMult64((__in_base), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ ULONG
-__utility_UMult64(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
+__utility_UMult64(void *__base, ULONG arg1, ULONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(arg1);
 	register ULONG _d1 __asm("d1") = (ULONG)(arg2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -204(%/a6)"
@@ -455,14 +489,15 @@ __utility_UMult64(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
 	return (ULONG)_d0;
 }
 #define UMult64(arg1, arg2) __utility_UMult64((UTILITY_BASE_NAME), (ULONG)(arg1), (ULONG)(arg2))
+#define __UMult64_base(__in_base, arg1, arg2) __utility_UMult64((__in_base), (ULONG)(arg1), (ULONG)(arg2))
 
 static __inline__ ULONG
-__utility_PackStructureTags(struct UtilityBase *__base, APTR pack, CONST ULONG * packTable, CONST struct TagItem * tagList)
+__utility_PackStructureTags(void *__base, APTR pack, CONST ULONG * packTable, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(pack);
 	register ULONG _a1 __asm("a1") = (ULONG)(packTable);
 	register ULONG _a2 __asm("a2") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -210(%/a6)"
@@ -472,14 +507,15 @@ __utility_PackStructureTags(struct UtilityBase *__base, APTR pack, CONST ULONG *
 	return (ULONG)_d0;
 }
 #define PackStructureTags(pack, packTable, tagList) __utility_PackStructureTags((UTILITY_BASE_NAME), (APTR)(pack), (CONST ULONG *)(packTable), (CONST struct TagItem *)(tagList))
+#define __PackStructureTags_base(__in_base, pack, packTable, tagList) __utility_PackStructureTags((__in_base), (APTR)(pack), (CONST ULONG *)(packTable), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
-__utility_UnpackStructureTags(struct UtilityBase *__base, CONST_APTR pack, CONST ULONG * packTable, struct TagItem * tagList)
+__utility_UnpackStructureTags(void *__base, CONST_APTR pack, CONST ULONG * packTable, struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(pack);
 	register ULONG _a1 __asm("a1") = (ULONG)(packTable);
 	register ULONG _a2 __asm("a2") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -216(%/a6)"
@@ -489,13 +525,14 @@ __utility_UnpackStructureTags(struct UtilityBase *__base, CONST_APTR pack, CONST
 	return (ULONG)_d0;
 }
 #define UnpackStructureTags(pack, packTable, tagList) __utility_UnpackStructureTags((UTILITY_BASE_NAME), (CONST_APTR)(pack), (CONST ULONG *)(packTable), (struct TagItem *)(tagList))
+#define __UnpackStructureTags_base(__in_base, pack, packTable, tagList) __utility_UnpackStructureTags((__in_base), (CONST_APTR)(pack), (CONST ULONG *)(packTable), (struct TagItem *)(tagList))
 
 static __inline__ BOOL
-__utility_AddNamedObject(struct UtilityBase *__base, struct NamedObject * nameSpace, struct NamedObject * object)
+__utility_AddNamedObject(void *__base, struct NamedObject * nameSpace, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(nameSpace);
 	register ULONG _a1 __asm("a1") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -222(%/a6)"
@@ -505,13 +542,14 @@ __utility_AddNamedObject(struct UtilityBase *__base, struct NamedObject * nameSp
 	return (BOOL)_d0;
 }
 #define AddNamedObject(nameSpace, object) __utility_AddNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(nameSpace), (struct NamedObject *)(object))
+#define __AddNamedObject_base(__in_base, nameSpace, object) __utility_AddNamedObject((__in_base), (struct NamedObject *)(nameSpace), (struct NamedObject *)(object))
 
 static __inline__ struct NamedObject *
-__utility_AllocNamedObjectA(struct UtilityBase *__base, CONST_STRPTR name, CONST struct TagItem * tagList)
+__utility_AllocNamedObjectA(void *__base, CONST_STRPTR name, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -228(%/a6)"
@@ -521,14 +559,24 @@ __utility_AllocNamedObjectA(struct UtilityBase *__base, CONST_STRPTR name, CONST
 	return (struct NamedObject *)_d0;
 }
 #define AllocNamedObjectA(name, tagList) __utility_AllocNamedObjectA((UTILITY_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tagList))
+#define __AllocNamedObjectA_base(__in_base, name, tagList) __utility_AllocNamedObjectA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tagList))
 
-#define AllocNamedObject(name, ...) (AllocNamedObject)((CONST_STRPTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct NamedObject *
+__AllocNamedObject_va(void *__base, CONST_STRPTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	struct NamedObject * _r = (struct NamedObject *)__utility_AllocNamedObjectA(__base, name, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocNamedObject(name, ...) __AllocNamedObject_va((UTILITY_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ LONG
-__utility_AttemptRemNamedObject(struct UtilityBase *__base, struct NamedObject * object)
+__utility_AttemptRemNamedObject(void *__base, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -539,14 +587,15 @@ __utility_AttemptRemNamedObject(struct UtilityBase *__base, struct NamedObject *
 	return (LONG)_d0;
 }
 #define AttemptRemNamedObject(object) __utility_AttemptRemNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define __AttemptRemNamedObject_base(__in_base, object) __utility_AttemptRemNamedObject((__in_base), (struct NamedObject *)(object))
 
 static __inline__ struct NamedObject *
-__utility_FindNamedObject(struct UtilityBase *__base, struct NamedObject * nameSpace, CONST_STRPTR name, struct NamedObject * lastObject)
+__utility_FindNamedObject(void *__base, struct NamedObject * nameSpace, CONST_STRPTR name, struct NamedObject * lastObject)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(nameSpace);
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
 	register ULONG _a2 __asm("a2") = (ULONG)(lastObject);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -240(%/a6)"
@@ -556,12 +605,13 @@ __utility_FindNamedObject(struct UtilityBase *__base, struct NamedObject * nameS
 	return (struct NamedObject *)_d0;
 }
 #define FindNamedObject(nameSpace, name, lastObject) __utility_FindNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(nameSpace), (CONST_STRPTR)(name), (struct NamedObject *)(lastObject))
+#define __FindNamedObject_base(__in_base, nameSpace, name, lastObject) __utility_FindNamedObject((__in_base), (struct NamedObject *)(nameSpace), (CONST_STRPTR)(name), (struct NamedObject *)(lastObject))
 
 static __inline__ VOID
-__utility_FreeNamedObject(struct UtilityBase *__base, struct NamedObject * object)
+__utility_FreeNamedObject(void *__base, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -572,12 +622,13 @@ __utility_FreeNamedObject(struct UtilityBase *__base, struct NamedObject * objec
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeNamedObject(object) __utility_FreeNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define __FreeNamedObject_base(__in_base, object) __utility_FreeNamedObject((__in_base), (struct NamedObject *)(object))
 
 static __inline__ STRPTR
-__utility_NamedObjectName(struct UtilityBase *__base, struct NamedObject * object)
+__utility_NamedObjectName(void *__base, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -588,12 +639,13 @@ __utility_NamedObjectName(struct UtilityBase *__base, struct NamedObject * objec
 	return (STRPTR)_d0;
 }
 #define NamedObjectName(object) __utility_NamedObjectName((UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define __NamedObjectName_base(__in_base, object) __utility_NamedObjectName((__in_base), (struct NamedObject *)(object))
 
 static __inline__ VOID
-__utility_ReleaseNamedObject(struct UtilityBase *__base, struct NamedObject * object)
+__utility_ReleaseNamedObject(void *__base, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -604,13 +656,14 @@ __utility_ReleaseNamedObject(struct UtilityBase *__base, struct NamedObject * ob
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleaseNamedObject(object) __utility_ReleaseNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define __ReleaseNamedObject_base(__in_base, object) __utility_ReleaseNamedObject((__in_base), (struct NamedObject *)(object))
 
 static __inline__ VOID
-__utility_RemNamedObject(struct UtilityBase *__base, struct NamedObject * object, struct Message * message)
+__utility_RemNamedObject(void *__base, struct NamedObject * object, struct Message * message)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
 	register ULONG _a1 __asm("a1") = (ULONG)(message);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -264(%/a6)"
@@ -620,11 +673,12 @@ __utility_RemNamedObject(struct UtilityBase *__base, struct NamedObject * object
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemNamedObject(object, message) __utility_RemNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object), (struct Message *)(message))
+#define __RemNamedObject_base(__in_base, object, message) __utility_RemNamedObject((__in_base), (struct NamedObject *)(object), (struct Message *)(message))
 
 static __inline__ ULONG
-__utility_GetUniqueID(struct UtilityBase *__base)
+__utility_GetUniqueID(void *__base)
 {
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -636,15 +690,16 @@ __utility_GetUniqueID(struct UtilityBase *__base)
 	return (ULONG)_d0;
 }
 #define GetUniqueID() __utility_GetUniqueID((UTILITY_BASE_NAME))
+#define __GetUniqueID_base(__in_base) __utility_GetUniqueID((__in_base))
 
 static __inline__ LONG
-__utility_VSNPrintf(struct UtilityBase *__base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR format, CONST_APTR args)
+__utility_VSNPrintf(void *__base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR format, CONST_APTR args)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(bufferSize);
 	register ULONG _a1 __asm("a1") = (ULONG)(format);
 	register ULONG _a2 __asm("a2") = (ULONG)(args);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -312(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -653,16 +708,26 @@ __utility_VSNPrintf(struct UtilityBase *__base, STRPTR buffer, ULONG bufferSize,
 	return (LONG)_d0;
 }
 #define VSNPrintf(buffer, bufferSize, format, args) __utility_VSNPrintf((UTILITY_BASE_NAME), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)(args))
+#define __VSNPrintf_base(__in_base, buffer, bufferSize, format, args) __utility_VSNPrintf((__in_base), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)(args))
 
-#define SNPrintf(buffer, bufferSize, format, ...) (SNPrintf)((STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__SNPrintf_va(void *__base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR format, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, format);
+	LONG _r = (LONG)__utility_VSNPrintf(__base, buffer, bufferSize, format, (CONST_APTR)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SNPrintf(buffer, bufferSize, format, ...) __SNPrintf_va((UTILITY_BASE_NAME), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), ##__VA_ARGS__)
 
 static __inline__ STRPTR
-__utility_Strncpy(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
+__utility_Strncpy(void *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(dst);
 	register ULONG _a0 __asm("a0") = (ULONG)(src);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -438(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -671,14 +736,15 @@ __utility_Strncpy(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULON
 	return (STRPTR)_d0;
 }
 #define Strncpy(dst, src, size) __utility_Strncpy((UTILITY_BASE_NAME), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
+#define __Strncpy_base(__in_base, dst, src, size) __utility_Strncpy((__in_base), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
 
 static __inline__ STRPTR
-__utility_Strncat(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
+__utility_Strncat(void *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(dst);
 	register ULONG _a0 __asm("a0") = (ULONG)(src);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -444(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -687,14 +753,15 @@ __utility_Strncat(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULON
 	return (STRPTR)_d0;
 }
 #define Strncat(dst, src, size) __utility_Strncat((UTILITY_BASE_NAME), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
+#define __Strncat_base(__in_base, dst, src, size) __utility_Strncat((__in_base), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
 
 static __inline__ LONG
-__utility_SDivMod64(struct UtilityBase *__base, LONG hi, LONG lo, LONG divisor)
+__utility_SDivMod64(void *__base, LONG hi, LONG lo, LONG divisor)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(hi);
 	register ULONG _d0 __asm("d0") = (ULONG)(lo);
 	register ULONG _d2 __asm("d2") = (ULONG)(divisor);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -450(%/a6)"
@@ -704,14 +771,15 @@ __utility_SDivMod64(struct UtilityBase *__base, LONG hi, LONG lo, LONG divisor)
 	return (LONG)_d0;
 }
 #define SDivMod64(hi, lo, divisor) __utility_SDivMod64((UTILITY_BASE_NAME), (LONG)(hi), (LONG)(lo), (LONG)(divisor))
+#define __SDivMod64_base(__in_base, hi, lo, divisor) __utility_SDivMod64((__in_base), (LONG)(hi), (LONG)(lo), (LONG)(divisor))
 
 static __inline__ ULONG
-__utility_UDivMod64(struct UtilityBase *__base, ULONG hi, ULONG lo, ULONG divisor)
+__utility_UDivMod64(void *__base, ULONG hi, ULONG lo, ULONG divisor)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(hi);
 	register ULONG _d0 __asm("d0") = (ULONG)(lo);
 	register ULONG _d2 __asm("d2") = (ULONG)(divisor);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -456(%/a6)"
@@ -721,5 +789,6 @@ __utility_UDivMod64(struct UtilityBase *__base, ULONG hi, ULONG lo, ULONG diviso
 	return (ULONG)_d0;
 }
 #define UDivMod64(hi, lo, divisor) __utility_UDivMod64((UTILITY_BASE_NAME), (ULONG)(hi), (ULONG)(lo), (ULONG)(divisor))
+#define __UDivMod64_base(__in_base, hi, lo, divisor) __utility_UDivMod64((__in_base), (ULONG)(hi), (ULONG)(lo), (ULONG)(divisor))
 
 #endif /* INLINE_UTILITY_H */

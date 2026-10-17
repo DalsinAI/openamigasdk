@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +32,10 @@ struct Library;
 #endif
 
 static __inline__ LONG
-__amigaguide_LockAmigaGuideBase(struct Library *__base, APTR handle)
+__amigaguide_LockAmigaGuideBase(void *__base, APTR handle)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(handle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -38,12 +46,13 @@ __amigaguide_LockAmigaGuideBase(struct Library *__base, APTR handle)
 	return (LONG)_d0;
 }
 #define LockAmigaGuideBase(handle) __amigaguide_LockAmigaGuideBase((AMIGAGUIDE_BASE_NAME), (APTR)(handle))
+#define __LockAmigaGuideBase_base(__in_base, handle) __amigaguide_LockAmigaGuideBase((__in_base), (APTR)(handle))
 
 static __inline__ VOID
-__amigaguide_UnlockAmigaGuideBase(struct Library *__base, LONG key)
+__amigaguide_UnlockAmigaGuideBase(void *__base, LONG key)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(key);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -54,13 +63,14 @@ __amigaguide_UnlockAmigaGuideBase(struct Library *__base, LONG key)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockAmigaGuideBase(key) __amigaguide_UnlockAmigaGuideBase((AMIGAGUIDE_BASE_NAME), (LONG)(key))
+#define __UnlockAmigaGuideBase_base(__in_base, key) __amigaguide_UnlockAmigaGuideBase((__in_base), (LONG)(key))
 
 static __inline__ APTR
-__amigaguide_OpenAmigaGuideA(struct Library *__base, struct NewAmigaGuide * nag, CONST struct TagItem * attrs)
+__amigaguide_OpenAmigaGuideA(void *__base, struct NewAmigaGuide * nag, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(nag);
 	register ULONG _a1 __asm("a1") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -70,15 +80,25 @@ __amigaguide_OpenAmigaGuideA(struct Library *__base, struct NewAmigaGuide * nag,
 	return (APTR)_d0;
 }
 #define OpenAmigaGuideA(nag, attrs) __amigaguide_OpenAmigaGuideA((AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
+#define __OpenAmigaGuideA_base(__in_base, nag, attrs) __amigaguide_OpenAmigaGuideA((__in_base), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
 
-#define OpenAmigaGuide(nag, ...) (OpenAmigaGuide)((struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR APTR
+__OpenAmigaGuide_va(void *__base, struct NewAmigaGuide * nag, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, nag);
+	APTR _r = (APTR)__amigaguide_OpenAmigaGuideA(__base, nag, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define OpenAmigaGuide(nag, ...) __OpenAmigaGuide_va((AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
 
 static __inline__ APTR
-__amigaguide_OpenAmigaGuideAsyncA(struct Library *__base, struct NewAmigaGuide * nag, CONST struct TagItem * attrs)
+__amigaguide_OpenAmigaGuideAsyncA(void *__base, struct NewAmigaGuide * nag, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(nag);
 	register ULONG _d0 __asm("d0") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -88,14 +108,24 @@ __amigaguide_OpenAmigaGuideAsyncA(struct Library *__base, struct NewAmigaGuide *
 	return (APTR)_d0;
 }
 #define OpenAmigaGuideAsyncA(nag, attrs) __amigaguide_OpenAmigaGuideAsyncA((AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
+#define __OpenAmigaGuideAsyncA_base(__in_base, nag, attrs) __amigaguide_OpenAmigaGuideAsyncA((__in_base), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
 
-#define OpenAmigaGuideAsync(nag, ...) (OpenAmigaGuideAsync)((struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR APTR
+__OpenAmigaGuideAsync_va(void *__base, struct NewAmigaGuide * nag, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, nag);
+	APTR _r = (APTR)__amigaguide_OpenAmigaGuideAsyncA(__base, nag, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define OpenAmigaGuideAsync(nag, ...) __OpenAmigaGuideAsync_va((AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
 
 static __inline__ VOID
-__amigaguide_CloseAmigaGuide(struct Library *__base, APTR cl)
+__amigaguide_CloseAmigaGuide(void *__base, APTR cl)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cl);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -106,12 +136,13 @@ __amigaguide_CloseAmigaGuide(struct Library *__base, APTR cl)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseAmigaGuide(cl) __amigaguide_CloseAmigaGuide((AMIGAGUIDE_BASE_NAME), (APTR)(cl))
+#define __CloseAmigaGuide_base(__in_base, cl) __amigaguide_CloseAmigaGuide((__in_base), (APTR)(cl))
 
 static __inline__ ULONG
-__amigaguide_AmigaGuideSignal(struct Library *__base, APTR cl)
+__amigaguide_AmigaGuideSignal(void *__base, APTR cl)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cl);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -122,12 +153,13 @@ __amigaguide_AmigaGuideSignal(struct Library *__base, APTR cl)
 	return (ULONG)_d0;
 }
 #define AmigaGuideSignal(cl) __amigaguide_AmigaGuideSignal((AMIGAGUIDE_BASE_NAME), (APTR)(cl))
+#define __AmigaGuideSignal_base(__in_base, cl) __amigaguide_AmigaGuideSignal((__in_base), (APTR)(cl))
 
 static __inline__ struct AmigaGuideMsg *
-__amigaguide_GetAmigaGuideMsg(struct Library *__base, APTR cl)
+__amigaguide_GetAmigaGuideMsg(void *__base, APTR cl)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cl);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -138,12 +170,13 @@ __amigaguide_GetAmigaGuideMsg(struct Library *__base, APTR cl)
 	return (struct AmigaGuideMsg *)_d0;
 }
 #define GetAmigaGuideMsg(cl) __amigaguide_GetAmigaGuideMsg((AMIGAGUIDE_BASE_NAME), (APTR)(cl))
+#define __GetAmigaGuideMsg_base(__in_base, cl) __amigaguide_GetAmigaGuideMsg((__in_base), (APTR)(cl))
 
 static __inline__ VOID
-__amigaguide_ReplyAmigaGuideMsg(struct Library *__base, struct AmigaGuideMsg * amsg)
+__amigaguide_ReplyAmigaGuideMsg(void *__base, struct AmigaGuideMsg * amsg)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(amsg);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -154,14 +187,15 @@ __amigaguide_ReplyAmigaGuideMsg(struct Library *__base, struct AmigaGuideMsg * a
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReplyAmigaGuideMsg(amsg) __amigaguide_ReplyAmigaGuideMsg((AMIGAGUIDE_BASE_NAME), (struct AmigaGuideMsg *)(amsg))
+#define __ReplyAmigaGuideMsg_base(__in_base, amsg) __amigaguide_ReplyAmigaGuideMsg((__in_base), (struct AmigaGuideMsg *)(amsg))
 
 static __inline__ LONG
-__amigaguide_SetAmigaGuideContextA(struct Library *__base, APTR cl, ULONG id, CONST struct TagItem * attrs)
+__amigaguide_SetAmigaGuideContextA(void *__base, APTR cl, ULONG id, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cl);
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
 	register ULONG _d1 __asm("d1") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -170,15 +204,25 @@ __amigaguide_SetAmigaGuideContextA(struct Library *__base, APTR cl, ULONG id, CO
 	return (LONG)_d0;
 }
 #define SetAmigaGuideContextA(cl, id, attrs) __amigaguide_SetAmigaGuideContextA((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)(attrs))
+#define __SetAmigaGuideContextA_base(__in_base, cl, id, attrs) __amigaguide_SetAmigaGuideContextA((__in_base), (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)(attrs))
 
-#define SetAmigaGuideContext(cl, id, ...) (SetAmigaGuideContext)((APTR)(cl), (ULONG)(id), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__SetAmigaGuideContext_va(void *__base, APTR cl, ULONG id, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, id);
+	LONG _r = (LONG)__amigaguide_SetAmigaGuideContextA(__base, cl, id, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetAmigaGuideContext(cl, id, ...) __SetAmigaGuideContext_va((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (ULONG)(id), ##__VA_ARGS__)
 
 static __inline__ LONG
-__amigaguide_SendAmigaGuideContextA(struct Library *__base, APTR cl, CONST struct TagItem * attrs)
+__amigaguide_SendAmigaGuideContextA(void *__base, APTR cl, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cl);
 	register ULONG _d0 __asm("d0") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -188,16 +232,26 @@ __amigaguide_SendAmigaGuideContextA(struct Library *__base, APTR cl, CONST struc
 	return (LONG)_d0;
 }
 #define SendAmigaGuideContextA(cl, attrs) __amigaguide_SendAmigaGuideContextA((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST struct TagItem *)(attrs))
+#define __SendAmigaGuideContextA_base(__in_base, cl, attrs) __amigaguide_SendAmigaGuideContextA((__in_base), (APTR)(cl), (CONST struct TagItem *)(attrs))
 
-#define SendAmigaGuideContext(cl, ...) (SendAmigaGuideContext)((APTR)(cl), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__SendAmigaGuideContext_va(void *__base, APTR cl, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, cl);
+	LONG _r = (LONG)__amigaguide_SendAmigaGuideContextA(__base, cl, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SendAmigaGuideContext(cl, ...) __SendAmigaGuideContext_va((AMIGAGUIDE_BASE_NAME), (APTR)(cl), ##__VA_ARGS__)
 
 static __inline__ LONG
-__amigaguide_SendAmigaGuideCmdA(struct Library *__base, APTR cl, CONST_STRPTR cmd, CONST struct TagItem * attrs)
+__amigaguide_SendAmigaGuideCmdA(void *__base, APTR cl, CONST_STRPTR cmd, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cl);
 	register ULONG _d0 __asm("d0") = (ULONG)(cmd);
 	register ULONG _d1 __asm("d1") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -206,15 +260,25 @@ __amigaguide_SendAmigaGuideCmdA(struct Library *__base, APTR cl, CONST_STRPTR cm
 	return (LONG)_d0;
 }
 #define SendAmigaGuideCmdA(cl, cmd, attrs) __amigaguide_SendAmigaGuideCmdA((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)(attrs))
+#define __SendAmigaGuideCmdA_base(__in_base, cl, cmd, attrs) __amigaguide_SendAmigaGuideCmdA((__in_base), (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)(attrs))
 
-#define SendAmigaGuideCmd(cl, cmd, ...) (SendAmigaGuideCmd)((APTR)(cl), (CONST_STRPTR)(cmd), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__SendAmigaGuideCmd_va(void *__base, APTR cl, CONST_STRPTR cmd, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, cmd);
+	LONG _r = (LONG)__amigaguide_SendAmigaGuideCmdA(__base, cl, cmd, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SendAmigaGuideCmd(cl, cmd, ...) __SendAmigaGuideCmd_va((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST_STRPTR)(cmd), ##__VA_ARGS__)
 
 static __inline__ LONG
-__amigaguide_SetAmigaGuideAttrsA(struct Library *__base, APTR cl, CONST struct TagItem * attrs)
+__amigaguide_SetAmigaGuideAttrsA(void *__base, APTR cl, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cl);
 	register ULONG _a1 __asm("a1") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -108(%/a6)"
@@ -224,16 +288,26 @@ __amigaguide_SetAmigaGuideAttrsA(struct Library *__base, APTR cl, CONST struct T
 	return (LONG)_d0;
 }
 #define SetAmigaGuideAttrsA(cl, attrs) __amigaguide_SetAmigaGuideAttrsA((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST struct TagItem *)(attrs))
+#define __SetAmigaGuideAttrsA_base(__in_base, cl, attrs) __amigaguide_SetAmigaGuideAttrsA((__in_base), (APTR)(cl), (CONST struct TagItem *)(attrs))
 
-#define SetAmigaGuideAttrs(cl, ...) (SetAmigaGuideAttrs)((APTR)(cl), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__SetAmigaGuideAttrs_va(void *__base, APTR cl, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, cl);
+	LONG _r = (LONG)__amigaguide_SetAmigaGuideAttrsA(__base, cl, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetAmigaGuideAttrs(cl, ...) __SetAmigaGuideAttrs_va((AMIGAGUIDE_BASE_NAME), (APTR)(cl), ##__VA_ARGS__)
 
 static __inline__ LONG
-__amigaguide_GetAmigaGuideAttr(struct Library *__base, Tag tag, APTR cl, ULONG * storage)
+__amigaguide_GetAmigaGuideAttr(void *__base, Tag tag, APTR cl, ULONG * storage)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(tag);
 	register ULONG _a0 __asm("a0") = (ULONG)(cl);
 	register ULONG _a1 __asm("a1") = (ULONG)(storage);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -242,13 +316,14 @@ __amigaguide_GetAmigaGuideAttr(struct Library *__base, Tag tag, APTR cl, ULONG *
 	return (LONG)_d0;
 }
 #define GetAmigaGuideAttr(tag, cl, storage) __amigaguide_GetAmigaGuideAttr((AMIGAGUIDE_BASE_NAME), (Tag)(tag), (APTR)(cl), (ULONG *)(storage))
+#define __GetAmigaGuideAttr_base(__in_base, tag, cl, storage) __amigaguide_GetAmigaGuideAttr((__in_base), (Tag)(tag), (APTR)(cl), (ULONG *)(storage))
 
 static __inline__ LONG
-__amigaguide_LoadXRef(struct Library *__base, BPTR lock, CONST_STRPTR name)
+__amigaguide_LoadXRef(void *__base, BPTR lock, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(lock);
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -258,11 +333,12 @@ __amigaguide_LoadXRef(struct Library *__base, BPTR lock, CONST_STRPTR name)
 	return (LONG)_d0;
 }
 #define LoadXRef(lock, name) __amigaguide_LoadXRef((AMIGAGUIDE_BASE_NAME), (BPTR)(lock), (CONST_STRPTR)(name))
+#define __LoadXRef_base(__in_base, lock, name) __amigaguide_LoadXRef((__in_base), (BPTR)(lock), (CONST_STRPTR)(name))
 
 static __inline__ VOID
-__amigaguide_ExpungeXRef(struct Library *__base)
+__amigaguide_ExpungeXRef(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -274,14 +350,15 @@ __amigaguide_ExpungeXRef(struct Library *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ExpungeXRef() __amigaguide_ExpungeXRef((AMIGAGUIDE_BASE_NAME))
+#define __ExpungeXRef_base(__in_base) __amigaguide_ExpungeXRef((__in_base))
 
 static __inline__ APTR
-__amigaguide_AddAmigaGuideHostA(struct Library *__base, struct Hook * h, CONST_STRPTR name, CONST struct TagItem * attrs)
+__amigaguide_AddAmigaGuideHostA(void *__base, struct Hook * h, CONST_STRPTR name, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(h);
 	register ULONG _d0 __asm("d0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -138(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -290,15 +367,25 @@ __amigaguide_AddAmigaGuideHostA(struct Library *__base, struct Hook * h, CONST_S
 	return (APTR)_d0;
 }
 #define AddAmigaGuideHostA(h, name, attrs) __amigaguide_AddAmigaGuideHostA((AMIGAGUIDE_BASE_NAME), (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)(attrs))
+#define __AddAmigaGuideHostA_base(__in_base, h, name, attrs) __amigaguide_AddAmigaGuideHostA((__in_base), (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)(attrs))
 
-#define AddAmigaGuideHost(h, name, ...) (AddAmigaGuideHost)((struct Hook *)(h), (CONST_STRPTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR APTR
+__AddAmigaGuideHost_va(void *__base, struct Hook * h, CONST_STRPTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	APTR _r = (APTR)__amigaguide_AddAmigaGuideHostA(__base, h, name, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AddAmigaGuideHost(h, name, ...) __AddAmigaGuideHost_va((AMIGAGUIDE_BASE_NAME), (struct Hook *)(h), (CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ LONG
-__amigaguide_RemoveAmigaGuideHostA(struct Library *__base, APTR hh, CONST struct TagItem * attrs)
+__amigaguide_RemoveAmigaGuideHostA(void *__base, APTR hh, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(hh);
 	register ULONG _a1 __asm("a1") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
@@ -308,14 +395,24 @@ __amigaguide_RemoveAmigaGuideHostA(struct Library *__base, APTR hh, CONST struct
 	return (LONG)_d0;
 }
 #define RemoveAmigaGuideHostA(hh, attrs) __amigaguide_RemoveAmigaGuideHostA((AMIGAGUIDE_BASE_NAME), (APTR)(hh), (CONST struct TagItem *)(attrs))
+#define __RemoveAmigaGuideHostA_base(__in_base, hh, attrs) __amigaguide_RemoveAmigaGuideHostA((__in_base), (APTR)(hh), (CONST struct TagItem *)(attrs))
 
-#define RemoveAmigaGuideHost(hh, ...) (RemoveAmigaGuideHost)((APTR)(hh), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__RemoveAmigaGuideHost_va(void *__base, APTR hh, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, hh);
+	LONG _r = (LONG)__amigaguide_RemoveAmigaGuideHostA(__base, hh, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define RemoveAmigaGuideHost(hh, ...) __RemoveAmigaGuideHost_va((AMIGAGUIDE_BASE_NAME), (APTR)(hh), ##__VA_ARGS__)
 
 static __inline__ CONST_STRPTR
-__amigaguide_GetAmigaGuideString(struct Library *__base, LONG id)
+__amigaguide_GetAmigaGuideString(void *__base, LONG id)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -326,5 +423,6 @@ __amigaguide_GetAmigaGuideString(struct Library *__base, LONG id)
 	return (CONST_STRPTR)_d0;
 }
 #define GetAmigaGuideString(id) __amigaguide_GetAmigaGuideString((AMIGAGUIDE_BASE_NAME), (LONG)(id))
+#define __GetAmigaGuideString_base(__in_base, id) __amigaguide_GetAmigaGuideString((__in_base), (LONG)(id))
 
 #endif /* INLINE_AMIGAGUIDE_H */
