@@ -25,7 +25,7 @@ cmp -s "$T/macros.h" "$NDK/Include_H/inline/macros.h" || { echo "inline/macros.h
 echo "== headers"
 "$NDK/tests/compile_headers.sh"
 
-FLAGS="-nostdinc -isystem $($CC -print-file-name=include) -I$NDK/Include_H -O2 -fomit-frame-pointer -Wall -Wextra -Werror"
+FLAGS="-nostdinc -isystem $($CC -print-file-name=include) -I$NDK/Include_H -m68040 -O2 -fomit-frame-pointer -Wall -Wextra -Werror"
 echo "== all headers in one unit"
 # every header at once: two headers defining one name differently show here
 # (the IEEE math headers rename the same functions as mathffp.h, as they
@@ -44,7 +44,7 @@ echo "sizes ok"
 echo "== a program"
 # shellcheck disable=SC2086
 # address 4 holds SysBase: GCC must not treat low addresses as invalid
-"$CC" $FLAGS -m68020 --param=min-pagesize=0 -c "$NDK/tests/hello.c" -o "$T/hello.o"
+"$CC" $FLAGS --param=min-pagesize=0 -c "$NDK/tests/hello.c" -o "$T/hello.o"
 "$OBJDUMP" -dr "$T/hello.o" > "$T/hello.dis"
 for want in 'jsr %fp@\(-552\)|jsr -552\(%fp\)|jsr %a6@\(-552\)' 'jsr %a6@\(-948\)|jsr %fp@\(-948\)' 'jsr %a6@\(-342\)|jsr %fp@\(-342\)' 'OpenWindowTags'; do
     grep -Eq "$want" "$T/hello.dis" || { echo "hello.o lacks $want"; sed -n 1,80p "$T/hello.dis"; exit 1; }

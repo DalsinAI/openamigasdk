@@ -18,11 +18,11 @@ aros: build/$(NAME).aros
 
 build/$(NAME).os32: $(SRC)
 	@mkdir -p build
-	$(CC_OS32) -m68020 -noixemul $(CFLAGS) -I$(SDK)/Include -o $@ $(SRC)
+	$(CC_OS32) -m68040 -noixemul $(CFLAGS) -I$(SDK)/Include -o $@ $(SRC)
 
 build/$(NAME).aros: $(SRC)
 	@mkdir -p build
-	$(CC_AROS) $(CFLAGS) -Wno-volatile-register-var -I$(SDK)/Include -o $@ $(SRC)
+	$(CC_AROS) -m68040 $(CFLAGS) -Wno-volatile-register-var -I$(SDK)/Include -o $@ $(SRC)
 
 clean:
 	rm -rf build

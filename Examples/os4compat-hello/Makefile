@@ -10,7 +10,7 @@ include $(SDK)/Lib/os4compat/os4compat.mk
 
 build/HelloOS4: hello_os4.c
 	@mkdir -p build
-	$(CC) -m68020 -noixemul $(CFLAGS) $(OS4COMPAT_CFLAGS) -o $@ hello_os4.c $(OS4COMPAT_LIBS)
+	$(CC) -m68040 -noixemul $(CFLAGS) $(OS4COMPAT_CFLAGS) -o $@ hello_os4.c $(OS4COMPAT_LIBS)
 
 clean:
 	rm -rf build

@@ -33,7 +33,7 @@ With the os32-gcc16 stove (GCC 16 for m68k-amigaos):
 ```sh
 sh OpenNDK/lib/build.sh                     # makes lib/build/<prefix>/libamiga.a
 m68k-amigaos-gcc -nostdinc -isystem "$(m68k-amigaos-gcc -print-file-name=include)" \
-    -I OpenNDK/Include_H -O2 -fomit-frame-pointer -c prog.c
+    -I OpenNDK/Include_H -m68040 -O2 -fomit-frame-pointer -c prog.c
 ```
 
 `-nostdinc` keeps a vendor NDK installed in the compiler's own search path
