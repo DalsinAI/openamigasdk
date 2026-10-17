@@ -60,9 +60,9 @@ __radiobutton_AllocRadioButtonNodeA(struct Library *__base, ULONG columns, struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Node *
-___radiobutton_AllocRadioButtonNode(__radiobutton_base_t __ndk_base, UWORD columns, Tag tag1, ...)
+___radiobutton_AllocRadioButtonNode(__radiobutton_base_t __ndk_base, UWORD columns, ...)
 {
-	return __radiobutton_AllocRadioButtonNodeA(__ndk_base, (UWORD)(columns), (struct TagItem *)&tag1);
+	return __radiobutton_AllocRadioButtonNodeA(__ndk_base, (ULONG)(columns), (struct TagItem *)((ULONG)&columns + sizeof(columns)));
 }
 #define AllocRadioButtonNode(columns, ...) ___radiobutton_AllocRadioButtonNode((__radiobutton_base_t)(RADIOBUTTON_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
 #else
@@ -105,9 +105,9 @@ __radiobutton_SetRadioButtonNodeAttrsA(struct Library *__base, struct Node * nod
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___radiobutton_SetRadioButtonNodeAttrs(__radiobutton_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___radiobutton_SetRadioButtonNodeAttrs(__radiobutton_base_t __ndk_base, struct Node * node, ...)
 {
-	__radiobutton_SetRadioButtonNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__radiobutton_SetRadioButtonNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define SetRadioButtonNodeAttrs(node, ...) ___radiobutton_SetRadioButtonNodeAttrs((__radiobutton_base_t)(RADIOBUTTON_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else
@@ -133,9 +133,9 @@ __radiobutton_GetRadioButtonNodeAttrsA(struct Library *__base, struct Node * nod
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___radiobutton_GetRadioButtonNodeAttrs(__radiobutton_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___radiobutton_GetRadioButtonNodeAttrs(__radiobutton_base_t __ndk_base, struct Node * node, ...)
 {
-	__radiobutton_GetRadioButtonNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__radiobutton_GetRadioButtonNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define GetRadioButtonNodeAttrs(node, ...) ___radiobutton_GetRadioButtonNodeAttrs((__radiobutton_base_t)(RADIOBUTTON_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else

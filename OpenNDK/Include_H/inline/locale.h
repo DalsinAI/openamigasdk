@@ -371,9 +371,9 @@ __locale_OpenCatalogA(struct LocaleBase *__base, CONST struct Locale * locale, C
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Catalog *
-___locale_OpenCatalog(__locale_base_t __ndk_base, CONST struct Locale * locale, CONST_STRPTR name, Tag tag1, ...)
+___locale_OpenCatalog(__locale_base_t __ndk_base, CONST struct Locale * locale, CONST_STRPTR name, ...)
 {
-	return __locale_OpenCatalogA(__ndk_base, (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+	return __locale_OpenCatalogA(__ndk_base, (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define OpenCatalog(locale, name, ...) ___locale_OpenCatalog((__locale_base_t)(LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else

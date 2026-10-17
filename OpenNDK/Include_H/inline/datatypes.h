@@ -43,9 +43,9 @@ __datatypes_ObtainDataTypeA(struct Library *__base, ULONG type, APTR handle, CON
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct DataType *
-___datatypes_ObtainDataType(__datatypes_base_t __ndk_base, ULONG type, APTR handle, Tag tag1, ...)
+___datatypes_ObtainDataType(__datatypes_base_t __ndk_base, ULONG type, APTR handle, ...)
 {
-	return __datatypes_ObtainDataTypeA(__ndk_base, (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)&tag1);
+	return __datatypes_ObtainDataTypeA(__ndk_base, (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)((ULONG)&handle + sizeof(handle)));
 }
 #define ObtainDataType(type, handle, ...) ___datatypes_ObtainDataType((__datatypes_base_t)(DATATYPES_BASE_NAME), (ULONG)(type), (APTR)(handle), ##__VA_ARGS__)
 #else
@@ -88,9 +88,9 @@ __datatypes_NewDTObjectA(struct Library *__base, STRPTR name, CONST struct TagIt
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) Object *
-___datatypes_NewDTObject(__datatypes_base_t __ndk_base, APTR name, Tag tag1, ...)
+___datatypes_NewDTObject(__datatypes_base_t __ndk_base, APTR name, ...)
 {
-	return __datatypes_NewDTObjectA(__ndk_base, (APTR)(name), (CONST struct TagItem *)&tag1);
+	return __datatypes_NewDTObjectA(__ndk_base, (STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define NewDTObject(name, ...) ___datatypes_NewDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (APTR)(name), ##__VA_ARGS__)
 #else
@@ -135,9 +135,9 @@ __datatypes_SetDTAttrsA(struct Library *__base, Object * o, struct Window * win,
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___datatypes_SetDTAttrs(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, Tag tag1, ...)
+___datatypes_SetDTAttrs(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, ...)
 {
-	return __datatypes_SetDTAttrsA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)&tag1);
+	return __datatypes_SetDTAttrsA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)((ULONG)&req + sizeof(req)));
 }
 #define SetDTAttrs(o, win, req, ...) ___datatypes_SetDTAttrs((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
@@ -164,9 +164,9 @@ __datatypes_GetDTAttrsA(struct Library *__base, Object * o, CONST struct TagItem
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___datatypes_GetDTAttrs(__datatypes_base_t __ndk_base, Object * o, Tag tag1, ...)
+___datatypes_GetDTAttrs(__datatypes_base_t __ndk_base, Object * o, ...)
 {
-	return __datatypes_GetDTAttrsA(__ndk_base, (Object *)(o), (CONST struct TagItem *)&tag1);
+	return __datatypes_GetDTAttrsA(__ndk_base, (Object *)(o), (CONST struct TagItem *)((ULONG)&o + sizeof(o)));
 }
 #define GetDTAttrs(o, ...) ___datatypes_GetDTAttrs((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), ##__VA_ARGS__)
 #else
@@ -212,9 +212,9 @@ __datatypes_RefreshDTObjectA(struct Library *__base, Object * o, struct Window *
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___datatypes_RefreshDTObject(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, Tag tag1, ...)
+___datatypes_RefreshDTObject(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, ...)
 {
-	__datatypes_RefreshDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)&tag1);
+	__datatypes_RefreshDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)((ULONG)&req + sizeof(req)));
 }
 #define RefreshDTObject(o, win, req, ...) ___datatypes_RefreshDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
@@ -223,9 +223,9 @@ ___datatypes_RefreshDTObject(__datatypes_base_t __ndk_base, Object * o, struct W
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___datatypes_RefreshDTObjects(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, Tag tag1, ...)
+___datatypes_RefreshDTObjects(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, ...)
 {
-	__datatypes_RefreshDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)&tag1);
+	__datatypes_RefreshDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)((ULONG)&req + sizeof(req)));
 }
 #define RefreshDTObjects(o, win, req, ...) ___datatypes_RefreshDTObjects((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
@@ -270,9 +270,9 @@ __datatypes_DoDTMethodA(struct Library *__base, Object * o, struct Window * win,
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___datatypes_DoDTMethod(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, ULONG data, ...)
+___datatypes_DoDTMethod(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, ...)
 {
-	return __datatypes_DoDTMethodA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)&data);
+	return __datatypes_DoDTMethodA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)((ULONG)&req + sizeof(req)));
 }
 #define DoDTMethod(o, win, req, ...) ___datatypes_DoDTMethod((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
@@ -351,9 +351,9 @@ __datatypes_PrintDTObjectA(struct Library *__base, Object * o, struct Window * w
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___datatypes_PrintDTObject(__datatypes_base_t __ndk_base, Object * o, struct Window * w, struct Requester * r, ULONG data, ...)
+___datatypes_PrintDTObject(__datatypes_base_t __ndk_base, Object * o, struct Window * w, struct Requester * r, ...)
 {
-	return __datatypes_PrintDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)&data);
+	return __datatypes_PrintDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)((ULONG)&r + sizeof(r)));
 }
 #define PrintDTObject(o, w, r, ...) ___datatypes_PrintDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), ##__VA_ARGS__)
 #else
@@ -502,9 +502,9 @@ __datatypes_SaveDTObjectA(struct Library *__base, Object * o, struct Window * wi
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___datatypes_SaveDTObject(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, Tag tag1, ...)
+___datatypes_SaveDTObject(__datatypes_base_t __ndk_base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, ...)
 {
-	return __datatypes_SaveDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (BOOL)(saveicon), (CONST struct TagItem *)&tag1);
+	return __datatypes_SaveDTObjectA(__ndk_base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)((ULONG)&saveicon + sizeof(saveicon)));
 }
 #define SaveDTObject(o, win, req, file, mode, saveicon, ...) ___datatypes_SaveDTObject((__datatypes_base_t)(DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (BOOL)(saveicon), ##__VA_ARGS__)
 #else

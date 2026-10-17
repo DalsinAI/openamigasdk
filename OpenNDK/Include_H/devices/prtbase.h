@@ -44,6 +44,17 @@
 #endif
 
 /* The device's library node and command table */
+
+/* the hooks below take their arguments on the stack */
+#define PRT_STDARGS		__STDARGS__
+
+/* structures the hooks below take pointers to */
+struct Hook;
+struct IORequest;
+struct PrtErrMsg;
+struct PrinterData;
+union printerIO;
+
 struct DeviceData {
 	struct Library	dd_Device;
 	APTR		dd_Segment;
@@ -68,8 +79,8 @@ struct PrinterData {
 	UWORD			pd_PrinterType;
 	struct PrinterSegment	*pd_SegmentData;
 	UBYTE			*pd_PrintBuf;
-	LONG			(*pd_PWrite)();		/* write to the port */
-	LONG			(*pd_PBothReady)();	/* wait for both writes */
+	LONG (* PRT_STDARGS pd_PWrite)(APTR buffer, LONG length);		/* write to the port */
+	LONG (* PRT_STDARGS pd_PBothReady)(void);	/* wait for both writes */
 	union {
 		struct IOExtPar	pd_p0;
 		struct IOExtSer	pd_s0;
@@ -91,11 +102,11 @@ struct PrinterData {
 	UBYTE			pd_Stk[P_STKSIZE];
 	/* V44 */
 	struct PrinterUnit	*pd_PUnit;
-	LONG			(*pd_PRead)();		/* read from the port */
-	LONG			(*pd_CallErrHook)();	/* report an error */
+	LONG (* PRT_STDARGS pd_PRead)(APTR buffer, LONG *length, TimeVal_Type *tv);		/* read from the port */
+	LONG (* PRT_STDARGS pd_CallErrHook)(struct Hook *hook, union printerIO *ior, struct PrtErrMsg *pem);	/* report an error */
 	ULONG			pd_UnitNumber;
 	STRPTR			pd_DriverName;
-	LONG			(*pd_PQuery)();		/* port status */
+	LONG (* PRT_STDARGS pd_PQuery)(LONG *numofchars);		/* port status */
 };
 
 #define pd_PIOR0	pd_ior0.pd_p0
@@ -132,10 +143,10 @@ struct PrinterData {
 /* What a driver describes itself with */
 struct PrinterExtendedData {
 	char	*ped_PrinterName;
-	VOID	(*ped_Init)();
-	VOID	(*ped_Expunge)();
-	LONG	(*ped_Open)();
-	VOID	(*ped_Close)();
+	VOID (* PRT_STDARGS ped_Init)(struct PrinterData *pd);
+	VOID (* PRT_STDARGS ped_Expunge)(void);
+	int (* PRT_STDARGS ped_Open)(struct IORequest *ior);
+	VOID (* PRT_STDARGS ped_Close)(struct IORequest *ior);
 	UBYTE	ped_PrinterClass;	/* PPC_ */
 	UBYTE	ped_ColorClass;		/* PCC_ */
 	UBYTE	ped_MaxColumns;
@@ -146,18 +157,18 @@ struct PrinterExtendedData {
 	UWORD	ped_XDotsInch;
 	UWORD	ped_YDotsInch;
 	char	***ped_Commands;	/* the escape sequence of each aXXX */
-	LONG	(*ped_DoSpecial)();
-	LONG	(*ped_Render)();
+	LONG (* PRT_STDARGS ped_DoSpecial)(UWORD *command, UBYTE output_buffer[], BYTE *current_line_position, BYTE *current_line_spacing, BYTE *crlf_flag, STRPTR params);
+	LONG (* PRT_STDARGS ped_Render)(LONG ct, LONG x, LONG y, LONG status, ...);
 	LONG	ped_TimeoutSecs;
 	/* V33 */
 	char	**ped_8BitChars;	/* text for 0xA0-0xFF */
 	LONG	ped_PrintMode;
 	/* V34 */
-	LONG	(*ped_ConvFunc)();
+	LONG (* PRT_STDARGS ped_ConvFunc)(STRPTR buf, TEXT c, LONG crlf_flag);
 	/* V44 */
 	struct TagItem *ped_TagList;	/* PRTA_, with PPC_EXTENDED */
-	LONG	(*ped_DoPreferences)();
-	VOID	(*ped_CallErrHook)();
+	LONG (* PRT_STDARGS ped_DoPreferences)(union printerIO *ior, LONG command);
+	VOID (* PRT_STDARGS ped_CallErrHook)(union printerIO *ior, struct Hook *hook);
 };
 
 /* ped_TagList tags */
@@ -218,7 +229,6 @@ struct PrinterSegment {
 #include <libraries/dosextens.h>
 #endif
 
-#define PRT_STDARGS		__STDARGS__
 /* a unit's flags live in its message port's node priority */
 #define du_Flags		mp_Node.ln_Pri
 

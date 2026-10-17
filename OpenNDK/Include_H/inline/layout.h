@@ -151,9 +151,9 @@ __layout_SetPageGadgetAttrsA(struct Library *__base, struct Gadget * gadget, Obj
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___layout_SetPageGadgetAttrs(__layout_base_t __ndk_base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, Tag tag1, ...)
+___layout_SetPageGadgetAttrs(__layout_base_t __ndk_base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, ...)
 {
-	return __layout_SetPageGadgetAttrsA(__ndk_base, (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), (struct TagItem *)&tag1);
+	return __layout_SetPageGadgetAttrsA(__ndk_base, (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), (struct TagItem *)((ULONG)&requester + sizeof(requester)));
 }
 #define SetPageGadgetAttrs(gadget, object, window, requester, ...) ___layout_SetPageGadgetAttrs((__layout_base_t)(LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
 #else

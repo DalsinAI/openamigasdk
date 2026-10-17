@@ -60,9 +60,9 @@ __listbrowser_AllocListBrowserNodeA(struct Library *__base, ULONG columns, struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Node *
-___listbrowser_AllocListBrowserNode(__listbrowser_base_t __ndk_base, UWORD columns, Tag tag1, ...)
+___listbrowser_AllocListBrowserNode(__listbrowser_base_t __ndk_base, UWORD columns, ...)
 {
-	return __listbrowser_AllocListBrowserNodeA(__ndk_base, (UWORD)(columns), (struct TagItem *)&tag1);
+	return __listbrowser_AllocListBrowserNodeA(__ndk_base, (ULONG)(columns), (struct TagItem *)((ULONG)&columns + sizeof(columns)));
 }
 #define AllocListBrowserNode(columns, ...) ___listbrowser_AllocListBrowserNode((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
 #else
@@ -105,9 +105,9 @@ __listbrowser_SetListBrowserNodeAttrsA(struct Library *__base, struct Node * nod
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___listbrowser_SetListBrowserNodeAttrs(__listbrowser_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___listbrowser_SetListBrowserNodeAttrs(__listbrowser_base_t __ndk_base, struct Node * node, ...)
 {
-	__listbrowser_SetListBrowserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__listbrowser_SetListBrowserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define SetListBrowserNodeAttrs(node, ...) ___listbrowser_SetListBrowserNodeAttrs((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else
@@ -133,9 +133,9 @@ __listbrowser_GetListBrowserNodeAttrsA(struct Library *__base, struct Node * nod
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___listbrowser_GetListBrowserNodeAttrs(__listbrowser_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___listbrowser_GetListBrowserNodeAttrs(__listbrowser_base_t __ndk_base, struct Node * node, ...)
 {
-	__listbrowser_GetListBrowserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__listbrowser_GetListBrowserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define GetListBrowserNodeAttrs(node, ...) ___listbrowser_GetListBrowserNodeAttrs((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else
@@ -263,9 +263,9 @@ __listbrowser_AllocLBColumnInfoA(struct Library *__base, ULONG columns, struct T
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct ColumnInfo *
-___listbrowser_AllocLBColumnInfo(__listbrowser_base_t __ndk_base, UWORD columns, Tag tag1, ...)
+___listbrowser_AllocLBColumnInfo(__listbrowser_base_t __ndk_base, UWORD columns, ...)
 {
-	return __listbrowser_AllocLBColumnInfoA(__ndk_base, (UWORD)(columns), (struct TagItem *)&tag1);
+	return __listbrowser_AllocLBColumnInfoA(__ndk_base, (ULONG)(columns), (struct TagItem *)((ULONG)&columns + sizeof(columns)));
 }
 #define AllocLBColumnInfo(columns, ...) ___listbrowser_AllocLBColumnInfo((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
 #else
@@ -291,9 +291,9 @@ __listbrowser_SetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___listbrowser_SetLBColumnInfoAttrs(__listbrowser_base_t __ndk_base, struct ColumnInfo * columninfo, Tag tag1, ...)
+___listbrowser_SetLBColumnInfoAttrs(__listbrowser_base_t __ndk_base, struct ColumnInfo * columninfo, ...)
 {
-	return __listbrowser_SetLBColumnInfoAttrsA(__ndk_base, (struct ColumnInfo *)(columninfo), (struct TagItem *)&tag1);
+	return __listbrowser_SetLBColumnInfoAttrsA(__ndk_base, (struct ColumnInfo *)(columninfo), (struct TagItem *)((ULONG)&columninfo + sizeof(columninfo)));
 }
 #define SetLBColumnInfoAttrs(columninfo, ...) ___listbrowser_SetLBColumnInfoAttrs((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 #else
@@ -319,9 +319,9 @@ __listbrowser_GetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___listbrowser_GetLBColumnInfoAttrs(__listbrowser_base_t __ndk_base, struct ColumnInfo * columninfo, Tag tag1, ...)
+___listbrowser_GetLBColumnInfoAttrs(__listbrowser_base_t __ndk_base, struct ColumnInfo * columninfo, ...)
 {
-	return __listbrowser_GetLBColumnInfoAttrsA(__ndk_base, (struct ColumnInfo *)(columninfo), (struct TagItem *)&tag1);
+	return __listbrowser_GetLBColumnInfoAttrsA(__ndk_base, (struct ColumnInfo *)(columninfo), (struct TagItem *)((ULONG)&columninfo + sizeof(columninfo)));
 }
 #define GetLBColumnInfoAttrs(columninfo, ...) ___listbrowser_GetLBColumnInfoAttrs((__listbrowser_base_t)(LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 #else

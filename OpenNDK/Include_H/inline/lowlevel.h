@@ -291,9 +291,9 @@ __lowlevel_SetJoyPortAttrsA(struct Library *__base, ULONG portNumber, CONST stru
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___lowlevel_SetJoyPortAttrs(__lowlevel_base_t __ndk_base, ULONG portNumber, Tag firstTag, ...)
+___lowlevel_SetJoyPortAttrs(__lowlevel_base_t __ndk_base, ULONG portNumber, ...)
 {
-	return __lowlevel_SetJoyPortAttrsA(__ndk_base, (ULONG)(portNumber), (CONST struct TagItem *)&firstTag);
+	return __lowlevel_SetJoyPortAttrsA(__ndk_base, (ULONG)(portNumber), (CONST struct TagItem *)((ULONG)&portNumber + sizeof(portNumber)));
 }
 #define SetJoyPortAttrs(portNumber, ...) ___lowlevel_SetJoyPortAttrs((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (ULONG)(portNumber), ##__VA_ARGS__)
 #else

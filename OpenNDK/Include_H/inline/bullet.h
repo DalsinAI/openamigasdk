@@ -77,9 +77,9 @@ __bullet_SetInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONS
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___bullet_SetInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, Tag tag1, ...)
+___bullet_SetInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, ...)
 {
-	return __bullet_SetInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)&tag1);
+	return __bullet_SetInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)((ULONG)&glyphEngine + sizeof(glyphEngine)));
 }
 #define SetInfo(glyphEngine, ...) ___bullet_SetInfo((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 #else
@@ -105,9 +105,9 @@ __bullet_ObtainInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, C
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___bullet_ObtainInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, Tag tag1, ...)
+___bullet_ObtainInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, ...)
 {
-	return __bullet_ObtainInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)&tag1);
+	return __bullet_ObtainInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)((ULONG)&glyphEngine + sizeof(glyphEngine)));
 }
 #define ObtainInfo(glyphEngine, ...) ___bullet_ObtainInfo((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 #else
@@ -133,9 +133,9 @@ __bullet_ReleaseInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___bullet_ReleaseInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, Tag tag1, ...)
+___bullet_ReleaseInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, ...)
 {
-	return __bullet_ReleaseInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)&tag1);
+	return __bullet_ReleaseInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)((ULONG)&glyphEngine + sizeof(glyphEngine)));
 }
 #define ReleaseInfo(glyphEngine, ...) ___bullet_ReleaseInfo((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 #else

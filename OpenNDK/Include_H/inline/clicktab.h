@@ -104,9 +104,9 @@ __clicktab_SetClickTabNodeAttrsA(struct Library *__base, struct Node * node, str
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___clicktab_SetClickTabNodeAttrs(__clicktab_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___clicktab_SetClickTabNodeAttrs(__clicktab_base_t __ndk_base, struct Node * node, ...)
 {
-	__clicktab_SetClickTabNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__clicktab_SetClickTabNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define SetClickTabNodeAttrs(node, ...) ___clicktab_SetClickTabNodeAttrs((__clicktab_base_t)(CLICKTAB_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else
@@ -132,9 +132,9 @@ __clicktab_GetClickTabNodeAttrsA(struct Library *__base, struct Node * node, str
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___clicktab_GetClickTabNodeAttrs(__clicktab_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___clicktab_GetClickTabNodeAttrs(__clicktab_base_t __ndk_base, struct Node * node, ...)
 {
-	__clicktab_GetClickTabNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__clicktab_GetClickTabNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define GetClickTabNodeAttrs(node, ...) ___clicktab_GetClickTabNodeAttrs((__clicktab_base_t)(CLICKTAB_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else

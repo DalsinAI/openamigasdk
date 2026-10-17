@@ -94,9 +94,9 @@ __asl_AllocAslRequest(struct Library *__base, ULONG reqType, CONST struct TagIte
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
-___asl_AllocAslRequestTags(__asl_base_t __ndk_base, ULONG reqType, Tag tag1, ...)
+___asl_AllocAslRequestTags(__asl_base_t __ndk_base, ULONG reqType, ...)
 {
-	return __asl_AllocAslRequest(__ndk_base, (ULONG)(reqType), (CONST struct TagItem *)&tag1);
+	return __asl_AllocAslRequest(__ndk_base, (ULONG)(reqType), (CONST struct TagItem *)((ULONG)&reqType + sizeof(reqType)));
 }
 #define AllocAslRequestTags(reqType, ...) ___asl_AllocAslRequestTags((__asl_base_t)(ASL_BASE_NAME), (ULONG)(reqType), ##__VA_ARGS__)
 #else
@@ -139,9 +139,9 @@ __asl_AslRequest(struct Library *__base, APTR requester, CONST struct TagItem * 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___asl_AslRequestTags(__asl_base_t __ndk_base, APTR requester, Tag tag1, ...)
+___asl_AslRequestTags(__asl_base_t __ndk_base, APTR requester, ...)
 {
-	return __asl_AslRequest(__ndk_base, (APTR)(requester), (CONST struct TagItem *)&tag1);
+	return __asl_AslRequest(__ndk_base, (APTR)(requester), (CONST struct TagItem *)((ULONG)&requester + sizeof(requester)));
 }
 #define AslRequestTags(requester, ...) ___asl_AslRequestTags((__asl_base_t)(ASL_BASE_NAME), (APTR)(requester), ##__VA_ARGS__)
 #else

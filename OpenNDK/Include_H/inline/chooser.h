@@ -104,9 +104,9 @@ __chooser_SetChooserNodeAttrsA(struct Library *__base, struct Node * node, struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___chooser_SetChooserNodeAttrs(__chooser_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___chooser_SetChooserNodeAttrs(__chooser_base_t __ndk_base, struct Node * node, ...)
 {
-	__chooser_SetChooserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__chooser_SetChooserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define SetChooserNodeAttrs(node, ...) ___chooser_SetChooserNodeAttrs((__chooser_base_t)(CHOOSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else
@@ -132,9 +132,9 @@ __chooser_GetChooserNodeAttrsA(struct Library *__base, struct Node * node, struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___chooser_GetChooserNodeAttrs(__chooser_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___chooser_GetChooserNodeAttrs(__chooser_base_t __ndk_base, struct Node * node, ...)
 {
-	__chooser_GetChooserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__chooser_GetChooserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define GetChooserNodeAttrs(node, ...) ___chooser_GetChooserNodeAttrs((__chooser_base_t)(CHOOSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else

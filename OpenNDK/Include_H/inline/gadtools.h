@@ -44,9 +44,9 @@ __gadtools_CreateGadgetA(struct Library *__base, ULONG kind, struct Gadget * gad
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Gadget *
-___gadtools_CreateGadget(__gadtools_base_t __ndk_base, ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, Tag tag1, ...)
+___gadtools_CreateGadget(__gadtools_base_t __ndk_base, ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, ...)
 {
-	return __gadtools_CreateGadgetA(__ndk_base, (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), (CONST struct TagItem *)&tag1);
+	return __gadtools_CreateGadgetA(__ndk_base, (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), (CONST struct TagItem *)((ULONG)&ng + sizeof(ng)));
 }
 #define CreateGadget(kind, gad, ng, ...) ___gadtools_CreateGadget((__gadtools_base_t)(GADTOOLS_BASE_NAME), (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), ##__VA_ARGS__)
 #else
@@ -91,9 +91,9 @@ __gadtools_GT_SetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___gadtools_GT_SetGadgetAttrs(__gadtools_base_t __ndk_base, struct Gadget * gad, struct Window * win, struct Requester * req, Tag tag1, ...)
+___gadtools_GT_SetGadgetAttrs(__gadtools_base_t __ndk_base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
 {
-	__gadtools_GT_SetGadgetAttrsA(__ndk_base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)&tag1);
+	__gadtools_GT_SetGadgetAttrsA(__ndk_base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)((ULONG)&req + sizeof(req)));
 }
 #define GT_SetGadgetAttrs(gad, win, req, ...) ___gadtools_GT_SetGadgetAttrs((__gadtools_base_t)(GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
@@ -119,9 +119,9 @@ __gadtools_CreateMenusA(struct Library *__base, CONST struct NewMenu * newmenu, 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Menu *
-___gadtools_CreateMenus(__gadtools_base_t __ndk_base, CONST struct NewMenu * newmenu, Tag tag1, ...)
+___gadtools_CreateMenus(__gadtools_base_t __ndk_base, CONST struct NewMenu * newmenu, ...)
 {
-	return __gadtools_CreateMenusA(__ndk_base, (CONST struct NewMenu *)(newmenu), (CONST struct TagItem *)&tag1);
+	return __gadtools_CreateMenusA(__ndk_base, (CONST struct NewMenu *)(newmenu), (CONST struct TagItem *)((ULONG)&newmenu + sizeof(newmenu)));
 }
 #define CreateMenus(newmenu, ...) ___gadtools_CreateMenus((__gadtools_base_t)(GADTOOLS_BASE_NAME), (CONST struct NewMenu *)(newmenu), ##__VA_ARGS__)
 #else
@@ -165,9 +165,9 @@ __gadtools_LayoutMenuItemsA(struct Library *__base, struct MenuItem * firstitem,
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___gadtools_LayoutMenuItems(__gadtools_base_t __ndk_base, struct MenuItem * firstitem, APTR vi, Tag tag1, ...)
+___gadtools_LayoutMenuItems(__gadtools_base_t __ndk_base, struct MenuItem * firstitem, APTR vi, ...)
 {
-	return __gadtools_LayoutMenuItemsA(__ndk_base, (struct MenuItem *)(firstitem), (APTR)(vi), (CONST struct TagItem *)&tag1);
+	return __gadtools_LayoutMenuItemsA(__ndk_base, (struct MenuItem *)(firstitem), (APTR)(vi), (CONST struct TagItem *)((ULONG)&vi + sizeof(vi)));
 }
 #define LayoutMenuItems(firstitem, vi, ...) ___gadtools_LayoutMenuItems((__gadtools_base_t)(GADTOOLS_BASE_NAME), (struct MenuItem *)(firstitem), (APTR)(vi), ##__VA_ARGS__)
 #else
@@ -194,9 +194,9 @@ __gadtools_LayoutMenusA(struct Library *__base, struct Menu * firstmenu, APTR vi
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___gadtools_LayoutMenus(__gadtools_base_t __ndk_base, struct Menu * firstmenu, APTR vi, Tag tag1, ...)
+___gadtools_LayoutMenus(__gadtools_base_t __ndk_base, struct Menu * firstmenu, APTR vi, ...)
 {
-	return __gadtools_LayoutMenusA(__ndk_base, (struct Menu *)(firstmenu), (APTR)(vi), (CONST struct TagItem *)&tag1);
+	return __gadtools_LayoutMenusA(__ndk_base, (struct Menu *)(firstmenu), (APTR)(vi), (CONST struct TagItem *)((ULONG)&vi + sizeof(vi)));
 }
 #define LayoutMenus(firstmenu, vi, ...) ___gadtools_LayoutMenus((__gadtools_base_t)(GADTOOLS_BASE_NAME), (struct Menu *)(firstmenu), (APTR)(vi), ##__VA_ARGS__)
 #else
@@ -360,9 +360,9 @@ __gadtools_DrawBevelBoxA(struct Library *__base, struct RastPort * rport, WORD l
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___gadtools_DrawBevelBox(__gadtools_base_t __ndk_base, struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, Tag tag1, ...)
+___gadtools_DrawBevelBox(__gadtools_base_t __ndk_base, struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, ...)
 {
-	__gadtools_DrawBevelBoxA(__ndk_base, (struct RastPort *)(rport), (LONG)(left), (LONG)(top), (LONG)(width), (LONG)(height), (CONST struct TagItem *)&tag1);
+	__gadtools_DrawBevelBoxA(__ndk_base, (struct RastPort *)(rport), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height), (CONST struct TagItem *)((ULONG)&height + sizeof(height)));
 }
 #define DrawBevelBox(rport, left, top, width, height, ...) ___gadtools_DrawBevelBox((__gadtools_base_t)(GADTOOLS_BASE_NAME), (struct RastPort *)(rport), (LONG)(left), (LONG)(top), (LONG)(width), (LONG)(height), ##__VA_ARGS__)
 #else
@@ -388,9 +388,9 @@ __gadtools_GetVisualInfoA(struct Library *__base, struct Screen * screen, CONST 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
-___gadtools_GetVisualInfo(__gadtools_base_t __ndk_base, struct Screen * screen, Tag tag1, ...)
+___gadtools_GetVisualInfo(__gadtools_base_t __ndk_base, struct Screen * screen, ...)
 {
-	return __gadtools_GetVisualInfoA(__ndk_base, (struct Screen *)(screen), (CONST struct TagItem *)&tag1);
+	return __gadtools_GetVisualInfoA(__ndk_base, (struct Screen *)(screen), (CONST struct TagItem *)((ULONG)&screen + sizeof(screen)));
 }
 #define GetVisualInfo(screen, ...) ___gadtools_GetVisualInfo((__gadtools_base_t)(GADTOOLS_BASE_NAME), (struct Screen *)(screen), ##__VA_ARGS__)
 #else
@@ -434,9 +434,9 @@ __gadtools_SetDesignFontA(struct Library *__base, APTR vi, CONST struct TextAttr
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___gadtools_SetDesignFont(__gadtools_base_t __ndk_base, APTR vi, CONST struct TextAttr * tattr, Tag tag1, ...)
+___gadtools_SetDesignFont(__gadtools_base_t __ndk_base, APTR vi, CONST struct TextAttr * tattr, ...)
 {
-	return __gadtools_SetDesignFontA(__ndk_base, (APTR)(vi), (CONST struct TextAttr *)(tattr), (CONST struct TagItem *)&tag1);
+	return __gadtools_SetDesignFontA(__ndk_base, (APTR)(vi), (CONST struct TextAttr *)(tattr), (CONST struct TagItem *)((ULONG)&tattr + sizeof(tattr)));
 }
 #define SetDesignFont(vi, tattr, ...) ___gadtools_SetDesignFont((__gadtools_base_t)(GADTOOLS_BASE_NAME), (APTR)(vi), (CONST struct TextAttr *)(tattr), ##__VA_ARGS__)
 #else
@@ -462,9 +462,9 @@ __gadtools_ScaleGadgetRectA(struct Library *__base, struct NewGadget * ng, CONST
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___gadtools_ScaleGadgetRect(__gadtools_base_t __ndk_base, struct NewGadget * ng, Tag tag1, ...)
+___gadtools_ScaleGadgetRect(__gadtools_base_t __ndk_base, struct NewGadget * ng, ...)
 {
-	return __gadtools_ScaleGadgetRectA(__ndk_base, (struct NewGadget *)(ng), (CONST struct TagItem *)&tag1);
+	return __gadtools_ScaleGadgetRectA(__ndk_base, (struct NewGadget *)(ng), (CONST struct TagItem *)((ULONG)&ng + sizeof(ng)));
 }
 #define ScaleGadgetRect(ng, ...) ___gadtools_ScaleGadgetRect((__gadtools_base_t)(GADTOOLS_BASE_NAME), (struct NewGadget *)(ng), ##__VA_ARGS__)
 #else
@@ -492,9 +492,9 @@ __gadtools_GT_GetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___gadtools_GT_GetGadgetAttrs(__gadtools_base_t __ndk_base, struct Gadget * gad, struct Window * win, struct Requester * req, Tag tag1, ...)
+___gadtools_GT_GetGadgetAttrs(__gadtools_base_t __ndk_base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
 {
-	return __gadtools_GT_GetGadgetAttrsA(__ndk_base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)&tag1);
+	return __gadtools_GT_GetGadgetAttrsA(__ndk_base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)((ULONG)&req + sizeof(req)));
 }
 #define GT_GetGadgetAttrs(gad, win, req, ...) ___gadtools_GT_GetGadgetAttrs((__gadtools_base_t)(GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else

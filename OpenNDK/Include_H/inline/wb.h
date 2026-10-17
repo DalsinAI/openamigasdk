@@ -61,9 +61,9 @@ __wb_AddAppWindowA(struct Library *__base, ULONG id, ULONG userdata, struct Wind
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct AppWindow *
-___wb_AddAppWindow(__wb_base_t __ndk_base, ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, Tag tag1, ...)
+___wb_AddAppWindow(__wb_base_t __ndk_base, ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, ...)
 {
-	return __wb_AddAppWindowA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)&tag1);
+	return __wb_AddAppWindowA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)((ULONG)&msgport + sizeof(msgport)));
 }
 #define AddAppWindow(id, userdata, window, msgport, ...) ___wb_AddAppWindow((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), ##__VA_ARGS__)
 #else
@@ -108,9 +108,9 @@ __wb_AddAppIconA(struct Library *__base, ULONG id, ULONG userdata, CONST_STRPTR 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct AppIcon *
-___wb_AddAppIcon(__wb_base_t __ndk_base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, Tag tag1, ...)
+___wb_AddAppIcon(__wb_base_t __ndk_base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, ...)
 {
-	return __wb_AddAppIconA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)&tag1);
+	return __wb_AddAppIconA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)((ULONG)&diskobj + sizeof(diskobj)));
 }
 #define AddAppIcon(id, userdata, text, msgport, lock, diskobj, ...) ___wb_AddAppIcon((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), ##__VA_ARGS__)
 #else
@@ -154,9 +154,9 @@ __wb_AddAppMenuItemA(struct Library *__base, ULONG id, ULONG userdata, CONST_STR
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct AppMenuItem *
-___wb_AddAppMenuItem(__wb_base_t __ndk_base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, Tag tag1, ...)
+___wb_AddAppMenuItem(__wb_base_t __ndk_base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, ...)
 {
-	return __wb_AddAppMenuItemA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)&tag1);
+	return __wb_AddAppMenuItemA(__ndk_base, (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)((ULONG)&msgport + sizeof(msgport)));
 }
 #define AddAppMenuItem(id, userdata, text, msgport, ...) ___wb_AddAppMenuItem((__wb_base_t)(WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), ##__VA_ARGS__)
 #else
@@ -217,9 +217,9 @@ __wb_OpenWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___wb_OpenWorkbenchObject(__wb_base_t __ndk_base, CONST_STRPTR name, Tag tag1, ...)
+___wb_OpenWorkbenchObject(__wb_base_t __ndk_base, CONST_STRPTR name, ...)
 {
-	return __wb_OpenWorkbenchObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+	return __wb_OpenWorkbenchObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define OpenWorkbenchObject(name, ...) ___wb_OpenWorkbenchObject((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
@@ -245,9 +245,9 @@ __wb_CloseWorkbenchObjectA(struct Library *__base, CONST_STRPTR name, CONST stru
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___wb_CloseWorkbenchObject(__wb_base_t __ndk_base, CONST_STRPTR name, Tag tag1, ...)
+___wb_CloseWorkbenchObject(__wb_base_t __ndk_base, CONST_STRPTR name, ...)
 {
-	return __wb_CloseWorkbenchObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+	return __wb_CloseWorkbenchObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define CloseWorkbenchObject(name, ...) ___wb_CloseWorkbenchObject((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
@@ -273,9 +273,9 @@ __wb_WorkbenchControlA(struct Library *__base, CONST_STRPTR name, CONST struct T
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___wb_WorkbenchControl(__wb_base_t __ndk_base, CONST_STRPTR name, Tag tag1, ...)
+___wb_WorkbenchControl(__wb_base_t __ndk_base, CONST_STRPTR name, ...)
 {
-	return __wb_WorkbenchControlA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+	return __wb_WorkbenchControlA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define WorkbenchControl(name, ...) ___wb_WorkbenchControl((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
@@ -301,9 +301,9 @@ __wb_AddAppWindowDropZoneA(struct Library *__base, struct AppWindow * aw, ULONG 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct AppWindowDropZone *
-___wb_AddAppWindowDropZone(__wb_base_t __ndk_base, struct AppWindow * aw, ULONG id, ULONG userdata, Tag tag1, ...)
+___wb_AddAppWindowDropZone(__wb_base_t __ndk_base, struct AppWindow * aw, ULONG id, ULONG userdata, ...)
 {
-	return __wb_AddAppWindowDropZoneA(__ndk_base, (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)&tag1);
+	return __wb_AddAppWindowDropZoneA(__ndk_base, (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)((ULONG)&userdata + sizeof(userdata)));
 }
 #define AddAppWindowDropZone(aw, id, userdata, ...) ___wb_AddAppWindowDropZone((__wb_base_t)(WB_BASE_NAME), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), ##__VA_ARGS__)
 #else
@@ -347,9 +347,9 @@ __wb_ChangeWorkbenchSelectionA(struct Library *__base, CONST_STRPTR name, struct
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___wb_ChangeWorkbenchSelection(__wb_base_t __ndk_base, CONST_STRPTR name, struct Hook * hook, Tag tag1, ...)
+___wb_ChangeWorkbenchSelection(__wb_base_t __ndk_base, CONST_STRPTR name, struct Hook * hook, ...)
 {
-	return __wb_ChangeWorkbenchSelectionA(__ndk_base, (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)&tag1);
+	return __wb_ChangeWorkbenchSelectionA(__ndk_base, (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)((ULONG)&hook + sizeof(hook)));
 }
 #define ChangeWorkbenchSelection(name, hook, ...) ___wb_ChangeWorkbenchSelection((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), (struct Hook *)(hook), ##__VA_ARGS__)
 #else
@@ -375,9 +375,9 @@ __wb_MakeWorkbenchObjectVisibleA(struct Library *__base, CONST_STRPTR name, CONS
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___wb_MakeWorkbenchObjectVisible(__wb_base_t __ndk_base, CONST_STRPTR name, Tag tag1, ...)
+___wb_MakeWorkbenchObjectVisible(__wb_base_t __ndk_base, CONST_STRPTR name, ...)
 {
-	return __wb_MakeWorkbenchObjectVisibleA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+	return __wb_MakeWorkbenchObjectVisibleA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define MakeWorkbenchObjectVisible(name, ...) ___wb_MakeWorkbenchObjectVisible((__wb_base_t)(WB_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
@@ -403,9 +403,9 @@ __wb_WhichWorkbenchObjectA(struct Library *__base, struct Window * window, LONG 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___wb_WhichWorkbenchObject(__wb_base_t __ndk_base, struct Window * window, LONG x, LONG y, Tag tag1, ...)
+___wb_WhichWorkbenchObject(__wb_base_t __ndk_base, struct Window * window, LONG x, LONG y, ...)
 {
-	return __wb_WhichWorkbenchObjectA(__ndk_base, (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)&tag1);
+	return __wb_WhichWorkbenchObjectA(__ndk_base, (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)((ULONG)&y + sizeof(y)));
 }
 #define WhichWorkbenchObject(window, x, y, ...) ___wb_WhichWorkbenchObject((__wb_base_t)(WB_BASE_NAME), (struct Window *)(window), (LONG)(x), (LONG)(y), ##__VA_ARGS__)
 #else
