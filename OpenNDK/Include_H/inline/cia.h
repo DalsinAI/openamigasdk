@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__cia_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__

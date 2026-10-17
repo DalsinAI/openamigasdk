@@ -2,7 +2,7 @@
 * utility.library's calls, for OpenNDK.
 * Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
 ==base _UtilityBase
-==basetype struct UtilityBase *
+==basetype struct Library *
 ==libname utility.library
 ==bias 30
 ==public

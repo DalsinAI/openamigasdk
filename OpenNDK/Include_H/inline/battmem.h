@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__battmem_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __battmem_ObtainBattSemaphore(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ObtainBattSemaphore() __battmem_ObtainBattSemaphore((BATTMEM_BASE_NAME))
+#define ObtainBattSemaphore() __battmem_ObtainBattSemaphore((__battmem_base_t)(BATTMEM_BASE_NAME))
+#define __ObtainBattSemaphore_base(__ndk_b) __battmem_ObtainBattSemaphore((__battmem_base_t)(__ndk_b))
 
 static __inline__ VOID
 __battmem_ReleaseBattSemaphore(struct Library *__base)
@@ -53,7 +55,8 @@ __battmem_ReleaseBattSemaphore(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseBattSemaphore() __battmem_ReleaseBattSemaphore((BATTMEM_BASE_NAME))
+#define ReleaseBattSemaphore() __battmem_ReleaseBattSemaphore((__battmem_base_t)(BATTMEM_BASE_NAME))
+#define __ReleaseBattSemaphore_base(__ndk_b) __battmem_ReleaseBattSemaphore((__battmem_base_t)(__ndk_b))
 
 static __inline__ ULONG
 __battmem_ReadBattMem(struct Library *__base, APTR buffer, ULONG offset, ULONG length)
@@ -69,7 +72,8 @@ __battmem_ReadBattMem(struct Library *__base, APTR buffer, ULONG offset, ULONG l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ReadBattMem(buffer, offset, length) __battmem_ReadBattMem((BATTMEM_BASE_NAME), (APTR)(buffer), (ULONG)(offset), (ULONG)(length))
+#define ReadBattMem(buffer, offset, length) __battmem_ReadBattMem((__battmem_base_t)(BATTMEM_BASE_NAME), (APTR)(buffer), (ULONG)(offset), (ULONG)(length))
+#define __ReadBattMem_base(__ndk_b, buffer, offset, length) __battmem_ReadBattMem((__battmem_base_t)(__ndk_b), (APTR)(buffer), (ULONG)(offset), (ULONG)(length))
 
 static __inline__ ULONG
 __battmem_WriteBattMem(struct Library *__base, CONST_APTR buffer, ULONG offset, ULONG length)
@@ -85,6 +89,7 @@ __battmem_WriteBattMem(struct Library *__base, CONST_APTR buffer, ULONG offset, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define WriteBattMem(buffer, offset, length) __battmem_WriteBattMem((BATTMEM_BASE_NAME), (CONST_APTR)(buffer), (ULONG)(offset), (ULONG)(length))
+#define WriteBattMem(buffer, offset, length) __battmem_WriteBattMem((__battmem_base_t)(BATTMEM_BASE_NAME), (CONST_APTR)(buffer), (ULONG)(offset), (ULONG)(length))
+#define __WriteBattMem_base(__ndk_b, buffer, offset, length) __battmem_WriteBattMem((__battmem_base_t)(__ndk_b), (CONST_APTR)(buffer), (ULONG)(offset), (ULONG)(length))
 
 #endif /* INLINE_BATTMEM_H */

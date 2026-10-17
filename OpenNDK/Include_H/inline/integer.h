@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__integer_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __integer_INTEGER_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define INTEGER_GetClass() __integer_INTEGER_GetClass((INTEGER_BASE_NAME))
+#define INTEGER_GetClass() __integer_INTEGER_GetClass((__integer_base_t)(INTEGER_BASE_NAME))
+#define __INTEGER_GetClass_base(__ndk_b) __integer_INTEGER_GetClass((__integer_base_t)(__ndk_b))
 
 #endif /* INLINE_INTEGER_H */

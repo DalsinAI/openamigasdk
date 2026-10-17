@@ -362,9 +362,11 @@ def inline(lib):
                        else "#define %s() %s()\n" % (f.name, f.alias_of.name))
             continue
         if f.varargs_of:
-            # a real function in libamiga.a; the macro casts its fixed
-            # arguments to their types, as for the other calls
-            out.append(varargs_macro(f))
+            # an inline function of its own that hands the arguments on the
+            # stack to the tag/array form, as NDK 3.2's inline headers do,
+            # so no amiga.lib is needed; with NO_INLINE_STDARG, the real
+            # function in libamiga.a. Both macros cast the fixed arguments.
+            out.append(varargs_inline(lib, f))
             continue
         out.append(inline_func(lib, f, bn))
     out.append("#endif /* %s */" % g)
@@ -380,17 +382,57 @@ def varargs_macro(f):
         f.name, ", ".join(names), f.name, ", ".join("(%s)(%s)" % (a.type, a.name) for a in fixed))
 
 
+def varargs_inline(lib, f):
+    g = f.varargs_of
+    old = varargs_macro(f)
+    if lib.base_is_arg(g) or len(g.args) < 1:
+        return old
+    fixed = f.args[:len(g.args) - 1]
+    rest = f.args[len(fixed):]
+    if not fixed and not rest:
+        return old
+    last = g.args[-1]
+    if rest:
+        addr = "(%s)&%s" % (last.type, rest[0].name)
+    else:
+        addr = "(%s)((ULONG)&%s + sizeof(%s))" % (last.type, fixed[-1].name, fixed[-1].name)
+    fname = "___%s_%s" % (lib.stem.replace(".", "_"), f.name)
+    params = ["%s __ndk_base" % base_t(lib)] + [a.decl for a in fixed + rest] + ["..."]
+    call = "__%s_%s(__ndk_base%s)" % (lib.stem.replace(".", "_"), g.name,
+                                      "".join(", (%s)(%s)" % (a.type, a.name) for a in fixed) + ", " + addr)
+    body = ("\t%s;" % call) if f.ret_kind() == "void" else ("\treturn %s;" % call)
+    names = [a.name for a in fixed]
+    margs = ["(%s)(%s)" % (base_t(lib), "%s_BASE_NAME" % lib.guard)] + ["(%s)(%s)" % (a.type, a.name) for a in fixed]
+    if names:
+        macro = "#define %s(%s, ...) %s(%s, ##__VA_ARGS__)" % (f.name, ", ".join(names), fname, ", ".join(margs))
+    else:
+        macro = "#define %s(...) %s(%s, __VA_ARGS__)" % (f.name, fname, ", ".join(margs))
+    # never inlined or cloned: the arguments after the named ones must stay
+    # on the stack beside it, and GCC drops them when it inlines a call that
+    # has no va_start, or copies a constant first one into a clone's frame
+    return ("#ifndef NO_INLINE_STDARG\nstatic __attribute__((__noinline__, __noclone__, __unused__)) %s\n%s(%s)\n{\n%s\n}\n%s\n#else\n%s#endif\n"
+            % (f.ret, fname, ", ".join(params), body, macro, old or ""))
+
+
 def same_call(f, g):
     """An alias that takes the same registers is a plain second name; one
     that takes fewer (dos's DoPkt0 to DoPkt4) gets an inline of its own."""
     return f.regs == g.regs
 
 
+def base_t(lib):
+    return "__%s_base_t" % lib.stem.replace(".", "_")
+
+
 def base_decl(lib):
     """Declare the base's structure at file scope, so the inline functions'
-    parameter names the same type the program's base variable has."""
+    parameter names the same type the program's base variable has, and a
+    typedef of the base type that the call macros cast to: a program may
+    #define the base's own name (GfxBase) after this header, and a typedef
+    can't be expanded by that."""
     m = re.match(r"\s*struct\s+(\w+)\s*\*\s*$", lib.basetype)
-    return "struct %s;\n" % m.group(1) if m else ""
+    return ("struct %s;\n" % m.group(1) if m else "") + "typedef %s%s%s;\n" % (
+        lib.basetype, "" if lib.basetype.endswith("*") else " ", base_t(lib))
 
 
 def cast_in(a, var):
@@ -466,9 +508,17 @@ def inline_func(lib, f, bn):
     # each argument is cast to the call's own type, as the vendor's inline
     # macros do: a string literal or a char * goes to a CONST_STRPTR, and an
     # int to a ULONG, without a warning under -Werror
-    callargs = ([] if base_arg else ["(%s)" % bn]) + ["(%s)(%s)" % (a.type, a.name) for a in f.args]
+    # the base too, as NDK 3.2's inline headers take any pointer there (a
+    # program's own struct Library *LocaleBase, say)
+    callargs = ([] if base_arg else ["(%s)(%s)" % (base_t(lib), bn)]) + ["(%s)(%s)" % (a.type, a.name) for a in f.args]
     macro = "#define %s(%s) %s(%s)" % (f.name, ", ".join(a.name for a in f.args), fname,
                                          ", ".join(callargs))
+    if not base_arg:
+        # __<call>_base(base, ...): the call through a base of the caller's,
+        # as the GCC packaging of NDK 3.2 (sfdc's inline headers) has it
+        names = ["__ndk_b"] + [a.name for a in f.args]
+        bargs = ["(%s)(__ndk_b)" % base_t(lib)] + callargs[1:]
+        macro += "\n#define __%s_base(%s) %s(%s)" % (f.name, ", ".join(names), fname, ", ".join(bargs))
     return "%s\n{\n%s\n}\n%s\n" % (sig, "\n".join(body), macro)
 
 

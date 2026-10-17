@@ -89,4 +89,13 @@ typedef unsigned char	TEXT;
 
 #define BYTEMASK	0xFF
 
+/* APTR and CONST_APTR are typedefs here (other headers test these) */
+#define APTR_TYPEDEF
+#define CONST_APTR_TYPEDEF
+
+/* the compiler keywords, as the OS 3.2 header brings them in */
+#ifndef COMPILER_SPECIFIC_H
+#include <clib/compiler-specific.h>
+#endif
+
 #endif /* EXEC_TYPES_H */

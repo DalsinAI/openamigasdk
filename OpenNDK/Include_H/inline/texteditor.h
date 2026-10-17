@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__texteditor_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __texteditor_TEXTEDITOR_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define TEXTEDITOR_GetClass() __texteditor_TEXTEDITOR_GetClass((TEXTEDITOR_BASE_NAME))
+#define TEXTEDITOR_GetClass() __texteditor_TEXTEDITOR_GetClass((__texteditor_base_t)(TEXTEDITOR_BASE_NAME))
+#define __TEXTEDITOR_GetClass_base(__ndk_b) __texteditor_TEXTEDITOR_GetClass((__texteditor_base_t)(__ndk_b))
 
 static __inline__ VOID
 __texteditor_HighlightSetFormat(struct Library *__base, APTR handle, ULONG first, ULONG last, UWORD format)
@@ -54,6 +56,7 @@ __texteditor_HighlightSetFormat(struct Library *__base, APTR handle, ULONG first
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HighlightSetFormat(handle, first, last, format) __texteditor_HighlightSetFormat((TEXTEDITOR_BASE_NAME), (APTR)(handle), (ULONG)(first), (ULONG)(last), (UWORD)(format))
+#define HighlightSetFormat(handle, first, last, format) __texteditor_HighlightSetFormat((__texteditor_base_t)(TEXTEDITOR_BASE_NAME), (APTR)(handle), (ULONG)(first), (ULONG)(last), (UWORD)(format))
+#define __HighlightSetFormat_base(__ndk_b, handle, first, last, format) __texteditor_HighlightSetFormat((__texteditor_base_t)(__ndk_b), (APTR)(handle), (ULONG)(first), (ULONG)(last), (UWORD)(format))
 
 #endif /* INLINE_TEXTEDITOR_H */

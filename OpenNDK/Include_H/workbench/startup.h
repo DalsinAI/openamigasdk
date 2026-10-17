@@ -31,7 +31,7 @@ struct WBStartup
 struct WBArg
 {
     BPTR wa_Lock;			/* the directory; NULL for a volume */
-    BYTE *wa_Name;			/* the name within it */
+    STRPTR wa_Name;			/* the name within it */
 };
 
 #endif /* WORKBENCH_STARTUP_H */

@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__requester_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __requester_REQUESTER_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define REQUESTER_GetClass() __requester_REQUESTER_GetClass((REQUESTER_BASE_NAME))
+#define REQUESTER_GetClass() __requester_REQUESTER_GetClass((__requester_base_t)(REQUESTER_BASE_NAME))
+#define __REQUESTER_GetClass_base(__ndk_b) __requester_REQUESTER_GetClass((__requester_base_t)(__ndk_b))
 
 #endif /* INLINE_REQUESTER_H */

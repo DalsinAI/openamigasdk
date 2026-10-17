@@ -8,6 +8,7 @@
 #include <exec/types.h>
 #include <exec/devices.h>
 #include <utility/tagitem.h>
+#include <devices/trackfile.h>
 
 #ifdef __cplusplus
 extern "C" {

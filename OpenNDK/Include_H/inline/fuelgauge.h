@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__fuelgauge_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __fuelgauge_FUELGAUGE_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define FUELGAUGE_GetClass() __fuelgauge_FUELGAUGE_GetClass((FUELGAUGE_BASE_NAME))
+#define FUELGAUGE_GetClass() __fuelgauge_FUELGAUGE_GetClass((__fuelgauge_base_t)(FUELGAUGE_BASE_NAME))
+#define __FUELGAUGE_GetClass_base(__ndk_b) __fuelgauge_FUELGAUGE_GetClass((__fuelgauge_base_t)(__ndk_b))
 
 #endif /* INLINE_FUELGAUGE_H */

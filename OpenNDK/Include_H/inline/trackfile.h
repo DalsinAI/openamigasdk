@@ -14,6 +14,7 @@
 #endif
 
 struct Device;
+typedef struct Device *__trackfile_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,9 +38,19 @@ __trackfile_TFStartUnitTagList(struct Device *__base, LONG unitNumber, CONST str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define TFStartUnitTagList(unitNumber, tags) __trackfile_TFStartUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define TFStartUnitTagList(unitNumber, tags) __trackfile_TFStartUnitTagList((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFStartUnitTagList_base(__ndk_b, unitNumber, tags) __trackfile_TFStartUnitTagList((__trackfile_base_t)(__ndk_b), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___trackfile_TFStartUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+{
+	return __trackfile_TFStartUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+}
+#define TFStartUnitTags(unitNumber, ...) ___trackfile_TFStartUnitTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
+#else
 #define TFStartUnitTags(unitNumber, ...) (TFStartUnitTags)((LONG)(unitNumber), ##__VA_ARGS__)
+#endif
 
 static __inline__ LONG
 __trackfile_TFStopUnitTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
@@ -55,9 +66,19 @@ __trackfile_TFStopUnitTagList(struct Device *__base, LONG unitNumber, CONST stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define TFStopUnitTagList(unitNumber, tags) __trackfile_TFStopUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define TFStopUnitTagList(unitNumber, tags) __trackfile_TFStopUnitTagList((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFStopUnitTagList_base(__ndk_b, unitNumber, tags) __trackfile_TFStopUnitTagList((__trackfile_base_t)(__ndk_b), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___trackfile_TFStopUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+{
+	return __trackfile_TFStopUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+}
+#define TFStopUnitTags(unitNumber, ...) ___trackfile_TFStopUnitTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
+#else
 #define TFStopUnitTags(unitNumber, ...) (TFStopUnitTags)((LONG)(unitNumber), ##__VA_ARGS__)
+#endif
 
 static __inline__ LONG
 __trackfile_TFInsertMediaTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
@@ -73,9 +94,19 @@ __trackfile_TFInsertMediaTagList(struct Device *__base, LONG unitNumber, CONST s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define TFInsertMediaTagList(unitNumber, tags) __trackfile_TFInsertMediaTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define TFInsertMediaTagList(unitNumber, tags) __trackfile_TFInsertMediaTagList((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFInsertMediaTagList_base(__ndk_b, unitNumber, tags) __trackfile_TFInsertMediaTagList((__trackfile_base_t)(__ndk_b), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___trackfile_TFInsertMediaTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+{
+	return __trackfile_TFInsertMediaTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+}
+#define TFInsertMediaTags(unitNumber, ...) ___trackfile_TFInsertMediaTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
+#else
 #define TFInsertMediaTags(unitNumber, ...) (TFInsertMediaTags)((LONG)(unitNumber), ##__VA_ARGS__)
+#endif
 
 static __inline__ LONG
 __trackfile_TFEjectMediaTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
@@ -91,9 +122,19 @@ __trackfile_TFEjectMediaTagList(struct Device *__base, LONG unitNumber, CONST st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define TFEjectMediaTagList(unitNumber, tags) __trackfile_TFEjectMediaTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define TFEjectMediaTagList(unitNumber, tags) __trackfile_TFEjectMediaTagList((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFEjectMediaTagList_base(__ndk_b, unitNumber, tags) __trackfile_TFEjectMediaTagList((__trackfile_base_t)(__ndk_b), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___trackfile_TFEjectMediaTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+{
+	return __trackfile_TFEjectMediaTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+}
+#define TFEjectMediaTags(unitNumber, ...) ___trackfile_TFEjectMediaTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
+#else
 #define TFEjectMediaTags(unitNumber, ...) (TFEjectMediaTags)((LONG)(unitNumber), ##__VA_ARGS__)
+#endif
 
 static __inline__ struct TrackFileUnitData *
 __trackfile_TFGetUnitData(struct Device *__base, LONG unitNumber)
@@ -109,7 +150,8 @@ __trackfile_TFGetUnitData(struct Device *__base, LONG unitNumber)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TrackFileUnitData *)_d0;
 }
-#define TFGetUnitData(unitNumber) __trackfile_TFGetUnitData((TRACKFILE_BASE_NAME), (LONG)(unitNumber))
+#define TFGetUnitData(unitNumber) __trackfile_TFGetUnitData((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber))
+#define __TFGetUnitData_base(__ndk_b, unitNumber) __trackfile_TFGetUnitData((__trackfile_base_t)(__ndk_b), (LONG)(unitNumber))
 
 static __inline__ VOID
 __trackfile_TFFreeUnitData(struct Device *__base, struct TrackFileUnitData * data)
@@ -125,7 +167,8 @@ __trackfile_TFFreeUnitData(struct Device *__base, struct TrackFileUnitData * dat
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define TFFreeUnitData(data) __trackfile_TFFreeUnitData((TRACKFILE_BASE_NAME), (struct TrackFileUnitData *)(data))
+#define TFFreeUnitData(data) __trackfile_TFFreeUnitData((__trackfile_base_t)(TRACKFILE_BASE_NAME), (struct TrackFileUnitData *)(data))
+#define __TFFreeUnitData_base(__ndk_b, data) __trackfile_TFFreeUnitData((__trackfile_base_t)(__ndk_b), (struct TrackFileUnitData *)(data))
 
 static __inline__ LONG
 __trackfile_TFChangeUnitTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
@@ -141,9 +184,19 @@ __trackfile_TFChangeUnitTagList(struct Device *__base, LONG unitNumber, CONST st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define TFChangeUnitTagList(unitNumber, tags) __trackfile_TFChangeUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define TFChangeUnitTagList(unitNumber, tags) __trackfile_TFChangeUnitTagList((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFChangeUnitTagList_base(__ndk_b, unitNumber, tags) __trackfile_TFChangeUnitTagList((__trackfile_base_t)(__ndk_b), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___trackfile_TFChangeUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+{
+	return __trackfile_TFChangeUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+}
+#define TFChangeUnitTags(unitNumber, ...) ___trackfile_TFChangeUnitTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
+#else
 #define TFChangeUnitTags(unitNumber, ...) (TFChangeUnitTags)((LONG)(unitNumber), ##__VA_ARGS__)
+#endif
 
 static __inline__ LONG
 __trackfile_TFExamineFileSize(struct Device *__base, LONG unitNumber)
@@ -159,6 +212,7 @@ __trackfile_TFExamineFileSize(struct Device *__base, LONG unitNumber)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define TFExamineFileSize(unitNumber) __trackfile_TFExamineFileSize((TRACKFILE_BASE_NAME), (LONG)(unitNumber))
+#define TFExamineFileSize(unitNumber) __trackfile_TFExamineFileSize((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber))
+#define __TFExamineFileSize_base(__ndk_b, unitNumber) __trackfile_TFExamineFileSize((__trackfile_base_t)(__ndk_b), (LONG)(unitNumber))
 
 #endif /* INLINE_TRACKFILE_H */

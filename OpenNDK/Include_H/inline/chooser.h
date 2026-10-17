@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__chooser_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __chooser_CHOOSER_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define CHOOSER_GetClass() __chooser_CHOOSER_GetClass((CHOOSER_BASE_NAME))
+#define CHOOSER_GetClass() __chooser_CHOOSER_GetClass((__chooser_base_t)(CHOOSER_BASE_NAME))
+#define __CHOOSER_GetClass_base(__ndk_b) __chooser_CHOOSER_GetClass((__chooser_base_t)(__ndk_b))
 
 static __inline__ struct Node *
 __chooser_AllocChooserNodeA(struct Library *__base, struct TagItem * tags)
@@ -53,8 +55,18 @@ __chooser_AllocChooserNodeA(struct Library *__base, struct TagItem * tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define AllocChooserNodeA(tags) __chooser_AllocChooserNodeA((CHOOSER_BASE_NAME), (struct TagItem *)(tags))
+#define AllocChooserNodeA(tags) __chooser_AllocChooserNodeA((__chooser_base_t)(CHOOSER_BASE_NAME), (struct TagItem *)(tags))
+#define __AllocChooserNodeA_base(__ndk_b, tags) __chooser_AllocChooserNodeA((__chooser_base_t)(__ndk_b), (struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct Node *
+___chooser_AllocChooserNode(__chooser_base_t __ndk_base, Tag tag1, ...)
+{
+	return __chooser_AllocChooserNodeA(__ndk_base, (struct TagItem *)&tag1);
+}
+#define AllocChooserNode(...) ___chooser_AllocChooserNode((__chooser_base_t)(CHOOSER_BASE_NAME), __VA_ARGS__)
+#else
+#endif
 
 static __inline__ VOID
 __chooser_FreeChooserNode(struct Library *__base, struct Node * node)
@@ -70,7 +82,8 @@ __chooser_FreeChooserNode(struct Library *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeChooserNode(node) __chooser_FreeChooserNode((CHOOSER_BASE_NAME), (struct Node *)(node))
+#define FreeChooserNode(node) __chooser_FreeChooserNode((__chooser_base_t)(CHOOSER_BASE_NAME), (struct Node *)(node))
+#define __FreeChooserNode_base(__ndk_b, node) __chooser_FreeChooserNode((__chooser_base_t)(__ndk_b), (struct Node *)(node))
 
 static __inline__ VOID
 __chooser_SetChooserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -86,9 +99,19 @@ __chooser_SetChooserNodeAttrsA(struct Library *__base, struct Node * node, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetChooserNodeAttrsA(node, tags) __chooser_SetChooserNodeAttrsA((CHOOSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define SetChooserNodeAttrsA(node, tags) __chooser_SetChooserNodeAttrsA((__chooser_base_t)(CHOOSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __SetChooserNodeAttrsA_base(__ndk_b, node, tags) __chooser_SetChooserNodeAttrsA((__chooser_base_t)(__ndk_b), (struct Node *)(node), (struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___chooser_SetChooserNodeAttrs(__chooser_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+{
+	__chooser_SetChooserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+}
+#define SetChooserNodeAttrs(node, ...) ___chooser_SetChooserNodeAttrs((__chooser_base_t)(CHOOSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
+#else
 #define SetChooserNodeAttrs(node, ...) (SetChooserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __chooser_GetChooserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -104,9 +127,19 @@ __chooser_GetChooserNodeAttrsA(struct Library *__base, struct Node * node, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetChooserNodeAttrsA(node, tags) __chooser_GetChooserNodeAttrsA((CHOOSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define GetChooserNodeAttrsA(node, tags) __chooser_GetChooserNodeAttrsA((__chooser_base_t)(CHOOSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __GetChooserNodeAttrsA_base(__ndk_b, node, tags) __chooser_GetChooserNodeAttrsA((__chooser_base_t)(__ndk_b), (struct Node *)(node), (struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___chooser_GetChooserNodeAttrs(__chooser_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+{
+	__chooser_GetChooserNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+}
+#define GetChooserNodeAttrs(node, ...) ___chooser_GetChooserNodeAttrs((__chooser_base_t)(CHOOSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
+#else
 #define GetChooserNodeAttrs(node, ...) (GetChooserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __chooser_ShowChooser(struct Library *__base, Object * o, struct Window * w, ULONG xpos, ULONG ypos)
@@ -122,7 +155,8 @@ __chooser_ShowChooser(struct Library *__base, Object * o, struct Window * w, ULO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ShowChooser(o, w, xpos, ypos) __chooser_ShowChooser((CHOOSER_BASE_NAME), (Object *)(o), (struct Window *)(w), (ULONG)(xpos), (ULONG)(ypos))
+#define ShowChooser(o, w, xpos, ypos) __chooser_ShowChooser((__chooser_base_t)(CHOOSER_BASE_NAME), (Object *)(o), (struct Window *)(w), (ULONG)(xpos), (ULONG)(ypos))
+#define __ShowChooser_base(__ndk_b, o, w, xpos, ypos) __chooser_ShowChooser((__chooser_base_t)(__ndk_b), (Object *)(o), (struct Window *)(w), (ULONG)(xpos), (ULONG)(ypos))
 
 static __inline__ VOID
 __chooser_HideChooser(struct Library *__base, Object * o, struct Window * w)
@@ -138,6 +172,7 @@ __chooser_HideChooser(struct Library *__base, Object * o, struct Window * w)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HideChooser(o, w) __chooser_HideChooser((CHOOSER_BASE_NAME), (Object *)(o), (struct Window *)(w))
+#define HideChooser(o, w) __chooser_HideChooser((__chooser_base_t)(CHOOSER_BASE_NAME), (Object *)(o), (struct Window *)(w))
+#define __HideChooser_base(__ndk_b, o, w) __chooser_HideChooser((__chooser_base_t)(__ndk_b), (Object *)(o), (struct Window *)(w))
 
 #endif /* INLINE_CHOOSER_H */

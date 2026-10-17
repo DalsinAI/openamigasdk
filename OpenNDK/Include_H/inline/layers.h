@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__layers_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __layers_InitLayers(struct Library *__base, struct Layer_Info * li)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitLayers(li) __layers_InitLayers((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define InitLayers(li) __layers_InitLayers((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __InitLayers_base(__ndk_b, li) __layers_InitLayers((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li))
 
 static __inline__ struct Layer *
 __layers_CreateUpfrontLayer(struct Library *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct BitMap * bm2)
@@ -57,7 +59,8 @@ __layers_CreateUpfrontLayer(struct Library *__base, struct Layer_Info * li, stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Layer *)_d0;
 }
-#define CreateUpfrontLayer(li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateUpfrontLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
+#define CreateUpfrontLayer(li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateUpfrontLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
+#define __CreateUpfrontLayer_base(__ndk_b, li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateUpfrontLayer((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
 
 static __inline__ struct Layer *
 __layers_CreateBehindLayer(struct Library *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct BitMap * bm2)
@@ -77,7 +80,8 @@ __layers_CreateBehindLayer(struct Library *__base, struct Layer_Info * li, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Layer *)_d0;
 }
-#define CreateBehindLayer(li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateBehindLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
+#define CreateBehindLayer(li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateBehindLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
+#define __CreateBehindLayer_base(__ndk_b, li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateBehindLayer((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
 
 static __inline__ LONG
 __layers_UpfrontLayer(struct Library *__base, LONG dummy, struct Layer * layer)
@@ -93,7 +97,8 @@ __layers_UpfrontLayer(struct Library *__base, LONG dummy, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define UpfrontLayer(dummy, layer) __layers_UpfrontLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define UpfrontLayer(dummy, layer) __layers_UpfrontLayer((__layers_base_t)(LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define __UpfrontLayer_base(__ndk_b, dummy, layer) __layers_UpfrontLayer((__layers_base_t)(__ndk_b), (LONG)(dummy), (struct Layer *)(layer))
 
 static __inline__ LONG
 __layers_BehindLayer(struct Library *__base, LONG dummy, struct Layer * layer)
@@ -109,7 +114,8 @@ __layers_BehindLayer(struct Library *__base, LONG dummy, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define BehindLayer(dummy, layer) __layers_BehindLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define BehindLayer(dummy, layer) __layers_BehindLayer((__layers_base_t)(LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define __BehindLayer_base(__ndk_b, dummy, layer) __layers_BehindLayer((__layers_base_t)(__ndk_b), (LONG)(dummy), (struct Layer *)(layer))
 
 static __inline__ LONG
 __layers_MoveLayer(struct Library *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
@@ -125,7 +131,8 @@ __layers_MoveLayer(struct Library *__base, LONG dummy, struct Layer * layer, LON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define MoveLayer(dummy, layer, dx, dy) __layers_MoveLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define MoveLayer(dummy, layer, dx, dy) __layers_MoveLayer((__layers_base_t)(LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define __MoveLayer_base(__ndk_b, dummy, layer, dx, dy) __layers_MoveLayer((__layers_base_t)(__ndk_b), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
 
 static __inline__ LONG
 __layers_SizeLayer(struct Library *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
@@ -141,7 +148,8 @@ __layers_SizeLayer(struct Library *__base, LONG dummy, struct Layer * layer, LON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SizeLayer(dummy, layer, dx, dy) __layers_SizeLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define SizeLayer(dummy, layer, dx, dy) __layers_SizeLayer((__layers_base_t)(LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define __SizeLayer_base(__ndk_b, dummy, layer, dx, dy) __layers_SizeLayer((__layers_base_t)(__ndk_b), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
 
 static __inline__ VOID
 __layers_ScrollLayer(struct Library *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
@@ -157,7 +165,8 @@ __layers_ScrollLayer(struct Library *__base, LONG dummy, struct Layer * layer, L
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScrollLayer(dummy, layer, dx, dy) __layers_ScrollLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define ScrollLayer(dummy, layer, dx, dy) __layers_ScrollLayer((__layers_base_t)(LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define __ScrollLayer_base(__ndk_b, dummy, layer, dx, dy) __layers_ScrollLayer((__layers_base_t)(__ndk_b), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
 
 static __inline__ LONG
 __layers_BeginUpdate(struct Library *__base, struct Layer * l)
@@ -173,7 +182,8 @@ __layers_BeginUpdate(struct Library *__base, struct Layer * l)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define BeginUpdate(l) __layers_BeginUpdate((LAYERS_BASE_NAME), (struct Layer *)(l))
+#define BeginUpdate(l) __layers_BeginUpdate((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(l))
+#define __BeginUpdate_base(__ndk_b, l) __layers_BeginUpdate((__layers_base_t)(__ndk_b), (struct Layer *)(l))
 
 static __inline__ VOID
 __layers_EndUpdate(struct Library *__base, struct Layer * layer, UWORD flag)
@@ -189,7 +199,8 @@ __layers_EndUpdate(struct Library *__base, struct Layer * layer, UWORD flag)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define EndUpdate(layer, flag) __layers_EndUpdate((LAYERS_BASE_NAME), (struct Layer *)(layer), (UWORD)(flag))
+#define EndUpdate(layer, flag) __layers_EndUpdate((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer), (UWORD)(flag))
+#define __EndUpdate_base(__ndk_b, layer, flag) __layers_EndUpdate((__layers_base_t)(__ndk_b), (struct Layer *)(layer), (UWORD)(flag))
 
 static __inline__ LONG
 __layers_DeleteLayer(struct Library *__base, LONG dummy, struct Layer * layer)
@@ -205,7 +216,8 @@ __layers_DeleteLayer(struct Library *__base, LONG dummy, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define DeleteLayer(dummy, layer) __layers_DeleteLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define DeleteLayer(dummy, layer) __layers_DeleteLayer((__layers_base_t)(LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define __DeleteLayer_base(__ndk_b, dummy, layer) __layers_DeleteLayer((__layers_base_t)(__ndk_b), (LONG)(dummy), (struct Layer *)(layer))
 
 static __inline__ VOID
 __layers_LockLayer(struct Library *__base, LONG dummy, struct Layer * layer)
@@ -221,7 +233,8 @@ __layers_LockLayer(struct Library *__base, LONG dummy, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LockLayer(dummy, layer) __layers_LockLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define LockLayer(dummy, layer) __layers_LockLayer((__layers_base_t)(LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define __LockLayer_base(__ndk_b, dummy, layer) __layers_LockLayer((__layers_base_t)(__ndk_b), (LONG)(dummy), (struct Layer *)(layer))
 
 static __inline__ VOID
 __layers_UnlockLayer(struct Library *__base, struct Layer * layer)
@@ -237,7 +250,8 @@ __layers_UnlockLayer(struct Library *__base, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockLayer(layer) __layers_UnlockLayer((LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define UnlockLayer(layer) __layers_UnlockLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define __UnlockLayer_base(__ndk_b, layer) __layers_UnlockLayer((__layers_base_t)(__ndk_b), (struct Layer *)(layer))
 
 static __inline__ VOID
 __layers_LockLayers(struct Library *__base, struct Layer_Info * li)
@@ -253,7 +267,8 @@ __layers_LockLayers(struct Library *__base, struct Layer_Info * li)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LockLayers(li) __layers_LockLayers((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define LockLayers(li) __layers_LockLayers((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __LockLayers_base(__ndk_b, li) __layers_LockLayers((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li))
 
 static __inline__ VOID
 __layers_UnlockLayers(struct Library *__base, struct Layer_Info * li)
@@ -269,7 +284,8 @@ __layers_UnlockLayers(struct Library *__base, struct Layer_Info * li)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockLayers(li) __layers_UnlockLayers((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define UnlockLayers(li) __layers_UnlockLayers((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __UnlockLayers_base(__ndk_b, li) __layers_UnlockLayers((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li))
 
 static __inline__ VOID
 __layers_LockLayerInfo(struct Library *__base, struct Layer_Info * li)
@@ -285,7 +301,8 @@ __layers_LockLayerInfo(struct Library *__base, struct Layer_Info * li)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LockLayerInfo(li) __layers_LockLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define LockLayerInfo(li) __layers_LockLayerInfo((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __LockLayerInfo_base(__ndk_b, li) __layers_LockLayerInfo((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li))
 
 static __inline__ VOID
 __layers_SwapBitsRastPortClipRect(struct Library *__base, struct RastPort * rp, struct ClipRect * cr)
@@ -301,7 +318,8 @@ __layers_SwapBitsRastPortClipRect(struct Library *__base, struct RastPort * rp, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SwapBitsRastPortClipRect(rp, cr) __layers_SwapBitsRastPortClipRect((LAYERS_BASE_NAME), (struct RastPort *)(rp), (struct ClipRect *)(cr))
+#define SwapBitsRastPortClipRect(rp, cr) __layers_SwapBitsRastPortClipRect((__layers_base_t)(LAYERS_BASE_NAME), (struct RastPort *)(rp), (struct ClipRect *)(cr))
+#define __SwapBitsRastPortClipRect_base(__ndk_b, rp, cr) __layers_SwapBitsRastPortClipRect((__layers_base_t)(__ndk_b), (struct RastPort *)(rp), (struct ClipRect *)(cr))
 
 static __inline__ struct Layer *
 __layers_WhichLayer(struct Library *__base, struct Layer_Info * li, WORD x, WORD y)
@@ -317,7 +335,8 @@ __layers_WhichLayer(struct Library *__base, struct Layer_Info * li, WORD x, WORD
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Layer *)_d0;
 }
-#define WhichLayer(li, x, y) __layers_WhichLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (WORD)(x), (WORD)(y))
+#define WhichLayer(li, x, y) __layers_WhichLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li), (WORD)(x), (WORD)(y))
+#define __WhichLayer_base(__ndk_b, li, x, y) __layers_WhichLayer((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li), (WORD)(x), (WORD)(y))
 
 static __inline__ VOID
 __layers_UnlockLayerInfo(struct Library *__base, struct Layer_Info * li)
@@ -333,7 +352,8 @@ __layers_UnlockLayerInfo(struct Library *__base, struct Layer_Info * li)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockLayerInfo(li) __layers_UnlockLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define UnlockLayerInfo(li) __layers_UnlockLayerInfo((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __UnlockLayerInfo_base(__ndk_b, li) __layers_UnlockLayerInfo((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li))
 
 static __inline__ struct Layer_Info *
 __layers_NewLayerInfo(struct Library *__base)
@@ -349,7 +369,8 @@ __layers_NewLayerInfo(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Layer_Info *)_d0;
 }
-#define NewLayerInfo() __layers_NewLayerInfo((LAYERS_BASE_NAME))
+#define NewLayerInfo() __layers_NewLayerInfo((__layers_base_t)(LAYERS_BASE_NAME))
+#define __NewLayerInfo_base(__ndk_b) __layers_NewLayerInfo((__layers_base_t)(__ndk_b))
 
 static __inline__ VOID
 __layers_DisposeLayerInfo(struct Library *__base, struct Layer_Info * li)
@@ -365,7 +386,8 @@ __layers_DisposeLayerInfo(struct Library *__base, struct Layer_Info * li)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DisposeLayerInfo(li) __layers_DisposeLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define DisposeLayerInfo(li) __layers_DisposeLayerInfo((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __DisposeLayerInfo_base(__ndk_b, li) __layers_DisposeLayerInfo((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li))
 
 static __inline__ LONG
 __layers_FattenLayerInfo(struct Library *__base, struct Layer_Info * li)
@@ -381,7 +403,8 @@ __layers_FattenLayerInfo(struct Library *__base, struct Layer_Info * li)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define FattenLayerInfo(li) __layers_FattenLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define FattenLayerInfo(li) __layers_FattenLayerInfo((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __FattenLayerInfo_base(__ndk_b, li) __layers_FattenLayerInfo((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li))
 
 static __inline__ VOID
 __layers_ThinLayerInfo(struct Library *__base, struct Layer_Info * li)
@@ -397,7 +420,8 @@ __layers_ThinLayerInfo(struct Library *__base, struct Layer_Info * li)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ThinLayerInfo(li) __layers_ThinLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define ThinLayerInfo(li) __layers_ThinLayerInfo((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __ThinLayerInfo_base(__ndk_b, li) __layers_ThinLayerInfo((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li))
 
 static __inline__ LONG
 __layers_MoveLayerInFrontOf(struct Library *__base, struct Layer * layer_to_move, struct Layer * other_layer)
@@ -413,7 +437,8 @@ __layers_MoveLayerInFrontOf(struct Library *__base, struct Layer * layer_to_move
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define MoveLayerInFrontOf(layer_to_move, other_layer) __layers_MoveLayerInFrontOf((LAYERS_BASE_NAME), (struct Layer *)(layer_to_move), (struct Layer *)(other_layer))
+#define MoveLayerInFrontOf(layer_to_move, other_layer) __layers_MoveLayerInFrontOf((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer_to_move), (struct Layer *)(other_layer))
+#define __MoveLayerInFrontOf_base(__ndk_b, layer_to_move, other_layer) __layers_MoveLayerInFrontOf((__layers_base_t)(__ndk_b), (struct Layer *)(layer_to_move), (struct Layer *)(other_layer))
 
 static __inline__ struct Region *
 __layers_InstallClipRegion(struct Library *__base, struct Layer * layer, CONST struct Region * region)
@@ -429,7 +454,8 @@ __layers_InstallClipRegion(struct Library *__base, struct Layer * layer, CONST s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Region *)_d0;
 }
-#define InstallClipRegion(layer, region) __layers_InstallClipRegion((LAYERS_BASE_NAME), (struct Layer *)(layer), (CONST struct Region *)(region))
+#define InstallClipRegion(layer, region) __layers_InstallClipRegion((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer), (CONST struct Region *)(region))
+#define __InstallClipRegion_base(__ndk_b, layer, region) __layers_InstallClipRegion((__layers_base_t)(__ndk_b), (struct Layer *)(layer), (CONST struct Region *)(region))
 
 static __inline__ LONG
 __layers_MoveSizeLayer(struct Library *__base, struct Layer * layer, LONG dx, LONG dy, LONG dw, LONG dh)
@@ -447,7 +473,8 @@ __layers_MoveSizeLayer(struct Library *__base, struct Layer * layer, LONG dx, LO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define MoveSizeLayer(layer, dx, dy, dw, dh) __layers_MoveSizeLayer((LAYERS_BASE_NAME), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy), (LONG)(dw), (LONG)(dh))
+#define MoveSizeLayer(layer, dx, dy, dw, dh) __layers_MoveSizeLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy), (LONG)(dw), (LONG)(dh))
+#define __MoveSizeLayer_base(__ndk_b, layer, dx, dy, dw, dh) __layers_MoveSizeLayer((__layers_base_t)(__ndk_b), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy), (LONG)(dw), (LONG)(dh))
 
 static __inline__ struct Layer *
 __layers_CreateUpfrontHookLayer(struct Library *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct Hook * hook, struct BitMap * bm2)
@@ -468,7 +495,8 @@ __layers_CreateUpfrontHookLayer(struct Library *__base, struct Layer_Info * li, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Layer *)_d0;
 }
-#define CreateUpfrontHookLayer(li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateUpfrontHookLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
+#define CreateUpfrontHookLayer(li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateUpfrontHookLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
+#define __CreateUpfrontHookLayer_base(__ndk_b, li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateUpfrontHookLayer((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
 
 static __inline__ struct Layer *
 __layers_CreateBehindHookLayer(struct Library *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct Hook * hook, struct BitMap * bm2)
@@ -489,7 +517,8 @@ __layers_CreateBehindHookLayer(struct Library *__base, struct Layer_Info * li, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Layer *)_d0;
 }
-#define CreateBehindHookLayer(li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateBehindHookLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
+#define CreateBehindHookLayer(li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateBehindHookLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
+#define __CreateBehindHookLayer_base(__ndk_b, li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateBehindHookLayer((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
 
 static __inline__ struct Hook *
 __layers_InstallLayerHook(struct Library *__base, struct Layer * layer, struct Hook * hook)
@@ -505,7 +534,8 @@ __layers_InstallLayerHook(struct Library *__base, struct Layer * layer, struct H
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Hook *)_d0;
 }
-#define InstallLayerHook(layer, hook) __layers_InstallLayerHook((LAYERS_BASE_NAME), (struct Layer *)(layer), (struct Hook *)(hook))
+#define InstallLayerHook(layer, hook) __layers_InstallLayerHook((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer), (struct Hook *)(hook))
+#define __InstallLayerHook_base(__ndk_b, layer, hook) __layers_InstallLayerHook((__layers_base_t)(__ndk_b), (struct Layer *)(layer), (struct Hook *)(hook))
 
 static __inline__ struct Hook *
 __layers_InstallLayerInfoHook(struct Library *__base, struct Layer_Info * li, CONST struct Hook * hook)
@@ -521,7 +551,8 @@ __layers_InstallLayerInfoHook(struct Library *__base, struct Layer_Info * li, CO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Hook *)_d0;
 }
-#define InstallLayerInfoHook(li, hook) __layers_InstallLayerInfoHook((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (CONST struct Hook *)(hook))
+#define InstallLayerInfoHook(li, hook) __layers_InstallLayerInfoHook((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li), (CONST struct Hook *)(hook))
+#define __InstallLayerInfoHook_base(__ndk_b, li, hook) __layers_InstallLayerInfoHook((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li), (CONST struct Hook *)(hook))
 
 static __inline__ VOID
 __layers_SortLayerCR(struct Library *__base, struct Layer * layer, WORD dx, WORD dy)
@@ -537,7 +568,8 @@ __layers_SortLayerCR(struct Library *__base, struct Layer * layer, WORD dx, WORD
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SortLayerCR(layer, dx, dy) __layers_SortLayerCR((LAYERS_BASE_NAME), (struct Layer *)(layer), (WORD)(dx), (WORD)(dy))
+#define SortLayerCR(layer, dx, dy) __layers_SortLayerCR((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer), (WORD)(dx), (WORD)(dy))
+#define __SortLayerCR_base(__ndk_b, layer, dx, dy) __layers_SortLayerCR((__layers_base_t)(__ndk_b), (struct Layer *)(layer), (WORD)(dx), (WORD)(dy))
 
 static __inline__ VOID
 __layers_DoHookClipRects(struct Library *__base, struct Hook * hook, struct RastPort * rport, CONST struct Rectangle * rect)
@@ -554,7 +586,8 @@ __layers_DoHookClipRects(struct Library *__base, struct Hook * hook, struct Rast
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DoHookClipRects(hook, rport, rect) __layers_DoHookClipRects((LAYERS_BASE_NAME), (struct Hook *)(hook), (struct RastPort *)(rport), (CONST struct Rectangle *)(rect))
+#define DoHookClipRects(hook, rport, rect) __layers_DoHookClipRects((__layers_base_t)(LAYERS_BASE_NAME), (struct Hook *)(hook), (struct RastPort *)(rport), (CONST struct Rectangle *)(rect))
+#define __DoHookClipRects_base(__ndk_b, hook, rport, rect) __layers_DoHookClipRects((__layers_base_t)(__ndk_b), (struct Hook *)(hook), (struct RastPort *)(rport), (CONST struct Rectangle *)(rect))
 
 static __inline__ BOOL
 __layers_LayerOccluded(struct Library *__base, struct Layer * layer)
@@ -570,7 +603,8 @@ __layers_LayerOccluded(struct Library *__base, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define LayerOccluded(layer) __layers_LayerOccluded((LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define LayerOccluded(layer) __layers_LayerOccluded((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define __LayerOccluded_base(__ndk_b, layer) __layers_LayerOccluded((__layers_base_t)(__ndk_b), (struct Layer *)(layer))
 
 static __inline__ LONG
 __layers_HideLayer(struct Library *__base, struct Layer * layer)
@@ -586,7 +620,8 @@ __layers_HideLayer(struct Library *__base, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define HideLayer(layer) __layers_HideLayer((LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define HideLayer(layer) __layers_HideLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define __HideLayer_base(__ndk_b, layer) __layers_HideLayer((__layers_base_t)(__ndk_b), (struct Layer *)(layer))
 
 static __inline__ LONG
 __layers_ShowLayer(struct Library *__base, struct Layer * layer, struct Layer * in_front_of)
@@ -602,7 +637,8 @@ __layers_ShowLayer(struct Library *__base, struct Layer * layer, struct Layer * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ShowLayer(layer, in_front_of) __layers_ShowLayer((LAYERS_BASE_NAME), (struct Layer *)(layer), (struct Layer *)(in_front_of))
+#define ShowLayer(layer, in_front_of) __layers_ShowLayer((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer *)(layer), (struct Layer *)(in_front_of))
+#define __ShowLayer_base(__ndk_b, layer, in_front_of) __layers_ShowLayer((__layers_base_t)(__ndk_b), (struct Layer *)(layer), (struct Layer *)(in_front_of))
 
 static __inline__ BOOL
 __layers_SetLayerInfoBounds(struct Library *__base, struct Layer_Info * li, CONST struct Rectangle * bounds)
@@ -618,6 +654,7 @@ __layers_SetLayerInfoBounds(struct Library *__base, struct Layer_Info * li, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetLayerInfoBounds(li, bounds) __layers_SetLayerInfoBounds((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (CONST struct Rectangle *)(bounds))
+#define SetLayerInfoBounds(li, bounds) __layers_SetLayerInfoBounds((__layers_base_t)(LAYERS_BASE_NAME), (struct Layer_Info *)(li), (CONST struct Rectangle *)(bounds))
+#define __SetLayerInfoBounds_base(__ndk_b, li, bounds) __layers_SetLayerInfoBounds((__layers_base_t)(__ndk_b), (struct Layer_Info *)(li), (CONST struct Rectangle *)(bounds))
 
 #endif /* INLINE_LAYERS_H */

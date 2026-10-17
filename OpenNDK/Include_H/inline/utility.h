@@ -13,7 +13,8 @@
 #define UTILITY_BASE_NAME UtilityBase
 #endif
 
-struct UtilityBase;
+struct Library;
+typedef struct Library *__utility_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -24,11 +25,11 @@ struct UtilityBase;
 #endif
 
 static __inline__ struct TagItem *
-__utility_FindTagItem(struct UtilityBase *__base, Tag tagVal, CONST struct TagItem * tagList)
+__utility_FindTagItem(struct Library *__base, Tag tagVal, CONST struct TagItem * tagList)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(tagVal);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
@@ -37,15 +38,16 @@ __utility_FindTagItem(struct UtilityBase *__base, Tag tagVal, CONST struct TagIt
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TagItem *)_d0;
 }
-#define FindTagItem(tagVal, tagList) __utility_FindTagItem((UTILITY_BASE_NAME), (Tag)(tagVal), (CONST struct TagItem *)(tagList))
+#define FindTagItem(tagVal, tagList) __utility_FindTagItem((__utility_base_t)(UTILITY_BASE_NAME), (Tag)(tagVal), (CONST struct TagItem *)(tagList))
+#define __FindTagItem_base(__ndk_b, tagVal, tagList) __utility_FindTagItem((__utility_base_t)(__ndk_b), (Tag)(tagVal), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
-__utility_GetTagData(struct UtilityBase *__base, Tag tagValue, ULONG defaultVal, CONST struct TagItem * tagList)
+__utility_GetTagData(struct Library *__base, Tag tagValue, ULONG defaultVal, CONST struct TagItem * tagList)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(tagValue);
 	register ULONG _d1 __asm("d1") = (ULONG)(defaultVal);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -53,15 +55,16 @@ __utility_GetTagData(struct UtilityBase *__base, Tag tagValue, ULONG defaultVal,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetTagData(tagValue, defaultVal, tagList) __utility_GetTagData((UTILITY_BASE_NAME), (Tag)(tagValue), (ULONG)(defaultVal), (CONST struct TagItem *)(tagList))
+#define GetTagData(tagValue, defaultVal, tagList) __utility_GetTagData((__utility_base_t)(UTILITY_BASE_NAME), (Tag)(tagValue), (ULONG)(defaultVal), (CONST struct TagItem *)(tagList))
+#define __GetTagData_base(__ndk_b, tagValue, defaultVal, tagList) __utility_GetTagData((__utility_base_t)(__ndk_b), (Tag)(tagValue), (ULONG)(defaultVal), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
-__utility_PackBoolTags(struct UtilityBase *__base, ULONG initialFlags, CONST struct TagItem * tagList, CONST struct TagItem * boolMap)
+__utility_PackBoolTags(struct Library *__base, ULONG initialFlags, CONST struct TagItem * tagList, CONST struct TagItem * boolMap)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(initialFlags);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
 	register ULONG _a1 __asm("a1") = (ULONG)(boolMap);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -69,13 +72,14 @@ __utility_PackBoolTags(struct UtilityBase *__base, ULONG initialFlags, CONST str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define PackBoolTags(initialFlags, tagList, boolMap) __utility_PackBoolTags((UTILITY_BASE_NAME), (ULONG)(initialFlags), (CONST struct TagItem *)(tagList), (CONST struct TagItem *)(boolMap))
+#define PackBoolTags(initialFlags, tagList, boolMap) __utility_PackBoolTags((__utility_base_t)(UTILITY_BASE_NAME), (ULONG)(initialFlags), (CONST struct TagItem *)(tagList), (CONST struct TagItem *)(boolMap))
+#define __PackBoolTags_base(__ndk_b, initialFlags, tagList, boolMap) __utility_PackBoolTags((__utility_base_t)(__ndk_b), (ULONG)(initialFlags), (CONST struct TagItem *)(tagList), (CONST struct TagItem *)(boolMap))
 
 static __inline__ struct TagItem *
-__utility_NextTagItem(struct UtilityBase *__base, struct TagItem ** tagListPtr)
+__utility_NextTagItem(struct Library *__base, struct TagItem ** tagListPtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagListPtr);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -85,15 +89,16 @@ __utility_NextTagItem(struct UtilityBase *__base, struct TagItem ** tagListPtr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TagItem *)_d0;
 }
-#define NextTagItem(tagListPtr) __utility_NextTagItem((UTILITY_BASE_NAME), (struct TagItem **)(tagListPtr))
+#define NextTagItem(tagListPtr) __utility_NextTagItem((__utility_base_t)(UTILITY_BASE_NAME), (struct TagItem **)(tagListPtr))
+#define __NextTagItem_base(__ndk_b, tagListPtr) __utility_NextTagItem((__utility_base_t)(__ndk_b), (struct TagItem **)(tagListPtr))
 
 static __inline__ VOID
-__utility_FilterTagChanges(struct UtilityBase *__base, struct TagItem * changeList, CONST struct TagItem * originalList, ULONG apply)
+__utility_FilterTagChanges(struct Library *__base, struct TagItem * changeList, CONST struct TagItem * originalList, ULONG apply)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(changeList);
 	register ULONG _a1 __asm("a1") = (ULONG)(originalList);
 	register ULONG _d0 __asm("d0") = (ULONG)(apply);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -101,15 +106,16 @@ __utility_FilterTagChanges(struct UtilityBase *__base, struct TagItem * changeLi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FilterTagChanges(changeList, originalList, apply) __utility_FilterTagChanges((UTILITY_BASE_NAME), (struct TagItem *)(changeList), (CONST struct TagItem *)(originalList), (ULONG)(apply))
+#define FilterTagChanges(changeList, originalList, apply) __utility_FilterTagChanges((__utility_base_t)(UTILITY_BASE_NAME), (struct TagItem *)(changeList), (CONST struct TagItem *)(originalList), (ULONG)(apply))
+#define __FilterTagChanges_base(__ndk_b, changeList, originalList, apply) __utility_FilterTagChanges((__utility_base_t)(__ndk_b), (struct TagItem *)(changeList), (CONST struct TagItem *)(originalList), (ULONG)(apply))
 
 static __inline__ VOID
-__utility_MapTags(struct UtilityBase *__base, struct TagItem * tagList, CONST struct TagItem * mapList, ULONG mapType)
+__utility_MapTags(struct Library *__base, struct TagItem * tagList, CONST struct TagItem * mapList, ULONG mapType)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
 	register ULONG _a1 __asm("a1") = (ULONG)(mapList);
 	register ULONG _d0 __asm("d0") = (ULONG)(mapType);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -117,13 +123,14 @@ __utility_MapTags(struct UtilityBase *__base, struct TagItem * tagList, CONST st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define MapTags(tagList, mapList, mapType) __utility_MapTags((UTILITY_BASE_NAME), (struct TagItem *)(tagList), (CONST struct TagItem *)(mapList), (ULONG)(mapType))
+#define MapTags(tagList, mapList, mapType) __utility_MapTags((__utility_base_t)(UTILITY_BASE_NAME), (struct TagItem *)(tagList), (CONST struct TagItem *)(mapList), (ULONG)(mapType))
+#define __MapTags_base(__ndk_b, tagList, mapList, mapType) __utility_MapTags((__utility_base_t)(__ndk_b), (struct TagItem *)(tagList), (CONST struct TagItem *)(mapList), (ULONG)(mapType))
 
 static __inline__ struct TagItem *
-__utility_AllocateTagItems(struct UtilityBase *__base, ULONG numTags)
+__utility_AllocateTagItems(struct Library *__base, ULONG numTags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(numTags);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -133,13 +140,14 @@ __utility_AllocateTagItems(struct UtilityBase *__base, ULONG numTags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TagItem *)_d0;
 }
-#define AllocateTagItems(numTags) __utility_AllocateTagItems((UTILITY_BASE_NAME), (ULONG)(numTags))
+#define AllocateTagItems(numTags) __utility_AllocateTagItems((__utility_base_t)(UTILITY_BASE_NAME), (ULONG)(numTags))
+#define __AllocateTagItems_base(__ndk_b, numTags) __utility_AllocateTagItems((__utility_base_t)(__ndk_b), (ULONG)(numTags))
 
 static __inline__ struct TagItem *
-__utility_CloneTagItems(struct UtilityBase *__base, CONST struct TagItem * tagList)
+__utility_CloneTagItems(struct Library *__base, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -149,13 +157,14 @@ __utility_CloneTagItems(struct UtilityBase *__base, CONST struct TagItem * tagLi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TagItem *)_d0;
 }
-#define CloneTagItems(tagList) __utility_CloneTagItems((UTILITY_BASE_NAME), (CONST struct TagItem *)(tagList))
+#define CloneTagItems(tagList) __utility_CloneTagItems((__utility_base_t)(UTILITY_BASE_NAME), (CONST struct TagItem *)(tagList))
+#define __CloneTagItems_base(__ndk_b, tagList) __utility_CloneTagItems((__utility_base_t)(__ndk_b), (CONST struct TagItem *)(tagList))
 
 static __inline__ VOID
-__utility_FreeTagItems(struct UtilityBase *__base, struct TagItem * tagList)
+__utility_FreeTagItems(struct Library *__base, struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -165,14 +174,15 @@ __utility_FreeTagItems(struct UtilityBase *__base, struct TagItem * tagList)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeTagItems(tagList) __utility_FreeTagItems((UTILITY_BASE_NAME), (struct TagItem *)(tagList))
+#define FreeTagItems(tagList) __utility_FreeTagItems((__utility_base_t)(UTILITY_BASE_NAME), (struct TagItem *)(tagList))
+#define __FreeTagItems_base(__ndk_b, tagList) __utility_FreeTagItems((__utility_base_t)(__ndk_b), (struct TagItem *)(tagList))
 
 static __inline__ VOID
-__utility_RefreshTagItemClones(struct UtilityBase *__base, struct TagItem * clone, CONST struct TagItem * original)
+__utility_RefreshTagItemClones(struct Library *__base, struct TagItem * clone, CONST struct TagItem * original)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(clone);
 	register ULONG _a1 __asm("a1") = (ULONG)(original);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -181,14 +191,15 @@ __utility_RefreshTagItemClones(struct UtilityBase *__base, struct TagItem * clon
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RefreshTagItemClones(clone, original) __utility_RefreshTagItemClones((UTILITY_BASE_NAME), (struct TagItem *)(clone), (CONST struct TagItem *)(original))
+#define RefreshTagItemClones(clone, original) __utility_RefreshTagItemClones((__utility_base_t)(UTILITY_BASE_NAME), (struct TagItem *)(clone), (CONST struct TagItem *)(original))
+#define __RefreshTagItemClones_base(__ndk_b, clone, original) __utility_RefreshTagItemClones((__utility_base_t)(__ndk_b), (struct TagItem *)(clone), (CONST struct TagItem *)(original))
 
 static __inline__ BOOL
-__utility_TagInArray(struct UtilityBase *__base, Tag tagValue, CONST Tag * tagArray)
+__utility_TagInArray(struct Library *__base, Tag tagValue, CONST Tag * tagArray)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(tagValue);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagArray);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -197,15 +208,16 @@ __utility_TagInArray(struct UtilityBase *__base, Tag tagValue, CONST Tag * tagAr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define TagInArray(tagValue, tagArray) __utility_TagInArray((UTILITY_BASE_NAME), (Tag)(tagValue), (CONST Tag *)(tagArray))
+#define TagInArray(tagValue, tagArray) __utility_TagInArray((__utility_base_t)(UTILITY_BASE_NAME), (Tag)(tagValue), (CONST Tag *)(tagArray))
+#define __TagInArray_base(__ndk_b, tagValue, tagArray) __utility_TagInArray((__utility_base_t)(__ndk_b), (Tag)(tagValue), (CONST Tag *)(tagArray))
 
 static __inline__ ULONG
-__utility_FilterTagItems(struct UtilityBase *__base, struct TagItem * tagList, CONST Tag * filterArray, ULONG logic)
+__utility_FilterTagItems(struct Library *__base, struct TagItem * tagList, CONST Tag * filterArray, ULONG logic)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
 	register ULONG _a1 __asm("a1") = (ULONG)(filterArray);
 	register ULONG _d0 __asm("d0") = (ULONG)(logic);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -213,15 +225,16 @@ __utility_FilterTagItems(struct UtilityBase *__base, struct TagItem * tagList, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define FilterTagItems(tagList, filterArray, logic) __utility_FilterTagItems((UTILITY_BASE_NAME), (struct TagItem *)(tagList), (CONST Tag *)(filterArray), (ULONG)(logic))
+#define FilterTagItems(tagList, filterArray, logic) __utility_FilterTagItems((__utility_base_t)(UTILITY_BASE_NAME), (struct TagItem *)(tagList), (CONST Tag *)(filterArray), (ULONG)(logic))
+#define __FilterTagItems_base(__ndk_b, tagList, filterArray, logic) __utility_FilterTagItems((__utility_base_t)(__ndk_b), (struct TagItem *)(tagList), (CONST Tag *)(filterArray), (ULONG)(logic))
 
 static __inline__ ULONG
-__utility_CallHookPkt(struct UtilityBase *__base, struct Hook * hook, APTR object, APTR paramPacket)
+__utility_CallHookPkt(struct Library *__base, struct Hook * hook, APTR object, APTR paramPacket)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(hook);
 	register ULONG _a2 __asm("a2") = (ULONG)(object);
 	register ULONG _a1 __asm("a1") = (ULONG)(paramPacket);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -230,14 +243,15 @@ __utility_CallHookPkt(struct UtilityBase *__base, struct Hook * hook, APTR objec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CallHookPkt(hook, object, paramPacket) __utility_CallHookPkt((UTILITY_BASE_NAME), (struct Hook *)(hook), (APTR)(object), (APTR)(paramPacket))
+#define CallHookPkt(hook, object, paramPacket) __utility_CallHookPkt((__utility_base_t)(UTILITY_BASE_NAME), (struct Hook *)(hook), (APTR)(object), (APTR)(paramPacket))
+#define __CallHookPkt_base(__ndk_b, hook, object, paramPacket) __utility_CallHookPkt((__utility_base_t)(__ndk_b), (struct Hook *)(hook), (APTR)(object), (APTR)(paramPacket))
 
 static __inline__ VOID
-__utility_Amiga2Date(struct UtilityBase *__base, ULONG seconds, struct ClockData * result)
+__utility_Amiga2Date(struct Library *__base, ULONG seconds, struct ClockData * result)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(seconds);
 	register ULONG _a0 __asm("a0") = (ULONG)(result);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -246,13 +260,14 @@ __utility_Amiga2Date(struct UtilityBase *__base, ULONG seconds, struct ClockData
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Amiga2Date(seconds, result) __utility_Amiga2Date((UTILITY_BASE_NAME), (ULONG)(seconds), (struct ClockData *)(result))
+#define Amiga2Date(seconds, result) __utility_Amiga2Date((__utility_base_t)(UTILITY_BASE_NAME), (ULONG)(seconds), (struct ClockData *)(result))
+#define __Amiga2Date_base(__ndk_b, seconds, result) __utility_Amiga2Date((__utility_base_t)(__ndk_b), (ULONG)(seconds), (struct ClockData *)(result))
 
 static __inline__ ULONG
-__utility_Date2Amiga(struct UtilityBase *__base, CONST struct ClockData * date)
+__utility_Date2Amiga(struct Library *__base, CONST struct ClockData * date)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(date);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -262,13 +277,14 @@ __utility_Date2Amiga(struct UtilityBase *__base, CONST struct ClockData * date)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define Date2Amiga(date) __utility_Date2Amiga((UTILITY_BASE_NAME), (CONST struct ClockData *)(date))
+#define Date2Amiga(date) __utility_Date2Amiga((__utility_base_t)(UTILITY_BASE_NAME), (CONST struct ClockData *)(date))
+#define __Date2Amiga_base(__ndk_b, date) __utility_Date2Amiga((__utility_base_t)(__ndk_b), (CONST struct ClockData *)(date))
 
 static __inline__ ULONG
-__utility_CheckDate(struct UtilityBase *__base, CONST struct ClockData * date)
+__utility_CheckDate(struct Library *__base, CONST struct ClockData * date)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(date);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -278,14 +294,15 @@ __utility_CheckDate(struct UtilityBase *__base, CONST struct ClockData * date)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CheckDate(date) __utility_CheckDate((UTILITY_BASE_NAME), (CONST struct ClockData *)(date))
+#define CheckDate(date) __utility_CheckDate((__utility_base_t)(UTILITY_BASE_NAME), (CONST struct ClockData *)(date))
+#define __CheckDate_base(__ndk_b, date) __utility_CheckDate((__utility_base_t)(__ndk_b), (CONST struct ClockData *)(date))
 
 static __inline__ LONG
-__utility_SMult32(struct UtilityBase *__base, LONG arg1, LONG arg2)
+__utility_SMult32(struct Library *__base, LONG arg1, LONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(arg1);
 	register ULONG _d1 __asm("d1") = (ULONG)(arg2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -138(%/a6)"
@@ -294,14 +311,15 @@ __utility_SMult32(struct UtilityBase *__base, LONG arg1, LONG arg2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SMult32(arg1, arg2) __utility_SMult32((UTILITY_BASE_NAME), (LONG)(arg1), (LONG)(arg2))
+#define SMult32(arg1, arg2) __utility_SMult32((__utility_base_t)(UTILITY_BASE_NAME), (LONG)(arg1), (LONG)(arg2))
+#define __SMult32_base(__ndk_b, arg1, arg2) __utility_SMult32((__utility_base_t)(__ndk_b), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ ULONG
-__utility_UMult32(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
+__utility_UMult32(struct Library *__base, ULONG arg1, ULONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(arg1);
 	register ULONG _d1 __asm("d1") = (ULONG)(arg2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
@@ -310,14 +328,15 @@ __utility_UMult32(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UMult32(arg1, arg2) __utility_UMult32((UTILITY_BASE_NAME), (ULONG)(arg1), (ULONG)(arg2))
+#define UMult32(arg1, arg2) __utility_UMult32((__utility_base_t)(UTILITY_BASE_NAME), (ULONG)(arg1), (ULONG)(arg2))
+#define __UMult32_base(__ndk_b, arg1, arg2) __utility_UMult32((__utility_base_t)(__ndk_b), (ULONG)(arg1), (ULONG)(arg2))
 
 static __inline__ LONG
-__utility_SDivMod32(struct UtilityBase *__base, LONG dividend, LONG divisor)
+__utility_SDivMod32(struct Library *__base, LONG dividend, LONG divisor)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(dividend);
 	register ULONG _d1 __asm("d1") = (ULONG)(divisor);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -150(%/a6)"
@@ -326,14 +345,15 @@ __utility_SDivMod32(struct UtilityBase *__base, LONG dividend, LONG divisor)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SDivMod32(dividend, divisor) __utility_SDivMod32((UTILITY_BASE_NAME), (LONG)(dividend), (LONG)(divisor))
+#define SDivMod32(dividend, divisor) __utility_SDivMod32((__utility_base_t)(UTILITY_BASE_NAME), (LONG)(dividend), (LONG)(divisor))
+#define __SDivMod32_base(__ndk_b, dividend, divisor) __utility_SDivMod32((__utility_base_t)(__ndk_b), (LONG)(dividend), (LONG)(divisor))
 
 static __inline__ ULONG
-__utility_UDivMod32(struct UtilityBase *__base, ULONG dividend, ULONG divisor)
+__utility_UDivMod32(struct Library *__base, ULONG dividend, ULONG divisor)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(dividend);
 	register ULONG _d1 __asm("d1") = (ULONG)(divisor);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -156(%/a6)"
@@ -342,14 +362,15 @@ __utility_UDivMod32(struct UtilityBase *__base, ULONG dividend, ULONG divisor)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UDivMod32(dividend, divisor) __utility_UDivMod32((UTILITY_BASE_NAME), (ULONG)(dividend), (ULONG)(divisor))
+#define UDivMod32(dividend, divisor) __utility_UDivMod32((__utility_base_t)(UTILITY_BASE_NAME), (ULONG)(dividend), (ULONG)(divisor))
+#define __UDivMod32_base(__ndk_b, dividend, divisor) __utility_UDivMod32((__utility_base_t)(__ndk_b), (ULONG)(dividend), (ULONG)(divisor))
 
 static __inline__ LONG
-__utility_Stricmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR string2)
+__utility_Stricmp(struct Library *__base, CONST_STRPTR string1, CONST_STRPTR string2)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(string1);
 	register ULONG _a1 __asm("a1") = (ULONG)(string2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
@@ -358,15 +379,16 @@ __utility_Stricmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Stricmp(string1, string2) __utility_Stricmp((UTILITY_BASE_NAME), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2))
+#define Stricmp(string1, string2) __utility_Stricmp((__utility_base_t)(UTILITY_BASE_NAME), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2))
+#define __Stricmp_base(__ndk_b, string1, string2) __utility_Stricmp((__utility_base_t)(__ndk_b), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2))
 
 static __inline__ LONG
-__utility_Strnicmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPTR string2, LONG length)
+__utility_Strnicmp(struct Library *__base, CONST_STRPTR string1, CONST_STRPTR string2, LONG length)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(string1);
 	register ULONG _a1 __asm("a1") = (ULONG)(string2);
 	register ULONG _d0 __asm("d0") = (ULONG)(length);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -168(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -374,13 +396,14 @@ __utility_Strnicmp(struct UtilityBase *__base, CONST_STRPTR string1, CONST_STRPT
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Strnicmp(string1, string2, length) __utility_Strnicmp((UTILITY_BASE_NAME), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length))
+#define Strnicmp(string1, string2, length) __utility_Strnicmp((__utility_base_t)(UTILITY_BASE_NAME), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length))
+#define __Strnicmp_base(__ndk_b, string1, string2, length) __utility_Strnicmp((__utility_base_t)(__ndk_b), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length))
 
 static __inline__ UBYTE
-__utility_ToUpper(struct UtilityBase *__base, UBYTE character)
+__utility_ToUpper(struct Library *__base, UBYTE character)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -390,13 +413,14 @@ __utility_ToUpper(struct UtilityBase *__base, UBYTE character)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE)_d0;
 }
-#define ToUpper(character) __utility_ToUpper((UTILITY_BASE_NAME), (UBYTE)(character))
+#define ToUpper(character) __utility_ToUpper((__utility_base_t)(UTILITY_BASE_NAME), (UBYTE)(character))
+#define __ToUpper_base(__ndk_b, character) __utility_ToUpper((__utility_base_t)(__ndk_b), (UBYTE)(character))
 
 static __inline__ UBYTE
-__utility_ToLower(struct UtilityBase *__base, UBYTE character)
+__utility_ToLower(struct Library *__base, UBYTE character)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -406,14 +430,15 @@ __utility_ToLower(struct UtilityBase *__base, UBYTE character)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE)_d0;
 }
-#define ToLower(character) __utility_ToLower((UTILITY_BASE_NAME), (UBYTE)(character))
+#define ToLower(character) __utility_ToLower((__utility_base_t)(UTILITY_BASE_NAME), (UBYTE)(character))
+#define __ToLower_base(__ndk_b, character) __utility_ToLower((__utility_base_t)(__ndk_b), (UBYTE)(character))
 
 static __inline__ VOID
-__utility_ApplyTagChanges(struct UtilityBase *__base, struct TagItem * list, CONST struct TagItem * changeList)
+__utility_ApplyTagChanges(struct Library *__base, struct TagItem * list, CONST struct TagItem * changeList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
 	register ULONG _a1 __asm("a1") = (ULONG)(changeList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -186(%/a6)"
@@ -422,14 +447,15 @@ __utility_ApplyTagChanges(struct UtilityBase *__base, struct TagItem * list, CON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ApplyTagChanges(list, changeList) __utility_ApplyTagChanges((UTILITY_BASE_NAME), (struct TagItem *)(list), (CONST struct TagItem *)(changeList))
+#define ApplyTagChanges(list, changeList) __utility_ApplyTagChanges((__utility_base_t)(UTILITY_BASE_NAME), (struct TagItem *)(list), (CONST struct TagItem *)(changeList))
+#define __ApplyTagChanges_base(__ndk_b, list, changeList) __utility_ApplyTagChanges((__utility_base_t)(__ndk_b), (struct TagItem *)(list), (CONST struct TagItem *)(changeList))
 
 static __inline__ LONG
-__utility_SMult64(struct UtilityBase *__base, LONG arg1, LONG arg2)
+__utility_SMult64(struct Library *__base, LONG arg1, LONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(arg1);
 	register ULONG _d1 __asm("d1") = (ULONG)(arg2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -198(%/a6)"
@@ -438,14 +464,15 @@ __utility_SMult64(struct UtilityBase *__base, LONG arg1, LONG arg2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SMult64(arg1, arg2) __utility_SMult64((UTILITY_BASE_NAME), (LONG)(arg1), (LONG)(arg2))
+#define SMult64(arg1, arg2) __utility_SMult64((__utility_base_t)(UTILITY_BASE_NAME), (LONG)(arg1), (LONG)(arg2))
+#define __SMult64_base(__ndk_b, arg1, arg2) __utility_SMult64((__utility_base_t)(__ndk_b), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ ULONG
-__utility_UMult64(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
+__utility_UMult64(struct Library *__base, ULONG arg1, ULONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(arg1);
 	register ULONG _d1 __asm("d1") = (ULONG)(arg2);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -204(%/a6)"
@@ -454,15 +481,16 @@ __utility_UMult64(struct UtilityBase *__base, ULONG arg1, ULONG arg2)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UMult64(arg1, arg2) __utility_UMult64((UTILITY_BASE_NAME), (ULONG)(arg1), (ULONG)(arg2))
+#define UMult64(arg1, arg2) __utility_UMult64((__utility_base_t)(UTILITY_BASE_NAME), (ULONG)(arg1), (ULONG)(arg2))
+#define __UMult64_base(__ndk_b, arg1, arg2) __utility_UMult64((__utility_base_t)(__ndk_b), (ULONG)(arg1), (ULONG)(arg2))
 
 static __inline__ ULONG
-__utility_PackStructureTags(struct UtilityBase *__base, APTR pack, CONST ULONG * packTable, CONST struct TagItem * tagList)
+__utility_PackStructureTags(struct Library *__base, APTR pack, CONST ULONG * packTable, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(pack);
 	register ULONG _a1 __asm("a1") = (ULONG)(packTable);
 	register ULONG _a2 __asm("a2") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -210(%/a6)"
@@ -471,15 +499,16 @@ __utility_PackStructureTags(struct UtilityBase *__base, APTR pack, CONST ULONG *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define PackStructureTags(pack, packTable, tagList) __utility_PackStructureTags((UTILITY_BASE_NAME), (APTR)(pack), (CONST ULONG *)(packTable), (CONST struct TagItem *)(tagList))
+#define PackStructureTags(pack, packTable, tagList) __utility_PackStructureTags((__utility_base_t)(UTILITY_BASE_NAME), (APTR)(pack), (CONST ULONG *)(packTable), (CONST struct TagItem *)(tagList))
+#define __PackStructureTags_base(__ndk_b, pack, packTable, tagList) __utility_PackStructureTags((__utility_base_t)(__ndk_b), (APTR)(pack), (CONST ULONG *)(packTable), (CONST struct TagItem *)(tagList))
 
 static __inline__ ULONG
-__utility_UnpackStructureTags(struct UtilityBase *__base, CONST_APTR pack, CONST ULONG * packTable, struct TagItem * tagList)
+__utility_UnpackStructureTags(struct Library *__base, CONST_APTR pack, CONST ULONG * packTable, struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(pack);
 	register ULONG _a1 __asm("a1") = (ULONG)(packTable);
 	register ULONG _a2 __asm("a2") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -216(%/a6)"
@@ -488,14 +517,15 @@ __utility_UnpackStructureTags(struct UtilityBase *__base, CONST_APTR pack, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UnpackStructureTags(pack, packTable, tagList) __utility_UnpackStructureTags((UTILITY_BASE_NAME), (CONST_APTR)(pack), (CONST ULONG *)(packTable), (struct TagItem *)(tagList))
+#define UnpackStructureTags(pack, packTable, tagList) __utility_UnpackStructureTags((__utility_base_t)(UTILITY_BASE_NAME), (CONST_APTR)(pack), (CONST ULONG *)(packTable), (struct TagItem *)(tagList))
+#define __UnpackStructureTags_base(__ndk_b, pack, packTable, tagList) __utility_UnpackStructureTags((__utility_base_t)(__ndk_b), (CONST_APTR)(pack), (CONST ULONG *)(packTable), (struct TagItem *)(tagList))
 
 static __inline__ BOOL
-__utility_AddNamedObject(struct UtilityBase *__base, struct NamedObject * nameSpace, struct NamedObject * object)
+__utility_AddNamedObject(struct Library *__base, struct NamedObject * nameSpace, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(nameSpace);
 	register ULONG _a1 __asm("a1") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -222(%/a6)"
@@ -504,14 +534,15 @@ __utility_AddNamedObject(struct UtilityBase *__base, struct NamedObject * nameSp
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AddNamedObject(nameSpace, object) __utility_AddNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(nameSpace), (struct NamedObject *)(object))
+#define AddNamedObject(nameSpace, object) __utility_AddNamedObject((__utility_base_t)(UTILITY_BASE_NAME), (struct NamedObject *)(nameSpace), (struct NamedObject *)(object))
+#define __AddNamedObject_base(__ndk_b, nameSpace, object) __utility_AddNamedObject((__utility_base_t)(__ndk_b), (struct NamedObject *)(nameSpace), (struct NamedObject *)(object))
 
 static __inline__ struct NamedObject *
-__utility_AllocNamedObjectA(struct UtilityBase *__base, CONST_STRPTR name, CONST struct TagItem * tagList)
+__utility_AllocNamedObjectA(struct Library *__base, CONST_STRPTR name, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -228(%/a6)"
@@ -520,15 +551,25 @@ __utility_AllocNamedObjectA(struct UtilityBase *__base, CONST_STRPTR name, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct NamedObject *)_d0;
 }
-#define AllocNamedObjectA(name, tagList) __utility_AllocNamedObjectA((UTILITY_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tagList))
+#define AllocNamedObjectA(name, tagList) __utility_AllocNamedObjectA((__utility_base_t)(UTILITY_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tagList))
+#define __AllocNamedObjectA_base(__ndk_b, name, tagList) __utility_AllocNamedObjectA((__utility_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct NamedObject *
+___utility_AllocNamedObject(__utility_base_t __ndk_base, CONST_STRPTR name, Tag tag1, ...)
+{
+	return __utility_AllocNamedObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+}
+#define AllocNamedObject(name, ...) ___utility_AllocNamedObject((__utility_base_t)(UTILITY_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
+#else
 #define AllocNamedObject(name, ...) (AllocNamedObject)((CONST_STRPTR)(name), ##__VA_ARGS__)
+#endif
 
 static __inline__ LONG
-__utility_AttemptRemNamedObject(struct UtilityBase *__base, struct NamedObject * object)
+__utility_AttemptRemNamedObject(struct Library *__base, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -538,15 +579,16 @@ __utility_AttemptRemNamedObject(struct UtilityBase *__base, struct NamedObject *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AttemptRemNamedObject(object) __utility_AttemptRemNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define AttemptRemNamedObject(object) __utility_AttemptRemNamedObject((__utility_base_t)(UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define __AttemptRemNamedObject_base(__ndk_b, object) __utility_AttemptRemNamedObject((__utility_base_t)(__ndk_b), (struct NamedObject *)(object))
 
 static __inline__ struct NamedObject *
-__utility_FindNamedObject(struct UtilityBase *__base, struct NamedObject * nameSpace, CONST_STRPTR name, struct NamedObject * lastObject)
+__utility_FindNamedObject(struct Library *__base, struct NamedObject * nameSpace, CONST_STRPTR name, struct NamedObject * lastObject)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(nameSpace);
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
 	register ULONG _a2 __asm("a2") = (ULONG)(lastObject);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -240(%/a6)"
@@ -555,13 +597,14 @@ __utility_FindNamedObject(struct UtilityBase *__base, struct NamedObject * nameS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct NamedObject *)_d0;
 }
-#define FindNamedObject(nameSpace, name, lastObject) __utility_FindNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(nameSpace), (CONST_STRPTR)(name), (struct NamedObject *)(lastObject))
+#define FindNamedObject(nameSpace, name, lastObject) __utility_FindNamedObject((__utility_base_t)(UTILITY_BASE_NAME), (struct NamedObject *)(nameSpace), (CONST_STRPTR)(name), (struct NamedObject *)(lastObject))
+#define __FindNamedObject_base(__ndk_b, nameSpace, name, lastObject) __utility_FindNamedObject((__utility_base_t)(__ndk_b), (struct NamedObject *)(nameSpace), (CONST_STRPTR)(name), (struct NamedObject *)(lastObject))
 
 static __inline__ VOID
-__utility_FreeNamedObject(struct UtilityBase *__base, struct NamedObject * object)
+__utility_FreeNamedObject(struct Library *__base, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -571,13 +614,14 @@ __utility_FreeNamedObject(struct UtilityBase *__base, struct NamedObject * objec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeNamedObject(object) __utility_FreeNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define FreeNamedObject(object) __utility_FreeNamedObject((__utility_base_t)(UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define __FreeNamedObject_base(__ndk_b, object) __utility_FreeNamedObject((__utility_base_t)(__ndk_b), (struct NamedObject *)(object))
 
 static __inline__ STRPTR
-__utility_NamedObjectName(struct UtilityBase *__base, struct NamedObject * object)
+__utility_NamedObjectName(struct Library *__base, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -587,13 +631,14 @@ __utility_NamedObjectName(struct UtilityBase *__base, struct NamedObject * objec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define NamedObjectName(object) __utility_NamedObjectName((UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define NamedObjectName(object) __utility_NamedObjectName((__utility_base_t)(UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define __NamedObjectName_base(__ndk_b, object) __utility_NamedObjectName((__utility_base_t)(__ndk_b), (struct NamedObject *)(object))
 
 static __inline__ VOID
-__utility_ReleaseNamedObject(struct UtilityBase *__base, struct NamedObject * object)
+__utility_ReleaseNamedObject(struct Library *__base, struct NamedObject * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -603,14 +648,15 @@ __utility_ReleaseNamedObject(struct UtilityBase *__base, struct NamedObject * ob
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseNamedObject(object) __utility_ReleaseNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define ReleaseNamedObject(object) __utility_ReleaseNamedObject((__utility_base_t)(UTILITY_BASE_NAME), (struct NamedObject *)(object))
+#define __ReleaseNamedObject_base(__ndk_b, object) __utility_ReleaseNamedObject((__utility_base_t)(__ndk_b), (struct NamedObject *)(object))
 
 static __inline__ VOID
-__utility_RemNamedObject(struct UtilityBase *__base, struct NamedObject * object, struct Message * message)
+__utility_RemNamedObject(struct Library *__base, struct NamedObject * object, struct Message * message)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
 	register ULONG _a1 __asm("a1") = (ULONG)(message);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -264(%/a6)"
@@ -619,12 +665,13 @@ __utility_RemNamedObject(struct UtilityBase *__base, struct NamedObject * object
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemNamedObject(object, message) __utility_RemNamedObject((UTILITY_BASE_NAME), (struct NamedObject *)(object), (struct Message *)(message))
+#define RemNamedObject(object, message) __utility_RemNamedObject((__utility_base_t)(UTILITY_BASE_NAME), (struct NamedObject *)(object), (struct Message *)(message))
+#define __RemNamedObject_base(__ndk_b, object, message) __utility_RemNamedObject((__utility_base_t)(__ndk_b), (struct NamedObject *)(object), (struct Message *)(message))
 
 static __inline__ ULONG
-__utility_GetUniqueID(struct UtilityBase *__base)
+__utility_GetUniqueID(struct Library *__base)
 {
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -635,16 +682,17 @@ __utility_GetUniqueID(struct UtilityBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetUniqueID() __utility_GetUniqueID((UTILITY_BASE_NAME))
+#define GetUniqueID() __utility_GetUniqueID((__utility_base_t)(UTILITY_BASE_NAME))
+#define __GetUniqueID_base(__ndk_b) __utility_GetUniqueID((__utility_base_t)(__ndk_b))
 
 static __inline__ LONG
-__utility_VSNPrintf(struct UtilityBase *__base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR format, CONST_APTR args)
+__utility_VSNPrintf(struct Library *__base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR format, CONST_APTR args)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(bufferSize);
 	register ULONG _a1 __asm("a1") = (ULONG)(format);
 	register ULONG _a2 __asm("a2") = (ULONG)(args);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -312(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -652,17 +700,27 @@ __utility_VSNPrintf(struct UtilityBase *__base, STRPTR buffer, ULONG bufferSize,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define VSNPrintf(buffer, bufferSize, format, args) __utility_VSNPrintf((UTILITY_BASE_NAME), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)(args))
+#define VSNPrintf(buffer, bufferSize, format, args) __utility_VSNPrintf((__utility_base_t)(UTILITY_BASE_NAME), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)(args))
+#define __VSNPrintf_base(__ndk_b, buffer, bufferSize, format, args) __utility_VSNPrintf((__utility_base_t)(__ndk_b), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)(args))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___utility_SNPrintf(__utility_base_t __ndk_base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR format, ...)
+{
+	return __utility_VSNPrintf(__ndk_base, (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)((ULONG)&format + sizeof(format)));
+}
+#define SNPrintf(buffer, bufferSize, format, ...) ___utility_SNPrintf((__utility_base_t)(UTILITY_BASE_NAME), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), ##__VA_ARGS__)
+#else
 #define SNPrintf(buffer, bufferSize, format, ...) (SNPrintf)((STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), ##__VA_ARGS__)
+#endif
 
 static __inline__ STRPTR
-__utility_Strncpy(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
+__utility_Strncpy(struct Library *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(dst);
 	register ULONG _a0 __asm("a0") = (ULONG)(src);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -438(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -670,15 +728,16 @@ __utility_Strncpy(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define Strncpy(dst, src, size) __utility_Strncpy((UTILITY_BASE_NAME), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
+#define Strncpy(dst, src, size) __utility_Strncpy((__utility_base_t)(UTILITY_BASE_NAME), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
+#define __Strncpy_base(__ndk_b, dst, src, size) __utility_Strncpy((__utility_base_t)(__ndk_b), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
 
 static __inline__ STRPTR
-__utility_Strncat(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
+__utility_Strncat(struct Library *__base, STRPTR dst, CONST_STRPTR src, ULONG size)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(dst);
 	register ULONG _a0 __asm("a0") = (ULONG)(src);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -444(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -686,15 +745,16 @@ __utility_Strncat(struct UtilityBase *__base, STRPTR dst, CONST_STRPTR src, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define Strncat(dst, src, size) __utility_Strncat((UTILITY_BASE_NAME), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
+#define Strncat(dst, src, size) __utility_Strncat((__utility_base_t)(UTILITY_BASE_NAME), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
+#define __Strncat_base(__ndk_b, dst, src, size) __utility_Strncat((__utility_base_t)(__ndk_b), (STRPTR)(dst), (CONST_STRPTR)(src), (ULONG)(size))
 
 static __inline__ LONG
-__utility_SDivMod64(struct UtilityBase *__base, LONG hi, LONG lo, LONG divisor)
+__utility_SDivMod64(struct Library *__base, LONG hi, LONG lo, LONG divisor)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(hi);
 	register ULONG _d0 __asm("d0") = (ULONG)(lo);
 	register ULONG _d2 __asm("d2") = (ULONG)(divisor);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -450(%/a6)"
@@ -703,15 +763,16 @@ __utility_SDivMod64(struct UtilityBase *__base, LONG hi, LONG lo, LONG divisor)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SDivMod64(hi, lo, divisor) __utility_SDivMod64((UTILITY_BASE_NAME), (LONG)(hi), (LONG)(lo), (LONG)(divisor))
+#define SDivMod64(hi, lo, divisor) __utility_SDivMod64((__utility_base_t)(UTILITY_BASE_NAME), (LONG)(hi), (LONG)(lo), (LONG)(divisor))
+#define __SDivMod64_base(__ndk_b, hi, lo, divisor) __utility_SDivMod64((__utility_base_t)(__ndk_b), (LONG)(hi), (LONG)(lo), (LONG)(divisor))
 
 static __inline__ ULONG
-__utility_UDivMod64(struct UtilityBase *__base, ULONG hi, ULONG lo, ULONG divisor)
+__utility_UDivMod64(struct Library *__base, ULONG hi, ULONG lo, ULONG divisor)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(hi);
 	register ULONG _d0 __asm("d0") = (ULONG)(lo);
 	register ULONG _d2 __asm("d2") = (ULONG)(divisor);
-	register struct UtilityBase *_a6 __asm("a6") = __base;
+	register struct Library *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -456(%/a6)"
@@ -720,6 +781,7 @@ __utility_UDivMod64(struct UtilityBase *__base, ULONG hi, ULONG lo, ULONG diviso
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define UDivMod64(hi, lo, divisor) __utility_UDivMod64((UTILITY_BASE_NAME), (ULONG)(hi), (ULONG)(lo), (ULONG)(divisor))
+#define UDivMod64(hi, lo, divisor) __utility_UDivMod64((__utility_base_t)(UTILITY_BASE_NAME), (ULONG)(hi), (ULONG)(lo), (ULONG)(divisor))
+#define __UDivMod64_base(__ndk_b, hi, lo, divisor) __utility_UDivMod64((__utility_base_t)(__ndk_b), (ULONG)(hi), (ULONG)(lo), (ULONG)(divisor))
 
 #endif /* INLINE_UTILITY_H */

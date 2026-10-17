@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__lowlevel_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __lowlevel_ReadJoyPort(struct Library *__base, ULONG port)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ReadJoyPort(port) __lowlevel_ReadJoyPort((LOWLEVEL_BASE_NAME), (ULONG)(port))
+#define ReadJoyPort(port) __lowlevel_ReadJoyPort((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (ULONG)(port))
+#define __ReadJoyPort_base(__ndk_b, port) __lowlevel_ReadJoyPort((__lowlevel_base_t)(__ndk_b), (ULONG)(port))
 
 static __inline__ UBYTE
 __lowlevel_GetLanguageSelection(struct Library *__base)
@@ -53,7 +55,8 @@ __lowlevel_GetLanguageSelection(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE)_d0;
 }
-#define GetLanguageSelection() __lowlevel_GetLanguageSelection((LOWLEVEL_BASE_NAME))
+#define GetLanguageSelection() __lowlevel_GetLanguageSelection((__lowlevel_base_t)(LOWLEVEL_BASE_NAME))
+#define __GetLanguageSelection_base(__ndk_b) __lowlevel_GetLanguageSelection((__lowlevel_base_t)(__ndk_b))
 
 static __inline__ ULONG
 __lowlevel_GetKey(struct Library *__base)
@@ -69,7 +72,8 @@ __lowlevel_GetKey(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetKey() __lowlevel_GetKey((LOWLEVEL_BASE_NAME))
+#define GetKey() __lowlevel_GetKey((__lowlevel_base_t)(LOWLEVEL_BASE_NAME))
+#define __GetKey_base(__ndk_b) __lowlevel_GetKey((__lowlevel_base_t)(__ndk_b))
 
 static __inline__ VOID
 __lowlevel_QueryKeys(struct Library *__base, struct KeyQuery * queryArray, LONG arraySize)
@@ -85,7 +89,8 @@ __lowlevel_QueryKeys(struct Library *__base, struct KeyQuery * queryArray, LONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define QueryKeys(queryArray, arraySize) __lowlevel_QueryKeys((LOWLEVEL_BASE_NAME), (struct KeyQuery *)(queryArray), (LONG)(arraySize))
+#define QueryKeys(queryArray, arraySize) __lowlevel_QueryKeys((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (struct KeyQuery *)(queryArray), (LONG)(arraySize))
+#define __QueryKeys_base(__ndk_b, queryArray, arraySize) __lowlevel_QueryKeys((__lowlevel_base_t)(__ndk_b), (struct KeyQuery *)(queryArray), (LONG)(arraySize))
 
 static __inline__ APTR
 __lowlevel_AddKBInt(struct Library *__base, APTR intRoutine, APTR intData)
@@ -101,7 +106,8 @@ __lowlevel_AddKBInt(struct Library *__base, APTR intRoutine, APTR intData)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AddKBInt(intRoutine, intData) __lowlevel_AddKBInt((LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define AddKBInt(intRoutine, intData) __lowlevel_AddKBInt((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define __AddKBInt_base(__ndk_b, intRoutine, intData) __lowlevel_AddKBInt((__lowlevel_base_t)(__ndk_b), (APTR)(intRoutine), (APTR)(intData))
 
 static __inline__ VOID
 __lowlevel_RemKBInt(struct Library *__base, APTR intHandle)
@@ -117,7 +123,8 @@ __lowlevel_RemKBInt(struct Library *__base, APTR intHandle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemKBInt(intHandle) __lowlevel_RemKBInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define RemKBInt(intHandle) __lowlevel_RemKBInt((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define __RemKBInt_base(__ndk_b, intHandle) __lowlevel_RemKBInt((__lowlevel_base_t)(__ndk_b), (APTR)(intHandle))
 
 static __inline__ ULONG
 __lowlevel_SystemControlA(struct Library *__base, CONST struct TagItem * tagList)
@@ -133,8 +140,18 @@ __lowlevel_SystemControlA(struct Library *__base, CONST struct TagItem * tagList
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SystemControlA(tagList) __lowlevel_SystemControlA((LOWLEVEL_BASE_NAME), (CONST struct TagItem *)(tagList))
+#define SystemControlA(tagList) __lowlevel_SystemControlA((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (CONST struct TagItem *)(tagList))
+#define __SystemControlA_base(__ndk_b, tagList) __lowlevel_SystemControlA((__lowlevel_base_t)(__ndk_b), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___lowlevel_SystemControl(__lowlevel_base_t __ndk_base, Tag firstTag, ...)
+{
+	return __lowlevel_SystemControlA(__ndk_base, (CONST struct TagItem *)&firstTag);
+}
+#define SystemControl(...) ___lowlevel_SystemControl((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), __VA_ARGS__)
+#else
+#endif
 
 static __inline__ APTR
 __lowlevel_AddTimerInt(struct Library *__base, APTR intRoutine, APTR intData)
@@ -150,7 +167,8 @@ __lowlevel_AddTimerInt(struct Library *__base, APTR intRoutine, APTR intData)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AddTimerInt(intRoutine, intData) __lowlevel_AddTimerInt((LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define AddTimerInt(intRoutine, intData) __lowlevel_AddTimerInt((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define __AddTimerInt_base(__ndk_b, intRoutine, intData) __lowlevel_AddTimerInt((__lowlevel_base_t)(__ndk_b), (APTR)(intRoutine), (APTR)(intData))
 
 static __inline__ VOID
 __lowlevel_RemTimerInt(struct Library *__base, APTR intHandle)
@@ -166,7 +184,8 @@ __lowlevel_RemTimerInt(struct Library *__base, APTR intHandle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemTimerInt(intHandle) __lowlevel_RemTimerInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define RemTimerInt(intHandle) __lowlevel_RemTimerInt((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define __RemTimerInt_base(__ndk_b, intHandle) __lowlevel_RemTimerInt((__lowlevel_base_t)(__ndk_b), (APTR)(intHandle))
 
 static __inline__ VOID
 __lowlevel_StopTimerInt(struct Library *__base, APTR intHandle)
@@ -182,7 +201,8 @@ __lowlevel_StopTimerInt(struct Library *__base, APTR intHandle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define StopTimerInt(intHandle) __lowlevel_StopTimerInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define StopTimerInt(intHandle) __lowlevel_StopTimerInt((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define __StopTimerInt_base(__ndk_b, intHandle) __lowlevel_StopTimerInt((__lowlevel_base_t)(__ndk_b), (APTR)(intHandle))
 
 static __inline__ VOID
 __lowlevel_StartTimerInt(struct Library *__base, APTR intHandle, ULONG timeInterval, BOOL continuous)
@@ -198,7 +218,8 @@ __lowlevel_StartTimerInt(struct Library *__base, APTR intHandle, ULONG timeInter
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define StartTimerInt(intHandle, timeInterval, continuous) __lowlevel_StartTimerInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle), (ULONG)(timeInterval), (BOOL)(continuous))
+#define StartTimerInt(intHandle, timeInterval, continuous) __lowlevel_StartTimerInt((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (APTR)(intHandle), (ULONG)(timeInterval), (BOOL)(continuous))
+#define __StartTimerInt_base(__ndk_b, intHandle, timeInterval, continuous) __lowlevel_StartTimerInt((__lowlevel_base_t)(__ndk_b), (APTR)(intHandle), (ULONG)(timeInterval), (BOOL)(continuous))
 
 static __inline__ ULONG
 __lowlevel_ElapsedTime(struct Library *__base, struct EClockVal * context)
@@ -214,7 +235,8 @@ __lowlevel_ElapsedTime(struct Library *__base, struct EClockVal * context)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ElapsedTime(context) __lowlevel_ElapsedTime((LOWLEVEL_BASE_NAME), (struct EClockVal *)(context))
+#define ElapsedTime(context) __lowlevel_ElapsedTime((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (struct EClockVal *)(context))
+#define __ElapsedTime_base(__ndk_b, context) __lowlevel_ElapsedTime((__lowlevel_base_t)(__ndk_b), (struct EClockVal *)(context))
 
 static __inline__ APTR
 __lowlevel_AddVBlankInt(struct Library *__base, APTR intRoutine, APTR intData)
@@ -230,7 +252,8 @@ __lowlevel_AddVBlankInt(struct Library *__base, APTR intRoutine, APTR intData)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AddVBlankInt(intRoutine, intData) __lowlevel_AddVBlankInt((LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define AddVBlankInt(intRoutine, intData) __lowlevel_AddVBlankInt((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define __AddVBlankInt_base(__ndk_b, intRoutine, intData) __lowlevel_AddVBlankInt((__lowlevel_base_t)(__ndk_b), (APTR)(intRoutine), (APTR)(intData))
 
 static __inline__ VOID
 __lowlevel_RemVBlankInt(struct Library *__base, APTR intHandle)
@@ -246,7 +269,8 @@ __lowlevel_RemVBlankInt(struct Library *__base, APTR intHandle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemVBlankInt(intHandle) __lowlevel_RemVBlankInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define RemVBlankInt(intHandle) __lowlevel_RemVBlankInt((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define __RemVBlankInt_base(__ndk_b, intHandle) __lowlevel_RemVBlankInt((__lowlevel_base_t)(__ndk_b), (APTR)(intHandle))
 
 static __inline__ BOOL
 __lowlevel_SetJoyPortAttrsA(struct Library *__base, ULONG portNumber, CONST struct TagItem * tagList)
@@ -262,8 +286,18 @@ __lowlevel_SetJoyPortAttrsA(struct Library *__base, ULONG portNumber, CONST stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetJoyPortAttrsA(portNumber, tagList) __lowlevel_SetJoyPortAttrsA((LOWLEVEL_BASE_NAME), (ULONG)(portNumber), (CONST struct TagItem *)(tagList))
+#define SetJoyPortAttrsA(portNumber, tagList) __lowlevel_SetJoyPortAttrsA((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (ULONG)(portNumber), (CONST struct TagItem *)(tagList))
+#define __SetJoyPortAttrsA_base(__ndk_b, portNumber, tagList) __lowlevel_SetJoyPortAttrsA((__lowlevel_base_t)(__ndk_b), (ULONG)(portNumber), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
+___lowlevel_SetJoyPortAttrs(__lowlevel_base_t __ndk_base, ULONG portNumber, Tag firstTag, ...)
+{
+	return __lowlevel_SetJoyPortAttrsA(__ndk_base, (ULONG)(portNumber), (CONST struct TagItem *)&firstTag);
+}
+#define SetJoyPortAttrs(portNumber, ...) ___lowlevel_SetJoyPortAttrs((__lowlevel_base_t)(LOWLEVEL_BASE_NAME), (ULONG)(portNumber), ##__VA_ARGS__)
+#else
 #define SetJoyPortAttrs(portNumber, ...) (SetJoyPortAttrs)((ULONG)(portNumber), ##__VA_ARGS__)
+#endif
 
 #endif /* INLINE_LOWLEVEL_H */

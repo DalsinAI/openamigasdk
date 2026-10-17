@@ -42,4 +42,21 @@
 #include <exec/avl.h>
 #endif
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef EXEC_ALERTS_H
+#include <exec/alerts.h>
+#endif
+#ifndef EXEC_ERRORS_H
+#include <exec/errors.h>
+#endif
+#ifndef EXEC_INITIALIZERS_H
+#include <exec/initializers.h>
+#endif
+#ifndef EXEC_RESIDENT_H
+#include <exec/resident.h>
+#endif
+#ifndef EXEC_EXECBASE_H
+#include <exec/execbase.h>
+#endif
+
 #endif /* EXEC_EXEC_H */

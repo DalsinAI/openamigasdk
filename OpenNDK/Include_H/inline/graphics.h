@@ -14,6 +14,7 @@
 #endif
 
 struct GfxBase;
+typedef struct GfxBase *__graphics_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -44,7 +45,8 @@ __graphics_BltBitMap(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define BltBitMap(srcBitMap, xSrc, ySrc, destBitMap, xDest, yDest, xSize, ySize, minterm, mask, tempA) __graphics_BltBitMap((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct BitMap *)(destBitMap), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (UBYTE)(mask), (PLANEPTR)(tempA))
+#define BltBitMap(srcBitMap, xSrc, ySrc, destBitMap, xDest, yDest, xSize, ySize, minterm, mask, tempA) __graphics_BltBitMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct BitMap *)(destBitMap), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (UBYTE)(mask), (PLANEPTR)(tempA))
+#define __BltBitMap_base(__ndk_b, srcBitMap, xSrc, ySrc, destBitMap, xDest, yDest, xSize, ySize, minterm, mask, tempA) __graphics_BltBitMap((__graphics_base_t)(__ndk_b), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct BitMap *)(destBitMap), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (UBYTE)(mask), (PLANEPTR)(tempA))
 
 static __inline__ VOID
 __graphics_BltTemplate(struct GfxBase *__base, CONST PLANEPTR source, WORD xSrc, WORD srcMod, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize)
@@ -64,7 +66,8 @@ __graphics_BltTemplate(struct GfxBase *__base, CONST PLANEPTR source, WORD xSrc,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define BltTemplate(source, xSrc, srcMod, destRP, xDest, yDest, xSize, ySize) __graphics_BltTemplate((GRAPHICS_BASE_NAME), (CONST PLANEPTR)(source), (WORD)(xSrc), (WORD)(srcMod), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize))
+#define BltTemplate(source, xSrc, srcMod, destRP, xDest, yDest, xSize, ySize) __graphics_BltTemplate((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST PLANEPTR)(source), (WORD)(xSrc), (WORD)(srcMod), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize))
+#define __BltTemplate_base(__ndk_b, source, xSrc, srcMod, destRP, xDest, yDest, xSize, ySize) __graphics_BltTemplate((__graphics_base_t)(__ndk_b), (CONST PLANEPTR)(source), (WORD)(xSrc), (WORD)(srcMod), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize))
 
 static __inline__ VOID
 __graphics_ClearEOL(struct GfxBase *__base, struct RastPort * rp)
@@ -80,7 +83,8 @@ __graphics_ClearEOL(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ClearEOL(rp) __graphics_ClearEOL((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define ClearEOL(rp) __graphics_ClearEOL((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __ClearEOL_base(__ndk_b, rp) __graphics_ClearEOL((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_ClearScreen(struct GfxBase *__base, struct RastPort * rp)
@@ -96,7 +100,8 @@ __graphics_ClearScreen(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ClearScreen(rp) __graphics_ClearScreen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define ClearScreen(rp) __graphics_ClearScreen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __ClearScreen_base(__ndk_b, rp) __graphics_ClearScreen((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ WORD
 __graphics_TextLength(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD count)
@@ -112,7 +117,8 @@ __graphics_TextLength(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (WORD)_d0;
 }
-#define TextLength(rp, string, count) __graphics_TextLength((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
+#define TextLength(rp, string, count) __graphics_TextLength((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
+#define __TextLength_base(__ndk_b, rp, string, count) __graphics_TextLength((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
 
 static __inline__ LONG
 __graphics_Text(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD count)
@@ -128,7 +134,8 @@ __graphics_Text(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR strin
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define Text(rp, string, count) __graphics_Text((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
+#define Text(rp, string, count) __graphics_Text((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
+#define __Text_base(__ndk_b, rp, string, count) __graphics_Text((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
 
 static __inline__ LONG
 __graphics_SetFont(struct GfxBase *__base, struct RastPort * rp, CONST struct TextFont * textFont)
@@ -144,7 +151,8 @@ __graphics_SetFont(struct GfxBase *__base, struct RastPort * rp, CONST struct Te
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetFont(rp, textFont) __graphics_SetFont((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST struct TextFont *)(textFont))
+#define SetFont(rp, textFont) __graphics_SetFont((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST struct TextFont *)(textFont))
+#define __SetFont_base(__ndk_b, rp, textFont) __graphics_SetFont((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST struct TextFont *)(textFont))
 
 static __inline__ struct TextFont *
 __graphics_OpenFont(struct GfxBase *__base, CONST struct TextAttr * textAttr)
@@ -160,7 +168,8 @@ __graphics_OpenFont(struct GfxBase *__base, CONST struct TextAttr * textAttr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TextFont *)_d0;
 }
-#define OpenFont(textAttr) __graphics_OpenFont((GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(textAttr))
+#define OpenFont(textAttr) __graphics_OpenFont((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(textAttr))
+#define __OpenFont_base(__ndk_b, textAttr) __graphics_OpenFont((__graphics_base_t)(__ndk_b), (CONST struct TextAttr *)(textAttr))
 
 static __inline__ VOID
 __graphics_CloseFont(struct GfxBase *__base, struct TextFont * textFont)
@@ -176,7 +185,8 @@ __graphics_CloseFont(struct GfxBase *__base, struct TextFont * textFont)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseFont(textFont) __graphics_CloseFont((GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define CloseFont(textFont) __graphics_CloseFont((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define __CloseFont_base(__ndk_b, textFont) __graphics_CloseFont((__graphics_base_t)(__ndk_b), (struct TextFont *)(textFont))
 
 static __inline__ ULONG
 __graphics_AskSoftStyle(struct GfxBase *__base, struct RastPort * rp)
@@ -192,7 +202,8 @@ __graphics_AskSoftStyle(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define AskSoftStyle(rp) __graphics_AskSoftStyle((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define AskSoftStyle(rp) __graphics_AskSoftStyle((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __AskSoftStyle_base(__ndk_b, rp) __graphics_AskSoftStyle((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ ULONG
 __graphics_SetSoftStyle(struct GfxBase *__base, struct RastPort * rp, ULONG style, ULONG enable)
@@ -208,7 +219,8 @@ __graphics_SetSoftStyle(struct GfxBase *__base, struct RastPort * rp, ULONG styl
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetSoftStyle(rp, style, enable) __graphics_SetSoftStyle((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(style), (ULONG)(enable))
+#define SetSoftStyle(rp, style, enable) __graphics_SetSoftStyle((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(style), (ULONG)(enable))
+#define __SetSoftStyle_base(__ndk_b, rp, style, enable) __graphics_SetSoftStyle((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (ULONG)(style), (ULONG)(enable))
 
 static __inline__ VOID
 __graphics_AddBob(struct GfxBase *__base, struct Bob * bob, struct RastPort * rp)
@@ -224,7 +236,8 @@ __graphics_AddBob(struct GfxBase *__base, struct Bob * bob, struct RastPort * rp
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddBob(bob, rp) __graphics_AddBob((GRAPHICS_BASE_NAME), (struct Bob *)(bob), (struct RastPort *)(rp))
+#define AddBob(bob, rp) __graphics_AddBob((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Bob *)(bob), (struct RastPort *)(rp))
+#define __AddBob_base(__ndk_b, bob, rp) __graphics_AddBob((__graphics_base_t)(__ndk_b), (struct Bob *)(bob), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_AddVSprite(struct GfxBase *__base, struct VSprite * vSprite, struct RastPort * rp)
@@ -240,7 +253,8 @@ __graphics_AddVSprite(struct GfxBase *__base, struct VSprite * vSprite, struct R
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddVSprite(vSprite, rp) __graphics_AddVSprite((GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite), (struct RastPort *)(rp))
+#define AddVSprite(vSprite, rp) __graphics_AddVSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite), (struct RastPort *)(rp))
+#define __AddVSprite_base(__ndk_b, vSprite, rp) __graphics_AddVSprite((__graphics_base_t)(__ndk_b), (struct VSprite *)(vSprite), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_DoCollision(struct GfxBase *__base, struct RastPort * rp)
@@ -256,7 +270,8 @@ __graphics_DoCollision(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DoCollision(rp) __graphics_DoCollision((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define DoCollision(rp) __graphics_DoCollision((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __DoCollision_base(__ndk_b, rp) __graphics_DoCollision((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_DrawGList(struct GfxBase *__base, struct RastPort * rp, struct ViewPort * vp)
@@ -272,7 +287,8 @@ __graphics_DrawGList(struct GfxBase *__base, struct RastPort * rp, struct ViewPo
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DrawGList(rp, vp) __graphics_DrawGList((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (struct ViewPort *)(vp))
+#define DrawGList(rp, vp) __graphics_DrawGList((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (struct ViewPort *)(vp))
+#define __DrawGList_base(__ndk_b, rp, vp) __graphics_DrawGList((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (struct ViewPort *)(vp))
 
 static __inline__ VOID
 __graphics_InitGels(struct GfxBase *__base, struct VSprite * head, struct VSprite * tail, struct GelsInfo * gelsInfo)
@@ -289,7 +305,8 @@ __graphics_InitGels(struct GfxBase *__base, struct VSprite * head, struct VSprit
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitGels(head, tail, gelsInfo) __graphics_InitGels((GRAPHICS_BASE_NAME), (struct VSprite *)(head), (struct VSprite *)(tail), (struct GelsInfo *)(gelsInfo))
+#define InitGels(head, tail, gelsInfo) __graphics_InitGels((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct VSprite *)(head), (struct VSprite *)(tail), (struct GelsInfo *)(gelsInfo))
+#define __InitGels_base(__ndk_b, head, tail, gelsInfo) __graphics_InitGels((__graphics_base_t)(__ndk_b), (struct VSprite *)(head), (struct VSprite *)(tail), (struct GelsInfo *)(gelsInfo))
 
 static __inline__ VOID
 __graphics_InitMasks(struct GfxBase *__base, struct VSprite * vSprite)
@@ -305,7 +322,8 @@ __graphics_InitMasks(struct GfxBase *__base, struct VSprite * vSprite)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitMasks(vSprite) __graphics_InitMasks((GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite))
+#define InitMasks(vSprite) __graphics_InitMasks((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite))
+#define __InitMasks_base(__ndk_b, vSprite) __graphics_InitMasks((__graphics_base_t)(__ndk_b), (struct VSprite *)(vSprite))
 
 static __inline__ VOID
 __graphics_RemIBob(struct GfxBase *__base, struct Bob * bob, struct RastPort * rp, struct ViewPort * vp)
@@ -322,7 +340,8 @@ __graphics_RemIBob(struct GfxBase *__base, struct Bob * bob, struct RastPort * r
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemIBob(bob, rp, vp) __graphics_RemIBob((GRAPHICS_BASE_NAME), (struct Bob *)(bob), (struct RastPort *)(rp), (struct ViewPort *)(vp))
+#define RemIBob(bob, rp, vp) __graphics_RemIBob((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Bob *)(bob), (struct RastPort *)(rp), (struct ViewPort *)(vp))
+#define __RemIBob_base(__ndk_b, bob, rp, vp) __graphics_RemIBob((__graphics_base_t)(__ndk_b), (struct Bob *)(bob), (struct RastPort *)(rp), (struct ViewPort *)(vp))
 
 static __inline__ VOID
 __graphics_RemVSprite(struct GfxBase *__base, struct VSprite * vSprite)
@@ -338,7 +357,8 @@ __graphics_RemVSprite(struct GfxBase *__base, struct VSprite * vSprite)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemVSprite(vSprite) __graphics_RemVSprite((GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite))
+#define RemVSprite(vSprite) __graphics_RemVSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite))
+#define __RemVSprite_base(__ndk_b, vSprite) __graphics_RemVSprite((__graphics_base_t)(__ndk_b), (struct VSprite *)(vSprite))
 
 static __inline__ VOID
 __graphics_SetCollision(struct GfxBase *__base, ULONG num, VOID (*CONST routine)(struct VSprite * gelA, struct VSprite * gelB), struct GelsInfo * gelsInfo)
@@ -354,7 +374,8 @@ __graphics_SetCollision(struct GfxBase *__base, ULONG num, VOID (*CONST routine)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetCollision(num, routine, gelsInfo) __graphics_SetCollision((GRAPHICS_BASE_NAME), (ULONG)(num), (VOID (*CONST )(struct VSprite * gelA, struct VSprite * gelB))(routine), (struct GelsInfo *)(gelsInfo))
+#define SetCollision(num, routine, gelsInfo) __graphics_SetCollision((__graphics_base_t)(GRAPHICS_BASE_NAME), (ULONG)(num), (VOID (*CONST )(struct VSprite * gelA, struct VSprite * gelB))(routine), (struct GelsInfo *)(gelsInfo))
+#define __SetCollision_base(__ndk_b, num, routine, gelsInfo) __graphics_SetCollision((__graphics_base_t)(__ndk_b), (ULONG)(num), (VOID (*CONST )(struct VSprite * gelA, struct VSprite * gelB))(routine), (struct GelsInfo *)(gelsInfo))
 
 static __inline__ VOID
 __graphics_SortGList(struct GfxBase *__base, struct RastPort * rp)
@@ -370,7 +391,8 @@ __graphics_SortGList(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SortGList(rp) __graphics_SortGList((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define SortGList(rp) __graphics_SortGList((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __SortGList_base(__ndk_b, rp) __graphics_SortGList((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_AddAnimOb(struct GfxBase *__base, struct AnimOb * anOb, struct AnimOb ** anKey, struct RastPort * rp)
@@ -387,7 +409,8 @@ __graphics_AddAnimOb(struct GfxBase *__base, struct AnimOb * anOb, struct AnimOb
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddAnimOb(anOb, anKey, rp) __graphics_AddAnimOb((GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
+#define AddAnimOb(anOb, anKey, rp) __graphics_AddAnimOb((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
+#define __AddAnimOb_base(__ndk_b, anOb, anKey, rp) __graphics_AddAnimOb((__graphics_base_t)(__ndk_b), (struct AnimOb *)(anOb), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_Animate(struct GfxBase *__base, struct AnimOb ** anKey, struct RastPort * rp)
@@ -403,7 +426,8 @@ __graphics_Animate(struct GfxBase *__base, struct AnimOb ** anKey, struct RastPo
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Animate(anKey, rp) __graphics_Animate((GRAPHICS_BASE_NAME), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
+#define Animate(anKey, rp) __graphics_Animate((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
+#define __Animate_base(__ndk_b, anKey, rp) __graphics_Animate((__graphics_base_t)(__ndk_b), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
 
 static __inline__ BOOL
 __graphics_GetGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct RastPort * rp, BOOL flag)
@@ -419,7 +443,8 @@ __graphics_GetGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct Rast
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define GetGBuffers(anOb, rp, flag) __graphics_GetGBuffers((GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
+#define GetGBuffers(anOb, rp, flag) __graphics_GetGBuffers((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
+#define __GetGBuffers_base(__ndk_b, anOb, rp, flag) __graphics_GetGBuffers((__graphics_base_t)(__ndk_b), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
 
 static __inline__ VOID
 __graphics_InitGMasks(struct GfxBase *__base, struct AnimOb * anOb)
@@ -435,7 +460,8 @@ __graphics_InitGMasks(struct GfxBase *__base, struct AnimOb * anOb)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitGMasks(anOb) __graphics_InitGMasks((GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb))
+#define InitGMasks(anOb) __graphics_InitGMasks((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb))
+#define __InitGMasks_base(__ndk_b, anOb) __graphics_InitGMasks((__graphics_base_t)(__ndk_b), (struct AnimOb *)(anOb))
 
 static __inline__ VOID
 __graphics_DrawEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCenter, WORD yCenter, WORD a, WORD b)
@@ -453,7 +479,8 @@ __graphics_DrawEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCente
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DrawEllipse(rp, xCenter, yCenter, a, b) __graphics_DrawEllipse((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
+#define DrawEllipse(rp, xCenter, yCenter, a, b) __graphics_DrawEllipse((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
+#define __DrawEllipse_base(__ndk_b, rp, xCenter, yCenter, a, b) __graphics_DrawEllipse((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
 
 static __inline__ LONG
 __graphics_AreaEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCenter, WORD yCenter, WORD a, WORD b)
@@ -471,7 +498,8 @@ __graphics_AreaEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCente
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AreaEllipse(rp, xCenter, yCenter, a, b) __graphics_AreaEllipse((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
+#define AreaEllipse(rp, xCenter, yCenter, a, b) __graphics_AreaEllipse((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
+#define __AreaEllipse_base(__ndk_b, rp, xCenter, yCenter, a, b) __graphics_AreaEllipse((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
 
 static __inline__ VOID
 __graphics_LoadRGB4(struct GfxBase *__base, struct ViewPort * vp, CONST UWORD * colors, WORD count)
@@ -487,7 +515,8 @@ __graphics_LoadRGB4(struct GfxBase *__base, struct ViewPort * vp, CONST UWORD * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LoadRGB4(vp, colors, count) __graphics_LoadRGB4((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (CONST UWORD *)(colors), (WORD)(count))
+#define LoadRGB4(vp, colors, count) __graphics_LoadRGB4((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (CONST UWORD *)(colors), (WORD)(count))
+#define __LoadRGB4_base(__ndk_b, vp, colors, count) __graphics_LoadRGB4((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (CONST UWORD *)(colors), (WORD)(count))
 
 static __inline__ VOID
 __graphics_InitRastPort(struct GfxBase *__base, struct RastPort * rp)
@@ -503,7 +532,8 @@ __graphics_InitRastPort(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitRastPort(rp) __graphics_InitRastPort((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define InitRastPort(rp) __graphics_InitRastPort((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __InitRastPort_base(__ndk_b, rp) __graphics_InitRastPort((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_InitVPort(struct GfxBase *__base, struct ViewPort * vp)
@@ -519,7 +549,8 @@ __graphics_InitVPort(struct GfxBase *__base, struct ViewPort * vp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitVPort(vp) __graphics_InitVPort((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define InitVPort(vp) __graphics_InitVPort((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __InitVPort_base(__ndk_b, vp) __graphics_InitVPort((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp))
 
 static __inline__ ULONG
 __graphics_MrgCop(struct GfxBase *__base, struct View * view)
@@ -535,7 +566,8 @@ __graphics_MrgCop(struct GfxBase *__base, struct View * view)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define MrgCop(view) __graphics_MrgCop((GRAPHICS_BASE_NAME), (struct View *)(view))
+#define MrgCop(view) __graphics_MrgCop((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct View *)(view))
+#define __MrgCop_base(__ndk_b, view) __graphics_MrgCop((__graphics_base_t)(__ndk_b), (struct View *)(view))
 
 static __inline__ ULONG
 __graphics_MakeVPort(struct GfxBase *__base, struct View * view, struct ViewPort * vp)
@@ -551,7 +583,8 @@ __graphics_MakeVPort(struct GfxBase *__base, struct View * view, struct ViewPort
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define MakeVPort(view, vp) __graphics_MakeVPort((GRAPHICS_BASE_NAME), (struct View *)(view), (struct ViewPort *)(vp))
+#define MakeVPort(view, vp) __graphics_MakeVPort((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct View *)(view), (struct ViewPort *)(vp))
+#define __MakeVPort_base(__ndk_b, view, vp) __graphics_MakeVPort((__graphics_base_t)(__ndk_b), (struct View *)(view), (struct ViewPort *)(vp))
 
 static __inline__ VOID
 __graphics_LoadView(struct GfxBase *__base, struct View * view)
@@ -567,7 +600,8 @@ __graphics_LoadView(struct GfxBase *__base, struct View * view)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LoadView(view) __graphics_LoadView((GRAPHICS_BASE_NAME), (struct View *)(view))
+#define LoadView(view) __graphics_LoadView((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct View *)(view))
+#define __LoadView_base(__ndk_b, view) __graphics_LoadView((__graphics_base_t)(__ndk_b), (struct View *)(view))
 
 static __inline__ VOID
 __graphics_WaitBlit(struct GfxBase *__base)
@@ -583,7 +617,8 @@ __graphics_WaitBlit(struct GfxBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WaitBlit() __graphics_WaitBlit((GRAPHICS_BASE_NAME))
+#define WaitBlit() __graphics_WaitBlit((__graphics_base_t)(GRAPHICS_BASE_NAME))
+#define __WaitBlit_base(__ndk_b) __graphics_WaitBlit((__graphics_base_t)(__ndk_b))
 
 static __inline__ VOID
 __graphics_SetRast(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
@@ -599,7 +634,8 @@ __graphics_SetRast(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetRast(rp, pen) __graphics_SetRast((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define SetRast(rp, pen) __graphics_SetRast((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define __SetRast_base(__ndk_b, rp, pen) __graphics_SetRast((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UBYTE)(pen))
 
 static __inline__ VOID
 __graphics_Move(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
@@ -615,7 +651,8 @@ __graphics_Move(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Move(rp, x, y) __graphics_Move((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define Move(rp, x, y) __graphics_Move((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __Move_base(__ndk_b, rp, x, y) __graphics_Move((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ VOID
 __graphics_Draw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
@@ -631,7 +668,8 @@ __graphics_Draw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Draw(rp, x, y) __graphics_Draw((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define Draw(rp, x, y) __graphics_Draw((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __Draw_base(__ndk_b, rp, x, y) __graphics_Draw((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ LONG
 __graphics_AreaMove(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
@@ -647,7 +685,8 @@ __graphics_AreaMove(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AreaMove(rp, x, y) __graphics_AreaMove((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define AreaMove(rp, x, y) __graphics_AreaMove((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __AreaMove_base(__ndk_b, rp, x, y) __graphics_AreaMove((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ LONG
 __graphics_AreaDraw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
@@ -663,7 +702,8 @@ __graphics_AreaDraw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AreaDraw(rp, x, y) __graphics_AreaDraw((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define AreaDraw(rp, x, y) __graphics_AreaDraw((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __AreaDraw_base(__ndk_b, rp, x, y) __graphics_AreaDraw((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ LONG
 __graphics_AreaEnd(struct GfxBase *__base, struct RastPort * rp)
@@ -679,7 +719,8 @@ __graphics_AreaEnd(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AreaEnd(rp) __graphics_AreaEnd((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define AreaEnd(rp) __graphics_AreaEnd((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __AreaEnd_base(__ndk_b, rp) __graphics_AreaEnd((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_WaitTOF(struct GfxBase *__base)
@@ -695,7 +736,8 @@ __graphics_WaitTOF(struct GfxBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WaitTOF() __graphics_WaitTOF((GRAPHICS_BASE_NAME))
+#define WaitTOF() __graphics_WaitTOF((__graphics_base_t)(GRAPHICS_BASE_NAME))
+#define __WaitTOF_base(__ndk_b) __graphics_WaitTOF((__graphics_base_t)(__ndk_b))
 
 static __inline__ VOID
 __graphics_QBlit(struct GfxBase *__base, struct bltnode * blit)
@@ -711,7 +753,8 @@ __graphics_QBlit(struct GfxBase *__base, struct bltnode * blit)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define QBlit(blit) __graphics_QBlit((GRAPHICS_BASE_NAME), (struct bltnode *)(blit))
+#define QBlit(blit) __graphics_QBlit((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct bltnode *)(blit))
+#define __QBlit_base(__ndk_b, blit) __graphics_QBlit((__graphics_base_t)(__ndk_b), (struct bltnode *)(blit))
 
 static __inline__ VOID
 __graphics_InitArea(struct GfxBase *__base, struct AreaInfo * areaInfo, APTR vectorBuffer, WORD maxVectors)
@@ -727,7 +770,8 @@ __graphics_InitArea(struct GfxBase *__base, struct AreaInfo * areaInfo, APTR vec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitArea(areaInfo, vectorBuffer, maxVectors) __graphics_InitArea((GRAPHICS_BASE_NAME), (struct AreaInfo *)(areaInfo), (APTR)(vectorBuffer), (WORD)(maxVectors))
+#define InitArea(areaInfo, vectorBuffer, maxVectors) __graphics_InitArea((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct AreaInfo *)(areaInfo), (APTR)(vectorBuffer), (WORD)(maxVectors))
+#define __InitArea_base(__ndk_b, areaInfo, vectorBuffer, maxVectors) __graphics_InitArea((__graphics_base_t)(__ndk_b), (struct AreaInfo *)(areaInfo), (APTR)(vectorBuffer), (WORD)(maxVectors))
 
 static __inline__ VOID
 __graphics_SetRGB4(struct GfxBase *__base, struct ViewPort * vp, WORD index, UBYTE red, UBYTE green, UBYTE blue)
@@ -745,7 +789,8 @@ __graphics_SetRGB4(struct GfxBase *__base, struct ViewPort * vp, WORD index, UBY
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetRGB4(vp, index, red, green, blue) __graphics_SetRGB4((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
+#define SetRGB4(vp, index, red, green, blue) __graphics_SetRGB4((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
+#define __SetRGB4_base(__ndk_b, vp, index, red, green, blue) __graphics_SetRGB4((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
 
 static __inline__ VOID
 __graphics_QBSBlit(struct GfxBase *__base, struct bltnode * blit)
@@ -761,7 +806,8 @@ __graphics_QBSBlit(struct GfxBase *__base, struct bltnode * blit)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define QBSBlit(blit) __graphics_QBSBlit((GRAPHICS_BASE_NAME), (struct bltnode *)(blit))
+#define QBSBlit(blit) __graphics_QBSBlit((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct bltnode *)(blit))
+#define __QBSBlit_base(__ndk_b, blit) __graphics_QBSBlit((__graphics_base_t)(__ndk_b), (struct bltnode *)(blit))
 
 static __inline__ VOID
 __graphics_BltClear(struct GfxBase *__base, PLANEPTR memBlock, ULONG byteCount, ULONG flags)
@@ -777,7 +823,8 @@ __graphics_BltClear(struct GfxBase *__base, PLANEPTR memBlock, ULONG byteCount, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define BltClear(memBlock, byteCount, flags) __graphics_BltClear((GRAPHICS_BASE_NAME), (PLANEPTR)(memBlock), (ULONG)(byteCount), (ULONG)(flags))
+#define BltClear(memBlock, byteCount, flags) __graphics_BltClear((__graphics_base_t)(GRAPHICS_BASE_NAME), (PLANEPTR)(memBlock), (ULONG)(byteCount), (ULONG)(flags))
+#define __BltClear_base(__ndk_b, memBlock, byteCount, flags) __graphics_BltClear((__graphics_base_t)(__ndk_b), (PLANEPTR)(memBlock), (ULONG)(byteCount), (ULONG)(flags))
 
 static __inline__ VOID
 __graphics_RectFill(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
@@ -795,7 +842,8 @@ __graphics_RectFill(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WOR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RectFill(rp, xMin, yMin, xMax, yMax) __graphics_RectFill((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define RectFill(rp, xMin, yMin, xMax, yMax) __graphics_RectFill((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __RectFill_base(__ndk_b, rp, xMin, yMin, xMax, yMax) __graphics_RectFill((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ VOID
 __graphics_BltPattern(struct GfxBase *__base, struct RastPort * rp, CONST PLANEPTR mask, WORD xMin, WORD yMin, WORD xMax, WORD yMax, UWORD maskBPR)
@@ -814,7 +862,8 @@ __graphics_BltPattern(struct GfxBase *__base, struct RastPort * rp, CONST PLANEP
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define BltPattern(rp, mask, xMin, yMin, xMax, yMax, maskBPR) __graphics_BltPattern((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST PLANEPTR)(mask), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax), (UWORD)(maskBPR))
+#define BltPattern(rp, mask, xMin, yMin, xMax, yMax, maskBPR) __graphics_BltPattern((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST PLANEPTR)(mask), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax), (UWORD)(maskBPR))
+#define __BltPattern_base(__ndk_b, rp, mask, xMin, yMin, xMax, yMax, maskBPR) __graphics_BltPattern((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST PLANEPTR)(mask), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax), (UWORD)(maskBPR))
 
 static __inline__ ULONG
 __graphics_ReadPixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
@@ -830,7 +879,8 @@ __graphics_ReadPixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ReadPixel(rp, x, y) __graphics_ReadPixel((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define ReadPixel(rp, x, y) __graphics_ReadPixel((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __ReadPixel_base(__ndk_b, rp, x, y) __graphics_ReadPixel((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ LONG
 __graphics_WritePixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
@@ -846,7 +896,8 @@ __graphics_WritePixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WritePixel(rp, x, y) __graphics_WritePixel((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define WritePixel(rp, x, y) __graphics_WritePixel((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __WritePixel_base(__ndk_b, rp, x, y) __graphics_WritePixel((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ BOOL
 __graphics_Flood(struct GfxBase *__base, struct RastPort * rp, ULONG mode, WORD x, WORD y)
@@ -863,7 +914,8 @@ __graphics_Flood(struct GfxBase *__base, struct RastPort * rp, ULONG mode, WORD 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define Flood(rp, mode, x, y) __graphics_Flood((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(mode), (WORD)(x), (WORD)(y))
+#define Flood(rp, mode, x, y) __graphics_Flood((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(mode), (WORD)(x), (WORD)(y))
+#define __Flood_base(__ndk_b, rp, mode, x, y) __graphics_Flood((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (ULONG)(mode), (WORD)(x), (WORD)(y))
 
 static __inline__ VOID
 __graphics_PolyDraw(struct GfxBase *__base, struct RastPort * rp, WORD count, CONST WORD * polyTable)
@@ -879,7 +931,8 @@ __graphics_PolyDraw(struct GfxBase *__base, struct RastPort * rp, WORD count, CO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define PolyDraw(rp, count, polyTable) __graphics_PolyDraw((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(count), (CONST WORD *)(polyTable))
+#define PolyDraw(rp, count, polyTable) __graphics_PolyDraw((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(count), (CONST WORD *)(polyTable))
+#define __PolyDraw_base(__ndk_b, rp, count, polyTable) __graphics_PolyDraw((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(count), (CONST WORD *)(polyTable))
 
 static __inline__ VOID
 __graphics_SetAPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
@@ -895,7 +948,8 @@ __graphics_SetAPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetAPen(rp, pen) __graphics_SetAPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define SetAPen(rp, pen) __graphics_SetAPen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define __SetAPen_base(__ndk_b, rp, pen) __graphics_SetAPen((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UBYTE)(pen))
 
 static __inline__ VOID
 __graphics_SetBPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
@@ -911,7 +965,8 @@ __graphics_SetBPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetBPen(rp, pen) __graphics_SetBPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define SetBPen(rp, pen) __graphics_SetBPen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define __SetBPen_base(__ndk_b, rp, pen) __graphics_SetBPen((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UBYTE)(pen))
 
 static __inline__ VOID
 __graphics_SetDrMd(struct GfxBase *__base, struct RastPort * rp, UBYTE drawMode)
@@ -927,7 +982,8 @@ __graphics_SetDrMd(struct GfxBase *__base, struct RastPort * rp, UBYTE drawMode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetDrMd(rp, drawMode) __graphics_SetDrMd((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(drawMode))
+#define SetDrMd(rp, drawMode) __graphics_SetDrMd((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(drawMode))
+#define __SetDrMd_base(__ndk_b, rp, drawMode) __graphics_SetDrMd((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UBYTE)(drawMode))
 
 static __inline__ VOID
 __graphics_InitView(struct GfxBase *__base, struct View * view)
@@ -943,7 +999,8 @@ __graphics_InitView(struct GfxBase *__base, struct View * view)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitView(view) __graphics_InitView((GRAPHICS_BASE_NAME), (struct View *)(view))
+#define InitView(view) __graphics_InitView((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct View *)(view))
+#define __InitView_base(__ndk_b, view) __graphics_InitView((__graphics_base_t)(__ndk_b), (struct View *)(view))
 
 static __inline__ VOID
 __graphics_CBump(struct GfxBase *__base, struct UCopList * copList)
@@ -959,7 +1016,8 @@ __graphics_CBump(struct GfxBase *__base, struct UCopList * copList)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CBump(copList) __graphics_CBump((GRAPHICS_BASE_NAME), (struct UCopList *)(copList))
+#define CBump(copList) __graphics_CBump((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct UCopList *)(copList))
+#define __CBump_base(__ndk_b, copList) __graphics_CBump((__graphics_base_t)(__ndk_b), (struct UCopList *)(copList))
 
 static __inline__ LONG
 __graphics_CMove(struct GfxBase *__base, struct UCopList * copList, APTR destination, WORD data)
@@ -975,7 +1033,8 @@ __graphics_CMove(struct GfxBase *__base, struct UCopList * copList, APTR destina
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CMove(copList, destination, data) __graphics_CMove((GRAPHICS_BASE_NAME), (struct UCopList *)(copList), (APTR)(destination), (WORD)(data))
+#define CMove(copList, destination, data) __graphics_CMove((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct UCopList *)(copList), (APTR)(destination), (WORD)(data))
+#define __CMove_base(__ndk_b, copList, destination, data) __graphics_CMove((__graphics_base_t)(__ndk_b), (struct UCopList *)(copList), (APTR)(destination), (WORD)(data))
 
 static __inline__ LONG
 __graphics_CWait(struct GfxBase *__base, struct UCopList * copList, WORD v, WORD h)
@@ -991,7 +1050,8 @@ __graphics_CWait(struct GfxBase *__base, struct UCopList * copList, WORD v, WORD
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CWait(copList, v, h) __graphics_CWait((GRAPHICS_BASE_NAME), (struct UCopList *)(copList), (WORD)(v), (WORD)(h))
+#define CWait(copList, v, h) __graphics_CWait((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct UCopList *)(copList), (WORD)(v), (WORD)(h))
+#define __CWait_base(__ndk_b, copList, v, h) __graphics_CWait((__graphics_base_t)(__ndk_b), (struct UCopList *)(copList), (WORD)(v), (WORD)(h))
 
 static __inline__ LONG
 __graphics_VBeamPos(struct GfxBase *__base)
@@ -1007,7 +1067,8 @@ __graphics_VBeamPos(struct GfxBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define VBeamPos() __graphics_VBeamPos((GRAPHICS_BASE_NAME))
+#define VBeamPos() __graphics_VBeamPos((__graphics_base_t)(GRAPHICS_BASE_NAME))
+#define __VBeamPos_base(__ndk_b) __graphics_VBeamPos((__graphics_base_t)(__ndk_b))
 
 static __inline__ VOID
 __graphics_InitBitMap(struct GfxBase *__base, struct BitMap * bitMap, BYTE depth, WORD width, WORD height)
@@ -1024,7 +1085,8 @@ __graphics_InitBitMap(struct GfxBase *__base, struct BitMap * bitMap, BYTE depth
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitBitMap(bitMap, depth, width, height) __graphics_InitBitMap((GRAPHICS_BASE_NAME), (struct BitMap *)(bitMap), (BYTE)(depth), (WORD)(width), (WORD)(height))
+#define InitBitMap(bitMap, depth, width, height) __graphics_InitBitMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct BitMap *)(bitMap), (BYTE)(depth), (WORD)(width), (WORD)(height))
+#define __InitBitMap_base(__ndk_b, bitMap, depth, width, height) __graphics_InitBitMap((__graphics_base_t)(__ndk_b), (struct BitMap *)(bitMap), (BYTE)(depth), (WORD)(width), (WORD)(height))
 
 static __inline__ VOID
 __graphics_ScrollRaster(struct GfxBase *__base, struct RastPort * rp, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
@@ -1044,7 +1106,8 @@ __graphics_ScrollRaster(struct GfxBase *__base, struct RastPort * rp, WORD dx, W
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScrollRaster(rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRaster((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define ScrollRaster(rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRaster((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __ScrollRaster_base(__ndk_b, rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRaster((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ VOID
 __graphics_WaitBOVP(struct GfxBase *__base, struct ViewPort * vp)
@@ -1060,7 +1123,8 @@ __graphics_WaitBOVP(struct GfxBase *__base, struct ViewPort * vp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WaitBOVP(vp) __graphics_WaitBOVP((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define WaitBOVP(vp) __graphics_WaitBOVP((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __WaitBOVP_base(__ndk_b, vp) __graphics_WaitBOVP((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp))
 
 static __inline__ WORD
 __graphics_GetSprite(struct GfxBase *__base, struct SimpleSprite * sprite, WORD num)
@@ -1076,7 +1140,8 @@ __graphics_GetSprite(struct GfxBase *__base, struct SimpleSprite * sprite, WORD 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (WORD)_d0;
 }
-#define GetSprite(sprite, num) __graphics_GetSprite((GRAPHICS_BASE_NAME), (struct SimpleSprite *)(sprite), (WORD)(num))
+#define GetSprite(sprite, num) __graphics_GetSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct SimpleSprite *)(sprite), (WORD)(num))
+#define __GetSprite_base(__ndk_b, sprite, num) __graphics_GetSprite((__graphics_base_t)(__ndk_b), (struct SimpleSprite *)(sprite), (WORD)(num))
 
 static __inline__ VOID
 __graphics_FreeSprite(struct GfxBase *__base, WORD num)
@@ -1092,7 +1157,8 @@ __graphics_FreeSprite(struct GfxBase *__base, WORD num)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeSprite(num) __graphics_FreeSprite((GRAPHICS_BASE_NAME), (WORD)(num))
+#define FreeSprite(num) __graphics_FreeSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (WORD)(num))
+#define __FreeSprite_base(__ndk_b, num) __graphics_FreeSprite((__graphics_base_t)(__ndk_b), (WORD)(num))
 
 static __inline__ VOID
 __graphics_ChangeSprite(struct GfxBase *__base, struct ViewPort * vp, struct SimpleSprite * sprite, UWORD * newData)
@@ -1109,7 +1175,8 @@ __graphics_ChangeSprite(struct GfxBase *__base, struct ViewPort * vp, struct Sim
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ChangeSprite(vp, sprite, newData) __graphics_ChangeSprite((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (UWORD *)(newData))
+#define ChangeSprite(vp, sprite, newData) __graphics_ChangeSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (UWORD *)(newData))
+#define __ChangeSprite_base(__ndk_b, vp, sprite, newData) __graphics_ChangeSprite((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (UWORD *)(newData))
 
 static __inline__ VOID
 __graphics_MoveSprite(struct GfxBase *__base, struct ViewPort * vp, struct SimpleSprite * sprite, WORD x, WORD y)
@@ -1125,7 +1192,8 @@ __graphics_MoveSprite(struct GfxBase *__base, struct ViewPort * vp, struct Simpl
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define MoveSprite(vp, sprite, x, y) __graphics_MoveSprite((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (WORD)(x), (WORD)(y))
+#define MoveSprite(vp, sprite, x, y) __graphics_MoveSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (WORD)(x), (WORD)(y))
+#define __MoveSprite_base(__ndk_b, vp, sprite, x, y) __graphics_MoveSprite((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (WORD)(x), (WORD)(y))
 
 static __inline__ VOID
 __graphics_LockLayerRom(struct GfxBase *__base, struct Layer * layer)
@@ -1141,7 +1209,8 @@ __graphics_LockLayerRom(struct GfxBase *__base, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LockLayerRom(layer) __graphics_LockLayerRom((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define LockLayerRom(layer) __graphics_LockLayerRom((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __LockLayerRom_base(__ndk_b, layer) __graphics_LockLayerRom((__graphics_base_t)(__ndk_b), (struct Layer *)(layer))
 
 static __inline__ VOID
 __graphics_UnlockLayerRom(struct GfxBase *__base, struct Layer * layer)
@@ -1157,7 +1226,8 @@ __graphics_UnlockLayerRom(struct GfxBase *__base, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockLayerRom(layer) __graphics_UnlockLayerRom((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define UnlockLayerRom(layer) __graphics_UnlockLayerRom((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __UnlockLayerRom_base(__ndk_b, layer) __graphics_UnlockLayerRom((__graphics_base_t)(__ndk_b), (struct Layer *)(layer))
 
 static __inline__ VOID
 __graphics_SyncSBitMap(struct GfxBase *__base, struct Layer * layer)
@@ -1173,7 +1243,8 @@ __graphics_SyncSBitMap(struct GfxBase *__base, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SyncSBitMap(layer) __graphics_SyncSBitMap((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define SyncSBitMap(layer) __graphics_SyncSBitMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __SyncSBitMap_base(__ndk_b, layer) __graphics_SyncSBitMap((__graphics_base_t)(__ndk_b), (struct Layer *)(layer))
 
 static __inline__ VOID
 __graphics_CopySBitMap(struct GfxBase *__base, struct Layer * layer)
@@ -1189,7 +1260,8 @@ __graphics_CopySBitMap(struct GfxBase *__base, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CopySBitMap(layer) __graphics_CopySBitMap((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define CopySBitMap(layer) __graphics_CopySBitMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __CopySBitMap_base(__ndk_b, layer) __graphics_CopySBitMap((__graphics_base_t)(__ndk_b), (struct Layer *)(layer))
 
 static __inline__ VOID
 __graphics_OwnBlitter(struct GfxBase *__base)
@@ -1205,7 +1277,8 @@ __graphics_OwnBlitter(struct GfxBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define OwnBlitter() __graphics_OwnBlitter((GRAPHICS_BASE_NAME))
+#define OwnBlitter() __graphics_OwnBlitter((__graphics_base_t)(GRAPHICS_BASE_NAME))
+#define __OwnBlitter_base(__ndk_b) __graphics_OwnBlitter((__graphics_base_t)(__ndk_b))
 
 static __inline__ VOID
 __graphics_DisownBlitter(struct GfxBase *__base)
@@ -1221,7 +1294,8 @@ __graphics_DisownBlitter(struct GfxBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DisownBlitter() __graphics_DisownBlitter((GRAPHICS_BASE_NAME))
+#define DisownBlitter() __graphics_DisownBlitter((__graphics_base_t)(GRAPHICS_BASE_NAME))
+#define __DisownBlitter_base(__ndk_b) __graphics_DisownBlitter((__graphics_base_t)(__ndk_b))
 
 static __inline__ struct TmpRas *
 __graphics_InitTmpRas(struct GfxBase *__base, struct TmpRas * tmpRas, PLANEPTR buffer, LONG size)
@@ -1237,7 +1311,8 @@ __graphics_InitTmpRas(struct GfxBase *__base, struct TmpRas * tmpRas, PLANEPTR b
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TmpRas *)_d0;
 }
-#define InitTmpRas(tmpRas, buffer, size) __graphics_InitTmpRas((GRAPHICS_BASE_NAME), (struct TmpRas *)(tmpRas), (PLANEPTR)(buffer), (LONG)(size))
+#define InitTmpRas(tmpRas, buffer, size) __graphics_InitTmpRas((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct TmpRas *)(tmpRas), (PLANEPTR)(buffer), (LONG)(size))
+#define __InitTmpRas_base(__ndk_b, tmpRas, buffer, size) __graphics_InitTmpRas((__graphics_base_t)(__ndk_b), (struct TmpRas *)(tmpRas), (PLANEPTR)(buffer), (LONG)(size))
 
 static __inline__ VOID
 __graphics_AskFont(struct GfxBase *__base, struct RastPort * rp, struct TextAttr * textAttr)
@@ -1253,7 +1328,8 @@ __graphics_AskFont(struct GfxBase *__base, struct RastPort * rp, struct TextAttr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AskFont(rp, textAttr) __graphics_AskFont((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (struct TextAttr *)(textAttr))
+#define AskFont(rp, textAttr) __graphics_AskFont((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (struct TextAttr *)(textAttr))
+#define __AskFont_base(__ndk_b, rp, textAttr) __graphics_AskFont((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (struct TextAttr *)(textAttr))
 
 static __inline__ VOID
 __graphics_AddFont(struct GfxBase *__base, struct TextFont * textFont)
@@ -1269,7 +1345,8 @@ __graphics_AddFont(struct GfxBase *__base, struct TextFont * textFont)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddFont(textFont) __graphics_AddFont((GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define AddFont(textFont) __graphics_AddFont((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define __AddFont_base(__ndk_b, textFont) __graphics_AddFont((__graphics_base_t)(__ndk_b), (struct TextFont *)(textFont))
 
 static __inline__ VOID
 __graphics_RemFont(struct GfxBase *__base, struct TextFont * textFont)
@@ -1285,7 +1362,8 @@ __graphics_RemFont(struct GfxBase *__base, struct TextFont * textFont)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemFont(textFont) __graphics_RemFont((GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define RemFont(textFont) __graphics_RemFont((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define __RemFont_base(__ndk_b, textFont) __graphics_RemFont((__graphics_base_t)(__ndk_b), (struct TextFont *)(textFont))
 
 static __inline__ PLANEPTR
 __graphics_AllocRaster(struct GfxBase *__base, UWORD width, UWORD height)
@@ -1301,7 +1379,8 @@ __graphics_AllocRaster(struct GfxBase *__base, UWORD width, UWORD height)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (PLANEPTR)_d0;
 }
-#define AllocRaster(width, height) __graphics_AllocRaster((GRAPHICS_BASE_NAME), (UWORD)(width), (UWORD)(height))
+#define AllocRaster(width, height) __graphics_AllocRaster((__graphics_base_t)(GRAPHICS_BASE_NAME), (UWORD)(width), (UWORD)(height))
+#define __AllocRaster_base(__ndk_b, width, height) __graphics_AllocRaster((__graphics_base_t)(__ndk_b), (UWORD)(width), (UWORD)(height))
 
 static __inline__ VOID
 __graphics_FreeRaster(struct GfxBase *__base, PLANEPTR p, UWORD width, UWORD height)
@@ -1317,7 +1396,8 @@ __graphics_FreeRaster(struct GfxBase *__base, PLANEPTR p, UWORD width, UWORD hei
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeRaster(p, width, height) __graphics_FreeRaster((GRAPHICS_BASE_NAME), (PLANEPTR)(p), (UWORD)(width), (UWORD)(height))
+#define FreeRaster(p, width, height) __graphics_FreeRaster((__graphics_base_t)(GRAPHICS_BASE_NAME), (PLANEPTR)(p), (UWORD)(width), (UWORD)(height))
+#define __FreeRaster_base(__ndk_b, p, width, height) __graphics_FreeRaster((__graphics_base_t)(__ndk_b), (PLANEPTR)(p), (UWORD)(width), (UWORD)(height))
 
 static __inline__ VOID
 __graphics_AndRectRegion(struct GfxBase *__base, struct Region * region, CONST struct Rectangle * rectangle)
@@ -1333,7 +1413,8 @@ __graphics_AndRectRegion(struct GfxBase *__base, struct Region * region, CONST s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AndRectRegion(region, rectangle) __graphics_AndRectRegion((GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define AndRectRegion(region, rectangle) __graphics_AndRectRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define __AndRectRegion_base(__ndk_b, region, rectangle) __graphics_AndRectRegion((__graphics_base_t)(__ndk_b), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
 
 static __inline__ BOOL
 __graphics_OrRectRegion(struct GfxBase *__base, struct Region * region, CONST struct Rectangle * rectangle)
@@ -1349,7 +1430,8 @@ __graphics_OrRectRegion(struct GfxBase *__base, struct Region * region, CONST st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define OrRectRegion(region, rectangle) __graphics_OrRectRegion((GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define OrRectRegion(region, rectangle) __graphics_OrRectRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define __OrRectRegion_base(__ndk_b, region, rectangle) __graphics_OrRectRegion((__graphics_base_t)(__ndk_b), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
 
 static __inline__ struct Region *
 __graphics_NewRegion(struct GfxBase *__base)
@@ -1365,7 +1447,8 @@ __graphics_NewRegion(struct GfxBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Region *)_d0;
 }
-#define NewRegion() __graphics_NewRegion((GRAPHICS_BASE_NAME))
+#define NewRegion() __graphics_NewRegion((__graphics_base_t)(GRAPHICS_BASE_NAME))
+#define __NewRegion_base(__ndk_b) __graphics_NewRegion((__graphics_base_t)(__ndk_b))
 
 static __inline__ BOOL
 __graphics_ClearRectRegion(struct GfxBase *__base, struct Region * region, CONST struct Rectangle * rectangle)
@@ -1381,7 +1464,8 @@ __graphics_ClearRectRegion(struct GfxBase *__base, struct Region * region, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ClearRectRegion(region, rectangle) __graphics_ClearRectRegion((GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define ClearRectRegion(region, rectangle) __graphics_ClearRectRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define __ClearRectRegion_base(__ndk_b, region, rectangle) __graphics_ClearRectRegion((__graphics_base_t)(__ndk_b), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
 
 static __inline__ VOID
 __graphics_ClearRegion(struct GfxBase *__base, struct Region * region)
@@ -1397,7 +1481,8 @@ __graphics_ClearRegion(struct GfxBase *__base, struct Region * region)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ClearRegion(region) __graphics_ClearRegion((GRAPHICS_BASE_NAME), (struct Region *)(region))
+#define ClearRegion(region) __graphics_ClearRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Region *)(region))
+#define __ClearRegion_base(__ndk_b, region) __graphics_ClearRegion((__graphics_base_t)(__ndk_b), (struct Region *)(region))
 
 static __inline__ VOID
 __graphics_DisposeRegion(struct GfxBase *__base, struct Region * region)
@@ -1413,7 +1498,8 @@ __graphics_DisposeRegion(struct GfxBase *__base, struct Region * region)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DisposeRegion(region) __graphics_DisposeRegion((GRAPHICS_BASE_NAME), (struct Region *)(region))
+#define DisposeRegion(region) __graphics_DisposeRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Region *)(region))
+#define __DisposeRegion_base(__ndk_b, region) __graphics_DisposeRegion((__graphics_base_t)(__ndk_b), (struct Region *)(region))
 
 static __inline__ VOID
 __graphics_FreeVPortCopLists(struct GfxBase *__base, struct ViewPort * vp)
@@ -1429,7 +1515,8 @@ __graphics_FreeVPortCopLists(struct GfxBase *__base, struct ViewPort * vp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeVPortCopLists(vp) __graphics_FreeVPortCopLists((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define FreeVPortCopLists(vp) __graphics_FreeVPortCopLists((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __FreeVPortCopLists_base(__ndk_b, vp) __graphics_FreeVPortCopLists((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp))
 
 static __inline__ VOID
 __graphics_FreeCopList(struct GfxBase *__base, struct CopList * copList)
@@ -1445,7 +1532,8 @@ __graphics_FreeCopList(struct GfxBase *__base, struct CopList * copList)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeCopList(copList) __graphics_FreeCopList((GRAPHICS_BASE_NAME), (struct CopList *)(copList))
+#define FreeCopList(copList) __graphics_FreeCopList((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct CopList *)(copList))
+#define __FreeCopList_base(__ndk_b, copList) __graphics_FreeCopList((__graphics_base_t)(__ndk_b), (struct CopList *)(copList))
 
 static __inline__ VOID
 __graphics_ClipBlit(struct GfxBase *__base, struct RastPort * srcRP, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm)
@@ -1466,7 +1554,8 @@ __graphics_ClipBlit(struct GfxBase *__base, struct RastPort * srcRP, WORD xSrc, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ClipBlit(srcRP, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_ClipBlit((GRAPHICS_BASE_NAME), (struct RastPort *)(srcRP), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
+#define ClipBlit(srcRP, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_ClipBlit((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(srcRP), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
+#define __ClipBlit_base(__ndk_b, srcRP, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_ClipBlit((__graphics_base_t)(__ndk_b), (struct RastPort *)(srcRP), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
 
 static __inline__ BOOL
 __graphics_XorRectRegion(struct GfxBase *__base, struct Region * region, CONST struct Rectangle * rectangle)
@@ -1482,7 +1571,8 @@ __graphics_XorRectRegion(struct GfxBase *__base, struct Region * region, CONST s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define XorRectRegion(region, rectangle) __graphics_XorRectRegion((GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define XorRectRegion(region, rectangle) __graphics_XorRectRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define __XorRectRegion_base(__ndk_b, region, rectangle) __graphics_XorRectRegion((__graphics_base_t)(__ndk_b), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
 
 static __inline__ VOID
 __graphics_FreeCprList(struct GfxBase *__base, struct cprlist * cprList)
@@ -1498,7 +1588,8 @@ __graphics_FreeCprList(struct GfxBase *__base, struct cprlist * cprList)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeCprList(cprList) __graphics_FreeCprList((GRAPHICS_BASE_NAME), (struct cprlist *)(cprList))
+#define FreeCprList(cprList) __graphics_FreeCprList((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct cprlist *)(cprList))
+#define __FreeCprList_base(__ndk_b, cprList) __graphics_FreeCprList((__graphics_base_t)(__ndk_b), (struct cprlist *)(cprList))
 
 static __inline__ struct ColorMap *
 __graphics_GetColorMap(struct GfxBase *__base, LONG entries)
@@ -1514,7 +1605,8 @@ __graphics_GetColorMap(struct GfxBase *__base, LONG entries)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ColorMap *)_d0;
 }
-#define GetColorMap(entries) __graphics_GetColorMap((GRAPHICS_BASE_NAME), (LONG)(entries))
+#define GetColorMap(entries) __graphics_GetColorMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (LONG)(entries))
+#define __GetColorMap_base(__ndk_b, entries) __graphics_GetColorMap((__graphics_base_t)(__ndk_b), (LONG)(entries))
 
 static __inline__ VOID
 __graphics_FreeColorMap(struct GfxBase *__base, struct ColorMap * colorMap)
@@ -1530,7 +1622,8 @@ __graphics_FreeColorMap(struct GfxBase *__base, struct ColorMap * colorMap)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeColorMap(colorMap) __graphics_FreeColorMap((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap))
+#define FreeColorMap(colorMap) __graphics_FreeColorMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap))
+#define __FreeColorMap_base(__ndk_b, colorMap) __graphics_FreeColorMap((__graphics_base_t)(__ndk_b), (struct ColorMap *)(colorMap))
 
 static __inline__ ULONG
 __graphics_GetRGB4(struct GfxBase *__base, struct ColorMap * colorMap, LONG entry)
@@ -1546,7 +1639,8 @@ __graphics_GetRGB4(struct GfxBase *__base, struct ColorMap * colorMap, LONG entr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetRGB4(colorMap, entry) __graphics_GetRGB4((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (LONG)(entry))
+#define GetRGB4(colorMap, entry) __graphics_GetRGB4((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (LONG)(entry))
+#define __GetRGB4_base(__ndk_b, colorMap, entry) __graphics_GetRGB4((__graphics_base_t)(__ndk_b), (struct ColorMap *)(colorMap), (LONG)(entry))
 
 static __inline__ VOID
 __graphics_ScrollVPort(struct GfxBase *__base, struct ViewPort * vp)
@@ -1562,7 +1656,8 @@ __graphics_ScrollVPort(struct GfxBase *__base, struct ViewPort * vp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScrollVPort(vp) __graphics_ScrollVPort((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define ScrollVPort(vp) __graphics_ScrollVPort((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __ScrollVPort_base(__ndk_b, vp) __graphics_ScrollVPort((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp))
 
 static __inline__ struct CopList *
 __graphics_UCopperListInit(struct GfxBase *__base, struct UCopList * uCopList, WORD n)
@@ -1578,7 +1673,8 @@ __graphics_UCopperListInit(struct GfxBase *__base, struct UCopList * uCopList, W
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct CopList *)_d0;
 }
-#define UCopperListInit(uCopList, n) __graphics_UCopperListInit((GRAPHICS_BASE_NAME), (struct UCopList *)(uCopList), (WORD)(n))
+#define UCopperListInit(uCopList, n) __graphics_UCopperListInit((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct UCopList *)(uCopList), (WORD)(n))
+#define __UCopperListInit_base(__ndk_b, uCopList, n) __graphics_UCopperListInit((__graphics_base_t)(__ndk_b), (struct UCopList *)(uCopList), (WORD)(n))
 
 static __inline__ VOID
 __graphics_FreeGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct RastPort * rp, BOOL flag)
@@ -1594,7 +1690,8 @@ __graphics_FreeGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct Ras
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeGBuffers(anOb, rp, flag) __graphics_FreeGBuffers((GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
+#define FreeGBuffers(anOb, rp, flag) __graphics_FreeGBuffers((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
+#define __FreeGBuffers_base(__ndk_b, anOb, rp, flag) __graphics_FreeGBuffers((__graphics_base_t)(__ndk_b), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
 
 static __inline__ VOID
 __graphics_BltBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm)
@@ -1615,7 +1712,8 @@ __graphics_BltBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define BltBitMapRastPort(srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_BltBitMapRastPort((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
+#define BltBitMapRastPort(srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_BltBitMapRastPort((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
+#define __BltBitMapRastPort_base(__ndk_b, srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_BltBitMapRastPort((__graphics_base_t)(__ndk_b), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
 
 static __inline__ BOOL
 __graphics_OrRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegion, struct Region * destRegion)
@@ -1631,7 +1729,8 @@ __graphics_OrRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegio
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define OrRegionRegion(srcRegion, destRegion) __graphics_OrRegionRegion((GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define OrRegionRegion(srcRegion, destRegion) __graphics_OrRegionRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define __OrRegionRegion_base(__ndk_b, srcRegion, destRegion) __graphics_OrRegionRegion((__graphics_base_t)(__ndk_b), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
 
 static __inline__ BOOL
 __graphics_XorRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegion, struct Region * destRegion)
@@ -1647,7 +1746,8 @@ __graphics_XorRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define XorRegionRegion(srcRegion, destRegion) __graphics_XorRegionRegion((GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define XorRegionRegion(srcRegion, destRegion) __graphics_XorRegionRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define __XorRegionRegion_base(__ndk_b, srcRegion, destRegion) __graphics_XorRegionRegion((__graphics_base_t)(__ndk_b), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
 
 static __inline__ BOOL
 __graphics_AndRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegion, struct Region * destRegion)
@@ -1663,7 +1763,8 @@ __graphics_AndRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AndRegionRegion(srcRegion, destRegion) __graphics_AndRegionRegion((GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define AndRegionRegion(srcRegion, destRegion) __graphics_AndRegionRegion((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define __AndRegionRegion_base(__ndk_b, srcRegion, destRegion) __graphics_AndRegionRegion((__graphics_base_t)(__ndk_b), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
 
 static __inline__ VOID
 __graphics_SetRGB4CM(struct GfxBase *__base, struct ColorMap * colorMap, WORD index, UBYTE red, UBYTE green, UBYTE blue)
@@ -1681,7 +1782,8 @@ __graphics_SetRGB4CM(struct GfxBase *__base, struct ColorMap * colorMap, WORD in
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetRGB4CM(colorMap, index, red, green, blue) __graphics_SetRGB4CM((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
+#define SetRGB4CM(colorMap, index, red, green, blue) __graphics_SetRGB4CM((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
+#define __SetRGB4CM_base(__ndk_b, colorMap, index, red, green, blue) __graphics_SetRGB4CM((__graphics_base_t)(__ndk_b), (struct ColorMap *)(colorMap), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
 
 static __inline__ VOID
 __graphics_BltMaskBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm, CONST PLANEPTR bltMask)
@@ -1703,7 +1805,8 @@ __graphics_BltMaskBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define BltMaskBitMapRastPort(srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm, bltMask) __graphics_BltMaskBitMapRastPort((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (CONST PLANEPTR)(bltMask))
+#define BltMaskBitMapRastPort(srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm, bltMask) __graphics_BltMaskBitMapRastPort((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (CONST PLANEPTR)(bltMask))
+#define __BltMaskBitMapRastPort_base(__ndk_b, srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm, bltMask) __graphics_BltMaskBitMapRastPort((__graphics_base_t)(__ndk_b), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (CONST PLANEPTR)(bltMask))
 
 static __inline__ BOOL
 __graphics_AttemptLockLayerRom(struct GfxBase *__base, struct Layer * layer)
@@ -1719,7 +1822,8 @@ __graphics_AttemptLockLayerRom(struct GfxBase *__base, struct Layer * layer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AttemptLockLayerRom(layer) __graphics_AttemptLockLayerRom((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define AttemptLockLayerRom(layer) __graphics_AttemptLockLayerRom((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __AttemptLockLayerRom_base(__ndk_b, layer) __graphics_AttemptLockLayerRom((__graphics_base_t)(__ndk_b), (struct Layer *)(layer))
 
 static __inline__ APTR
 __graphics_GfxNew(struct GfxBase *__base, ULONG gfxNodeType)
@@ -1735,7 +1839,8 @@ __graphics_GfxNew(struct GfxBase *__base, ULONG gfxNodeType)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define GfxNew(gfxNodeType) __graphics_GfxNew((GRAPHICS_BASE_NAME), (ULONG)(gfxNodeType))
+#define GfxNew(gfxNodeType) __graphics_GfxNew((__graphics_base_t)(GRAPHICS_BASE_NAME), (ULONG)(gfxNodeType))
+#define __GfxNew_base(__ndk_b, gfxNodeType) __graphics_GfxNew((__graphics_base_t)(__ndk_b), (ULONG)(gfxNodeType))
 
 static __inline__ VOID
 __graphics_GfxFree(struct GfxBase *__base, APTR gfxNodePtr)
@@ -1751,7 +1856,8 @@ __graphics_GfxFree(struct GfxBase *__base, APTR gfxNodePtr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GfxFree(gfxNodePtr) __graphics_GfxFree((GRAPHICS_BASE_NAME), (APTR)(gfxNodePtr))
+#define GfxFree(gfxNodePtr) __graphics_GfxFree((__graphics_base_t)(GRAPHICS_BASE_NAME), (APTR)(gfxNodePtr))
+#define __GfxFree_base(__ndk_b, gfxNodePtr) __graphics_GfxFree((__graphics_base_t)(__ndk_b), (APTR)(gfxNodePtr))
 
 static __inline__ VOID
 __graphics_GfxAssociate(struct GfxBase *__base, CONST_APTR associateNode, APTR gfxNodePtr)
@@ -1767,7 +1873,8 @@ __graphics_GfxAssociate(struct GfxBase *__base, CONST_APTR associateNode, APTR g
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GfxAssociate(associateNode, gfxNodePtr) __graphics_GfxAssociate((GRAPHICS_BASE_NAME), (CONST_APTR)(associateNode), (APTR)(gfxNodePtr))
+#define GfxAssociate(associateNode, gfxNodePtr) __graphics_GfxAssociate((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST_APTR)(associateNode), (APTR)(gfxNodePtr))
+#define __GfxAssociate_base(__ndk_b, associateNode, gfxNodePtr) __graphics_GfxAssociate((__graphics_base_t)(__ndk_b), (CONST_APTR)(associateNode), (APTR)(gfxNodePtr))
 
 static __inline__ VOID
 __graphics_BitMapScale(struct GfxBase *__base, struct BitScaleArgs * bitScaleArgs)
@@ -1783,7 +1890,8 @@ __graphics_BitMapScale(struct GfxBase *__base, struct BitScaleArgs * bitScaleArg
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define BitMapScale(bitScaleArgs) __graphics_BitMapScale((GRAPHICS_BASE_NAME), (struct BitScaleArgs *)(bitScaleArgs))
+#define BitMapScale(bitScaleArgs) __graphics_BitMapScale((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct BitScaleArgs *)(bitScaleArgs))
+#define __BitMapScale_base(__ndk_b, bitScaleArgs) __graphics_BitMapScale((__graphics_base_t)(__ndk_b), (struct BitScaleArgs *)(bitScaleArgs))
 
 static __inline__ UWORD
 __graphics_ScalerDiv(struct GfxBase *__base, UWORD factor, UWORD numerator, UWORD denominator)
@@ -1800,7 +1908,8 @@ __graphics_ScalerDiv(struct GfxBase *__base, UWORD factor, UWORD numerator, UWOR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define ScalerDiv(factor, numerator, denominator) __graphics_ScalerDiv((GRAPHICS_BASE_NAME), (UWORD)(factor), (UWORD)(numerator), (UWORD)(denominator))
+#define ScalerDiv(factor, numerator, denominator) __graphics_ScalerDiv((__graphics_base_t)(GRAPHICS_BASE_NAME), (UWORD)(factor), (UWORD)(numerator), (UWORD)(denominator))
+#define __ScalerDiv_base(__ndk_b, factor, numerator, denominator) __graphics_ScalerDiv((__graphics_base_t)(__ndk_b), (UWORD)(factor), (UWORD)(numerator), (UWORD)(denominator))
 
 static __inline__ WORD
 __graphics_TextExtent(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, WORD count, struct TextExtent * textExtent)
@@ -1817,7 +1926,8 @@ __graphics_TextExtent(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (WORD)_d0;
 }
-#define TextExtent(rp, string, count, textExtent) __graphics_TextExtent((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (WORD)(count), (struct TextExtent *)(textExtent))
+#define TextExtent(rp, string, count, textExtent) __graphics_TextExtent((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (WORD)(count), (struct TextExtent *)(textExtent))
+#define __TextExtent_base(__ndk_b, rp, string, count, textExtent) __graphics_TextExtent((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST_STRPTR)(string), (WORD)(count), (struct TextExtent *)(textExtent))
 
 static __inline__ ULONG
 __graphics_TextFit(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD strLen, CONST struct TextExtent * textExtent, CONST struct TextExtent * constrainingExtent, WORD strDirection, UWORD constrainingBitWidth, UWORD constrainingBitHeight)
@@ -1837,7 +1947,8 @@ __graphics_TextFit(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define TextFit(rp, string, strLen, textExtent, constrainingExtent, strDirection, constrainingBitWidth, constrainingBitHeight) __graphics_TextFit((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(strLen), (CONST struct TextExtent *)(textExtent), (CONST struct TextExtent *)(constrainingExtent), (WORD)(strDirection), (UWORD)(constrainingBitWidth), (UWORD)(constrainingBitHeight))
+#define TextFit(rp, string, strLen, textExtent, constrainingExtent, strDirection, constrainingBitWidth, constrainingBitHeight) __graphics_TextFit((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(strLen), (CONST struct TextExtent *)(textExtent), (CONST struct TextExtent *)(constrainingExtent), (WORD)(strDirection), (UWORD)(constrainingBitWidth), (UWORD)(constrainingBitHeight))
+#define __TextFit_base(__ndk_b, rp, string, strLen, textExtent, constrainingExtent, strDirection, constrainingBitWidth, constrainingBitHeight) __graphics_TextFit((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(strLen), (CONST struct TextExtent *)(textExtent), (CONST struct TextExtent *)(constrainingExtent), (WORD)(strDirection), (UWORD)(constrainingBitWidth), (UWORD)(constrainingBitHeight))
 
 static __inline__ APTR
 __graphics_GfxLookUp(struct GfxBase *__base, CONST_APTR associateNode)
@@ -1853,7 +1964,8 @@ __graphics_GfxLookUp(struct GfxBase *__base, CONST_APTR associateNode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define GfxLookUp(associateNode) __graphics_GfxLookUp((GRAPHICS_BASE_NAME), (CONST_APTR)(associateNode))
+#define GfxLookUp(associateNode) __graphics_GfxLookUp((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST_APTR)(associateNode))
+#define __GfxLookUp_base(__ndk_b, associateNode) __graphics_GfxLookUp((__graphics_base_t)(__ndk_b), (CONST_APTR)(associateNode))
 
 static __inline__ BOOL
 __graphics_VideoControl(struct GfxBase *__base, struct ColorMap * colorMap, struct TagItem * tagarray)
@@ -1869,9 +1981,19 @@ __graphics_VideoControl(struct GfxBase *__base, struct ColorMap * colorMap, stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define VideoControl(colorMap, tagarray) __graphics_VideoControl((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (struct TagItem *)(tagarray))
+#define VideoControl(colorMap, tagarray) __graphics_VideoControl((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (struct TagItem *)(tagarray))
+#define __VideoControl_base(__ndk_b, colorMap, tagarray) __graphics_VideoControl((__graphics_base_t)(__ndk_b), (struct ColorMap *)(colorMap), (struct TagItem *)(tagarray))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
+___graphics_VideoControlTags(__graphics_base_t __ndk_base, struct ColorMap * colorMap, Tag tag1Type, ...)
+{
+	return __graphics_VideoControl(__ndk_base, (struct ColorMap *)(colorMap), (struct TagItem *)&tag1Type);
+}
+#define VideoControlTags(colorMap, ...) ___graphics_VideoControlTags((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), ##__VA_ARGS__)
+#else
 #define VideoControlTags(colorMap, ...) (VideoControlTags)((struct ColorMap *)(colorMap), ##__VA_ARGS__)
+#endif
 
 static __inline__ struct MonitorSpec *
 __graphics_OpenMonitor(struct GfxBase *__base, CONST_STRPTR monitorName, ULONG displayID)
@@ -1887,7 +2009,8 @@ __graphics_OpenMonitor(struct GfxBase *__base, CONST_STRPTR monitorName, ULONG d
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MonitorSpec *)_d0;
 }
-#define OpenMonitor(monitorName, displayID) __graphics_OpenMonitor((GRAPHICS_BASE_NAME), (CONST_STRPTR)(monitorName), (ULONG)(displayID))
+#define OpenMonitor(monitorName, displayID) __graphics_OpenMonitor((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST_STRPTR)(monitorName), (ULONG)(displayID))
+#define __OpenMonitor_base(__ndk_b, monitorName, displayID) __graphics_OpenMonitor((__graphics_base_t)(__ndk_b), (CONST_STRPTR)(monitorName), (ULONG)(displayID))
 
 static __inline__ BOOL
 __graphics_CloseMonitor(struct GfxBase *__base, struct MonitorSpec * monitorSpec)
@@ -1903,7 +2026,8 @@ __graphics_CloseMonitor(struct GfxBase *__base, struct MonitorSpec * monitorSpec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define CloseMonitor(monitorSpec) __graphics_CloseMonitor((GRAPHICS_BASE_NAME), (struct MonitorSpec *)(monitorSpec))
+#define CloseMonitor(monitorSpec) __graphics_CloseMonitor((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct MonitorSpec *)(monitorSpec))
+#define __CloseMonitor_base(__ndk_b, monitorSpec) __graphics_CloseMonitor((__graphics_base_t)(__ndk_b), (struct MonitorSpec *)(monitorSpec))
 
 static __inline__ DisplayInfoHandle
 __graphics_FindDisplayInfo(struct GfxBase *__base, ULONG displayID)
@@ -1919,7 +2043,8 @@ __graphics_FindDisplayInfo(struct GfxBase *__base, ULONG displayID)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (DisplayInfoHandle)_d0;
 }
-#define FindDisplayInfo(displayID) __graphics_FindDisplayInfo((GRAPHICS_BASE_NAME), (ULONG)(displayID))
+#define FindDisplayInfo(displayID) __graphics_FindDisplayInfo((__graphics_base_t)(GRAPHICS_BASE_NAME), (ULONG)(displayID))
+#define __FindDisplayInfo_base(__ndk_b, displayID) __graphics_FindDisplayInfo((__graphics_base_t)(__ndk_b), (ULONG)(displayID))
 
 static __inline__ ULONG
 __graphics_NextDisplayInfo(struct GfxBase *__base, ULONG displayID)
@@ -1935,7 +2060,8 @@ __graphics_NextDisplayInfo(struct GfxBase *__base, ULONG displayID)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define NextDisplayInfo(displayID) __graphics_NextDisplayInfo((GRAPHICS_BASE_NAME), (ULONG)(displayID))
+#define NextDisplayInfo(displayID) __graphics_NextDisplayInfo((__graphics_base_t)(GRAPHICS_BASE_NAME), (ULONG)(displayID))
+#define __NextDisplayInfo_base(__ndk_b, displayID) __graphics_NextDisplayInfo((__graphics_base_t)(__ndk_b), (ULONG)(displayID))
 
 static __inline__ ULONG
 __graphics_GetDisplayInfoData(struct GfxBase *__base, CONST DisplayInfoHandle handle, APTR buf, ULONG size, ULONG tagID, ULONG displayID)
@@ -1952,7 +2078,8 @@ __graphics_GetDisplayInfoData(struct GfxBase *__base, CONST DisplayInfoHandle ha
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetDisplayInfoData(handle, buf, size, tagID, displayID) __graphics_GetDisplayInfoData((GRAPHICS_BASE_NAME), (CONST DisplayInfoHandle)(handle), (APTR)(buf), (ULONG)(size), (ULONG)(tagID), (ULONG)(displayID))
+#define GetDisplayInfoData(handle, buf, size, tagID, displayID) __graphics_GetDisplayInfoData((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST DisplayInfoHandle)(handle), (APTR)(buf), (ULONG)(size), (ULONG)(tagID), (ULONG)(displayID))
+#define __GetDisplayInfoData_base(__ndk_b, handle, buf, size, tagID, displayID) __graphics_GetDisplayInfoData((__graphics_base_t)(__ndk_b), (CONST DisplayInfoHandle)(handle), (APTR)(buf), (ULONG)(size), (ULONG)(tagID), (ULONG)(displayID))
 
 static __inline__ VOID
 __graphics_FontExtent(struct GfxBase *__base, CONST struct TextFont * font, struct TextExtent * fontExtent)
@@ -1968,7 +2095,8 @@ __graphics_FontExtent(struct GfxBase *__base, CONST struct TextFont * font, stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FontExtent(font, fontExtent) __graphics_FontExtent((GRAPHICS_BASE_NAME), (CONST struct TextFont *)(font), (struct TextExtent *)(fontExtent))
+#define FontExtent(font, fontExtent) __graphics_FontExtent((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct TextFont *)(font), (struct TextExtent *)(fontExtent))
+#define __FontExtent_base(__ndk_b, font, fontExtent) __graphics_FontExtent((__graphics_base_t)(__ndk_b), (CONST struct TextFont *)(font), (struct TextExtent *)(fontExtent))
 
 static __inline__ LONG
 __graphics_ReadPixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD width, UBYTE * array, struct RastPort * tempRP)
@@ -1986,7 +2114,8 @@ __graphics_ReadPixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xs
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReadPixelLine8(rp, xstart, ystart, width, array, tempRP) __graphics_ReadPixelLine8((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
+#define ReadPixelLine8(rp, xstart, ystart, width, array, tempRP) __graphics_ReadPixelLine8((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
+#define __ReadPixelLine8_base(__ndk_b, rp, xstart, ystart, width, array, tempRP) __graphics_ReadPixelLine8((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
 
 static __inline__ LONG
 __graphics_WritePixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD width, UBYTE * array, struct RastPort * tempRP)
@@ -2004,7 +2133,8 @@ __graphics_WritePixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD x
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WritePixelLine8(rp, xstart, ystart, width, array, tempRP) __graphics_WritePixelLine8((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
+#define WritePixelLine8(rp, xstart, ystart, width, array, tempRP) __graphics_WritePixelLine8((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
+#define __WritePixelLine8_base(__ndk_b, rp, xstart, ystart, width, array, tempRP) __graphics_WritePixelLine8((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
 
 static __inline__ LONG
 __graphics_ReadPixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, UBYTE * array, struct RastPort * temprp)
@@ -2023,7 +2153,8 @@ __graphics_ReadPixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD x
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReadPixelArray8(rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_ReadPixelArray8((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
+#define ReadPixelArray8(rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_ReadPixelArray8((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
+#define __ReadPixelArray8_base(__ndk_b, rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_ReadPixelArray8((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
 
 static __inline__ LONG
 __graphics_WritePixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, UBYTE * array, struct RastPort * temprp)
@@ -2042,7 +2173,8 @@ __graphics_WritePixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WritePixelArray8(rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_WritePixelArray8((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
+#define WritePixelArray8(rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_WritePixelArray8((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
+#define __WritePixelArray8_base(__ndk_b, rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_WritePixelArray8((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
 
 static __inline__ LONG
 __graphics_GetVPModeID(struct GfxBase *__base, CONST struct ViewPort * vp)
@@ -2058,7 +2190,8 @@ __graphics_GetVPModeID(struct GfxBase *__base, CONST struct ViewPort * vp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetVPModeID(vp) __graphics_GetVPModeID((GRAPHICS_BASE_NAME), (CONST struct ViewPort *)(vp))
+#define GetVPModeID(vp) __graphics_GetVPModeID((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct ViewPort *)(vp))
+#define __GetVPModeID_base(__ndk_b, vp) __graphics_GetVPModeID((__graphics_base_t)(__ndk_b), (CONST struct ViewPort *)(vp))
 
 static __inline__ LONG
 __graphics_ModeNotAvailable(struct GfxBase *__base, ULONG modeID)
@@ -2074,7 +2207,8 @@ __graphics_ModeNotAvailable(struct GfxBase *__base, ULONG modeID)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ModeNotAvailable(modeID) __graphics_ModeNotAvailable((GRAPHICS_BASE_NAME), (ULONG)(modeID))
+#define ModeNotAvailable(modeID) __graphics_ModeNotAvailable((__graphics_base_t)(GRAPHICS_BASE_NAME), (ULONG)(modeID))
+#define __ModeNotAvailable_base(__ndk_b, modeID) __graphics_ModeNotAvailable((__graphics_base_t)(__ndk_b), (ULONG)(modeID))
 
 static __inline__ WORD
 __graphics_WeighTAMatch(struct GfxBase *__base, CONST struct TextAttr * reqTextAttr, CONST struct TextAttr * targetTextAttr, CONST struct TagItem * targetTags)
@@ -2091,9 +2225,19 @@ __graphics_WeighTAMatch(struct GfxBase *__base, CONST struct TextAttr * reqTextA
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (WORD)_d0;
 }
-#define WeighTAMatch(reqTextAttr, targetTextAttr, targetTags) __graphics_WeighTAMatch((GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)(targetTags))
+#define WeighTAMatch(reqTextAttr, targetTextAttr, targetTags) __graphics_WeighTAMatch((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)(targetTags))
+#define __WeighTAMatch_base(__ndk_b, reqTextAttr, targetTextAttr, targetTags) __graphics_WeighTAMatch((__graphics_base_t)(__ndk_b), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)(targetTags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) WORD
+___graphics_WeighTAMatchTags(__graphics_base_t __ndk_base, CONST struct TextAttr * reqTextAttr, CONST struct TextAttr * targetTextAttr, Tag tag1Type, ...)
+{
+	return __graphics_WeighTAMatch(__ndk_base, (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)&tag1Type);
+}
+#define WeighTAMatchTags(reqTextAttr, targetTextAttr, ...) ___graphics_WeighTAMatchTags((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), ##__VA_ARGS__)
+#else
 #define WeighTAMatchTags(reqTextAttr, targetTextAttr, ...) (WeighTAMatchTags)((CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __graphics_EraseRect(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
@@ -2111,7 +2255,8 @@ __graphics_EraseRect(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define EraseRect(rp, xMin, yMin, xMax, yMax) __graphics_EraseRect((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define EraseRect(rp, xMin, yMin, xMax, yMax) __graphics_EraseRect((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __EraseRect_base(__ndk_b, rp, xMin, yMin, xMax, yMax) __graphics_EraseRect((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ ULONG
 __graphics_ExtendFont(struct GfxBase *__base, struct TextFont * font, CONST struct TagItem * fontTags)
@@ -2127,9 +2272,19 @@ __graphics_ExtendFont(struct GfxBase *__base, struct TextFont * font, CONST stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ExtendFont(font, fontTags) __graphics_ExtendFont((GRAPHICS_BASE_NAME), (struct TextFont *)(font), (CONST struct TagItem *)(fontTags))
+#define ExtendFont(font, fontTags) __graphics_ExtendFont((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct TextFont *)(font), (CONST struct TagItem *)(fontTags))
+#define __ExtendFont_base(__ndk_b, font, fontTags) __graphics_ExtendFont((__graphics_base_t)(__ndk_b), (struct TextFont *)(font), (CONST struct TagItem *)(fontTags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___graphics_ExtendFontTags(__graphics_base_t __ndk_base, struct TextFont * font, Tag tag1Type, ...)
+{
+	return __graphics_ExtendFont(__ndk_base, (struct TextFont *)(font), (CONST struct TagItem *)&tag1Type);
+}
+#define ExtendFontTags(font, ...) ___graphics_ExtendFontTags((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct TextFont *)(font), ##__VA_ARGS__)
+#else
 #define ExtendFontTags(font, ...) (ExtendFontTags)((struct TextFont *)(font), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __graphics_StripFont(struct GfxBase *__base, struct TextFont * font)
@@ -2145,7 +2300,8 @@ __graphics_StripFont(struct GfxBase *__base, struct TextFont * font)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define StripFont(font) __graphics_StripFont((GRAPHICS_BASE_NAME), (struct TextFont *)(font))
+#define StripFont(font) __graphics_StripFont((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct TextFont *)(font))
+#define __StripFont_base(__ndk_b, font) __graphics_StripFont((__graphics_base_t)(__ndk_b), (struct TextFont *)(font))
 
 static __inline__ UWORD
 __graphics_CalcIVG(struct GfxBase *__base, struct View * v, struct ViewPort * vp)
@@ -2161,7 +2317,8 @@ __graphics_CalcIVG(struct GfxBase *__base, struct View * v, struct ViewPort * vp
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define CalcIVG(v, vp) __graphics_CalcIVG((GRAPHICS_BASE_NAME), (struct View *)(v), (struct ViewPort *)(vp))
+#define CalcIVG(v, vp) __graphics_CalcIVG((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct View *)(v), (struct ViewPort *)(vp))
+#define __CalcIVG_base(__ndk_b, v, vp) __graphics_CalcIVG((__graphics_base_t)(__ndk_b), (struct View *)(v), (struct ViewPort *)(vp))
 
 static __inline__ LONG
 __graphics_AttachPalExtra(struct GfxBase *__base, struct ColorMap * cm, struct ViewPort * vp)
@@ -2177,7 +2334,8 @@ __graphics_AttachPalExtra(struct GfxBase *__base, struct ColorMap * cm, struct V
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AttachPalExtra(cm, vp) __graphics_AttachPalExtra((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (struct ViewPort *)(vp))
+#define AttachPalExtra(cm, vp) __graphics_AttachPalExtra((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (struct ViewPort *)(vp))
+#define __AttachPalExtra_base(__ndk_b, cm, vp) __graphics_AttachPalExtra((__graphics_base_t)(__ndk_b), (struct ColorMap *)(cm), (struct ViewPort *)(vp))
 
 static __inline__ LONG
 __graphics_ObtainBestPenA(struct GfxBase *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, CONST struct TagItem * tags)
@@ -2195,9 +2353,19 @@ __graphics_ObtainBestPenA(struct GfxBase *__base, struct ColorMap * cm, ULONG r,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ObtainBestPenA(cm, r, g, b, tags) __graphics_ObtainBestPenA((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)(tags))
+#define ObtainBestPenA(cm, r, g, b, tags) __graphics_ObtainBestPenA((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)(tags))
+#define __ObtainBestPenA_base(__ndk_b, cm, r, g, b, tags) __graphics_ObtainBestPenA((__graphics_base_t)(__ndk_b), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___graphics_ObtainBestPen(__graphics_base_t __ndk_base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, Tag tag1Type, ...)
+{
+	return __graphics_ObtainBestPenA(__ndk_base, (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)&tag1Type);
+}
+#define ObtainBestPen(cm, r, g, b, ...) ___graphics_ObtainBestPen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), ##__VA_ARGS__)
+#else
 #define ObtainBestPen(cm, r, g, b, ...) (ObtainBestPen)((struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __graphics_SetRGB32(struct GfxBase *__base, struct ViewPort * vp, ULONG n, ULONG r, ULONG g, ULONG b)
@@ -2215,7 +2383,8 @@ __graphics_SetRGB32(struct GfxBase *__base, struct ViewPort * vp, ULONG n, ULONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetRGB32(vp, n, r, g, b) __graphics_SetRGB32((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
+#define SetRGB32(vp, n, r, g, b) __graphics_SetRGB32((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
+#define __SetRGB32_base(__ndk_b, vp, n, r, g, b) __graphics_SetRGB32((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
 
 static __inline__ ULONG
 __graphics_GetAPen(struct GfxBase *__base, struct RastPort * rp)
@@ -2231,7 +2400,8 @@ __graphics_GetAPen(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetAPen(rp) __graphics_GetAPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define GetAPen(rp) __graphics_GetAPen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __GetAPen_base(__ndk_b, rp) __graphics_GetAPen((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ ULONG
 __graphics_GetBPen(struct GfxBase *__base, struct RastPort * rp)
@@ -2247,7 +2417,8 @@ __graphics_GetBPen(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetBPen(rp) __graphics_GetBPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define GetBPen(rp) __graphics_GetBPen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __GetBPen_base(__ndk_b, rp) __graphics_GetBPen((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ ULONG
 __graphics_GetDrMd(struct GfxBase *__base, struct RastPort * rp)
@@ -2263,7 +2434,8 @@ __graphics_GetDrMd(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetDrMd(rp) __graphics_GetDrMd((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define GetDrMd(rp) __graphics_GetDrMd((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __GetDrMd_base(__ndk_b, rp) __graphics_GetDrMd((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ ULONG
 __graphics_GetOutlinePen(struct GfxBase *__base, struct RastPort * rp)
@@ -2279,7 +2451,8 @@ __graphics_GetOutlinePen(struct GfxBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetOutlinePen(rp) __graphics_GetOutlinePen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define GetOutlinePen(rp) __graphics_GetOutlinePen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __GetOutlinePen_base(__ndk_b, rp) __graphics_GetOutlinePen((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __graphics_LoadRGB32(struct GfxBase *__base, struct ViewPort * vp, CONST ULONG * table)
@@ -2295,7 +2468,8 @@ __graphics_LoadRGB32(struct GfxBase *__base, struct ViewPort * vp, CONST ULONG *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LoadRGB32(vp, table) __graphics_LoadRGB32((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (CONST ULONG *)(table))
+#define LoadRGB32(vp, table) __graphics_LoadRGB32((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (CONST ULONG *)(table))
+#define __LoadRGB32_base(__ndk_b, vp, table) __graphics_LoadRGB32((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (CONST ULONG *)(table))
 
 static __inline__ ULONG
 __graphics_SetChipRev(struct GfxBase *__base, ULONG want)
@@ -2311,7 +2485,8 @@ __graphics_SetChipRev(struct GfxBase *__base, ULONG want)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetChipRev(want) __graphics_SetChipRev((GRAPHICS_BASE_NAME), (ULONG)(want))
+#define SetChipRev(want) __graphics_SetChipRev((__graphics_base_t)(GRAPHICS_BASE_NAME), (ULONG)(want))
+#define __SetChipRev_base(__ndk_b, want) __graphics_SetChipRev((__graphics_base_t)(__ndk_b), (ULONG)(want))
 
 static __inline__ VOID
 __graphics_SetABPenDrMd(struct GfxBase *__base, struct RastPort * rp, ULONG frontPen, ULONG backPen, ULONG drawmode)
@@ -2328,7 +2503,8 @@ __graphics_SetABPenDrMd(struct GfxBase *__base, struct RastPort * rp, ULONG fron
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetABPenDrMd(rp, frontPen, backPen, drawmode) __graphics_SetABPenDrMd((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(frontPen), (ULONG)(backPen), (ULONG)(drawmode))
+#define SetABPenDrMd(rp, frontPen, backPen, drawmode) __graphics_SetABPenDrMd((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(frontPen), (ULONG)(backPen), (ULONG)(drawmode))
+#define __SetABPenDrMd_base(__ndk_b, rp, frontPen, backPen, drawmode) __graphics_SetABPenDrMd((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (ULONG)(frontPen), (ULONG)(backPen), (ULONG)(drawmode))
 
 static __inline__ VOID
 __graphics_GetRGB32(struct GfxBase *__base, CONST struct ColorMap * cm, ULONG firstcolor, ULONG ncolors, ULONG * table)
@@ -2344,7 +2520,8 @@ __graphics_GetRGB32(struct GfxBase *__base, CONST struct ColorMap * cm, ULONG fi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetRGB32(cm, firstcolor, ncolors, table) __graphics_GetRGB32((GRAPHICS_BASE_NAME), (CONST struct ColorMap *)(cm), (ULONG)(firstcolor), (ULONG)(ncolors), (ULONG *)(table))
+#define GetRGB32(cm, firstcolor, ncolors, table) __graphics_GetRGB32((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct ColorMap *)(cm), (ULONG)(firstcolor), (ULONG)(ncolors), (ULONG *)(table))
+#define __GetRGB32_base(__ndk_b, cm, firstcolor, ncolors, table) __graphics_GetRGB32((__graphics_base_t)(__ndk_b), (CONST struct ColorMap *)(cm), (ULONG)(firstcolor), (ULONG)(ncolors), (ULONG *)(table))
 
 static __inline__ struct BitMap *
 __graphics_AllocBitMap(struct GfxBase *__base, ULONG sizex, ULONG sizey, ULONG depth, ULONG flags, CONST struct BitMap * friend_bitmap)
@@ -2362,7 +2539,8 @@ __graphics_AllocBitMap(struct GfxBase *__base, ULONG sizex, ULONG sizey, ULONG d
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct BitMap *)_d0;
 }
-#define AllocBitMap(sizex, sizey, depth, flags, friend_bitmap) __graphics_AllocBitMap((GRAPHICS_BASE_NAME), (ULONG)(sizex), (ULONG)(sizey), (ULONG)(depth), (ULONG)(flags), (CONST struct BitMap *)(friend_bitmap))
+#define AllocBitMap(sizex, sizey, depth, flags, friend_bitmap) __graphics_AllocBitMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (ULONG)(sizex), (ULONG)(sizey), (ULONG)(depth), (ULONG)(flags), (CONST struct BitMap *)(friend_bitmap))
+#define __AllocBitMap_base(__ndk_b, sizex, sizey, depth, flags, friend_bitmap) __graphics_AllocBitMap((__graphics_base_t)(__ndk_b), (ULONG)(sizex), (ULONG)(sizey), (ULONG)(depth), (ULONG)(flags), (CONST struct BitMap *)(friend_bitmap))
 
 static __inline__ VOID
 __graphics_FreeBitMap(struct GfxBase *__base, struct BitMap * bm)
@@ -2378,7 +2556,8 @@ __graphics_FreeBitMap(struct GfxBase *__base, struct BitMap * bm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeBitMap(bm) __graphics_FreeBitMap((GRAPHICS_BASE_NAME), (struct BitMap *)(bm))
+#define FreeBitMap(bm) __graphics_FreeBitMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct BitMap *)(bm))
+#define __FreeBitMap_base(__ndk_b, bm) __graphics_FreeBitMap((__graphics_base_t)(__ndk_b), (struct BitMap *)(bm))
 
 static __inline__ LONG
 __graphics_GetExtSpriteA(struct GfxBase *__base, struct ExtSprite * ss, CONST struct TagItem * tags)
@@ -2395,9 +2574,19 @@ __graphics_GetExtSpriteA(struct GfxBase *__base, struct ExtSprite * ss, CONST st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetExtSpriteA(ss, tags) __graphics_GetExtSpriteA((GRAPHICS_BASE_NAME), (struct ExtSprite *)(ss), (CONST struct TagItem *)(tags))
+#define GetExtSpriteA(ss, tags) __graphics_GetExtSpriteA((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ExtSprite *)(ss), (CONST struct TagItem *)(tags))
+#define __GetExtSpriteA_base(__ndk_b, ss, tags) __graphics_GetExtSpriteA((__graphics_base_t)(__ndk_b), (struct ExtSprite *)(ss), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___graphics_GetExtSprite(__graphics_base_t __ndk_base, struct ExtSprite * ss, Tag tag1Type, ...)
+{
+	return __graphics_GetExtSpriteA(__ndk_base, (struct ExtSprite *)(ss), (CONST struct TagItem *)&tag1Type);
+}
+#define GetExtSprite(ss, ...) ___graphics_GetExtSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ExtSprite *)(ss), ##__VA_ARGS__)
+#else
 #define GetExtSprite(ss, ...) (GetExtSprite)((struct ExtSprite *)(ss), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __graphics_CoerceMode(struct GfxBase *__base, struct ViewPort * vp, ULONG monitorid, ULONG flags)
@@ -2413,7 +2602,8 @@ __graphics_CoerceMode(struct GfxBase *__base, struct ViewPort * vp, ULONG monito
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CoerceMode(vp, monitorid, flags) __graphics_CoerceMode((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (ULONG)(monitorid), (ULONG)(flags))
+#define CoerceMode(vp, monitorid, flags) __graphics_CoerceMode((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (ULONG)(monitorid), (ULONG)(flags))
+#define __CoerceMode_base(__ndk_b, vp, monitorid, flags) __graphics_CoerceMode((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (ULONG)(monitorid), (ULONG)(flags))
 
 static __inline__ VOID
 __graphics_ChangeVPBitMap(struct GfxBase *__base, struct ViewPort * vp, struct BitMap * bm, struct DBufInfo * db)
@@ -2430,7 +2620,8 @@ __graphics_ChangeVPBitMap(struct GfxBase *__base, struct ViewPort * vp, struct B
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ChangeVPBitMap(vp, bm, db) __graphics_ChangeVPBitMap((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct BitMap *)(bm), (struct DBufInfo *)(db))
+#define ChangeVPBitMap(vp, bm, db) __graphics_ChangeVPBitMap((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct BitMap *)(bm), (struct DBufInfo *)(db))
+#define __ChangeVPBitMap_base(__ndk_b, vp, bm, db) __graphics_ChangeVPBitMap((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (struct BitMap *)(bm), (struct DBufInfo *)(db))
 
 static __inline__ VOID
 __graphics_ReleasePen(struct GfxBase *__base, struct ColorMap * cm, ULONG n)
@@ -2446,7 +2637,8 @@ __graphics_ReleasePen(struct GfxBase *__base, struct ColorMap * cm, ULONG n)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleasePen(cm, n) __graphics_ReleasePen((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n))
+#define ReleasePen(cm, n) __graphics_ReleasePen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n))
+#define __ReleasePen_base(__ndk_b, cm, n) __graphics_ReleasePen((__graphics_base_t)(__ndk_b), (struct ColorMap *)(cm), (ULONG)(n))
 
 static __inline__ ULONG
 __graphics_ObtainPen(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULONG r, ULONG g, ULONG b, LONG f)
@@ -2465,7 +2657,8 @@ __graphics_ObtainPen(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ObtainPen(cm, n, r, g, b, f) __graphics_ObtainPen((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(f))
+#define ObtainPen(cm, n, r, g, b, f) __graphics_ObtainPen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(f))
+#define __ObtainPen_base(__ndk_b, cm, n, r, g, b, f) __graphics_ObtainPen((__graphics_base_t)(__ndk_b), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(f))
 
 static __inline__ ULONG
 __graphics_GetBitMapAttr(struct GfxBase *__base, CONST struct BitMap * bm, ULONG attrnum)
@@ -2481,7 +2674,8 @@ __graphics_GetBitMapAttr(struct GfxBase *__base, CONST struct BitMap * bm, ULONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetBitMapAttr(bm, attrnum) __graphics_GetBitMapAttr((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), (ULONG)(attrnum))
+#define GetBitMapAttr(bm, attrnum) __graphics_GetBitMapAttr((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), (ULONG)(attrnum))
+#define __GetBitMapAttr_base(__ndk_b, bm, attrnum) __graphics_GetBitMapAttr((__graphics_base_t)(__ndk_b), (CONST struct BitMap *)(bm), (ULONG)(attrnum))
 
 static __inline__ struct DBufInfo *
 __graphics_AllocDBufInfo(struct GfxBase *__base, struct ViewPort * vp)
@@ -2497,7 +2691,8 @@ __graphics_AllocDBufInfo(struct GfxBase *__base, struct ViewPort * vp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DBufInfo *)_d0;
 }
-#define AllocDBufInfo(vp) __graphics_AllocDBufInfo((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define AllocDBufInfo(vp) __graphics_AllocDBufInfo((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __AllocDBufInfo_base(__ndk_b, vp) __graphics_AllocDBufInfo((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp))
 
 static __inline__ VOID
 __graphics_FreeDBufInfo(struct GfxBase *__base, struct DBufInfo * dbi)
@@ -2513,7 +2708,8 @@ __graphics_FreeDBufInfo(struct GfxBase *__base, struct DBufInfo * dbi)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeDBufInfo(dbi) __graphics_FreeDBufInfo((GRAPHICS_BASE_NAME), (struct DBufInfo *)(dbi))
+#define FreeDBufInfo(dbi) __graphics_FreeDBufInfo((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct DBufInfo *)(dbi))
+#define __FreeDBufInfo_base(__ndk_b, dbi) __graphics_FreeDBufInfo((__graphics_base_t)(__ndk_b), (struct DBufInfo *)(dbi))
 
 static __inline__ ULONG
 __graphics_SetOutlinePen(struct GfxBase *__base, struct RastPort * rp, ULONG pen)
@@ -2529,7 +2725,8 @@ __graphics_SetOutlinePen(struct GfxBase *__base, struct RastPort * rp, ULONG pen
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetOutlinePen(rp, pen) __graphics_SetOutlinePen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(pen))
+#define SetOutlinePen(rp, pen) __graphics_SetOutlinePen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(pen))
+#define __SetOutlinePen_base(__ndk_b, rp, pen) __graphics_SetOutlinePen((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (ULONG)(pen))
 
 static __inline__ ULONG
 __graphics_SetWriteMask(struct GfxBase *__base, struct RastPort * rp, ULONG msk)
@@ -2545,7 +2742,8 @@ __graphics_SetWriteMask(struct GfxBase *__base, struct RastPort * rp, ULONG msk)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetWriteMask(rp, msk) __graphics_SetWriteMask((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(msk))
+#define SetWriteMask(rp, msk) __graphics_SetWriteMask((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(msk))
+#define __SetWriteMask_base(__ndk_b, rp, msk) __graphics_SetWriteMask((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (ULONG)(msk))
 
 static __inline__ VOID
 __graphics_SetMaxPen(struct GfxBase *__base, struct RastPort * rp, ULONG maxpen)
@@ -2561,7 +2759,8 @@ __graphics_SetMaxPen(struct GfxBase *__base, struct RastPort * rp, ULONG maxpen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetMaxPen(rp, maxpen) __graphics_SetMaxPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(maxpen))
+#define SetMaxPen(rp, maxpen) __graphics_SetMaxPen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(maxpen))
+#define __SetMaxPen_base(__ndk_b, rp, maxpen) __graphics_SetMaxPen((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (ULONG)(maxpen))
 
 static __inline__ VOID
 __graphics_SetRGB32CM(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULONG r, ULONG g, ULONG b)
@@ -2579,7 +2778,8 @@ __graphics_SetRGB32CM(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetRGB32CM(cm, n, r, g, b) __graphics_SetRGB32CM((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
+#define SetRGB32CM(cm, n, r, g, b) __graphics_SetRGB32CM((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
+#define __SetRGB32CM_base(__ndk_b, cm, n, r, g, b) __graphics_SetRGB32CM((__graphics_base_t)(__ndk_b), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
 
 static __inline__ VOID
 __graphics_ScrollRasterBF(struct GfxBase *__base, struct RastPort * rp, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
@@ -2599,7 +2799,8 @@ __graphics_ScrollRasterBF(struct GfxBase *__base, struct RastPort * rp, WORD dx,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScrollRasterBF(rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRasterBF((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define ScrollRasterBF(rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRasterBF((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __ScrollRasterBF_base(__ndk_b, rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRasterBF((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ LONG
 __graphics_FindColor(struct GfxBase *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, LONG maxcolor)
@@ -2619,7 +2820,8 @@ __graphics_FindColor(struct GfxBase *__base, struct ColorMap * cm, ULONG r, ULON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define FindColor(cm, r, g, b, maxcolor) __graphics_FindColor((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(maxcolor))
+#define FindColor(cm, r, g, b, maxcolor) __graphics_FindColor((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(maxcolor))
+#define __FindColor_base(__ndk_b, cm, r, g, b, maxcolor) __graphics_FindColor((__graphics_base_t)(__ndk_b), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(maxcolor))
 
 static __inline__ struct ExtSprite *
 __graphics_AllocSpriteDataA(struct GfxBase *__base, CONST struct BitMap * bm, CONST struct TagItem * tags)
@@ -2636,9 +2838,19 @@ __graphics_AllocSpriteDataA(struct GfxBase *__base, CONST struct BitMap * bm, CO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ExtSprite *)_d0;
 }
-#define AllocSpriteDataA(bm, tags) __graphics_AllocSpriteDataA((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), (CONST struct TagItem *)(tags))
+#define AllocSpriteDataA(bm, tags) __graphics_AllocSpriteDataA((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), (CONST struct TagItem *)(tags))
+#define __AllocSpriteDataA_base(__ndk_b, bm, tags) __graphics_AllocSpriteDataA((__graphics_base_t)(__ndk_b), (CONST struct BitMap *)(bm), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct ExtSprite *
+___graphics_AllocSpriteData(__graphics_base_t __ndk_base, CONST struct BitMap * bm, Tag tag1Type, ...)
+{
+	return __graphics_AllocSpriteDataA(__ndk_base, (CONST struct BitMap *)(bm), (CONST struct TagItem *)&tag1Type);
+}
+#define AllocSpriteData(bm, ...) ___graphics_AllocSpriteData((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), ##__VA_ARGS__)
+#else
 #define AllocSpriteData(bm, ...) (AllocSpriteData)((CONST struct BitMap *)(bm), ##__VA_ARGS__)
+#endif
 
 static __inline__ LONG
 __graphics_ChangeExtSpriteA(struct GfxBase *__base, struct ViewPort * vp, struct ExtSprite * oldsprite, struct ExtSprite * newsprite, CONST struct TagItem * tags)
@@ -2656,9 +2868,19 @@ __graphics_ChangeExtSpriteA(struct GfxBase *__base, struct ViewPort * vp, struct
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ChangeExtSpriteA(vp, oldsprite, newsprite, tags) __graphics_ChangeExtSpriteA((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)(tags))
+#define ChangeExtSpriteA(vp, oldsprite, newsprite, tags) __graphics_ChangeExtSpriteA((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)(tags))
+#define __ChangeExtSpriteA_base(__ndk_b, vp, oldsprite, newsprite, tags) __graphics_ChangeExtSpriteA((__graphics_base_t)(__ndk_b), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___graphics_ChangeExtSprite(__graphics_base_t __ndk_base, struct ViewPort * vp, struct ExtSprite * oldsprite, struct ExtSprite * newsprite, Tag tag1Type, ...)
+{
+	return __graphics_ChangeExtSpriteA(__ndk_base, (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)&tag1Type);
+}
+#define ChangeExtSprite(vp, oldsprite, newsprite, ...) ___graphics_ChangeExtSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), ##__VA_ARGS__)
+#else
 #define ChangeExtSprite(vp, oldsprite, newsprite, ...) (ChangeExtSprite)((struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __graphics_FreeSpriteData(struct GfxBase *__base, struct ExtSprite * sp)
@@ -2675,7 +2897,8 @@ __graphics_FreeSpriteData(struct GfxBase *__base, struct ExtSprite * sp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeSpriteData(sp) __graphics_FreeSpriteData((GRAPHICS_BASE_NAME), (struct ExtSprite *)(sp))
+#define FreeSpriteData(sp) __graphics_FreeSpriteData((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ExtSprite *)(sp))
+#define __FreeSpriteData_base(__ndk_b, sp) __graphics_FreeSpriteData((__graphics_base_t)(__ndk_b), (struct ExtSprite *)(sp))
 
 static __inline__ VOID
 __graphics_SetRPAttrsA(struct GfxBase *__base, struct RastPort * rp, CONST struct TagItem * tags)
@@ -2691,9 +2914,19 @@ __graphics_SetRPAttrsA(struct GfxBase *__base, struct RastPort * rp, CONST struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetRPAttrsA(rp, tags) __graphics_SetRPAttrsA((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST struct TagItem *)(tags))
+#define SetRPAttrsA(rp, tags) __graphics_SetRPAttrsA((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST struct TagItem *)(tags))
+#define __SetRPAttrsA_base(__ndk_b, rp, tags) __graphics_SetRPAttrsA((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___graphics_SetRPAttrs(__graphics_base_t __ndk_base, struct RastPort * rp, Tag tag1Type, ...)
+{
+	__graphics_SetRPAttrsA(__ndk_base, (struct RastPort *)(rp), (CONST struct TagItem *)&tag1Type);
+}
+#define SetRPAttrs(rp, ...) ___graphics_SetRPAttrs((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), ##__VA_ARGS__)
+#else
 #define SetRPAttrs(rp, ...) (SetRPAttrs)((struct RastPort *)(rp), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __graphics_GetRPAttrsA(struct GfxBase *__base, CONST struct RastPort * rp, CONST struct TagItem * tags)
@@ -2709,9 +2942,19 @@ __graphics_GetRPAttrsA(struct GfxBase *__base, CONST struct RastPort * rp, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetRPAttrsA(rp, tags) __graphics_GetRPAttrsA((GRAPHICS_BASE_NAME), (CONST struct RastPort *)(rp), (CONST struct TagItem *)(tags))
+#define GetRPAttrsA(rp, tags) __graphics_GetRPAttrsA((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct RastPort *)(rp), (CONST struct TagItem *)(tags))
+#define __GetRPAttrsA_base(__ndk_b, rp, tags) __graphics_GetRPAttrsA((__graphics_base_t)(__ndk_b), (CONST struct RastPort *)(rp), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___graphics_GetRPAttrs(__graphics_base_t __ndk_base, CONST struct RastPort * rp, Tag tag1Type, ...)
+{
+	__graphics_GetRPAttrsA(__ndk_base, (CONST struct RastPort *)(rp), (CONST struct TagItem *)&tag1Type);
+}
+#define GetRPAttrs(rp, ...) ___graphics_GetRPAttrs((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct RastPort *)(rp), ##__VA_ARGS__)
+#else
 #define GetRPAttrs(rp, ...) (GetRPAttrs)((CONST struct RastPort *)(rp), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __graphics_BestModeIDA(struct GfxBase *__base, CONST struct TagItem * tags)
@@ -2727,8 +2970,18 @@ __graphics_BestModeIDA(struct GfxBase *__base, CONST struct TagItem * tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define BestModeIDA(tags) __graphics_BestModeIDA((GRAPHICS_BASE_NAME), (CONST struct TagItem *)(tags))
+#define BestModeIDA(tags) __graphics_BestModeIDA((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct TagItem *)(tags))
+#define __BestModeIDA_base(__ndk_b, tags) __graphics_BestModeIDA((__graphics_base_t)(__ndk_b), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___graphics_BestModeID(__graphics_base_t __ndk_base, Tag tag1Type, ...)
+{
+	return __graphics_BestModeIDA(__ndk_base, (CONST struct TagItem *)&tag1Type);
+}
+#define BestModeID(...) ___graphics_BestModeID((__graphics_base_t)(GRAPHICS_BASE_NAME), __VA_ARGS__)
+#else
+#endif
 
 static __inline__ VOID
 __graphics_WriteChunkyPixels(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, CONST UBYTE * array, LONG bytesperrow)
@@ -2748,6 +3001,7 @@ __graphics_WriteChunkyPixels(struct GfxBase *__base, struct RastPort * rp, UWORD
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WriteChunkyPixels(rp, xstart, ystart, xstop, ystop, array, bytesperrow) __graphics_WriteChunkyPixels((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (CONST UBYTE *)(array), (LONG)(bytesperrow))
+#define WriteChunkyPixels(rp, xstart, ystart, xstop, ystop, array, bytesperrow) __graphics_WriteChunkyPixels((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (CONST UBYTE *)(array), (LONG)(bytesperrow))
+#define __WriteChunkyPixels_base(__ndk_b, rp, xstart, ystart, xstop, ystop, array, bytesperrow) __graphics_WriteChunkyPixels((__graphics_base_t)(__ndk_b), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (CONST UBYTE *)(array), (LONG)(bytesperrow))
 
 #endif /* INLINE_GRAPHICS_H */

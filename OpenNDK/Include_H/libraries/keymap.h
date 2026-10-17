@@ -61,4 +61,12 @@
 #define RAWKEY_WHEEL_RIGHT	125
 #define RAWKEY_WHEEL_UP		122
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef EXEC_NODES_H
+#include <exec/nodes.h>
+#endif
+#ifndef EXEC_LISTS_H
+#include <exec/lists.h>
+#endif
+
 #endif /* LIBRARIES_KEYMAP_H */

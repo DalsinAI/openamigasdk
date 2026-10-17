@@ -81,4 +81,9 @@ struct PrtInfo {
 	ULONG		*pi_InvertHookBuf;
 };
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef DEVICES_PRTBASE_H
+#include <devices/prtbase.h>
+#endif
+
 #endif /* DEVICES_PRTGFX_H */

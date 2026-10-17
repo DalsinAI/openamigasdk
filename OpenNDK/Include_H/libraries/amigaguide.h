@@ -206,4 +206,9 @@ struct opExpungeNode {
 	struct TagItem	*oen_Attrs;
 };
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_CLASSUSR_H
+#include <intuition/classusr.h>
+#endif
+
 #endif /* LIBRARIES_AMIGAGUIDE_H */

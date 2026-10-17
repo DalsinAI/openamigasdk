@@ -67,4 +67,33 @@ struct ARexxCmd
 /* More names from the 3.2 interface */
 #define AREXX_DefExtention	(AREXX_Dummy + 2)
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef EXEC_MEMORY_H
+#include <exec/memory.h>
+#endif
+#ifndef DOS_DOS_H
+#include <dos/dos.h>
+#endif
+#ifndef DOS_RDARGS_H
+#include <dos/rdargs.h>
+#endif
+#ifndef REXX_STORAGE_H
+#include <rexx/storage.h>
+#endif
+#ifndef REXX_RXSLIB_H
+#include <rexx/rxslib.h>
+#endif
+#ifndef REXX_ERRORS_H
+#include <rexx/errors.h>
+#endif
+#ifndef INTUITION_CLASSES_H
+#include <intuition/classes.h>
+#endif
+#ifndef INTUITION_CLASSUSR_H
+#include <intuition/classusr.h>
+#endif
+#ifndef UTILITY_HOOKS_H
+#include <utility/hooks.h>
+#endif
+
 #endif /* CLASSES_AREXX_H */

@@ -320,4 +320,12 @@ struct LVDrawMsg
 #define NWAYIDCMP		64
 #define NWAY_KIND		7
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_GADGETCLASS_H
+#include <intuition/gadgetclass.h>
+#endif
+
+/* the user data GadTools keeps right after a menu item */
+#define MENU_USERDATA(menuitem)	(*(APTR *)((menuitem) + 1))
+
 #endif /* LIBRARIES_GADTOOLS_H */

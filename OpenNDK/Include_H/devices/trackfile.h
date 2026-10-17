@@ -86,4 +86,11 @@ struct TrackFileUnitData
 #define TF_Timeout		(TF_Dummy + 5)
 #define TF_WriteProtected	(TF_Dummy + 3)
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef DEVICES_TRACKDISK_H
+#include <devices/trackdisk.h>
+#endif
+
+#define TRACKFILENAME		"trackfile.device"
+
 #endif /* DEVICES_TRACKFILE_H */

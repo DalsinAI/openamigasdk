@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__diskfont_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __diskfont_OpenDiskFont(struct Library *__base, CONST struct TextAttr * textAttr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct TextFont *)_d0;
 }
-#define OpenDiskFont(textAttr) __diskfont_OpenDiskFont((DISKFONT_BASE_NAME), (CONST struct TextAttr *)(textAttr))
+#define OpenDiskFont(textAttr) __diskfont_OpenDiskFont((__diskfont_base_t)(DISKFONT_BASE_NAME), (CONST struct TextAttr *)(textAttr))
+#define __OpenDiskFont_base(__ndk_b, textAttr) __diskfont_OpenDiskFont((__diskfont_base_t)(__ndk_b), (CONST struct TextAttr *)(textAttr))
 
 static __inline__ LONG
 __diskfont_AvailFonts(struct Library *__base, struct AvailFontsHeader * buffer, LONG bufBytes, ULONG flags)
@@ -53,7 +55,8 @@ __diskfont_AvailFonts(struct Library *__base, struct AvailFontsHeader * buffer, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define AvailFonts(buffer, bufBytes, flags) __diskfont_AvailFonts((DISKFONT_BASE_NAME), (struct AvailFontsHeader *)(buffer), (LONG)(bufBytes), (ULONG)(flags))
+#define AvailFonts(buffer, bufBytes, flags) __diskfont_AvailFonts((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct AvailFontsHeader *)(buffer), (LONG)(bufBytes), (ULONG)(flags))
+#define __AvailFonts_base(__ndk_b, buffer, bufBytes, flags) __diskfont_AvailFonts((__diskfont_base_t)(__ndk_b), (struct AvailFontsHeader *)(buffer), (LONG)(bufBytes), (ULONG)(flags))
 
 static __inline__ struct FontContentsHeader *
 __diskfont_NewFontContents(struct Library *__base, BPTR fontsLock, CONST_STRPTR fontName)
@@ -69,7 +72,8 @@ __diskfont_NewFontContents(struct Library *__base, BPTR fontsLock, CONST_STRPTR 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct FontContentsHeader *)_d0;
 }
-#define NewFontContents(fontsLock, fontName) __diskfont_NewFontContents((DISKFONT_BASE_NAME), (BPTR)(fontsLock), (CONST_STRPTR)(fontName))
+#define NewFontContents(fontsLock, fontName) __diskfont_NewFontContents((__diskfont_base_t)(DISKFONT_BASE_NAME), (BPTR)(fontsLock), (CONST_STRPTR)(fontName))
+#define __NewFontContents_base(__ndk_b, fontsLock, fontName) __diskfont_NewFontContents((__diskfont_base_t)(__ndk_b), (BPTR)(fontsLock), (CONST_STRPTR)(fontName))
 
 static __inline__ VOID
 __diskfont_DisposeFontContents(struct Library *__base, struct FontContentsHeader * fontContentsHeader)
@@ -85,7 +89,8 @@ __diskfont_DisposeFontContents(struct Library *__base, struct FontContentsHeader
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DisposeFontContents(fontContentsHeader) __diskfont_DisposeFontContents((DISKFONT_BASE_NAME), (struct FontContentsHeader *)(fontContentsHeader))
+#define DisposeFontContents(fontContentsHeader) __diskfont_DisposeFontContents((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct FontContentsHeader *)(fontContentsHeader))
+#define __DisposeFontContents_base(__ndk_b, fontContentsHeader) __diskfont_DisposeFontContents((__diskfont_base_t)(__ndk_b), (struct FontContentsHeader *)(fontContentsHeader))
 
 static __inline__ struct DiskFont *
 __diskfont_NewScaledDiskFont(struct Library *__base, struct TextFont * sourceFont, CONST struct TextAttr * destTextAttr)
@@ -101,7 +106,8 @@ __diskfont_NewScaledDiskFont(struct Library *__base, struct TextFont * sourceFon
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DiskFont *)_d0;
 }
-#define NewScaledDiskFont(sourceFont, destTextAttr) __diskfont_NewScaledDiskFont((DISKFONT_BASE_NAME), (struct TextFont *)(sourceFont), (CONST struct TextAttr *)(destTextAttr))
+#define NewScaledDiskFont(sourceFont, destTextAttr) __diskfont_NewScaledDiskFont((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct TextFont *)(sourceFont), (CONST struct TextAttr *)(destTextAttr))
+#define __NewScaledDiskFont_base(__ndk_b, sourceFont, destTextAttr) __diskfont_NewScaledDiskFont((__diskfont_base_t)(__ndk_b), (struct TextFont *)(sourceFont), (CONST struct TextAttr *)(destTextAttr))
 
 static __inline__ LONG
 __diskfont_GetDiskFontCtrl(struct Library *__base, LONG tagid)
@@ -117,7 +123,8 @@ __diskfont_GetDiskFontCtrl(struct Library *__base, LONG tagid)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetDiskFontCtrl(tagid) __diskfont_GetDiskFontCtrl((DISKFONT_BASE_NAME), (LONG)(tagid))
+#define GetDiskFontCtrl(tagid) __diskfont_GetDiskFontCtrl((__diskfont_base_t)(DISKFONT_BASE_NAME), (LONG)(tagid))
+#define __GetDiskFontCtrl_base(__ndk_b, tagid) __diskfont_GetDiskFontCtrl((__diskfont_base_t)(__ndk_b), (LONG)(tagid))
 
 static __inline__ VOID
 __diskfont_SetDiskFontCtrlA(struct Library *__base, CONST struct TagItem * taglist)
@@ -133,8 +140,18 @@ __diskfont_SetDiskFontCtrlA(struct Library *__base, CONST struct TagItem * tagli
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetDiskFontCtrlA(taglist) __diskfont_SetDiskFontCtrlA((DISKFONT_BASE_NAME), (CONST struct TagItem *)(taglist))
+#define SetDiskFontCtrlA(taglist) __diskfont_SetDiskFontCtrlA((__diskfont_base_t)(DISKFONT_BASE_NAME), (CONST struct TagItem *)(taglist))
+#define __SetDiskFontCtrlA_base(__ndk_b, taglist) __diskfont_SetDiskFontCtrlA((__diskfont_base_t)(__ndk_b), (CONST struct TagItem *)(taglist))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___diskfont_SetDiskFontCtrl(__diskfont_base_t __ndk_base, Tag tag1, ...)
+{
+	__diskfont_SetDiskFontCtrlA(__ndk_base, (CONST struct TagItem *)&tag1);
+}
+#define SetDiskFontCtrl(...) ___diskfont_SetDiskFontCtrl((__diskfont_base_t)(DISKFONT_BASE_NAME), __VA_ARGS__)
+#else
+#endif
 
 static __inline__ LONG
 __diskfont_EOpenEngine(struct Library *__base, struct EGlyphEngine * eEngine)
@@ -150,7 +167,8 @@ __diskfont_EOpenEngine(struct Library *__base, struct EGlyphEngine * eEngine)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define EOpenEngine(eEngine) __diskfont_EOpenEngine((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine))
+#define EOpenEngine(eEngine) __diskfont_EOpenEngine((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine))
+#define __EOpenEngine_base(__ndk_b, eEngine) __diskfont_EOpenEngine((__diskfont_base_t)(__ndk_b), (struct EGlyphEngine *)(eEngine))
 
 static __inline__ VOID
 __diskfont_ECloseEngine(struct Library *__base, struct EGlyphEngine * eEngine)
@@ -166,7 +184,8 @@ __diskfont_ECloseEngine(struct Library *__base, struct EGlyphEngine * eEngine)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ECloseEngine(eEngine) __diskfont_ECloseEngine((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine))
+#define ECloseEngine(eEngine) __diskfont_ECloseEngine((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine))
+#define __ECloseEngine_base(__ndk_b, eEngine) __diskfont_ECloseEngine((__diskfont_base_t)(__ndk_b), (struct EGlyphEngine *)(eEngine))
 
 static __inline__ ULONG
 __diskfont_ESetInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
@@ -182,9 +201,19 @@ __diskfont_ESetInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ESetInfoA(eEngine, taglist) __diskfont_ESetInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define ESetInfoA(eEngine, taglist) __diskfont_ESetInfoA((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define __ESetInfoA_base(__ndk_b, eEngine, taglist) __diskfont_ESetInfoA((__diskfont_base_t)(__ndk_b), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___diskfont_ESetInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, Tag tag1, ...)
+{
+	return __diskfont_ESetInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)&tag1);
+}
+#define ESetInfo(eEngine, ...) ___diskfont_ESetInfo((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+#else
 #define ESetInfo(eEngine, ...) (ESetInfo)((struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __diskfont_EObtainInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
@@ -200,9 +229,19 @@ __diskfont_EObtainInfoA(struct Library *__base, struct EGlyphEngine * eEngine, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define EObtainInfoA(eEngine, taglist) __diskfont_EObtainInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define EObtainInfoA(eEngine, taglist) __diskfont_EObtainInfoA((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define __EObtainInfoA_base(__ndk_b, eEngine, taglist) __diskfont_EObtainInfoA((__diskfont_base_t)(__ndk_b), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___diskfont_EObtainInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, Tag tag1, ...)
+{
+	return __diskfont_EObtainInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)&tag1);
+}
+#define EObtainInfo(eEngine, ...) ___diskfont_EObtainInfo((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+#else
 #define EObtainInfo(eEngine, ...) (EObtainInfo)((struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __diskfont_EReleaseInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONST struct TagItem * taglist)
@@ -218,9 +257,19 @@ __diskfont_EReleaseInfoA(struct Library *__base, struct EGlyphEngine * eEngine, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define EReleaseInfoA(eEngine, taglist) __diskfont_EReleaseInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define EReleaseInfoA(eEngine, taglist) __diskfont_EReleaseInfoA((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
+#define __EReleaseInfoA_base(__ndk_b, eEngine, taglist) __diskfont_EReleaseInfoA((__diskfont_base_t)(__ndk_b), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___diskfont_EReleaseInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, Tag tag1, ...)
+{
+	return __diskfont_EReleaseInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)&tag1);
+}
+#define EReleaseInfo(eEngine, ...) ___diskfont_EReleaseInfo((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+#else
 #define EReleaseInfo(eEngine, ...) (EReleaseInfo)((struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
+#endif
 
 static __inline__ struct OutlineFont *
 __diskfont_OpenOutlineFont(struct Library *__base, CONST_STRPTR name, struct List * list, ULONG flags)
@@ -236,7 +285,8 @@ __diskfont_OpenOutlineFont(struct Library *__base, CONST_STRPTR name, struct Lis
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct OutlineFont *)_d0;
 }
-#define OpenOutlineFont(name, list, flags) __diskfont_OpenOutlineFont((DISKFONT_BASE_NAME), (CONST_STRPTR)(name), (struct List *)(list), (ULONG)(flags))
+#define OpenOutlineFont(name, list, flags) __diskfont_OpenOutlineFont((__diskfont_base_t)(DISKFONT_BASE_NAME), (CONST_STRPTR)(name), (struct List *)(list), (ULONG)(flags))
+#define __OpenOutlineFont_base(__ndk_b, name, list, flags) __diskfont_OpenOutlineFont((__diskfont_base_t)(__ndk_b), (CONST_STRPTR)(name), (struct List *)(list), (ULONG)(flags))
 
 static __inline__ VOID
 __diskfont_CloseOutlineFont(struct Library *__base, struct OutlineFont * olf, struct List * list)
@@ -252,7 +302,8 @@ __diskfont_CloseOutlineFont(struct Library *__base, struct OutlineFont * olf, st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseOutlineFont(olf, list) __diskfont_CloseOutlineFont((DISKFONT_BASE_NAME), (struct OutlineFont *)(olf), (struct List *)(list))
+#define CloseOutlineFont(olf, list) __diskfont_CloseOutlineFont((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct OutlineFont *)(olf), (struct List *)(list))
+#define __CloseOutlineFont_base(__ndk_b, olf, list) __diskfont_CloseOutlineFont((__diskfont_base_t)(__ndk_b), (struct OutlineFont *)(olf), (struct List *)(list))
 
 static __inline__ LONG
 __diskfont_WriteFontContents(struct Library *__base, BPTR fontsLock, CONST_STRPTR fontName, CONST struct FontContentsHeader * fontContentsHeader)
@@ -269,7 +320,8 @@ __diskfont_WriteFontContents(struct Library *__base, BPTR fontsLock, CONST_STRPT
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WriteFontContents(fontsLock, fontName, fontContentsHeader) __diskfont_WriteFontContents((DISKFONT_BASE_NAME), (BPTR)(fontsLock), (CONST_STRPTR)(fontName), (CONST struct FontContentsHeader *)(fontContentsHeader))
+#define WriteFontContents(fontsLock, fontName, fontContentsHeader) __diskfont_WriteFontContents((__diskfont_base_t)(DISKFONT_BASE_NAME), (BPTR)(fontsLock), (CONST_STRPTR)(fontName), (CONST struct FontContentsHeader *)(fontContentsHeader))
+#define __WriteFontContents_base(__ndk_b, fontsLock, fontName, fontContentsHeader) __diskfont_WriteFontContents((__diskfont_base_t)(__ndk_b), (BPTR)(fontsLock), (CONST_STRPTR)(fontName), (CONST struct FontContentsHeader *)(fontContentsHeader))
 
 static __inline__ LONG
 __diskfont_WriteDiskFontHeaderA(struct Library *__base, CONST struct TextFont * font, CONST_STRPTR fileName, CONST struct TagItem * tagList)
@@ -286,9 +338,19 @@ __diskfont_WriteDiskFontHeaderA(struct Library *__base, CONST struct TextFont * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WriteDiskFontHeaderA(font, fileName, tagList) __diskfont_WriteDiskFontHeaderA((DISKFONT_BASE_NAME), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)(tagList))
+#define WriteDiskFontHeaderA(font, fileName, tagList) __diskfont_WriteDiskFontHeaderA((__diskfont_base_t)(DISKFONT_BASE_NAME), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)(tagList))
+#define __WriteDiskFontHeaderA_base(__ndk_b, font, fileName, tagList) __diskfont_WriteDiskFontHeaderA((__diskfont_base_t)(__ndk_b), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___diskfont_WriteDiskFontHeader(__diskfont_base_t __ndk_base, CONST struct TextFont * font, CONST_STRPTR fileName, Tag tag1, ...)
+{
+	return __diskfont_WriteDiskFontHeaderA(__ndk_base, (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)&tag1);
+}
+#define WriteDiskFontHeader(font, fileName, ...) ___diskfont_WriteDiskFontHeader((__diskfont_base_t)(DISKFONT_BASE_NAME), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), ##__VA_ARGS__)
+#else
 #define WriteDiskFontHeader(font, fileName, ...) (WriteDiskFontHeader)((CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __diskfont_ObtainCharsetInfo(struct Library *__base, ULONG knownTag, ULONG knownValue, ULONG wantedTag)
@@ -305,6 +367,7 @@ __diskfont_ObtainCharsetInfo(struct Library *__base, ULONG knownTag, ULONG known
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ObtainCharsetInfo(knownTag, knownValue, wantedTag) __diskfont_ObtainCharsetInfo((DISKFONT_BASE_NAME), (ULONG)(knownTag), (ULONG)(knownValue), (ULONG)(wantedTag))
+#define ObtainCharsetInfo(knownTag, knownValue, wantedTag) __diskfont_ObtainCharsetInfo((__diskfont_base_t)(DISKFONT_BASE_NAME), (ULONG)(knownTag), (ULONG)(knownValue), (ULONG)(wantedTag))
+#define __ObtainCharsetInfo_base(__ndk_b, knownTag, knownValue, wantedTag) __diskfont_ObtainCharsetInfo((__diskfont_base_t)(__ndk_b), (ULONG)(knownTag), (ULONG)(knownValue), (ULONG)(wantedTag))
 
 #endif /* INLINE_DISKFONT_H */

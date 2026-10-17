@@ -41,4 +41,9 @@ struct Message {
 	UWORD	mn_Length;	/* total size including this header */
 };
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef EXEC_TASKS_H
+#include <exec/tasks.h>
+#endif
+
 #endif /* EXEC_PORTS_H */

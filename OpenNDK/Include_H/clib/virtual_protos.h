@@ -12,6 +12,7 @@
 #include <intuition/classusr.h>
 #include <graphics/text.h>
 #include <gadgets/layout.h>
+#include <gadgets/virtual.h>
 
 #ifdef __cplusplus
 extern "C" {

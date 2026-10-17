@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__space_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __space_SPACE_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define SPACE_GetClass() __space_SPACE_GetClass((SPACE_BASE_NAME))
+#define SPACE_GetClass() __space_SPACE_GetClass((__space_base_t)(SPACE_BASE_NAME))
+#define __SPACE_GetClass_base(__ndk_b) __space_SPACE_GetClass((__space_base_t)(__ndk_b))
 
 #endif /* INLINE_SPACE_H */

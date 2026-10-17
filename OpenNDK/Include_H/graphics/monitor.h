@@ -169,4 +169,9 @@ struct SpecialMonitor
 #define REQUEST_PAL		2
 #define REQUEST_SPECIAL		4
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef GRAPHICS_VIEW_H
+#include <graphics/view.h>
+#endif
+
 #endif /* GRAPHICS_MONITOR_H */

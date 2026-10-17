@@ -59,4 +59,12 @@ struct HistoryNode
 #define SHELL_METH_GETHIST	0x47455448
 #define SHELL_METH_METHODS	0x4C495354
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef UTILITY_TAGITEM_H
+#include <utility/tagitem.h>
+#endif
+
+/* four characters as one ULONG, first character highest */
+#define MAKE_SID(a, b, c, d)	(((ULONG)(a) << 24) | ((ULONG)(b) << 16) | ((ULONG)(c) << 8) | (ULONG)(d))
+
 #endif /* DOS_SHELL_H */

@@ -10,36 +10,77 @@ on them. OpenNDK's own inline headers (tools/ndkgen.py) do not use them.
 offs is the call's offset as a positive number (0x1e for -30), rN a
 register name without quotes (d0, a1, ...), bt and bn the base's type and
 value. Up to 12 arguments; a4, a5 and a6 are not accepted as argument
-registers here.
+registers here (the A4 and A5 forms below take that argument in d7).
+NDK 3.2's other forms (NR, FR, FP, FPn, A4, A5, UB) are there too: see
+NDK32 for their names and what each means. The base goes to a6 as a void *, whatever bt says, as NDK
+3.2's own inline/macros.h does: sources pass an empty bt, or a base of
+another type (struct Library * for a library with a base of its own).
 """
 import os
+import re
 
 MAX = 12
 
+# NDK 3.2's other forms, by name (their meaning is the interface; the
+# bodies here are ours):
+#   NR    returns nothing
+#   FR    rt is a function-pointer type, declared by the last parameter fpr
+#   FP    the argument types name function-pointer types, declared by the
+#         fpt parameters after bn (FP2..FP6: that many)
+#   A4/A5 the argument the call wants in a4 (a5) is given in d7; d7 and the
+#         register are swapped around the jsr, as GCC can't hand them over
+#   UB    no base: the caller's arguments set a6 themselves
+NDK32 = """LP0FR LP1FP LP1FR LP1FPFR LP1A5 LP1NRA5 LP1A5FP LP1NRFP LP2UB LP2FP LP2FPFR
+LP2NRFP LP3UB LP3NRUB LP3FP LP3FP2 LP3FP3 LP3NRFP LP3NRFP2 LP3NRFP3 LP4NRFP3 LP4FP LP4FP4
+LP5NRA4 LP5NRA5 LP5FP LP5A4 LP5A4FP LP6A4 LP6NRA4 LP6FP LP6A4FP LP7NRFP6 LP7A4 LP7A4FP
+LP7NRA4 LP8A4 LP8NRA4 LP9A4 LP9NRA4 LP10A4""".split()
 
-def macro(n, nr):
+
+def macro(n, nr, a=None, ub=False, fp=0, fr=False):
     params = ["offs"] + ([] if nr else ["rt"]) + ["name"]
     for i in range(1, n + 1):
         params += ["t%d" % i, "v%d" % i, "r%d" % i]
-    params += ["bt", "bn"]
-    lines = []
+    if not ub:
+        params += ["bt", "bn"]
+    fpts = ["fpt"] if fp == 1 else ["fpt%d" % i for i in range(1, fp + 1)]
+    params += fpts + (["fpr"] if fr else [])
+    lines = ["\ttypedef %s;" % f for f in fpts]
+    if fr:
+        lines.append("\ttypedef fpr;")
     for i in range(1, n + 1):
         lines.append("\tt%d __ndk_v%d = (v%d);" % (i, i, i))
-    lines.append("\tregister bt __ndk_bn __asm(\"a6\") = (bn);")
+    if not ub:
+        lines.append("\tregister void *const __ndk_bn __asm(\"a6\") = (void *)(bn);")
     for i in range(1, n + 1):
         lines.append("\tregister t%d __ndk_r%d __asm(#r%d) = __ndk_v%d;" % (i, i, i, i))
+    jsr = "jsr -\" #offs \"(%/a6)"
+    if a:
+        jsr = "exg %%/d7,%%/%s\\n\\t%s\\n\\texg %%/d7,%%/%s" % (a, jsr, a)
+    ins = ([] if ub else ["\"r\" (__ndk_bn)"]) + ["\"r\" (__ndk_r%d)" % i for i in range(1, n + 1)]
     lines += ["\tregister ULONG __ndk_d0 __asm(\"d0\");",
               "\tregister ULONG __ndk_d1 __asm(\"d1\");",
               "\tregister ULONG __ndk_a0 __asm(\"a0\");",
               "\tregister ULONG __ndk_a1 __asm(\"a1\");",
-              "\t__asm__ __volatile__ (\"jsr -\" #offs \"(%/a6)\"",
+              "\t__asm__ __volatile__ (\"%s\"" % jsr,
               "\t\t: \"=r\" (__ndk_d0), \"=r\" (__ndk_d1), \"=r\" (__ndk_a0), \"=r\" (__ndk_a1)",
-              "\t\t: \"r\" (__ndk_bn)" + "".join(", \"r\" (__ndk_r%d)" % i for i in range(1, n + 1)),
+              "\t\t: " + ", ".join(ins) if ins else "\t\t:",
               "\t\t: __OPENNDK_FPCLOBBER \"cc\", \"memory\");",
               "\t(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1;"]
     lines.append("\t(void)__ndk_d0;" if nr else "\t(rt)__ndk_d0;")
+    return lines, params
+
+
+def define(name, lines, params):
     body = " \\\n".join(["({"] + lines + ["})"])
-    return "#define LP%d%s(%s) \\\n%s\n" % (n, "NR" if nr else "", ", ".join(params), body)
+    return "#define %s(%s) \\\n%s\n" % (name, ", ".join(params), body)
+
+
+def variant(name):
+    m = re.match(r"LP(\d+)(NR)?(A4|A5|UB)?(NR)?(FP(\d)?)?(FR)?$", name)
+    n, nr, a, nr2, fp, fpn, fr = m.groups()
+    lines, params = macro(int(n), bool(nr or nr2), a=a.lower() if a in ("A4", "A5") else None,
+                          ub=a == "UB", fp=(int(fpn) if fpn else 1) if fp else 0, fr=bool(fr))
+    return define(name, lines, params)
 
 
 def main():
@@ -50,12 +91,16 @@ def main():
            "#ifndef __INLINE_MACROS_H",
            "#define __INLINE_MACROS_H\n",
            "#ifndef EXEC_TYPES_H\n#include <exec/types.h>\n#endif\n",
+           "/* as NDK 3.2's: the common headers and the structures, for inline headers built on these */\n"
+           "#ifndef __INLINE_STUB_H\n#include <inline/stubs.h>\n#endif\n",
            "#ifndef __OPENNDK_FPCLOBBER\n#ifdef __HAVE_68881__\n"
            "#define __OPENNDK_FPCLOBBER \"fp0\", \"fp1\",\n#else\n"
            "#define __OPENNDK_FPCLOBBER\n#endif\n#endif\n"]
     for n in range(MAX + 1):
-        out.append(macro(n, False))
-        out.append(macro(n, True))
+        out.append(define("LP%d" % n, *macro(n, False)))
+        out.append(define("LP%dNR" % n, *macro(n, True)))
+    for name in NDK32:
+        out.append(variant(name))
     out.append("#endif /* __INLINE_MACROS_H */")
     dest = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Include_H", "inline", "macros.h")
     os.makedirs(os.path.dirname(dest), exist_ok=True)

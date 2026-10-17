@@ -27,4 +27,9 @@ struct gpClipRect
 #define GMC_VISIBLE		2
 #define GM_CLIPRECT		0x550001
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_CGHOOKS_H
+#include <intuition/cghooks.h>
+#endif
+
 #endif /* REACTION_REACTION_CLASS_H */

@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__led_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __led_LED_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define LED_GetClass() __led_LED_GetClass((LED_BASE_NAME))
+#define LED_GetClass() __led_LED_GetClass((__led_base_t)(LED_BASE_NAME))
+#define __LED_GetClass_base(__ndk_b) __led_LED_GetClass((__led_base_t)(__ndk_b))
 
 #endif /* INLINE_LED_H */

@@ -67,4 +67,9 @@ struct KeyMapResource {
 #define DP_2DINDEXMASK	0x0f	/* the dead key's index */
 #define DP_2DFACSHIFT	4	/* its factor for double dead keys */
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef LIBRARIES_KEYMAP_H
+#include <libraries/keymap.h>
+#endif
+
 #endif /* DEVICES_KEYMAP_H */

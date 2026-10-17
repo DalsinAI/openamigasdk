@@ -115,4 +115,12 @@ struct BitMap
 #define BMF_RTGCHECK		0x200
 #define BMF_RTGTAGS		0x100
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef UTILITY_TAGITEM_H
+#include <utility/tagitem.h>
+#endif
+
+/* a BitMap with the extended layout: its flags field says so */
+#define BITMAPFLAGS_ARE_EXTENDED(f)	(((f) & BMF_CHECKMASK) == BMF_CHECKVALUE)
+
 #endif /* GRAPHICS_GFX_H */

@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__getcolor_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __getcolor_GETCOLOR_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define GETCOLOR_GetClass() __getcolor_GETCOLOR_GetClass((GETCOLOR_BASE_NAME))
+#define GETCOLOR_GetClass() __getcolor_GETCOLOR_GetClass((__getcolor_base_t)(GETCOLOR_BASE_NAME))
+#define __GETCOLOR_GetClass_base(__ndk_b) __getcolor_GETCOLOR_GetClass((__getcolor_base_t)(__ndk_b))
 
 #endif /* INLINE_GETCOLOR_H */

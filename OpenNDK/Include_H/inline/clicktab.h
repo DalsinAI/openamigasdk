@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__clicktab_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __clicktab_CLICKTAB_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define CLICKTAB_GetClass() __clicktab_CLICKTAB_GetClass((CLICKTAB_BASE_NAME))
+#define CLICKTAB_GetClass() __clicktab_CLICKTAB_GetClass((__clicktab_base_t)(CLICKTAB_BASE_NAME))
+#define __CLICKTAB_GetClass_base(__ndk_b) __clicktab_CLICKTAB_GetClass((__clicktab_base_t)(__ndk_b))
 
 static __inline__ struct Node *
 __clicktab_AllocClickTabNodeA(struct Library *__base, struct TagItem * tags)
@@ -53,8 +55,18 @@ __clicktab_AllocClickTabNodeA(struct Library *__base, struct TagItem * tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define AllocClickTabNodeA(tags) __clicktab_AllocClickTabNodeA((CLICKTAB_BASE_NAME), (struct TagItem *)(tags))
+#define AllocClickTabNodeA(tags) __clicktab_AllocClickTabNodeA((__clicktab_base_t)(CLICKTAB_BASE_NAME), (struct TagItem *)(tags))
+#define __AllocClickTabNodeA_base(__ndk_b, tags) __clicktab_AllocClickTabNodeA((__clicktab_base_t)(__ndk_b), (struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct Node *
+___clicktab_AllocClickTabNode(__clicktab_base_t __ndk_base, Tag tag1, ...)
+{
+	return __clicktab_AllocClickTabNodeA(__ndk_base, (struct TagItem *)&tag1);
+}
+#define AllocClickTabNode(...) ___clicktab_AllocClickTabNode((__clicktab_base_t)(CLICKTAB_BASE_NAME), __VA_ARGS__)
+#else
+#endif
 
 static __inline__ VOID
 __clicktab_FreeClickTabNode(struct Library *__base, struct Node * node)
@@ -70,7 +82,8 @@ __clicktab_FreeClickTabNode(struct Library *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeClickTabNode(node) __clicktab_FreeClickTabNode((CLICKTAB_BASE_NAME), (struct Node *)(node))
+#define FreeClickTabNode(node) __clicktab_FreeClickTabNode((__clicktab_base_t)(CLICKTAB_BASE_NAME), (struct Node *)(node))
+#define __FreeClickTabNode_base(__ndk_b, node) __clicktab_FreeClickTabNode((__clicktab_base_t)(__ndk_b), (struct Node *)(node))
 
 static __inline__ VOID
 __clicktab_SetClickTabNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -86,9 +99,19 @@ __clicktab_SetClickTabNodeAttrsA(struct Library *__base, struct Node * node, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetClickTabNodeAttrsA(node, tags) __clicktab_SetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define SetClickTabNodeAttrsA(node, tags) __clicktab_SetClickTabNodeAttrsA((__clicktab_base_t)(CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __SetClickTabNodeAttrsA_base(__ndk_b, node, tags) __clicktab_SetClickTabNodeAttrsA((__clicktab_base_t)(__ndk_b), (struct Node *)(node), (struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___clicktab_SetClickTabNodeAttrs(__clicktab_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+{
+	__clicktab_SetClickTabNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+}
+#define SetClickTabNodeAttrs(node, ...) ___clicktab_SetClickTabNodeAttrs((__clicktab_base_t)(CLICKTAB_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
+#else
 #define SetClickTabNodeAttrs(node, ...) (SetClickTabNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __clicktab_GetClickTabNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -104,8 +127,18 @@ __clicktab_GetClickTabNodeAttrsA(struct Library *__base, struct Node * node, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetClickTabNodeAttrsA(node, tags) __clicktab_GetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define GetClickTabNodeAttrsA(node, tags) __clicktab_GetClickTabNodeAttrsA((__clicktab_base_t)(CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __GetClickTabNodeAttrsA_base(__ndk_b, node, tags) __clicktab_GetClickTabNodeAttrsA((__clicktab_base_t)(__ndk_b), (struct Node *)(node), (struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___clicktab_GetClickTabNodeAttrs(__clicktab_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+{
+	__clicktab_GetClickTabNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+}
+#define GetClickTabNodeAttrs(node, ...) ___clicktab_GetClickTabNodeAttrs((__clicktab_base_t)(CLICKTAB_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
+#else
 #define GetClickTabNodeAttrs(node, ...) (GetClickTabNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+#endif
 
 #endif /* INLINE_CLICKTAB_H */

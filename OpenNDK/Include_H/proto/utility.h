@@ -10,7 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern struct UtilityBase *UtilityBase;
+extern struct Library *UtilityBase;
 #ifdef __cplusplus
 }
 #endif

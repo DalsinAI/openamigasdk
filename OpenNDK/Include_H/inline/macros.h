@@ -9,6 +9,11 @@
 #include <exec/types.h>
 #endif
 
+/* as NDK 3.2's: the common headers and the structures, for inline headers built on these */
+#ifndef __INLINE_STUB_H
+#include <inline/stubs.h>
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -19,7 +24,7 @@
 
 #define LP0(offs, rt, name, bt, bn) \
 ({ \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register ULONG __ndk_d0 __asm("d0"); \
 	register ULONG __ndk_d1 __asm("d1"); \
 	register ULONG __ndk_a0 __asm("a0"); \
@@ -34,7 +39,7 @@
 
 #define LP0NR(offs, name, bt, bn) \
 ({ \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register ULONG __ndk_d0 __asm("d0"); \
 	register ULONG __ndk_d1 __asm("d1"); \
 	register ULONG __ndk_a0 __asm("a0"); \
@@ -50,7 +55,7 @@
 #define LP1(offs, rt, name, t1, v1, r1, bt, bn) \
 ({ \
 	t1 __ndk_v1 = (v1); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register ULONG __ndk_d0 __asm("d0"); \
 	register ULONG __ndk_d1 __asm("d1"); \
@@ -67,7 +72,7 @@
 #define LP1NR(offs, name, t1, v1, r1, bt, bn) \
 ({ \
 	t1 __ndk_v1 = (v1); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register ULONG __ndk_d0 __asm("d0"); \
 	register ULONG __ndk_d1 __asm("d1"); \
@@ -85,7 +90,7 @@
 ({ \
 	t1 __ndk_v1 = (v1); \
 	t2 __ndk_v2 = (v2); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register ULONG __ndk_d0 __asm("d0"); \
@@ -104,7 +109,7 @@
 ({ \
 	t1 __ndk_v1 = (v1); \
 	t2 __ndk_v2 = (v2); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register ULONG __ndk_d0 __asm("d0"); \
@@ -124,7 +129,7 @@
 	t1 __ndk_v1 = (v1); \
 	t2 __ndk_v2 = (v2); \
 	t3 __ndk_v3 = (v3); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -145,7 +150,7 @@
 	t1 __ndk_v1 = (v1); \
 	t2 __ndk_v2 = (v2); \
 	t3 __ndk_v3 = (v3); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -167,7 +172,7 @@
 	t2 __ndk_v2 = (v2); \
 	t3 __ndk_v3 = (v3); \
 	t4 __ndk_v4 = (v4); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -190,7 +195,7 @@
 	t2 __ndk_v2 = (v2); \
 	t3 __ndk_v3 = (v3); \
 	t4 __ndk_v4 = (v4); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -214,7 +219,7 @@
 	t3 __ndk_v3 = (v3); \
 	t4 __ndk_v4 = (v4); \
 	t5 __ndk_v5 = (v5); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -239,7 +244,7 @@
 	t3 __ndk_v3 = (v3); \
 	t4 __ndk_v4 = (v4); \
 	t5 __ndk_v5 = (v5); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -265,7 +270,7 @@
 	t4 __ndk_v4 = (v4); \
 	t5 __ndk_v5 = (v5); \
 	t6 __ndk_v6 = (v6); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -292,7 +297,7 @@
 	t4 __ndk_v4 = (v4); \
 	t5 __ndk_v5 = (v5); \
 	t6 __ndk_v6 = (v6); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -320,7 +325,7 @@
 	t5 __ndk_v5 = (v5); \
 	t6 __ndk_v6 = (v6); \
 	t7 __ndk_v7 = (v7); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -349,7 +354,7 @@
 	t5 __ndk_v5 = (v5); \
 	t6 __ndk_v6 = (v6); \
 	t7 __ndk_v7 = (v7); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -379,7 +384,7 @@
 	t6 __ndk_v6 = (v6); \
 	t7 __ndk_v7 = (v7); \
 	t8 __ndk_v8 = (v8); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -410,7 +415,7 @@
 	t6 __ndk_v6 = (v6); \
 	t7 __ndk_v7 = (v7); \
 	t8 __ndk_v8 = (v8); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -442,7 +447,7 @@
 	t7 __ndk_v7 = (v7); \
 	t8 __ndk_v8 = (v8); \
 	t9 __ndk_v9 = (v9); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -475,7 +480,7 @@
 	t7 __ndk_v7 = (v7); \
 	t8 __ndk_v8 = (v8); \
 	t9 __ndk_v9 = (v9); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -509,7 +514,7 @@
 	t8 __ndk_v8 = (v8); \
 	t9 __ndk_v9 = (v9); \
 	t10 __ndk_v10 = (v10); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -544,7 +549,7 @@
 	t8 __ndk_v8 = (v8); \
 	t9 __ndk_v9 = (v9); \
 	t10 __ndk_v10 = (v10); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -580,7 +585,7 @@
 	t9 __ndk_v9 = (v9); \
 	t10 __ndk_v10 = (v10); \
 	t11 __ndk_v11 = (v11); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -617,7 +622,7 @@
 	t9 __ndk_v9 = (v9); \
 	t10 __ndk_v10 = (v10); \
 	t11 __ndk_v11 = (v11); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -655,7 +660,7 @@
 	t10 __ndk_v10 = (v10); \
 	t11 __ndk_v11 = (v11); \
 	t12 __ndk_v12 = (v12); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -694,7 +699,7 @@
 	t10 __ndk_v10 = (v10); \
 	t11 __ndk_v11 = (v11); \
 	t12 __ndk_v12 = (v12); \
-	register bt __ndk_bn __asm("a6") = (bn); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
 	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
 	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
 	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
@@ -717,6 +722,1004 @@
 		: __OPENNDK_FPCLOBBER "cc", "memory"); \
 	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
 	(void)__ndk_d0; \
+})
+
+#define LP0FR(offs, rt, name, bt, bn, fpr) \
+({ \
+	typedef fpr; \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP1FP(offs, rt, name, t1, v1, r1, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP1FR(offs, rt, name, t1, v1, r1, bt, bn, fpr) \
+({ \
+	typedef fpr; \
+	t1 __ndk_v1 = (v1); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP1FPFR(offs, rt, name, t1, v1, r1, bt, bn, fpt, fpr) \
+({ \
+	typedef fpt; \
+	typedef fpr; \
+	t1 __ndk_v1 = (v1); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP1A5(offs, rt, name, t1, v1, r1, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a5\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a5" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP1NRA5(offs, name, t1, v1, r1, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a5\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a5" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP1A5FP(offs, rt, name, t1, v1, r1, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a5\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a5" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP1NRFP(offs, name, t1, v1, r1, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP2UB(offs, rt, name, t1, v1, r1, t2, v2, r2) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_r1), "r" (__ndk_r2) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP2FP(offs, rt, name, t1, v1, r1, t2, v2, r2, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP2FPFR(offs, rt, name, t1, v1, r1, t2, v2, r2, bt, bn, fpt, fpr) \
+({ \
+	typedef fpt; \
+	typedef fpr; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP2NRFP(offs, name, t1, v1, r1, t2, v2, r2, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP3UB(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP3NRUB(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP3FP(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP3FP2(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, bt, bn, fpt1, fpt2) \
+({ \
+	typedef fpt1; \
+	typedef fpt2; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP3FP3(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, bt, bn, fpt1, fpt2, fpt3) \
+({ \
+	typedef fpt1; \
+	typedef fpt2; \
+	typedef fpt3; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP3NRFP(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP3NRFP2(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, bt, bn, fpt1, fpt2) \
+({ \
+	typedef fpt1; \
+	typedef fpt2; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP3NRFP3(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, bt, bn, fpt1, fpt2, fpt3) \
+({ \
+	typedef fpt1; \
+	typedef fpt2; \
+	typedef fpt3; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP4NRFP3(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, bt, bn, fpt1, fpt2, fpt3) \
+({ \
+	typedef fpt1; \
+	typedef fpt2; \
+	typedef fpt3; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP4FP(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP4FP4(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, bt, bn, fpt1, fpt2, fpt3, fpt4) \
+({ \
+	typedef fpt1; \
+	typedef fpt2; \
+	typedef fpt3; \
+	typedef fpt4; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP5NRA4(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP5NRA5(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a5\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a5" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP5FP(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP5A4(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP5A4FP(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP6A4(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP6NRA4(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP6FP(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP6A4FP(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP7NRFP6(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, bt, bn, fpt1, fpt2, fpt3, fpt4, fpt5, fpt6) \
+({ \
+	typedef fpt1; \
+	typedef fpt2; \
+	typedef fpt3; \
+	typedef fpt4; \
+	typedef fpt5; \
+	typedef fpt6; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("jsr -" #offs "(%/a6)" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP7A4(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP7A4FP(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, bt, bn, fpt) \
+({ \
+	typedef fpt; \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP7NRA4(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP8A4(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, t8, v8, r8, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	t8 __ndk_v8 = (v8); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register t8 __ndk_r8 __asm(#r8) = __ndk_v8; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7), "r" (__ndk_r8) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP8NRA4(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, t8, v8, r8, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	t8 __ndk_v8 = (v8); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register t8 __ndk_r8 __asm(#r8) = __ndk_v8; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7), "r" (__ndk_r8) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP9A4(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, t8, v8, r8, t9, v9, r9, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	t8 __ndk_v8 = (v8); \
+	t9 __ndk_v9 = (v9); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register t8 __ndk_r8 __asm(#r8) = __ndk_v8; \
+	register t9 __ndk_r9 __asm(#r9) = __ndk_v9; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7), "r" (__ndk_r8), "r" (__ndk_r9) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
+})
+
+#define LP9NRA4(offs, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, t8, v8, r8, t9, v9, r9, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	t8 __ndk_v8 = (v8); \
+	t9 __ndk_v9 = (v9); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register t8 __ndk_r8 __asm(#r8) = __ndk_v8; \
+	register t9 __ndk_r9 __asm(#r9) = __ndk_v9; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7), "r" (__ndk_r8), "r" (__ndk_r9) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(void)__ndk_d0; \
+})
+
+#define LP10A4(offs, rt, name, t1, v1, r1, t2, v2, r2, t3, v3, r3, t4, v4, r4, t5, v5, r5, t6, v6, r6, t7, v7, r7, t8, v8, r8, t9, v9, r9, t10, v10, r10, bt, bn) \
+({ \
+	t1 __ndk_v1 = (v1); \
+	t2 __ndk_v2 = (v2); \
+	t3 __ndk_v3 = (v3); \
+	t4 __ndk_v4 = (v4); \
+	t5 __ndk_v5 = (v5); \
+	t6 __ndk_v6 = (v6); \
+	t7 __ndk_v7 = (v7); \
+	t8 __ndk_v8 = (v8); \
+	t9 __ndk_v9 = (v9); \
+	t10 __ndk_v10 = (v10); \
+	register void *const __ndk_bn __asm("a6") = (void *)(bn); \
+	register t1 __ndk_r1 __asm(#r1) = __ndk_v1; \
+	register t2 __ndk_r2 __asm(#r2) = __ndk_v2; \
+	register t3 __ndk_r3 __asm(#r3) = __ndk_v3; \
+	register t4 __ndk_r4 __asm(#r4) = __ndk_v4; \
+	register t5 __ndk_r5 __asm(#r5) = __ndk_v5; \
+	register t6 __ndk_r6 __asm(#r6) = __ndk_v6; \
+	register t7 __ndk_r7 __asm(#r7) = __ndk_v7; \
+	register t8 __ndk_r8 __asm(#r8) = __ndk_v8; \
+	register t9 __ndk_r9 __asm(#r9) = __ndk_v9; \
+	register t10 __ndk_r10 __asm(#r10) = __ndk_v10; \
+	register ULONG __ndk_d0 __asm("d0"); \
+	register ULONG __ndk_d1 __asm("d1"); \
+	register ULONG __ndk_a0 __asm("a0"); \
+	register ULONG __ndk_a1 __asm("a1"); \
+	__asm__ __volatile__ ("exg %/d7,%/a4\n\tjsr -" #offs "(%/a6)\n\texg %/d7,%/a4" \
+		: "=r" (__ndk_d0), "=r" (__ndk_d1), "=r" (__ndk_a0), "=r" (__ndk_a1) \
+		: "r" (__ndk_bn), "r" (__ndk_r1), "r" (__ndk_r2), "r" (__ndk_r3), "r" (__ndk_r4), "r" (__ndk_r5), "r" (__ndk_r6), "r" (__ndk_r7), "r" (__ndk_r8), "r" (__ndk_r9), "r" (__ndk_r10) \
+		: __OPENNDK_FPCLOBBER "cc", "memory"); \
+	(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1; \
+	(rt)__ndk_d0; \
 })
 
 #endif /* __INLINE_MACROS_H */

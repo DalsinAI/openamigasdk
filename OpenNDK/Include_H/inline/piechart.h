@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__piechart_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __piechart_PIECHART_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define PIECHART_GetClass() __piechart_PIECHART_GetClass((PIECHART_BASE_NAME))
+#define PIECHART_GetClass() __piechart_PIECHART_GetClass((__piechart_base_t)(PIECHART_BASE_NAME))
+#define __PIECHART_GetClass_base(__ndk_b) __piechart_PIECHART_GetClass((__piechart_base_t)(__ndk_b))
 
 #endif /* INLINE_PIECHART_H */

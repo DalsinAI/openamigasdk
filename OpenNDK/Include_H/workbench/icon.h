@@ -163,4 +163,12 @@ struct IconIdentifyMsg
 #define ICONGETA_IdentifyBuffer	(ICONA_Dummy + 122)
 #define ICONGETA_IdentifyOnly	(ICONA_Dummy + 123)
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_IMAGECLASS_H
+#include <intuition/imageclass.h>
+#endif
+#ifndef DATATYPES_PICTURECLASS_H
+#include <datatypes/pictureclass.h>
+#endif
+
 #endif /* WORKBENCH_ICON_H */
