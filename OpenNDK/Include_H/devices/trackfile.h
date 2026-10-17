@@ -14,9 +14,14 @@
 #ifndef DOS_DOS_H
 #include <dos/dos.h>
 #endif
+#ifndef DEVICES_TRACKDISK_H
+#include <devices/trackdisk.h>
+#endif
 #ifndef UTILITY_TAGITEM_H
 #include <utility/tagitem.h>
 #endif
+
+#define TRACKFILENAME	"trackfile.device"
 
 /* A unit's checksum, 64 bits */
 struct TrackFileChecksum
