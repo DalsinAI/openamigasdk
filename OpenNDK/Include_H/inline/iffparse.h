@@ -53,7 +53,7 @@ __iffparse_OpenIFF(struct Library *__base, struct IFFHandle * iff, LONG rwMode)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define OpenIFF(iff, rwMode) __iffparse_OpenIFF((IFFPARSE_BASE_NAME), (iff), (rwMode))
+#define OpenIFF(iff, rwMode) __iffparse_OpenIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(rwMode))
 
 static __inline__ LONG
 __iffparse_ParseIFF(struct Library *__base, struct IFFHandle * iff, LONG control)
@@ -69,7 +69,7 @@ __iffparse_ParseIFF(struct Library *__base, struct IFFHandle * iff, LONG control
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ParseIFF(iff, control) __iffparse_ParseIFF((IFFPARSE_BASE_NAME), (iff), (control))
+#define ParseIFF(iff, control) __iffparse_ParseIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(control))
 
 static __inline__ VOID
 __iffparse_CloseIFF(struct Library *__base, struct IFFHandle * iff)
@@ -85,7 +85,7 @@ __iffparse_CloseIFF(struct Library *__base, struct IFFHandle * iff)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseIFF(iff) __iffparse_CloseIFF((IFFPARSE_BASE_NAME), (iff))
+#define CloseIFF(iff) __iffparse_CloseIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
 
 static __inline__ VOID
 __iffparse_FreeIFF(struct Library *__base, struct IFFHandle * iff)
@@ -101,7 +101,7 @@ __iffparse_FreeIFF(struct Library *__base, struct IFFHandle * iff)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeIFF(iff) __iffparse_FreeIFF((IFFPARSE_BASE_NAME), (iff))
+#define FreeIFF(iff) __iffparse_FreeIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
 
 static __inline__ LONG
 __iffparse_ReadChunkBytes(struct Library *__base, struct IFFHandle * iff, APTR buf, LONG numBytes)
@@ -117,7 +117,7 @@ __iffparse_ReadChunkBytes(struct Library *__base, struct IFFHandle * iff, APTR b
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReadChunkBytes(iff, buf, numBytes) __iffparse_ReadChunkBytes((IFFPARSE_BASE_NAME), (iff), (buf), (numBytes))
+#define ReadChunkBytes(iff, buf, numBytes) __iffparse_ReadChunkBytes((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (APTR)(buf), (LONG)(numBytes))
 
 static __inline__ LONG
 __iffparse_WriteChunkBytes(struct Library *__base, struct IFFHandle * iff, CONST_APTR buf, LONG numBytes)
@@ -133,7 +133,7 @@ __iffparse_WriteChunkBytes(struct Library *__base, struct IFFHandle * iff, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WriteChunkBytes(iff, buf, numBytes) __iffparse_WriteChunkBytes((IFFPARSE_BASE_NAME), (iff), (buf), (numBytes))
+#define WriteChunkBytes(iff, buf, numBytes) __iffparse_WriteChunkBytes((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST_APTR)(buf), (LONG)(numBytes))
 
 static __inline__ LONG
 __iffparse_ReadChunkRecords(struct Library *__base, struct IFFHandle * iff, APTR buf, LONG bytesPerRecord, LONG numRecords)
@@ -149,7 +149,7 @@ __iffparse_ReadChunkRecords(struct Library *__base, struct IFFHandle * iff, APTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ReadChunkRecords(iff, buf, bytesPerRecord, numRecords) __iffparse_ReadChunkRecords((IFFPARSE_BASE_NAME), (iff), (buf), (bytesPerRecord), (numRecords))
+#define ReadChunkRecords(iff, buf, bytesPerRecord, numRecords) __iffparse_ReadChunkRecords((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (APTR)(buf), (LONG)(bytesPerRecord), (LONG)(numRecords))
 
 static __inline__ LONG
 __iffparse_WriteChunkRecords(struct Library *__base, struct IFFHandle * iff, CONST_APTR buf, LONG bytesPerRecord, LONG numRecords)
@@ -165,7 +165,7 @@ __iffparse_WriteChunkRecords(struct Library *__base, struct IFFHandle * iff, CON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define WriteChunkRecords(iff, buf, bytesPerRecord, numRecords) __iffparse_WriteChunkRecords((IFFPARSE_BASE_NAME), (iff), (buf), (bytesPerRecord), (numRecords))
+#define WriteChunkRecords(iff, buf, bytesPerRecord, numRecords) __iffparse_WriteChunkRecords((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST_APTR)(buf), (LONG)(bytesPerRecord), (LONG)(numRecords))
 
 static __inline__ LONG
 __iffparse_PushChunk(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id, LONG size)
@@ -182,7 +182,7 @@ __iffparse_PushChunk(struct Library *__base, struct IFFHandle * iff, LONG type, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define PushChunk(iff, type, id, size) __iffparse_PushChunk((IFFPARSE_BASE_NAME), (iff), (type), (id), (size))
+#define PushChunk(iff, type, id, size) __iffparse_PushChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(size))
 
 static __inline__ LONG
 __iffparse_PopChunk(struct Library *__base, struct IFFHandle * iff)
@@ -198,7 +198,7 @@ __iffparse_PopChunk(struct Library *__base, struct IFFHandle * iff)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define PopChunk(iff) __iffparse_PopChunk((IFFPARSE_BASE_NAME), (iff))
+#define PopChunk(iff) __iffparse_PopChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
 
 static __inline__ LONG
 __iffparse_EntryHandler(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id, LONG position, struct Hook * handler, APTR object)
@@ -216,7 +216,7 @@ __iffparse_EntryHandler(struct Library *__base, struct IFFHandle * iff, LONG typ
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define EntryHandler(iff, type, id, position, handler, object) __iffparse_EntryHandler((IFFPARSE_BASE_NAME), (iff), (type), (id), (position), (handler), (object))
+#define EntryHandler(iff, type, id, position, handler, object) __iffparse_EntryHandler((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(position), (struct Hook *)(handler), (APTR)(object))
 
 static __inline__ LONG
 __iffparse_ExitHandler(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id, LONG position, struct Hook * handler, APTR object)
@@ -234,7 +234,7 @@ __iffparse_ExitHandler(struct Library *__base, struct IFFHandle * iff, LONG type
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ExitHandler(iff, type, id, position, handler, object) __iffparse_ExitHandler((IFFPARSE_BASE_NAME), (iff), (type), (id), (position), (handler), (object))
+#define ExitHandler(iff, type, id, position, handler, object) __iffparse_ExitHandler((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(position), (struct Hook *)(handler), (APTR)(object))
 
 static __inline__ LONG
 __iffparse_PropChunk(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id)
@@ -250,7 +250,7 @@ __iffparse_PropChunk(struct Library *__base, struct IFFHandle * iff, LONG type, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define PropChunk(iff, type, id) __iffparse_PropChunk((IFFPARSE_BASE_NAME), (iff), (type), (id))
+#define PropChunk(iff, type, id) __iffparse_PropChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ LONG
 __iffparse_PropChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
@@ -266,7 +266,7 @@ __iffparse_PropChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define PropChunks(iff, propArray, numPairs) __iffparse_PropChunks((IFFPARSE_BASE_NAME), (iff), (propArray), (numPairs))
+#define PropChunks(iff, propArray, numPairs) __iffparse_PropChunks((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
 
 static __inline__ LONG
 __iffparse_StopChunk(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id)
@@ -282,7 +282,7 @@ __iffparse_StopChunk(struct Library *__base, struct IFFHandle * iff, LONG type, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define StopChunk(iff, type, id) __iffparse_StopChunk((IFFPARSE_BASE_NAME), (iff), (type), (id))
+#define StopChunk(iff, type, id) __iffparse_StopChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ LONG
 __iffparse_StopChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
@@ -298,7 +298,7 @@ __iffparse_StopChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define StopChunks(iff, propArray, numPairs) __iffparse_StopChunks((IFFPARSE_BASE_NAME), (iff), (propArray), (numPairs))
+#define StopChunks(iff, propArray, numPairs) __iffparse_StopChunks((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
 
 static __inline__ LONG
 __iffparse_CollectionChunk(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id)
@@ -314,7 +314,7 @@ __iffparse_CollectionChunk(struct Library *__base, struct IFFHandle * iff, LONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CollectionChunk(iff, type, id) __iffparse_CollectionChunk((IFFPARSE_BASE_NAME), (iff), (type), (id))
+#define CollectionChunk(iff, type, id) __iffparse_CollectionChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ LONG
 __iffparse_CollectionChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
@@ -330,7 +330,7 @@ __iffparse_CollectionChunks(struct Library *__base, struct IFFHandle * iff, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CollectionChunks(iff, propArray, numPairs) __iffparse_CollectionChunks((IFFPARSE_BASE_NAME), (iff), (propArray), (numPairs))
+#define CollectionChunks(iff, propArray, numPairs) __iffparse_CollectionChunks((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
 
 static __inline__ LONG
 __iffparse_StopOnExit(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id)
@@ -346,7 +346,7 @@ __iffparse_StopOnExit(struct Library *__base, struct IFFHandle * iff, LONG type,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define StopOnExit(iff, type, id) __iffparse_StopOnExit((IFFPARSE_BASE_NAME), (iff), (type), (id))
+#define StopOnExit(iff, type, id) __iffparse_StopOnExit((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ struct StoredProperty *
 __iffparse_FindProp(struct Library *__base, CONST struct IFFHandle * iff, LONG type, LONG id)
@@ -362,7 +362,7 @@ __iffparse_FindProp(struct Library *__base, CONST struct IFFHandle * iff, LONG t
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct StoredProperty *)_d0;
 }
-#define FindProp(iff, type, id) __iffparse_FindProp((IFFPARSE_BASE_NAME), (iff), (type), (id))
+#define FindProp(iff, type, id) __iffparse_FindProp((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ struct CollectionItem *
 __iffparse_FindCollection(struct Library *__base, CONST struct IFFHandle * iff, LONG type, LONG id)
@@ -378,7 +378,7 @@ __iffparse_FindCollection(struct Library *__base, CONST struct IFFHandle * iff, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct CollectionItem *)_d0;
 }
-#define FindCollection(iff, type, id) __iffparse_FindCollection((IFFPARSE_BASE_NAME), (iff), (type), (id))
+#define FindCollection(iff, type, id) __iffparse_FindCollection((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ struct ContextNode *
 __iffparse_FindPropContext(struct Library *__base, CONST struct IFFHandle * iff)
@@ -394,7 +394,7 @@ __iffparse_FindPropContext(struct Library *__base, CONST struct IFFHandle * iff)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ContextNode *)_d0;
 }
-#define FindPropContext(iff) __iffparse_FindPropContext((IFFPARSE_BASE_NAME), (iff))
+#define FindPropContext(iff) __iffparse_FindPropContext((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff))
 
 static __inline__ struct ContextNode *
 __iffparse_CurrentChunk(struct Library *__base, CONST struct IFFHandle * iff)
@@ -410,7 +410,7 @@ __iffparse_CurrentChunk(struct Library *__base, CONST struct IFFHandle * iff)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ContextNode *)_d0;
 }
-#define CurrentChunk(iff) __iffparse_CurrentChunk((IFFPARSE_BASE_NAME), (iff))
+#define CurrentChunk(iff) __iffparse_CurrentChunk((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff))
 
 static __inline__ struct ContextNode *
 __iffparse_ParentChunk(struct Library *__base, CONST struct ContextNode * contextNode)
@@ -426,7 +426,7 @@ __iffparse_ParentChunk(struct Library *__base, CONST struct ContextNode * contex
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ContextNode *)_d0;
 }
-#define ParentChunk(contextNode) __iffparse_ParentChunk((IFFPARSE_BASE_NAME), (contextNode))
+#define ParentChunk(contextNode) __iffparse_ParentChunk((IFFPARSE_BASE_NAME), (CONST struct ContextNode *)(contextNode))
 
 static __inline__ struct LocalContextItem *
 __iffparse_AllocLocalItem(struct Library *__base, LONG type, LONG id, LONG ident, LONG dataSize)
@@ -444,7 +444,7 @@ __iffparse_AllocLocalItem(struct Library *__base, LONG type, LONG id, LONG ident
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct LocalContextItem *)_d0;
 }
-#define AllocLocalItem(type, id, ident, dataSize) __iffparse_AllocLocalItem((IFFPARSE_BASE_NAME), (type), (id), (ident), (dataSize))
+#define AllocLocalItem(type, id, ident, dataSize) __iffparse_AllocLocalItem((IFFPARSE_BASE_NAME), (LONG)(type), (LONG)(id), (LONG)(ident), (LONG)(dataSize))
 
 static __inline__ APTR
 __iffparse_LocalItemData(struct Library *__base, CONST struct LocalContextItem * localItem)
@@ -460,7 +460,7 @@ __iffparse_LocalItemData(struct Library *__base, CONST struct LocalContextItem *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define LocalItemData(localItem) __iffparse_LocalItemData((IFFPARSE_BASE_NAME), (localItem))
+#define LocalItemData(localItem) __iffparse_LocalItemData((IFFPARSE_BASE_NAME), (CONST struct LocalContextItem *)(localItem))
 
 static __inline__ VOID
 __iffparse_SetLocalItemPurge(struct Library *__base, struct LocalContextItem * localItem, CONST struct Hook * purgeHook)
@@ -476,7 +476,7 @@ __iffparse_SetLocalItemPurge(struct Library *__base, struct LocalContextItem * l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetLocalItemPurge(localItem, purgeHook) __iffparse_SetLocalItemPurge((IFFPARSE_BASE_NAME), (localItem), (purgeHook))
+#define SetLocalItemPurge(localItem, purgeHook) __iffparse_SetLocalItemPurge((IFFPARSE_BASE_NAME), (struct LocalContextItem *)(localItem), (CONST struct Hook *)(purgeHook))
 
 static __inline__ VOID
 __iffparse_FreeLocalItem(struct Library *__base, struct LocalContextItem * localItem)
@@ -492,7 +492,7 @@ __iffparse_FreeLocalItem(struct Library *__base, struct LocalContextItem * local
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeLocalItem(localItem) __iffparse_FreeLocalItem((IFFPARSE_BASE_NAME), (localItem))
+#define FreeLocalItem(localItem) __iffparse_FreeLocalItem((IFFPARSE_BASE_NAME), (struct LocalContextItem *)(localItem))
 
 static __inline__ struct LocalContextItem *
 __iffparse_FindLocalItem(struct Library *__base, CONST struct IFFHandle * iff, LONG type, LONG id, LONG ident)
@@ -509,7 +509,7 @@ __iffparse_FindLocalItem(struct Library *__base, CONST struct IFFHandle * iff, L
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct LocalContextItem *)_d0;
 }
-#define FindLocalItem(iff, type, id, ident) __iffparse_FindLocalItem((IFFPARSE_BASE_NAME), (iff), (type), (id), (ident))
+#define FindLocalItem(iff, type, id, ident) __iffparse_FindLocalItem((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(ident))
 
 static __inline__ LONG
 __iffparse_StoreLocalItem(struct Library *__base, struct IFFHandle * iff, struct LocalContextItem * localItem, LONG position)
@@ -525,7 +525,7 @@ __iffparse_StoreLocalItem(struct Library *__base, struct IFFHandle * iff, struct
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define StoreLocalItem(iff, localItem, position) __iffparse_StoreLocalItem((IFFPARSE_BASE_NAME), (iff), (localItem), (position))
+#define StoreLocalItem(iff, localItem, position) __iffparse_StoreLocalItem((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (struct LocalContextItem *)(localItem), (LONG)(position))
 
 static __inline__ VOID
 __iffparse_StoreItemInContext(struct Library *__base, struct IFFHandle * iff, struct LocalContextItem * localItem, struct ContextNode * contextNode)
@@ -542,7 +542,7 @@ __iffparse_StoreItemInContext(struct Library *__base, struct IFFHandle * iff, st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define StoreItemInContext(iff, localItem, contextNode) __iffparse_StoreItemInContext((IFFPARSE_BASE_NAME), (iff), (localItem), (contextNode))
+#define StoreItemInContext(iff, localItem, contextNode) __iffparse_StoreItemInContext((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (struct LocalContextItem *)(localItem), (struct ContextNode *)(contextNode))
 
 static __inline__ VOID
 __iffparse_InitIFF(struct Library *__base, struct IFFHandle * iff, LONG flags, CONST struct Hook * streamHook)
@@ -558,7 +558,7 @@ __iffparse_InitIFF(struct Library *__base, struct IFFHandle * iff, LONG flags, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitIFF(iff, flags, streamHook) __iffparse_InitIFF((IFFPARSE_BASE_NAME), (iff), (flags), (streamHook))
+#define InitIFF(iff, flags, streamHook) __iffparse_InitIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(flags), (CONST struct Hook *)(streamHook))
 
 static __inline__ VOID
 __iffparse_InitIFFasDOS(struct Library *__base, struct IFFHandle * iff)
@@ -574,7 +574,7 @@ __iffparse_InitIFFasDOS(struct Library *__base, struct IFFHandle * iff)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitIFFasDOS(iff) __iffparse_InitIFFasDOS((IFFPARSE_BASE_NAME), (iff))
+#define InitIFFasDOS(iff) __iffparse_InitIFFasDOS((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
 
 static __inline__ VOID
 __iffparse_InitIFFasClip(struct Library *__base, struct IFFHandle * iff)
@@ -590,7 +590,7 @@ __iffparse_InitIFFasClip(struct Library *__base, struct IFFHandle * iff)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitIFFasClip(iff) __iffparse_InitIFFasClip((IFFPARSE_BASE_NAME), (iff))
+#define InitIFFasClip(iff) __iffparse_InitIFFasClip((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
 
 static __inline__ struct ClipboardHandle *
 __iffparse_OpenClipboard(struct Library *__base, LONG unitNumber)
@@ -606,7 +606,7 @@ __iffparse_OpenClipboard(struct Library *__base, LONG unitNumber)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ClipboardHandle *)_d0;
 }
-#define OpenClipboard(unitNumber) __iffparse_OpenClipboard((IFFPARSE_BASE_NAME), (unitNumber))
+#define OpenClipboard(unitNumber) __iffparse_OpenClipboard((IFFPARSE_BASE_NAME), (LONG)(unitNumber))
 
 static __inline__ VOID
 __iffparse_CloseClipboard(struct Library *__base, struct ClipboardHandle * clipHandle)
@@ -622,7 +622,7 @@ __iffparse_CloseClipboard(struct Library *__base, struct ClipboardHandle * clipH
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseClipboard(clipHandle) __iffparse_CloseClipboard((IFFPARSE_BASE_NAME), (clipHandle))
+#define CloseClipboard(clipHandle) __iffparse_CloseClipboard((IFFPARSE_BASE_NAME), (struct ClipboardHandle *)(clipHandle))
 
 static __inline__ LONG
 __iffparse_GoodID(struct Library *__base, LONG id)
@@ -638,7 +638,7 @@ __iffparse_GoodID(struct Library *__base, LONG id)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GoodID(id) __iffparse_GoodID((IFFPARSE_BASE_NAME), (id))
+#define GoodID(id) __iffparse_GoodID((IFFPARSE_BASE_NAME), (LONG)(id))
 
 static __inline__ LONG
 __iffparse_GoodType(struct Library *__base, LONG type)
@@ -654,7 +654,7 @@ __iffparse_GoodType(struct Library *__base, LONG type)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GoodType(type) __iffparse_GoodType((IFFPARSE_BASE_NAME), (type))
+#define GoodType(type) __iffparse_GoodType((IFFPARSE_BASE_NAME), (LONG)(type))
 
 static __inline__ STRPTR
 __iffparse_IDtoStr(struct Library *__base, LONG id, STRPTR buf)
@@ -670,6 +670,6 @@ __iffparse_IDtoStr(struct Library *__base, LONG id, STRPTR buf)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define IDtoStr(id, buf) __iffparse_IDtoStr((IFFPARSE_BASE_NAME), (id), (buf))
+#define IDtoStr(id, buf) __iffparse_IDtoStr((IFFPARSE_BASE_NAME), (LONG)(id), (STRPTR)(buf))
 
 #endif /* INLINE_IFFPARSE_H */

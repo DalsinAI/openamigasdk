@@ -54,7 +54,7 @@ __layout_ActivateLayoutGadget(struct Library *__base, struct Gadget * gadget, st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ActivateLayoutGadget(gadget, window, requester, object) __layout_ActivateLayoutGadget((LAYOUT_BASE_NAME), (gadget), (window), (requester), (object))
+#define ActivateLayoutGadget(gadget, window, requester, object) __layout_ActivateLayoutGadget((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (ULONG)(object))
 
 static __inline__ VOID
 __layout_FlushLayoutDomainCache(struct Library *__base, struct Gadget * gadget)
@@ -70,7 +70,7 @@ __layout_FlushLayoutDomainCache(struct Library *__base, struct Gadget * gadget)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FlushLayoutDomainCache(gadget) __layout_FlushLayoutDomainCache((LAYOUT_BASE_NAME), (gadget))
+#define FlushLayoutDomainCache(gadget) __layout_FlushLayoutDomainCache((LAYOUT_BASE_NAME), (struct Gadget *)(gadget))
 
 static __inline__ BOOL
 __layout_RethinkLayout(struct Library *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, LONG refresh)
@@ -87,7 +87,7 @@ __layout_RethinkLayout(struct Library *__base, struct Gadget * gadget, struct Wi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define RethinkLayout(gadget, window, requester, refresh) __layout_RethinkLayout((LAYOUT_BASE_NAME), (gadget), (window), (requester), (refresh))
+#define RethinkLayout(gadget, window, requester, refresh) __layout_RethinkLayout((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (LONG)(refresh))
 
 static __inline__ VOID
 __layout_LayoutLimits(struct Library *__base, struct Gadget * gadget, struct LayoutLimits * limits, struct TextFont * font, struct Screen * screen)
@@ -105,7 +105,7 @@ __layout_LayoutLimits(struct Library *__base, struct Gadget * gadget, struct Lay
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LayoutLimits(gadget, limits, font, screen) __layout_LayoutLimits((LAYOUT_BASE_NAME), (gadget), (limits), (font), (screen))
+#define LayoutLimits(gadget, limits, font, screen) __layout_LayoutLimits((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (struct LayoutLimits *)(limits), (struct TextFont *)(font), (struct Screen *)(screen))
 
 static __inline__ Class *
 __layout_PAGE_GetClass(struct Library *__base)
@@ -139,7 +139,9 @@ __layout_SetPageGadgetAttrsA(struct Library *__base, struct Gadget * gadget, Obj
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetPageGadgetAttrsA(gadget, object, window, requester, tags) __layout_SetPageGadgetAttrsA((LAYOUT_BASE_NAME), (gadget), (object), (window), (requester), (tags))
+#define SetPageGadgetAttrsA(gadget, object, window, requester, tags) __layout_SetPageGadgetAttrsA((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), (struct TagItem *)(tags))
+
+#define SetPageGadgetAttrs(gadget, object, window, requester, ...) (SetPageGadgetAttrs)((struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
 
 static __inline__ VOID
 __layout_RefreshPageGadget(struct Library *__base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester)
@@ -157,6 +159,6 @@ __layout_RefreshPageGadget(struct Library *__base, struct Gadget * gadget, Objec
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RefreshPageGadget(gadget, object, window, requester) __layout_RefreshPageGadget((LAYOUT_BASE_NAME), (gadget), (object), (window), (requester))
+#define RefreshPageGadget(gadget, object, window, requester) __layout_RefreshPageGadget((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester))
 
 #endif /* INLINE_LAYOUT_H */

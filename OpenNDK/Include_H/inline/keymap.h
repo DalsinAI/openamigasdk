@@ -37,7 +37,7 @@ __keymap_SetKeyMapDefault(struct Library *__base, CONST struct KeyMap * keyMap)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetKeyMapDefault(keyMap) __keymap_SetKeyMapDefault((KEYMAP_BASE_NAME), (keyMap))
+#define SetKeyMapDefault(keyMap) __keymap_SetKeyMapDefault((KEYMAP_BASE_NAME), (CONST struct KeyMap *)(keyMap))
 
 static __inline__ struct KeyMap *
 __keymap_AskKeyMapDefault(struct Library *__base)
@@ -70,7 +70,7 @@ __keymap_MapRawKey(struct Library *__base, CONST struct InputEvent * event, STRP
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (WORD)_d0;
 }
-#define MapRawKey(event, buffer, length, keyMap) __keymap_MapRawKey((KEYMAP_BASE_NAME), (event), (buffer), (length), (keyMap))
+#define MapRawKey(event, buffer, length, keyMap) __keymap_MapRawKey((KEYMAP_BASE_NAME), (CONST struct InputEvent *)(event), (STRPTR)(buffer), (WORD)(length), (CONST struct KeyMap *)(keyMap))
 
 static __inline__ LONG
 __keymap_MapANSI(struct Library *__base, CONST_STRPTR string, LONG count, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap)
@@ -87,6 +87,6 @@ __keymap_MapANSI(struct Library *__base, CONST_STRPTR string, LONG count, STRPTR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define MapANSI(string, count, buffer, length, keyMap) __keymap_MapANSI((KEYMAP_BASE_NAME), (string), (count), (buffer), (length), (keyMap))
+#define MapANSI(string, count, buffer, length, keyMap) __keymap_MapANSI((KEYMAP_BASE_NAME), (CONST_STRPTR)(string), (LONG)(count), (STRPTR)(buffer), (LONG)(length), (CONST struct KeyMap *)(keyMap))
 
 #endif /* INLINE_KEYMAP_H */

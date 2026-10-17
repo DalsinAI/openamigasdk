@@ -37,7 +37,7 @@ __cardres_OwnCard(struct Library *__base, struct CardHandle * handle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct CardHandle *)_d0;
 }
-#define OwnCard(handle) __cardres_OwnCard((CARDRES_BASE_NAME), (handle))
+#define OwnCard(handle) __cardres_OwnCard((CARDRES_BASE_NAME), (struct CardHandle *)(handle))
 
 static __inline__ VOID
 __cardres_ReleaseCard(struct Library *__base, struct CardHandle * handle, ULONG flags)
@@ -53,7 +53,7 @@ __cardres_ReleaseCard(struct Library *__base, struct CardHandle * handle, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseCard(handle, flags) __cardres_ReleaseCard((CARDRES_BASE_NAME), (handle), (flags))
+#define ReleaseCard(handle, flags) __cardres_ReleaseCard((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (ULONG)(flags))
 
 static __inline__ struct CardMemoryMap *
 __cardres_GetCardMap(struct Library *__base)
@@ -85,7 +85,7 @@ __cardres_BeginCardAccess(struct Library *__base, struct CardHandle * handle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define BeginCardAccess(handle) __cardres_BeginCardAccess((CARDRES_BASE_NAME), (handle))
+#define BeginCardAccess(handle) __cardres_BeginCardAccess((CARDRES_BASE_NAME), (struct CardHandle *)(handle))
 
 static __inline__ BOOL
 __cardres_EndCardAccess(struct Library *__base, struct CardHandle * handle)
@@ -101,7 +101,7 @@ __cardres_EndCardAccess(struct Library *__base, struct CardHandle * handle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define EndCardAccess(handle) __cardres_EndCardAccess((CARDRES_BASE_NAME), (handle))
+#define EndCardAccess(handle) __cardres_EndCardAccess((CARDRES_BASE_NAME), (struct CardHandle *)(handle))
 
 static __inline__ UBYTE
 __cardres_ReadCardStatus(struct Library *__base)
@@ -133,7 +133,7 @@ __cardres_CardResetRemove(struct Library *__base, struct CardHandle * handle, UL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define CardResetRemove(handle, flag) __cardres_CardResetRemove((CARDRES_BASE_NAME), (handle), (flag))
+#define CardResetRemove(handle, flag) __cardres_CardResetRemove((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (ULONG)(flag))
 
 static __inline__ UBYTE
 __cardres_CardMiscControl(struct Library *__base, struct CardHandle * handle, UBYTE control_bits)
@@ -149,7 +149,7 @@ __cardres_CardMiscControl(struct Library *__base, struct CardHandle * handle, UB
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE)_d0;
 }
-#define CardMiscControl(handle, control_bits) __cardres_CardMiscControl((CARDRES_BASE_NAME), (handle), (control_bits))
+#define CardMiscControl(handle, control_bits) __cardres_CardMiscControl((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (UBYTE)(control_bits))
 
 static __inline__ ULONG
 __cardres_CardAccessSpeed(struct Library *__base, struct CardHandle * handle, ULONG nanoseconds)
@@ -165,7 +165,7 @@ __cardres_CardAccessSpeed(struct Library *__base, struct CardHandle * handle, UL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CardAccessSpeed(handle, nanoseconds) __cardres_CardAccessSpeed((CARDRES_BASE_NAME), (handle), (nanoseconds))
+#define CardAccessSpeed(handle, nanoseconds) __cardres_CardAccessSpeed((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (ULONG)(nanoseconds))
 
 static __inline__ LONG
 __cardres_CardProgramVoltage(struct Library *__base, struct CardHandle * handle, ULONG voltage)
@@ -181,7 +181,7 @@ __cardres_CardProgramVoltage(struct Library *__base, struct CardHandle * handle,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CardProgramVoltage(handle, voltage) __cardres_CardProgramVoltage((CARDRES_BASE_NAME), (handle), (voltage))
+#define CardProgramVoltage(handle, voltage) __cardres_CardProgramVoltage((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (ULONG)(voltage))
 
 static __inline__ BOOL
 __cardres_CardResetCard(struct Library *__base, struct CardHandle * handle)
@@ -197,7 +197,7 @@ __cardres_CardResetCard(struct Library *__base, struct CardHandle * handle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define CardResetCard(handle) __cardres_CardResetCard((CARDRES_BASE_NAME), (handle))
+#define CardResetCard(handle) __cardres_CardResetCard((CARDRES_BASE_NAME), (struct CardHandle *)(handle))
 
 static __inline__ BOOL
 __cardres_CopyTuple(struct Library *__base, CONST struct CardHandle * handle, UBYTE * buffer, ULONG tuplecode, ULONG size)
@@ -213,7 +213,7 @@ __cardres_CopyTuple(struct Library *__base, CONST struct CardHandle * handle, UB
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define CopyTuple(handle, buffer, tuplecode, size) __cardres_CopyTuple((CARDRES_BASE_NAME), (handle), (buffer), (tuplecode), (size))
+#define CopyTuple(handle, buffer, tuplecode, size) __cardres_CopyTuple((CARDRES_BASE_NAME), (CONST struct CardHandle *)(handle), (UBYTE *)(buffer), (ULONG)(tuplecode), (ULONG)(size))
 
 static __inline__ ULONG
 __cardres_DeviceTuple(struct Library *__base, CONST UBYTE * tuple_data, struct DeviceTData * storage)
@@ -229,7 +229,7 @@ __cardres_DeviceTuple(struct Library *__base, CONST UBYTE * tuple_data, struct D
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define DeviceTuple(tuple_data, storage) __cardres_DeviceTuple((CARDRES_BASE_NAME), (tuple_data), (storage))
+#define DeviceTuple(tuple_data, storage) __cardres_DeviceTuple((CARDRES_BASE_NAME), (CONST UBYTE *)(tuple_data), (struct DeviceTData *)(storage))
 
 static __inline__ struct Resident *
 __cardres_IfAmigaXIP(struct Library *__base, CONST struct CardHandle * handle)
@@ -246,7 +246,7 @@ __cardres_IfAmigaXIP(struct Library *__base, CONST struct CardHandle * handle)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Resident *)_d0;
 }
-#define IfAmigaXIP(handle) __cardres_IfAmigaXIP((CARDRES_BASE_NAME), (handle))
+#define IfAmigaXIP(handle) __cardres_IfAmigaXIP((CARDRES_BASE_NAME), (CONST struct CardHandle *)(handle))
 
 static __inline__ BOOL
 __cardres_CardForceChange(struct Library *__base)

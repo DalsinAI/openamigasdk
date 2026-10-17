@@ -53,7 +53,8 @@ __chooser_AllocChooserNodeA(struct Library *__base, struct TagItem * tags)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define AllocChooserNodeA(tags) __chooser_AllocChooserNodeA((CHOOSER_BASE_NAME), (tags))
+#define AllocChooserNodeA(tags) __chooser_AllocChooserNodeA((CHOOSER_BASE_NAME), (struct TagItem *)(tags))
+
 
 static __inline__ VOID
 __chooser_FreeChooserNode(struct Library *__base, struct Node * node)
@@ -69,7 +70,7 @@ __chooser_FreeChooserNode(struct Library *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeChooserNode(node) __chooser_FreeChooserNode((CHOOSER_BASE_NAME), (node))
+#define FreeChooserNode(node) __chooser_FreeChooserNode((CHOOSER_BASE_NAME), (struct Node *)(node))
 
 static __inline__ VOID
 __chooser_SetChooserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -85,7 +86,9 @@ __chooser_SetChooserNodeAttrsA(struct Library *__base, struct Node * node, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetChooserNodeAttrsA(node, tags) __chooser_SetChooserNodeAttrsA((CHOOSER_BASE_NAME), (node), (tags))
+#define SetChooserNodeAttrsA(node, tags) __chooser_SetChooserNodeAttrsA((CHOOSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define SetChooserNodeAttrs(node, ...) (SetChooserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
 __chooser_GetChooserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -101,7 +104,9 @@ __chooser_GetChooserNodeAttrsA(struct Library *__base, struct Node * node, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetChooserNodeAttrsA(node, tags) __chooser_GetChooserNodeAttrsA((CHOOSER_BASE_NAME), (node), (tags))
+#define GetChooserNodeAttrsA(node, tags) __chooser_GetChooserNodeAttrsA((CHOOSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define GetChooserNodeAttrs(node, ...) (GetChooserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ ULONG
 __chooser_ShowChooser(struct Library *__base, Object * o, struct Window * w, ULONG xpos, ULONG ypos)
@@ -117,7 +122,7 @@ __chooser_ShowChooser(struct Library *__base, Object * o, struct Window * w, ULO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ShowChooser(o, w, xpos, ypos) __chooser_ShowChooser((CHOOSER_BASE_NAME), (o), (w), (xpos), (ypos))
+#define ShowChooser(o, w, xpos, ypos) __chooser_ShowChooser((CHOOSER_BASE_NAME), (Object *)(o), (struct Window *)(w), (ULONG)(xpos), (ULONG)(ypos))
 
 static __inline__ VOID
 __chooser_HideChooser(struct Library *__base, Object * o, struct Window * w)
@@ -133,6 +138,6 @@ __chooser_HideChooser(struct Library *__base, Object * o, struct Window * w)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HideChooser(o, w) __chooser_HideChooser((CHOOSER_BASE_NAME), (o), (w))
+#define HideChooser(o, w) __chooser_HideChooser((CHOOSER_BASE_NAME), (Object *)(o), (struct Window *)(w))
 
 #endif /* INLINE_CHOOSER_H */

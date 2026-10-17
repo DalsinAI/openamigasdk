@@ -53,7 +53,9 @@ __listbrowser_AllocListBrowserNodeA(struct Library *__base, ULONG columns, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define AllocListBrowserNodeA(columns, tags) __listbrowser_AllocListBrowserNodeA((LISTBROWSER_BASE_NAME), (columns), (tags))
+#define AllocListBrowserNodeA(columns, tags) __listbrowser_AllocListBrowserNodeA((LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
+
+#define AllocListBrowserNode(columns, ...) (AllocListBrowserNode)((UWORD)(columns), ##__VA_ARGS__)
 
 static __inline__ VOID
 __listbrowser_FreeListBrowserNode(struct Library *__base, struct Node * node)
@@ -69,7 +71,7 @@ __listbrowser_FreeListBrowserNode(struct Library *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeListBrowserNode(node) __listbrowser_FreeListBrowserNode((LISTBROWSER_BASE_NAME), (node))
+#define FreeListBrowserNode(node) __listbrowser_FreeListBrowserNode((LISTBROWSER_BASE_NAME), (struct Node *)(node))
 
 static __inline__ VOID
 __listbrowser_SetListBrowserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -85,7 +87,9 @@ __listbrowser_SetListBrowserNodeAttrsA(struct Library *__base, struct Node * nod
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetListBrowserNodeAttrsA(node, tags) __listbrowser_SetListBrowserNodeAttrsA((LISTBROWSER_BASE_NAME), (node), (tags))
+#define SetListBrowserNodeAttrsA(node, tags) __listbrowser_SetListBrowserNodeAttrsA((LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define SetListBrowserNodeAttrs(node, ...) (SetListBrowserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
 __listbrowser_GetListBrowserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -101,7 +105,9 @@ __listbrowser_GetListBrowserNodeAttrsA(struct Library *__base, struct Node * nod
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetListBrowserNodeAttrsA(node, tags) __listbrowser_GetListBrowserNodeAttrsA((LISTBROWSER_BASE_NAME), (node), (tags))
+#define GetListBrowserNodeAttrsA(node, tags) __listbrowser_GetListBrowserNodeAttrsA((LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define GetListBrowserNodeAttrs(node, ...) (GetListBrowserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
 __listbrowser_ListBrowserSelectAll(struct Library *__base, struct List * list)
@@ -117,7 +123,7 @@ __listbrowser_ListBrowserSelectAll(struct Library *__base, struct List * list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ListBrowserSelectAll(list) __listbrowser_ListBrowserSelectAll((LISTBROWSER_BASE_NAME), (list))
+#define ListBrowserSelectAll(list) __listbrowser_ListBrowserSelectAll((LISTBROWSER_BASE_NAME), (struct List *)(list))
 
 static __inline__ VOID
 __listbrowser_ShowListBrowserNodeChildren(struct Library *__base, struct Node * node, LONG depth)
@@ -133,7 +139,7 @@ __listbrowser_ShowListBrowserNodeChildren(struct Library *__base, struct Node * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ShowListBrowserNodeChildren(node, depth) __listbrowser_ShowListBrowserNodeChildren((LISTBROWSER_BASE_NAME), (node), (depth))
+#define ShowListBrowserNodeChildren(node, depth) __listbrowser_ShowListBrowserNodeChildren((LISTBROWSER_BASE_NAME), (struct Node *)(node), (LONG)(depth))
 
 static __inline__ VOID
 __listbrowser_HideListBrowserNodeChildren(struct Library *__base, struct Node * node)
@@ -149,7 +155,7 @@ __listbrowser_HideListBrowserNodeChildren(struct Library *__base, struct Node * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HideListBrowserNodeChildren(node) __listbrowser_HideListBrowserNodeChildren((LISTBROWSER_BASE_NAME), (node))
+#define HideListBrowserNodeChildren(node) __listbrowser_HideListBrowserNodeChildren((LISTBROWSER_BASE_NAME), (struct Node *)(node))
 
 static __inline__ VOID
 __listbrowser_ShowAllListBrowserChildren(struct Library *__base, struct List * list)
@@ -165,7 +171,7 @@ __listbrowser_ShowAllListBrowserChildren(struct Library *__base, struct List * l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ShowAllListBrowserChildren(list) __listbrowser_ShowAllListBrowserChildren((LISTBROWSER_BASE_NAME), (list))
+#define ShowAllListBrowserChildren(list) __listbrowser_ShowAllListBrowserChildren((LISTBROWSER_BASE_NAME), (struct List *)(list))
 
 static __inline__ VOID
 __listbrowser_HideAllListBrowserChildren(struct Library *__base, struct List * list)
@@ -181,7 +187,7 @@ __listbrowser_HideAllListBrowserChildren(struct Library *__base, struct List * l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HideAllListBrowserChildren(list) __listbrowser_HideAllListBrowserChildren((LISTBROWSER_BASE_NAME), (list))
+#define HideAllListBrowserChildren(list) __listbrowser_HideAllListBrowserChildren((LISTBROWSER_BASE_NAME), (struct List *)(list))
 
 static __inline__ VOID
 __listbrowser_FreeListBrowserList(struct Library *__base, struct List * list)
@@ -197,7 +203,7 @@ __listbrowser_FreeListBrowserList(struct Library *__base, struct List * list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeListBrowserList(list) __listbrowser_FreeListBrowserList((LISTBROWSER_BASE_NAME), (list))
+#define FreeListBrowserList(list) __listbrowser_FreeListBrowserList((LISTBROWSER_BASE_NAME), (struct List *)(list))
 
 static __inline__ struct ColumnInfo *
 __listbrowser_AllocLBColumnInfoA(struct Library *__base, ULONG columns, struct TagItem * tags)
@@ -213,7 +219,9 @@ __listbrowser_AllocLBColumnInfoA(struct Library *__base, ULONG columns, struct T
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ColumnInfo *)_d0;
 }
-#define AllocLBColumnInfoA(columns, tags) __listbrowser_AllocLBColumnInfoA((LISTBROWSER_BASE_NAME), (columns), (tags))
+#define AllocLBColumnInfoA(columns, tags) __listbrowser_AllocLBColumnInfoA((LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
+
+#define AllocLBColumnInfo(columns, ...) (AllocLBColumnInfo)((UWORD)(columns), ##__VA_ARGS__)
 
 static __inline__ LONG
 __listbrowser_SetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * columninfo, struct TagItem * tags)
@@ -229,7 +237,9 @@ __listbrowser_SetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((LISTBROWSER_BASE_NAME), (columninfo), (tags))
+#define SetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
+
+#define SetLBColumnInfoAttrs(columninfo, ...) (SetLBColumnInfoAttrs)((struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 
 static __inline__ LONG
 __listbrowser_GetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * columninfo, struct TagItem * tags)
@@ -245,7 +255,9 @@ __listbrowser_GetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((LISTBROWSER_BASE_NAME), (columninfo), (tags))
+#define GetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
+
+#define GetLBColumnInfoAttrs(columninfo, ...) (GetLBColumnInfoAttrs)((struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 
 static __inline__ VOID
 __listbrowser_FreeLBColumnInfo(struct Library *__base, struct ColumnInfo * columninfo)
@@ -261,7 +273,7 @@ __listbrowser_FreeLBColumnInfo(struct Library *__base, struct ColumnInfo * colum
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeLBColumnInfo(columninfo) __listbrowser_FreeLBColumnInfo((LISTBROWSER_BASE_NAME), (columninfo))
+#define FreeLBColumnInfo(columninfo) __listbrowser_FreeLBColumnInfo((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo))
 
 static __inline__ VOID
 __listbrowser_ListBrowserClearAll(struct Library *__base, struct List * list)
@@ -277,6 +289,6 @@ __listbrowser_ListBrowserClearAll(struct Library *__base, struct List * list)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ListBrowserClearAll(list) __listbrowser_ListBrowserClearAll((LISTBROWSER_BASE_NAME), (list))
+#define ListBrowserClearAll(list) __listbrowser_ListBrowserClearAll((LISTBROWSER_BASE_NAME), (struct List *)(list))
 
 #endif /* INLINE_LISTBROWSER_H */

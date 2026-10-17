@@ -38,7 +38,7 @@ __mathieeesingtrans_IEEESPAtan(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPAtan(parm) __mathieeesingtrans_IEEESPAtan((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPAtan(parm) __mathieeesingtrans_IEEESPAtan((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPSin(struct Library *__base, FLOAT parm)
@@ -55,7 +55,7 @@ __mathieeesingtrans_IEEESPSin(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPSin(parm) __mathieeesingtrans_IEEESPSin((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPSin(parm) __mathieeesingtrans_IEEESPSin((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPCos(struct Library *__base, FLOAT parm)
@@ -72,7 +72,7 @@ __mathieeesingtrans_IEEESPCos(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPCos(parm) __mathieeesingtrans_IEEESPCos((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPCos(parm) __mathieeesingtrans_IEEESPCos((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPTan(struct Library *__base, FLOAT parm)
@@ -89,7 +89,7 @@ __mathieeesingtrans_IEEESPTan(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPTan(parm) __mathieeesingtrans_IEEESPTan((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPTan(parm) __mathieeesingtrans_IEEESPTan((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPSincos(struct Library *__base, FLOAT * cosptr, FLOAT parm)
@@ -106,7 +106,7 @@ __mathieeesingtrans_IEEESPSincos(struct Library *__base, FLOAT * cosptr, FLOAT p
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPSincos(cosptr, parm) __mathieeesingtrans_IEEESPSincos((MATHIEEESINGTRANS_BASE_NAME), (cosptr), (parm))
+#define IEEESPSincos(cosptr, parm) __mathieeesingtrans_IEEESPSincos((MATHIEEESINGTRANS_BASE_NAME), (FLOAT *)(cosptr), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPSinh(struct Library *__base, FLOAT parm)
@@ -123,7 +123,7 @@ __mathieeesingtrans_IEEESPSinh(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPSinh(parm) __mathieeesingtrans_IEEESPSinh((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPSinh(parm) __mathieeesingtrans_IEEESPSinh((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPCosh(struct Library *__base, FLOAT parm)
@@ -140,7 +140,7 @@ __mathieeesingtrans_IEEESPCosh(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPCosh(parm) __mathieeesingtrans_IEEESPCosh((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPCosh(parm) __mathieeesingtrans_IEEESPCosh((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPTanh(struct Library *__base, FLOAT parm)
@@ -157,7 +157,7 @@ __mathieeesingtrans_IEEESPTanh(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPTanh(parm) __mathieeesingtrans_IEEESPTanh((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPTanh(parm) __mathieeesingtrans_IEEESPTanh((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPExp(struct Library *__base, FLOAT parm)
@@ -174,7 +174,7 @@ __mathieeesingtrans_IEEESPExp(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPExp(parm) __mathieeesingtrans_IEEESPExp((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPExp(parm) __mathieeesingtrans_IEEESPExp((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPLog(struct Library *__base, FLOAT parm)
@@ -191,7 +191,7 @@ __mathieeesingtrans_IEEESPLog(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPLog(parm) __mathieeesingtrans_IEEESPLog((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPLog(parm) __mathieeesingtrans_IEEESPLog((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPPow(struct Library *__base, FLOAT power, FLOAT arg)
@@ -209,7 +209,7 @@ __mathieeesingtrans_IEEESPPow(struct Library *__base, FLOAT power, FLOAT arg)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPPow(power, arg) __mathieeesingtrans_IEEESPPow((MATHIEEESINGTRANS_BASE_NAME), (power), (arg))
+#define IEEESPPow(power, arg) __mathieeesingtrans_IEEESPPow((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(power), (FLOAT)(arg))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPSqrt(struct Library *__base, FLOAT parm)
@@ -226,7 +226,7 @@ __mathieeesingtrans_IEEESPSqrt(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPSqrt(parm) __mathieeesingtrans_IEEESPSqrt((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPSqrt(parm) __mathieeesingtrans_IEEESPSqrt((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPTieee(struct Library *__base, FLOAT parm)
@@ -243,7 +243,7 @@ __mathieeesingtrans_IEEESPTieee(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPTieee(parm) __mathieeesingtrans_IEEESPTieee((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPTieee(parm) __mathieeesingtrans_IEEESPTieee((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPFieee(struct Library *__base, FLOAT parm)
@@ -260,7 +260,7 @@ __mathieeesingtrans_IEEESPFieee(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPFieee(parm) __mathieeesingtrans_IEEESPFieee((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPFieee(parm) __mathieeesingtrans_IEEESPFieee((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPAsin(struct Library *__base, FLOAT parm)
@@ -277,7 +277,7 @@ __mathieeesingtrans_IEEESPAsin(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPAsin(parm) __mathieeesingtrans_IEEESPAsin((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPAsin(parm) __mathieeesingtrans_IEEESPAsin((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPAcos(struct Library *__base, FLOAT parm)
@@ -294,7 +294,7 @@ __mathieeesingtrans_IEEESPAcos(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPAcos(parm) __mathieeesingtrans_IEEESPAcos((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPAcos(parm) __mathieeesingtrans_IEEESPAcos((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathieeesingtrans_IEEESPLog10(struct Library *__base, FLOAT parm)
@@ -311,6 +311,6 @@ __mathieeesingtrans_IEEESPLog10(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEESPLog10(parm) __mathieeesingtrans_IEEESPLog10((MATHIEEESINGTRANS_BASE_NAME), (parm))
+#define IEEESPLog10(parm) __mathieeesingtrans_IEEESPLog10((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
 
 #endif /* INLINE_MATHIEEESINGTRANS_H */
