@@ -362,10 +362,22 @@ def inline(lib):
                        else "#define %s() %s()\n" % (f.name, f.alias_of.name))
             continue
         if f.varargs_of:
-            continue                            # a real function in libamiga.a
+            # a real function in libamiga.a; the macro casts its fixed
+            # arguments to their types, as for the other calls
+            out.append(varargs_macro(f))
+            continue
         out.append(inline_func(lib, f, bn))
     out.append("#endif /* %s */" % g)
     return "\n".join(out) + "\n"
+
+
+def varargs_macro(f):
+    fixed = f.args[:len(f.varargs_of.args) - 1]
+    if not fixed:
+        return ""
+    names = [a.name for a in fixed]
+    return "#define %s(%s, ...) (%s)(%s, ##__VA_ARGS__)\n" % (
+        f.name, ", ".join(names), f.name, ", ".join("(%s)(%s)" % (a.type, a.name) for a in fixed))
 
 
 def same_call(f, g):
@@ -451,7 +463,10 @@ def inline_func(lib, f, bn):
     else:
         body.append("\t" + " ".join("(void)%s;" % regvars[r] for r in SCRATCH))
     sig = "static __inline__ %s\n%s(%s)" % (f.ret, fname, ", ".join(params) or "void")
-    callargs = ([] if base_arg else ["(%s)" % bn]) + ["(%s)" % a.name for a in f.args]
+    # each argument is cast to the call's own type, as the vendor's inline
+    # macros do: a string literal or a char * goes to a CONST_STRPTR, and an
+    # int to a ULONG, without a warning under -Werror
+    callargs = ([] if base_arg else ["(%s)" % bn]) + ["(%s)(%s)" % (a.type, a.name) for a in f.args]
     macro = "#define %s(%s) %s(%s)" % (f.name, ", ".join(a.name for a in f.args), fname,
                                          ", ".join(callargs))
     return "%s\n{\n%s\n}\n%s\n" % (sig, "\n".join(body), macro)

@@ -39,9 +39,9 @@ typedef unsigned char	*STRPTR;	/* a NUL-terminated string */
 typedef const unsigned char *CONST_STRPTR;
 
 /* 32 bits */
-typedef long		LONG;
-typedef unsigned long	ULONG;
-typedef unsigned long	LONGBITS;	/* 32 flag bits */
+typedef int		LONG;
+typedef unsigned int	ULONG;
+typedef unsigned int	LONGBITS;	/* 32 flag bits */
 
 /* 16 bits */
 typedef short		WORD;

@@ -37,7 +37,7 @@ __cia_AddICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * in
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Interrupt *)_d0;
 }
-#define AddICRVector(resource, iCRBit, interrupt) __cia_AddICRVector((resource), (iCRBit), (interrupt))
+#define AddICRVector(resource, iCRBit, interrupt) __cia_AddICRVector((struct Library *)(resource), (WORD)(iCRBit), (struct Interrupt *)(interrupt))
 
 static __inline__ VOID
 __cia_RemICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * interrupt)
@@ -53,7 +53,7 @@ __cia_RemICRVector(struct Library * resource, WORD iCRBit, struct Interrupt * in
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemICRVector(resource, iCRBit, interrupt) __cia_RemICRVector((resource), (iCRBit), (interrupt))
+#define RemICRVector(resource, iCRBit, interrupt) __cia_RemICRVector((struct Library *)(resource), (WORD)(iCRBit), (struct Interrupt *)(interrupt))
 
 static __inline__ WORD
 __cia_AbleICR(struct Library * resource, WORD mask)
@@ -69,7 +69,7 @@ __cia_AbleICR(struct Library * resource, WORD mask)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (WORD)_d0;
 }
-#define AbleICR(resource, mask) __cia_AbleICR((resource), (mask))
+#define AbleICR(resource, mask) __cia_AbleICR((struct Library *)(resource), (WORD)(mask))
 
 static __inline__ WORD
 __cia_SetICR(struct Library * resource, WORD mask)
@@ -85,6 +85,6 @@ __cia_SetICR(struct Library * resource, WORD mask)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (WORD)_d0;
 }
-#define SetICR(resource, mask) __cia_SetICR((resource), (mask))
+#define SetICR(resource, mask) __cia_SetICR((struct Library *)(resource), (WORD)(mask))
 
 #endif /* INLINE_CIA_H */

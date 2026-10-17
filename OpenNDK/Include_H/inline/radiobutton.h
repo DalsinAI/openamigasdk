@@ -53,7 +53,9 @@ __radiobutton_AllocRadioButtonNodeA(struct Library *__base, ULONG columns, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Node *)_d0;
 }
-#define AllocRadioButtonNodeA(columns, tags) __radiobutton_AllocRadioButtonNodeA((RADIOBUTTON_BASE_NAME), (columns), (tags))
+#define AllocRadioButtonNodeA(columns, tags) __radiobutton_AllocRadioButtonNodeA((RADIOBUTTON_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
+
+#define AllocRadioButtonNode(columns, ...) (AllocRadioButtonNode)((UWORD)(columns), ##__VA_ARGS__)
 
 static __inline__ VOID
 __radiobutton_FreeRadioButtonNode(struct Library *__base, struct Node * node)
@@ -69,7 +71,7 @@ __radiobutton_FreeRadioButtonNode(struct Library *__base, struct Node * node)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeRadioButtonNode(node) __radiobutton_FreeRadioButtonNode((RADIOBUTTON_BASE_NAME), (node))
+#define FreeRadioButtonNode(node) __radiobutton_FreeRadioButtonNode((RADIOBUTTON_BASE_NAME), (struct Node *)(node))
 
 static __inline__ VOID
 __radiobutton_SetRadioButtonNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -85,7 +87,9 @@ __radiobutton_SetRadioButtonNodeAttrsA(struct Library *__base, struct Node * nod
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetRadioButtonNodeAttrsA(node, tags) __radiobutton_SetRadioButtonNodeAttrsA((RADIOBUTTON_BASE_NAME), (node), (tags))
+#define SetRadioButtonNodeAttrsA(node, tags) __radiobutton_SetRadioButtonNodeAttrsA((RADIOBUTTON_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define SetRadioButtonNodeAttrs(node, ...) (SetRadioButtonNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
 __radiobutton_GetRadioButtonNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
@@ -101,6 +105,8 @@ __radiobutton_GetRadioButtonNodeAttrsA(struct Library *__base, struct Node * nod
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetRadioButtonNodeAttrsA(node, tags) __radiobutton_GetRadioButtonNodeAttrsA((RADIOBUTTON_BASE_NAME), (node), (tags))
+#define GetRadioButtonNodeAttrsA(node, tags) __radiobutton_GetRadioButtonNodeAttrsA((RADIOBUTTON_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+
+#define GetRadioButtonNodeAttrs(node, ...) (GetRadioButtonNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
 
 #endif /* INLINE_RADIOBUTTON_H */

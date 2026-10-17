@@ -55,7 +55,7 @@ __virtual_RefreshVirtualGadget(struct Library *__base, struct Gadget * gadget, O
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RefreshVirtualGadget(gadget, obj, window, requester) __virtual_RefreshVirtualGadget((VIRTUAL_BASE_NAME), (gadget), (obj), (window), (requester))
+#define RefreshVirtualGadget(gadget, obj, window, requester) __virtual_RefreshVirtualGadget((VIRTUAL_BASE_NAME), (struct Gadget *)(gadget), (Object *)(obj), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ BOOL
 __virtual_RethinkVirtualSize(struct Library *__base, Object * virt_obj, Object * rootlayout, struct TextFont * font, struct Screen * screen, struct LayoutLimits * layoutlimits)
@@ -73,6 +73,6 @@ __virtual_RethinkVirtualSize(struct Library *__base, Object * virt_obj, Object *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define RethinkVirtualSize(virt_obj, rootlayout, font, screen, layoutlimits) __virtual_RethinkVirtualSize((VIRTUAL_BASE_NAME), (virt_obj), (rootlayout), (font), (screen), (layoutlimits))
+#define RethinkVirtualSize(virt_obj, rootlayout, font, screen, layoutlimits) __virtual_RethinkVirtualSize((VIRTUAL_BASE_NAME), (Object *)(virt_obj), (Object *)(rootlayout), (struct TextFont *)(font), (struct Screen *)(screen), (struct LayoutLimits *)(layoutlimits))
 
 #endif /* INLINE_VIRTUAL_H */

@@ -38,7 +38,9 @@ __gadtools_CreateGadgetA(struct Library *__base, ULONG kind, struct Gadget * gad
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Gadget *)_d0;
 }
-#define CreateGadgetA(kind, gad, ng, taglist) __gadtools_CreateGadgetA((GADTOOLS_BASE_NAME), (kind), (gad), (ng), (taglist))
+#define CreateGadgetA(kind, gad, ng, taglist) __gadtools_CreateGadgetA((GADTOOLS_BASE_NAME), (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
+
+#define CreateGadget(kind, gad, ng, ...) (CreateGadget)((ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), ##__VA_ARGS__)
 
 static __inline__ VOID
 __gadtools_FreeGadgets(struct Library *__base, struct Gadget * gad)
@@ -54,7 +56,7 @@ __gadtools_FreeGadgets(struct Library *__base, struct Gadget * gad)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeGadgets(gad) __gadtools_FreeGadgets((GADTOOLS_BASE_NAME), (gad))
+#define FreeGadgets(gad) __gadtools_FreeGadgets((GADTOOLS_BASE_NAME), (struct Gadget *)(gad))
 
 static __inline__ VOID
 __gadtools_GT_SetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist)
@@ -72,7 +74,9 @@ __gadtools_GT_SetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GT_SetGadgetAttrsA(gad, win, req, taglist) __gadtools_GT_SetGadgetAttrsA((GADTOOLS_BASE_NAME), (gad), (win), (req), (taglist))
+#define GT_SetGadgetAttrsA(gad, win, req, taglist) __gadtools_GT_SetGadgetAttrsA((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
+
+#define GT_SetGadgetAttrs(gad, win, req, ...) (GT_SetGadgetAttrs)((struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
 static __inline__ struct Menu *
 __gadtools_CreateMenusA(struct Library *__base, CONST struct NewMenu * newmenu, CONST struct TagItem * taglist)
@@ -88,7 +92,9 @@ __gadtools_CreateMenusA(struct Library *__base, CONST struct NewMenu * newmenu, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Menu *)_d0;
 }
-#define CreateMenusA(newmenu, taglist) __gadtools_CreateMenusA((GADTOOLS_BASE_NAME), (newmenu), (taglist))
+#define CreateMenusA(newmenu, taglist) __gadtools_CreateMenusA((GADTOOLS_BASE_NAME), (CONST struct NewMenu *)(newmenu), (CONST struct TagItem *)(taglist))
+
+#define CreateMenus(newmenu, ...) (CreateMenus)((CONST struct NewMenu *)(newmenu), ##__VA_ARGS__)
 
 static __inline__ VOID
 __gadtools_FreeMenus(struct Library *__base, struct Menu * menu)
@@ -104,7 +110,7 @@ __gadtools_FreeMenus(struct Library *__base, struct Menu * menu)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeMenus(menu) __gadtools_FreeMenus((GADTOOLS_BASE_NAME), (menu))
+#define FreeMenus(menu) __gadtools_FreeMenus((GADTOOLS_BASE_NAME), (struct Menu *)(menu))
 
 static __inline__ BOOL
 __gadtools_LayoutMenuItemsA(struct Library *__base, struct MenuItem * firstitem, APTR vi, CONST struct TagItem * taglist)
@@ -121,7 +127,9 @@ __gadtools_LayoutMenuItemsA(struct Library *__base, struct MenuItem * firstitem,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define LayoutMenuItemsA(firstitem, vi, taglist) __gadtools_LayoutMenuItemsA((GADTOOLS_BASE_NAME), (firstitem), (vi), (taglist))
+#define LayoutMenuItemsA(firstitem, vi, taglist) __gadtools_LayoutMenuItemsA((GADTOOLS_BASE_NAME), (struct MenuItem *)(firstitem), (APTR)(vi), (CONST struct TagItem *)(taglist))
+
+#define LayoutMenuItems(firstitem, vi, ...) (LayoutMenuItems)((struct MenuItem *)(firstitem), (APTR)(vi), ##__VA_ARGS__)
 
 static __inline__ BOOL
 __gadtools_LayoutMenusA(struct Library *__base, struct Menu * firstmenu, APTR vi, CONST struct TagItem * taglist)
@@ -138,7 +146,9 @@ __gadtools_LayoutMenusA(struct Library *__base, struct Menu * firstmenu, APTR vi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define LayoutMenusA(firstmenu, vi, taglist) __gadtools_LayoutMenusA((GADTOOLS_BASE_NAME), (firstmenu), (vi), (taglist))
+#define LayoutMenusA(firstmenu, vi, taglist) __gadtools_LayoutMenusA((GADTOOLS_BASE_NAME), (struct Menu *)(firstmenu), (APTR)(vi), (CONST struct TagItem *)(taglist))
+
+#define LayoutMenus(firstmenu, vi, ...) (LayoutMenus)((struct Menu *)(firstmenu), (APTR)(vi), ##__VA_ARGS__)
 
 static __inline__ struct IntuiMessage *
 __gadtools_GT_GetIMsg(struct Library *__base, struct MsgPort * iport)
@@ -154,7 +164,7 @@ __gadtools_GT_GetIMsg(struct Library *__base, struct MsgPort * iport)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct IntuiMessage *)_d0;
 }
-#define GT_GetIMsg(iport) __gadtools_GT_GetIMsg((GADTOOLS_BASE_NAME), (iport))
+#define GT_GetIMsg(iport) __gadtools_GT_GetIMsg((GADTOOLS_BASE_NAME), (struct MsgPort *)(iport))
 
 static __inline__ VOID
 __gadtools_GT_ReplyIMsg(struct Library *__base, struct IntuiMessage * imsg)
@@ -170,7 +180,7 @@ __gadtools_GT_ReplyIMsg(struct Library *__base, struct IntuiMessage * imsg)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GT_ReplyIMsg(imsg) __gadtools_GT_ReplyIMsg((GADTOOLS_BASE_NAME), (imsg))
+#define GT_ReplyIMsg(imsg) __gadtools_GT_ReplyIMsg((GADTOOLS_BASE_NAME), (struct IntuiMessage *)(imsg))
 
 static __inline__ VOID
 __gadtools_GT_RefreshWindow(struct Library *__base, struct Window * win, struct Requester * req)
@@ -186,7 +196,7 @@ __gadtools_GT_RefreshWindow(struct Library *__base, struct Window * win, struct 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GT_RefreshWindow(win, req) __gadtools_GT_RefreshWindow((GADTOOLS_BASE_NAME), (win), (req))
+#define GT_RefreshWindow(win, req) __gadtools_GT_RefreshWindow((GADTOOLS_BASE_NAME), (struct Window *)(win), (struct Requester *)(req))
 
 static __inline__ VOID
 __gadtools_GT_BeginRefresh(struct Library *__base, struct Window * win)
@@ -202,7 +212,7 @@ __gadtools_GT_BeginRefresh(struct Library *__base, struct Window * win)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GT_BeginRefresh(win) __gadtools_GT_BeginRefresh((GADTOOLS_BASE_NAME), (win))
+#define GT_BeginRefresh(win) __gadtools_GT_BeginRefresh((GADTOOLS_BASE_NAME), (struct Window *)(win))
 
 static __inline__ VOID
 __gadtools_GT_EndRefresh(struct Library *__base, struct Window * win, BOOL complete)
@@ -218,7 +228,7 @@ __gadtools_GT_EndRefresh(struct Library *__base, struct Window * win, BOOL compl
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GT_EndRefresh(win, complete) __gadtools_GT_EndRefresh((GADTOOLS_BASE_NAME), (win), (complete))
+#define GT_EndRefresh(win, complete) __gadtools_GT_EndRefresh((GADTOOLS_BASE_NAME), (struct Window *)(win), (BOOL)(complete))
 
 static __inline__ struct IntuiMessage *
 __gadtools_GT_FilterIMsg(struct Library *__base, CONST struct IntuiMessage * imsg)
@@ -234,7 +244,7 @@ __gadtools_GT_FilterIMsg(struct Library *__base, CONST struct IntuiMessage * ims
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct IntuiMessage *)_d0;
 }
-#define GT_FilterIMsg(imsg) __gadtools_GT_FilterIMsg((GADTOOLS_BASE_NAME), (imsg))
+#define GT_FilterIMsg(imsg) __gadtools_GT_FilterIMsg((GADTOOLS_BASE_NAME), (CONST struct IntuiMessage *)(imsg))
 
 static __inline__ struct IntuiMessage *
 __gadtools_GT_PostFilterIMsg(struct Library *__base, struct IntuiMessage * imsg)
@@ -250,7 +260,7 @@ __gadtools_GT_PostFilterIMsg(struct Library *__base, struct IntuiMessage * imsg)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct IntuiMessage *)_d0;
 }
-#define GT_PostFilterIMsg(imsg) __gadtools_GT_PostFilterIMsg((GADTOOLS_BASE_NAME), (imsg))
+#define GT_PostFilterIMsg(imsg) __gadtools_GT_PostFilterIMsg((GADTOOLS_BASE_NAME), (struct IntuiMessage *)(imsg))
 
 static __inline__ struct Gadget *
 __gadtools_CreateContext(struct Library *__base, struct Gadget ** glistptr)
@@ -266,7 +276,7 @@ __gadtools_CreateContext(struct Library *__base, struct Gadget ** glistptr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Gadget *)_d0;
 }
-#define CreateContext(glistptr) __gadtools_CreateContext((GADTOOLS_BASE_NAME), (glistptr))
+#define CreateContext(glistptr) __gadtools_CreateContext((GADTOOLS_BASE_NAME), (struct Gadget **)(glistptr))
 
 static __inline__ VOID
 __gadtools_DrawBevelBoxA(struct Library *__base, struct RastPort * rport, WORD left, WORD top, WORD width, WORD height, CONST struct TagItem * taglist)
@@ -284,7 +294,9 @@ __gadtools_DrawBevelBoxA(struct Library *__base, struct RastPort * rport, WORD l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DrawBevelBoxA(rport, left, top, width, height, taglist) __gadtools_DrawBevelBoxA((GADTOOLS_BASE_NAME), (rport), (left), (top), (width), (height), (taglist))
+#define DrawBevelBoxA(rport, left, top, width, height, taglist) __gadtools_DrawBevelBoxA((GADTOOLS_BASE_NAME), (struct RastPort *)(rport), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height), (CONST struct TagItem *)(taglist))
+
+#define DrawBevelBox(rport, left, top, width, height, ...) (DrawBevelBox)((struct RastPort *)(rport), (LONG)(left), (LONG)(top), (LONG)(width), (LONG)(height), ##__VA_ARGS__)
 
 static __inline__ APTR
 __gadtools_GetVisualInfoA(struct Library *__base, struct Screen * screen, CONST struct TagItem * taglist)
@@ -300,7 +312,9 @@ __gadtools_GetVisualInfoA(struct Library *__base, struct Screen * screen, CONST 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define GetVisualInfoA(screen, taglist) __gadtools_GetVisualInfoA((GADTOOLS_BASE_NAME), (screen), (taglist))
+#define GetVisualInfoA(screen, taglist) __gadtools_GetVisualInfoA((GADTOOLS_BASE_NAME), (struct Screen *)(screen), (CONST struct TagItem *)(taglist))
+
+#define GetVisualInfo(screen, ...) (GetVisualInfo)((struct Screen *)(screen), ##__VA_ARGS__)
 
 static __inline__ VOID
 __gadtools_FreeVisualInfo(struct Library *__base, APTR vi)
@@ -316,7 +330,7 @@ __gadtools_FreeVisualInfo(struct Library *__base, APTR vi)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeVisualInfo(vi) __gadtools_FreeVisualInfo((GADTOOLS_BASE_NAME), (vi))
+#define FreeVisualInfo(vi) __gadtools_FreeVisualInfo((GADTOOLS_BASE_NAME), (APTR)(vi))
 
 static __inline__ LONG
 __gadtools_SetDesignFontA(struct Library *__base, APTR vi, CONST struct TextAttr * tattr, CONST struct TagItem * taglist)
@@ -333,7 +347,9 @@ __gadtools_SetDesignFontA(struct Library *__base, APTR vi, CONST struct TextAttr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetDesignFontA(vi, tattr, taglist) __gadtools_SetDesignFontA((GADTOOLS_BASE_NAME), (vi), (tattr), (taglist))
+#define SetDesignFontA(vi, tattr, taglist) __gadtools_SetDesignFontA((GADTOOLS_BASE_NAME), (APTR)(vi), (CONST struct TextAttr *)(tattr), (CONST struct TagItem *)(taglist))
+
+#define SetDesignFont(vi, tattr, ...) (SetDesignFont)((APTR)(vi), (CONST struct TextAttr *)(tattr), ##__VA_ARGS__)
 
 static __inline__ LONG
 __gadtools_ScaleGadgetRectA(struct Library *__base, struct NewGadget * ng, CONST struct TagItem * taglist)
@@ -349,7 +365,9 @@ __gadtools_ScaleGadgetRectA(struct Library *__base, struct NewGadget * ng, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ScaleGadgetRectA(ng, taglist) __gadtools_ScaleGadgetRectA((GADTOOLS_BASE_NAME), (ng), (taglist))
+#define ScaleGadgetRectA(ng, taglist) __gadtools_ScaleGadgetRectA((GADTOOLS_BASE_NAME), (struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
+
+#define ScaleGadgetRect(ng, ...) (ScaleGadgetRect)((struct NewGadget *)(ng), ##__VA_ARGS__)
 
 static __inline__ LONG
 __gadtools_GT_GetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist)
@@ -367,6 +385,8 @@ __gadtools_GT_GetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GT_GetGadgetAttrsA(gad, win, req, taglist) __gadtools_GT_GetGadgetAttrsA((GADTOOLS_BASE_NAME), (gad), (win), (req), (taglist))
+#define GT_GetGadgetAttrsA(gad, win, req, taglist) __gadtools_GT_GetGadgetAttrsA((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
+
+#define GT_GetGadgetAttrs(gad, win, req, ...) (GT_GetGadgetAttrs)((struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
 #endif /* INLINE_GADTOOLS_H */

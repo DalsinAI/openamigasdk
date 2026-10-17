@@ -38,7 +38,7 @@ __mathieeedoubtrans_IEEEDPAtan(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPAtan(parm) __mathieeedoubtrans_IEEEDPAtan((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPAtan(parm) __mathieeedoubtrans_IEEEDPAtan((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPSin(struct Library *__base, DOUBLE parm)
@@ -55,7 +55,7 @@ __mathieeedoubtrans_IEEEDPSin(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPSin(parm) __mathieeedoubtrans_IEEEDPSin((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPSin(parm) __mathieeedoubtrans_IEEEDPSin((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPCos(struct Library *__base, DOUBLE parm)
@@ -72,7 +72,7 @@ __mathieeedoubtrans_IEEEDPCos(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPCos(parm) __mathieeedoubtrans_IEEEDPCos((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPCos(parm) __mathieeedoubtrans_IEEEDPCos((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPTan(struct Library *__base, DOUBLE parm)
@@ -89,7 +89,7 @@ __mathieeedoubtrans_IEEEDPTan(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPTan(parm) __mathieeedoubtrans_IEEEDPTan((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPTan(parm) __mathieeedoubtrans_IEEEDPTan((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPSincos(struct Library *__base, DOUBLE * pf2, DOUBLE parm)
@@ -106,7 +106,7 @@ __mathieeedoubtrans_IEEEDPSincos(struct Library *__base, DOUBLE * pf2, DOUBLE pa
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPSincos(pf2, parm) __mathieeedoubtrans_IEEEDPSincos((MATHIEEEDOUBTRANS_BASE_NAME), (pf2), (parm))
+#define IEEEDPSincos(pf2, parm) __mathieeedoubtrans_IEEEDPSincos((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE *)(pf2), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPSinh(struct Library *__base, DOUBLE parm)
@@ -123,7 +123,7 @@ __mathieeedoubtrans_IEEEDPSinh(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPSinh(parm) __mathieeedoubtrans_IEEEDPSinh((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPSinh(parm) __mathieeedoubtrans_IEEEDPSinh((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPCosh(struct Library *__base, DOUBLE parm)
@@ -140,7 +140,7 @@ __mathieeedoubtrans_IEEEDPCosh(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPCosh(parm) __mathieeedoubtrans_IEEEDPCosh((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPCosh(parm) __mathieeedoubtrans_IEEEDPCosh((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPTanh(struct Library *__base, DOUBLE parm)
@@ -157,7 +157,7 @@ __mathieeedoubtrans_IEEEDPTanh(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPTanh(parm) __mathieeedoubtrans_IEEEDPTanh((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPTanh(parm) __mathieeedoubtrans_IEEEDPTanh((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPExp(struct Library *__base, DOUBLE parm)
@@ -174,7 +174,7 @@ __mathieeedoubtrans_IEEEDPExp(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPExp(parm) __mathieeedoubtrans_IEEEDPExp((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPExp(parm) __mathieeedoubtrans_IEEEDPExp((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPLog(struct Library *__base, DOUBLE parm)
@@ -191,7 +191,7 @@ __mathieeedoubtrans_IEEEDPLog(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPLog(parm) __mathieeedoubtrans_IEEEDPLog((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPLog(parm) __mathieeedoubtrans_IEEEDPLog((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPPow(struct Library *__base, DOUBLE power, DOUBLE arg)
@@ -211,7 +211,7 @@ __mathieeedoubtrans_IEEEDPPow(struct Library *__base, DOUBLE power, DOUBLE arg)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPPow(power, arg) __mathieeedoubtrans_IEEEDPPow((MATHIEEEDOUBTRANS_BASE_NAME), (power), (arg))
+#define IEEEDPPow(power, arg) __mathieeedoubtrans_IEEEDPPow((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(power), (DOUBLE)(arg))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPSqrt(struct Library *__base, DOUBLE parm)
@@ -228,7 +228,7 @@ __mathieeedoubtrans_IEEEDPSqrt(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPSqrt(parm) __mathieeedoubtrans_IEEEDPSqrt((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPSqrt(parm) __mathieeedoubtrans_IEEEDPSqrt((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ FLOAT
 __mathieeedoubtrans_IEEEDPTieee(struct Library *__base, DOUBLE parm)
@@ -245,7 +245,7 @@ __mathieeedoubtrans_IEEEDPTieee(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define IEEEDPTieee(parm) __mathieeedoubtrans_IEEEDPTieee((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPTieee(parm) __mathieeedoubtrans_IEEEDPTieee((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPFieee(struct Library *__base, FLOAT single)
@@ -262,7 +262,7 @@ __mathieeedoubtrans_IEEEDPFieee(struct Library *__base, FLOAT single)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d1; return _r.d; }
 }
-#define IEEEDPFieee(single) __mathieeedoubtrans_IEEEDPFieee((MATHIEEEDOUBTRANS_BASE_NAME), (single))
+#define IEEEDPFieee(single) __mathieeedoubtrans_IEEEDPFieee((MATHIEEEDOUBTRANS_BASE_NAME), (FLOAT)(single))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPAsin(struct Library *__base, DOUBLE parm)
@@ -279,7 +279,7 @@ __mathieeedoubtrans_IEEEDPAsin(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPAsin(parm) __mathieeedoubtrans_IEEEDPAsin((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPAsin(parm) __mathieeedoubtrans_IEEEDPAsin((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPAcos(struct Library *__base, DOUBLE parm)
@@ -296,7 +296,7 @@ __mathieeedoubtrans_IEEEDPAcos(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPAcos(parm) __mathieeedoubtrans_IEEEDPAcos((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPAcos(parm) __mathieeedoubtrans_IEEEDPAcos((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
 __mathieeedoubtrans_IEEEDPLog10(struct Library *__base, DOUBLE parm)
@@ -313,6 +313,6 @@ __mathieeedoubtrans_IEEEDPLog10(struct Library *__base, DOUBLE parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
-#define IEEEDPLog10(parm) __mathieeedoubtrans_IEEEDPLog10((MATHIEEEDOUBTRANS_BASE_NAME), (parm))
+#define IEEEDPLog10(parm) __mathieeedoubtrans_IEEEDPLog10((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
 
 #endif /* INLINE_MATHIEEEDOUBTRANS_H */

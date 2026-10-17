@@ -37,7 +37,7 @@ __commodities_CreateCxObj(struct Library *__base, ULONG type, LONG arg1, LONG ar
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (CxObj *)_d0;
 }
-#define CreateCxObj(type, arg1, arg2) __commodities_CreateCxObj((COMMODITIES_BASE_NAME), (type), (arg1), (arg2))
+#define CreateCxObj(type, arg1, arg2) __commodities_CreateCxObj((COMMODITIES_BASE_NAME), (ULONG)(type), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ CxObj *
 __commodities_CxBroker(struct Library *__base, CONST struct NewBroker * nb, LONG * error)
@@ -53,7 +53,7 @@ __commodities_CxBroker(struct Library *__base, CONST struct NewBroker * nb, LONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (CxObj *)_d0;
 }
-#define CxBroker(nb, error) __commodities_CxBroker((COMMODITIES_BASE_NAME), (nb), (error))
+#define CxBroker(nb, error) __commodities_CxBroker((COMMODITIES_BASE_NAME), (CONST struct NewBroker *)(nb), (LONG *)(error))
 
 static __inline__ LONG
 __commodities_ActivateCxObj(struct Library *__base, CxObj * co, LONG doIt)
@@ -69,7 +69,7 @@ __commodities_ActivateCxObj(struct Library *__base, CxObj * co, LONG doIt)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ActivateCxObj(co, doIt) __commodities_ActivateCxObj((COMMODITIES_BASE_NAME), (co), (doIt))
+#define ActivateCxObj(co, doIt) __commodities_ActivateCxObj((COMMODITIES_BASE_NAME), (CxObj *)(co), (LONG)(doIt))
 
 static __inline__ VOID
 __commodities_DeleteCxObj(struct Library *__base, CxObj * co)
@@ -85,7 +85,7 @@ __commodities_DeleteCxObj(struct Library *__base, CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeleteCxObj(co) __commodities_DeleteCxObj((COMMODITIES_BASE_NAME), (co))
+#define DeleteCxObj(co) __commodities_DeleteCxObj((COMMODITIES_BASE_NAME), (CxObj *)(co))
 
 static __inline__ VOID
 __commodities_DeleteCxObjAll(struct Library *__base, CxObj * co)
@@ -101,7 +101,7 @@ __commodities_DeleteCxObjAll(struct Library *__base, CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeleteCxObjAll(co) __commodities_DeleteCxObjAll((COMMODITIES_BASE_NAME), (co))
+#define DeleteCxObjAll(co) __commodities_DeleteCxObjAll((COMMODITIES_BASE_NAME), (CxObj *)(co))
 
 static __inline__ ULONG
 __commodities_CxObjType(struct Library *__base, CONST CxObj * co)
@@ -117,7 +117,7 @@ __commodities_CxObjType(struct Library *__base, CONST CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CxObjType(co) __commodities_CxObjType((COMMODITIES_BASE_NAME), (co))
+#define CxObjType(co) __commodities_CxObjType((COMMODITIES_BASE_NAME), (CONST CxObj *)(co))
 
 static __inline__ LONG
 __commodities_CxObjError(struct Library *__base, CONST CxObj * co)
@@ -133,7 +133,7 @@ __commodities_CxObjError(struct Library *__base, CONST CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CxObjError(co) __commodities_CxObjError((COMMODITIES_BASE_NAME), (co))
+#define CxObjError(co) __commodities_CxObjError((COMMODITIES_BASE_NAME), (CONST CxObj *)(co))
 
 static __inline__ VOID
 __commodities_ClearCxObjError(struct Library *__base, CxObj * co)
@@ -149,7 +149,7 @@ __commodities_ClearCxObjError(struct Library *__base, CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ClearCxObjError(co) __commodities_ClearCxObjError((COMMODITIES_BASE_NAME), (co))
+#define ClearCxObjError(co) __commodities_ClearCxObjError((COMMODITIES_BASE_NAME), (CxObj *)(co))
 
 static __inline__ LONG
 __commodities_SetCxObjPri(struct Library *__base, CxObj * co, LONG pri)
@@ -165,7 +165,7 @@ __commodities_SetCxObjPri(struct Library *__base, CxObj * co, LONG pri)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetCxObjPri(co, pri) __commodities_SetCxObjPri((COMMODITIES_BASE_NAME), (co), (pri))
+#define SetCxObjPri(co, pri) __commodities_SetCxObjPri((COMMODITIES_BASE_NAME), (CxObj *)(co), (LONG)(pri))
 
 static __inline__ VOID
 __commodities_AttachCxObj(struct Library *__base, CxObj * headObj, CxObj * co)
@@ -181,7 +181,7 @@ __commodities_AttachCxObj(struct Library *__base, CxObj * headObj, CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AttachCxObj(headObj, co) __commodities_AttachCxObj((COMMODITIES_BASE_NAME), (headObj), (co))
+#define AttachCxObj(headObj, co) __commodities_AttachCxObj((COMMODITIES_BASE_NAME), (CxObj *)(headObj), (CxObj *)(co))
 
 static __inline__ VOID
 __commodities_EnqueueCxObj(struct Library *__base, CxObj * headObj, CxObj * co)
@@ -197,7 +197,7 @@ __commodities_EnqueueCxObj(struct Library *__base, CxObj * headObj, CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define EnqueueCxObj(headObj, co) __commodities_EnqueueCxObj((COMMODITIES_BASE_NAME), (headObj), (co))
+#define EnqueueCxObj(headObj, co) __commodities_EnqueueCxObj((COMMODITIES_BASE_NAME), (CxObj *)(headObj), (CxObj *)(co))
 
 static __inline__ VOID
 __commodities_InsertCxObj(struct Library *__base, CxObj * headObj, CxObj * co, CxObj * pred)
@@ -214,7 +214,7 @@ __commodities_InsertCxObj(struct Library *__base, CxObj * headObj, CxObj * co, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InsertCxObj(headObj, co, pred) __commodities_InsertCxObj((COMMODITIES_BASE_NAME), (headObj), (co), (pred))
+#define InsertCxObj(headObj, co, pred) __commodities_InsertCxObj((COMMODITIES_BASE_NAME), (CxObj *)(headObj), (CxObj *)(co), (CxObj *)(pred))
 
 static __inline__ VOID
 __commodities_RemoveCxObj(struct Library *__base, CxObj * co)
@@ -230,7 +230,7 @@ __commodities_RemoveCxObj(struct Library *__base, CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemoveCxObj(co) __commodities_RemoveCxObj((COMMODITIES_BASE_NAME), (co))
+#define RemoveCxObj(co) __commodities_RemoveCxObj((COMMODITIES_BASE_NAME), (CxObj *)(co))
 
 static __inline__ VOID
 __commodities_SetTranslate(struct Library *__base, CxObj * translator, struct InputEvent * events)
@@ -246,7 +246,7 @@ __commodities_SetTranslate(struct Library *__base, CxObj * translator, struct In
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetTranslate(translator, events) __commodities_SetTranslate((COMMODITIES_BASE_NAME), (translator), (events))
+#define SetTranslate(translator, events) __commodities_SetTranslate((COMMODITIES_BASE_NAME), (CxObj *)(translator), (struct InputEvent *)(events))
 
 static __inline__ VOID
 __commodities_SetFilter(struct Library *__base, CxObj * filter, CONST_STRPTR text)
@@ -262,7 +262,7 @@ __commodities_SetFilter(struct Library *__base, CxObj * filter, CONST_STRPTR tex
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetFilter(filter, text) __commodities_SetFilter((COMMODITIES_BASE_NAME), (filter), (text))
+#define SetFilter(filter, text) __commodities_SetFilter((COMMODITIES_BASE_NAME), (CxObj *)(filter), (CONST_STRPTR)(text))
 
 static __inline__ VOID
 __commodities_SetFilterIX(struct Library *__base, CxObj * filter, CONST IX * ix)
@@ -278,7 +278,7 @@ __commodities_SetFilterIX(struct Library *__base, CxObj * filter, CONST IX * ix)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetFilterIX(filter, ix) __commodities_SetFilterIX((COMMODITIES_BASE_NAME), (filter), (ix))
+#define SetFilterIX(filter, ix) __commodities_SetFilterIX((COMMODITIES_BASE_NAME), (CxObj *)(filter), (CONST IX *)(ix))
 
 static __inline__ LONG
 __commodities_ParseIX(struct Library *__base, CONST_STRPTR description, IX * ix)
@@ -294,7 +294,7 @@ __commodities_ParseIX(struct Library *__base, CONST_STRPTR description, IX * ix)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define ParseIX(description, ix) __commodities_ParseIX((COMMODITIES_BASE_NAME), (description), (ix))
+#define ParseIX(description, ix) __commodities_ParseIX((COMMODITIES_BASE_NAME), (CONST_STRPTR)(description), (IX *)(ix))
 
 static __inline__ ULONG
 __commodities_CxMsgType(struct Library *__base, CONST CxMsg * cxm)
@@ -310,7 +310,7 @@ __commodities_CxMsgType(struct Library *__base, CONST CxMsg * cxm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define CxMsgType(cxm) __commodities_CxMsgType((COMMODITIES_BASE_NAME), (cxm))
+#define CxMsgType(cxm) __commodities_CxMsgType((COMMODITIES_BASE_NAME), (CONST CxMsg *)(cxm))
 
 static __inline__ APTR
 __commodities_CxMsgData(struct Library *__base, CONST CxMsg * cxm)
@@ -326,7 +326,7 @@ __commodities_CxMsgData(struct Library *__base, CONST CxMsg * cxm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define CxMsgData(cxm) __commodities_CxMsgData((COMMODITIES_BASE_NAME), (cxm))
+#define CxMsgData(cxm) __commodities_CxMsgData((COMMODITIES_BASE_NAME), (CONST CxMsg *)(cxm))
 
 static __inline__ LONG
 __commodities_CxMsgID(struct Library *__base, CONST CxMsg * cxm)
@@ -342,7 +342,7 @@ __commodities_CxMsgID(struct Library *__base, CONST CxMsg * cxm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CxMsgID(cxm) __commodities_CxMsgID((COMMODITIES_BASE_NAME), (cxm))
+#define CxMsgID(cxm) __commodities_CxMsgID((COMMODITIES_BASE_NAME), (CONST CxMsg *)(cxm))
 
 static __inline__ VOID
 __commodities_DivertCxMsg(struct Library *__base, CxMsg * cxm, CxObj * headObj, CxObj * returnObj)
@@ -359,7 +359,7 @@ __commodities_DivertCxMsg(struct Library *__base, CxMsg * cxm, CxObj * headObj, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DivertCxMsg(cxm, headObj, returnObj) __commodities_DivertCxMsg((COMMODITIES_BASE_NAME), (cxm), (headObj), (returnObj))
+#define DivertCxMsg(cxm, headObj, returnObj) __commodities_DivertCxMsg((COMMODITIES_BASE_NAME), (CxMsg *)(cxm), (CxObj *)(headObj), (CxObj *)(returnObj))
 
 static __inline__ VOID
 __commodities_RouteCxMsg(struct Library *__base, CxMsg * cxm, CxObj * co)
@@ -375,7 +375,7 @@ __commodities_RouteCxMsg(struct Library *__base, CxMsg * cxm, CxObj * co)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RouteCxMsg(cxm, co) __commodities_RouteCxMsg((COMMODITIES_BASE_NAME), (cxm), (co))
+#define RouteCxMsg(cxm, co) __commodities_RouteCxMsg((COMMODITIES_BASE_NAME), (CxMsg *)(cxm), (CxObj *)(co))
 
 static __inline__ VOID
 __commodities_DisposeCxMsg(struct Library *__base, CxMsg * cxm)
@@ -391,7 +391,7 @@ __commodities_DisposeCxMsg(struct Library *__base, CxMsg * cxm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DisposeCxMsg(cxm) __commodities_DisposeCxMsg((COMMODITIES_BASE_NAME), (cxm))
+#define DisposeCxMsg(cxm) __commodities_DisposeCxMsg((COMMODITIES_BASE_NAME), (CxMsg *)(cxm))
 
 static __inline__ BOOL
 __commodities_InvertKeyMap(struct Library *__base, ULONG ansiCode, struct InputEvent * event, CONST struct KeyMap * km)
@@ -407,7 +407,7 @@ __commodities_InvertKeyMap(struct Library *__base, ULONG ansiCode, struct InputE
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define InvertKeyMap(ansiCode, event, km) __commodities_InvertKeyMap((COMMODITIES_BASE_NAME), (ansiCode), (event), (km))
+#define InvertKeyMap(ansiCode, event, km) __commodities_InvertKeyMap((COMMODITIES_BASE_NAME), (ULONG)(ansiCode), (struct InputEvent *)(event), (CONST struct KeyMap *)(km))
 
 static __inline__ VOID
 __commodities_AddIEvents(struct Library *__base, struct InputEvent * events)
@@ -423,7 +423,7 @@ __commodities_AddIEvents(struct Library *__base, struct InputEvent * events)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddIEvents(events) __commodities_AddIEvents((COMMODITIES_BASE_NAME), (events))
+#define AddIEvents(events) __commodities_AddIEvents((COMMODITIES_BASE_NAME), (struct InputEvent *)(events))
 
 static __inline__ BOOL
 __commodities_MatchIX(struct Library *__base, CONST struct InputEvent * event, CONST IX * ix)
@@ -439,6 +439,6 @@ __commodities_MatchIX(struct Library *__base, CONST struct InputEvent * event, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define MatchIX(event, ix) __commodities_MatchIX((COMMODITIES_BASE_NAME), (event), (ix))
+#define MatchIX(event, ix) __commodities_MatchIX((COMMODITIES_BASE_NAME), (CONST struct InputEvent *)(event), (CONST IX *)(ix))
 
 #endif /* INLINE_COMMODITIES_H */
