@@ -406,7 +406,9 @@ struct DisplayMode
 #define FONF_DOMSGFUNC	(1L << FONB_DOMSGFUNC)
 #define FONF_DOWILDFUNC	(1L << FONB_DOWILDFUNC)
 
-/* The semaphore ASL publishes with its current preferences */
+/* The semaphore ASL publishes with its current preferences, under this name */
+#define ASL_SEMAPHORE_NAME	"asl.library"
+
 struct AslSemaphore
 {
     struct SignalSemaphore as_Semaphore;
