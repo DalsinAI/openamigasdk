@@ -23,7 +23,7 @@ struct WBStartup
     struct MsgPort *sm_Process;		/* the process's port */
     BPTR sm_Segment;			/* its code */
     LONG sm_NumArgs;			/* entries in sm_ArgList */
-    char *sm_ToolWindow;		/* a window description, or NULL */
+    STRPTR	sm_ToolWindow;		/* a window description, or NULL */
     struct WBArg *sm_ArgList;		/* the tool first, then the projects */
 };
 
@@ -31,7 +31,7 @@ struct WBStartup
 struct WBArg
 {
     BPTR wa_Lock;			/* the directory; NULL for a volume */
-    BYTE *wa_Name;			/* the name within it */
+    STRPTR wa_Name;			/* the name within it */
 };
 
 #endif /* WORKBENCH_STARTUP_H */

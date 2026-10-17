@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +32,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__listbrowser_LISTBROWSER_GetClass(struct Library *__base)
+__listbrowser_LISTBROWSER_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,13 +46,14 @@ __listbrowser_LISTBROWSER_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define LISTBROWSER_GetClass() __listbrowser_LISTBROWSER_GetClass((LISTBROWSER_BASE_NAME))
+#define __LISTBROWSER_GetClass_base(__in_base) __listbrowser_LISTBROWSER_GetClass((__in_base))
 
 static __inline__ struct Node *
-__listbrowser_AllocListBrowserNodeA(struct Library *__base, ULONG columns, struct TagItem * tags)
+__listbrowser_AllocListBrowserNodeA(void *__base, ULONG columns, struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(columns);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
@@ -54,14 +63,24 @@ __listbrowser_AllocListBrowserNodeA(struct Library *__base, ULONG columns, struc
 	return (struct Node *)_d0;
 }
 #define AllocListBrowserNodeA(columns, tags) __listbrowser_AllocListBrowserNodeA((LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
+#define __AllocListBrowserNodeA_base(__in_base, columns, tags) __listbrowser_AllocListBrowserNodeA((__in_base), (ULONG)(columns), (struct TagItem *)(tags))
 
-#define AllocListBrowserNode(columns, ...) (AllocListBrowserNode)((UWORD)(columns), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct Node *
+__AllocListBrowserNode_va(void *__base, UWORD columns, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, columns);
+	struct Node * _r = (struct Node *)__listbrowser_AllocListBrowserNodeA(__base, (ULONG)(columns), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocListBrowserNode(columns, ...) __AllocListBrowserNode_va((LISTBROWSER_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
 
 static __inline__ VOID
-__listbrowser_FreeListBrowserNode(struct Library *__base, struct Node * node)
+__listbrowser_FreeListBrowserNode(void *__base, struct Node * node)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -72,13 +91,14 @@ __listbrowser_FreeListBrowserNode(struct Library *__base, struct Node * node)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeListBrowserNode(node) __listbrowser_FreeListBrowserNode((LISTBROWSER_BASE_NAME), (struct Node *)(node))
+#define __FreeListBrowserNode_base(__in_base, node) __listbrowser_FreeListBrowserNode((__in_base), (struct Node *)(node))
 
 static __inline__ VOID
-__listbrowser_SetListBrowserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
+__listbrowser_SetListBrowserNodeAttrsA(void *__base, struct Node * node, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -88,15 +108,24 @@ __listbrowser_SetListBrowserNodeAttrsA(struct Library *__base, struct Node * nod
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetListBrowserNodeAttrsA(node, tags) __listbrowser_SetListBrowserNodeAttrsA((LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __SetListBrowserNodeAttrsA_base(__in_base, node, tags) __listbrowser_SetListBrowserNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-#define SetListBrowserNodeAttrs(node, ...) (SetListBrowserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__SetListBrowserNodeAttrs_va(void *__base, struct Node * node, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, node);
+	__listbrowser_SetListBrowserNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define SetListBrowserNodeAttrs(node, ...) __SetListBrowserNodeAttrs_va((LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
-__listbrowser_GetListBrowserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
+__listbrowser_GetListBrowserNodeAttrsA(void *__base, struct Node * node, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -106,14 +135,23 @@ __listbrowser_GetListBrowserNodeAttrsA(struct Library *__base, struct Node * nod
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GetListBrowserNodeAttrsA(node, tags) __listbrowser_GetListBrowserNodeAttrsA((LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __GetListBrowserNodeAttrsA_base(__in_base, node, tags) __listbrowser_GetListBrowserNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-#define GetListBrowserNodeAttrs(node, ...) (GetListBrowserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__GetListBrowserNodeAttrs_va(void *__base, struct Node * node, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, node);
+	__listbrowser_GetListBrowserNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define GetListBrowserNodeAttrs(node, ...) __GetListBrowserNodeAttrs_va((LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
-__listbrowser_ListBrowserSelectAll(struct Library *__base, struct List * list)
+__listbrowser_ListBrowserSelectAll(void *__base, struct List * list)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -124,13 +162,14 @@ __listbrowser_ListBrowserSelectAll(struct Library *__base, struct List * list)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ListBrowserSelectAll(list) __listbrowser_ListBrowserSelectAll((LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __ListBrowserSelectAll_base(__in_base, list) __listbrowser_ListBrowserSelectAll((__in_base), (struct List *)(list))
 
 static __inline__ VOID
-__listbrowser_ShowListBrowserNodeChildren(struct Library *__base, struct Node * node, LONG depth)
+__listbrowser_ShowListBrowserNodeChildren(void *__base, struct Node * node, LONG depth)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _d0 __asm("d0") = (ULONG)(depth);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -140,12 +179,13 @@ __listbrowser_ShowListBrowserNodeChildren(struct Library *__base, struct Node * 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ShowListBrowserNodeChildren(node, depth) __listbrowser_ShowListBrowserNodeChildren((LISTBROWSER_BASE_NAME), (struct Node *)(node), (LONG)(depth))
+#define __ShowListBrowserNodeChildren_base(__in_base, node, depth) __listbrowser_ShowListBrowserNodeChildren((__in_base), (struct Node *)(node), (LONG)(depth))
 
 static __inline__ VOID
-__listbrowser_HideListBrowserNodeChildren(struct Library *__base, struct Node * node)
+__listbrowser_HideListBrowserNodeChildren(void *__base, struct Node * node)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -156,12 +196,13 @@ __listbrowser_HideListBrowserNodeChildren(struct Library *__base, struct Node * 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define HideListBrowserNodeChildren(node) __listbrowser_HideListBrowserNodeChildren((LISTBROWSER_BASE_NAME), (struct Node *)(node))
+#define __HideListBrowserNodeChildren_base(__in_base, node) __listbrowser_HideListBrowserNodeChildren((__in_base), (struct Node *)(node))
 
 static __inline__ VOID
-__listbrowser_ShowAllListBrowserChildren(struct Library *__base, struct List * list)
+__listbrowser_ShowAllListBrowserChildren(void *__base, struct List * list)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -172,12 +213,13 @@ __listbrowser_ShowAllListBrowserChildren(struct Library *__base, struct List * l
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ShowAllListBrowserChildren(list) __listbrowser_ShowAllListBrowserChildren((LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __ShowAllListBrowserChildren_base(__in_base, list) __listbrowser_ShowAllListBrowserChildren((__in_base), (struct List *)(list))
 
 static __inline__ VOID
-__listbrowser_HideAllListBrowserChildren(struct Library *__base, struct List * list)
+__listbrowser_HideAllListBrowserChildren(void *__base, struct List * list)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -188,12 +230,13 @@ __listbrowser_HideAllListBrowserChildren(struct Library *__base, struct List * l
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define HideAllListBrowserChildren(list) __listbrowser_HideAllListBrowserChildren((LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __HideAllListBrowserChildren_base(__in_base, list) __listbrowser_HideAllListBrowserChildren((__in_base), (struct List *)(list))
 
 static __inline__ VOID
-__listbrowser_FreeListBrowserList(struct Library *__base, struct List * list)
+__listbrowser_FreeListBrowserList(void *__base, struct List * list)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -204,13 +247,14 @@ __listbrowser_FreeListBrowserList(struct Library *__base, struct List * list)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeListBrowserList(list) __listbrowser_FreeListBrowserList((LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __FreeListBrowserList_base(__in_base, list) __listbrowser_FreeListBrowserList((__in_base), (struct List *)(list))
 
 static __inline__ struct ColumnInfo *
-__listbrowser_AllocLBColumnInfoA(struct Library *__base, ULONG columns, struct TagItem * tags)
+__listbrowser_AllocLBColumnInfoA(void *__base, ULONG columns, struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(columns);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -220,15 +264,25 @@ __listbrowser_AllocLBColumnInfoA(struct Library *__base, ULONG columns, struct T
 	return (struct ColumnInfo *)_d0;
 }
 #define AllocLBColumnInfoA(columns, tags) __listbrowser_AllocLBColumnInfoA((LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
+#define __AllocLBColumnInfoA_base(__in_base, columns, tags) __listbrowser_AllocLBColumnInfoA((__in_base), (ULONG)(columns), (struct TagItem *)(tags))
 
-#define AllocLBColumnInfo(columns, ...) (AllocLBColumnInfo)((UWORD)(columns), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct ColumnInfo *
+__AllocLBColumnInfo_va(void *__base, UWORD columns, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, columns);
+	struct ColumnInfo * _r = (struct ColumnInfo *)__listbrowser_AllocLBColumnInfoA(__base, (ULONG)(columns), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocLBColumnInfo(columns, ...) __AllocLBColumnInfo_va((LISTBROWSER_BASE_NAME), (UWORD)(columns), ##__VA_ARGS__)
 
 static __inline__ LONG
-__listbrowser_SetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * columninfo, struct TagItem * tags)
+__listbrowser_SetLBColumnInfoAttrsA(void *__base, struct ColumnInfo * columninfo, struct TagItem * tags)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(columninfo);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -238,15 +292,25 @@ __listbrowser_SetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 	return (LONG)_d0;
 }
 #define SetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
+#define __SetLBColumnInfoAttrsA_base(__in_base, columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((__in_base), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
 
-#define SetLBColumnInfoAttrs(columninfo, ...) (SetLBColumnInfoAttrs)((struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__SetLBColumnInfoAttrs_va(void *__base, struct ColumnInfo * columninfo, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, columninfo);
+	LONG _r = (LONG)__listbrowser_SetLBColumnInfoAttrsA(__base, (struct ColumnInfo *)(columninfo), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetLBColumnInfoAttrs(columninfo, ...) __SetLBColumnInfoAttrs_va((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 
 static __inline__ LONG
-__listbrowser_GetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * columninfo, struct TagItem * tags)
+__listbrowser_GetLBColumnInfoAttrsA(void *__base, struct ColumnInfo * columninfo, struct TagItem * tags)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(columninfo);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -108(%/a6)"
@@ -256,14 +320,24 @@ __listbrowser_GetLBColumnInfoAttrsA(struct Library *__base, struct ColumnInfo * 
 	return (LONG)_d0;
 }
 #define GetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
+#define __GetLBColumnInfoAttrsA_base(__in_base, columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((__in_base), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
 
-#define GetLBColumnInfoAttrs(columninfo, ...) (GetLBColumnInfoAttrs)((struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__GetLBColumnInfoAttrs_va(void *__base, struct ColumnInfo * columninfo, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, columninfo);
+	LONG _r = (LONG)__listbrowser_GetLBColumnInfoAttrsA(__base, (struct ColumnInfo *)(columninfo), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define GetLBColumnInfoAttrs(columninfo, ...) __GetLBColumnInfoAttrs_va((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), ##__VA_ARGS__)
 
 static __inline__ VOID
-__listbrowser_FreeLBColumnInfo(struct Library *__base, struct ColumnInfo * columninfo)
+__listbrowser_FreeLBColumnInfo(void *__base, struct ColumnInfo * columninfo)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(columninfo);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -274,12 +348,13 @@ __listbrowser_FreeLBColumnInfo(struct Library *__base, struct ColumnInfo * colum
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeLBColumnInfo(columninfo) __listbrowser_FreeLBColumnInfo((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo))
+#define __FreeLBColumnInfo_base(__in_base, columninfo) __listbrowser_FreeLBColumnInfo((__in_base), (struct ColumnInfo *)(columninfo))
 
 static __inline__ VOID
-__listbrowser_ListBrowserClearAll(struct Library *__base, struct List * list)
+__listbrowser_ListBrowserClearAll(void *__base, struct List * list)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -290,5 +365,6 @@ __listbrowser_ListBrowserClearAll(struct Library *__base, struct List * list)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ListBrowserClearAll(list) __listbrowser_ListBrowserClearAll((LISTBROWSER_BASE_NAME), (struct List *)(list))
+#define __ListBrowserClearAll_base(__in_base, list) __listbrowser_ListBrowserClearAll((__in_base), (struct List *)(list))
 
 #endif /* INLINE_LISTBROWSER_H */

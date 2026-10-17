@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Library;
 #endif
 
 static __inline__ VOID
-__battmem_ObtainBattSemaphore(struct Library *__base)
+__battmem_ObtainBattSemaphore(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,11 +39,12 @@ __battmem_ObtainBattSemaphore(struct Library *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ObtainBattSemaphore() __battmem_ObtainBattSemaphore((BATTMEM_BASE_NAME))
+#define __ObtainBattSemaphore_base(__in_base) __battmem_ObtainBattSemaphore((__in_base))
 
 static __inline__ VOID
-__battmem_ReleaseBattSemaphore(struct Library *__base)
+__battmem_ReleaseBattSemaphore(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -54,14 +56,15 @@ __battmem_ReleaseBattSemaphore(struct Library *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleaseBattSemaphore() __battmem_ReleaseBattSemaphore((BATTMEM_BASE_NAME))
+#define __ReleaseBattSemaphore_base(__in_base) __battmem_ReleaseBattSemaphore((__in_base))
 
 static __inline__ ULONG
-__battmem_ReadBattMem(struct Library *__base, APTR buffer, ULONG offset, ULONG length)
+__battmem_ReadBattMem(void *__base, APTR buffer, ULONG offset, ULONG length)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(offset);
 	register ULONG _d1 __asm("d1") = (ULONG)(length);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -18(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -70,14 +73,15 @@ __battmem_ReadBattMem(struct Library *__base, APTR buffer, ULONG offset, ULONG l
 	return (ULONG)_d0;
 }
 #define ReadBattMem(buffer, offset, length) __battmem_ReadBattMem((BATTMEM_BASE_NAME), (APTR)(buffer), (ULONG)(offset), (ULONG)(length))
+#define __ReadBattMem_base(__in_base, buffer, offset, length) __battmem_ReadBattMem((__in_base), (APTR)(buffer), (ULONG)(offset), (ULONG)(length))
 
 static __inline__ ULONG
-__battmem_WriteBattMem(struct Library *__base, CONST_APTR buffer, ULONG offset, ULONG length)
+__battmem_WriteBattMem(void *__base, CONST_APTR buffer, ULONG offset, ULONG length)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(offset);
 	register ULONG _d1 __asm("d1") = (ULONG)(length);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -24(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -86,5 +90,6 @@ __battmem_WriteBattMem(struct Library *__base, CONST_APTR buffer, ULONG offset, 
 	return (ULONG)_d0;
 }
 #define WriteBattMem(buffer, offset, length) __battmem_WriteBattMem((BATTMEM_BASE_NAME), (CONST_APTR)(buffer), (ULONG)(offset), (ULONG)(length))
+#define __WriteBattMem_base(__in_base, buffer, offset, length) __battmem_WriteBattMem((__in_base), (CONST_APTR)(buffer), (ULONG)(offset), (ULONG)(length))
 
 #endif /* INLINE_BATTMEM_H */

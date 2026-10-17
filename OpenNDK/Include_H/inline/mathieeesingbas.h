@@ -15,6 +15,7 @@
 
 struct MathIEEEBase;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +25,11 @@ struct MathIEEEBase;
 #endif
 
 static __inline__ LONG
-__mathieeesingbas_IEEESPFix(struct MathIEEEBase *__base, FLOAT parm)
+__mathieeesingbas_IEEESPFix(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -39,12 +40,13 @@ __mathieeesingbas_IEEESPFix(struct MathIEEEBase *__base, FLOAT parm)
 	return (LONG)_d0;
 }
 #define IEEESPFix(parm) __mathieeesingbas_IEEESPFix((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPFix_base(__in_base, parm) __mathieeesingbas_IEEESPFix((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPFlt(struct MathIEEEBase *__base, LONG integer)
+__mathieeesingbas_IEEESPFlt(void *__base, LONG integer)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(integer);
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -55,15 +57,16 @@ __mathieeesingbas_IEEESPFlt(struct MathIEEEBase *__base, LONG integer)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPFlt(integer) __mathieeesingbas_IEEESPFlt((MATHIEEESINGBAS_BASE_NAME), (LONG)(integer))
+#define __IEEESPFlt_base(__in_base, integer) __mathieeesingbas_IEEESPFlt((__in_base), (LONG)(integer))
 
 static __inline__ LONG
-__mathieeesingbas_IEEESPCmp(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT rightParm)
+__mathieeesingbas_IEEESPCmp(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = leftParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = rightParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -73,13 +76,14 @@ __mathieeesingbas_IEEESPCmp(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT r
 	return (LONG)_d0;
 }
 #define IEEESPCmp(leftParm, rightParm) __mathieeesingbas_IEEESPCmp((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __IEEESPCmp_base(__in_base, leftParm, rightParm) __mathieeesingbas_IEEESPCmp((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ LONG
-__mathieeesingbas_IEEESPTst(struct MathIEEEBase *__base, FLOAT parm)
+__mathieeesingbas_IEEESPTst(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -90,13 +94,14 @@ __mathieeesingbas_IEEESPTst(struct MathIEEEBase *__base, FLOAT parm)
 	return (LONG)_d0;
 }
 #define IEEESPTst(parm) __mathieeesingbas_IEEESPTst((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPTst_base(__in_base, parm) __mathieeesingbas_IEEESPTst((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPAbs(struct MathIEEEBase *__base, FLOAT parm)
+__mathieeesingbas_IEEESPAbs(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -107,13 +112,14 @@ __mathieeesingbas_IEEESPAbs(struct MathIEEEBase *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPAbs(parm) __mathieeesingbas_IEEESPAbs((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPAbs_base(__in_base, parm) __mathieeesingbas_IEEESPAbs((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPNeg(struct MathIEEEBase *__base, FLOAT parm)
+__mathieeesingbas_IEEESPNeg(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -124,15 +130,16 @@ __mathieeesingbas_IEEESPNeg(struct MathIEEEBase *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPNeg(parm) __mathieeesingbas_IEEESPNeg((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPNeg_base(__in_base, parm) __mathieeesingbas_IEEESPNeg((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPAdd(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT rightParm)
+__mathieeesingbas_IEEESPAdd(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = leftParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = rightParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -142,15 +149,16 @@ __mathieeesingbas_IEEESPAdd(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT r
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPAdd(leftParm, rightParm) __mathieeesingbas_IEEESPAdd((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __IEEESPAdd_base(__in_base, leftParm, rightParm) __mathieeesingbas_IEEESPAdd((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPSub(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT rightParm)
+__mathieeesingbas_IEEESPSub(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = leftParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = rightParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
@@ -160,15 +168,16 @@ __mathieeesingbas_IEEESPSub(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT r
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPSub(leftParm, rightParm) __mathieeesingbas_IEEESPSub((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __IEEESPSub_base(__in_base, leftParm, rightParm) __mathieeesingbas_IEEESPSub((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPMul(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT rightParm)
+__mathieeesingbas_IEEESPMul(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = leftParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = rightParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -178,15 +187,16 @@ __mathieeesingbas_IEEESPMul(struct MathIEEEBase *__base, FLOAT leftParm, FLOAT r
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPMul(leftParm, rightParm) __mathieeesingbas_IEEESPMul((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __IEEESPMul_base(__in_base, leftParm, rightParm) __mathieeesingbas_IEEESPMul((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPDiv(struct MathIEEEBase *__base, FLOAT dividend, FLOAT divisor)
+__mathieeesingbas_IEEESPDiv(void *__base, FLOAT dividend, FLOAT divisor)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = dividend;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = divisor;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -196,13 +206,14 @@ __mathieeesingbas_IEEESPDiv(struct MathIEEEBase *__base, FLOAT dividend, FLOAT d
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPDiv(dividend, divisor) __mathieeesingbas_IEEESPDiv((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(dividend), (FLOAT)(divisor))
+#define __IEEESPDiv_base(__in_base, dividend, divisor) __mathieeesingbas_IEEESPDiv((__in_base), (FLOAT)(dividend), (FLOAT)(divisor))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPFloor(struct MathIEEEBase *__base, FLOAT parm)
+__mathieeesingbas_IEEESPFloor(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -213,13 +224,14 @@ __mathieeesingbas_IEEESPFloor(struct MathIEEEBase *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPFloor(parm) __mathieeesingbas_IEEESPFloor((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPFloor_base(__in_base, parm) __mathieeesingbas_IEEESPFloor((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingbas_IEEESPCeil(struct MathIEEEBase *__base, FLOAT parm)
+__mathieeesingbas_IEEESPCeil(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -230,5 +242,6 @@ __mathieeesingbas_IEEESPCeil(struct MathIEEEBase *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPCeil(parm) __mathieeesingbas_IEEESPCeil((MATHIEEESINGBAS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPCeil_base(__in_base, parm) __mathieeesingbas_IEEESPCeil((__in_base), (FLOAT)(parm))
 
 #endif /* INLINE_MATHIEEESINGBAS_H */

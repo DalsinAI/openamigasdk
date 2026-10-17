@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +25,10 @@ struct Library;
 #endif
 
 static __inline__ struct CardHandle *
-__cardres_OwnCard(struct Library *__base, struct CardHandle * handle)
+__cardres_OwnCard(void *__base, struct CardHandle * handle)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,13 +39,14 @@ __cardres_OwnCard(struct Library *__base, struct CardHandle * handle)
 	return (struct CardHandle *)_d0;
 }
 #define OwnCard(handle) __cardres_OwnCard((CARDRES_BASE_NAME), (struct CardHandle *)(handle))
+#define __OwnCard_base(__in_base, handle) __cardres_OwnCard((__in_base), (struct CardHandle *)(handle))
 
 static __inline__ VOID
-__cardres_ReleaseCard(struct Library *__base, struct CardHandle * handle, ULONG flags)
+__cardres_ReleaseCard(void *__base, struct CardHandle * handle, ULONG flags)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -12(%/a6)"
@@ -54,11 +56,12 @@ __cardres_ReleaseCard(struct Library *__base, struct CardHandle * handle, ULONG 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleaseCard(handle, flags) __cardres_ReleaseCard((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (ULONG)(flags))
+#define __ReleaseCard_base(__in_base, handle, flags) __cardres_ReleaseCard((__in_base), (struct CardHandle *)(handle), (ULONG)(flags))
 
 static __inline__ struct CardMemoryMap *
-__cardres_GetCardMap(struct Library *__base)
+__cardres_GetCardMap(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -70,12 +73,13 @@ __cardres_GetCardMap(struct Library *__base)
 	return (struct CardMemoryMap *)_d0;
 }
 #define GetCardMap() __cardres_GetCardMap((CARDRES_BASE_NAME))
+#define __GetCardMap_base(__in_base) __cardres_GetCardMap((__in_base))
 
 static __inline__ BOOL
-__cardres_BeginCardAccess(struct Library *__base, struct CardHandle * handle)
+__cardres_BeginCardAccess(void *__base, struct CardHandle * handle)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -86,12 +90,13 @@ __cardres_BeginCardAccess(struct Library *__base, struct CardHandle * handle)
 	return (BOOL)_d0;
 }
 #define BeginCardAccess(handle) __cardres_BeginCardAccess((CARDRES_BASE_NAME), (struct CardHandle *)(handle))
+#define __BeginCardAccess_base(__in_base, handle) __cardres_BeginCardAccess((__in_base), (struct CardHandle *)(handle))
 
 static __inline__ BOOL
-__cardres_EndCardAccess(struct Library *__base, struct CardHandle * handle)
+__cardres_EndCardAccess(void *__base, struct CardHandle * handle)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -102,11 +107,12 @@ __cardres_EndCardAccess(struct Library *__base, struct CardHandle * handle)
 	return (BOOL)_d0;
 }
 #define EndCardAccess(handle) __cardres_EndCardAccess((CARDRES_BASE_NAME), (struct CardHandle *)(handle))
+#define __EndCardAccess_base(__in_base, handle) __cardres_EndCardAccess((__in_base), (struct CardHandle *)(handle))
 
 static __inline__ UBYTE
-__cardres_ReadCardStatus(struct Library *__base)
+__cardres_ReadCardStatus(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -118,13 +124,14 @@ __cardres_ReadCardStatus(struct Library *__base)
 	return (UBYTE)_d0;
 }
 #define ReadCardStatus() __cardres_ReadCardStatus((CARDRES_BASE_NAME))
+#define __ReadCardStatus_base(__in_base) __cardres_ReadCardStatus((__in_base))
 
 static __inline__ BOOL
-__cardres_CardResetRemove(struct Library *__base, struct CardHandle * handle, ULONG flag)
+__cardres_CardResetRemove(void *__base, struct CardHandle * handle, ULONG flag)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
 	register ULONG _d0 __asm("d0") = (ULONG)(flag);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -134,13 +141,14 @@ __cardres_CardResetRemove(struct Library *__base, struct CardHandle * handle, UL
 	return (BOOL)_d0;
 }
 #define CardResetRemove(handle, flag) __cardres_CardResetRemove((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (ULONG)(flag))
+#define __CardResetRemove_base(__in_base, handle, flag) __cardres_CardResetRemove((__in_base), (struct CardHandle *)(handle), (ULONG)(flag))
 
 static __inline__ UBYTE
-__cardres_CardMiscControl(struct Library *__base, struct CardHandle * handle, UBYTE control_bits)
+__cardres_CardMiscControl(void *__base, struct CardHandle * handle, UBYTE control_bits)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
 	register ULONG _d1 __asm("d1") = (ULONG)(control_bits);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -150,13 +158,14 @@ __cardres_CardMiscControl(struct Library *__base, struct CardHandle * handle, UB
 	return (UBYTE)_d0;
 }
 #define CardMiscControl(handle, control_bits) __cardres_CardMiscControl((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (UBYTE)(control_bits))
+#define __CardMiscControl_base(__in_base, handle, control_bits) __cardres_CardMiscControl((__in_base), (struct CardHandle *)(handle), (UBYTE)(control_bits))
 
 static __inline__ ULONG
-__cardres_CardAccessSpeed(struct Library *__base, struct CardHandle * handle, ULONG nanoseconds)
+__cardres_CardAccessSpeed(void *__base, struct CardHandle * handle, ULONG nanoseconds)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
 	register ULONG _d0 __asm("d0") = (ULONG)(nanoseconds);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -166,13 +175,14 @@ __cardres_CardAccessSpeed(struct Library *__base, struct CardHandle * handle, UL
 	return (ULONG)_d0;
 }
 #define CardAccessSpeed(handle, nanoseconds) __cardres_CardAccessSpeed((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (ULONG)(nanoseconds))
+#define __CardAccessSpeed_base(__in_base, handle, nanoseconds) __cardres_CardAccessSpeed((__in_base), (struct CardHandle *)(handle), (ULONG)(nanoseconds))
 
 static __inline__ LONG
-__cardres_CardProgramVoltage(struct Library *__base, struct CardHandle * handle, ULONG voltage)
+__cardres_CardProgramVoltage(void *__base, struct CardHandle * handle, ULONG voltage)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
 	register ULONG _d0 __asm("d0") = (ULONG)(voltage);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -182,12 +192,13 @@ __cardres_CardProgramVoltage(struct Library *__base, struct CardHandle * handle,
 	return (LONG)_d0;
 }
 #define CardProgramVoltage(handle, voltage) __cardres_CardProgramVoltage((CARDRES_BASE_NAME), (struct CardHandle *)(handle), (ULONG)(voltage))
+#define __CardProgramVoltage_base(__in_base, handle, voltage) __cardres_CardProgramVoltage((__in_base), (struct CardHandle *)(handle), (ULONG)(voltage))
 
 static __inline__ BOOL
-__cardres_CardResetCard(struct Library *__base, struct CardHandle * handle)
+__cardres_CardResetCard(void *__base, struct CardHandle * handle)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -198,15 +209,16 @@ __cardres_CardResetCard(struct Library *__base, struct CardHandle * handle)
 	return (BOOL)_d0;
 }
 #define CardResetCard(handle) __cardres_CardResetCard((CARDRES_BASE_NAME), (struct CardHandle *)(handle))
+#define __CardResetCard_base(__in_base, handle) __cardres_CardResetCard((__in_base), (struct CardHandle *)(handle))
 
 static __inline__ BOOL
-__cardres_CopyTuple(struct Library *__base, CONST struct CardHandle * handle, UBYTE * buffer, ULONG tuplecode, ULONG size)
+__cardres_CopyTuple(void *__base, CONST struct CardHandle * handle, UBYTE * buffer, ULONG tuplecode, ULONG size)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(handle);
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d1 __asm("d1") = (ULONG)(tuplecode);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -72(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -214,13 +226,14 @@ __cardres_CopyTuple(struct Library *__base, CONST struct CardHandle * handle, UB
 	return (BOOL)_d0;
 }
 #define CopyTuple(handle, buffer, tuplecode, size) __cardres_CopyTuple((CARDRES_BASE_NAME), (CONST struct CardHandle *)(handle), (UBYTE *)(buffer), (ULONG)(tuplecode), (ULONG)(size))
+#define __CopyTuple_base(__in_base, handle, buffer, tuplecode, size) __cardres_CopyTuple((__in_base), (CONST struct CardHandle *)(handle), (UBYTE *)(buffer), (ULONG)(tuplecode), (ULONG)(size))
 
 static __inline__ ULONG
-__cardres_DeviceTuple(struct Library *__base, CONST UBYTE * tuple_data, struct DeviceTData * storage)
+__cardres_DeviceTuple(void *__base, CONST UBYTE * tuple_data, struct DeviceTData * storage)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tuple_data);
 	register ULONG _a1 __asm("a1") = (ULONG)(storage);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -230,12 +243,13 @@ __cardres_DeviceTuple(struct Library *__base, CONST UBYTE * tuple_data, struct D
 	return (ULONG)_d0;
 }
 #define DeviceTuple(tuple_data, storage) __cardres_DeviceTuple((CARDRES_BASE_NAME), (CONST UBYTE *)(tuple_data), (struct DeviceTData *)(storage))
+#define __DeviceTuple_base(__in_base, tuple_data, storage) __cardres_DeviceTuple((__in_base), (CONST UBYTE *)(tuple_data), (struct DeviceTData *)(storage))
 
 static __inline__ struct Resident *
-__cardres_IfAmigaXIP(struct Library *__base, CONST struct CardHandle * handle)
+__cardres_IfAmigaXIP(void *__base, CONST struct CardHandle * handle)
 {
 	register ULONG _a2 __asm("a2") = (ULONG)(handle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -247,11 +261,12 @@ __cardres_IfAmigaXIP(struct Library *__base, CONST struct CardHandle * handle)
 	return (struct Resident *)_d0;
 }
 #define IfAmigaXIP(handle) __cardres_IfAmigaXIP((CARDRES_BASE_NAME), (CONST struct CardHandle *)(handle))
+#define __IfAmigaXIP_base(__in_base, handle) __cardres_IfAmigaXIP((__in_base), (CONST struct CardHandle *)(handle))
 
 static __inline__ BOOL
-__cardres_CardForceChange(struct Library *__base)
+__cardres_CardForceChange(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -263,11 +278,12 @@ __cardres_CardForceChange(struct Library *__base)
 	return (BOOL)_d0;
 }
 #define CardForceChange() __cardres_CardForceChange((CARDRES_BASE_NAME))
+#define __CardForceChange_base(__in_base) __cardres_CardForceChange((__in_base))
 
 static __inline__ ULONG
-__cardres_CardChangeCount(struct Library *__base)
+__cardres_CardChangeCount(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -279,11 +295,12 @@ __cardres_CardChangeCount(struct Library *__base)
 	return (ULONG)_d0;
 }
 #define CardChangeCount() __cardres_CardChangeCount((CARDRES_BASE_NAME))
+#define __CardChangeCount_base(__in_base) __cardres_CardChangeCount((__in_base))
 
 static __inline__ ULONG
-__cardres_CardInterface(struct Library *__base)
+__cardres_CardInterface(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -295,5 +312,6 @@ __cardres_CardInterface(struct Library *__base)
 	return (ULONG)_d0;
 }
 #define CardInterface() __cardres_CardInterface((CARDRES_BASE_NAME))
+#define __CardInterface_base(__in_base) __cardres_CardInterface((__in_base))
 
 #endif /* INLINE_CARDRES_H */

@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__texteditor_TEXTEDITOR_GetClass(struct Library *__base)
+__texteditor_TEXTEDITOR_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,15 +39,16 @@ __texteditor_TEXTEDITOR_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define TEXTEDITOR_GetClass() __texteditor_TEXTEDITOR_GetClass((TEXTEDITOR_BASE_NAME))
+#define __TEXTEDITOR_GetClass_base(__in_base) __texteditor_TEXTEDITOR_GetClass((__in_base))
 
 static __inline__ VOID
-__texteditor_HighlightSetFormat(struct Library *__base, APTR handle, ULONG first, ULONG last, UWORD format)
+__texteditor_HighlightSetFormat(void *__base, APTR handle, ULONG first, ULONG last, UWORD format)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(handle);
 	register ULONG _d0 __asm("d0") = (ULONG)(first);
 	register ULONG _d1 __asm("d1") = (ULONG)(last);
 	register ULONG _d2 __asm("d2") = (ULONG)(format);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -55,5 +57,6 @@ __texteditor_HighlightSetFormat(struct Library *__base, APTR handle, ULONG first
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define HighlightSetFormat(handle, first, last, format) __texteditor_HighlightSetFormat((TEXTEDITOR_BASE_NAME), (APTR)(handle), (ULONG)(first), (ULONG)(last), (UWORD)(format))
+#define __HighlightSetFormat_base(__in_base, handle, first, last, format) __texteditor_HighlightSetFormat((__in_base), (APTR)(handle), (ULONG)(first), (ULONG)(last), (UWORD)(format))
 
 #endif /* INLINE_TEXTEDITOR_H */

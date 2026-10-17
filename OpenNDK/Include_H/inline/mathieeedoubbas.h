@@ -15,6 +15,7 @@
 
 struct MathIEEEBase;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,12 +25,12 @@ struct MathIEEEBase;
 #endif
 
 static __inline__ LONG
-__mathieeedoubbas_IEEEDPFix(struct MathIEEEBase *__base, DOUBLE parm)
+__mathieeedoubbas_IEEEDPFix(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
@@ -39,12 +40,13 @@ __mathieeedoubbas_IEEEDPFix(struct MathIEEEBase *__base, DOUBLE parm)
 	return (LONG)_d0;
 }
 #define IEEEDPFix(parm) __mathieeedoubbas_IEEEDPFix((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPFix_base(__in_base, parm) __mathieeedoubbas_IEEEDPFix((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPFlt(struct MathIEEEBase *__base, LONG integer)
+__mathieeedoubbas_IEEEDPFlt(void *__base, LONG integer)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(integer);
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -55,9 +57,10 @@ __mathieeedoubbas_IEEEDPFlt(struct MathIEEEBase *__base, LONG integer)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d1; return _r.d; }
 }
 #define IEEEDPFlt(integer) __mathieeedoubbas_IEEEDPFlt((MATHIEEEDOUBBAS_BASE_NAME), (LONG)(integer))
+#define __IEEEDPFlt_base(__in_base, integer) __mathieeedoubbas_IEEEDPFlt((__in_base), (LONG)(integer))
 
 static __inline__ LONG
-__mathieeedoubbas_IEEEDPCmp(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE rightParm)
+__mathieeedoubbas_IEEEDPCmp(void *__base, DOUBLE leftParm, DOUBLE rightParm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = leftParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
@@ -65,7 +68,7 @@ __mathieeedoubbas_IEEEDPCmp(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 	union { DOUBLE d; ULONG u[2]; } _d2_u; _d2_u.d = rightParm;
 	register ULONG _d2 __asm("d2") = _d2_u.u[0];
 	register ULONG _d2_lo __asm("d3") = _d2_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -75,14 +78,15 @@ __mathieeedoubbas_IEEEDPCmp(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 	return (LONG)_d0;
 }
 #define IEEEDPCmp(leftParm, rightParm) __mathieeedoubbas_IEEEDPCmp((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define __IEEEDPCmp_base(__in_base, leftParm, rightParm) __mathieeedoubbas_IEEEDPCmp((__in_base), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
 
 static __inline__ LONG
-__mathieeedoubbas_IEEEDPTst(struct MathIEEEBase *__base, DOUBLE parm)
+__mathieeedoubbas_IEEEDPTst(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -92,14 +96,15 @@ __mathieeedoubbas_IEEEDPTst(struct MathIEEEBase *__base, DOUBLE parm)
 	return (LONG)_d0;
 }
 #define IEEEDPTst(parm) __mathieeedoubbas_IEEEDPTst((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPTst_base(__in_base, parm) __mathieeedoubbas_IEEEDPTst((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPAbs(struct MathIEEEBase *__base, DOUBLE parm)
+__mathieeedoubbas_IEEEDPAbs(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -109,14 +114,15 @@ __mathieeedoubbas_IEEEDPAbs(struct MathIEEEBase *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPAbs(parm) __mathieeedoubbas_IEEEDPAbs((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPAbs_base(__in_base, parm) __mathieeedoubbas_IEEEDPAbs((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPNeg(struct MathIEEEBase *__base, DOUBLE parm)
+__mathieeedoubbas_IEEEDPNeg(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -126,9 +132,10 @@ __mathieeedoubbas_IEEEDPNeg(struct MathIEEEBase *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPNeg(parm) __mathieeedoubbas_IEEEDPNeg((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPNeg_base(__in_base, parm) __mathieeedoubbas_IEEEDPNeg((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPAdd(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE rightParm)
+__mathieeedoubbas_IEEEDPAdd(void *__base, DOUBLE leftParm, DOUBLE rightParm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = leftParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
@@ -136,7 +143,7 @@ __mathieeedoubbas_IEEEDPAdd(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 	union { DOUBLE d; ULONG u[2]; } _d2_u; _d2_u.d = rightParm;
 	register ULONG _d2 __asm("d2") = _d2_u.u[0];
 	register ULONG _d2_lo __asm("d3") = _d2_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -146,9 +153,10 @@ __mathieeedoubbas_IEEEDPAdd(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPAdd(leftParm, rightParm) __mathieeedoubbas_IEEEDPAdd((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define __IEEEDPAdd_base(__in_base, leftParm, rightParm) __mathieeedoubbas_IEEEDPAdd((__in_base), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPSub(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE rightParm)
+__mathieeedoubbas_IEEEDPSub(void *__base, DOUBLE leftParm, DOUBLE rightParm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = leftParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
@@ -156,7 +164,7 @@ __mathieeedoubbas_IEEEDPSub(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 	union { DOUBLE d; ULONG u[2]; } _d2_u; _d2_u.d = rightParm;
 	register ULONG _d2 __asm("d2") = _d2_u.u[0];
 	register ULONG _d2_lo __asm("d3") = _d2_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
@@ -166,9 +174,10 @@ __mathieeedoubbas_IEEEDPSub(struct MathIEEEBase *__base, DOUBLE leftParm, DOUBLE
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPSub(leftParm, rightParm) __mathieeedoubbas_IEEEDPSub((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
+#define __IEEEDPSub_base(__in_base, leftParm, rightParm) __mathieeedoubbas_IEEEDPSub((__in_base), (DOUBLE)(leftParm), (DOUBLE)(rightParm))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPMul(struct MathIEEEBase *__base, DOUBLE factor1, DOUBLE factor2)
+__mathieeedoubbas_IEEEDPMul(void *__base, DOUBLE factor1, DOUBLE factor2)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = factor1;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
@@ -176,7 +185,7 @@ __mathieeedoubbas_IEEEDPMul(struct MathIEEEBase *__base, DOUBLE factor1, DOUBLE 
 	union { DOUBLE d; ULONG u[2]; } _d2_u; _d2_u.d = factor2;
 	register ULONG _d2 __asm("d2") = _d2_u.u[0];
 	register ULONG _d2_lo __asm("d3") = _d2_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -186,9 +195,10 @@ __mathieeedoubbas_IEEEDPMul(struct MathIEEEBase *__base, DOUBLE factor1, DOUBLE 
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPMul(factor1, factor2) __mathieeedoubbas_IEEEDPMul((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(factor1), (DOUBLE)(factor2))
+#define __IEEEDPMul_base(__in_base, factor1, factor2) __mathieeedoubbas_IEEEDPMul((__in_base), (DOUBLE)(factor1), (DOUBLE)(factor2))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPDiv(struct MathIEEEBase *__base, DOUBLE dividend, DOUBLE divisor)
+__mathieeedoubbas_IEEEDPDiv(void *__base, DOUBLE dividend, DOUBLE divisor)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = dividend;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
@@ -196,7 +206,7 @@ __mathieeedoubbas_IEEEDPDiv(struct MathIEEEBase *__base, DOUBLE dividend, DOUBLE
 	union { DOUBLE d; ULONG u[2]; } _d2_u; _d2_u.d = divisor;
 	register ULONG _d2 __asm("d2") = _d2_u.u[0];
 	register ULONG _d2_lo __asm("d3") = _d2_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -206,14 +216,15 @@ __mathieeedoubbas_IEEEDPDiv(struct MathIEEEBase *__base, DOUBLE dividend, DOUBLE
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPDiv(dividend, divisor) __mathieeedoubbas_IEEEDPDiv((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(dividend), (DOUBLE)(divisor))
+#define __IEEEDPDiv_base(__in_base, dividend, divisor) __mathieeedoubbas_IEEEDPDiv((__in_base), (DOUBLE)(dividend), (DOUBLE)(divisor))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPFloor(struct MathIEEEBase *__base, DOUBLE parm)
+__mathieeedoubbas_IEEEDPFloor(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -223,14 +234,15 @@ __mathieeedoubbas_IEEEDPFloor(struct MathIEEEBase *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPFloor(parm) __mathieeedoubbas_IEEEDPFloor((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPFloor_base(__in_base, parm) __mathieeedoubbas_IEEEDPFloor((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubbas_IEEEDPCeil(struct MathIEEEBase *__base, DOUBLE parm)
+__mathieeedoubbas_IEEEDPCeil(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct MathIEEEBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -240,5 +252,6 @@ __mathieeedoubbas_IEEEDPCeil(struct MathIEEEBase *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPCeil(parm) __mathieeedoubbas_IEEEDPCeil((MATHIEEEDOUBBAS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPCeil_base(__in_base, parm) __mathieeedoubbas_IEEEDPCeil((__in_base), (DOUBLE)(parm))
 
 #endif /* INLINE_MATHIEEEDOUBBAS_H */

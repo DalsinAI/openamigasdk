@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +32,10 @@ struct Library;
 #endif
 
 static __inline__ ULONG
-__lowlevel_ReadJoyPort(struct Library *__base, ULONG port)
+__lowlevel_ReadJoyPort(void *__base, ULONG port)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(port);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -38,11 +46,12 @@ __lowlevel_ReadJoyPort(struct Library *__base, ULONG port)
 	return (ULONG)_d0;
 }
 #define ReadJoyPort(port) __lowlevel_ReadJoyPort((LOWLEVEL_BASE_NAME), (ULONG)(port))
+#define __ReadJoyPort_base(__in_base, port) __lowlevel_ReadJoyPort((__in_base), (ULONG)(port))
 
 static __inline__ UBYTE
-__lowlevel_GetLanguageSelection(struct Library *__base)
+__lowlevel_GetLanguageSelection(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -54,11 +63,12 @@ __lowlevel_GetLanguageSelection(struct Library *__base)
 	return (UBYTE)_d0;
 }
 #define GetLanguageSelection() __lowlevel_GetLanguageSelection((LOWLEVEL_BASE_NAME))
+#define __GetLanguageSelection_base(__in_base) __lowlevel_GetLanguageSelection((__in_base))
 
 static __inline__ ULONG
-__lowlevel_GetKey(struct Library *__base)
+__lowlevel_GetKey(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -70,13 +80,14 @@ __lowlevel_GetKey(struct Library *__base)
 	return (ULONG)_d0;
 }
 #define GetKey() __lowlevel_GetKey((LOWLEVEL_BASE_NAME))
+#define __GetKey_base(__in_base) __lowlevel_GetKey((__in_base))
 
 static __inline__ VOID
-__lowlevel_QueryKeys(struct Library *__base, struct KeyQuery * queryArray, LONG arraySize)
+__lowlevel_QueryKeys(void *__base, struct KeyQuery * queryArray, LONG arraySize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(queryArray);
 	register ULONG _d1 __asm("d1") = (ULONG)(arraySize);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -86,13 +97,14 @@ __lowlevel_QueryKeys(struct Library *__base, struct KeyQuery * queryArray, LONG 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define QueryKeys(queryArray, arraySize) __lowlevel_QueryKeys((LOWLEVEL_BASE_NAME), (struct KeyQuery *)(queryArray), (LONG)(arraySize))
+#define __QueryKeys_base(__in_base, queryArray, arraySize) __lowlevel_QueryKeys((__in_base), (struct KeyQuery *)(queryArray), (LONG)(arraySize))
 
 static __inline__ APTR
-__lowlevel_AddKBInt(struct Library *__base, APTR intRoutine, APTR intData)
+__lowlevel_AddKBInt(void *__base, APTR intRoutine, APTR intData)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(intRoutine);
 	register ULONG _a1 __asm("a1") = (ULONG)(intData);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -102,12 +114,13 @@ __lowlevel_AddKBInt(struct Library *__base, APTR intRoutine, APTR intData)
 	return (APTR)_d0;
 }
 #define AddKBInt(intRoutine, intData) __lowlevel_AddKBInt((LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define __AddKBInt_base(__in_base, intRoutine, intData) __lowlevel_AddKBInt((__in_base), (APTR)(intRoutine), (APTR)(intData))
 
 static __inline__ VOID
-__lowlevel_RemKBInt(struct Library *__base, APTR intHandle)
+__lowlevel_RemKBInt(void *__base, APTR intHandle)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(intHandle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -118,12 +131,13 @@ __lowlevel_RemKBInt(struct Library *__base, APTR intHandle)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemKBInt(intHandle) __lowlevel_RemKBInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define __RemKBInt_base(__in_base, intHandle) __lowlevel_RemKBInt((__in_base), (APTR)(intHandle))
 
 static __inline__ ULONG
-__lowlevel_SystemControlA(struct Library *__base, CONST struct TagItem * tagList)
+__lowlevel_SystemControlA(void *__base, CONST struct TagItem * tagList)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -134,14 +148,25 @@ __lowlevel_SystemControlA(struct Library *__base, CONST struct TagItem * tagList
 	return (ULONG)_d0;
 }
 #define SystemControlA(tagList) __lowlevel_SystemControlA((LOWLEVEL_BASE_NAME), (CONST struct TagItem *)(tagList))
+#define __SystemControlA_base(__in_base, tagList) __lowlevel_SystemControlA((__in_base), (CONST struct TagItem *)(tagList))
 
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__SystemControl_va(void *__base, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, __base);
+	ULONG _r = (ULONG)__lowlevel_SystemControlA(__base, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SystemControl(...) __SystemControl_va((LOWLEVEL_BASE_NAME), ##__VA_ARGS__)
 
 static __inline__ APTR
-__lowlevel_AddTimerInt(struct Library *__base, APTR intRoutine, APTR intData)
+__lowlevel_AddTimerInt(void *__base, APTR intRoutine, APTR intData)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(intRoutine);
 	register ULONG _a1 __asm("a1") = (ULONG)(intData);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -151,12 +176,13 @@ __lowlevel_AddTimerInt(struct Library *__base, APTR intRoutine, APTR intData)
 	return (APTR)_d0;
 }
 #define AddTimerInt(intRoutine, intData) __lowlevel_AddTimerInt((LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define __AddTimerInt_base(__in_base, intRoutine, intData) __lowlevel_AddTimerInt((__in_base), (APTR)(intRoutine), (APTR)(intData))
 
 static __inline__ VOID
-__lowlevel_RemTimerInt(struct Library *__base, APTR intHandle)
+__lowlevel_RemTimerInt(void *__base, APTR intHandle)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(intHandle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -167,12 +193,13 @@ __lowlevel_RemTimerInt(struct Library *__base, APTR intHandle)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemTimerInt(intHandle) __lowlevel_RemTimerInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define __RemTimerInt_base(__in_base, intHandle) __lowlevel_RemTimerInt((__in_base), (APTR)(intHandle))
 
 static __inline__ VOID
-__lowlevel_StopTimerInt(struct Library *__base, APTR intHandle)
+__lowlevel_StopTimerInt(void *__base, APTR intHandle)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(intHandle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -183,14 +210,15 @@ __lowlevel_StopTimerInt(struct Library *__base, APTR intHandle)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define StopTimerInt(intHandle) __lowlevel_StopTimerInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define __StopTimerInt_base(__in_base, intHandle) __lowlevel_StopTimerInt((__in_base), (APTR)(intHandle))
 
 static __inline__ VOID
-__lowlevel_StartTimerInt(struct Library *__base, APTR intHandle, ULONG timeInterval, BOOL continuous)
+__lowlevel_StartTimerInt(void *__base, APTR intHandle, ULONG timeInterval, BOOL continuous)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(intHandle);
 	register ULONG _d0 __asm("d0") = (ULONG)(timeInterval);
 	register ULONG _d1 __asm("d1") = (ULONG)(continuous);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -199,12 +227,13 @@ __lowlevel_StartTimerInt(struct Library *__base, APTR intHandle, ULONG timeInter
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define StartTimerInt(intHandle, timeInterval, continuous) __lowlevel_StartTimerInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle), (ULONG)(timeInterval), (BOOL)(continuous))
+#define __StartTimerInt_base(__in_base, intHandle, timeInterval, continuous) __lowlevel_StartTimerInt((__in_base), (APTR)(intHandle), (ULONG)(timeInterval), (BOOL)(continuous))
 
 static __inline__ ULONG
-__lowlevel_ElapsedTime(struct Library *__base, struct EClockVal * context)
+__lowlevel_ElapsedTime(void *__base, struct EClockVal * context)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(context);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -215,13 +244,14 @@ __lowlevel_ElapsedTime(struct Library *__base, struct EClockVal * context)
 	return (ULONG)_d0;
 }
 #define ElapsedTime(context) __lowlevel_ElapsedTime((LOWLEVEL_BASE_NAME), (struct EClockVal *)(context))
+#define __ElapsedTime_base(__in_base, context) __lowlevel_ElapsedTime((__in_base), (struct EClockVal *)(context))
 
 static __inline__ APTR
-__lowlevel_AddVBlankInt(struct Library *__base, APTR intRoutine, APTR intData)
+__lowlevel_AddVBlankInt(void *__base, APTR intRoutine, APTR intData)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(intRoutine);
 	register ULONG _a1 __asm("a1") = (ULONG)(intData);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -108(%/a6)"
@@ -231,12 +261,13 @@ __lowlevel_AddVBlankInt(struct Library *__base, APTR intRoutine, APTR intData)
 	return (APTR)_d0;
 }
 #define AddVBlankInt(intRoutine, intData) __lowlevel_AddVBlankInt((LOWLEVEL_BASE_NAME), (APTR)(intRoutine), (APTR)(intData))
+#define __AddVBlankInt_base(__in_base, intRoutine, intData) __lowlevel_AddVBlankInt((__in_base), (APTR)(intRoutine), (APTR)(intData))
 
 static __inline__ VOID
-__lowlevel_RemVBlankInt(struct Library *__base, APTR intHandle)
+__lowlevel_RemVBlankInt(void *__base, APTR intHandle)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(intHandle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -247,13 +278,14 @@ __lowlevel_RemVBlankInt(struct Library *__base, APTR intHandle)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemVBlankInt(intHandle) __lowlevel_RemVBlankInt((LOWLEVEL_BASE_NAME), (APTR)(intHandle))
+#define __RemVBlankInt_base(__in_base, intHandle) __lowlevel_RemVBlankInt((__in_base), (APTR)(intHandle))
 
 static __inline__ BOOL
-__lowlevel_SetJoyPortAttrsA(struct Library *__base, ULONG portNumber, CONST struct TagItem * tagList)
+__lowlevel_SetJoyPortAttrsA(void *__base, ULONG portNumber, CONST struct TagItem * tagList)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(portNumber);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
@@ -263,7 +295,17 @@ __lowlevel_SetJoyPortAttrsA(struct Library *__base, ULONG portNumber, CONST stru
 	return (BOOL)_d0;
 }
 #define SetJoyPortAttrsA(portNumber, tagList) __lowlevel_SetJoyPortAttrsA((LOWLEVEL_BASE_NAME), (ULONG)(portNumber), (CONST struct TagItem *)(tagList))
+#define __SetJoyPortAttrsA_base(__in_base, portNumber, tagList) __lowlevel_SetJoyPortAttrsA((__in_base), (ULONG)(portNumber), (CONST struct TagItem *)(tagList))
 
-#define SetJoyPortAttrs(portNumber, ...) (SetJoyPortAttrs)((ULONG)(portNumber), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__SetJoyPortAttrs_va(void *__base, ULONG portNumber, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, portNumber);
+	BOOL _r = (BOOL)__lowlevel_SetJoyPortAttrsA(__base, (ULONG)(portNumber), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetJoyPortAttrs(portNumber, ...) __SetJoyPortAttrs_va((LOWLEVEL_BASE_NAME), (ULONG)(portNumber), ##__VA_ARGS__)
 
 #endif /* INLINE_LOWLEVEL_H */

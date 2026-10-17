@@ -13,7 +13,8 @@
 #define MATHIEEEDOUBTRANS_BASE_NAME MathIeeeDoubTransBase
 #endif
 
-struct Library;
+struct MathIEEEBase;
+
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -24,12 +25,12 @@ struct Library;
 #endif
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPAtan(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPAtan(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
@@ -39,14 +40,15 @@ __mathieeedoubtrans_IEEEDPAtan(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPAtan(parm) __mathieeedoubtrans_IEEEDPAtan((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPAtan_base(__in_base, parm) __mathieeedoubtrans_IEEEDPAtan((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPSin(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPSin(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
@@ -56,14 +58,15 @@ __mathieeedoubtrans_IEEEDPSin(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPSin(parm) __mathieeedoubtrans_IEEEDPSin((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPSin_base(__in_base, parm) __mathieeedoubtrans_IEEEDPSin((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPCos(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPCos(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -73,14 +76,15 @@ __mathieeedoubtrans_IEEEDPCos(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPCos(parm) __mathieeedoubtrans_IEEEDPCos((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPCos_base(__in_base, parm) __mathieeedoubtrans_IEEEDPCos((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPTan(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPTan(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -90,15 +94,16 @@ __mathieeedoubtrans_IEEEDPTan(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPTan(parm) __mathieeedoubtrans_IEEEDPTan((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPTan_base(__in_base, parm) __mathieeedoubtrans_IEEEDPTan((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPSincos(struct Library *__base, DOUBLE * pf2, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPSincos(void *__base, DOUBLE * pf2, DOUBLE parm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(pf2);
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
 		: "+r" (_d0), "+r" (_d0_lo), "+r" (_a0), "=r" (_a1)
@@ -107,14 +112,15 @@ __mathieeedoubtrans_IEEEDPSincos(struct Library *__base, DOUBLE * pf2, DOUBLE pa
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPSincos(pf2, parm) __mathieeedoubtrans_IEEEDPSincos((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE *)(pf2), (DOUBLE)(parm))
+#define __IEEEDPSincos_base(__in_base, pf2, parm) __mathieeedoubtrans_IEEEDPSincos((__in_base), (DOUBLE *)(pf2), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPSinh(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPSinh(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -124,14 +130,15 @@ __mathieeedoubtrans_IEEEDPSinh(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPSinh(parm) __mathieeedoubtrans_IEEEDPSinh((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPSinh_base(__in_base, parm) __mathieeedoubtrans_IEEEDPSinh((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPCosh(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPCosh(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -141,14 +148,15 @@ __mathieeedoubtrans_IEEEDPCosh(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPCosh(parm) __mathieeedoubtrans_IEEEDPCosh((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPCosh_base(__in_base, parm) __mathieeedoubtrans_IEEEDPCosh((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPTanh(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPTanh(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
@@ -158,14 +166,15 @@ __mathieeedoubtrans_IEEEDPTanh(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPTanh(parm) __mathieeedoubtrans_IEEEDPTanh((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPTanh_base(__in_base, parm) __mathieeedoubtrans_IEEEDPTanh((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPExp(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPExp(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -175,14 +184,15 @@ __mathieeedoubtrans_IEEEDPExp(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPExp(parm) __mathieeedoubtrans_IEEEDPExp((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPExp_base(__in_base, parm) __mathieeedoubtrans_IEEEDPExp((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPLog(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPLog(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -192,9 +202,10 @@ __mathieeedoubtrans_IEEEDPLog(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPLog(parm) __mathieeedoubtrans_IEEEDPLog((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPLog_base(__in_base, parm) __mathieeedoubtrans_IEEEDPLog((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPPow(struct Library *__base, DOUBLE power, DOUBLE arg)
+__mathieeedoubtrans_IEEEDPPow(void *__base, DOUBLE power, DOUBLE arg)
 {
 	union { DOUBLE d; ULONG u[2]; } _d2_u; _d2_u.d = power;
 	register ULONG _d2 __asm("d2") = _d2_u.u[0];
@@ -202,7 +213,7 @@ __mathieeedoubtrans_IEEEDPPow(struct Library *__base, DOUBLE power, DOUBLE arg)
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = arg;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -212,14 +223,15 @@ __mathieeedoubtrans_IEEEDPPow(struct Library *__base, DOUBLE power, DOUBLE arg)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPPow(power, arg) __mathieeedoubtrans_IEEEDPPow((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(power), (DOUBLE)(arg))
+#define __IEEEDPPow_base(__in_base, power, arg) __mathieeedoubtrans_IEEEDPPow((__in_base), (DOUBLE)(power), (DOUBLE)(arg))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPSqrt(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPSqrt(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -229,14 +241,15 @@ __mathieeedoubtrans_IEEEDPSqrt(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPSqrt(parm) __mathieeedoubtrans_IEEEDPSqrt((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPSqrt_base(__in_base, parm) __mathieeedoubtrans_IEEEDPSqrt((__in_base), (DOUBLE)(parm))
 
 static __inline__ FLOAT
-__mathieeedoubtrans_IEEEDPTieee(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPTieee(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -246,13 +259,14 @@ __mathieeedoubtrans_IEEEDPTieee(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEEDPTieee(parm) __mathieeedoubtrans_IEEEDPTieee((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPTieee_base(__in_base, parm) __mathieeedoubtrans_IEEEDPTieee((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPFieee(struct Library *__base, FLOAT single)
+__mathieeedoubtrans_IEEEDPFieee(void *__base, FLOAT single)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = single;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -263,14 +277,15 @@ __mathieeedoubtrans_IEEEDPFieee(struct Library *__base, FLOAT single)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d1; return _r.d; }
 }
 #define IEEEDPFieee(single) __mathieeedoubtrans_IEEEDPFieee((MATHIEEEDOUBTRANS_BASE_NAME), (FLOAT)(single))
+#define __IEEEDPFieee_base(__in_base, single) __mathieeedoubtrans_IEEEDPFieee((__in_base), (FLOAT)(single))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPAsin(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPAsin(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
@@ -280,14 +295,15 @@ __mathieeedoubtrans_IEEEDPAsin(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPAsin(parm) __mathieeedoubtrans_IEEEDPAsin((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPAsin_base(__in_base, parm) __mathieeedoubtrans_IEEEDPAsin((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPAcos(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPAcos(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -297,14 +313,15 @@ __mathieeedoubtrans_IEEEDPAcos(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPAcos(parm) __mathieeedoubtrans_IEEEDPAcos((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPAcos_base(__in_base, parm) __mathieeedoubtrans_IEEEDPAcos((__in_base), (DOUBLE)(parm))
 
 static __inline__ DOUBLE
-__mathieeedoubtrans_IEEEDPLog10(struct Library *__base, DOUBLE parm)
+__mathieeedoubtrans_IEEEDPLog10(void *__base, DOUBLE parm)
 {
 	union { DOUBLE d; ULONG u[2]; } _d0_u; _d0_u.d = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u[0];
 	register ULONG _d0_lo __asm("d1") = _d0_u.u[1];
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -314,5 +331,6 @@ __mathieeedoubtrans_IEEEDPLog10(struct Library *__base, DOUBLE parm)
 	{ union { ULONG u[2]; DOUBLE d; } _r; _r.u[0] = _d0; _r.u[1] = _d0_lo; return _r.d; }
 }
 #define IEEEDPLog10(parm) __mathieeedoubtrans_IEEEDPLog10((MATHIEEEDOUBTRANS_BASE_NAME), (DOUBLE)(parm))
+#define __IEEEDPLog10_base(__in_base, parm) __mathieeedoubtrans_IEEEDPLog10((__in_base), (DOUBLE)(parm))
 
 #endif /* INLINE_MATHIEEEDOUBTRANS_H */

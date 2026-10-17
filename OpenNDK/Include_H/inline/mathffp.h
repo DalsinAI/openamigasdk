@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +25,11 @@ struct Library;
 #endif
 
 static __inline__ LONG
-__mathffp_SPFix(struct Library *__base, FLOAT parm)
+__mathffp_SPFix(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -39,12 +40,13 @@ __mathffp_SPFix(struct Library *__base, FLOAT parm)
 	return (LONG)_d0;
 }
 #define SPFix(parm) __mathffp_SPFix((MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPFix_base(__in_base, parm) __mathffp_SPFix((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathffp_SPFlt(struct Library *__base, LONG integer)
+__mathffp_SPFlt(void *__base, LONG integer)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(integer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -55,15 +57,16 @@ __mathffp_SPFlt(struct Library *__base, LONG integer)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPFlt(integer) __mathffp_SPFlt((MATHFFP_BASE_NAME), (LONG)(integer))
+#define __SPFlt_base(__in_base, integer) __mathffp_SPFlt((__in_base), (LONG)(integer))
 
 static __inline__ LONG
-__mathffp_SPCmp(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
+__mathffp_SPCmp(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = leftParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = rightParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -73,13 +76,14 @@ __mathffp_SPCmp(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 	return (LONG)_d0;
 }
 #define SPCmp(leftParm, rightParm) __mathffp_SPCmp((MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPCmp_base(__in_base, leftParm, rightParm) __mathffp_SPCmp((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ LONG
-__mathffp_SPTst(struct Library *__base, FLOAT parm)
+__mathffp_SPTst(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = parm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -90,13 +94,14 @@ __mathffp_SPTst(struct Library *__base, FLOAT parm)
 	return (LONG)_d0;
 }
 #define SPTst(parm) __mathffp_SPTst((MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPTst_base(__in_base, parm) __mathffp_SPTst((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathffp_SPAbs(struct Library *__base, FLOAT parm)
+__mathffp_SPAbs(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -107,13 +112,14 @@ __mathffp_SPAbs(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPAbs(parm) __mathffp_SPAbs((MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPAbs_base(__in_base, parm) __mathffp_SPAbs((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathffp_SPNeg(struct Library *__base, FLOAT parm)
+__mathffp_SPNeg(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -124,15 +130,16 @@ __mathffp_SPNeg(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPNeg(parm) __mathffp_SPNeg((MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPNeg_base(__in_base, parm) __mathffp_SPNeg((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathffp_SPAdd(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
+__mathffp_SPAdd(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = leftParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = rightParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -142,15 +149,16 @@ __mathffp_SPAdd(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPAdd(leftParm, rightParm) __mathffp_SPAdd((MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPAdd_base(__in_base, leftParm, rightParm) __mathffp_SPAdd((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
-__mathffp_SPSub(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
+__mathffp_SPSub(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = leftParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = rightParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
@@ -160,15 +168,16 @@ __mathffp_SPSub(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPSub(leftParm, rightParm) __mathffp_SPSub((MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPSub_base(__in_base, leftParm, rightParm) __mathffp_SPSub((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
-__mathffp_SPMul(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
+__mathffp_SPMul(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = leftParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = rightParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -178,15 +187,16 @@ __mathffp_SPMul(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPMul(leftParm, rightParm) __mathffp_SPMul((MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPMul_base(__in_base, leftParm, rightParm) __mathffp_SPMul((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
-__mathffp_SPDiv(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
+__mathffp_SPDiv(void *__base, FLOAT leftParm, FLOAT rightParm)
 {
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = leftParm;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = rightParm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -196,13 +206,14 @@ __mathffp_SPDiv(struct Library *__base, FLOAT leftParm, FLOAT rightParm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPDiv(leftParm, rightParm) __mathffp_SPDiv((MATHFFP_BASE_NAME), (FLOAT)(leftParm), (FLOAT)(rightParm))
+#define __SPDiv_base(__in_base, leftParm, rightParm) __mathffp_SPDiv((__in_base), (FLOAT)(leftParm), (FLOAT)(rightParm))
 
 static __inline__ FLOAT
-__mathffp_SPFloor(struct Library *__base, FLOAT parm)
+__mathffp_SPFloor(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -213,13 +224,14 @@ __mathffp_SPFloor(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPFloor(parm) __mathffp_SPFloor((MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPFloor_base(__in_base, parm) __mathffp_SPFloor((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathffp_SPCeil(struct Library *__base, FLOAT parm)
+__mathffp_SPCeil(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -230,5 +242,6 @@ __mathffp_SPCeil(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPCeil(parm) __mathffp_SPCeil((MATHFFP_BASE_NAME), (FLOAT)(parm))
+#define __SPCeil_base(__in_base, parm) __mathffp_SPCeil((__in_base), (FLOAT)(parm))
 
 #endif /* INLINE_MATHFFP_H */

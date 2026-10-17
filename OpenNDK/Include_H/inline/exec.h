@@ -15,6 +15,7 @@
 
 struct ExecBase;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct ExecBase;
 #endif
 
 static __inline__ ULONG
-__exec_Supervisor(struct ExecBase *__base, ULONG (*CONST userFunction)())
+__exec_Supervisor(void *__base, ULONG (*CONST userFunction)())
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,13 +39,14 @@ __exec_Supervisor(struct ExecBase *__base, ULONG (*CONST userFunction)())
 	return (ULONG)_d0;
 }
 #define Supervisor(userFunction) __exec_Supervisor((EXEC_BASE_NAME), (ULONG (*CONST )())(userFunction))
+#define __Supervisor_base(__in_base, userFunction) __exec_Supervisor((__in_base), (ULONG (*CONST )())(userFunction))
 
 static __inline__ VOID
-__exec_InitCode(struct ExecBase *__base, ULONG startClass, ULONG version)
+__exec_InitCode(void *__base, ULONG startClass, ULONG version)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(startClass);
 	register ULONG _d1 __asm("d1") = (ULONG)(version);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
@@ -54,14 +56,15 @@ __exec_InitCode(struct ExecBase *__base, ULONG startClass, ULONG version)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitCode(startClass, version) __exec_InitCode((EXEC_BASE_NAME), (ULONG)(startClass), (ULONG)(version))
+#define __InitCode_base(__in_base, startClass, version) __exec_InitCode((__in_base), (ULONG)(startClass), (ULONG)(version))
 
 static __inline__ VOID
-__exec_InitStruct(struct ExecBase *__base, CONST_APTR initTable, APTR memory, ULONG size)
+__exec_InitStruct(void *__base, CONST_APTR initTable, APTR memory, ULONG size)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(initTable);
 	register ULONG _a2 __asm("a2") = (ULONG)(memory);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -71,16 +74,17 @@ __exec_InitStruct(struct ExecBase *__base, CONST_APTR initTable, APTR memory, UL
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitStruct(initTable, memory, size) __exec_InitStruct((EXEC_BASE_NAME), (CONST_APTR)(initTable), (APTR)(memory), (ULONG)(size))
+#define __InitStruct_base(__in_base, initTable, memory, size) __exec_InitStruct((__in_base), (CONST_APTR)(initTable), (APTR)(memory), (ULONG)(size))
 
 static __inline__ struct Library *
-__exec_MakeLibrary(struct ExecBase *__base, CONST_APTR funcInit, CONST_APTR structInit, ULONG (*CONST libInit)(), ULONG dataSize, ULONG segList)
+__exec_MakeLibrary(void *__base, CONST_APTR funcInit, CONST_APTR structInit, ULONG (*CONST libInit)(), ULONG dataSize, ULONG segList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(funcInit);
 	register ULONG _a1 __asm("a1") = (ULONG)(structInit);
 	register ULONG _a2 __asm("a2") = (ULONG)(libInit);
 	register ULONG _d0 __asm("d0") = (ULONG)(dataSize);
 	register ULONG _d1 __asm("d1") = (ULONG)(segList);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -84(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
@@ -88,14 +92,15 @@ __exec_MakeLibrary(struct ExecBase *__base, CONST_APTR funcInit, CONST_APTR stru
 	return (struct Library *)_d0;
 }
 #define MakeLibrary(funcInit, structInit, libInit, dataSize, segList) __exec_MakeLibrary((EXEC_BASE_NAME), (CONST_APTR)(funcInit), (CONST_APTR)(structInit), (ULONG (*CONST )())(libInit), (ULONG)(dataSize), (ULONG)(segList))
+#define __MakeLibrary_base(__in_base, funcInit, structInit, libInit, dataSize, segList) __exec_MakeLibrary((__in_base), (CONST_APTR)(funcInit), (CONST_APTR)(structInit), (ULONG (*CONST )())(libInit), (ULONG)(dataSize), (ULONG)(segList))
 
 static __inline__ VOID
-__exec_MakeFunctions(struct ExecBase *__base, APTR target, CONST_APTR functionArray, ULONG funcDispBase)
+__exec_MakeFunctions(void *__base, APTR target, CONST_APTR functionArray, ULONG funcDispBase)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(target);
 	register ULONG _a1 __asm("a1") = (ULONG)(functionArray);
 	register ULONG _a2 __asm("a2") = (ULONG)(funcDispBase);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -105,12 +110,13 @@ __exec_MakeFunctions(struct ExecBase *__base, APTR target, CONST_APTR functionAr
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define MakeFunctions(target, functionArray, funcDispBase) __exec_MakeFunctions((EXEC_BASE_NAME), (APTR)(target), (CONST_APTR)(functionArray), (ULONG)(funcDispBase))
+#define __MakeFunctions_base(__in_base, target, functionArray, funcDispBase) __exec_MakeFunctions((__in_base), (APTR)(target), (CONST_APTR)(functionArray), (ULONG)(funcDispBase))
 
 static __inline__ struct Resident *
-__exec_FindResident(struct ExecBase *__base, CONST_STRPTR name)
+__exec_FindResident(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -121,13 +127,14 @@ __exec_FindResident(struct ExecBase *__base, CONST_STRPTR name)
 	return (struct Resident *)_d0;
 }
 #define FindResident(name) __exec_FindResident((EXEC_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindResident_base(__in_base, name) __exec_FindResident((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ APTR
-__exec_InitResident(struct ExecBase *__base, CONST struct Resident * resident, ULONG segList)
+__exec_InitResident(void *__base, CONST struct Resident * resident, ULONG segList)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(resident);
 	register ULONG _d1 __asm("d1") = (ULONG)(segList);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -137,12 +144,13 @@ __exec_InitResident(struct ExecBase *__base, CONST struct Resident * resident, U
 	return (APTR)_d0;
 }
 #define InitResident(resident, segList) __exec_InitResident((EXEC_BASE_NAME), (CONST struct Resident *)(resident), (ULONG)(segList))
+#define __InitResident_base(__in_base, resident, segList) __exec_InitResident((__in_base), (CONST struct Resident *)(resident), (ULONG)(segList))
 
 static __inline__ VOID
-__exec_Alert(struct ExecBase *__base, ULONG alertNum)
+__exec_Alert(void *__base, ULONG alertNum)
 {
 	register ULONG _d7 __asm("d7") = (ULONG)(alertNum);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -154,12 +162,13 @@ __exec_Alert(struct ExecBase *__base, ULONG alertNum)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Alert(alertNum) __exec_Alert((EXEC_BASE_NAME), (ULONG)(alertNum))
+#define __Alert_base(__in_base, alertNum) __exec_Alert((__in_base), (ULONG)(alertNum))
 
 static __inline__ VOID
-__exec_Debug(struct ExecBase *__base, ULONG flags)
+__exec_Debug(void *__base, ULONG flags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -170,11 +179,12 @@ __exec_Debug(struct ExecBase *__base, ULONG flags)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Debug(flags) __exec_Debug((EXEC_BASE_NAME), (ULONG)(flags))
+#define __Debug_base(__in_base, flags) __exec_Debug((__in_base), (ULONG)(flags))
 
 static __inline__ VOID
-__exec_Disable(struct ExecBase *__base)
+__exec_Disable(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -186,11 +196,12 @@ __exec_Disable(struct ExecBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Disable() __exec_Disable((EXEC_BASE_NAME))
+#define __Disable_base(__in_base) __exec_Disable((__in_base))
 
 static __inline__ VOID
-__exec_Enable(struct ExecBase *__base)
+__exec_Enable(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -202,11 +213,12 @@ __exec_Enable(struct ExecBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Enable() __exec_Enable((EXEC_BASE_NAME))
+#define __Enable_base(__in_base) __exec_Enable((__in_base))
 
 static __inline__ VOID
-__exec_Forbid(struct ExecBase *__base)
+__exec_Forbid(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -218,11 +230,12 @@ __exec_Forbid(struct ExecBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Forbid() __exec_Forbid((EXEC_BASE_NAME))
+#define __Forbid_base(__in_base) __exec_Forbid((__in_base))
 
 static __inline__ VOID
-__exec_Permit(struct ExecBase *__base)
+__exec_Permit(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -234,13 +247,14 @@ __exec_Permit(struct ExecBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Permit() __exec_Permit((EXEC_BASE_NAME))
+#define __Permit_base(__in_base) __exec_Permit((__in_base))
 
 static __inline__ ULONG
-__exec_SetSR(struct ExecBase *__base, ULONG newSR, ULONG mask)
+__exec_SetSR(void *__base, ULONG newSR, ULONG mask)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(newSR);
 	register ULONG _d1 __asm("d1") = (ULONG)(mask);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
@@ -250,11 +264,12 @@ __exec_SetSR(struct ExecBase *__base, ULONG newSR, ULONG mask)
 	return (ULONG)_d0;
 }
 #define SetSR(newSR, mask) __exec_SetSR((EXEC_BASE_NAME), (ULONG)(newSR), (ULONG)(mask))
+#define __SetSR_base(__in_base, newSR, mask) __exec_SetSR((__in_base), (ULONG)(newSR), (ULONG)(mask))
 
 static __inline__ APTR
-__exec_SuperState(struct ExecBase *__base)
+__exec_SuperState(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -266,12 +281,13 @@ __exec_SuperState(struct ExecBase *__base)
 	return (APTR)_d0;
 }
 #define SuperState() __exec_SuperState((EXEC_BASE_NAME))
+#define __SuperState_base(__in_base) __exec_SuperState((__in_base))
 
 static __inline__ VOID
-__exec_UserState(struct ExecBase *__base, APTR sysStack)
+__exec_UserState(void *__base, APTR sysStack)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(sysStack);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -282,13 +298,14 @@ __exec_UserState(struct ExecBase *__base, APTR sysStack)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UserState(sysStack) __exec_UserState((EXEC_BASE_NAME), (APTR)(sysStack))
+#define __UserState_base(__in_base, sysStack) __exec_UserState((__in_base), (APTR)(sysStack))
 
 static __inline__ struct Interrupt *
-__exec_SetIntVector(struct ExecBase *__base, LONG intNumber, struct Interrupt * interrupt)
+__exec_SetIntVector(void *__base, LONG intNumber, struct Interrupt * interrupt)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(intNumber);
 	register ULONG _a1 __asm("a1") = (ULONG)(interrupt);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
@@ -298,13 +315,14 @@ __exec_SetIntVector(struct ExecBase *__base, LONG intNumber, struct Interrupt * 
 	return (struct Interrupt *)_d0;
 }
 #define SetIntVector(intNumber, interrupt) __exec_SetIntVector((EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define __SetIntVector_base(__in_base, intNumber, interrupt) __exec_SetIntVector((__in_base), (LONG)(intNumber), (struct Interrupt *)(interrupt))
 
 static __inline__ VOID
-__exec_AddIntServer(struct ExecBase *__base, LONG intNumber, struct Interrupt * interrupt)
+__exec_AddIntServer(void *__base, LONG intNumber, struct Interrupt * interrupt)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(intNumber);
 	register ULONG _a1 __asm("a1") = (ULONG)(interrupt);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -168(%/a6)"
@@ -314,13 +332,14 @@ __exec_AddIntServer(struct ExecBase *__base, LONG intNumber, struct Interrupt * 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddIntServer(intNumber, interrupt) __exec_AddIntServer((EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define __AddIntServer_base(__in_base, intNumber, interrupt) __exec_AddIntServer((__in_base), (LONG)(intNumber), (struct Interrupt *)(interrupt))
 
 static __inline__ VOID
-__exec_RemIntServer(struct ExecBase *__base, LONG intNumber, struct Interrupt * interrupt)
+__exec_RemIntServer(void *__base, LONG intNumber, struct Interrupt * interrupt)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(intNumber);
 	register ULONG _a1 __asm("a1") = (ULONG)(interrupt);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -174(%/a6)"
@@ -330,12 +349,13 @@ __exec_RemIntServer(struct ExecBase *__base, LONG intNumber, struct Interrupt * 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemIntServer(intNumber, interrupt) __exec_RemIntServer((EXEC_BASE_NAME), (LONG)(intNumber), (struct Interrupt *)(interrupt))
+#define __RemIntServer_base(__in_base, intNumber, interrupt) __exec_RemIntServer((__in_base), (LONG)(intNumber), (struct Interrupt *)(interrupt))
 
 static __inline__ VOID
-__exec_Cause(struct ExecBase *__base, struct Interrupt * interrupt)
+__exec_Cause(void *__base, struct Interrupt * interrupt)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(interrupt);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -346,13 +366,14 @@ __exec_Cause(struct ExecBase *__base, struct Interrupt * interrupt)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Cause(interrupt) __exec_Cause((EXEC_BASE_NAME), (struct Interrupt *)(interrupt))
+#define __Cause_base(__in_base, interrupt) __exec_Cause((__in_base), (struct Interrupt *)(interrupt))
 
 static __inline__ APTR
-__exec_Allocate(struct ExecBase *__base, struct MemHeader * freeList, ULONG byteSize)
+__exec_Allocate(void *__base, struct MemHeader * freeList, ULONG byteSize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(freeList);
 	register ULONG _d0 __asm("d0") = (ULONG)(byteSize);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -186(%/a6)"
@@ -362,14 +383,15 @@ __exec_Allocate(struct ExecBase *__base, struct MemHeader * freeList, ULONG byte
 	return (APTR)_d0;
 }
 #define Allocate(freeList, byteSize) __exec_Allocate((EXEC_BASE_NAME), (struct MemHeader *)(freeList), (ULONG)(byteSize))
+#define __Allocate_base(__in_base, freeList, byteSize) __exec_Allocate((__in_base), (struct MemHeader *)(freeList), (ULONG)(byteSize))
 
 static __inline__ VOID
-__exec_Deallocate(struct ExecBase *__base, struct MemHeader * freeList, APTR memoryBlock, ULONG byteSize)
+__exec_Deallocate(void *__base, struct MemHeader * freeList, APTR memoryBlock, ULONG byteSize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(freeList);
 	register ULONG _a1 __asm("a1") = (ULONG)(memoryBlock);
 	register ULONG _d0 __asm("d0") = (ULONG)(byteSize);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -192(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -378,13 +400,14 @@ __exec_Deallocate(struct ExecBase *__base, struct MemHeader * freeList, APTR mem
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Deallocate(freeList, memoryBlock, byteSize) __exec_Deallocate((EXEC_BASE_NAME), (struct MemHeader *)(freeList), (APTR)(memoryBlock), (ULONG)(byteSize))
+#define __Deallocate_base(__in_base, freeList, memoryBlock, byteSize) __exec_Deallocate((__in_base), (struct MemHeader *)(freeList), (APTR)(memoryBlock), (ULONG)(byteSize))
 
 static __inline__ APTR
-__exec_AllocMem(struct ExecBase *__base, ULONG byteSize, ULONG requirements)
+__exec_AllocMem(void *__base, ULONG byteSize, ULONG requirements)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(byteSize);
 	register ULONG _d1 __asm("d1") = (ULONG)(requirements);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -198(%/a6)"
@@ -394,13 +417,14 @@ __exec_AllocMem(struct ExecBase *__base, ULONG byteSize, ULONG requirements)
 	return (APTR)_d0;
 }
 #define AllocMem(byteSize, requirements) __exec_AllocMem((EXEC_BASE_NAME), (ULONG)(byteSize), (ULONG)(requirements))
+#define __AllocMem_base(__in_base, byteSize, requirements) __exec_AllocMem((__in_base), (ULONG)(byteSize), (ULONG)(requirements))
 
 static __inline__ APTR
-__exec_AllocAbs(struct ExecBase *__base, ULONG byteSize, APTR location)
+__exec_AllocAbs(void *__base, ULONG byteSize, APTR location)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(byteSize);
 	register ULONG _a1 __asm("a1") = (ULONG)(location);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -204(%/a6)"
@@ -410,13 +434,14 @@ __exec_AllocAbs(struct ExecBase *__base, ULONG byteSize, APTR location)
 	return (APTR)_d0;
 }
 #define AllocAbs(byteSize, location) __exec_AllocAbs((EXEC_BASE_NAME), (ULONG)(byteSize), (APTR)(location))
+#define __AllocAbs_base(__in_base, byteSize, location) __exec_AllocAbs((__in_base), (ULONG)(byteSize), (APTR)(location))
 
 static __inline__ VOID
-__exec_FreeMem(struct ExecBase *__base, APTR memoryBlock, ULONG byteSize)
+__exec_FreeMem(void *__base, APTR memoryBlock, ULONG byteSize)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(memoryBlock);
 	register ULONG _d0 __asm("d0") = (ULONG)(byteSize);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -210(%/a6)"
@@ -426,12 +451,13 @@ __exec_FreeMem(struct ExecBase *__base, APTR memoryBlock, ULONG byteSize)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeMem(memoryBlock, byteSize) __exec_FreeMem((EXEC_BASE_NAME), (APTR)(memoryBlock), (ULONG)(byteSize))
+#define __FreeMem_base(__in_base, memoryBlock, byteSize) __exec_FreeMem((__in_base), (APTR)(memoryBlock), (ULONG)(byteSize))
 
 static __inline__ ULONG
-__exec_AvailMem(struct ExecBase *__base, ULONG requirements)
+__exec_AvailMem(void *__base, ULONG requirements)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(requirements);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -442,12 +468,13 @@ __exec_AvailMem(struct ExecBase *__base, ULONG requirements)
 	return (ULONG)_d0;
 }
 #define AvailMem(requirements) __exec_AvailMem((EXEC_BASE_NAME), (ULONG)(requirements))
+#define __AvailMem_base(__in_base, requirements) __exec_AvailMem((__in_base), (ULONG)(requirements))
 
 static __inline__ struct MemList *
-__exec_AllocEntry(struct ExecBase *__base, struct MemList * entry)
+__exec_AllocEntry(void *__base, struct MemList * entry)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(entry);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -458,12 +485,13 @@ __exec_AllocEntry(struct ExecBase *__base, struct MemList * entry)
 	return (struct MemList *)_d0;
 }
 #define AllocEntry(entry) __exec_AllocEntry((EXEC_BASE_NAME), (struct MemList *)(entry))
+#define __AllocEntry_base(__in_base, entry) __exec_AllocEntry((__in_base), (struct MemList *)(entry))
 
 static __inline__ VOID
-__exec_FreeEntry(struct ExecBase *__base, struct MemList * entry)
+__exec_FreeEntry(void *__base, struct MemList * entry)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(entry);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -474,14 +502,15 @@ __exec_FreeEntry(struct ExecBase *__base, struct MemList * entry)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeEntry(entry) __exec_FreeEntry((EXEC_BASE_NAME), (struct MemList *)(entry))
+#define __FreeEntry_base(__in_base, entry) __exec_FreeEntry((__in_base), (struct MemList *)(entry))
 
 static __inline__ VOID
-__exec_Insert(struct ExecBase *__base, struct List * list, struct Node * node, struct Node * pred)
+__exec_Insert(void *__base, struct List * list, struct Node * node, struct Node * pred)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
 	register ULONG _a1 __asm("a1") = (ULONG)(node);
 	register ULONG _a2 __asm("a2") = (ULONG)(pred);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -234(%/a6)"
@@ -491,15 +520,16 @@ __exec_Insert(struct ExecBase *__base, struct List * list, struct Node * node, s
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Insert(list, node, pred) __exec_Insert((EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node), (struct Node *)(pred))
+#define __Insert_base(__in_base, list, node, pred) __exec_Insert((__in_base), (struct List *)(list), (struct Node *)(node), (struct Node *)(pred))
 
 #define InsertMinNode(...) Insert(__VA_ARGS__)
 
 static __inline__ VOID
-__exec_AddHead(struct ExecBase *__base, struct List * list, struct Node * node)
+__exec_AddHead(void *__base, struct List * list, struct Node * node)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
 	register ULONG _a1 __asm("a1") = (ULONG)(node);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -240(%/a6)"
@@ -509,15 +539,16 @@ __exec_AddHead(struct ExecBase *__base, struct List * list, struct Node * node)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddHead(list, node) __exec_AddHead((EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
+#define __AddHead_base(__in_base, list, node) __exec_AddHead((__in_base), (struct List *)(list), (struct Node *)(node))
 
 #define AddHeadMinList(...) AddHead(__VA_ARGS__)
 
 static __inline__ VOID
-__exec_AddTail(struct ExecBase *__base, struct List * list, struct Node * node)
+__exec_AddTail(void *__base, struct List * list, struct Node * node)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
 	register ULONG _a1 __asm("a1") = (ULONG)(node);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -246(%/a6)"
@@ -527,14 +558,15 @@ __exec_AddTail(struct ExecBase *__base, struct List * list, struct Node * node)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddTail(list, node) __exec_AddTail((EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
+#define __AddTail_base(__in_base, list, node) __exec_AddTail((__in_base), (struct List *)(list), (struct Node *)(node))
 
 #define AddTailMinList(...) AddTail(__VA_ARGS__)
 
 static __inline__ VOID
-__exec_Remove(struct ExecBase *__base, struct Node * node)
+__exec_Remove(void *__base, struct Node * node)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(node);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -545,14 +577,15 @@ __exec_Remove(struct ExecBase *__base, struct Node * node)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Remove(node) __exec_Remove((EXEC_BASE_NAME), (struct Node *)(node))
+#define __Remove_base(__in_base, node) __exec_Remove((__in_base), (struct Node *)(node))
 
 #define RemoveMinNode(...) Remove(__VA_ARGS__)
 
 static __inline__ struct Node *
-__exec_RemHead(struct ExecBase *__base, struct List * list)
+__exec_RemHead(void *__base, struct List * list)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -563,14 +596,15 @@ __exec_RemHead(struct ExecBase *__base, struct List * list)
 	return (struct Node *)_d0;
 }
 #define RemHead(list) __exec_RemHead((EXEC_BASE_NAME), (struct List *)(list))
+#define __RemHead_base(__in_base, list) __exec_RemHead((__in_base), (struct List *)(list))
 
 #define RemHeadMinList(...) RemHead(__VA_ARGS__)
 
 static __inline__ struct Node *
-__exec_RemTail(struct ExecBase *__base, struct List * list)
+__exec_RemTail(void *__base, struct List * list)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -581,15 +615,16 @@ __exec_RemTail(struct ExecBase *__base, struct List * list)
 	return (struct Node *)_d0;
 }
 #define RemTail(list) __exec_RemTail((EXEC_BASE_NAME), (struct List *)(list))
+#define __RemTail_base(__in_base, list) __exec_RemTail((__in_base), (struct List *)(list))
 
 #define RemTailMinList(...) RemTail(__VA_ARGS__)
 
 static __inline__ VOID
-__exec_Enqueue(struct ExecBase *__base, struct List * list, struct Node * node)
+__exec_Enqueue(void *__base, struct List * list, struct Node * node)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
 	register ULONG _a1 __asm("a1") = (ULONG)(node);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -270(%/a6)"
@@ -599,13 +634,14 @@ __exec_Enqueue(struct ExecBase *__base, struct List * list, struct Node * node)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Enqueue(list, node) __exec_Enqueue((EXEC_BASE_NAME), (struct List *)(list), (struct Node *)(node))
+#define __Enqueue_base(__in_base, list, node) __exec_Enqueue((__in_base), (struct List *)(list), (struct Node *)(node))
 
 static __inline__ struct Node *
-__exec_FindName(struct ExecBase *__base, struct List * list, CONST_STRPTR name)
+__exec_FindName(void *__base, struct List * list, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(list);
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -276(%/a6)"
@@ -615,14 +651,15 @@ __exec_FindName(struct ExecBase *__base, struct List * list, CONST_STRPTR name)
 	return (struct Node *)_d0;
 }
 #define FindName(list, name) __exec_FindName((EXEC_BASE_NAME), (struct List *)(list), (CONST_STRPTR)(name))
+#define __FindName_base(__in_base, list, name) __exec_FindName((__in_base), (struct List *)(list), (CONST_STRPTR)(name))
 
 static __inline__ APTR
-__exec_AddTask(struct ExecBase *__base, struct Task * task, APTR initPC, APTR finalPC)
+__exec_AddTask(void *__base, struct Task * task, APTR initPC, APTR finalPC)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(task);
 	register ULONG _a2 __asm("a2") = (ULONG)(initPC);
 	register ULONG _a3 __asm("a3") = (ULONG)(finalPC);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -633,12 +670,13 @@ __exec_AddTask(struct ExecBase *__base, struct Task * task, APTR initPC, APTR fi
 	return (APTR)_d0;
 }
 #define AddTask(task, initPC, finalPC) __exec_AddTask((EXEC_BASE_NAME), (struct Task *)(task), (APTR)(initPC), (APTR)(finalPC))
+#define __AddTask_base(__in_base, task, initPC, finalPC) __exec_AddTask((__in_base), (struct Task *)(task), (APTR)(initPC), (APTR)(finalPC))
 
 static __inline__ VOID
-__exec_RemTask(struct ExecBase *__base, struct Task * task)
+__exec_RemTask(void *__base, struct Task * task)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(task);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -649,12 +687,13 @@ __exec_RemTask(struct ExecBase *__base, struct Task * task)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemTask(task) __exec_RemTask((EXEC_BASE_NAME), (struct Task *)(task))
+#define __RemTask_base(__in_base, task) __exec_RemTask((__in_base), (struct Task *)(task))
 
 static __inline__ struct Task *
-__exec_FindTask(struct ExecBase *__base, CONST_STRPTR name)
+__exec_FindTask(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -665,13 +704,14 @@ __exec_FindTask(struct ExecBase *__base, CONST_STRPTR name)
 	return (struct Task *)_d0;
 }
 #define FindTask(name) __exec_FindTask((EXEC_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindTask_base(__in_base, name) __exec_FindTask((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BYTE
-__exec_SetTaskPri(struct ExecBase *__base, struct Task * task, LONG priority)
+__exec_SetTaskPri(void *__base, struct Task * task, LONG priority)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(task);
 	register ULONG _d0 __asm("d0") = (ULONG)(priority);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -300(%/a6)"
@@ -681,13 +721,14 @@ __exec_SetTaskPri(struct ExecBase *__base, struct Task * task, LONG priority)
 	return (BYTE)_d0;
 }
 #define SetTaskPri(task, priority) __exec_SetTaskPri((EXEC_BASE_NAME), (struct Task *)(task), (LONG)(priority))
+#define __SetTaskPri_base(__in_base, task, priority) __exec_SetTaskPri((__in_base), (struct Task *)(task), (LONG)(priority))
 
 static __inline__ ULONG
-__exec_SetSignal(struct ExecBase *__base, ULONG newSignals, ULONG signalSet)
+__exec_SetSignal(void *__base, ULONG newSignals, ULONG signalSet)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(newSignals);
 	register ULONG _d1 __asm("d1") = (ULONG)(signalSet);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -306(%/a6)"
@@ -697,13 +738,14 @@ __exec_SetSignal(struct ExecBase *__base, ULONG newSignals, ULONG signalSet)
 	return (ULONG)_d0;
 }
 #define SetSignal(newSignals, signalSet) __exec_SetSignal((EXEC_BASE_NAME), (ULONG)(newSignals), (ULONG)(signalSet))
+#define __SetSignal_base(__in_base, newSignals, signalSet) __exec_SetSignal((__in_base), (ULONG)(newSignals), (ULONG)(signalSet))
 
 static __inline__ ULONG
-__exec_SetExcept(struct ExecBase *__base, ULONG newSignals, ULONG signalSet)
+__exec_SetExcept(void *__base, ULONG newSignals, ULONG signalSet)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(newSignals);
 	register ULONG _d1 __asm("d1") = (ULONG)(signalSet);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -312(%/a6)"
@@ -713,12 +755,13 @@ __exec_SetExcept(struct ExecBase *__base, ULONG newSignals, ULONG signalSet)
 	return (ULONG)_d0;
 }
 #define SetExcept(newSignals, signalSet) __exec_SetExcept((EXEC_BASE_NAME), (ULONG)(newSignals), (ULONG)(signalSet))
+#define __SetExcept_base(__in_base, newSignals, signalSet) __exec_SetExcept((__in_base), (ULONG)(newSignals), (ULONG)(signalSet))
 
 static __inline__ ULONG
-__exec_Wait(struct ExecBase *__base, ULONG signalSet)
+__exec_Wait(void *__base, ULONG signalSet)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(signalSet);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -729,13 +772,14 @@ __exec_Wait(struct ExecBase *__base, ULONG signalSet)
 	return (ULONG)_d0;
 }
 #define Wait(signalSet) __exec_Wait((EXEC_BASE_NAME), (ULONG)(signalSet))
+#define __Wait_base(__in_base, signalSet) __exec_Wait((__in_base), (ULONG)(signalSet))
 
 static __inline__ VOID
-__exec_Signal(struct ExecBase *__base, struct Task * task, ULONG signalSet)
+__exec_Signal(void *__base, struct Task * task, ULONG signalSet)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(task);
 	register ULONG _d0 __asm("d0") = (ULONG)(signalSet);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -324(%/a6)"
@@ -745,12 +789,13 @@ __exec_Signal(struct ExecBase *__base, struct Task * task, ULONG signalSet)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Signal(task, signalSet) __exec_Signal((EXEC_BASE_NAME), (struct Task *)(task), (ULONG)(signalSet))
+#define __Signal_base(__in_base, task, signalSet) __exec_Signal((__in_base), (struct Task *)(task), (ULONG)(signalSet))
 
 static __inline__ BYTE
-__exec_AllocSignal(struct ExecBase *__base, BYTE signalNum)
+__exec_AllocSignal(void *__base, BYTE signalNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(signalNum);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -761,12 +806,13 @@ __exec_AllocSignal(struct ExecBase *__base, BYTE signalNum)
 	return (BYTE)_d0;
 }
 #define AllocSignal(signalNum) __exec_AllocSignal((EXEC_BASE_NAME), (BYTE)(signalNum))
+#define __AllocSignal_base(__in_base, signalNum) __exec_AllocSignal((__in_base), (BYTE)(signalNum))
 
 static __inline__ VOID
-__exec_FreeSignal(struct ExecBase *__base, BYTE signalNum)
+__exec_FreeSignal(void *__base, BYTE signalNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(signalNum);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -777,12 +823,13 @@ __exec_FreeSignal(struct ExecBase *__base, BYTE signalNum)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeSignal(signalNum) __exec_FreeSignal((EXEC_BASE_NAME), (BYTE)(signalNum))
+#define __FreeSignal_base(__in_base, signalNum) __exec_FreeSignal((__in_base), (BYTE)(signalNum))
 
 static __inline__ LONG
-__exec_AllocTrap(struct ExecBase *__base, LONG trapNum)
+__exec_AllocTrap(void *__base, LONG trapNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(trapNum);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -793,12 +840,13 @@ __exec_AllocTrap(struct ExecBase *__base, LONG trapNum)
 	return (LONG)_d0;
 }
 #define AllocTrap(trapNum) __exec_AllocTrap((EXEC_BASE_NAME), (LONG)(trapNum))
+#define __AllocTrap_base(__in_base, trapNum) __exec_AllocTrap((__in_base), (LONG)(trapNum))
 
 static __inline__ VOID
-__exec_FreeTrap(struct ExecBase *__base, LONG trapNum)
+__exec_FreeTrap(void *__base, LONG trapNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(trapNum);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -809,12 +857,13 @@ __exec_FreeTrap(struct ExecBase *__base, LONG trapNum)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeTrap(trapNum) __exec_FreeTrap((EXEC_BASE_NAME), (LONG)(trapNum))
+#define __FreeTrap_base(__in_base, trapNum) __exec_FreeTrap((__in_base), (LONG)(trapNum))
 
 static __inline__ VOID
-__exec_AddPort(struct ExecBase *__base, struct MsgPort * port)
+__exec_AddPort(void *__base, struct MsgPort * port)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(port);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -825,12 +874,13 @@ __exec_AddPort(struct ExecBase *__base, struct MsgPort * port)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddPort(port) __exec_AddPort((EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __AddPort_base(__in_base, port) __exec_AddPort((__in_base), (struct MsgPort *)(port))
 
 static __inline__ VOID
-__exec_RemPort(struct ExecBase *__base, struct MsgPort * port)
+__exec_RemPort(void *__base, struct MsgPort * port)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(port);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -841,13 +891,14 @@ __exec_RemPort(struct ExecBase *__base, struct MsgPort * port)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemPort(port) __exec_RemPort((EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __RemPort_base(__in_base, port) __exec_RemPort((__in_base), (struct MsgPort *)(port))
 
 static __inline__ VOID
-__exec_PutMsg(struct ExecBase *__base, struct MsgPort * port, struct Message * message)
+__exec_PutMsg(void *__base, struct MsgPort * port, struct Message * message)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(port);
 	register ULONG _a1 __asm("a1") = (ULONG)(message);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -366(%/a6)"
@@ -857,12 +908,13 @@ __exec_PutMsg(struct ExecBase *__base, struct MsgPort * port, struct Message * m
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define PutMsg(port, message) __exec_PutMsg((EXEC_BASE_NAME), (struct MsgPort *)(port), (struct Message *)(message))
+#define __PutMsg_base(__in_base, port, message) __exec_PutMsg((__in_base), (struct MsgPort *)(port), (struct Message *)(message))
 
 static __inline__ struct Message *
-__exec_GetMsg(struct ExecBase *__base, struct MsgPort * port)
+__exec_GetMsg(void *__base, struct MsgPort * port)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(port);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -873,12 +925,13 @@ __exec_GetMsg(struct ExecBase *__base, struct MsgPort * port)
 	return (struct Message *)_d0;
 }
 #define GetMsg(port) __exec_GetMsg((EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __GetMsg_base(__in_base, port) __exec_GetMsg((__in_base), (struct MsgPort *)(port))
 
 static __inline__ VOID
-__exec_ReplyMsg(struct ExecBase *__base, struct Message * message)
+__exec_ReplyMsg(void *__base, struct Message * message)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(message);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -889,12 +942,13 @@ __exec_ReplyMsg(struct ExecBase *__base, struct Message * message)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReplyMsg(message) __exec_ReplyMsg((EXEC_BASE_NAME), (struct Message *)(message))
+#define __ReplyMsg_base(__in_base, message) __exec_ReplyMsg((__in_base), (struct Message *)(message))
 
 static __inline__ struct Message *
-__exec_WaitPort(struct ExecBase *__base, struct MsgPort * port)
+__exec_WaitPort(void *__base, struct MsgPort * port)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(port);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -905,12 +959,13 @@ __exec_WaitPort(struct ExecBase *__base, struct MsgPort * port)
 	return (struct Message *)_d0;
 }
 #define WaitPort(port) __exec_WaitPort((EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __WaitPort_base(__in_base, port) __exec_WaitPort((__in_base), (struct MsgPort *)(port))
 
 static __inline__ struct MsgPort *
-__exec_FindPort(struct ExecBase *__base, CONST_STRPTR name)
+__exec_FindPort(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -921,12 +976,13 @@ __exec_FindPort(struct ExecBase *__base, CONST_STRPTR name)
 	return (struct MsgPort *)_d0;
 }
 #define FindPort(name) __exec_FindPort((EXEC_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindPort_base(__in_base, name) __exec_FindPort((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ VOID
-__exec_AddLibrary(struct ExecBase *__base, struct Library * library)
+__exec_AddLibrary(void *__base, struct Library * library)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(library);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -937,12 +993,13 @@ __exec_AddLibrary(struct ExecBase *__base, struct Library * library)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddLibrary(library) __exec_AddLibrary((EXEC_BASE_NAME), (struct Library *)(library))
+#define __AddLibrary_base(__in_base, library) __exec_AddLibrary((__in_base), (struct Library *)(library))
 
 static __inline__ VOID
-__exec_RemLibrary(struct ExecBase *__base, struct Library * library)
+__exec_RemLibrary(void *__base, struct Library * library)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(library);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -953,12 +1010,13 @@ __exec_RemLibrary(struct ExecBase *__base, struct Library * library)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemLibrary(library) __exec_RemLibrary((EXEC_BASE_NAME), (struct Library *)(library))
+#define __RemLibrary_base(__in_base, library) __exec_RemLibrary((__in_base), (struct Library *)(library))
 
 static __inline__ struct Library *
-__exec_OldOpenLibrary(struct ExecBase *__base, CONST_STRPTR libName)
+__exec_OldOpenLibrary(void *__base, CONST_STRPTR libName)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(libName);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -969,12 +1027,13 @@ __exec_OldOpenLibrary(struct ExecBase *__base, CONST_STRPTR libName)
 	return (struct Library *)_d0;
 }
 #define OldOpenLibrary(libName) __exec_OldOpenLibrary((EXEC_BASE_NAME), (CONST_STRPTR)(libName))
+#define __OldOpenLibrary_base(__in_base, libName) __exec_OldOpenLibrary((__in_base), (CONST_STRPTR)(libName))
 
 static __inline__ VOID
-__exec_CloseLibrary(struct ExecBase *__base, struct Library * library)
+__exec_CloseLibrary(void *__base, struct Library * library)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(library);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -985,14 +1044,15 @@ __exec_CloseLibrary(struct ExecBase *__base, struct Library * library)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseLibrary(library) __exec_CloseLibrary((EXEC_BASE_NAME), (struct Library *)(library))
+#define __CloseLibrary_base(__in_base, library) __exec_CloseLibrary((__in_base), (struct Library *)(library))
 
 static __inline__ APTR
-__exec_SetFunction(struct ExecBase *__base, struct Library * library, LONG funcOffset, ULONG (*CONST newFunction)())
+__exec_SetFunction(void *__base, struct Library * library, LONG funcOffset, ULONG (*CONST newFunction)())
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(library);
 	register ULONG _a0 __asm("a0") = (ULONG)(funcOffset);
 	register ULONG _d0 __asm("d0") = (ULONG)(newFunction);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -420(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1001,12 +1061,13 @@ __exec_SetFunction(struct ExecBase *__base, struct Library * library, LONG funcO
 	return (APTR)_d0;
 }
 #define SetFunction(library, funcOffset, newFunction) __exec_SetFunction((EXEC_BASE_NAME), (struct Library *)(library), (LONG)(funcOffset), (ULONG (*CONST )())(newFunction))
+#define __SetFunction_base(__in_base, library, funcOffset, newFunction) __exec_SetFunction((__in_base), (struct Library *)(library), (LONG)(funcOffset), (ULONG (*CONST )())(newFunction))
 
 static __inline__ VOID
-__exec_SumLibrary(struct ExecBase *__base, struct Library * library)
+__exec_SumLibrary(void *__base, struct Library * library)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(library);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1017,12 +1078,13 @@ __exec_SumLibrary(struct ExecBase *__base, struct Library * library)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SumLibrary(library) __exec_SumLibrary((EXEC_BASE_NAME), (struct Library *)(library))
+#define __SumLibrary_base(__in_base, library) __exec_SumLibrary((__in_base), (struct Library *)(library))
 
 static __inline__ VOID
-__exec_AddDevice(struct ExecBase *__base, struct Device * device)
+__exec_AddDevice(void *__base, struct Device * device)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(device);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1033,12 +1095,13 @@ __exec_AddDevice(struct ExecBase *__base, struct Device * device)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddDevice(device) __exec_AddDevice((EXEC_BASE_NAME), (struct Device *)(device))
+#define __AddDevice_base(__in_base, device) __exec_AddDevice((__in_base), (struct Device *)(device))
 
 static __inline__ VOID
-__exec_RemDevice(struct ExecBase *__base, struct Device * device)
+__exec_RemDevice(void *__base, struct Device * device)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(device);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1049,15 +1112,16 @@ __exec_RemDevice(struct ExecBase *__base, struct Device * device)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemDevice(device) __exec_RemDevice((EXEC_BASE_NAME), (struct Device *)(device))
+#define __RemDevice_base(__in_base, device) __exec_RemDevice((__in_base), (struct Device *)(device))
 
 static __inline__ BYTE
-__exec_OpenDevice(struct ExecBase *__base, CONST_STRPTR devName, ULONG unit, struct IORequest * ioRequest, ULONG flags)
+__exec_OpenDevice(void *__base, CONST_STRPTR devName, ULONG unit, struct IORequest * ioRequest, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(devName);
 	register ULONG _d0 __asm("d0") = (ULONG)(unit);
 	register ULONG _a1 __asm("a1") = (ULONG)(ioRequest);
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -444(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -1065,12 +1129,13 @@ __exec_OpenDevice(struct ExecBase *__base, CONST_STRPTR devName, ULONG unit, str
 	return (BYTE)_d0;
 }
 #define OpenDevice(devName, unit, ioRequest, flags) __exec_OpenDevice((EXEC_BASE_NAME), (CONST_STRPTR)(devName), (ULONG)(unit), (struct IORequest *)(ioRequest), (ULONG)(flags))
+#define __OpenDevice_base(__in_base, devName, unit, ioRequest, flags) __exec_OpenDevice((__in_base), (CONST_STRPTR)(devName), (ULONG)(unit), (struct IORequest *)(ioRequest), (ULONG)(flags))
 
 static __inline__ VOID
-__exec_CloseDevice(struct ExecBase *__base, struct IORequest * ioRequest)
+__exec_CloseDevice(void *__base, struct IORequest * ioRequest)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(ioRequest);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1081,12 +1146,13 @@ __exec_CloseDevice(struct ExecBase *__base, struct IORequest * ioRequest)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseDevice(ioRequest) __exec_CloseDevice((EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __CloseDevice_base(__in_base, ioRequest) __exec_CloseDevice((__in_base), (struct IORequest *)(ioRequest))
 
 static __inline__ BYTE
-__exec_DoIO(struct ExecBase *__base, struct IORequest * ioRequest)
+__exec_DoIO(void *__base, struct IORequest * ioRequest)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(ioRequest);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1097,12 +1163,13 @@ __exec_DoIO(struct ExecBase *__base, struct IORequest * ioRequest)
 	return (BYTE)_d0;
 }
 #define DoIO(ioRequest) __exec_DoIO((EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __DoIO_base(__in_base, ioRequest) __exec_DoIO((__in_base), (struct IORequest *)(ioRequest))
 
 static __inline__ VOID
-__exec_SendIO(struct ExecBase *__base, struct IORequest * ioRequest)
+__exec_SendIO(void *__base, struct IORequest * ioRequest)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(ioRequest);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1113,12 +1180,13 @@ __exec_SendIO(struct ExecBase *__base, struct IORequest * ioRequest)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SendIO(ioRequest) __exec_SendIO((EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __SendIO_base(__in_base, ioRequest) __exec_SendIO((__in_base), (struct IORequest *)(ioRequest))
 
 static __inline__ struct IORequest *
-__exec_CheckIO(struct ExecBase *__base, struct IORequest * ioRequest)
+__exec_CheckIO(void *__base, struct IORequest * ioRequest)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(ioRequest);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1129,12 +1197,13 @@ __exec_CheckIO(struct ExecBase *__base, struct IORequest * ioRequest)
 	return (struct IORequest *)_d0;
 }
 #define CheckIO(ioRequest) __exec_CheckIO((EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __CheckIO_base(__in_base, ioRequest) __exec_CheckIO((__in_base), (struct IORequest *)(ioRequest))
 
 static __inline__ BYTE
-__exec_WaitIO(struct ExecBase *__base, struct IORequest * ioRequest)
+__exec_WaitIO(void *__base, struct IORequest * ioRequest)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(ioRequest);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1145,12 +1214,13 @@ __exec_WaitIO(struct ExecBase *__base, struct IORequest * ioRequest)
 	return (BYTE)_d0;
 }
 #define WaitIO(ioRequest) __exec_WaitIO((EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __WaitIO_base(__in_base, ioRequest) __exec_WaitIO((__in_base), (struct IORequest *)(ioRequest))
 
 static __inline__ VOID
-__exec_AbortIO(struct ExecBase *__base, struct IORequest * ioRequest)
+__exec_AbortIO(void *__base, struct IORequest * ioRequest)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(ioRequest);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1161,12 +1231,13 @@ __exec_AbortIO(struct ExecBase *__base, struct IORequest * ioRequest)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AbortIO(ioRequest) __exec_AbortIO((EXEC_BASE_NAME), (struct IORequest *)(ioRequest))
+#define __AbortIO_base(__in_base, ioRequest) __exec_AbortIO((__in_base), (struct IORequest *)(ioRequest))
 
 static __inline__ VOID
-__exec_AddResource(struct ExecBase *__base, APTR resource)
+__exec_AddResource(void *__base, APTR resource)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(resource);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1177,12 +1248,13 @@ __exec_AddResource(struct ExecBase *__base, APTR resource)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddResource(resource) __exec_AddResource((EXEC_BASE_NAME), (APTR)(resource))
+#define __AddResource_base(__in_base, resource) __exec_AddResource((__in_base), (APTR)(resource))
 
 static __inline__ VOID
-__exec_RemResource(struct ExecBase *__base, APTR resource)
+__exec_RemResource(void *__base, APTR resource)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(resource);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1193,12 +1265,13 @@ __exec_RemResource(struct ExecBase *__base, APTR resource)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemResource(resource) __exec_RemResource((EXEC_BASE_NAME), (APTR)(resource))
+#define __RemResource_base(__in_base, resource) __exec_RemResource((__in_base), (APTR)(resource))
 
 static __inline__ APTR
-__exec_OpenResource(struct ExecBase *__base, CONST_STRPTR resName)
+__exec_OpenResource(void *__base, CONST_STRPTR resName)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(resName);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1209,15 +1282,16 @@ __exec_OpenResource(struct ExecBase *__base, CONST_STRPTR resName)
 	return (APTR)_d0;
 }
 #define OpenResource(resName) __exec_OpenResource((EXEC_BASE_NAME), (CONST_STRPTR)(resName))
+#define __OpenResource_base(__in_base, resName) __exec_OpenResource((__in_base), (CONST_STRPTR)(resName))
 
 static __inline__ APTR
-__exec_RawDoFmt(struct ExecBase *__base, CONST_STRPTR formatString, CONST_APTR dataStream, VOID (*CONST putChProc)(), APTR putChData)
+__exec_RawDoFmt(void *__base, CONST_STRPTR formatString, CONST_APTR dataStream, VOID (*CONST putChProc)(), APTR putChData)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(formatString);
 	register ULONG _a1 __asm("a1") = (ULONG)(dataStream);
 	register ULONG _a2 __asm("a2") = (ULONG)(putChProc);
 	register ULONG _a3 __asm("a3") = (ULONG)(putChData);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -522(%/a6)"
@@ -1227,11 +1301,12 @@ __exec_RawDoFmt(struct ExecBase *__base, CONST_STRPTR formatString, CONST_APTR d
 	return (APTR)_d0;
 }
 #define RawDoFmt(formatString, dataStream, putChProc, putChData) __exec_RawDoFmt((EXEC_BASE_NAME), (CONST_STRPTR)(formatString), (CONST_APTR)(dataStream), (VOID (*CONST )())(putChProc), (APTR)(putChData))
+#define __RawDoFmt_base(__in_base, formatString, dataStream, putChProc, putChData) __exec_RawDoFmt((__in_base), (CONST_STRPTR)(formatString), (CONST_APTR)(dataStream), (VOID (*CONST )())(putChProc), (APTR)(putChData))
 
 static __inline__ ULONG
-__exec_GetCC(struct ExecBase *__base)
+__exec_GetCC(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1243,12 +1318,13 @@ __exec_GetCC(struct ExecBase *__base)
 	return (ULONG)_d0;
 }
 #define GetCC() __exec_GetCC((EXEC_BASE_NAME))
+#define __GetCC_base(__in_base) __exec_GetCC((__in_base))
 
 static __inline__ ULONG
-__exec_TypeOfMem(struct ExecBase *__base, CONST_APTR address)
+__exec_TypeOfMem(void *__base, CONST_APTR address)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(address);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1259,13 +1335,14 @@ __exec_TypeOfMem(struct ExecBase *__base, CONST_APTR address)
 	return (ULONG)_d0;
 }
 #define TypeOfMem(address) __exec_TypeOfMem((EXEC_BASE_NAME), (CONST_APTR)(address))
+#define __TypeOfMem_base(__in_base, address) __exec_TypeOfMem((__in_base), (CONST_APTR)(address))
 
 static __inline__ ULONG
-__exec_Procure(struct ExecBase *__base, struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg)
+__exec_Procure(void *__base, struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
 	register ULONG _a1 __asm("a1") = (ULONG)(bidMsg);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -540(%/a6)"
@@ -1275,13 +1352,14 @@ __exec_Procure(struct ExecBase *__base, struct SignalSemaphore * sigSem, struct 
 	return (ULONG)_d0;
 }
 #define Procure(sigSem, bidMsg) __exec_Procure((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
+#define __Procure_base(__in_base, sigSem, bidMsg) __exec_Procure((__in_base), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
 
 static __inline__ VOID
-__exec_Vacate(struct ExecBase *__base, struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg)
+__exec_Vacate(void *__base, struct SignalSemaphore * sigSem, struct SemaphoreMessage * bidMsg)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
 	register ULONG _a1 __asm("a1") = (ULONG)(bidMsg);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -546(%/a6)"
@@ -1291,13 +1369,14 @@ __exec_Vacate(struct ExecBase *__base, struct SignalSemaphore * sigSem, struct S
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Vacate(sigSem, bidMsg) __exec_Vacate((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
+#define __Vacate_base(__in_base, sigSem, bidMsg) __exec_Vacate((__in_base), (struct SignalSemaphore *)(sigSem), (struct SemaphoreMessage *)(bidMsg))
 
 static __inline__ struct Library *
-__exec_OpenLibrary(struct ExecBase *__base, CONST_STRPTR libName, ULONG version)
+__exec_OpenLibrary(void *__base, CONST_STRPTR libName, ULONG version)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(libName);
 	register ULONG _d0 __asm("d0") = (ULONG)(version);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -552(%/a6)"
@@ -1307,12 +1386,13 @@ __exec_OpenLibrary(struct ExecBase *__base, CONST_STRPTR libName, ULONG version)
 	return (struct Library *)_d0;
 }
 #define OpenLibrary(libName, version) __exec_OpenLibrary((EXEC_BASE_NAME), (CONST_STRPTR)(libName), (ULONG)(version))
+#define __OpenLibrary_base(__in_base, libName, version) __exec_OpenLibrary((__in_base), (CONST_STRPTR)(libName), (ULONG)(version))
 
 static __inline__ VOID
-__exec_InitSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
+__exec_InitSemaphore(void *__base, struct SignalSemaphore * sigSem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1323,12 +1403,13 @@ __exec_InitSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitSemaphore(sigSem) __exec_InitSemaphore((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __InitSemaphore_base(__in_base, sigSem) __exec_InitSemaphore((__in_base), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
-__exec_ObtainSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
+__exec_ObtainSemaphore(void *__base, struct SignalSemaphore * sigSem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1339,12 +1420,13 @@ __exec_ObtainSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ObtainSemaphore(sigSem) __exec_ObtainSemaphore((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __ObtainSemaphore_base(__in_base, sigSem) __exec_ObtainSemaphore((__in_base), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
-__exec_ReleaseSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
+__exec_ReleaseSemaphore(void *__base, struct SignalSemaphore * sigSem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1355,12 +1437,13 @@ __exec_ReleaseSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleaseSemaphore(sigSem) __exec_ReleaseSemaphore((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __ReleaseSemaphore_base(__in_base, sigSem) __exec_ReleaseSemaphore((__in_base), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ ULONG
-__exec_AttemptSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
+__exec_AttemptSemaphore(void *__base, struct SignalSemaphore * sigSem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1371,12 +1454,13 @@ __exec_AttemptSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem
 	return (ULONG)_d0;
 }
 #define AttemptSemaphore(sigSem) __exec_AttemptSemaphore((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __AttemptSemaphore_base(__in_base, sigSem) __exec_AttemptSemaphore((__in_base), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
-__exec_ObtainSemaphoreList(struct ExecBase *__base, struct List * sigSem)
+__exec_ObtainSemaphoreList(void *__base, struct List * sigSem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1387,12 +1471,13 @@ __exec_ObtainSemaphoreList(struct ExecBase *__base, struct List * sigSem)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ObtainSemaphoreList(sigSem) __exec_ObtainSemaphoreList((EXEC_BASE_NAME), (struct List *)(sigSem))
+#define __ObtainSemaphoreList_base(__in_base, sigSem) __exec_ObtainSemaphoreList((__in_base), (struct List *)(sigSem))
 
 static __inline__ VOID
-__exec_ReleaseSemaphoreList(struct ExecBase *__base, struct List * sigSem)
+__exec_ReleaseSemaphoreList(void *__base, struct List * sigSem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1403,12 +1488,13 @@ __exec_ReleaseSemaphoreList(struct ExecBase *__base, struct List * sigSem)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleaseSemaphoreList(sigSem) __exec_ReleaseSemaphoreList((EXEC_BASE_NAME), (struct List *)(sigSem))
+#define __ReleaseSemaphoreList_base(__in_base, sigSem) __exec_ReleaseSemaphoreList((__in_base), (struct List *)(sigSem))
 
 static __inline__ struct SignalSemaphore *
-__exec_FindSemaphore(struct ExecBase *__base, CONST_STRPTR name)
+__exec_FindSemaphore(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1419,12 +1505,13 @@ __exec_FindSemaphore(struct ExecBase *__base, CONST_STRPTR name)
 	return (struct SignalSemaphore *)_d0;
 }
 #define FindSemaphore(name) __exec_FindSemaphore((EXEC_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindSemaphore_base(__in_base, name) __exec_FindSemaphore((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ VOID
-__exec_AddSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
+__exec_AddSemaphore(void *__base, struct SignalSemaphore * sigSem)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1435,12 +1522,13 @@ __exec_AddSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddSemaphore(sigSem) __exec_AddSemaphore((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __AddSemaphore_base(__in_base, sigSem) __exec_AddSemaphore((__in_base), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
-__exec_RemSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
+__exec_RemSemaphore(void *__base, struct SignalSemaphore * sigSem)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1451,11 +1539,12 @@ __exec_RemSemaphore(struct ExecBase *__base, struct SignalSemaphore * sigSem)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemSemaphore(sigSem) __exec_RemSemaphore((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __RemSemaphore_base(__in_base, sigSem) __exec_RemSemaphore((__in_base), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ ULONG
-__exec_SumKickData(struct ExecBase *__base)
+__exec_SumKickData(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1467,16 +1556,17 @@ __exec_SumKickData(struct ExecBase *__base)
 	return (ULONG)_d0;
 }
 #define SumKickData() __exec_SumKickData((EXEC_BASE_NAME))
+#define __SumKickData_base(__in_base) __exec_SumKickData((__in_base))
 
 static __inline__ VOID
-__exec_AddMemList(struct ExecBase *__base, ULONG size, ULONG attributes, LONG pri, APTR base, CONST_STRPTR name)
+__exec_AddMemList(void *__base, ULONG size, ULONG attributes, LONG pri, APTR base, CONST_STRPTR name)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
 	register ULONG _d1 __asm("d1") = (ULONG)(attributes);
 	register ULONG _d2 __asm("d2") = (ULONG)(pri);
 	register ULONG _a0 __asm("a0") = (ULONG)(base);
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -618(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6), "r" (_d2)
@@ -1484,14 +1574,15 @@ __exec_AddMemList(struct ExecBase *__base, ULONG size, ULONG attributes, LONG pr
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddMemList(size, attributes, pri, base, name) __exec_AddMemList((EXEC_BASE_NAME), (ULONG)(size), (ULONG)(attributes), (LONG)(pri), (APTR)(base), (CONST_STRPTR)(name))
+#define __AddMemList_base(__in_base, size, attributes, pri, base, name) __exec_AddMemList((__in_base), (ULONG)(size), (ULONG)(attributes), (LONG)(pri), (APTR)(base), (CONST_STRPTR)(name))
 
 static __inline__ VOID
-__exec_CopyMem(struct ExecBase *__base, CONST_APTR source, APTR dest, ULONG size)
+__exec_CopyMem(void *__base, CONST_APTR source, APTR dest, ULONG size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(source);
 	register ULONG _a1 __asm("a1") = (ULONG)(dest);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -624(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1500,14 +1591,15 @@ __exec_CopyMem(struct ExecBase *__base, CONST_APTR source, APTR dest, ULONG size
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CopyMem(source, dest, size) __exec_CopyMem((EXEC_BASE_NAME), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
+#define __CopyMem_base(__in_base, source, dest, size) __exec_CopyMem((__in_base), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
 
 static __inline__ VOID
-__exec_CopyMemQuick(struct ExecBase *__base, CONST_APTR source, APTR dest, ULONG size)
+__exec_CopyMemQuick(void *__base, CONST_APTR source, APTR dest, ULONG size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(source);
 	register ULONG _a1 __asm("a1") = (ULONG)(dest);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -630(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1516,11 +1608,12 @@ __exec_CopyMemQuick(struct ExecBase *__base, CONST_APTR source, APTR dest, ULONG
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CopyMemQuick(source, dest, size) __exec_CopyMemQuick((EXEC_BASE_NAME), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
+#define __CopyMemQuick_base(__in_base, source, dest, size) __exec_CopyMemQuick((__in_base), (CONST_APTR)(source), (APTR)(dest), (ULONG)(size))
 
 static __inline__ VOID
-__exec_CacheClearU(struct ExecBase *__base)
+__exec_CacheClearU(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1532,14 +1625,15 @@ __exec_CacheClearU(struct ExecBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CacheClearU() __exec_CacheClearU((EXEC_BASE_NAME))
+#define __CacheClearU_base(__in_base) __exec_CacheClearU((__in_base))
 
 static __inline__ VOID
-__exec_CacheClearE(struct ExecBase *__base, APTR address, ULONG length, ULONG caches)
+__exec_CacheClearE(void *__base, APTR address, ULONG length, ULONG caches)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(address);
 	register ULONG _d0 __asm("d0") = (ULONG)(length);
 	register ULONG _d1 __asm("d1") = (ULONG)(caches);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -642(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -1548,13 +1642,14 @@ __exec_CacheClearE(struct ExecBase *__base, APTR address, ULONG length, ULONG ca
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CacheClearE(address, length, caches) __exec_CacheClearE((EXEC_BASE_NAME), (APTR)(address), (ULONG)(length), (ULONG)(caches))
+#define __CacheClearE_base(__in_base, address, length, caches) __exec_CacheClearE((__in_base), (APTR)(address), (ULONG)(length), (ULONG)(caches))
 
 static __inline__ ULONG
-__exec_CacheControl(struct ExecBase *__base, ULONG cacheBits, ULONG cacheMask)
+__exec_CacheControl(void *__base, ULONG cacheBits, ULONG cacheMask)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(cacheBits);
 	register ULONG _d1 __asm("d1") = (ULONG)(cacheMask);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -648(%/a6)"
@@ -1564,13 +1659,14 @@ __exec_CacheControl(struct ExecBase *__base, ULONG cacheBits, ULONG cacheMask)
 	return (ULONG)_d0;
 }
 #define CacheControl(cacheBits, cacheMask) __exec_CacheControl((EXEC_BASE_NAME), (ULONG)(cacheBits), (ULONG)(cacheMask))
+#define __CacheControl_base(__in_base, cacheBits, cacheMask) __exec_CacheControl((__in_base), (ULONG)(cacheBits), (ULONG)(cacheMask))
 
 static __inline__ APTR
-__exec_CreateIORequest(struct ExecBase *__base, CONST struct MsgPort * port, ULONG size)
+__exec_CreateIORequest(void *__base, CONST struct MsgPort * port, ULONG size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(port);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -654(%/a6)"
@@ -1580,12 +1676,13 @@ __exec_CreateIORequest(struct ExecBase *__base, CONST struct MsgPort * port, ULO
 	return (APTR)_d0;
 }
 #define CreateIORequest(port, size) __exec_CreateIORequest((EXEC_BASE_NAME), (CONST struct MsgPort *)(port), (ULONG)(size))
+#define __CreateIORequest_base(__in_base, port, size) __exec_CreateIORequest((__in_base), (CONST struct MsgPort *)(port), (ULONG)(size))
 
 static __inline__ VOID
-__exec_DeleteIORequest(struct ExecBase *__base, APTR iorequest)
+__exec_DeleteIORequest(void *__base, APTR iorequest)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iorequest);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1596,11 +1693,12 @@ __exec_DeleteIORequest(struct ExecBase *__base, APTR iorequest)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeleteIORequest(iorequest) __exec_DeleteIORequest((EXEC_BASE_NAME), (APTR)(iorequest))
+#define __DeleteIORequest_base(__in_base, iorequest) __exec_DeleteIORequest((__in_base), (APTR)(iorequest))
 
 static __inline__ struct MsgPort *
-__exec_CreateMsgPort(struct ExecBase *__base)
+__exec_CreateMsgPort(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1612,12 +1710,13 @@ __exec_CreateMsgPort(struct ExecBase *__base)
 	return (struct MsgPort *)_d0;
 }
 #define CreateMsgPort() __exec_CreateMsgPort((EXEC_BASE_NAME))
+#define __CreateMsgPort_base(__in_base) __exec_CreateMsgPort((__in_base))
 
 static __inline__ VOID
-__exec_DeleteMsgPort(struct ExecBase *__base, struct MsgPort * port)
+__exec_DeleteMsgPort(void *__base, struct MsgPort * port)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(port);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1628,12 +1727,13 @@ __exec_DeleteMsgPort(struct ExecBase *__base, struct MsgPort * port)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeleteMsgPort(port) __exec_DeleteMsgPort((EXEC_BASE_NAME), (struct MsgPort *)(port))
+#define __DeleteMsgPort_base(__in_base, port) __exec_DeleteMsgPort((__in_base), (struct MsgPort *)(port))
 
 static __inline__ VOID
-__exec_ObtainSemaphoreShared(struct ExecBase *__base, struct SignalSemaphore * sigSem)
+__exec_ObtainSemaphoreShared(void *__base, struct SignalSemaphore * sigSem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1644,13 +1744,14 @@ __exec_ObtainSemaphoreShared(struct ExecBase *__base, struct SignalSemaphore * s
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ObtainSemaphoreShared(sigSem) __exec_ObtainSemaphoreShared((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __ObtainSemaphoreShared_base(__in_base, sigSem) __exec_ObtainSemaphoreShared((__in_base), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ APTR
-__exec_AllocVec(struct ExecBase *__base, ULONG byteSize, ULONG requirements)
+__exec_AllocVec(void *__base, ULONG byteSize, ULONG requirements)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(byteSize);
 	register ULONG _d1 __asm("d1") = (ULONG)(requirements);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -684(%/a6)"
@@ -1660,12 +1761,13 @@ __exec_AllocVec(struct ExecBase *__base, ULONG byteSize, ULONG requirements)
 	return (APTR)_d0;
 }
 #define AllocVec(byteSize, requirements) __exec_AllocVec((EXEC_BASE_NAME), (ULONG)(byteSize), (ULONG)(requirements))
+#define __AllocVec_base(__in_base, byteSize, requirements) __exec_AllocVec((__in_base), (ULONG)(byteSize), (ULONG)(requirements))
 
 static __inline__ VOID
-__exec_FreeVec(struct ExecBase *__base, APTR memoryBlock)
+__exec_FreeVec(void *__base, APTR memoryBlock)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(memoryBlock);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1676,14 +1778,15 @@ __exec_FreeVec(struct ExecBase *__base, APTR memoryBlock)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeVec(memoryBlock) __exec_FreeVec((EXEC_BASE_NAME), (APTR)(memoryBlock))
+#define __FreeVec_base(__in_base, memoryBlock) __exec_FreeVec((__in_base), (APTR)(memoryBlock))
 
 static __inline__ APTR
-__exec_CreatePool(struct ExecBase *__base, ULONG requirements, ULONG puddleSize, ULONG threshSize)
+__exec_CreatePool(void *__base, ULONG requirements, ULONG puddleSize, ULONG threshSize)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(requirements);
 	register ULONG _d1 __asm("d1") = (ULONG)(puddleSize);
 	register ULONG _d2 __asm("d2") = (ULONG)(threshSize);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -696(%/a6)"
@@ -1693,12 +1796,13 @@ __exec_CreatePool(struct ExecBase *__base, ULONG requirements, ULONG puddleSize,
 	return (APTR)_d0;
 }
 #define CreatePool(requirements, puddleSize, threshSize) __exec_CreatePool((EXEC_BASE_NAME), (ULONG)(requirements), (ULONG)(puddleSize), (ULONG)(threshSize))
+#define __CreatePool_base(__in_base, requirements, puddleSize, threshSize) __exec_CreatePool((__in_base), (ULONG)(requirements), (ULONG)(puddleSize), (ULONG)(threshSize))
 
 static __inline__ VOID
-__exec_DeletePool(struct ExecBase *__base, APTR poolHeader)
+__exec_DeletePool(void *__base, APTR poolHeader)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(poolHeader);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1709,13 +1813,14 @@ __exec_DeletePool(struct ExecBase *__base, APTR poolHeader)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeletePool(poolHeader) __exec_DeletePool((EXEC_BASE_NAME), (APTR)(poolHeader))
+#define __DeletePool_base(__in_base, poolHeader) __exec_DeletePool((__in_base), (APTR)(poolHeader))
 
 static __inline__ APTR
-__exec_AllocPooled(struct ExecBase *__base, APTR poolHeader, ULONG memSize)
+__exec_AllocPooled(void *__base, APTR poolHeader, ULONG memSize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(poolHeader);
 	register ULONG _d0 __asm("d0") = (ULONG)(memSize);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -708(%/a6)"
@@ -1725,14 +1830,15 @@ __exec_AllocPooled(struct ExecBase *__base, APTR poolHeader, ULONG memSize)
 	return (APTR)_d0;
 }
 #define AllocPooled(poolHeader, memSize) __exec_AllocPooled((EXEC_BASE_NAME), (APTR)(poolHeader), (ULONG)(memSize))
+#define __AllocPooled_base(__in_base, poolHeader, memSize) __exec_AllocPooled((__in_base), (APTR)(poolHeader), (ULONG)(memSize))
 
 static __inline__ VOID
-__exec_FreePooled(struct ExecBase *__base, APTR poolHeader, APTR memory, ULONG memSize)
+__exec_FreePooled(void *__base, APTR poolHeader, APTR memory, ULONG memSize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(poolHeader);
 	register ULONG _a1 __asm("a1") = (ULONG)(memory);
 	register ULONG _d0 __asm("d0") = (ULONG)(memSize);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -714(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1741,12 +1847,13 @@ __exec_FreePooled(struct ExecBase *__base, APTR poolHeader, APTR memory, ULONG m
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreePooled(poolHeader, memory, memSize) __exec_FreePooled((EXEC_BASE_NAME), (APTR)(poolHeader), (APTR)(memory), (ULONG)(memSize))
+#define __FreePooled_base(__in_base, poolHeader, memory, memSize) __exec_FreePooled((__in_base), (APTR)(poolHeader), (APTR)(memory), (ULONG)(memSize))
 
 static __inline__ ULONG
-__exec_AttemptSemaphoreShared(struct ExecBase *__base, struct SignalSemaphore * sigSem)
+__exec_AttemptSemaphoreShared(void *__base, struct SignalSemaphore * sigSem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sigSem);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1757,11 +1864,12 @@ __exec_AttemptSemaphoreShared(struct ExecBase *__base, struct SignalSemaphore * 
 	return (ULONG)_d0;
 }
 #define AttemptSemaphoreShared(sigSem) __exec_AttemptSemaphoreShared((EXEC_BASE_NAME), (struct SignalSemaphore *)(sigSem))
+#define __AttemptSemaphoreShared_base(__in_base, sigSem) __exec_AttemptSemaphoreShared((__in_base), (struct SignalSemaphore *)(sigSem))
 
 static __inline__ VOID
-__exec_ColdReboot(struct ExecBase *__base)
+__exec_ColdReboot(void *__base)
 {
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1773,12 +1881,13 @@ __exec_ColdReboot(struct ExecBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ColdReboot() __exec_ColdReboot((EXEC_BASE_NAME))
+#define __ColdReboot_base(__in_base) __exec_ColdReboot((__in_base))
 
 static __inline__ VOID
-__exec_StackSwap(struct ExecBase *__base, struct StackSwapStruct * newStack)
+__exec_StackSwap(void *__base, struct StackSwapStruct * newStack)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(newStack);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1789,14 +1898,15 @@ __exec_StackSwap(struct ExecBase *__base, struct StackSwapStruct * newStack)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define StackSwap(newStack) __exec_StackSwap((EXEC_BASE_NAME), (struct StackSwapStruct *)(newStack))
+#define __StackSwap_base(__in_base, newStack) __exec_StackSwap((__in_base), (struct StackSwapStruct *)(newStack))
 
 static __inline__ APTR
-__exec_CachePreDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length, ULONG flags)
+__exec_CachePreDMA(void *__base, CONST_APTR address, ULONG * length, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(address);
 	register ULONG _a1 __asm("a1") = (ULONG)(length);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -762(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1805,14 +1915,15 @@ __exec_CachePreDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length, 
 	return (APTR)_d0;
 }
 #define CachePreDMA(address, length, flags) __exec_CachePreDMA((EXEC_BASE_NAME), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
+#define __CachePreDMA_base(__in_base, address, length, flags) __exec_CachePreDMA((__in_base), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
 
 static __inline__ VOID
-__exec_CachePostDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length, ULONG flags)
+__exec_CachePostDMA(void *__base, CONST_APTR address, ULONG * length, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(address);
 	register ULONG _a1 __asm("a1") = (ULONG)(length);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -768(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1821,12 +1932,13 @@ __exec_CachePostDMA(struct ExecBase *__base, CONST_APTR address, ULONG * length,
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CachePostDMA(address, length, flags) __exec_CachePostDMA((EXEC_BASE_NAME), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
+#define __CachePostDMA_base(__in_base, address, length, flags) __exec_CachePostDMA((__in_base), (CONST_APTR)(address), (ULONG *)(length), (ULONG)(flags))
 
 static __inline__ VOID
-__exec_AddMemHandler(struct ExecBase *__base, struct Interrupt * memhand)
+__exec_AddMemHandler(void *__base, struct Interrupt * memhand)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(memhand);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1837,12 +1949,13 @@ __exec_AddMemHandler(struct ExecBase *__base, struct Interrupt * memhand)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddMemHandler(memhand) __exec_AddMemHandler((EXEC_BASE_NAME), (struct Interrupt *)(memhand))
+#define __AddMemHandler_base(__in_base, memhand) __exec_AddMemHandler((__in_base), (struct Interrupt *)(memhand))
 
 static __inline__ VOID
-__exec_RemMemHandler(struct ExecBase *__base, struct Interrupt * memhand)
+__exec_RemMemHandler(void *__base, struct Interrupt * memhand)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(memhand);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1853,12 +1966,13 @@ __exec_RemMemHandler(struct ExecBase *__base, struct Interrupt * memhand)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemMemHandler(memhand) __exec_RemMemHandler((EXEC_BASE_NAME), (struct Interrupt *)(memhand))
+#define __RemMemHandler_base(__in_base, memhand) __exec_RemMemHandler((__in_base), (struct Interrupt *)(memhand))
 
 static __inline__ ULONG
-__exec_ObtainQuickVector(struct ExecBase *__base, APTR interruptCode)
+__exec_ObtainQuickVector(void *__base, APTR interruptCode)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(interruptCode);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1869,12 +1983,13 @@ __exec_ObtainQuickVector(struct ExecBase *__base, APTR interruptCode)
 	return (ULONG)_d0;
 }
 #define ObtainQuickVector(interruptCode) __exec_ObtainQuickVector((EXEC_BASE_NAME), (APTR)(interruptCode))
+#define __ObtainQuickVector_base(__in_base, interruptCode) __exec_ObtainQuickVector((__in_base), (APTR)(interruptCode))
 
 static __inline__ VOID
-__exec_NewMinList(struct ExecBase *__base, struct MinList * minlist)
+__exec_NewMinList(void *__base, struct MinList * minlist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(minlist);
-	register struct ExecBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1885,5 +2000,6 @@ __exec_NewMinList(struct ExecBase *__base, struct MinList * minlist)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define NewMinList(minlist) __exec_NewMinList((EXEC_BASE_NAME), (struct MinList *)(minlist))
+#define __NewMinList_base(__in_base, minlist) __exec_NewMinList((__in_base), (struct MinList *)(minlist))
 
 #endif /* INLINE_EXEC_H */

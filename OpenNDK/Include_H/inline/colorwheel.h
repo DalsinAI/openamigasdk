@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +25,11 @@ struct Library;
 #endif
 
 static __inline__ VOID
-__colorwheel_ConvertHSBToRGB(struct Library *__base, struct ColorWheelHSB * hsb, struct ColorWheelRGB * rgb)
+__colorwheel_ConvertHSBToRGB(void *__base, struct ColorWheelHSB * hsb, struct ColorWheelRGB * rgb)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(hsb);
 	register ULONG _a1 __asm("a1") = (ULONG)(rgb);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
@@ -38,13 +39,14 @@ __colorwheel_ConvertHSBToRGB(struct Library *__base, struct ColorWheelHSB * hsb,
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ConvertHSBToRGB(hsb, rgb) __colorwheel_ConvertHSBToRGB((COLORWHEEL_BASE_NAME), (struct ColorWheelHSB *)(hsb), (struct ColorWheelRGB *)(rgb))
+#define __ConvertHSBToRGB_base(__in_base, hsb, rgb) __colorwheel_ConvertHSBToRGB((__in_base), (struct ColorWheelHSB *)(hsb), (struct ColorWheelRGB *)(rgb))
 
 static __inline__ VOID
-__colorwheel_ConvertRGBToHSB(struct Library *__base, struct ColorWheelRGB * rgb, struct ColorWheelHSB * hsb)
+__colorwheel_ConvertRGBToHSB(void *__base, struct ColorWheelRGB * rgb, struct ColorWheelHSB * hsb)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rgb);
 	register ULONG _a1 __asm("a1") = (ULONG)(hsb);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
@@ -54,5 +56,6 @@ __colorwheel_ConvertRGBToHSB(struct Library *__base, struct ColorWheelRGB * rgb,
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ConvertRGBToHSB(rgb, hsb) __colorwheel_ConvertRGBToHSB((COLORWHEEL_BASE_NAME), (struct ColorWheelRGB *)(rgb), (struct ColorWheelHSB *)(hsb))
+#define __ConvertRGBToHSB_base(__in_base, rgb, hsb) __colorwheel_ConvertRGBToHSB((__in_base), (struct ColorWheelRGB *)(rgb), (struct ColorWheelHSB *)(hsb))
 
 #endif /* INLINE_COLORWHEEL_H */

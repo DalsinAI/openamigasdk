@@ -19,7 +19,7 @@ struct ExtendedNode
     UBYTE        xln_Subsystem;
     UBYTE        xln_Subtype;
     LONG         xln_Library;	/* the GfxBase that made it */
-    LONG       (*xln_Init)();
+    LONG       (* __ASM__ xln_Init) __CLIB_PROTOTYPE((__REG__(a0, struct ExtendedNode *), __REG__(d0, UWORD)));
 };
 
 /* xln_Subsystem */

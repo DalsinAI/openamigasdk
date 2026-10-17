@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +25,11 @@ struct Library;
 #endif
 
 static __inline__ UBYTE *
-__misc_AllocMiscResource(struct Library *__base, ULONG unitNum, CONST_STRPTR name)
+__misc_AllocMiscResource(void *__base, ULONG unitNum, CONST_STRPTR name)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNum);
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -6(%/a6)"
@@ -38,12 +39,13 @@ __misc_AllocMiscResource(struct Library *__base, ULONG unitNum, CONST_STRPTR nam
 	return (UBYTE *)_d0;
 }
 #define AllocMiscResource(unitNum, name) __misc_AllocMiscResource((MISC_BASE_NAME), (ULONG)(unitNum), (CONST_STRPTR)(name))
+#define __AllocMiscResource_base(__in_base, unitNum, name) __misc_AllocMiscResource((__in_base), (ULONG)(unitNum), (CONST_STRPTR)(name))
 
 static __inline__ VOID
-__misc_FreeMiscResource(struct Library *__base, ULONG unitNum)
+__misc_FreeMiscResource(void *__base, ULONG unitNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNum);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -54,5 +56,6 @@ __misc_FreeMiscResource(struct Library *__base, ULONG unitNum)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeMiscResource(unitNum) __misc_FreeMiscResource((MISC_BASE_NAME), (ULONG)(unitNum))
+#define __FreeMiscResource_base(__in_base, unitNum) __misc_FreeMiscResource((__in_base), (ULONG)(unitNum))
 
 #endif /* INLINE_MISC_H */

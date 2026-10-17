@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Library;
 #endif
 
 static __inline__ struct IFFHandle *
-__iffparse_AllocIFF(struct Library *__base)
+__iffparse_AllocIFF(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,13 +39,14 @@ __iffparse_AllocIFF(struct Library *__base)
 	return (struct IFFHandle *)_d0;
 }
 #define AllocIFF() __iffparse_AllocIFF((IFFPARSE_BASE_NAME))
+#define __AllocIFF_base(__in_base) __iffparse_AllocIFF((__in_base))
 
 static __inline__ LONG
-__iffparse_OpenIFF(struct Library *__base, struct IFFHandle * iff, LONG rwMode)
+__iffparse_OpenIFF(void *__base, struct IFFHandle * iff, LONG rwMode)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(rwMode);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
@@ -54,13 +56,14 @@ __iffparse_OpenIFF(struct Library *__base, struct IFFHandle * iff, LONG rwMode)
 	return (LONG)_d0;
 }
 #define OpenIFF(iff, rwMode) __iffparse_OpenIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(rwMode))
+#define __OpenIFF_base(__in_base, iff, rwMode) __iffparse_OpenIFF((__in_base), (struct IFFHandle *)(iff), (LONG)(rwMode))
 
 static __inline__ LONG
-__iffparse_ParseIFF(struct Library *__base, struct IFFHandle * iff, LONG control)
+__iffparse_ParseIFF(void *__base, struct IFFHandle * iff, LONG control)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(control);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -70,12 +73,13 @@ __iffparse_ParseIFF(struct Library *__base, struct IFFHandle * iff, LONG control
 	return (LONG)_d0;
 }
 #define ParseIFF(iff, control) __iffparse_ParseIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(control))
+#define __ParseIFF_base(__in_base, iff, control) __iffparse_ParseIFF((__in_base), (struct IFFHandle *)(iff), (LONG)(control))
 
 static __inline__ VOID
-__iffparse_CloseIFF(struct Library *__base, struct IFFHandle * iff)
+__iffparse_CloseIFF(void *__base, struct IFFHandle * iff)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -86,12 +90,13 @@ __iffparse_CloseIFF(struct Library *__base, struct IFFHandle * iff)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseIFF(iff) __iffparse_CloseIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
+#define __CloseIFF_base(__in_base, iff) __iffparse_CloseIFF((__in_base), (struct IFFHandle *)(iff))
 
 static __inline__ VOID
-__iffparse_FreeIFF(struct Library *__base, struct IFFHandle * iff)
+__iffparse_FreeIFF(void *__base, struct IFFHandle * iff)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -102,14 +107,15 @@ __iffparse_FreeIFF(struct Library *__base, struct IFFHandle * iff)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeIFF(iff) __iffparse_FreeIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
+#define __FreeIFF_base(__in_base, iff) __iffparse_FreeIFF((__in_base), (struct IFFHandle *)(iff))
 
 static __inline__ LONG
-__iffparse_ReadChunkBytes(struct Library *__base, struct IFFHandle * iff, APTR buf, LONG numBytes)
+__iffparse_ReadChunkBytes(void *__base, struct IFFHandle * iff, APTR buf, LONG numBytes)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(buf);
 	register ULONG _d0 __asm("d0") = (ULONG)(numBytes);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -118,14 +124,15 @@ __iffparse_ReadChunkBytes(struct Library *__base, struct IFFHandle * iff, APTR b
 	return (LONG)_d0;
 }
 #define ReadChunkBytes(iff, buf, numBytes) __iffparse_ReadChunkBytes((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (APTR)(buf), (LONG)(numBytes))
+#define __ReadChunkBytes_base(__in_base, iff, buf, numBytes) __iffparse_ReadChunkBytes((__in_base), (struct IFFHandle *)(iff), (APTR)(buf), (LONG)(numBytes))
 
 static __inline__ LONG
-__iffparse_WriteChunkBytes(struct Library *__base, struct IFFHandle * iff, CONST_APTR buf, LONG numBytes)
+__iffparse_WriteChunkBytes(void *__base, struct IFFHandle * iff, CONST_APTR buf, LONG numBytes)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(buf);
 	register ULONG _d0 __asm("d0") = (ULONG)(numBytes);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -134,15 +141,16 @@ __iffparse_WriteChunkBytes(struct Library *__base, struct IFFHandle * iff, CONST
 	return (LONG)_d0;
 }
 #define WriteChunkBytes(iff, buf, numBytes) __iffparse_WriteChunkBytes((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST_APTR)(buf), (LONG)(numBytes))
+#define __WriteChunkBytes_base(__in_base, iff, buf, numBytes) __iffparse_WriteChunkBytes((__in_base), (struct IFFHandle *)(iff), (CONST_APTR)(buf), (LONG)(numBytes))
 
 static __inline__ LONG
-__iffparse_ReadChunkRecords(struct Library *__base, struct IFFHandle * iff, APTR buf, LONG bytesPerRecord, LONG numRecords)
+__iffparse_ReadChunkRecords(void *__base, struct IFFHandle * iff, APTR buf, LONG bytesPerRecord, LONG numRecords)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(buf);
 	register ULONG _d0 __asm("d0") = (ULONG)(bytesPerRecord);
 	register ULONG _d1 __asm("d1") = (ULONG)(numRecords);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -72(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -150,15 +158,16 @@ __iffparse_ReadChunkRecords(struct Library *__base, struct IFFHandle * iff, APTR
 	return (LONG)_d0;
 }
 #define ReadChunkRecords(iff, buf, bytesPerRecord, numRecords) __iffparse_ReadChunkRecords((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (APTR)(buf), (LONG)(bytesPerRecord), (LONG)(numRecords))
+#define __ReadChunkRecords_base(__in_base, iff, buf, bytesPerRecord, numRecords) __iffparse_ReadChunkRecords((__in_base), (struct IFFHandle *)(iff), (APTR)(buf), (LONG)(bytesPerRecord), (LONG)(numRecords))
 
 static __inline__ LONG
-__iffparse_WriteChunkRecords(struct Library *__base, struct IFFHandle * iff, CONST_APTR buf, LONG bytesPerRecord, LONG numRecords)
+__iffparse_WriteChunkRecords(void *__base, struct IFFHandle * iff, CONST_APTR buf, LONG bytesPerRecord, LONG numRecords)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(buf);
 	register ULONG _d0 __asm("d0") = (ULONG)(bytesPerRecord);
 	register ULONG _d1 __asm("d1") = (ULONG)(numRecords);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -78(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -166,15 +175,16 @@ __iffparse_WriteChunkRecords(struct Library *__base, struct IFFHandle * iff, CON
 	return (LONG)_d0;
 }
 #define WriteChunkRecords(iff, buf, bytesPerRecord, numRecords) __iffparse_WriteChunkRecords((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST_APTR)(buf), (LONG)(bytesPerRecord), (LONG)(numRecords))
+#define __WriteChunkRecords_base(__in_base, iff, buf, bytesPerRecord, numRecords) __iffparse_WriteChunkRecords((__in_base), (struct IFFHandle *)(iff), (CONST_APTR)(buf), (LONG)(bytesPerRecord), (LONG)(numRecords))
 
 static __inline__ LONG
-__iffparse_PushChunk(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id, LONG size)
+__iffparse_PushChunk(void *__base, struct IFFHandle * iff, LONG type, LONG id, LONG size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
 	register ULONG _d2 __asm("d2") = (ULONG)(size);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -183,12 +193,13 @@ __iffparse_PushChunk(struct Library *__base, struct IFFHandle * iff, LONG type, 
 	return (LONG)_d0;
 }
 #define PushChunk(iff, type, id, size) __iffparse_PushChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(size))
+#define __PushChunk_base(__in_base, iff, type, id, size) __iffparse_PushChunk((__in_base), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(size))
 
 static __inline__ LONG
-__iffparse_PopChunk(struct Library *__base, struct IFFHandle * iff)
+__iffparse_PopChunk(void *__base, struct IFFHandle * iff)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -199,9 +210,10 @@ __iffparse_PopChunk(struct Library *__base, struct IFFHandle * iff)
 	return (LONG)_d0;
 }
 #define PopChunk(iff) __iffparse_PopChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
+#define __PopChunk_base(__in_base, iff) __iffparse_PopChunk((__in_base), (struct IFFHandle *)(iff))
 
 static __inline__ LONG
-__iffparse_EntryHandler(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id, LONG position, struct Hook * handler, APTR object)
+__iffparse_EntryHandler(void *__base, struct IFFHandle * iff, LONG type, LONG id, LONG position, struct Hook * handler, APTR object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
@@ -209,7 +221,7 @@ __iffparse_EntryHandler(struct Library *__base, struct IFFHandle * iff, LONG typ
 	register ULONG _d2 __asm("d2") = (ULONG)(position);
 	register ULONG _a1 __asm("a1") = (ULONG)(handler);
 	register ULONG _a2 __asm("a2") = (ULONG)(object);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -102(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2)
@@ -217,9 +229,10 @@ __iffparse_EntryHandler(struct Library *__base, struct IFFHandle * iff, LONG typ
 	return (LONG)_d0;
 }
 #define EntryHandler(iff, type, id, position, handler, object) __iffparse_EntryHandler((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(position), (struct Hook *)(handler), (APTR)(object))
+#define __EntryHandler_base(__in_base, iff, type, id, position, handler, object) __iffparse_EntryHandler((__in_base), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(position), (struct Hook *)(handler), (APTR)(object))
 
 static __inline__ LONG
-__iffparse_ExitHandler(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id, LONG position, struct Hook * handler, APTR object)
+__iffparse_ExitHandler(void *__base, struct IFFHandle * iff, LONG type, LONG id, LONG position, struct Hook * handler, APTR object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
@@ -227,7 +240,7 @@ __iffparse_ExitHandler(struct Library *__base, struct IFFHandle * iff, LONG type
 	register ULONG _d2 __asm("d2") = (ULONG)(position);
 	register ULONG _a1 __asm("a1") = (ULONG)(handler);
 	register ULONG _a2 __asm("a2") = (ULONG)(object);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -108(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2)
@@ -235,14 +248,15 @@ __iffparse_ExitHandler(struct Library *__base, struct IFFHandle * iff, LONG type
 	return (LONG)_d0;
 }
 #define ExitHandler(iff, type, id, position, handler, object) __iffparse_ExitHandler((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(position), (struct Hook *)(handler), (APTR)(object))
+#define __ExitHandler_base(__in_base, iff, type, id, position, handler, object) __iffparse_ExitHandler((__in_base), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(position), (struct Hook *)(handler), (APTR)(object))
 
 static __inline__ LONG
-__iffparse_PropChunk(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id)
+__iffparse_PropChunk(void *__base, struct IFFHandle * iff, LONG type, LONG id)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -251,14 +265,15 @@ __iffparse_PropChunk(struct Library *__base, struct IFFHandle * iff, LONG type, 
 	return (LONG)_d0;
 }
 #define PropChunk(iff, type, id) __iffparse_PropChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
+#define __PropChunk_base(__in_base, iff, type, id) __iffparse_PropChunk((__in_base), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ LONG
-__iffparse_PropChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
+__iffparse_PropChunks(void *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(propArray);
 	register ULONG _d0 __asm("d0") = (ULONG)(numPairs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -267,14 +282,15 @@ __iffparse_PropChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG
 	return (LONG)_d0;
 }
 #define PropChunks(iff, propArray, numPairs) __iffparse_PropChunks((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
+#define __PropChunks_base(__in_base, iff, propArray, numPairs) __iffparse_PropChunks((__in_base), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
 
 static __inline__ LONG
-__iffparse_StopChunk(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id)
+__iffparse_StopChunk(void *__base, struct IFFHandle * iff, LONG type, LONG id)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -283,14 +299,15 @@ __iffparse_StopChunk(struct Library *__base, struct IFFHandle * iff, LONG type, 
 	return (LONG)_d0;
 }
 #define StopChunk(iff, type, id) __iffparse_StopChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
+#define __StopChunk_base(__in_base, iff, type, id) __iffparse_StopChunk((__in_base), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ LONG
-__iffparse_StopChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
+__iffparse_StopChunks(void *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(propArray);
 	register ULONG _d0 __asm("d0") = (ULONG)(numPairs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -299,14 +316,15 @@ __iffparse_StopChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG
 	return (LONG)_d0;
 }
 #define StopChunks(iff, propArray, numPairs) __iffparse_StopChunks((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
+#define __StopChunks_base(__in_base, iff, propArray, numPairs) __iffparse_StopChunks((__in_base), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
 
 static __inline__ LONG
-__iffparse_CollectionChunk(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id)
+__iffparse_CollectionChunk(void *__base, struct IFFHandle * iff, LONG type, LONG id)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -138(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -315,14 +333,15 @@ __iffparse_CollectionChunk(struct Library *__base, struct IFFHandle * iff, LONG 
 	return (LONG)_d0;
 }
 #define CollectionChunk(iff, type, id) __iffparse_CollectionChunk((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
+#define __CollectionChunk_base(__in_base, iff, type, id) __iffparse_CollectionChunk((__in_base), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ LONG
-__iffparse_CollectionChunks(struct Library *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
+__iffparse_CollectionChunks(void *__base, struct IFFHandle * iff, CONST LONG * propArray, LONG numPairs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(propArray);
 	register ULONG _d0 __asm("d0") = (ULONG)(numPairs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -331,14 +350,15 @@ __iffparse_CollectionChunks(struct Library *__base, struct IFFHandle * iff, CONS
 	return (LONG)_d0;
 }
 #define CollectionChunks(iff, propArray, numPairs) __iffparse_CollectionChunks((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
+#define __CollectionChunks_base(__in_base, iff, propArray, numPairs) __iffparse_CollectionChunks((__in_base), (struct IFFHandle *)(iff), (CONST LONG *)(propArray), (LONG)(numPairs))
 
 static __inline__ LONG
-__iffparse_StopOnExit(struct Library *__base, struct IFFHandle * iff, LONG type, LONG id)
+__iffparse_StopOnExit(void *__base, struct IFFHandle * iff, LONG type, LONG id)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -150(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -347,14 +367,15 @@ __iffparse_StopOnExit(struct Library *__base, struct IFFHandle * iff, LONG type,
 	return (LONG)_d0;
 }
 #define StopOnExit(iff, type, id) __iffparse_StopOnExit((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
+#define __StopOnExit_base(__in_base, iff, type, id) __iffparse_StopOnExit((__in_base), (struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ struct StoredProperty *
-__iffparse_FindProp(struct Library *__base, CONST struct IFFHandle * iff, LONG type, LONG id)
+__iffparse_FindProp(void *__base, CONST struct IFFHandle * iff, LONG type, LONG id)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -156(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -363,14 +384,15 @@ __iffparse_FindProp(struct Library *__base, CONST struct IFFHandle * iff, LONG t
 	return (struct StoredProperty *)_d0;
 }
 #define FindProp(iff, type, id) __iffparse_FindProp((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
+#define __FindProp_base(__in_base, iff, type, id) __iffparse_FindProp((__in_base), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ struct CollectionItem *
-__iffparse_FindCollection(struct Library *__base, CONST struct IFFHandle * iff, LONG type, LONG id)
+__iffparse_FindCollection(void *__base, CONST struct IFFHandle * iff, LONG type, LONG id)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -379,12 +401,13 @@ __iffparse_FindCollection(struct Library *__base, CONST struct IFFHandle * iff, 
 	return (struct CollectionItem *)_d0;
 }
 #define FindCollection(iff, type, id) __iffparse_FindCollection((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
+#define __FindCollection_base(__in_base, iff, type, id) __iffparse_FindCollection((__in_base), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id))
 
 static __inline__ struct ContextNode *
-__iffparse_FindPropContext(struct Library *__base, CONST struct IFFHandle * iff)
+__iffparse_FindPropContext(void *__base, CONST struct IFFHandle * iff)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -395,12 +418,13 @@ __iffparse_FindPropContext(struct Library *__base, CONST struct IFFHandle * iff)
 	return (struct ContextNode *)_d0;
 }
 #define FindPropContext(iff) __iffparse_FindPropContext((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff))
+#define __FindPropContext_base(__in_base, iff) __iffparse_FindPropContext((__in_base), (CONST struct IFFHandle *)(iff))
 
 static __inline__ struct ContextNode *
-__iffparse_CurrentChunk(struct Library *__base, CONST struct IFFHandle * iff)
+__iffparse_CurrentChunk(void *__base, CONST struct IFFHandle * iff)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -411,12 +435,13 @@ __iffparse_CurrentChunk(struct Library *__base, CONST struct IFFHandle * iff)
 	return (struct ContextNode *)_d0;
 }
 #define CurrentChunk(iff) __iffparse_CurrentChunk((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff))
+#define __CurrentChunk_base(__in_base, iff) __iffparse_CurrentChunk((__in_base), (CONST struct IFFHandle *)(iff))
 
 static __inline__ struct ContextNode *
-__iffparse_ParentChunk(struct Library *__base, CONST struct ContextNode * contextNode)
+__iffparse_ParentChunk(void *__base, CONST struct ContextNode * contextNode)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(contextNode);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -427,15 +452,16 @@ __iffparse_ParentChunk(struct Library *__base, CONST struct ContextNode * contex
 	return (struct ContextNode *)_d0;
 }
 #define ParentChunk(contextNode) __iffparse_ParentChunk((IFFPARSE_BASE_NAME), (CONST struct ContextNode *)(contextNode))
+#define __ParentChunk_base(__in_base, contextNode) __iffparse_ParentChunk((__in_base), (CONST struct ContextNode *)(contextNode))
 
 static __inline__ struct LocalContextItem *
-__iffparse_AllocLocalItem(struct Library *__base, LONG type, LONG id, LONG ident, LONG dataSize)
+__iffparse_AllocLocalItem(void *__base, LONG type, LONG id, LONG ident, LONG dataSize)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
 	register ULONG _d2 __asm("d2") = (ULONG)(ident);
 	register ULONG _d3 __asm("d3") = (ULONG)(dataSize);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -186(%/a6)"
@@ -445,12 +471,13 @@ __iffparse_AllocLocalItem(struct Library *__base, LONG type, LONG id, LONG ident
 	return (struct LocalContextItem *)_d0;
 }
 #define AllocLocalItem(type, id, ident, dataSize) __iffparse_AllocLocalItem((IFFPARSE_BASE_NAME), (LONG)(type), (LONG)(id), (LONG)(ident), (LONG)(dataSize))
+#define __AllocLocalItem_base(__in_base, type, id, ident, dataSize) __iffparse_AllocLocalItem((__in_base), (LONG)(type), (LONG)(id), (LONG)(ident), (LONG)(dataSize))
 
 static __inline__ APTR
-__iffparse_LocalItemData(struct Library *__base, CONST struct LocalContextItem * localItem)
+__iffparse_LocalItemData(void *__base, CONST struct LocalContextItem * localItem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(localItem);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -461,13 +488,14 @@ __iffparse_LocalItemData(struct Library *__base, CONST struct LocalContextItem *
 	return (APTR)_d0;
 }
 #define LocalItemData(localItem) __iffparse_LocalItemData((IFFPARSE_BASE_NAME), (CONST struct LocalContextItem *)(localItem))
+#define __LocalItemData_base(__in_base, localItem) __iffparse_LocalItemData((__in_base), (CONST struct LocalContextItem *)(localItem))
 
 static __inline__ VOID
-__iffparse_SetLocalItemPurge(struct Library *__base, struct LocalContextItem * localItem, CONST struct Hook * purgeHook)
+__iffparse_SetLocalItemPurge(void *__base, struct LocalContextItem * localItem, CONST struct Hook * purgeHook)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(localItem);
 	register ULONG _a1 __asm("a1") = (ULONG)(purgeHook);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -198(%/a6)"
@@ -477,12 +505,13 @@ __iffparse_SetLocalItemPurge(struct Library *__base, struct LocalContextItem * l
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetLocalItemPurge(localItem, purgeHook) __iffparse_SetLocalItemPurge((IFFPARSE_BASE_NAME), (struct LocalContextItem *)(localItem), (CONST struct Hook *)(purgeHook))
+#define __SetLocalItemPurge_base(__in_base, localItem, purgeHook) __iffparse_SetLocalItemPurge((__in_base), (struct LocalContextItem *)(localItem), (CONST struct Hook *)(purgeHook))
 
 static __inline__ VOID
-__iffparse_FreeLocalItem(struct Library *__base, struct LocalContextItem * localItem)
+__iffparse_FreeLocalItem(void *__base, struct LocalContextItem * localItem)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(localItem);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -493,15 +522,16 @@ __iffparse_FreeLocalItem(struct Library *__base, struct LocalContextItem * local
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeLocalItem(localItem) __iffparse_FreeLocalItem((IFFPARSE_BASE_NAME), (struct LocalContextItem *)(localItem))
+#define __FreeLocalItem_base(__in_base, localItem) __iffparse_FreeLocalItem((__in_base), (struct LocalContextItem *)(localItem))
 
 static __inline__ struct LocalContextItem *
-__iffparse_FindLocalItem(struct Library *__base, CONST struct IFFHandle * iff, LONG type, LONG id, LONG ident)
+__iffparse_FindLocalItem(void *__base, CONST struct IFFHandle * iff, LONG type, LONG id, LONG ident)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _d1 __asm("d1") = (ULONG)(id);
 	register ULONG _d2 __asm("d2") = (ULONG)(ident);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -210(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -510,14 +540,15 @@ __iffparse_FindLocalItem(struct Library *__base, CONST struct IFFHandle * iff, L
 	return (struct LocalContextItem *)_d0;
 }
 #define FindLocalItem(iff, type, id, ident) __iffparse_FindLocalItem((IFFPARSE_BASE_NAME), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(ident))
+#define __FindLocalItem_base(__in_base, iff, type, id, ident) __iffparse_FindLocalItem((__in_base), (CONST struct IFFHandle *)(iff), (LONG)(type), (LONG)(id), (LONG)(ident))
 
 static __inline__ LONG
-__iffparse_StoreLocalItem(struct Library *__base, struct IFFHandle * iff, struct LocalContextItem * localItem, LONG position)
+__iffparse_StoreLocalItem(void *__base, struct IFFHandle * iff, struct LocalContextItem * localItem, LONG position)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(localItem);
 	register ULONG _d0 __asm("d0") = (ULONG)(position);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -216(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -526,14 +557,15 @@ __iffparse_StoreLocalItem(struct Library *__base, struct IFFHandle * iff, struct
 	return (LONG)_d0;
 }
 #define StoreLocalItem(iff, localItem, position) __iffparse_StoreLocalItem((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (struct LocalContextItem *)(localItem), (LONG)(position))
+#define __StoreLocalItem_base(__in_base, iff, localItem, position) __iffparse_StoreLocalItem((__in_base), (struct IFFHandle *)(iff), (struct LocalContextItem *)(localItem), (LONG)(position))
 
 static __inline__ VOID
-__iffparse_StoreItemInContext(struct Library *__base, struct IFFHandle * iff, struct LocalContextItem * localItem, struct ContextNode * contextNode)
+__iffparse_StoreItemInContext(void *__base, struct IFFHandle * iff, struct LocalContextItem * localItem, struct ContextNode * contextNode)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _a1 __asm("a1") = (ULONG)(localItem);
 	register ULONG _a2 __asm("a2") = (ULONG)(contextNode);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -222(%/a6)"
@@ -543,14 +575,15 @@ __iffparse_StoreItemInContext(struct Library *__base, struct IFFHandle * iff, st
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define StoreItemInContext(iff, localItem, contextNode) __iffparse_StoreItemInContext((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (struct LocalContextItem *)(localItem), (struct ContextNode *)(contextNode))
+#define __StoreItemInContext_base(__in_base, iff, localItem, contextNode) __iffparse_StoreItemInContext((__in_base), (struct IFFHandle *)(iff), (struct LocalContextItem *)(localItem), (struct ContextNode *)(contextNode))
 
 static __inline__ VOID
-__iffparse_InitIFF(struct Library *__base, struct IFFHandle * iff, LONG flags, CONST struct Hook * streamHook)
+__iffparse_InitIFF(void *__base, struct IFFHandle * iff, LONG flags, CONST struct Hook * streamHook)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
 	register ULONG _a1 __asm("a1") = (ULONG)(streamHook);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -228(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -559,12 +592,13 @@ __iffparse_InitIFF(struct Library *__base, struct IFFHandle * iff, LONG flags, C
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitIFF(iff, flags, streamHook) __iffparse_InitIFF((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff), (LONG)(flags), (CONST struct Hook *)(streamHook))
+#define __InitIFF_base(__in_base, iff, flags, streamHook) __iffparse_InitIFF((__in_base), (struct IFFHandle *)(iff), (LONG)(flags), (CONST struct Hook *)(streamHook))
 
 static __inline__ VOID
-__iffparse_InitIFFasDOS(struct Library *__base, struct IFFHandle * iff)
+__iffparse_InitIFFasDOS(void *__base, struct IFFHandle * iff)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -575,12 +609,13 @@ __iffparse_InitIFFasDOS(struct Library *__base, struct IFFHandle * iff)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitIFFasDOS(iff) __iffparse_InitIFFasDOS((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
+#define __InitIFFasDOS_base(__in_base, iff) __iffparse_InitIFFasDOS((__in_base), (struct IFFHandle *)(iff))
 
 static __inline__ VOID
-__iffparse_InitIFFasClip(struct Library *__base, struct IFFHandle * iff)
+__iffparse_InitIFFasClip(void *__base, struct IFFHandle * iff)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iff);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -591,12 +626,13 @@ __iffparse_InitIFFasClip(struct Library *__base, struct IFFHandle * iff)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitIFFasClip(iff) __iffparse_InitIFFasClip((IFFPARSE_BASE_NAME), (struct IFFHandle *)(iff))
+#define __InitIFFasClip_base(__in_base, iff) __iffparse_InitIFFasClip((__in_base), (struct IFFHandle *)(iff))
 
 static __inline__ struct ClipboardHandle *
-__iffparse_OpenClipboard(struct Library *__base, LONG unitNumber)
+__iffparse_OpenClipboard(void *__base, LONG unitNumber)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNumber);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -607,12 +643,13 @@ __iffparse_OpenClipboard(struct Library *__base, LONG unitNumber)
 	return (struct ClipboardHandle *)_d0;
 }
 #define OpenClipboard(unitNumber) __iffparse_OpenClipboard((IFFPARSE_BASE_NAME), (LONG)(unitNumber))
+#define __OpenClipboard_base(__in_base, unitNumber) __iffparse_OpenClipboard((__in_base), (LONG)(unitNumber))
 
 static __inline__ VOID
-__iffparse_CloseClipboard(struct Library *__base, struct ClipboardHandle * clipHandle)
+__iffparse_CloseClipboard(void *__base, struct ClipboardHandle * clipHandle)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(clipHandle);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -623,12 +660,13 @@ __iffparse_CloseClipboard(struct Library *__base, struct ClipboardHandle * clipH
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseClipboard(clipHandle) __iffparse_CloseClipboard((IFFPARSE_BASE_NAME), (struct ClipboardHandle *)(clipHandle))
+#define __CloseClipboard_base(__in_base, clipHandle) __iffparse_CloseClipboard((__in_base), (struct ClipboardHandle *)(clipHandle))
 
 static __inline__ LONG
-__iffparse_GoodID(struct Library *__base, LONG id)
+__iffparse_GoodID(void *__base, LONG id)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -639,12 +677,13 @@ __iffparse_GoodID(struct Library *__base, LONG id)
 	return (LONG)_d0;
 }
 #define GoodID(id) __iffparse_GoodID((IFFPARSE_BASE_NAME), (LONG)(id))
+#define __GoodID_base(__in_base, id) __iffparse_GoodID((__in_base), (LONG)(id))
 
 static __inline__ LONG
-__iffparse_GoodType(struct Library *__base, LONG type)
+__iffparse_GoodType(void *__base, LONG type)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -655,13 +694,14 @@ __iffparse_GoodType(struct Library *__base, LONG type)
 	return (LONG)_d0;
 }
 #define GoodType(type) __iffparse_GoodType((IFFPARSE_BASE_NAME), (LONG)(type))
+#define __GoodType_base(__in_base, type) __iffparse_GoodType((__in_base), (LONG)(type))
 
 static __inline__ STRPTR
-__iffparse_IDtoStr(struct Library *__base, LONG id, STRPTR buf)
+__iffparse_IDtoStr(void *__base, LONG id, STRPTR buf)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
 	register ULONG _a0 __asm("a0") = (ULONG)(buf);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -270(%/a6)"
@@ -671,5 +711,6 @@ __iffparse_IDtoStr(struct Library *__base, LONG id, STRPTR buf)
 	return (STRPTR)_d0;
 }
 #define IDtoStr(id, buf) __iffparse_IDtoStr((IFFPARSE_BASE_NAME), (LONG)(id), (STRPTR)(buf))
+#define __IDtoStr_base(__in_base, id, buf) __iffparse_IDtoStr((__in_base), (LONG)(id), (STRPTR)(buf))
 
 #endif /* INLINE_IFFPARSE_H */

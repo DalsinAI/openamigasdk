@@ -15,6 +15,14 @@
 
 struct LocaleBase;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +32,10 @@ struct LocaleBase;
 #endif
 
 static __inline__ VOID
-__locale_CloseCatalog(struct LocaleBase *__base, struct Catalog * catalog)
+__locale_CloseCatalog(void *__base, struct Catalog * catalog)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(catalog);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -38,12 +46,13 @@ __locale_CloseCatalog(struct LocaleBase *__base, struct Catalog * catalog)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseCatalog(catalog) __locale_CloseCatalog((LOCALE_BASE_NAME), (struct Catalog *)(catalog))
+#define __CloseCatalog_base(__in_base, catalog) __locale_CloseCatalog((__in_base), (struct Catalog *)(catalog))
 
 static __inline__ VOID
-__locale_CloseLocale(struct LocaleBase *__base, struct Locale * locale)
+__locale_CloseLocale(void *__base, struct Locale * locale)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,13 +63,14 @@ __locale_CloseLocale(struct LocaleBase *__base, struct Locale * locale)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseLocale(locale) __locale_CloseLocale((LOCALE_BASE_NAME), (struct Locale *)(locale))
+#define __CloseLocale_base(__in_base, locale) __locale_CloseLocale((__in_base), (struct Locale *)(locale))
 
 static __inline__ ULONG
-__locale_ConvToLower(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_ConvToLower(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -70,13 +80,14 @@ __locale_ConvToLower(struct LocaleBase *__base, CONST struct Locale * locale, UL
 	return (ULONG)_d0;
 }
 #define ConvToLower(locale, character) __locale_ConvToLower((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __ConvToLower_base(__in_base, locale, character) __locale_ConvToLower((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ ULONG
-__locale_ConvToUpper(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_ConvToUpper(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -86,15 +97,16 @@ __locale_ConvToUpper(struct LocaleBase *__base, CONST struct Locale * locale, UL
 	return (ULONG)_d0;
 }
 #define ConvToUpper(locale, character) __locale_ConvToUpper((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __ConvToUpper_base(__in_base, locale, character) __locale_ConvToUpper((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ VOID
-__locale_FormatDate(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR fmtTemplate, CONST struct DateStamp * date, CONST struct Hook * putCharFunc)
+__locale_FormatDate(void *__base, CONST struct Locale * locale, CONST_STRPTR fmtTemplate, CONST struct DateStamp * date, CONST struct Hook * putCharFunc)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _a1 __asm("a1") = (ULONG)(fmtTemplate);
 	register ULONG _a2 __asm("a2") = (ULONG)(date);
 	register ULONG _a3 __asm("a3") = (ULONG)(putCharFunc);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -104,15 +116,16 @@ __locale_FormatDate(struct LocaleBase *__base, CONST struct Locale * locale, CON
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FormatDate(locale, fmtTemplate, date, putCharFunc) __locale_FormatDate((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST struct DateStamp *)(date), (CONST struct Hook *)(putCharFunc))
+#define __FormatDate_base(__in_base, locale, fmtTemplate, date, putCharFunc) __locale_FormatDate((__in_base), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST struct DateStamp *)(date), (CONST struct Hook *)(putCharFunc))
 
 static __inline__ APTR
-__locale_FormatString(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR fmtTemplate, CONST_APTR dataStream, CONST struct Hook * putCharFunc)
+__locale_FormatString(void *__base, CONST struct Locale * locale, CONST_STRPTR fmtTemplate, CONST_APTR dataStream, CONST struct Hook * putCharFunc)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _a1 __asm("a1") = (ULONG)(fmtTemplate);
 	register ULONG _a2 __asm("a2") = (ULONG)(dataStream);
 	register ULONG _a3 __asm("a3") = (ULONG)(putCharFunc);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -122,14 +135,15 @@ __locale_FormatString(struct LocaleBase *__base, CONST struct Locale * locale, C
 	return (APTR)_d0;
 }
 #define FormatString(locale, fmtTemplate, dataStream, putCharFunc) __locale_FormatString((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST_APTR)(dataStream), (CONST struct Hook *)(putCharFunc))
+#define __FormatString_base(__in_base, locale, fmtTemplate, dataStream, putCharFunc) __locale_FormatString((__in_base), (CONST struct Locale *)(locale), (CONST_STRPTR)(fmtTemplate), (CONST_APTR)(dataStream), (CONST struct Hook *)(putCharFunc))
 
 static __inline__ CONST_STRPTR
-__locale_GetCatalogStr(struct LocaleBase *__base, CONST struct Catalog * catalog, LONG stringNum, CONST_STRPTR defaultString)
+__locale_GetCatalogStr(void *__base, CONST struct Catalog * catalog, LONG stringNum, CONST_STRPTR defaultString)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(catalog);
 	register ULONG _d0 __asm("d0") = (ULONG)(stringNum);
 	register ULONG _a1 __asm("a1") = (ULONG)(defaultString);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -138,13 +152,14 @@ __locale_GetCatalogStr(struct LocaleBase *__base, CONST struct Catalog * catalog
 	return (CONST_STRPTR)_d0;
 }
 #define GetCatalogStr(catalog, stringNum, defaultString) __locale_GetCatalogStr((LOCALE_BASE_NAME), (CONST struct Catalog *)(catalog), (LONG)(stringNum), (CONST_STRPTR)(defaultString))
+#define __GetCatalogStr_base(__in_base, catalog, stringNum, defaultString) __locale_GetCatalogStr((__in_base), (CONST struct Catalog *)(catalog), (LONG)(stringNum), (CONST_STRPTR)(defaultString))
 
 static __inline__ CONST_STRPTR
-__locale_GetLocaleStr(struct LocaleBase *__base, CONST struct Locale * locale, ULONG stringNum)
+__locale_GetLocaleStr(void *__base, CONST struct Locale * locale, ULONG stringNum)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(stringNum);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -154,13 +169,14 @@ __locale_GetLocaleStr(struct LocaleBase *__base, CONST struct Locale * locale, U
 	return (CONST_STRPTR)_d0;
 }
 #define GetLocaleStr(locale, stringNum) __locale_GetLocaleStr((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(stringNum))
+#define __GetLocaleStr_base(__in_base, locale, stringNum) __locale_GetLocaleStr((__in_base), (CONST struct Locale *)(locale), (ULONG)(stringNum))
 
 static __inline__ BOOL
-__locale_IsAlNum(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsAlNum(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -170,13 +186,14 @@ __locale_IsAlNum(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsAlNum(locale, character) __locale_IsAlNum((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsAlNum_base(__in_base, locale, character) __locale_IsAlNum((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsAlpha(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsAlpha(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -186,13 +203,14 @@ __locale_IsAlpha(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsAlpha(locale, character) __locale_IsAlpha((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsAlpha_base(__in_base, locale, character) __locale_IsAlpha((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsCntrl(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsCntrl(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -202,13 +220,14 @@ __locale_IsCntrl(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsCntrl(locale, character) __locale_IsCntrl((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsCntrl_base(__in_base, locale, character) __locale_IsCntrl((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsDigit(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsDigit(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -218,13 +237,14 @@ __locale_IsDigit(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsDigit(locale, character) __locale_IsDigit((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsDigit_base(__in_base, locale, character) __locale_IsDigit((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsGraph(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsGraph(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -108(%/a6)"
@@ -234,13 +254,14 @@ __locale_IsGraph(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsGraph(locale, character) __locale_IsGraph((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsGraph_base(__in_base, locale, character) __locale_IsGraph((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsLower(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsLower(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
@@ -250,13 +271,14 @@ __locale_IsLower(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsLower(locale, character) __locale_IsLower((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsLower_base(__in_base, locale, character) __locale_IsLower((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsPrint(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsPrint(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -266,13 +288,14 @@ __locale_IsPrint(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsPrint(locale, character) __locale_IsPrint((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsPrint_base(__in_base, locale, character) __locale_IsPrint((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsPunct(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsPunct(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -282,13 +305,14 @@ __locale_IsPunct(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsPunct(locale, character) __locale_IsPunct((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsPunct_base(__in_base, locale, character) __locale_IsPunct((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsSpace(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsSpace(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
@@ -298,13 +322,14 @@ __locale_IsSpace(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsSpace(locale, character) __locale_IsSpace((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsSpace_base(__in_base, locale, character) __locale_IsSpace((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsUpper(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsUpper(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -138(%/a6)"
@@ -314,13 +339,14 @@ __locale_IsUpper(struct LocaleBase *__base, CONST struct Locale * locale, ULONG 
 	return (BOOL)_d0;
 }
 #define IsUpper(locale, character) __locale_IsUpper((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsUpper_base(__in_base, locale, character) __locale_IsUpper((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ BOOL
-__locale_IsXDigit(struct LocaleBase *__base, CONST struct Locale * locale, ULONG character)
+__locale_IsXDigit(void *__base, CONST struct Locale * locale, ULONG character)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _d0 __asm("d0") = (ULONG)(character);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
@@ -330,14 +356,15 @@ __locale_IsXDigit(struct LocaleBase *__base, CONST struct Locale * locale, ULONG
 	return (BOOL)_d0;
 }
 #define IsXDigit(locale, character) __locale_IsXDigit((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (ULONG)(character))
+#define __IsXDigit_base(__in_base, locale, character) __locale_IsXDigit((__in_base), (CONST struct Locale *)(locale), (ULONG)(character))
 
 static __inline__ struct Catalog *
-__locale_OpenCatalogA(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR name, CONST struct TagItem * tags)
+__locale_OpenCatalogA(void *__base, CONST struct Locale * locale, CONST_STRPTR name, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _a1 __asm("a1") = (ULONG)(name);
 	register ULONG _a2 __asm("a2") = (ULONG)(tags);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -150(%/a6)"
@@ -347,14 +374,24 @@ __locale_OpenCatalogA(struct LocaleBase *__base, CONST struct Locale * locale, C
 	return (struct Catalog *)_d0;
 }
 #define OpenCatalogA(locale, name, tags) __locale_OpenCatalogA((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __OpenCatalogA_base(__in_base, locale, name, tags) __locale_OpenCatalogA((__in_base), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-#define OpenCatalog(locale, name, ...) (OpenCatalog)((CONST struct Locale *)(locale), (CONST_STRPTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct Catalog *
+__OpenCatalog_va(void *__base, CONST struct Locale * locale, CONST_STRPTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	struct Catalog * _r = (struct Catalog *)__locale_OpenCatalogA(__base, (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define OpenCatalog(locale, name, ...) __OpenCatalog_va((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ struct Locale *
-__locale_OpenLocale(struct LocaleBase *__base, CONST_STRPTR name)
+__locale_OpenLocale(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -365,15 +402,16 @@ __locale_OpenLocale(struct LocaleBase *__base, CONST_STRPTR name)
 	return (struct Locale *)_d0;
 }
 #define OpenLocale(name) __locale_OpenLocale((LOCALE_BASE_NAME), (CONST_STRPTR)(name))
+#define __OpenLocale_base(__in_base, name) __locale_OpenLocale((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
-__locale_ParseDate(struct LocaleBase *__base, CONST struct Locale * locale, struct DateStamp * date, CONST_STRPTR fmtTemplate, CONST struct Hook * getCharFunc)
+__locale_ParseDate(void *__base, CONST struct Locale * locale, struct DateStamp * date, CONST_STRPTR fmtTemplate, CONST struct Hook * getCharFunc)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _a1 __asm("a1") = (ULONG)(date);
 	register ULONG _a2 __asm("a2") = (ULONG)(fmtTemplate);
 	register ULONG _a3 __asm("a3") = (ULONG)(getCharFunc);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
@@ -383,16 +421,17 @@ __locale_ParseDate(struct LocaleBase *__base, CONST struct Locale * locale, stru
 	return (BOOL)_d0;
 }
 #define ParseDate(locale, date, fmtTemplate, getCharFunc) __locale_ParseDate((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (struct DateStamp *)(date), (CONST_STRPTR)(fmtTemplate), (CONST struct Hook *)(getCharFunc))
+#define __ParseDate_base(__in_base, locale, date, fmtTemplate, getCharFunc) __locale_ParseDate((__in_base), (CONST struct Locale *)(locale), (struct DateStamp *)(date), (CONST_STRPTR)(fmtTemplate), (CONST struct Hook *)(getCharFunc))
 
 static __inline__ ULONG
-__locale_StrConvert(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR string, APTR buffer, ULONG bufferSize, ULONG type)
+__locale_StrConvert(void *__base, CONST struct Locale * locale, CONST_STRPTR string, APTR buffer, ULONG bufferSize, ULONG type)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _a1 __asm("a1") = (ULONG)(string);
 	register ULONG _a2 __asm("a2") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(bufferSize);
 	register ULONG _d1 __asm("d1") = (ULONG)(type);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -174(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
@@ -400,16 +439,17 @@ __locale_StrConvert(struct LocaleBase *__base, CONST struct Locale * locale, CON
 	return (ULONG)_d0;
 }
 #define StrConvert(locale, string, buffer, bufferSize, type) __locale_StrConvert((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(string), (APTR)(buffer), (ULONG)(bufferSize), (ULONG)(type))
+#define __StrConvert_base(__in_base, locale, string, buffer, bufferSize, type) __locale_StrConvert((__in_base), (CONST struct Locale *)(locale), (CONST_STRPTR)(string), (APTR)(buffer), (ULONG)(bufferSize), (ULONG)(type))
 
 static __inline__ LONG
-__locale_StrnCmp(struct LocaleBase *__base, CONST struct Locale * locale, CONST_STRPTR string1, CONST_STRPTR string2, LONG length, ULONG type)
+__locale_StrnCmp(void *__base, CONST struct Locale * locale, CONST_STRPTR string1, CONST_STRPTR string2, LONG length, ULONG type)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(locale);
 	register ULONG _a1 __asm("a1") = (ULONG)(string1);
 	register ULONG _a2 __asm("a2") = (ULONG)(string2);
 	register ULONG _d0 __asm("d0") = (ULONG)(length);
 	register ULONG _d1 __asm("d1") = (ULONG)(type);
-	register struct LocaleBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -180(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
@@ -417,5 +457,6 @@ __locale_StrnCmp(struct LocaleBase *__base, CONST struct Locale * locale, CONST_
 	return (LONG)_d0;
 }
 #define StrnCmp(locale, string1, string2, length, type) __locale_StrnCmp((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length), (ULONG)(type))
+#define __StrnCmp_base(__in_base, locale, string1, string2, length, type) __locale_StrnCmp((__in_base), (CONST struct Locale *)(locale), (CONST_STRPTR)(string1), (CONST_STRPTR)(string2), (LONG)(length), (ULONG)(type))
 
 #endif /* INLINE_LOCALE_H */

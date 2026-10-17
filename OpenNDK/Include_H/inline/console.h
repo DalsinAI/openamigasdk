@@ -15,6 +15,7 @@
 
 struct Device;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +25,11 @@ struct Device;
 #endif
 
 static __inline__ struct InputEvent *
-__console_CDInputHandler(struct Device *__base, CONST struct InputEvent * events, struct Library * consoleDevice)
+__console_CDInputHandler(void *__base, CONST struct InputEvent * events, struct Library * consoleDevice)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(events);
 	register ULONG _a1 __asm("a1") = (ULONG)(consoleDevice);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -38,15 +39,16 @@ __console_CDInputHandler(struct Device *__base, CONST struct InputEvent * events
 	return (struct InputEvent *)_d0;
 }
 #define CDInputHandler(events, consoleDevice) __console_CDInputHandler((CONSOLE_BASE_NAME), (CONST struct InputEvent *)(events), (struct Library *)(consoleDevice))
+#define __CDInputHandler_base(__in_base, events, consoleDevice) __console_CDInputHandler((__in_base), (CONST struct InputEvent *)(events), (struct Library *)(consoleDevice))
 
 static __inline__ LONG
-__console_RawKeyConvert(struct Device *__base, CONST struct InputEvent * events, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap)
+__console_RawKeyConvert(void *__base, CONST struct InputEvent * events, STRPTR buffer, LONG length, CONST struct KeyMap * keyMap)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(events);
 	register ULONG _a1 __asm("a1") = (ULONG)(buffer);
 	register ULONG _d1 __asm("d1") = (ULONG)(length);
 	register ULONG _a2 __asm("a2") = (ULONG)(keyMap);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
 		: "=r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -55,5 +57,6 @@ __console_RawKeyConvert(struct Device *__base, CONST struct InputEvent * events,
 	return (LONG)_d0;
 }
 #define RawKeyConvert(events, buffer, length, keyMap) __console_RawKeyConvert((CONSOLE_BASE_NAME), (CONST struct InputEvent *)(events), (STRPTR)(buffer), (LONG)(length), (CONST struct KeyMap *)(keyMap))
+#define __RawKeyConvert_base(__in_base, events, buffer, length, keyMap) __console_RawKeyConvert((__in_base), (CONST struct InputEvent *)(events), (STRPTR)(buffer), (LONG)(length), (CONST struct KeyMap *)(keyMap))
 
 #endif /* INLINE_CONSOLE_H */
