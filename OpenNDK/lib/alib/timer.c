@@ -3,7 +3,7 @@
 #include "alib.h"
 #include <devices/timer.h>
 
-LONG DoTimer(struct timeval *tv, LONG unit, LONG command)
+LONG DoTimer(TimeVal_Type *tv, LONG unit, LONG command)
 {
 	struct MsgPort *port = CreateMsgPort();
 	struct timerequest *tr;

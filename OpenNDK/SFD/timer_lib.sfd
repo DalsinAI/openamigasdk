@@ -10,10 +10,10 @@
 ==include <exec/devices.h>
 ==include <devices/timer.h>
 ==version 33
-VOID AddTime(struct timeval * dest, CONST struct timeval * src) (a0,a1)
-VOID SubTime(struct timeval * dest, CONST struct timeval * src) (a0,a1)
-LONG CmpTime(CONST struct timeval * dest, CONST struct timeval * src) (a0,a1)
+VOID AddTime(TimeVal_Type * dest, CONST TimeVal_Type * src) (a0,a1)
+VOID SubTime(TimeVal_Type * dest, CONST TimeVal_Type * src) (a0,a1)
+LONG CmpTime(CONST TimeVal_Type * dest, CONST TimeVal_Type * src) (a0,a1)
 ==version 36
 ULONG ReadEClock(struct EClockVal * dest) (a0)
-VOID GetSysTime(struct timeval * dest) (a0)
+VOID GetSysTime(TimeVal_Type * dest) (a0)
 ==end
