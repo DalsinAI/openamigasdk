@@ -20,6 +20,7 @@
 ==include <graphics/clip.h>
 ==include <hardware/blit.h>
 ==include <utility/tagitem.h>
+==include <graphics/copper.h>
 ==version 33
 LONG BltBitMap(CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct BitMap * destBitMap, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm, UBYTE mask, PLANEPTR tempA) (a0,d0,d1,a1,d2,d3,d4,d5,d6,d7,a2)
 VOID BltTemplate(CONST PLANEPTR source, WORD xSrc, WORD srcMod, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize) (a0,d0,d1,a1,d2,d3,d4,d5)

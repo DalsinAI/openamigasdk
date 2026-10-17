@@ -8,6 +8,9 @@
 #ifndef GRAPHICS_MONITOR_H
 #include <graphics/monitor.h>
 #endif
+#ifndef GRAPHICS_DISPLAYINFO_H
+#include <graphics/displayinfo.h>
+#endif
 
 #define INVALID_ID	(~0)
 

@@ -15,7 +15,9 @@ trap 'rm -rf "$T"' EXIT
 if [ $# -eq 0 ]; then
     set -- $(cd "$INC" && find . -name '*.h' | sed 's|^\./||' | sort)
 fi
-FLAGS="-nostdinc -isystem $($CC -print-file-name=include) -I$INC -fsyntax-only
+# check/shim gives <stdint.h> (exec/types.h takes it in C99) to a compiler
+# without a C library
+FLAGS="-nostdinc -isystem $($CC -print-file-name=include) -idirafter $NDK/check/shim -I$INC -fsyntax-only
   -Wall -Wextra -Werror -Wno-unused-function -fomit-frame-pointer -m68040"
 bad=0 n=0
 for h in "$@"; do

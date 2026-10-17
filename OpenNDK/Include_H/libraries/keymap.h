@@ -8,6 +8,12 @@
 #ifndef EXEC_TYPES_H
 #include <exec/types.h>
 #endif
+#ifndef EXEC_NODES_H
+#include <exec/nodes.h>
+#endif
+#ifndef EXEC_LISTS_H
+#include <exec/lists.h>
+#endif
 
 /* More names from the 3.2 interface */
 #define RAWKEY_BACKSPACE	65

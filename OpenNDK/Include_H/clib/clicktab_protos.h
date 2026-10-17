@@ -12,6 +12,7 @@
 #include <intuition/classusr.h>
 #include <exec/nodes.h>
 #include <gadgets/clicktab.h>
+#include <utility/tagitem.h>
 
 #ifdef __cplusplus
 extern "C" {

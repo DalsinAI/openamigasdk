@@ -261,4 +261,8 @@ struct gpKeyGoInactive
 #define GM_QUERYHOVERED		15
 #define PGA_KnobImage		(PGA_Dummy + 13)
 
+#ifndef INTUITION_IOBSOLETE_H
+#include <intuition/iobsolete.h>
+#endif
+
 #endif /* INTUITION_GADGETCLASS_H */

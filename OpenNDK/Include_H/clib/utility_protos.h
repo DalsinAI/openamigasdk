@@ -12,6 +12,7 @@
 #include <utility/hooks.h>
 #include <utility/name.h>
 #include <utility/utility.h>
+#include <exec/libraries.h>
 
 #ifdef __cplusplus
 extern "C" {

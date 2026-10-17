@@ -11,6 +11,7 @@
 #include <dos/dos.h>
 #include <utility/hooks.h>
 #include <utility/tagitem.h>
+#include <rexx/storage.h>
 
 #ifdef __cplusplus
 extern "C" {

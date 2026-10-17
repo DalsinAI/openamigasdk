@@ -1,0 +1,193 @@
+# The structures tests/layout.c checks field by field (check/layout_numbers.py).
+define NEWCLIPRECTS_1_1
+include exec/types.h exec/nodes.h exec/lists.h exec/libraries.h exec/ports.h exec/tasks.h
+include exec/interrupts.h exec/semaphores.h exec/io.h exec/devices.h exec/memory.h exec/resident.h exec/execbase.h
+include utility/tagitem.h utility/hooks.h utility/date.h
+include dos/dos.h dos/dosextens.h dos/rdargs.h dos/dosasl.h dos/datetime.h dos/filehandler.h dos/exall.h dos/notify.h
+include graphics/gfx.h graphics/clip.h graphics/layers.h graphics/rastport.h graphics/view.h graphics/text.h
+include graphics/gfxbase.h graphics/regions.h graphics/displayinfo.h graphics/sprite.h graphics/gels.h
+include intuition/intuition.h intuition/screens.h intuition/intuitionbase.h intuition/classes.h intuition/classusr.h
+include intuition/gadgetclass.h intuition/imageclass.h intuition/preferences.h intuition/sghooks.h intuition/cghooks.h
+include devices/timer.h devices/inputevent.h devices/trackdisk.h devices/serial.h devices/parallel.h devices/audio.h
+include devices/keymap.h devices/clipboard.h devices/conunit.h devices/scsidisk.h
+include workbench/workbench.h workbench/startup.h workbench/icon.h
+include libraries/gadtools.h libraries/asl.h libraries/iffparse.h libraries/locale.h libraries/configvars.h
+include libraries/realtime.h libraries/nonvolatile.h
+include prefs/prefhdr.h prefs/font.h prefs/screenmode.h prefs/icontrol.h prefs/input.h prefs/locale.h prefs/palette.h
+include prefs/pointer.h prefs/wbpattern.h prefs/serial.h prefs/overscan.h prefs/sound.h prefs/printertxt.h prefs/printergfx.h
+include datatypes/datatypes.h datatypes/pictureclass.h datatypes/soundclass.h
+include rexx/storage.h hardware/custom.h hardware/cia.h resources/filesysres.h
+struct Node ln_Succ ln_Pred ln_Type ln_Pri ln_Name
+struct MinNode mln_Succ mln_Pred
+struct List lh_Head lh_Tail lh_TailPred lh_Type l_pad
+struct MinList mlh_Head mlh_Tail mlh_TailPred
+struct Library lib_Node lib_Flags lib_pad lib_NegSize lib_PosSize lib_Version lib_Revision lib_IdString lib_Sum lib_OpenCnt
+struct Message mn_Node mn_ReplyPort mn_Length
+struct MsgPort mp_Node mp_Flags mp_SigBit mp_SigTask mp_MsgList
+struct Task tc_Node tc_Flags tc_State tc_IDNestCnt tc_TDNestCnt tc_SigAlloc tc_SigWait tc_SigRecvd tc_SigExcept tc_TrapAlloc tc_TrapAble tc_ExceptData tc_ExceptCode tc_TrapData tc_TrapCode tc_SPReg tc_SPLower tc_SPUpper tc_Switch tc_Launch tc_MemEntry tc_UserData
+struct Interrupt is_Node is_Data is_Code
+struct IntVector iv_Data iv_Code iv_Node
+struct SignalSemaphore ss_Link ss_NestCount ss_WaitQueue ss_MultipleLink ss_Owner ss_QueueCount
+struct SemaphoreRequest sr_Link sr_Waiter
+struct IORequest io_Message io_Device io_Unit io_Command io_Flags io_Error
+struct IOStdReq io_Message io_Device io_Unit io_Command io_Flags io_Error io_Actual io_Length io_Data io_Offset
+struct Device dd_Library
+struct Unit unit_MsgPort unit_flags unit_pad unit_OpenCnt
+struct MemChunk mc_Next mc_Bytes
+struct MemHeader mh_Node mh_Attributes mh_First mh_Lower mh_Upper mh_Free
+struct MemEntry me_Un me_Length
+struct MemList ml_Node ml_NumEntries ml_ME
+struct Resident rt_MatchWord rt_MatchTag rt_EndSkip rt_Flags rt_Version rt_Type rt_Pri rt_Name rt_IdString rt_Init
+struct ExecBase LibNode SoftVer LowMemChkSum ChkBase ColdCapture CoolCapture WarmCapture SysStkUpper SysStkLower MaxLocMem DebugEntry DebugData AlertData MaxExtMem ChkSum IntVects ThisTask IdleCount DispCount Quantum Elapsed SysFlags IDNestCnt TDNestCnt AttnFlags AttnResched ResModules TaskTrapCode TaskExceptCode TaskExitCode TaskSigAlloc TaskTrapAlloc MemList ResourceList DeviceList IntrList LibList PortList TaskReady TaskWait SoftInts LastAlert VBlankFrequency PowerSupplyFrequency SemaphoreList KickMemPtr KickTagPtr KickCheckSum ex_Pad0 ex_LaunchPoint ex_RamLibPrivate ex_EClockFrequency ex_CacheControl ex_TaskID ex_Reserved1 ex_MMULock ex_Reserved2 ex_MemHandlers ex_MemHandler
+struct TagItem ti_Tag ti_Data
+struct Hook h_MinNode h_Entry h_SubEntry h_Data
+struct ClockData sec min hour mday month year wday
+struct DateStamp ds_Days ds_Minute ds_Tick
+struct FileInfoBlock fib_DiskKey fib_DirEntryType fib_FileName fib_Protection fib_EntryType fib_Size fib_NumBlocks fib_Date fib_Comment fib_OwnerUID fib_OwnerGID fib_Reserved
+struct InfoData id_NumSoftErrors id_UnitNumber id_DiskState id_NumBlocks id_NumBlocksUsed id_BytesPerBlock id_DiskType id_VolumeNode id_InUse
+struct Process pr_Task pr_MsgPort pr_Pad pr_SegList pr_StackSize pr_GlobVec pr_TaskNum pr_StackBase pr_Result2 pr_CurrentDir pr_CIS pr_COS pr_ConsoleTask pr_FileSystemTask pr_CLI pr_ReturnAddr pr_PktWait pr_WindowPtr pr_HomeDir pr_Flags pr_ExitCode pr_ExitData pr_Arguments pr_LocalVars pr_ShellPrivate pr_CES
+struct CommandLineInterface cli_Result2 cli_SetName cli_CommandDir cli_ReturnCode cli_CommandName cli_FailLevel cli_Prompt cli_StandardInput cli_CurrentInput cli_CommandFile cli_Interactive cli_Background cli_CurrentOutput cli_DefaultStack cli_StandardOutput cli_Module
+struct FileHandle fh_Link fh_Port fh_Type fh_Buf fh_Pos fh_End fh_Funcs fh_Func2 fh_Func3 fh_Args fh_Arg2
+struct FileLock fl_Link fl_Key fl_Access fl_Task fl_Volume
+struct DosList dol_Next dol_Type dol_Task dol_Lock dol_misc dol_Name
+struct DosPacket dp_Link dp_Port dp_Type dp_Res1 dp_Res2 dp_Arg1 dp_Arg2 dp_Arg3 dp_Arg4 dp_Arg5 dp_Arg6 dp_Arg7
+struct StandardPacket sp_Msg sp_Pkt
+struct DosLibrary dl_lib dl_Root dl_GV dl_A2 dl_A5 dl_A6 dl_Errors dl_TimeReq dl_UtilityBase dl_IntuitionBase
+struct RootNode rn_TaskArray rn_ConsoleSegment rn_Time rn_RestartSeg rn_Info rn_FileHandlerSegment rn_CliList rn_BootProc rn_ShellSegment rn_Flags
+struct RDArgs RDA_Source RDA_DAList RDA_Buffer RDA_BufSiz RDA_ExtHelp RDA_Flags
+struct CSource CS_Buffer CS_Length CS_CurChr
+struct AnchorPath ap_Base ap_Last ap_BreakBits ap_FoundBreak ap_Flags ap_Reserved ap_Strlen ap_Info ap_Buf
+struct AChain an_Child an_Parent an_Lock an_Info an_Flags an_String
+struct DateTime dat_Stamp dat_Format dat_Flags dat_StrDay dat_StrDate dat_StrTime
+struct DosEnvec de_TableSize de_SizeBlock de_SecOrg de_Surfaces de_SectorPerBlock de_BlocksPerTrack de_Reserved de_PreAlloc de_Interleave de_LowCyl de_HighCyl de_NumBuffers de_BufMemType de_MaxTransfer de_Mask de_BootPri de_DosType de_Baud de_Control de_BootBlocks
+struct FileSysStartupMsg fssm_Unit fssm_Device fssm_Environ fssm_Flags
+struct DeviceNode dn_Next dn_Type dn_Task dn_Lock dn_Handler dn_StackSize dn_Priority dn_Startup dn_SegList dn_GlobalVec dn_Name
+struct ExAllData ed_Next ed_Name ed_Type ed_Size ed_Prot ed_Days ed_Mins ed_Ticks ed_Comment ed_OwnerUID ed_OwnerGID
+struct ExAllControl eac_Entries eac_LastKey eac_MatchString eac_MatchFunc
+struct NotifyRequest nr_Name nr_FullName nr_UserData nr_Flags nr_stuff nr_Reserved nr_MsgCount nr_Handler
+struct NotifyMessage nm_ExecMessage nm_Class nm_Code nm_NReq nm_DoNotTouch nm_DoNotTouch2
+struct Rectangle MinX MinY MaxX MaxY
+struct ClipRect Next reservedlink obscured BitMap bounds vlink home reserved Flags
+struct Layer front back ClipRect rp bounds nlink priority Flags SuperBitMap SuperClipRect Window Scroll_X Scroll_Y OnScreen OffScreen Backup SuperSaveClipRects Undamaged LayerInfo Lock BackFill reserved1 ClipRegion clipped Width Height reserved2 DamageList
+struct Layer_Info top_layer resPtr1 resPtr2 FreeClipRects bounds Lock gs_Head PrivateReserve3 PrivateReserve4 Flags res_count LockLayersCount PrivateReserve5 UserClipRectsCount BlankHook resPtr5
+struct RastPort Layer BitMap AreaPtrn TmpRas AreaInfo GelsInfo Mask FgPen BgPen AOlPen DrawMode AreaPtSz linpatcnt dummy Flags LinePtrn cp_x cp_y minterms PenWidth PenHeight Font AlgoStyle TxFlags TxHeight TxWidth TxBaseline TxSpacing RP_User longreserved wordreserved reserved
+struct BitMap BytesPerRow Rows Flags Depth pad Planes
+struct ViewPort Next ColorMap DspIns SprIns ClrIns UCopIns DWidth DHeight DxOffset DyOffset Modes SpritePriorities ExtendedModes RasInfo
+struct View ViewPort LOFCprList SHFCprList DyOffset DxOffset Modes
+struct ViewPortExtra n ViewPort DisplayClip VecTable DriverData Flags Origin cop1ptr cop2ptr
+struct ColorMap Flags Type Count ColorTable cm_vpe LowColorBits TransparencyPlane SpriteResolution SpriteResDefault AuxFlags cm_vp NormalDisplayInfo CoerceDisplayInfo cm_batch_items VPModeID PalExtra SpriteBase_Even SpriteBase_Odd Bp_0_base Bp_1_base
+struct TextAttr ta_Name ta_YSize ta_Style ta_Flags
+struct TTextAttr tta_Name tta_YSize tta_Style tta_Flags tta_Tags
+struct TextFont tf_Message tf_YSize tf_Style tf_Flags tf_XSize tf_Baseline tf_BoldSmear tf_Accessors tf_LoChar tf_HiChar tf_CharData tf_Modulo tf_CharLoc tf_CharSpace tf_CharKern
+struct TextFontExtension tfe_MatchWord tfe_Flags0 tfe_Flags1 tfe_BackPtr tfe_OrigReplyPort tfe_Tags tfe_OFontPatchS tfe_OFontPatchK
+struct GfxBase LibNode ActiView copinit cia blitter LOFlist SHFlist blthd blttl bsblthd bsblttl vbsrv timsrv bltsrv TextFonts DefaultFont Modes VBlank Debug BeamSync system_bplcon0 SpriteReserved bytereserved Flags BlitLock BlitNest BlitWaitQ BlitOwner TOF_WaitQ DisplayFlags SimpleSprites MaxDisplayRow MaxDisplayColumn NormalDisplayRows NormalDisplayColumns NormalDPMX NormalDPMY LastChanceMemory LCMptr MicrosPerLine MinDisplayColumn ChipRevBits0 MemType crb_reserved monitor_id hedley hedley_sprites hedley_sprites1 hedley_count hedley_flags hedley_tmp hash_table current_tot_rows current_tot_cclks hedley_hint hedley_hint2 nreserved a2024_sync_raster control_delta_pal control_delta_ntsc current_monitor MonitorList default_monitor MonitorListSemaphore DisplayInfoDataBase TopLine ActiViewCprSemaphore UtilBase ExecBase bwshifts StrtFetchMasks StopFetchMasks Overrun RealStops SpriteWidth SpriteFMode SoftSprites arraywidth DefaultSpriteWidth SprMoveDisable WantChips BoardMemType Bugs gb_LayersBase ColorMask IVector IData SpecialCounter DBList MonitorFlags ScanDoubledSprites BP3Bits MonitorVBlank natural_monitor ProgData ExtSprites pad3 GfxFlags VBCounter HashTableSemaphore HWEmul Scratch ScratchSize
+struct Region bounds RegionRectangle
+struct RegionRectangle Next Prev bounds
+struct AreaInfo VctrTbl VctrPtr FlagTbl FlagPtr Count MaxCount FirstX FirstY
+struct TmpRas RasPtr Size
+struct GelsInfo sprRsrvd Flags gelHead gelTail nextLine lastColor collHandler leftmost rightmost topmost bottommost firstBlissObj lastBlissObj
+struct VSprite NextVSprite PrevVSprite DrawPath ClearPath OldY OldX Flags Y X Height Width Depth MeMask HitMask ImageData BorderLine CollMask SprColors VSBob PlanePick PlaneOnOff VUserExt
+struct Bob Flags SaveBuffer ImageShadow Before After BobVSprite BobComp DBuffer BUserExt
+struct SimpleSprite posctldata height x y num
+struct ExtSprite es_SimpleSprite es_wordwidth es_flags
+struct QueryHeader StructID DisplayID SkipID Length
+struct DisplayInfo Header NotAvailable PropertyFlags Resolution PixelSpeed NumStdSprites PaletteRange SpriteResolution pad RedBits GreenBits BlueBits pad2 reserved
+struct DimensionInfo Header MaxDepth MinRasterWidth MinRasterHeight MaxRasterWidth MaxRasterHeight Nominal MaxOScan VideoOScan TxtOScan StdOScan pad reserved
+struct MonitorInfo Header Mspc ViewPosition ViewResolution ViewPositionRange TotalRows TotalColorClocks MinRow Compatibility pad MouseTicks DefaultViewPosition PreferredModeID reserved
+struct NameInfo Header Name reserved
+struct IBox Left Top Width Height
+struct Window NextWindow LeftEdge TopEdge Width Height MouseY MouseX MinWidth MinHeight MaxWidth MaxHeight Flags MenuStrip Title FirstRequest DMRequest ReqCount WScreen RPort BorderLeft BorderTop BorderRight BorderBottom BorderRPort FirstGadget Parent Descendant Pointer PtrHeight PtrWidth XOffset YOffset IDCMPFlags UserPort WindowPort MessageKey DetailPen BlockPen CheckMark ScreenTitle GZZMouseX GZZMouseY GZZWidth GZZHeight ExtData UserData WLayer IFont MoreFlags
+struct NewWindow LeftEdge TopEdge Width Height DetailPen BlockPen IDCMPFlags Flags FirstGadget CheckMark Title Screen BitMap MinWidth MinHeight MaxWidth MaxHeight Type
+struct ExtNewWindow LeftEdge TopEdge Width Height DetailPen BlockPen IDCMPFlags Flags FirstGadget CheckMark Title Screen BitMap MinWidth MinHeight MaxWidth MaxHeight Type Extension
+struct Screen NextScreen FirstWindow LeftEdge TopEdge Width Height MouseY MouseX Flags Title DefaultTitle BarHeight BarVBorder BarHBorder MenuVBorder MenuHBorder WBorTop WBorLeft WBorRight WBorBottom Font ViewPort RastPort BitMap LayerInfo FirstGadget DetailPen BlockPen SaveColor0 BarLayer ExtData UserData
+struct NewScreen LeftEdge TopEdge Width Height Depth DetailPen BlockPen ViewModes Type Font DefaultTitle Gadgets CustomBitMap
+struct ExtNewScreen LeftEdge TopEdge Width Height Depth DetailPen BlockPen ViewModes Type Font DefaultTitle Gadgets CustomBitMap Extension
+struct Gadget NextGadget LeftEdge TopEdge Width Height Flags Activation GadgetType GadgetRender SelectRender GadgetText MutualExclude SpecialInfo GadgetID UserData
+struct ExtGadget NextGadget LeftEdge TopEdge Width Height Flags Activation GadgetType GadgetRender SelectRender GadgetText MutualExclude SpecialInfo GadgetID UserData MoreFlags BoundsLeftEdge BoundsTopEdge BoundsWidth BoundsHeight
+struct Image LeftEdge TopEdge Width Height Depth ImageData PlanePick PlaneOnOff NextImage
+struct Border LeftEdge TopEdge FrontPen BackPen DrawMode Count XY NextBorder
+struct IntuiText FrontPen BackPen DrawMode LeftEdge TopEdge ITextFont IText NextText
+struct IntuiMessage ExecMessage Class Code Qualifier IAddress MouseX MouseY Seconds Micros IDCMPWindow SpecialLink
+struct ExtIntuiMessage eim_IntuiMessage eim_TabletData
+struct Menu NextMenu LeftEdge TopEdge Width Height Flags MenuName FirstItem JazzX JazzY BeatX BeatY
+struct MenuItem NextItem LeftEdge TopEdge Width Height Flags MutualExclude ItemFill SelectFill Command SubItem NextSelect
+struct Requester OlderRequest LeftEdge TopEdge Width Height RelLeft RelTop ReqGadget ReqBorder ReqText Flags BackFill ReqLayer ReqPad1 ImageBMap RWindow ReqImage ReqPad2
+struct PropInfo Flags HorizPot VertPot HorizBody VertBody CWidth CHeight HPotRes VPotRes LeftBorder TopBorder
+struct StringInfo Buffer UndoBuffer BufferPos MaxChars DispPos UndoPos NumChars DispCount CLeft CTop Extension LongInt AltKeyMap
+struct StringExtend Font Pens ActivePens InitialModes EditHook WorkBuffer Reserved
+struct SGWork Gadget StringInfo WorkBuffer PrevBuffer Modes IEvent Code BufferPos NumChars Actions LongInt GadgetInfo EditOp
+struct DrawInfo dri_Version dri_NumPens dri_Pens dri_Font dri_Depth dri_Resolution dri_Flags dri_CheckMark dri_AmigaKey dri_Screen dri_Reserved
+struct IntuitionBase LibNode ViewLord ActiveWindow ActiveScreen FirstScreen Flags MouseY MouseX Seconds Micros
+struct Preferences FontHeight PrinterPort BaudRate KeyRptSpeed KeyRptDelay DoubleClick PointerMatrix XOffset YOffset color17 color18 color19 PointerTicks color0 color1 color2 color3 ViewXOffset ViewYOffset ViewInitX ViewInitY EnableCLI PrinterType PrinterFilename PrintPitch PrintQuality PrintSpacing PrintLeftMargin PrintRightMargin PrintImage PrintAspect PrintShade PrintThreshold PaperSize PaperLength PaperType SerRWBits SerStopBuf SerParShk LaceWB Pad PrtDevName DefaultPrtUnit DefaultSerUnit RowSizeChange ColumnSizeChange PrintFlags PrintMaxWidth PrintMaxHeight PrintDensity PrintXOffset wb_Width wb_Height wb_Depth ext_size
+struct IClass cl_Dispatcher cl_Reserved cl_Super cl_ID cl_InstOffset cl_InstSize cl_UserData cl_SubclassCount cl_ObjectCount cl_Flags
+struct opSet MethodID ops_AttrList ops_GInfo
+struct opGet MethodID opg_AttrID opg_Storage
+struct opUpdate MethodID opu_AttrList opu_GInfo opu_Flags
+struct gpInput MethodID gpi_GInfo gpi_IEvent gpi_Termination gpi_Mouse gpi_TabletData
+struct gpRender MethodID gpr_GInfo gpr_RPort gpr_Redraw
+struct gpHitTest MethodID gpht_GInfo gpht_Mouse
+struct gpLayout MethodID gpl_GInfo gpl_Initial
+struct impDraw MethodID imp_RPort imp_Offset imp_State imp_DrInfo imp_Dimensions
+struct GadgetInfo gi_Screen gi_Window gi_Requester gi_RastPort gi_Layer gi_Domain gi_Pens gi_DrInfo gi_Reserved
+struct Remember NextRemember RememberSize Memory
+struct EasyStruct es_StructSize es_Flags es_Title es_TextFormat es_GadgetFormat
+struct TabletData td_XFraction td_YFraction td_TabletX td_TabletY td_RangeX td_RangeY td_TagList
+struct PubScreenNode psn_Node psn_Screen psn_Flags psn_Size psn_VisitorCount psn_SigTask psn_SigBit
+struct timeval tv_sec tv_secs tv_usec tv_micro
+struct timerequest tr_node tr_time
+struct InputEvent ie_NextEvent ie_Class ie_SubClass ie_Code ie_Qualifier ie_position ie_TimeStamp
+struct IOExtTD iotd_Req iotd_Count iotd_SecLabel
+struct DriveGeometry dg_SectorSize dg_TotalSectors dg_Cylinders dg_CylSectors dg_Heads dg_TrackSectors dg_BufMemType dg_DeviceType dg_Flags dg_Reserved
+struct IOExtSer IOSer io_CtlChar io_RBufLen io_ExtFlags io_Baud io_BrkTime io_TermArray io_ReadLen io_WriteLen io_StopBits io_SerFlags io_Status
+struct IOExtPar IOPar io_PExtFlags io_Status io_ParFlags io_PTermArray
+struct IOAudio ioa_Request ioa_AllocKey ioa_Data ioa_Length ioa_Period ioa_Volume ioa_Cycles ioa_WriteMsg
+struct KeyMap km_LoKeyMapTypes km_LoKeyMap km_LoCapsable km_LoRepeatable km_HiKeyMapTypes km_HiKeyMap km_HiCapsable km_HiRepeatable
+struct IOClipReq io_Message io_Device io_Unit io_Command io_Flags io_Error io_Actual io_Length io_Data io_Offset io_ClipID
+struct ConUnit cu_MP cu_Window cu_XCP cu_YCP cu_XMax cu_YMax cu_XRSize cu_YRSize cu_XROrigin cu_YROrigin cu_XRExtant cu_YRExtant cu_XMinShrink cu_YMinShrink cu_XCCP cu_YCCP cu_KeyMapStruct cu_TabStops cu_Mask cu_FgPen cu_BgPen cu_AOLPen cu_DrawMode cu_Obsolete1 cu_Obsolete2 cu_Minterms cu_Font cu_AlgoStyle cu_TxFlags cu_TxHeight cu_TxWidth cu_TxBaseline cu_TxSpacing cu_Modes cu_RawEvents
+struct SCSICmd scsi_Data scsi_Length scsi_Actual scsi_Command scsi_CmdLength scsi_CmdActual scsi_Flags scsi_Status scsi_SenseData scsi_SenseLength scsi_SenseActual
+struct DiskObject do_Magic do_Version do_Gadget do_Type do_DefaultTool do_ToolTypes do_CurrentX do_CurrentY do_DrawerData do_ToolWindow do_StackSize
+struct DrawerData dd_NewWindow dd_CurrentX dd_CurrentY dd_Flags dd_ViewModes
+struct AppMessage am_Message am_Type am_UserData am_ID am_NumArgs am_ArgList am_Version am_Class am_MouseX am_MouseY am_Seconds am_Micros am_Reserved
+struct WBStartup sm_Message sm_Process sm_Segment sm_NumArgs sm_ToolWindow sm_ArgList
+struct WBArg wa_Lock wa_Name
+struct NewGadget ng_LeftEdge ng_TopEdge ng_Width ng_Height ng_GadgetText ng_TextAttr ng_GadgetID ng_Flags ng_VisualInfo ng_UserData
+struct NewMenu nm_Type nm_Label nm_CommKey nm_Flags nm_MutualExclude nm_UserData
+struct FileRequester fr_Reserved0 fr_File fr_Drawer fr_Reserved1 fr_LeftEdge fr_TopEdge fr_Width fr_Height fr_Reserved2 fr_NumArgs fr_ArgList fr_UserData fr_Reserved3 fr_Pattern
+struct FontRequester fo_Reserved0 fo_Attr fo_FrontPen fo_BackPen fo_DrawMode fo_SpecialDrawMode fo_UserData fo_LeftEdge fo_TopEdge fo_Width fo_Height fo_TAttr
+struct ScreenModeRequester sm_DisplayID sm_DisplayWidth sm_DisplayHeight sm_DisplayDepth sm_OverscanType sm_AutoScroll sm_BitMapWidth sm_BitMapHeight sm_LeftEdge sm_TopEdge sm_Width sm_Height sm_InfoOpened sm_InfoLeftEdge sm_InfoTopEdge sm_InfoWidth sm_InfoHeight sm_UserData
+struct IFFHandle iff_Stream iff_Flags iff_Depth
+struct ContextNode cn_Node cn_ID cn_Type cn_Size cn_Scan
+struct StoredProperty sp_Size sp_Data
+struct Locale loc_LocaleName loc_LanguageName loc_PrefLanguages loc_Flags loc_CodeSet loc_CountryCode loc_TelephoneCode loc_GMTOffset loc_MeasuringSystem loc_CalendarType loc_Reserved0 loc_DateTimeFormat loc_DateFormat loc_TimeFormat loc_ShortDateTimeFormat loc_ShortDateFormat loc_ShortTimeFormat loc_DecimalPoint loc_GroupSeparator loc_FracGroupSeparator loc_Grouping loc_FracGrouping loc_MonDecimalPoint loc_MonGroupSeparator loc_MonFracGroupSeparator loc_MonGrouping loc_MonFracGrouping loc_MonFracDigits loc_MonIntFracDigits loc_Reserved1 loc_MonCS loc_MonSmallCS loc_MonIntCS loc_MonPositiveSign loc_MonPositiveSpaceSep loc_MonPositiveSignPos loc_MonPositiveCSPos loc_Reserved2 loc_MonNegativeSign loc_MonNegativeSpaceSep loc_MonNegativeSignPos loc_MonNegativeCSPos loc_Reserved3
+struct ConfigDev cd_Node cd_Flags cd_Pad cd_Rom cd_BoardAddr cd_BoardSize cd_SlotAddr cd_SlotSize cd_Driver cd_NextCD cd_Unused
+struct CurrentBinding cb_ConfigDev cb_FileName cb_ProductString cb_ToolTypes
+struct Conductor cdt_Link cdt_Reserved0 cdt_Players cdt_ClockTime cdt_StartTime cdt_ExternalTime cdt_MaxExternalTime cdt_Metronome cdt_Reserved1 cdt_Flags cdt_State
+struct Player pl_Link pl_Reserved0 pl_Reserved1 pl_Hook pl_Source pl_Task pl_MetricTime pl_AlarmTime pl_UserData pl_PlayerID pl_Flags
+struct NVInfo nvi_MaxStorage nvi_FreeStorage
+struct PrefHeader ph_Version ph_Type ph_Flags
+struct FontPrefs fp_Reserved fp_Reserved2 fp_Type fp_FrontPen fp_BackPen fp_DrawMode fp_SpecialDrawMode fp_TextAttr fp_Name
+struct ScreenModePrefs smp_Reserved smp_DisplayID smp_Width smp_Height smp_Depth smp_Control
+struct IControlPrefs ic_Reserved ic_TimeOut ic_MetaDrag ic_Flags ic_WBtoFront ic_FrontToBack ic_ReqTrue ic_ReqFalse ic_Version ic_VersionMagic ic_HoverSlugishness ic_HoverFlags ic_Pad ic_GUIGeometry
+struct InputPrefs ip_Keymap ip_PointerTicks ip_DoubleClick ip_KeyRptDelay ip_KeyRptSpeed ip_MouseAccel
+struct LocalePrefs lp_Reserved lp_CountryName lp_PreferredLanguages lp_GMTOffset lp_Flags lp_CountryData
+struct CountryPrefs cp_Reserved cp_CountryCode cp_TelephoneCode cp_MeasuringSystem cp_DateTimeFormat cp_DateFormat cp_TimeFormat cp_ShortDateTimeFormat cp_ShortDateFormat cp_ShortTimeFormat cp_DecimalPoint cp_GroupSeparator cp_FracGroupSeparator cp_Grouping cp_FracGrouping cp_MonDecimalPoint cp_MonGroupSeparator cp_MonFracGroupSeparator cp_MonGrouping cp_MonFracGrouping cp_MonFracDigits cp_MonIntFracDigits cp_MonCS cp_MonSmallCS cp_MonIntCS cp_MonPositiveSign cp_MonPositiveSpaceSep cp_MonPositiveSignPos cp_MonPositiveCSPos cp_MonNegativeSign cp_MonNegativeSpaceSep cp_MonNegativeSignPos cp_MonNegativeCSPos cp_CalendarType
+struct PalettePrefs pap_Reserved pap_4ColorPens pap_8ColorPens pap_Colors
+struct PointerPrefs pp_Reserved pp_Which pp_Size pp_Width pp_Height pp_Depth pp_YSize pp_X pp_Y
+struct WBPatternPrefs wbp_Reserved wbp_Which wbp_Flags wbp_Revision wbp_Depth wbp_DataLength
+struct SerialPrefs sp_Reserved sp_Unit0Map sp_BaudRate sp_InputBuffer sp_OutputBuffer sp_InputHandshake sp_OutputHandshake sp_Parity sp_BitsPerChar sp_StopBits
+struct OverscanPrefs os_Reserved os_Magic os_HStart os_HStop os_VStart os_VStop os_DisplayID os_ViewPos os_Text os_Standard
+struct SoundPrefs sop_Reserved sop_DisplayQueue sop_AudioQueue sop_AudioType sop_AudioVolume sop_AudioPeriod sop_AudioDuration sop_AudioFileName
+struct PrinterTxtPrefs pt_Reserved pt_Driver pt_Port pt_PaperType pt_PaperSize pt_PaperLength pt_Pitch pt_Spacing pt_LeftMargin pt_RightMargin pt_Quality
+struct PrinterGfxPrefs pg_Reserved pg_Aspect pg_Shade pg_Image pg_Threshold pg_ColorCorrect pg_Dimensions pg_Dithering pg_GraphicFlags pg_PrintDensity pg_PrintMaxWidth pg_PrintMaxHeight pg_PrintXOffset pg_PrintYOffset
+struct DataType dtn_Node1 dtn_Node2 dtn_Header dtn_ToolList dtn_FunctionName dtn_AttrList dtn_Length
+struct DataTypeHeader dth_Name dth_BaseName dth_Pattern dth_Mask dth_GroupID dth_ID dth_MaskLen dth_Pad dth_Flags dth_Priority
+struct BitMapHeader bmh_Width bmh_Height bmh_Left bmh_Top bmh_Depth bmh_Masking bmh_Compression bmh_Pad bmh_Transparent bmh_XAspect bmh_YAspect bmh_PageWidth bmh_PageHeight
+struct ColorRegister red green blue
+struct VoiceHeader vh_OneShotHiSamples vh_RepeatHiSamples vh_SamplesPerHiCycle vh_SamplesPerSec vh_Octaves vh_Compression vh_Volume
+struct DTSpecialInfo si_Lock si_Flags si_TopVert si_VisVert si_TotVert si_OTopVert si_VertUnit si_TopHoriz si_VisHoriz si_TotHoriz si_OTopHoriz si_HorizUnit
+struct RexxMsg rm_Node rm_TaskBlock rm_LibBase rm_Action rm_Result1 rm_Result2 rm_Args rm_PassPort rm_CommAddr rm_FileExt rm_Stdin rm_Stdout rm_avail
+struct RexxArg ra_Size ra_Length ra_Flags ra_Hash ra_Buff
+struct Custom bltddat dmaconr vposr vhposr dskdatr joy0dat joy1dat clxdat adkconr pot0dat pot1dat potinp serdatr dskbytr intenar intreqr dskpt dsklen dskdat refptr vposw vhposw copcon serdat serper potgo joytest strequ strvbl strhor strlong bltcon0 bltcon1 bltafwm bltalwm bltcpt bltbpt bltapt bltdpt bltsize pad2d bltcon0l bltsizv bltsizh bltcmod bltbmod bltamod bltdmod pad34 bltcdat bltbdat bltadat pad3b deniseid dsksync cop1lc cop2lc copjmp1 copjmp2 copins diwstrt diwstop ddfstrt ddfstop dmacon clxcon intena intreq adkcon aud bplpt bplcon0 bplcon1 bplcon2 bplcon3 bpl1mod bpl2mod bplcon4 clxcon2 bpldat sprpt spr color htotal hsstop hbstrt hbstop vtotal vsstop vbstrt vbstop sprhstrt sprhstop bplhstrt bplhstop hhposw hhposr beamcon0 hsstrt vsstrt hcenter diwhigh padf3 fmode
+struct CIA ciapra pad0 ciaprb pad1 ciaddra pad2 ciaddrb pad3 ciatalo pad4 ciatahi pad5 ciatblo pad6 ciatbhi pad7 ciatodlow pad8 ciatodmid pad9 ciatodhi pad10 unusedreg pad11 ciasdr pad12 ciaicr pad13 ciacra pad14 ciacrb
+struct FileSysResource fsr_Node fsr_Creator fsr_FileSysEntries
+struct FileSysEntry fse_Node fse_DosType fse_Version fse_PatchFlags fse_Type fse_Task fse_Lock fse_Handler fse_StackSize fse_Priority fse_Startup fse_SegList fse_GlobalVec

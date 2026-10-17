@@ -14,6 +14,9 @@
 #ifndef LIBRARIES_IFFPARSE_H
 #include <libraries/iffparse.h>
 #endif
+#ifndef DEVICES_TIMER_H
+#include <devices/timer.h>
+#endif
 
 #define SOUNDDTCLASS	"sound.datatype"
 

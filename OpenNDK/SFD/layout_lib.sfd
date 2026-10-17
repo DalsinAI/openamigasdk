@@ -13,6 +13,7 @@
 ==include <intuition/classusr.h>
 ==include <graphics/text.h>
 ==include <gadgets/layout.h>
+==include <utility/tagitem.h>
 ==version 44
 Class * LAYOUT_GetClass() ()
 BOOL ActivateLayoutGadget(struct Gadget * gadget, struct Window * window, struct Requester * requester, ULONG object) (a0,a1,a2,d0)

@@ -14,6 +14,12 @@
 #ifndef INTUITION_INTUITION_H
 #include <intuition/intuition.h>
 #endif
+#ifndef UTILITY_TAGITEM_H
+#include <utility/tagitem.h>
+#endif
+#ifndef INTUITION_GADGETCLASS_H
+#include <intuition/gadgetclass.h>
+#endif
 
 /* One row of a listview */
 struct ListLabelNode

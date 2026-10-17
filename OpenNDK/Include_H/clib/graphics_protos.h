@@ -19,6 +19,7 @@
 #include <graphics/clip.h>
 #include <hardware/blit.h>
 #include <utility/tagitem.h>
+#include <graphics/copper.h>
 
 #ifdef __cplusplus
 extern "C" {
