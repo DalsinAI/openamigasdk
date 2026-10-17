@@ -13,8 +13,8 @@ struct Isrvstr
 {
     struct Node     is_Node;
     struct Isrvstr *Iptr;	/* passed to the server */
-    int           (*code)();
-    int           (*ccode)();
+    LONG          (*code)();
+    LONG __STDARGS__ (*ccode) __CLIB_PROTOTYPE((APTR));
     int             Carg;
 };
 

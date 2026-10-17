@@ -14,7 +14,7 @@
 
 /* A string to parse in place of the command line */
 struct CSource {
-	UBYTE	*CS_Buffer;
+	STRPTR	CS_Buffer;
 	LONG	CS_Length;
 	LONG	CS_CurChr;	/* where parsing has reached */
 };
