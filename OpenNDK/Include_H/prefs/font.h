@@ -27,6 +27,7 @@ struct FontPrefs
     UBYTE fp_FrontPen;
     UBYTE fp_BackPen;
     UBYTE fp_DrawMode;
+    UBYTE fp_SpecialDrawMode;
     struct TextAttr fp_TextAttr;
     BYTE fp_Name[FONTNAMESIZE];		/* fp_TextAttr.ta_Name points here */
 };

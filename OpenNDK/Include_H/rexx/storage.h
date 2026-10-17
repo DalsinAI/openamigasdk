@@ -191,4 +191,7 @@ struct SrcNode {
 	LONG		sn_Size;	/* and its size */
 };
 
+/* a message from ARexx: it carries rexxsyslib's base and a task block */
+#define CHECKREXXMSG(msg)	(RexxSysBase && (msg)->rm_LibBase == RexxSysBase && (msg)->rm_TaskBlock && IsRexxMsg(msg))
+
 #endif /* REXX_STORAGE_H */

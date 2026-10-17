@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__bevel_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __bevel_BEVEL_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define BEVEL_GetClass() __bevel_BEVEL_GetClass((BEVEL_BASE_NAME))
+#define BEVEL_GetClass() __bevel_BEVEL_GetClass((__bevel_base_t)(BEVEL_BASE_NAME))
+#define __BEVEL_GetClass_base(__ndk_b) __bevel_BEVEL_GetClass((__bevel_base_t)(__ndk_b))
 
 #endif /* INLINE_BEVEL_H */

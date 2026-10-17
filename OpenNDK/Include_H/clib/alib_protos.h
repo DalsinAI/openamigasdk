@@ -94,4 +94,12 @@ VOID FreeIEvents(struct InputEvent *events);
 }
 #endif
 
+/* what the OS 3.2 header brings in with this one */
+#ifndef GRAPHICS_GRAPHINT_H
+#include <graphics/graphint.h>
+#endif
+#ifndef REXX_STORAGE_H
+#include <rexx/storage.h>
+#endif
+
 #endif /* CLIB_ALIB_PROTOS_H */

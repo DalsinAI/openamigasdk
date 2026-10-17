@@ -14,6 +14,7 @@
 #include <intuition/gadgetclass.h>
 #include <datatypes/datatypes.h>
 #include <datatypes/datatypesclass.h>
+#include <rexx/storage.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -6,6 +6,7 @@
 #define CLIB_BATTMEM_PROTOS_H
 
 #include <exec/types.h>
+#include <exec/libraries.h>
 
 #ifdef __cplusplus
 extern "C" {

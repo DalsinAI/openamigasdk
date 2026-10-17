@@ -11,6 +11,7 @@
 ==include <intuition/intuition.h>
 ==include <intuition/classes.h>
 ==include <intuition/classusr.h>
+==include <images/drawlist.h>
 ==version 44
 Class * DRAWLIST_GetClass() ()
 ==end

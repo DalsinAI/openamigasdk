@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__button_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __button_BUTTON_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define BUTTON_GetClass() __button_BUTTON_GetClass((BUTTON_BASE_NAME))
+#define BUTTON_GetClass() __button_BUTTON_GetClass((__button_base_t)(BUTTON_BASE_NAME))
+#define __BUTTON_GetClass_base(__ndk_b) __button_BUTTON_GetClass((__button_base_t)(__ndk_b))
 
 #endif /* INLINE_BUTTON_H */

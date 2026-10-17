@@ -40,4 +40,7 @@ struct NSDeviceQueryResult {
 /* More names from the 3.2 interface */
 #define NSDEVTYPE_AUDIOARD	8
 
+/* the high 32 bits of a 64-bit offset ride in io_Actual */
+#define io_HighOffset		io_Actual
+
 #endif /* DEVICES_NEWSTYLE_H */

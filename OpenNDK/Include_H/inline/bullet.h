@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__bullet_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __bullet_OpenEngine(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct GlyphEngine *)_d0;
 }
-#define OpenEngine() __bullet_OpenEngine((BULLET_BASE_NAME))
+#define OpenEngine() __bullet_OpenEngine((__bullet_base_t)(BULLET_BASE_NAME))
+#define __OpenEngine_base(__ndk_b) __bullet_OpenEngine((__bullet_base_t)(__ndk_b))
 
 static __inline__ VOID
 __bullet_CloseEngine(struct Library *__base, struct GlyphEngine * glyphEngine)
@@ -53,7 +55,8 @@ __bullet_CloseEngine(struct Library *__base, struct GlyphEngine * glyphEngine)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseEngine(glyphEngine) __bullet_CloseEngine((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine))
+#define CloseEngine(glyphEngine) __bullet_CloseEngine((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine))
+#define __CloseEngine_base(__ndk_b, glyphEngine) __bullet_CloseEngine((__bullet_base_t)(__ndk_b), (struct GlyphEngine *)(glyphEngine))
 
 static __inline__ ULONG
 __bullet_SetInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
@@ -69,9 +72,19 @@ __bullet_SetInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONS
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetInfoA(glyphEngine, tagList) __bullet_SetInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define SetInfoA(glyphEngine, tagList) __bullet_SetInfoA((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define __SetInfoA_base(__ndk_b, glyphEngine, tagList) __bullet_SetInfoA((__bullet_base_t)(__ndk_b), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___bullet_SetInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, Tag tag1, ...)
+{
+	return __bullet_SetInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)&tag1);
+}
+#define SetInfo(glyphEngine, ...) ___bullet_SetInfo((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+#else
 #define SetInfo(glyphEngine, ...) (SetInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __bullet_ObtainInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
@@ -87,9 +100,19 @@ __bullet_ObtainInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ObtainInfoA(glyphEngine, tagList) __bullet_ObtainInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define ObtainInfoA(glyphEngine, tagList) __bullet_ObtainInfoA((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define __ObtainInfoA_base(__ndk_b, glyphEngine, tagList) __bullet_ObtainInfoA((__bullet_base_t)(__ndk_b), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___bullet_ObtainInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, Tag tag1, ...)
+{
+	return __bullet_ObtainInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)&tag1);
+}
+#define ObtainInfo(glyphEngine, ...) ___bullet_ObtainInfo((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+#else
 #define ObtainInfo(glyphEngine, ...) (ObtainInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __bullet_ReleaseInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
@@ -105,8 +128,18 @@ __bullet_ReleaseInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ReleaseInfoA(glyphEngine, tagList) __bullet_ReleaseInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define ReleaseInfoA(glyphEngine, tagList) __bullet_ReleaseInfoA((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define __ReleaseInfoA_base(__ndk_b, glyphEngine, tagList) __bullet_ReleaseInfoA((__bullet_base_t)(__ndk_b), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___bullet_ReleaseInfo(__bullet_base_t __ndk_base, struct GlyphEngine * glyphEngine, Tag tag1, ...)
+{
+	return __bullet_ReleaseInfoA(__ndk_base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)&tag1);
+}
+#define ReleaseInfo(glyphEngine, ...) ___bullet_ReleaseInfo((__bullet_base_t)(BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+#else
 #define ReleaseInfo(glyphEngine, ...) (ReleaseInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+#endif
 
 #endif /* INLINE_BULLET_H */

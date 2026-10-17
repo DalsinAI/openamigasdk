@@ -78,4 +78,9 @@
 #define POINTERTYPE_ZOOMIN	33
 #define POINTERTYPE_ZOOMOUT	34
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_INTUITION_H
+#include <intuition/intuition.h>
+#endif
+
 #endif /* INTUITION_POINTERCLASS_H */

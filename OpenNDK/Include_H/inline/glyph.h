@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__glyph_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __glyph_GLYPH_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define GLYPH_GetClass() __glyph_GLYPH_GetClass((GLYPH_BASE_NAME))
+#define GLYPH_GetClass() __glyph_GLYPH_GetClass((__glyph_base_t)(GLYPH_BASE_NAME))
+#define __GLYPH_GetClass_base(__ndk_b) __glyph_GLYPH_GetClass((__glyph_base_t)(__ndk_b))
 
 #endif /* INLINE_GLYPH_H */

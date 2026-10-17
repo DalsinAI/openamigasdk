@@ -278,4 +278,9 @@
 #define VGAPRODUCTEHBDBL_KEY	0x390A0
 #define VGAPRODUCTHAMDBL_KEY	0x39820
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef GRAPHICS_DISPLAYINFO_H
+#include <graphics/displayinfo.h>
+#endif
+
 #endif /* GRAPHICS_MODEID_H */

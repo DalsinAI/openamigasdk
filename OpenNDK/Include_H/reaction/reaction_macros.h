@@ -172,4 +172,59 @@
 #define VBarFrame		7
 #define VCentered		2
 
+/* older and shorter names */
+#define ArrowUp			GLYPH_ARROWUP
+#define ArrowDown		GLYPH_ARROWDOWN
+#define ArrowLeft		GLYPH_ARROWLEFT
+#define ArrowRight		GLYPH_ARROWRIGHT
+#define ClickTabsObject		ClickTabObject
+#define ClickTabsEnd		End
+#define FuelObject		FuelGaugeObject
+#define MxObject		RadioButtonObject
+#define EndHGroup		End
+#define EndVGroup		End
+
+/* objects of classes outside the set, by name or by their GetClass call */
+#define DropDownObject		NewObject(CHOOSER_GetClass(), NULL, CHOOSER_DropDown, TRUE
+#define PopUpObject		NewObject(CHOOSER_GetClass(), NULL, CHOOSER_PopUp, TRUE
+#define ToggleObject		NewObject(NULL, "button.gadget", GA_ToggleSelect, TRUE
+#define BoingBallObject		NewObject(NULL, "boingball.image"
+#define BoingBallEnd		End
+#define GradientObject		NewObject(NULL, "gradientslider.gadget"
+#define LedObject		NewObject(NULL, "led.image"
+#define LedEnd			End
+#define StatusObject		NewObject(STATUSBAR_GetClass(), NULL
+#define StatusEnd		End
+#define StatusbarEnd		End
+#define TextFieldObject		NewObject(TEXTFIELD_GetClass(), NULL
+#define TextFieldEnd		End
+
+/* layout spacing and alignment tags */
+#define LOffset(p)		LAYOUT_LeftSpacing, (p)
+#define TOffset(p)		LAYOUT_TopSpacing, (p)
+#define ROffset(p)		LAYOUT_RightSpacing, (p)
+#define BOffset(p)		LAYOUT_BottomSpacing, (p)
+#define Offset(x1, y1, x2, y2)	LAYOUT_LeftSpacing, (x1), LAYOUT_TopSpacing, (y1), LAYOUT_RightSpacing, (x2), LAYOUT_BottomSpacing, (y2)
+#define Spacing(p)		LAYOUT_InnerSpacing, (p)
+#define HAlign(p)		LAYOUT_HorizAlignment, (p)
+#define VAlign(p)		LAYOUT_VertAlignment, (p)
+
+/* a string gadget, with a label, and with a button beside it */
+#define String(text, id, maxchars)	StringObject, STRINGA_TextVal, (text), STRINGA_MaxChars, (maxchars), GA_ID, (id), GA_RelVerify, TRUE, GA_TabCycle, TRUE, StringEnd
+#define LabelString(text, id, maxchars, label)	String(text, id, maxchars), Label(label)
+#define LabelTextLine(text, label)	TextLine(text), Label(label)
+#define PopString(text, id, maxchars, image)	LAYOUT_AddChild, HLayoutObject, String(text, 0, maxchars), ButtonObject, BAG_AutoButton, (image), GA_RelVerify, TRUE, GA_ID, (id), ButtonEnd, LayoutEnd
+
+/* struct NewMenu lines */
+#define Title(t)		{ NM_TITLE, (t), NULL, 0, 0, NULL }
+#define Item(t, s, i)		{ NM_ITEM, (t), (s), 0, 0, (APTR)(i) }
+#define ItemBar			{ NM_ITEM, NM_BARLABEL, NULL, 0, 0, NULL }
+#define SubItem(t, s, i)	{ NM_SUB, (t), (s), 0, 0, (APTR)(i) }
+#define SubBar			{ NM_SUB, NM_BARLABEL, NULL, 0, 0, NULL }
+#define EndMenu			{ NM_END, NULL, NULL, 0, 0, NULL }
+
+/* ARexx class calls */
+#define RA_HandleRexx(obj)	DoMethod((obj), AM_HANDLEEVENT)
+#define RA_FlushRexx(obj)	DoMethod((obj), AM_FLUSH)
+
 #endif /* REACTION_REACTION_MACROS_H */

@@ -15,6 +15,7 @@
 ==include <intuition/gadgetclass.h>
 ==include <datatypes/datatypes.h>
 ==include <datatypes/datatypesclass.h>
+==include <rexx/storage.h>
 ==version 39
 ==private
 VOID datatypesPrivate1() ()

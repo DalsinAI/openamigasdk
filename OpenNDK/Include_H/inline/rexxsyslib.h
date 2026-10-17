@@ -14,6 +14,7 @@
 #endif
 
 struct RxsLib;
+typedef struct RxsLib *__rexxsyslib_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __rexxsyslib_CreateArgstring(struct RxsLib *__base, CONST_STRPTR string, ULONG l
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE *)_d0;
 }
-#define CreateArgstring(string, length) __rexxsyslib_CreateArgstring((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(string), (ULONG)(length))
+#define CreateArgstring(string, length) __rexxsyslib_CreateArgstring((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(string), (ULONG)(length))
+#define __CreateArgstring_base(__ndk_b, string, length) __rexxsyslib_CreateArgstring((__rexxsyslib_base_t)(__ndk_b), (CONST_STRPTR)(string), (ULONG)(length))
 
 static __inline__ VOID
 __rexxsyslib_DeleteArgstring(struct RxsLib *__base, UBYTE * argstring)
@@ -53,7 +55,8 @@ __rexxsyslib_DeleteArgstring(struct RxsLib *__base, UBYTE * argstring)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeleteArgstring(argstring) __rexxsyslib_DeleteArgstring((REXXSYSLIB_BASE_NAME), (UBYTE *)(argstring))
+#define DeleteArgstring(argstring) __rexxsyslib_DeleteArgstring((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (UBYTE *)(argstring))
+#define __DeleteArgstring_base(__ndk_b, argstring) __rexxsyslib_DeleteArgstring((__rexxsyslib_base_t)(__ndk_b), (UBYTE *)(argstring))
 
 static __inline__ ULONG
 __rexxsyslib_LengthArgstring(struct RxsLib *__base, CONST UBYTE * argstring)
@@ -69,7 +72,8 @@ __rexxsyslib_LengthArgstring(struct RxsLib *__base, CONST UBYTE * argstring)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define LengthArgstring(argstring) __rexxsyslib_LengthArgstring((REXXSYSLIB_BASE_NAME), (CONST UBYTE *)(argstring))
+#define LengthArgstring(argstring) __rexxsyslib_LengthArgstring((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST UBYTE *)(argstring))
+#define __LengthArgstring_base(__ndk_b, argstring) __rexxsyslib_LengthArgstring((__rexxsyslib_base_t)(__ndk_b), (CONST UBYTE *)(argstring))
 
 static __inline__ struct RexxMsg *
 __rexxsyslib_CreateRexxMsg(struct RxsLib *__base, CONST struct MsgPort * port, CONST_STRPTR extension, CONST_STRPTR host)
@@ -85,7 +89,8 @@ __rexxsyslib_CreateRexxMsg(struct RxsLib *__base, CONST struct MsgPort * port, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct RexxMsg *)_d0;
 }
-#define CreateRexxMsg(port, extension, host) __rexxsyslib_CreateRexxMsg((REXXSYSLIB_BASE_NAME), (CONST struct MsgPort *)(port), (CONST_STRPTR)(extension), (CONST_STRPTR)(host))
+#define CreateRexxMsg(port, extension, host) __rexxsyslib_CreateRexxMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST struct MsgPort *)(port), (CONST_STRPTR)(extension), (CONST_STRPTR)(host))
+#define __CreateRexxMsg_base(__ndk_b, port, extension, host) __rexxsyslib_CreateRexxMsg((__rexxsyslib_base_t)(__ndk_b), (CONST struct MsgPort *)(port), (CONST_STRPTR)(extension), (CONST_STRPTR)(host))
 
 static __inline__ VOID
 __rexxsyslib_DeleteRexxMsg(struct RxsLib *__base, struct RexxMsg * packet)
@@ -101,7 +106,8 @@ __rexxsyslib_DeleteRexxMsg(struct RxsLib *__base, struct RexxMsg * packet)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeleteRexxMsg(packet) __rexxsyslib_DeleteRexxMsg((REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(packet))
+#define DeleteRexxMsg(packet) __rexxsyslib_DeleteRexxMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(packet))
+#define __DeleteRexxMsg_base(__ndk_b, packet) __rexxsyslib_DeleteRexxMsg((__rexxsyslib_base_t)(__ndk_b), (struct RexxMsg *)(packet))
 
 static __inline__ VOID
 __rexxsyslib_ClearRexxMsg(struct RxsLib *__base, struct RexxMsg * msgptr, ULONG count)
@@ -117,7 +123,8 @@ __rexxsyslib_ClearRexxMsg(struct RxsLib *__base, struct RexxMsg * msgptr, ULONG 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ClearRexxMsg(msgptr, count) __rexxsyslib_ClearRexxMsg((REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(msgptr), (ULONG)(count))
+#define ClearRexxMsg(msgptr, count) __rexxsyslib_ClearRexxMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(msgptr), (ULONG)(count))
+#define __ClearRexxMsg_base(__ndk_b, msgptr, count) __rexxsyslib_ClearRexxMsg((__rexxsyslib_base_t)(__ndk_b), (struct RexxMsg *)(msgptr), (ULONG)(count))
 
 static __inline__ BOOL
 __rexxsyslib_FillRexxMsg(struct RxsLib *__base, struct RexxMsg * msgptr, ULONG count, ULONG mask)
@@ -133,7 +140,8 @@ __rexxsyslib_FillRexxMsg(struct RxsLib *__base, struct RexxMsg * msgptr, ULONG c
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define FillRexxMsg(msgptr, count, mask) __rexxsyslib_FillRexxMsg((REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(msgptr), (ULONG)(count), (ULONG)(mask))
+#define FillRexxMsg(msgptr, count, mask) __rexxsyslib_FillRexxMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(msgptr), (ULONG)(count), (ULONG)(mask))
+#define __FillRexxMsg_base(__ndk_b, msgptr, count, mask) __rexxsyslib_FillRexxMsg((__rexxsyslib_base_t)(__ndk_b), (struct RexxMsg *)(msgptr), (ULONG)(count), (ULONG)(mask))
 
 static __inline__ BOOL
 __rexxsyslib_IsRexxMsg(struct RxsLib *__base, CONST struct RexxMsg * msgptr)
@@ -149,7 +157,8 @@ __rexxsyslib_IsRexxMsg(struct RxsLib *__base, CONST struct RexxMsg * msgptr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define IsRexxMsg(msgptr) __rexxsyslib_IsRexxMsg((REXXSYSLIB_BASE_NAME), (CONST struct RexxMsg *)(msgptr))
+#define IsRexxMsg(msgptr) __rexxsyslib_IsRexxMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST struct RexxMsg *)(msgptr))
+#define __IsRexxMsg_base(__ndk_b, msgptr) __rexxsyslib_IsRexxMsg((__rexxsyslib_base_t)(__ndk_b), (CONST struct RexxMsg *)(msgptr))
 
 static __inline__ VOID
 __rexxsyslib_LockRexxBase(struct RxsLib *__base, ULONG resource)
@@ -165,7 +174,8 @@ __rexxsyslib_LockRexxBase(struct RxsLib *__base, ULONG resource)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LockRexxBase(resource) __rexxsyslib_LockRexxBase((REXXSYSLIB_BASE_NAME), (ULONG)(resource))
+#define LockRexxBase(resource) __rexxsyslib_LockRexxBase((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (ULONG)(resource))
+#define __LockRexxBase_base(__ndk_b, resource) __rexxsyslib_LockRexxBase((__rexxsyslib_base_t)(__ndk_b), (ULONG)(resource))
 
 static __inline__ VOID
 __rexxsyslib_UnlockRexxBase(struct RxsLib *__base, ULONG resource)
@@ -181,7 +191,8 @@ __rexxsyslib_UnlockRexxBase(struct RxsLib *__base, ULONG resource)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockRexxBase(resource) __rexxsyslib_UnlockRexxBase((REXXSYSLIB_BASE_NAME), (ULONG)(resource))
+#define UnlockRexxBase(resource) __rexxsyslib_UnlockRexxBase((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (ULONG)(resource))
+#define __UnlockRexxBase_base(__ndk_b, resource) __rexxsyslib_UnlockRexxBase((__rexxsyslib_base_t)(__ndk_b), (ULONG)(resource))
 
 static __inline__ struct MsgPort *
 __rexxsyslib_CreateRexxHostPort(struct RxsLib *__base, CONST_STRPTR basename)
@@ -197,7 +208,8 @@ __rexxsyslib_CreateRexxHostPort(struct RxsLib *__base, CONST_STRPTR basename)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MsgPort *)_d0;
 }
-#define CreateRexxHostPort(basename) __rexxsyslib_CreateRexxHostPort((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(basename))
+#define CreateRexxHostPort(basename) __rexxsyslib_CreateRexxHostPort((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(basename))
+#define __CreateRexxHostPort_base(__ndk_b, basename) __rexxsyslib_CreateRexxHostPort((__rexxsyslib_base_t)(__ndk_b), (CONST_STRPTR)(basename))
 
 static __inline__ VOID
 __rexxsyslib_DeleteRexxHostPort(struct RxsLib *__base, struct MsgPort * port)
@@ -213,7 +225,8 @@ __rexxsyslib_DeleteRexxHostPort(struct RxsLib *__base, struct MsgPort * port)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DeleteRexxHostPort(port) __rexxsyslib_DeleteRexxHostPort((REXXSYSLIB_BASE_NAME), (struct MsgPort *)(port))
+#define DeleteRexxHostPort(port) __rexxsyslib_DeleteRexxHostPort((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (struct MsgPort *)(port))
+#define __DeleteRexxHostPort_base(__ndk_b, port) __rexxsyslib_DeleteRexxHostPort((__rexxsyslib_base_t)(__ndk_b), (struct MsgPort *)(port))
 
 static __inline__ LONG
 __rexxsyslib_GetRexxVarFromMsg(struct RxsLib *__base, CONST_STRPTR var, CONST struct RexxMsg * msgptr, STRPTR value)
@@ -230,7 +243,8 @@ __rexxsyslib_GetRexxVarFromMsg(struct RxsLib *__base, CONST_STRPTR var, CONST st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetRexxVarFromMsg(var, msgptr, value) __rexxsyslib_GetRexxVarFromMsg((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(value))
+#define GetRexxVarFromMsg(var, msgptr, value) __rexxsyslib_GetRexxVarFromMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(value))
+#define __GetRexxVarFromMsg_base(__ndk_b, var, msgptr, value) __rexxsyslib_GetRexxVarFromMsg((__rexxsyslib_base_t)(__ndk_b), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(value))
 
 static __inline__ LONG
 __rexxsyslib_SetRexxVarFromMsg(struct RxsLib *__base, CONST_STRPTR var, struct RexxMsg * msgptr, CONST_STRPTR value)
@@ -247,7 +261,8 @@ __rexxsyslib_SetRexxVarFromMsg(struct RxsLib *__base, CONST_STRPTR var, struct R
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetRexxVarFromMsg(var, msgptr, value) __rexxsyslib_SetRexxVarFromMsg((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (struct RexxMsg *)(msgptr), (CONST_STRPTR)(value))
+#define SetRexxVarFromMsg(var, msgptr, value) __rexxsyslib_SetRexxVarFromMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (struct RexxMsg *)(msgptr), (CONST_STRPTR)(value))
+#define __SetRexxVarFromMsg_base(__ndk_b, var, msgptr, value) __rexxsyslib_SetRexxVarFromMsg((__rexxsyslib_base_t)(__ndk_b), (CONST_STRPTR)(var), (struct RexxMsg *)(msgptr), (CONST_STRPTR)(value))
 
 static __inline__ struct RexxMsg *
 __rexxsyslib_LaunchRexxScript(struct RxsLib *__base, CONST_STRPTR script, struct MsgPort * replyport, CONST_STRPTR extension, BPTR input, BPTR output)
@@ -265,7 +280,8 @@ __rexxsyslib_LaunchRexxScript(struct RxsLib *__base, CONST_STRPTR script, struct
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct RexxMsg *)_d0;
 }
-#define LaunchRexxScript(script, replyport, extension, input, output) __rexxsyslib_LaunchRexxScript((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(script), (struct MsgPort *)(replyport), (CONST_STRPTR)(extension), (BPTR)(input), (BPTR)(output))
+#define LaunchRexxScript(script, replyport, extension, input, output) __rexxsyslib_LaunchRexxScript((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(script), (struct MsgPort *)(replyport), (CONST_STRPTR)(extension), (BPTR)(input), (BPTR)(output))
+#define __LaunchRexxScript_base(__ndk_b, script, replyport, extension, input, output) __rexxsyslib_LaunchRexxScript((__rexxsyslib_base_t)(__ndk_b), (CONST_STRPTR)(script), (struct MsgPort *)(replyport), (CONST_STRPTR)(extension), (BPTR)(input), (BPTR)(output))
 
 static __inline__ VOID
 __rexxsyslib_FreeRexxMsg(struct RxsLib *__base, struct RexxMsg * rxm)
@@ -281,7 +297,8 @@ __rexxsyslib_FreeRexxMsg(struct RxsLib *__base, struct RexxMsg * rxm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeRexxMsg(rxm) __rexxsyslib_FreeRexxMsg((REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(rxm))
+#define FreeRexxMsg(rxm) __rexxsyslib_FreeRexxMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (struct RexxMsg *)(rxm))
+#define __FreeRexxMsg_base(__ndk_b, rxm) __rexxsyslib_FreeRexxMsg((__rexxsyslib_base_t)(__ndk_b), (struct RexxMsg *)(rxm))
 
 static __inline__ LONG
 __rexxsyslib_GetRexxBufferFromMsg(struct RxsLib *__base, CONST_STRPTR var, CONST struct RexxMsg * msgptr, STRPTR buffer, ULONG buffer_size)
@@ -298,6 +315,7 @@ __rexxsyslib_GetRexxBufferFromMsg(struct RxsLib *__base, CONST_STRPTR var, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetRexxBufferFromMsg(var, msgptr, buffer, buffer_size) __rexxsyslib_GetRexxBufferFromMsg((REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(buffer), (ULONG)(buffer_size))
+#define GetRexxBufferFromMsg(var, msgptr, buffer, buffer_size) __rexxsyslib_GetRexxBufferFromMsg((__rexxsyslib_base_t)(REXXSYSLIB_BASE_NAME), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(buffer), (ULONG)(buffer_size))
+#define __GetRexxBufferFromMsg_base(__ndk_b, var, msgptr, buffer, buffer_size) __rexxsyslib_GetRexxBufferFromMsg((__rexxsyslib_base_t)(__ndk_b), (CONST_STRPTR)(var), (CONST struct RexxMsg *)(msgptr), (STRPTR)(buffer), (ULONG)(buffer_size))
 
 #endif /* INLINE_REXXSYSLIB_H */

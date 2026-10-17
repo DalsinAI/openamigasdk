@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__mathtrans_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -38,7 +39,8 @@ __mathtrans_SPAtan(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPAtan(parm) __mathtrans_SPAtan((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPAtan(parm) __mathtrans_SPAtan((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPAtan_base(__ndk_b, parm) __mathtrans_SPAtan((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPSin(struct Library *__base, FLOAT parm)
@@ -55,7 +57,8 @@ __mathtrans_SPSin(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPSin(parm) __mathtrans_SPSin((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPSin(parm) __mathtrans_SPSin((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPSin_base(__ndk_b, parm) __mathtrans_SPSin((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPCos(struct Library *__base, FLOAT parm)
@@ -72,7 +75,8 @@ __mathtrans_SPCos(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPCos(parm) __mathtrans_SPCos((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPCos(parm) __mathtrans_SPCos((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPCos_base(__ndk_b, parm) __mathtrans_SPCos((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPTan(struct Library *__base, FLOAT parm)
@@ -89,7 +93,8 @@ __mathtrans_SPTan(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPTan(parm) __mathtrans_SPTan((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPTan(parm) __mathtrans_SPTan((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPTan_base(__ndk_b, parm) __mathtrans_SPTan((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPSincos(struct Library *__base, FLOAT * cosResult, FLOAT parm)
@@ -106,7 +111,8 @@ __mathtrans_SPSincos(struct Library *__base, FLOAT * cosResult, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPSincos(cosResult, parm) __mathtrans_SPSincos((MATHTRANS_BASE_NAME), (FLOAT *)(cosResult), (FLOAT)(parm))
+#define SPSincos(cosResult, parm) __mathtrans_SPSincos((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT *)(cosResult), (FLOAT)(parm))
+#define __SPSincos_base(__ndk_b, cosResult, parm) __mathtrans_SPSincos((__mathtrans_base_t)(__ndk_b), (FLOAT *)(cosResult), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPSinh(struct Library *__base, FLOAT parm)
@@ -123,7 +129,8 @@ __mathtrans_SPSinh(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPSinh(parm) __mathtrans_SPSinh((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPSinh(parm) __mathtrans_SPSinh((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPSinh_base(__ndk_b, parm) __mathtrans_SPSinh((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPCosh(struct Library *__base, FLOAT parm)
@@ -140,7 +147,8 @@ __mathtrans_SPCosh(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPCosh(parm) __mathtrans_SPCosh((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPCosh(parm) __mathtrans_SPCosh((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPCosh_base(__ndk_b, parm) __mathtrans_SPCosh((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPTanh(struct Library *__base, FLOAT parm)
@@ -157,7 +165,8 @@ __mathtrans_SPTanh(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPTanh(parm) __mathtrans_SPTanh((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPTanh(parm) __mathtrans_SPTanh((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPTanh_base(__ndk_b, parm) __mathtrans_SPTanh((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPExp(struct Library *__base, FLOAT parm)
@@ -174,7 +183,8 @@ __mathtrans_SPExp(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPExp(parm) __mathtrans_SPExp((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPExp(parm) __mathtrans_SPExp((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPExp_base(__ndk_b, parm) __mathtrans_SPExp((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPLog(struct Library *__base, FLOAT parm)
@@ -191,7 +201,8 @@ __mathtrans_SPLog(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPLog(parm) __mathtrans_SPLog((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPLog(parm) __mathtrans_SPLog((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPLog_base(__ndk_b, parm) __mathtrans_SPLog((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPPow(struct Library *__base, FLOAT power, FLOAT arg)
@@ -209,7 +220,8 @@ __mathtrans_SPPow(struct Library *__base, FLOAT power, FLOAT arg)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPPow(power, arg) __mathtrans_SPPow((MATHTRANS_BASE_NAME), (FLOAT)(power), (FLOAT)(arg))
+#define SPPow(power, arg) __mathtrans_SPPow((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(power), (FLOAT)(arg))
+#define __SPPow_base(__ndk_b, power, arg) __mathtrans_SPPow((__mathtrans_base_t)(__ndk_b), (FLOAT)(power), (FLOAT)(arg))
 
 static __inline__ FLOAT
 __mathtrans_SPSqrt(struct Library *__base, FLOAT parm)
@@ -226,7 +238,8 @@ __mathtrans_SPSqrt(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPSqrt(parm) __mathtrans_SPSqrt((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPSqrt(parm) __mathtrans_SPSqrt((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPSqrt_base(__ndk_b, parm) __mathtrans_SPSqrt((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPTieee(struct Library *__base, FLOAT parm)
@@ -243,7 +256,8 @@ __mathtrans_SPTieee(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPTieee(parm) __mathtrans_SPTieee((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPTieee(parm) __mathtrans_SPTieee((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPTieee_base(__ndk_b, parm) __mathtrans_SPTieee((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPFieee(struct Library *__base, FLOAT parm)
@@ -260,7 +274,8 @@ __mathtrans_SPFieee(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPFieee(parm) __mathtrans_SPFieee((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPFieee(parm) __mathtrans_SPFieee((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPFieee_base(__ndk_b, parm) __mathtrans_SPFieee((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPAsin(struct Library *__base, FLOAT parm)
@@ -277,7 +292,8 @@ __mathtrans_SPAsin(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPAsin(parm) __mathtrans_SPAsin((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPAsin(parm) __mathtrans_SPAsin((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPAsin_base(__ndk_b, parm) __mathtrans_SPAsin((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPAcos(struct Library *__base, FLOAT parm)
@@ -294,7 +310,8 @@ __mathtrans_SPAcos(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPAcos(parm) __mathtrans_SPAcos((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPAcos(parm) __mathtrans_SPAcos((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPAcos_base(__ndk_b, parm) __mathtrans_SPAcos((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 static __inline__ FLOAT
 __mathtrans_SPLog10(struct Library *__base, FLOAT parm)
@@ -311,6 +328,7 @@ __mathtrans_SPLog10(struct Library *__base, FLOAT parm)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
-#define SPLog10(parm) __mathtrans_SPLog10((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define SPLog10(parm) __mathtrans_SPLog10((__mathtrans_base_t)(MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPLog10_base(__ndk_b, parm) __mathtrans_SPLog10((__mathtrans_base_t)(__ndk_b), (FLOAT)(parm))
 
 #endif /* INLINE_MATHTRANS_H */

@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__icon_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __icon_FreeFreeList(struct Library *__base, struct FreeList * freelist)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeFreeList(freelist) __icon_FreeFreeList((ICON_BASE_NAME), (struct FreeList *)(freelist))
+#define FreeFreeList(freelist) __icon_FreeFreeList((__icon_base_t)(ICON_BASE_NAME), (struct FreeList *)(freelist))
+#define __FreeFreeList_base(__ndk_b, freelist) __icon_FreeFreeList((__icon_base_t)(__ndk_b), (struct FreeList *)(freelist))
 
 static __inline__ BOOL
 __icon_AddFreeList(struct Library *__base, struct FreeList * freelist, CONST_APTR mem, ULONG size)
@@ -54,7 +56,8 @@ __icon_AddFreeList(struct Library *__base, struct FreeList * freelist, CONST_APT
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AddFreeList(freelist, mem, size) __icon_AddFreeList((ICON_BASE_NAME), (struct FreeList *)(freelist), (CONST_APTR)(mem), (ULONG)(size))
+#define AddFreeList(freelist, mem, size) __icon_AddFreeList((__icon_base_t)(ICON_BASE_NAME), (struct FreeList *)(freelist), (CONST_APTR)(mem), (ULONG)(size))
+#define __AddFreeList_base(__ndk_b, freelist, mem, size) __icon_AddFreeList((__icon_base_t)(__ndk_b), (struct FreeList *)(freelist), (CONST_APTR)(mem), (ULONG)(size))
 
 static __inline__ struct DiskObject *
 __icon_GetDiskObject(struct Library *__base, CONST_STRPTR name)
@@ -70,7 +73,8 @@ __icon_GetDiskObject(struct Library *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DiskObject *)_d0;
 }
-#define GetDiskObject(name) __icon_GetDiskObject((ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define GetDiskObject(name) __icon_GetDiskObject((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define __GetDiskObject_base(__ndk_b, name) __icon_GetDiskObject((__icon_base_t)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
 __icon_PutDiskObject(struct Library *__base, CONST_STRPTR name, CONST struct DiskObject * diskobj)
@@ -86,7 +90,8 @@ __icon_PutDiskObject(struct Library *__base, CONST_STRPTR name, CONST struct Dis
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define PutDiskObject(name, diskobj) __icon_PutDiskObject((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(diskobj))
+#define PutDiskObject(name, diskobj) __icon_PutDiskObject((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(diskobj))
+#define __PutDiskObject_base(__ndk_b, name, diskobj) __icon_PutDiskObject((__icon_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct DiskObject *)(diskobj))
 
 static __inline__ VOID
 __icon_FreeDiskObject(struct Library *__base, struct DiskObject * diskobj)
@@ -102,7 +107,8 @@ __icon_FreeDiskObject(struct Library *__base, struct DiskObject * diskobj)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeDiskObject(diskobj) __icon_FreeDiskObject((ICON_BASE_NAME), (struct DiskObject *)(diskobj))
+#define FreeDiskObject(diskobj) __icon_FreeDiskObject((__icon_base_t)(ICON_BASE_NAME), (struct DiskObject *)(diskobj))
+#define __FreeDiskObject_base(__ndk_b, diskobj) __icon_FreeDiskObject((__icon_base_t)(__ndk_b), (struct DiskObject *)(diskobj))
 
 static __inline__ UBYTE *
 __icon_FindToolType(struct Library *__base, CONST STRPTR * toolTypeArray, CONST_STRPTR typeName)
@@ -118,7 +124,8 @@ __icon_FindToolType(struct Library *__base, CONST STRPTR * toolTypeArray, CONST_
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UBYTE *)_d0;
 }
-#define FindToolType(toolTypeArray, typeName) __icon_FindToolType((ICON_BASE_NAME), (CONST STRPTR *)(toolTypeArray), (CONST_STRPTR)(typeName))
+#define FindToolType(toolTypeArray, typeName) __icon_FindToolType((__icon_base_t)(ICON_BASE_NAME), (CONST STRPTR *)(toolTypeArray), (CONST_STRPTR)(typeName))
+#define __FindToolType_base(__ndk_b, toolTypeArray, typeName) __icon_FindToolType((__icon_base_t)(__ndk_b), (CONST STRPTR *)(toolTypeArray), (CONST_STRPTR)(typeName))
 
 static __inline__ BOOL
 __icon_MatchToolValue(struct Library *__base, CONST_STRPTR typeString, CONST_STRPTR value)
@@ -134,7 +141,8 @@ __icon_MatchToolValue(struct Library *__base, CONST_STRPTR typeString, CONST_STR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define MatchToolValue(typeString, value) __icon_MatchToolValue((ICON_BASE_NAME), (CONST_STRPTR)(typeString), (CONST_STRPTR)(value))
+#define MatchToolValue(typeString, value) __icon_MatchToolValue((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(typeString), (CONST_STRPTR)(value))
+#define __MatchToolValue_base(__ndk_b, typeString, value) __icon_MatchToolValue((__icon_base_t)(__ndk_b), (CONST_STRPTR)(typeString), (CONST_STRPTR)(value))
 
 static __inline__ STRPTR
 __icon_BumpRevision(struct Library *__base, STRPTR newname, CONST_STRPTR oldname)
@@ -150,7 +158,8 @@ __icon_BumpRevision(struct Library *__base, STRPTR newname, CONST_STRPTR oldname
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define BumpRevision(newname, oldname) __icon_BumpRevision((ICON_BASE_NAME), (STRPTR)(newname), (CONST_STRPTR)(oldname))
+#define BumpRevision(newname, oldname) __icon_BumpRevision((__icon_base_t)(ICON_BASE_NAME), (STRPTR)(newname), (CONST_STRPTR)(oldname))
+#define __BumpRevision_base(__ndk_b, newname, oldname) __icon_BumpRevision((__icon_base_t)(__ndk_b), (STRPTR)(newname), (CONST_STRPTR)(oldname))
 
 static __inline__ APTR
 __icon_FreeAlloc(struct Library *__base, struct FreeList * freelist, ULONG len, ULONG type)
@@ -167,7 +176,8 @@ __icon_FreeAlloc(struct Library *__base, struct FreeList * freelist, ULONG len, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define FreeAlloc(freelist, len, type) __icon_FreeAlloc((ICON_BASE_NAME), (struct FreeList *)(freelist), (ULONG)(len), (ULONG)(type))
+#define FreeAlloc(freelist, len, type) __icon_FreeAlloc((__icon_base_t)(ICON_BASE_NAME), (struct FreeList *)(freelist), (ULONG)(len), (ULONG)(type))
+#define __FreeAlloc_base(__ndk_b, freelist, len, type) __icon_FreeAlloc((__icon_base_t)(__ndk_b), (struct FreeList *)(freelist), (ULONG)(len), (ULONG)(type))
 
 static __inline__ struct DiskObject *
 __icon_GetDefDiskObject(struct Library *__base, LONG type)
@@ -183,7 +193,8 @@ __icon_GetDefDiskObject(struct Library *__base, LONG type)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DiskObject *)_d0;
 }
-#define GetDefDiskObject(type) __icon_GetDefDiskObject((ICON_BASE_NAME), (LONG)(type))
+#define GetDefDiskObject(type) __icon_GetDefDiskObject((__icon_base_t)(ICON_BASE_NAME), (LONG)(type))
+#define __GetDefDiskObject_base(__ndk_b, type) __icon_GetDefDiskObject((__icon_base_t)(__ndk_b), (LONG)(type))
 
 static __inline__ BOOL
 __icon_PutDefDiskObject(struct Library *__base, CONST struct DiskObject * diskObject)
@@ -199,7 +210,8 @@ __icon_PutDefDiskObject(struct Library *__base, CONST struct DiskObject * diskOb
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define PutDefDiskObject(diskObject) __icon_PutDefDiskObject((ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject))
+#define PutDefDiskObject(diskObject) __icon_PutDefDiskObject((__icon_base_t)(ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject))
+#define __PutDefDiskObject_base(__ndk_b, diskObject) __icon_PutDefDiskObject((__icon_base_t)(__ndk_b), (CONST struct DiskObject *)(diskObject))
 
 static __inline__ struct DiskObject *
 __icon_GetDiskObjectNew(struct Library *__base, CONST_STRPTR name)
@@ -215,7 +227,8 @@ __icon_GetDiskObjectNew(struct Library *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DiskObject *)_d0;
 }
-#define GetDiskObjectNew(name) __icon_GetDiskObjectNew((ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define GetDiskObjectNew(name) __icon_GetDiskObjectNew((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define __GetDiskObjectNew_base(__ndk_b, name) __icon_GetDiskObjectNew((__icon_base_t)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
 __icon_DeleteDiskObject(struct Library *__base, CONST_STRPTR name)
@@ -231,7 +244,8 @@ __icon_DeleteDiskObject(struct Library *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define DeleteDiskObject(name) __icon_DeleteDiskObject((ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define DeleteDiskObject(name) __icon_DeleteDiskObject((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define __DeleteDiskObject_base(__ndk_b, name) __icon_DeleteDiskObject((__icon_base_t)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ VOID
 __icon_FreeFree(struct Library *__base, struct FreeList * freelist, APTR address)
@@ -247,7 +261,8 @@ __icon_FreeFree(struct Library *__base, struct FreeList * freelist, APTR address
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeFree(freelist, address) __icon_FreeFree((ICON_BASE_NAME), (struct FreeList *)(freelist), (APTR)(address))
+#define FreeFree(freelist, address) __icon_FreeFree((__icon_base_t)(ICON_BASE_NAME), (struct FreeList *)(freelist), (APTR)(address))
+#define __FreeFree_base(__ndk_b, freelist, address) __icon_FreeFree((__icon_base_t)(__ndk_b), (struct FreeList *)(freelist), (APTR)(address))
 
 static __inline__ struct DiskObject *
 __icon_DupDiskObjectA(struct Library *__base, CONST struct DiskObject * diskObject, CONST struct TagItem * tags)
@@ -263,9 +278,19 @@ __icon_DupDiskObjectA(struct Library *__base, CONST struct DiskObject * diskObje
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DiskObject *)_d0;
 }
-#define DupDiskObjectA(diskObject, tags) __icon_DupDiskObjectA((ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)(tags))
+#define DupDiskObjectA(diskObject, tags) __icon_DupDiskObjectA((__icon_base_t)(ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)(tags))
+#define __DupDiskObjectA_base(__ndk_b, diskObject, tags) __icon_DupDiskObjectA((__icon_base_t)(__ndk_b), (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct DiskObject *
+___icon_DupDiskObject(__icon_base_t __ndk_base, CONST struct DiskObject * diskObject, Tag tag1, ...)
+{
+	return __icon_DupDiskObjectA(__ndk_base, (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)&tag1);
+}
+#define DupDiskObject(diskObject, ...) ___icon_DupDiskObject((__icon_base_t)(ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject), ##__VA_ARGS__)
+#else
 #define DupDiskObject(diskObject, ...) (DupDiskObject)((CONST struct DiskObject *)(diskObject), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __icon_IconControlA(struct Library *__base, struct DiskObject * icon, CONST struct TagItem * tags)
@@ -281,9 +306,19 @@ __icon_IconControlA(struct Library *__base, struct DiskObject * icon, CONST stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define IconControlA(icon, tags) __icon_IconControlA((ICON_BASE_NAME), (struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
+#define IconControlA(icon, tags) __icon_IconControlA((__icon_base_t)(ICON_BASE_NAME), (struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
+#define __IconControlA_base(__ndk_b, icon, tags) __icon_IconControlA((__icon_base_t)(__ndk_b), (struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___icon_IconControl(__icon_base_t __ndk_base, struct DiskObject * icon, Tag tag1, ...)
+{
+	return __icon_IconControlA(__ndk_base, (struct DiskObject *)(icon), (CONST struct TagItem *)&tag1);
+}
+#define IconControl(icon, ...) ___icon_IconControl((__icon_base_t)(ICON_BASE_NAME), (struct DiskObject *)(icon), ##__VA_ARGS__)
+#else
 #define IconControl(icon, ...) (IconControl)((struct DiskObject *)(icon), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __icon_DrawIconStateA(struct Library *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, CONST struct TagItem * tags)
@@ -302,9 +337,19 @@ __icon_DrawIconStateA(struct Library *__base, struct RastPort * rp, CONST struct
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DrawIconStateA(rp, icon, label, leftOffset, topOffset, state, tags) __icon_DrawIconStateA((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)(tags))
+#define DrawIconStateA(rp, icon, label, leftOffset, topOffset, state, tags) __icon_DrawIconStateA((__icon_base_t)(ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)(tags))
+#define __DrawIconStateA_base(__ndk_b, rp, icon, label, leftOffset, topOffset, state, tags) __icon_DrawIconStateA((__icon_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___icon_DrawIconState(__icon_base_t __ndk_base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, Tag tag1, ...)
+{
+	__icon_DrawIconStateA(__ndk_base, (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)&tag1);
+}
+#define DrawIconState(rp, icon, label, leftOffset, topOffset, state, ...) ___icon_DrawIconState((__icon_base_t)(ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), ##__VA_ARGS__)
+#else
 #define DrawIconState(rp, icon, label, leftOffset, topOffset, state, ...) (DrawIconState)((struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), ##__VA_ARGS__)
+#endif
 
 static __inline__ BOOL
 __icon_GetIconRectangleA(struct Library *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, CONST struct TagItem * tags)
@@ -322,9 +367,19 @@ __icon_GetIconRectangleA(struct Library *__base, struct RastPort * rp, CONST str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define GetIconRectangleA(rp, icon, label, rect, tags) __icon_GetIconRectangleA((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)(tags))
+#define GetIconRectangleA(rp, icon, label, rect, tags) __icon_GetIconRectangleA((__icon_base_t)(ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)(tags))
+#define __GetIconRectangleA_base(__ndk_b, rp, icon, label, rect, tags) __icon_GetIconRectangleA((__icon_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
+___icon_GetIconRectangle(__icon_base_t __ndk_base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, Tag tag1, ...)
+{
+	return __icon_GetIconRectangleA(__ndk_base, (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)&tag1);
+}
+#define GetIconRectangle(rp, icon, label, rect, ...) ___icon_GetIconRectangle((__icon_base_t)(ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), ##__VA_ARGS__)
+#else
 #define GetIconRectangle(rp, icon, label, rect, ...) (GetIconRectangle)((struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), ##__VA_ARGS__)
+#endif
 
 static __inline__ struct DiskObject *
 __icon_NewDiskObject(struct Library *__base, LONG type)
@@ -340,7 +395,8 @@ __icon_NewDiskObject(struct Library *__base, LONG type)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DiskObject *)_d0;
 }
-#define NewDiskObject(type) __icon_NewDiskObject((ICON_BASE_NAME), (LONG)(type))
+#define NewDiskObject(type) __icon_NewDiskObject((__icon_base_t)(ICON_BASE_NAME), (LONG)(type))
+#define __NewDiskObject_base(__ndk_b, type) __icon_NewDiskObject((__icon_base_t)(__ndk_b), (LONG)(type))
 
 static __inline__ struct DiskObject *
 __icon_GetIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct TagItem * tags)
@@ -356,9 +412,19 @@ __icon_GetIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct Ta
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DiskObject *)_d0;
 }
-#define GetIconTagList(name, tags) __icon_GetIconTagList((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define GetIconTagList(name, tags) __icon_GetIconTagList((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __GetIconTagList_base(__ndk_b, name, tags) __icon_GetIconTagList((__icon_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct DiskObject *
+___icon_GetIconTags(__icon_base_t __ndk_base, CONST_STRPTR name, Tag tag1, ...)
+{
+	return __icon_GetIconTagList(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+}
+#define GetIconTags(name, ...) ___icon_GetIconTags((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
+#else
 #define GetIconTags(name, ...) (GetIconTags)((CONST_STRPTR)(name), ##__VA_ARGS__)
+#endif
 
 static __inline__ BOOL
 __icon_PutIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct DiskObject * icon, CONST struct TagItem * tags)
@@ -375,9 +441,19 @@ __icon_PutIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct Di
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define PutIconTagList(name, icon, tags) __icon_PutIconTagList((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
+#define PutIconTagList(name, icon, tags) __icon_PutIconTagList((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
+#define __PutIconTagList_base(__ndk_b, name, icon, tags) __icon_PutIconTagList((__icon_base_t)(__ndk_b), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
+___icon_PutIconTags(__icon_base_t __ndk_base, CONST_STRPTR name, CONST struct DiskObject * icon, Tag tag1, ...)
+{
+	return __icon_PutIconTagList(__ndk_base, (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)&tag1);
+}
+#define PutIconTags(name, icon, ...) ___icon_PutIconTags((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), ##__VA_ARGS__)
+#else
 #define PutIconTags(name, icon, ...) (PutIconTags)((CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), ##__VA_ARGS__)
+#endif
 
 static __inline__ BOOL
 __icon_LayoutIconA(struct Library *__base, struct DiskObject * icon, struct Screen * screen, struct TagItem * tags)
@@ -394,9 +470,19 @@ __icon_LayoutIconA(struct Library *__base, struct DiskObject * icon, struct Scre
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define LayoutIconA(icon, screen, tags) __icon_LayoutIconA((ICON_BASE_NAME), (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)(tags))
+#define LayoutIconA(icon, screen, tags) __icon_LayoutIconA((__icon_base_t)(ICON_BASE_NAME), (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)(tags))
+#define __LayoutIconA_base(__ndk_b, icon, screen, tags) __icon_LayoutIconA((__icon_base_t)(__ndk_b), (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)(tags))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
+___icon_LayoutIcon(__icon_base_t __ndk_base, struct DiskObject * icon, struct Screen * screen, Tag tag1, ...)
+{
+	return __icon_LayoutIconA(__ndk_base, (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)&tag1);
+}
+#define LayoutIcon(icon, screen, ...) ___icon_LayoutIcon((__icon_base_t)(ICON_BASE_NAME), (struct DiskObject *)(icon), (struct Screen *)(screen), ##__VA_ARGS__)
+#else
 #define LayoutIcon(icon, screen, ...) (LayoutIcon)((struct DiskObject *)(icon), (struct Screen *)(screen), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __icon_ChangeToSelectedIconColor(struct Library *__base, struct ColorRegister * cr)
@@ -412,7 +498,8 @@ __icon_ChangeToSelectedIconColor(struct Library *__base, struct ColorRegister * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ChangeToSelectedIconColor(cr) __icon_ChangeToSelectedIconColor((ICON_BASE_NAME), (struct ColorRegister *)(cr))
+#define ChangeToSelectedIconColor(cr) __icon_ChangeToSelectedIconColor((__icon_base_t)(ICON_BASE_NAME), (struct ColorRegister *)(cr))
+#define __ChangeToSelectedIconColor_base(__ndk_b, cr) __icon_ChangeToSelectedIconColor((__icon_base_t)(__ndk_b), (struct ColorRegister *)(cr))
 
 static __inline__ STRPTR
 __icon_BumpRevisionLength(struct Library *__base, STRPTR newname, CONST_STRPTR oldname, ULONG maxLength)
@@ -428,6 +515,7 @@ __icon_BumpRevisionLength(struct Library *__base, STRPTR newname, CONST_STRPTR o
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define BumpRevisionLength(newname, oldname, maxLength) __icon_BumpRevisionLength((ICON_BASE_NAME), (STRPTR)(newname), (CONST_STRPTR)(oldname), (ULONG)(maxLength))
+#define BumpRevisionLength(newname, oldname, maxLength) __icon_BumpRevisionLength((__icon_base_t)(ICON_BASE_NAME), (STRPTR)(newname), (CONST_STRPTR)(oldname), (ULONG)(maxLength))
+#define __BumpRevisionLength_base(__ndk_b, newname, oldname, maxLength) __icon_BumpRevisionLength((__icon_base_t)(__ndk_b), (STRPTR)(newname), (CONST_STRPTR)(oldname), (ULONG)(maxLength))
 
 #endif /* INLINE_ICON_H */

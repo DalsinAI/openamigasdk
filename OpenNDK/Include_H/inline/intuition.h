@@ -14,6 +14,7 @@
 #endif
 
 struct IntuitionBase;
+typedef struct IntuitionBase *__intuition_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,7 +38,8 @@ __intuition_OpenIntuition(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define OpenIntuition() __intuition_OpenIntuition((INTUITION_BASE_NAME))
+#define OpenIntuition() __intuition_OpenIntuition((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __OpenIntuition_base(__ndk_b) __intuition_OpenIntuition((__intuition_base_t)(__ndk_b))
 
 static __inline__ VOID
 __intuition_Intuition(struct IntuitionBase *__base, struct InputEvent * iEvent)
@@ -53,7 +55,8 @@ __intuition_Intuition(struct IntuitionBase *__base, struct InputEvent * iEvent)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define Intuition(iEvent) __intuition_Intuition((INTUITION_BASE_NAME), (struct InputEvent *)(iEvent))
+#define Intuition(iEvent) __intuition_Intuition((__intuition_base_t)(INTUITION_BASE_NAME), (struct InputEvent *)(iEvent))
+#define __Intuition_base(__ndk_b, iEvent) __intuition_Intuition((__intuition_base_t)(__ndk_b), (struct InputEvent *)(iEvent))
 
 static __inline__ UWORD
 __intuition_AddGadget(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget, UWORD position)
@@ -69,7 +72,8 @@ __intuition_AddGadget(struct IntuitionBase *__base, struct Window * window, stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define AddGadget(window, gadget, position) __intuition_AddGadget((INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position))
+#define AddGadget(window, gadget, position) __intuition_AddGadget((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position))
+#define __AddGadget_base(__ndk_b, window, gadget, position) __intuition_AddGadget((__intuition_base_t)(__ndk_b), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position))
 
 static __inline__ BOOL
 __intuition_ClearDMRequest(struct IntuitionBase *__base, struct Window * window)
@@ -85,7 +89,8 @@ __intuition_ClearDMRequest(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ClearDMRequest(window) __intuition_ClearDMRequest((INTUITION_BASE_NAME), (struct Window *)(window))
+#define ClearDMRequest(window) __intuition_ClearDMRequest((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ClearDMRequest_base(__ndk_b, window) __intuition_ClearDMRequest((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ VOID
 __intuition_ClearMenuStrip(struct IntuitionBase *__base, struct Window * window)
@@ -101,7 +106,8 @@ __intuition_ClearMenuStrip(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ClearMenuStrip(window) __intuition_ClearMenuStrip((INTUITION_BASE_NAME), (struct Window *)(window))
+#define ClearMenuStrip(window) __intuition_ClearMenuStrip((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ClearMenuStrip_base(__ndk_b, window) __intuition_ClearMenuStrip((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ VOID
 __intuition_ClearPointer(struct IntuitionBase *__base, struct Window * window)
@@ -117,7 +123,8 @@ __intuition_ClearPointer(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ClearPointer(window) __intuition_ClearPointer((INTUITION_BASE_NAME), (struct Window *)(window))
+#define ClearPointer(window) __intuition_ClearPointer((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ClearPointer_base(__ndk_b, window) __intuition_ClearPointer((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ BOOL
 __intuition_CloseScreen(struct IntuitionBase *__base, struct Screen * screen)
@@ -133,7 +140,8 @@ __intuition_CloseScreen(struct IntuitionBase *__base, struct Screen * screen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define CloseScreen(screen) __intuition_CloseScreen((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define CloseScreen(screen) __intuition_CloseScreen((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __CloseScreen_base(__ndk_b, screen) __intuition_CloseScreen((__intuition_base_t)(__ndk_b), (struct Screen *)(screen))
 
 static __inline__ VOID
 __intuition_CloseWindow(struct IntuitionBase *__base, struct Window * window)
@@ -149,7 +157,8 @@ __intuition_CloseWindow(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CloseWindow(window) __intuition_CloseWindow((INTUITION_BASE_NAME), (struct Window *)(window))
+#define CloseWindow(window) __intuition_CloseWindow((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __CloseWindow_base(__ndk_b, window) __intuition_CloseWindow((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ LONG
 __intuition_CloseWorkBench(struct IntuitionBase *__base)
@@ -165,7 +174,8 @@ __intuition_CloseWorkBench(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CloseWorkBench() __intuition_CloseWorkBench((INTUITION_BASE_NAME))
+#define CloseWorkBench() __intuition_CloseWorkBench((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __CloseWorkBench_base(__ndk_b) __intuition_CloseWorkBench((__intuition_base_t)(__ndk_b))
 
 static __inline__ VOID
 __intuition_CurrentTime(struct IntuitionBase *__base, ULONG * seconds, ULONG * micros)
@@ -181,7 +191,8 @@ __intuition_CurrentTime(struct IntuitionBase *__base, ULONG * seconds, ULONG * m
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define CurrentTime(seconds, micros) __intuition_CurrentTime((INTUITION_BASE_NAME), (ULONG *)(seconds), (ULONG *)(micros))
+#define CurrentTime(seconds, micros) __intuition_CurrentTime((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG *)(seconds), (ULONG *)(micros))
+#define __CurrentTime_base(__ndk_b, seconds, micros) __intuition_CurrentTime((__intuition_base_t)(__ndk_b), (ULONG *)(seconds), (ULONG *)(micros))
 
 static __inline__ BOOL
 __intuition_DisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_STRPTR string, UWORD height)
@@ -197,7 +208,8 @@ __intuition_DisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define DisplayAlert(alertNumber, string, height) __intuition_DisplayAlert((INTUITION_BASE_NAME), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height))
+#define DisplayAlert(alertNumber, string, height) __intuition_DisplayAlert((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height))
+#define __DisplayAlert_base(__ndk_b, alertNumber, string, height) __intuition_DisplayAlert((__intuition_base_t)(__ndk_b), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height))
 
 static __inline__ VOID
 __intuition_DisplayBeep(struct IntuitionBase *__base, struct Screen * screen)
@@ -213,7 +225,8 @@ __intuition_DisplayBeep(struct IntuitionBase *__base, struct Screen * screen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DisplayBeep(screen) __intuition_DisplayBeep((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define DisplayBeep(screen) __intuition_DisplayBeep((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __DisplayBeep_base(__ndk_b, screen) __intuition_DisplayBeep((__intuition_base_t)(__ndk_b), (struct Screen *)(screen))
 
 static __inline__ BOOL
 __intuition_DoubleClick(struct IntuitionBase *__base, ULONG sSeconds, ULONG sMicros, ULONG cSeconds, ULONG cMicros)
@@ -231,7 +244,8 @@ __intuition_DoubleClick(struct IntuitionBase *__base, ULONG sSeconds, ULONG sMic
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define DoubleClick(sSeconds, sMicros, cSeconds, cMicros) __intuition_DoubleClick((INTUITION_BASE_NAME), (ULONG)(sSeconds), (ULONG)(sMicros), (ULONG)(cSeconds), (ULONG)(cMicros))
+#define DoubleClick(sSeconds, sMicros, cSeconds, cMicros) __intuition_DoubleClick((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG)(sSeconds), (ULONG)(sMicros), (ULONG)(cSeconds), (ULONG)(cMicros))
+#define __DoubleClick_base(__ndk_b, sSeconds, sMicros, cSeconds, cMicros) __intuition_DoubleClick((__intuition_base_t)(__ndk_b), (ULONG)(sSeconds), (ULONG)(sMicros), (ULONG)(cSeconds), (ULONG)(cMicros))
 
 static __inline__ VOID
 __intuition_DrawBorder(struct IntuitionBase *__base, struct RastPort * rp, CONST struct Border * border, WORD leftOffset, WORD topOffset)
@@ -247,7 +261,8 @@ __intuition_DrawBorder(struct IntuitionBase *__base, struct RastPort * rp, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DrawBorder(rp, border, leftOffset, topOffset) __intuition_DrawBorder((INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct Border *)(border), (WORD)(leftOffset), (WORD)(topOffset))
+#define DrawBorder(rp, border, leftOffset, topOffset) __intuition_DrawBorder((__intuition_base_t)(INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct Border *)(border), (WORD)(leftOffset), (WORD)(topOffset))
+#define __DrawBorder_base(__ndk_b, rp, border, leftOffset, topOffset) __intuition_DrawBorder((__intuition_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST struct Border *)(border), (WORD)(leftOffset), (WORD)(topOffset))
 
 static __inline__ VOID
 __intuition_DrawImage(struct IntuitionBase *__base, struct RastPort * rp, CONST struct Image * image, WORD leftOffset, WORD topOffset)
@@ -263,7 +278,8 @@ __intuition_DrawImage(struct IntuitionBase *__base, struct RastPort * rp, CONST 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DrawImage(rp, image, leftOffset, topOffset) __intuition_DrawImage((INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
+#define DrawImage(rp, image, leftOffset, topOffset) __intuition_DrawImage((__intuition_base_t)(INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
+#define __DrawImage_base(__ndk_b, rp, image, leftOffset, topOffset) __intuition_DrawImage((__intuition_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
 
 static __inline__ VOID
 __intuition_EndRequest(struct IntuitionBase *__base, struct Requester * requester, struct Window * window)
@@ -279,7 +295,8 @@ __intuition_EndRequest(struct IntuitionBase *__base, struct Requester * requeste
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define EndRequest(requester, window) __intuition_EndRequest((INTUITION_BASE_NAME), (struct Requester *)(requester), (struct Window *)(window))
+#define EndRequest(requester, window) __intuition_EndRequest((__intuition_base_t)(INTUITION_BASE_NAME), (struct Requester *)(requester), (struct Window *)(window))
+#define __EndRequest_base(__ndk_b, requester, window) __intuition_EndRequest((__intuition_base_t)(__ndk_b), (struct Requester *)(requester), (struct Window *)(window))
 
 static __inline__ struct Preferences *
 __intuition_GetDefPrefs(struct IntuitionBase *__base, struct Preferences * preferences, WORD size)
@@ -295,7 +312,8 @@ __intuition_GetDefPrefs(struct IntuitionBase *__base, struct Preferences * prefe
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Preferences *)_d0;
 }
-#define GetDefPrefs(preferences, size) __intuition_GetDefPrefs((INTUITION_BASE_NAME), (struct Preferences *)(preferences), (WORD)(size))
+#define GetDefPrefs(preferences, size) __intuition_GetDefPrefs((__intuition_base_t)(INTUITION_BASE_NAME), (struct Preferences *)(preferences), (WORD)(size))
+#define __GetDefPrefs_base(__ndk_b, preferences, size) __intuition_GetDefPrefs((__intuition_base_t)(__ndk_b), (struct Preferences *)(preferences), (WORD)(size))
 
 static __inline__ struct Preferences *
 __intuition_GetPrefs(struct IntuitionBase *__base, struct Preferences * preferences, WORD size)
@@ -311,7 +329,8 @@ __intuition_GetPrefs(struct IntuitionBase *__base, struct Preferences * preferen
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Preferences *)_d0;
 }
-#define GetPrefs(preferences, size) __intuition_GetPrefs((INTUITION_BASE_NAME), (struct Preferences *)(preferences), (WORD)(size))
+#define GetPrefs(preferences, size) __intuition_GetPrefs((__intuition_base_t)(INTUITION_BASE_NAME), (struct Preferences *)(preferences), (WORD)(size))
+#define __GetPrefs_base(__ndk_b, preferences, size) __intuition_GetPrefs((__intuition_base_t)(__ndk_b), (struct Preferences *)(preferences), (WORD)(size))
 
 static __inline__ VOID
 __intuition_InitRequester(struct IntuitionBase *__base, struct Requester * requester)
@@ -327,7 +346,8 @@ __intuition_InitRequester(struct IntuitionBase *__base, struct Requester * reque
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define InitRequester(requester) __intuition_InitRequester((INTUITION_BASE_NAME), (struct Requester *)(requester))
+#define InitRequester(requester) __intuition_InitRequester((__intuition_base_t)(INTUITION_BASE_NAME), (struct Requester *)(requester))
+#define __InitRequester_base(__ndk_b, requester) __intuition_InitRequester((__intuition_base_t)(__ndk_b), (struct Requester *)(requester))
 
 static __inline__ struct MenuItem *
 __intuition_ItemAddress(struct IntuitionBase *__base, CONST struct Menu * menuStrip, UWORD menuNumber)
@@ -343,7 +363,8 @@ __intuition_ItemAddress(struct IntuitionBase *__base, CONST struct Menu * menuSt
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct MenuItem *)_d0;
 }
-#define ItemAddress(menuStrip, menuNumber) __intuition_ItemAddress((INTUITION_BASE_NAME), (CONST struct Menu *)(menuStrip), (UWORD)(menuNumber))
+#define ItemAddress(menuStrip, menuNumber) __intuition_ItemAddress((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct Menu *)(menuStrip), (UWORD)(menuNumber))
+#define __ItemAddress_base(__ndk_b, menuStrip, menuNumber) __intuition_ItemAddress((__intuition_base_t)(__ndk_b), (CONST struct Menu *)(menuStrip), (UWORD)(menuNumber))
 
 static __inline__ BOOL
 __intuition_ModifyIDCMP(struct IntuitionBase *__base, struct Window * window, ULONG flags)
@@ -359,7 +380,8 @@ __intuition_ModifyIDCMP(struct IntuitionBase *__base, struct Window * window, UL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ModifyIDCMP(window, flags) __intuition_ModifyIDCMP((INTUITION_BASE_NAME), (struct Window *)(window), (ULONG)(flags))
+#define ModifyIDCMP(window, flags) __intuition_ModifyIDCMP((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (ULONG)(flags))
+#define __ModifyIDCMP_base(__ndk_b, window, flags) __intuition_ModifyIDCMP((__intuition_base_t)(__ndk_b), (struct Window *)(window), (ULONG)(flags))
 
 static __inline__ VOID
 __intuition_ModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, UWORD flags, UWORD horizPot, UWORD vertPot, UWORD horizBody, UWORD vertBody)
@@ -379,7 +401,8 @@ __intuition_ModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ModifyProp(gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody) __intuition_ModifyProp((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody))
+#define ModifyProp(gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody) __intuition_ModifyProp((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody))
+#define __ModifyProp_base(__ndk_b, gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody) __intuition_ModifyProp((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody))
 
 static __inline__ VOID
 __intuition_MoveScreen(struct IntuitionBase *__base, struct Screen * screen, WORD dx, WORD dy)
@@ -395,7 +418,8 @@ __intuition_MoveScreen(struct IntuitionBase *__base, struct Screen * screen, WOR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define MoveScreen(screen, dx, dy) __intuition_MoveScreen((INTUITION_BASE_NAME), (struct Screen *)(screen), (WORD)(dx), (WORD)(dy))
+#define MoveScreen(screen, dx, dy) __intuition_MoveScreen((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen), (WORD)(dx), (WORD)(dy))
+#define __MoveScreen_base(__ndk_b, screen, dx, dy) __intuition_MoveScreen((__intuition_base_t)(__ndk_b), (struct Screen *)(screen), (WORD)(dx), (WORD)(dy))
 
 static __inline__ VOID
 __intuition_MoveWindow(struct IntuitionBase *__base, struct Window * window, WORD dx, WORD dy)
@@ -411,7 +435,8 @@ __intuition_MoveWindow(struct IntuitionBase *__base, struct Window * window, WOR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define MoveWindow(window, dx, dy) __intuition_MoveWindow((INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
+#define MoveWindow(window, dx, dy) __intuition_MoveWindow((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
+#define __MoveWindow_base(__ndk_b, window, dx, dy) __intuition_MoveWindow((__intuition_base_t)(__ndk_b), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
 
 static __inline__ VOID
 __intuition_OffGadget(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester)
@@ -428,7 +453,8 @@ __intuition_OffGadget(struct IntuitionBase *__base, struct Gadget * gadget, stru
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define OffGadget(gadget, window, requester) __intuition_OffGadget((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
+#define OffGadget(gadget, window, requester) __intuition_OffGadget((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
+#define __OffGadget_base(__ndk_b, gadget, window, requester) __intuition_OffGadget((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ VOID
 __intuition_OffMenu(struct IntuitionBase *__base, struct Window * window, UWORD menuNumber)
@@ -444,7 +470,8 @@ __intuition_OffMenu(struct IntuitionBase *__base, struct Window * window, UWORD 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define OffMenu(window, menuNumber) __intuition_OffMenu((INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(menuNumber))
+#define OffMenu(window, menuNumber) __intuition_OffMenu((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(menuNumber))
+#define __OffMenu_base(__ndk_b, window, menuNumber) __intuition_OffMenu((__intuition_base_t)(__ndk_b), (struct Window *)(window), (UWORD)(menuNumber))
 
 static __inline__ VOID
 __intuition_OnGadget(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester)
@@ -461,7 +488,8 @@ __intuition_OnGadget(struct IntuitionBase *__base, struct Gadget * gadget, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define OnGadget(gadget, window, requester) __intuition_OnGadget((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
+#define OnGadget(gadget, window, requester) __intuition_OnGadget((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
+#define __OnGadget_base(__ndk_b, gadget, window, requester) __intuition_OnGadget((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ VOID
 __intuition_OnMenu(struct IntuitionBase *__base, struct Window * window, UWORD menuNumber)
@@ -477,7 +505,8 @@ __intuition_OnMenu(struct IntuitionBase *__base, struct Window * window, UWORD m
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define OnMenu(window, menuNumber) __intuition_OnMenu((INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(menuNumber))
+#define OnMenu(window, menuNumber) __intuition_OnMenu((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(menuNumber))
+#define __OnMenu_base(__ndk_b, window, menuNumber) __intuition_OnMenu((__intuition_base_t)(__ndk_b), (struct Window *)(window), (UWORD)(menuNumber))
 
 static __inline__ struct Screen *
 __intuition_OpenScreen(struct IntuitionBase *__base, CONST struct NewScreen * newScreen)
@@ -493,7 +522,8 @@ __intuition_OpenScreen(struct IntuitionBase *__base, CONST struct NewScreen * ne
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Screen *)_d0;
 }
-#define OpenScreen(newScreen) __intuition_OpenScreen((INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen))
+#define OpenScreen(newScreen) __intuition_OpenScreen((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen))
+#define __OpenScreen_base(__ndk_b, newScreen) __intuition_OpenScreen((__intuition_base_t)(__ndk_b), (CONST struct NewScreen *)(newScreen))
 
 static __inline__ struct Window *
 __intuition_OpenWindow(struct IntuitionBase *__base, CONST struct NewWindow * newWindow)
@@ -509,7 +539,8 @@ __intuition_OpenWindow(struct IntuitionBase *__base, CONST struct NewWindow * ne
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Window *)_d0;
 }
-#define OpenWindow(newWindow) __intuition_OpenWindow((INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow))
+#define OpenWindow(newWindow) __intuition_OpenWindow((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow))
+#define __OpenWindow_base(__ndk_b, newWindow) __intuition_OpenWindow((__intuition_base_t)(__ndk_b), (CONST struct NewWindow *)(newWindow))
 
 static __inline__ ULONG
 __intuition_OpenWorkBench(struct IntuitionBase *__base)
@@ -525,7 +556,8 @@ __intuition_OpenWorkBench(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define OpenWorkBench() __intuition_OpenWorkBench((INTUITION_BASE_NAME))
+#define OpenWorkBench() __intuition_OpenWorkBench((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __OpenWorkBench_base(__ndk_b) __intuition_OpenWorkBench((__intuition_base_t)(__ndk_b))
 
 static __inline__ VOID
 __intuition_PrintIText(struct IntuitionBase *__base, struct RastPort * rp, CONST struct IntuiText * iText, WORD left, WORD top)
@@ -541,7 +573,8 @@ __intuition_PrintIText(struct IntuitionBase *__base, struct RastPort * rp, CONST
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define PrintIText(rp, iText, left, top) __intuition_PrintIText((INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct IntuiText *)(iText), (WORD)(left), (WORD)(top))
+#define PrintIText(rp, iText, left, top) __intuition_PrintIText((__intuition_base_t)(INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct IntuiText *)(iText), (WORD)(left), (WORD)(top))
+#define __PrintIText_base(__ndk_b, rp, iText, left, top) __intuition_PrintIText((__intuition_base_t)(__ndk_b), (struct RastPort *)(rp), (CONST struct IntuiText *)(iText), (WORD)(left), (WORD)(top))
 
 static __inline__ VOID
 __intuition_RefreshGadgets(struct IntuitionBase *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester)
@@ -558,7 +591,8 @@ __intuition_RefreshGadgets(struct IntuitionBase *__base, struct Gadget * gadgets
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RefreshGadgets(gadgets, window, requester) __intuition_RefreshGadgets((INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
+#define RefreshGadgets(gadgets, window, requester) __intuition_RefreshGadgets((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
+#define __RefreshGadgets_base(__ndk_b, gadgets, window, requester) __intuition_RefreshGadgets((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ UWORD
 __intuition_RemoveGadget(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget)
@@ -574,7 +608,8 @@ __intuition_RemoveGadget(struct IntuitionBase *__base, struct Window * window, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define RemoveGadget(window, gadget) __intuition_RemoveGadget((INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget))
+#define RemoveGadget(window, gadget) __intuition_RemoveGadget((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget))
+#define __RemoveGadget_base(__ndk_b, window, gadget) __intuition_RemoveGadget((__intuition_base_t)(__ndk_b), (struct Window *)(window), (struct Gadget *)(gadget))
 
 static __inline__ VOID
 __intuition_ReportMouse(struct IntuitionBase *__base, BOOL flag, struct Window * window)
@@ -590,7 +625,8 @@ __intuition_ReportMouse(struct IntuitionBase *__base, BOOL flag, struct Window *
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReportMouse(flag, window) __intuition_ReportMouse((INTUITION_BASE_NAME), (BOOL)(flag), (struct Window *)(window))
+#define ReportMouse(flag, window) __intuition_ReportMouse((__intuition_base_t)(INTUITION_BASE_NAME), (BOOL)(flag), (struct Window *)(window))
+#define __ReportMouse_base(__ndk_b, flag, window) __intuition_ReportMouse((__intuition_base_t)(__ndk_b), (BOOL)(flag), (struct Window *)(window))
 
 static __inline__ VOID
 __intuition_ReportMouse1(struct IntuitionBase *__base, struct Window * window, BOOL flag)
@@ -606,7 +642,8 @@ __intuition_ReportMouse1(struct IntuitionBase *__base, struct Window * window, B
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReportMouse1(window, flag) __intuition_ReportMouse1((INTUITION_BASE_NAME), (struct Window *)(window), (BOOL)(flag))
+#define ReportMouse1(window, flag) __intuition_ReportMouse1((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (BOOL)(flag))
+#define __ReportMouse1_base(__ndk_b, window, flag) __intuition_ReportMouse1((__intuition_base_t)(__ndk_b), (struct Window *)(window), (BOOL)(flag))
 
 static __inline__ BOOL
 __intuition_Request(struct IntuitionBase *__base, struct Requester * requester, struct Window * window)
@@ -622,7 +659,8 @@ __intuition_Request(struct IntuitionBase *__base, struct Requester * requester, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define Request(requester, window) __intuition_Request((INTUITION_BASE_NAME), (struct Requester *)(requester), (struct Window *)(window))
+#define Request(requester, window) __intuition_Request((__intuition_base_t)(INTUITION_BASE_NAME), (struct Requester *)(requester), (struct Window *)(window))
+#define __Request_base(__ndk_b, requester, window) __intuition_Request((__intuition_base_t)(__ndk_b), (struct Requester *)(requester), (struct Window *)(window))
 
 static __inline__ VOID
 __intuition_ScreenToBack(struct IntuitionBase *__base, struct Screen * screen)
@@ -638,7 +676,8 @@ __intuition_ScreenToBack(struct IntuitionBase *__base, struct Screen * screen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScreenToBack(screen) __intuition_ScreenToBack((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define ScreenToBack(screen) __intuition_ScreenToBack((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __ScreenToBack_base(__ndk_b, screen) __intuition_ScreenToBack((__intuition_base_t)(__ndk_b), (struct Screen *)(screen))
 
 static __inline__ VOID
 __intuition_ScreenToFront(struct IntuitionBase *__base, struct Screen * screen)
@@ -654,7 +693,8 @@ __intuition_ScreenToFront(struct IntuitionBase *__base, struct Screen * screen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScreenToFront(screen) __intuition_ScreenToFront((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define ScreenToFront(screen) __intuition_ScreenToFront((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __ScreenToFront_base(__ndk_b, screen) __intuition_ScreenToFront((__intuition_base_t)(__ndk_b), (struct Screen *)(screen))
 
 static __inline__ BOOL
 __intuition_SetDMRequest(struct IntuitionBase *__base, struct Window * window, struct Requester * requester)
@@ -670,7 +710,8 @@ __intuition_SetDMRequest(struct IntuitionBase *__base, struct Window * window, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetDMRequest(window, requester) __intuition_SetDMRequest((INTUITION_BASE_NAME), (struct Window *)(window), (struct Requester *)(requester))
+#define SetDMRequest(window, requester) __intuition_SetDMRequest((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (struct Requester *)(requester))
+#define __SetDMRequest_base(__ndk_b, window, requester) __intuition_SetDMRequest((__intuition_base_t)(__ndk_b), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ BOOL
 __intuition_SetMenuStrip(struct IntuitionBase *__base, struct Window * window, struct Menu * menu)
@@ -686,7 +727,8 @@ __intuition_SetMenuStrip(struct IntuitionBase *__base, struct Window * window, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define SetMenuStrip(window, menu) __intuition_SetMenuStrip((INTUITION_BASE_NAME), (struct Window *)(window), (struct Menu *)(menu))
+#define SetMenuStrip(window, menu) __intuition_SetMenuStrip((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (struct Menu *)(menu))
+#define __SetMenuStrip_base(__ndk_b, window, menu) __intuition_SetMenuStrip((__intuition_base_t)(__ndk_b), (struct Window *)(window), (struct Menu *)(menu))
 
 static __inline__ VOID
 __intuition_SetPointer(struct IntuitionBase *__base, struct Window * window, UWORD * pointer, WORD height, WORD width, WORD xOffset, WORD yOffset)
@@ -704,7 +746,8 @@ __intuition_SetPointer(struct IntuitionBase *__base, struct Window * window, UWO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetPointer(window, pointer, height, width, xOffset, yOffset) __intuition_SetPointer((INTUITION_BASE_NAME), (struct Window *)(window), (UWORD *)(pointer), (WORD)(height), (WORD)(width), (WORD)(xOffset), (WORD)(yOffset))
+#define SetPointer(window, pointer, height, width, xOffset, yOffset) __intuition_SetPointer((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (UWORD *)(pointer), (WORD)(height), (WORD)(width), (WORD)(xOffset), (WORD)(yOffset))
+#define __SetPointer_base(__ndk_b, window, pointer, height, width, xOffset, yOffset) __intuition_SetPointer((__intuition_base_t)(__ndk_b), (struct Window *)(window), (UWORD *)(pointer), (WORD)(height), (WORD)(width), (WORD)(xOffset), (WORD)(yOffset))
 
 static __inline__ VOID
 __intuition_SetWindowTitles(struct IntuitionBase *__base, struct Window * window, CONST_STRPTR windowTitle, CONST_STRPTR screenTitle)
@@ -721,7 +764,8 @@ __intuition_SetWindowTitles(struct IntuitionBase *__base, struct Window * window
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetWindowTitles(window, windowTitle, screenTitle) __intuition_SetWindowTitles((INTUITION_BASE_NAME), (struct Window *)(window), (CONST_STRPTR)(windowTitle), (CONST_STRPTR)(screenTitle))
+#define SetWindowTitles(window, windowTitle, screenTitle) __intuition_SetWindowTitles((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (CONST_STRPTR)(windowTitle), (CONST_STRPTR)(screenTitle))
+#define __SetWindowTitles_base(__ndk_b, window, windowTitle, screenTitle) __intuition_SetWindowTitles((__intuition_base_t)(__ndk_b), (struct Window *)(window), (CONST_STRPTR)(windowTitle), (CONST_STRPTR)(screenTitle))
 
 static __inline__ VOID
 __intuition_ShowTitle(struct IntuitionBase *__base, struct Screen * screen, BOOL showIt)
@@ -737,7 +781,8 @@ __intuition_ShowTitle(struct IntuitionBase *__base, struct Screen * screen, BOOL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ShowTitle(screen, showIt) __intuition_ShowTitle((INTUITION_BASE_NAME), (struct Screen *)(screen), (BOOL)(showIt))
+#define ShowTitle(screen, showIt) __intuition_ShowTitle((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen), (BOOL)(showIt))
+#define __ShowTitle_base(__ndk_b, screen, showIt) __intuition_ShowTitle((__intuition_base_t)(__ndk_b), (struct Screen *)(screen), (BOOL)(showIt))
 
 static __inline__ VOID
 __intuition_SizeWindow(struct IntuitionBase *__base, struct Window * window, WORD dx, WORD dy)
@@ -753,7 +798,8 @@ __intuition_SizeWindow(struct IntuitionBase *__base, struct Window * window, WOR
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SizeWindow(window, dx, dy) __intuition_SizeWindow((INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
+#define SizeWindow(window, dx, dy) __intuition_SizeWindow((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
+#define __SizeWindow_base(__ndk_b, window, dx, dy) __intuition_SizeWindow((__intuition_base_t)(__ndk_b), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
 
 static __inline__ struct View *
 __intuition_ViewAddress(struct IntuitionBase *__base)
@@ -769,7 +815,8 @@ __intuition_ViewAddress(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct View *)_d0;
 }
-#define ViewAddress() __intuition_ViewAddress((INTUITION_BASE_NAME))
+#define ViewAddress() __intuition_ViewAddress((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __ViewAddress_base(__ndk_b) __intuition_ViewAddress((__intuition_base_t)(__ndk_b))
 
 static __inline__ struct ViewPort *
 __intuition_ViewPortAddress(struct IntuitionBase *__base, CONST struct Window * window)
@@ -785,7 +832,8 @@ __intuition_ViewPortAddress(struct IntuitionBase *__base, CONST struct Window * 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ViewPort *)_d0;
 }
-#define ViewPortAddress(window) __intuition_ViewPortAddress((INTUITION_BASE_NAME), (CONST struct Window *)(window))
+#define ViewPortAddress(window) __intuition_ViewPortAddress((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct Window *)(window))
+#define __ViewPortAddress_base(__ndk_b, window) __intuition_ViewPortAddress((__intuition_base_t)(__ndk_b), (CONST struct Window *)(window))
 
 static __inline__ VOID
 __intuition_WindowToBack(struct IntuitionBase *__base, struct Window * window)
@@ -801,7 +849,8 @@ __intuition_WindowToBack(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WindowToBack(window) __intuition_WindowToBack((INTUITION_BASE_NAME), (struct Window *)(window))
+#define WindowToBack(window) __intuition_WindowToBack((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __WindowToBack_base(__ndk_b, window) __intuition_WindowToBack((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ VOID
 __intuition_WindowToFront(struct IntuitionBase *__base, struct Window * window)
@@ -817,7 +866,8 @@ __intuition_WindowToFront(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define WindowToFront(window) __intuition_WindowToFront((INTUITION_BASE_NAME), (struct Window *)(window))
+#define WindowToFront(window) __intuition_WindowToFront((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __WindowToFront_base(__ndk_b, window) __intuition_WindowToFront((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ BOOL
 __intuition_WindowLimits(struct IntuitionBase *__base, struct Window * window, LONG widthMin, LONG heightMin, ULONG widthMax, ULONG heightMax)
@@ -835,7 +885,8 @@ __intuition_WindowLimits(struct IntuitionBase *__base, struct Window * window, L
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define WindowLimits(window, widthMin, heightMin, widthMax, heightMax) __intuition_WindowLimits((INTUITION_BASE_NAME), (struct Window *)(window), (LONG)(widthMin), (LONG)(heightMin), (ULONG)(widthMax), (ULONG)(heightMax))
+#define WindowLimits(window, widthMin, heightMin, widthMax, heightMax) __intuition_WindowLimits((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (LONG)(widthMin), (LONG)(heightMin), (ULONG)(widthMax), (ULONG)(heightMax))
+#define __WindowLimits_base(__ndk_b, window, widthMin, heightMin, widthMax, heightMax) __intuition_WindowLimits((__intuition_base_t)(__ndk_b), (struct Window *)(window), (LONG)(widthMin), (LONG)(heightMin), (ULONG)(widthMax), (ULONG)(heightMax))
 
 static __inline__ struct Preferences *
 __intuition_SetPrefs(struct IntuitionBase *__base, CONST struct Preferences * preferences, LONG size, BOOL inform)
@@ -851,7 +902,8 @@ __intuition_SetPrefs(struct IntuitionBase *__base, CONST struct Preferences * pr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Preferences *)_d0;
 }
-#define SetPrefs(preferences, size, inform) __intuition_SetPrefs((INTUITION_BASE_NAME), (CONST struct Preferences *)(preferences), (LONG)(size), (BOOL)(inform))
+#define SetPrefs(preferences, size, inform) __intuition_SetPrefs((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct Preferences *)(preferences), (LONG)(size), (BOOL)(inform))
+#define __SetPrefs_base(__ndk_b, preferences, size, inform) __intuition_SetPrefs((__intuition_base_t)(__ndk_b), (CONST struct Preferences *)(preferences), (LONG)(size), (BOOL)(inform))
 
 static __inline__ LONG
 __intuition_IntuiTextLength(struct IntuitionBase *__base, CONST struct IntuiText * iText)
@@ -867,7 +919,8 @@ __intuition_IntuiTextLength(struct IntuitionBase *__base, CONST struct IntuiText
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define IntuiTextLength(iText) __intuition_IntuiTextLength((INTUITION_BASE_NAME), (CONST struct IntuiText *)(iText))
+#define IntuiTextLength(iText) __intuition_IntuiTextLength((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct IntuiText *)(iText))
+#define __IntuiTextLength_base(__ndk_b, iText) __intuition_IntuiTextLength((__intuition_base_t)(__ndk_b), (CONST struct IntuiText *)(iText))
 
 static __inline__ BOOL
 __intuition_WBenchToBack(struct IntuitionBase *__base)
@@ -883,7 +936,8 @@ __intuition_WBenchToBack(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define WBenchToBack() __intuition_WBenchToBack((INTUITION_BASE_NAME))
+#define WBenchToBack() __intuition_WBenchToBack((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __WBenchToBack_base(__ndk_b) __intuition_WBenchToBack((__intuition_base_t)(__ndk_b))
 
 static __inline__ BOOL
 __intuition_WBenchToFront(struct IntuitionBase *__base)
@@ -899,7 +953,8 @@ __intuition_WBenchToFront(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define WBenchToFront() __intuition_WBenchToFront((INTUITION_BASE_NAME))
+#define WBenchToFront() __intuition_WBenchToFront((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __WBenchToFront_base(__ndk_b) __intuition_WBenchToFront((__intuition_base_t)(__ndk_b))
 
 static __inline__ BOOL
 __intuition_AutoRequest(struct IntuitionBase *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG pFlag, ULONG nFlag, UWORD width, UWORD height)
@@ -919,7 +974,8 @@ __intuition_AutoRequest(struct IntuitionBase *__base, struct Window * window, CO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define AutoRequest(window, body, posText, negText, pFlag, nFlag, width, height) __intuition_AutoRequest((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(pFlag), (ULONG)(nFlag), (UWORD)(width), (UWORD)(height))
+#define AutoRequest(window, body, posText, negText, pFlag, nFlag, width, height) __intuition_AutoRequest((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(pFlag), (ULONG)(nFlag), (UWORD)(width), (UWORD)(height))
+#define __AutoRequest_base(__ndk_b, window, body, posText, negText, pFlag, nFlag, width, height) __intuition_AutoRequest((__intuition_base_t)(__ndk_b), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(pFlag), (ULONG)(nFlag), (UWORD)(width), (UWORD)(height))
 
 static __inline__ VOID
 __intuition_BeginRefresh(struct IntuitionBase *__base, struct Window * window)
@@ -935,7 +991,8 @@ __intuition_BeginRefresh(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define BeginRefresh(window) __intuition_BeginRefresh((INTUITION_BASE_NAME), (struct Window *)(window))
+#define BeginRefresh(window) __intuition_BeginRefresh((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __BeginRefresh_base(__ndk_b, window) __intuition_BeginRefresh((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ struct Window *
 __intuition_BuildSysRequest(struct IntuitionBase *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG flags, UWORD width, UWORD height)
@@ -954,7 +1011,8 @@ __intuition_BuildSysRequest(struct IntuitionBase *__base, struct Window * window
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Window *)_d0;
 }
-#define BuildSysRequest(window, body, posText, negText, flags, width, height) __intuition_BuildSysRequest((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(flags), (UWORD)(width), (UWORD)(height))
+#define BuildSysRequest(window, body, posText, negText, flags, width, height) __intuition_BuildSysRequest((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(flags), (UWORD)(width), (UWORD)(height))
+#define __BuildSysRequest_base(__ndk_b, window, body, posText, negText, flags, width, height) __intuition_BuildSysRequest((__intuition_base_t)(__ndk_b), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(flags), (UWORD)(width), (UWORD)(height))
 
 static __inline__ VOID
 __intuition_EndRefresh(struct IntuitionBase *__base, struct Window * window, LONG complete)
@@ -970,7 +1028,8 @@ __intuition_EndRefresh(struct IntuitionBase *__base, struct Window * window, LON
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define EndRefresh(window, complete) __intuition_EndRefresh((INTUITION_BASE_NAME), (struct Window *)(window), (LONG)(complete))
+#define EndRefresh(window, complete) __intuition_EndRefresh((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (LONG)(complete))
+#define __EndRefresh_base(__ndk_b, window, complete) __intuition_EndRefresh((__intuition_base_t)(__ndk_b), (struct Window *)(window), (LONG)(complete))
 
 static __inline__ VOID
 __intuition_FreeSysRequest(struct IntuitionBase *__base, struct Window * window)
@@ -986,7 +1045,8 @@ __intuition_FreeSysRequest(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeSysRequest(window) __intuition_FreeSysRequest((INTUITION_BASE_NAME), (struct Window *)(window))
+#define FreeSysRequest(window) __intuition_FreeSysRequest((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __FreeSysRequest_base(__ndk_b, window) __intuition_FreeSysRequest((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ LONG
 __intuition_MakeScreen(struct IntuitionBase *__base, struct Screen * screen)
@@ -1002,7 +1062,8 @@ __intuition_MakeScreen(struct IntuitionBase *__base, struct Screen * screen)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define MakeScreen(screen) __intuition_MakeScreen((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define MakeScreen(screen) __intuition_MakeScreen((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __MakeScreen_base(__ndk_b, screen) __intuition_MakeScreen((__intuition_base_t)(__ndk_b), (struct Screen *)(screen))
 
 static __inline__ LONG
 __intuition_RemakeDisplay(struct IntuitionBase *__base)
@@ -1018,7 +1079,8 @@ __intuition_RemakeDisplay(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RemakeDisplay() __intuition_RemakeDisplay((INTUITION_BASE_NAME))
+#define RemakeDisplay() __intuition_RemakeDisplay((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __RemakeDisplay_base(__ndk_b) __intuition_RemakeDisplay((__intuition_base_t)(__ndk_b))
 
 static __inline__ LONG
 __intuition_RethinkDisplay(struct IntuitionBase *__base)
@@ -1034,7 +1096,8 @@ __intuition_RethinkDisplay(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define RethinkDisplay() __intuition_RethinkDisplay((INTUITION_BASE_NAME))
+#define RethinkDisplay() __intuition_RethinkDisplay((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __RethinkDisplay_base(__ndk_b) __intuition_RethinkDisplay((__intuition_base_t)(__ndk_b))
 
 static __inline__ APTR
 __intuition_AllocRemember(struct IntuitionBase *__base, struct Remember ** rememberKey, ULONG size, ULONG flags)
@@ -1050,7 +1113,8 @@ __intuition_AllocRemember(struct IntuitionBase *__base, struct Remember ** remem
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define AllocRemember(rememberKey, size, flags) __intuition_AllocRemember((INTUITION_BASE_NAME), (struct Remember **)(rememberKey), (ULONG)(size), (ULONG)(flags))
+#define AllocRemember(rememberKey, size, flags) __intuition_AllocRemember((__intuition_base_t)(INTUITION_BASE_NAME), (struct Remember **)(rememberKey), (ULONG)(size), (ULONG)(flags))
+#define __AllocRemember_base(__ndk_b, rememberKey, size, flags) __intuition_AllocRemember((__intuition_base_t)(__ndk_b), (struct Remember **)(rememberKey), (ULONG)(size), (ULONG)(flags))
 
 static __inline__ VOID
 __intuition_AlohaWorkbench(struct IntuitionBase *__base, LONG wbport)
@@ -1066,7 +1130,8 @@ __intuition_AlohaWorkbench(struct IntuitionBase *__base, LONG wbport)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AlohaWorkbench(wbport) __intuition_AlohaWorkbench((INTUITION_BASE_NAME), (LONG)(wbport))
+#define AlohaWorkbench(wbport) __intuition_AlohaWorkbench((__intuition_base_t)(INTUITION_BASE_NAME), (LONG)(wbport))
+#define __AlohaWorkbench_base(__ndk_b, wbport) __intuition_AlohaWorkbench((__intuition_base_t)(__ndk_b), (LONG)(wbport))
 
 static __inline__ VOID
 __intuition_FreeRemember(struct IntuitionBase *__base, struct Remember ** rememberKey, BOOL reallyForget)
@@ -1082,7 +1147,8 @@ __intuition_FreeRemember(struct IntuitionBase *__base, struct Remember ** rememb
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeRemember(rememberKey, reallyForget) __intuition_FreeRemember((INTUITION_BASE_NAME), (struct Remember **)(rememberKey), (BOOL)(reallyForget))
+#define FreeRemember(rememberKey, reallyForget) __intuition_FreeRemember((__intuition_base_t)(INTUITION_BASE_NAME), (struct Remember **)(rememberKey), (BOOL)(reallyForget))
+#define __FreeRemember_base(__ndk_b, rememberKey, reallyForget) __intuition_FreeRemember((__intuition_base_t)(__ndk_b), (struct Remember **)(rememberKey), (BOOL)(reallyForget))
 
 static __inline__ ULONG
 __intuition_LockIBase(struct IntuitionBase *__base, ULONG dontknow)
@@ -1098,7 +1164,8 @@ __intuition_LockIBase(struct IntuitionBase *__base, ULONG dontknow)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define LockIBase(dontknow) __intuition_LockIBase((INTUITION_BASE_NAME), (ULONG)(dontknow))
+#define LockIBase(dontknow) __intuition_LockIBase((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG)(dontknow))
+#define __LockIBase_base(__ndk_b, dontknow) __intuition_LockIBase((__intuition_base_t)(__ndk_b), (ULONG)(dontknow))
 
 static __inline__ VOID
 __intuition_UnlockIBase(struct IntuitionBase *__base, ULONG ibLock)
@@ -1114,7 +1181,8 @@ __intuition_UnlockIBase(struct IntuitionBase *__base, ULONG ibLock)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockIBase(ibLock) __intuition_UnlockIBase((INTUITION_BASE_NAME), (ULONG)(ibLock))
+#define UnlockIBase(ibLock) __intuition_UnlockIBase((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG)(ibLock))
+#define __UnlockIBase_base(__ndk_b, ibLock) __intuition_UnlockIBase((__intuition_base_t)(__ndk_b), (ULONG)(ibLock))
 
 static __inline__ LONG
 __intuition_GetScreenData(struct IntuitionBase *__base, APTR buffer, UWORD size, UWORD type, CONST struct Screen * screen)
@@ -1130,7 +1198,8 @@ __intuition_GetScreenData(struct IntuitionBase *__base, APTR buffer, UWORD size,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define GetScreenData(buffer, size, type, screen) __intuition_GetScreenData((INTUITION_BASE_NAME), (APTR)(buffer), (UWORD)(size), (UWORD)(type), (CONST struct Screen *)(screen))
+#define GetScreenData(buffer, size, type, screen) __intuition_GetScreenData((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(buffer), (UWORD)(size), (UWORD)(type), (CONST struct Screen *)(screen))
+#define __GetScreenData_base(__ndk_b, buffer, size, type, screen) __intuition_GetScreenData((__intuition_base_t)(__ndk_b), (APTR)(buffer), (UWORD)(size), (UWORD)(type), (CONST struct Screen *)(screen))
 
 static __inline__ VOID
 __intuition_RefreshGList(struct IntuitionBase *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester, WORD numGad)
@@ -1147,7 +1216,8 @@ __intuition_RefreshGList(struct IntuitionBase *__base, struct Gadget * gadgets, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RefreshGList(gadgets, window, requester, numGad) __intuition_RefreshGList((INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester), (WORD)(numGad))
+#define RefreshGList(gadgets, window, requester, numGad) __intuition_RefreshGList((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester), (WORD)(numGad))
+#define __RefreshGList_base(__ndk_b, gadgets, window, requester, numGad) __intuition_RefreshGList((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester), (WORD)(numGad))
 
 static __inline__ UWORD
 __intuition_AddGList(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget, UWORD position, WORD numGad, struct Requester * requester)
@@ -1164,7 +1234,8 @@ __intuition_AddGList(struct IntuitionBase *__base, struct Window * window, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define AddGList(window, gadget, position, numGad, requester) __intuition_AddGList((INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position), (WORD)(numGad), (struct Requester *)(requester))
+#define AddGList(window, gadget, position, numGad, requester) __intuition_AddGList((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position), (WORD)(numGad), (struct Requester *)(requester))
+#define __AddGList_base(__ndk_b, window, gadget, position, numGad, requester) __intuition_AddGList((__intuition_base_t)(__ndk_b), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position), (WORD)(numGad), (struct Requester *)(requester))
 
 static __inline__ UWORD
 __intuition_RemoveGList(struct IntuitionBase *__base, struct Window * remPtr, struct Gadget * gadget, WORD numGad)
@@ -1180,7 +1251,8 @@ __intuition_RemoveGList(struct IntuitionBase *__base, struct Window * remPtr, st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define RemoveGList(remPtr, gadget, numGad) __intuition_RemoveGList((INTUITION_BASE_NAME), (struct Window *)(remPtr), (struct Gadget *)(gadget), (WORD)(numGad))
+#define RemoveGList(remPtr, gadget, numGad) __intuition_RemoveGList((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(remPtr), (struct Gadget *)(gadget), (WORD)(numGad))
+#define __RemoveGList_base(__ndk_b, remPtr, gadget, numGad) __intuition_RemoveGList((__intuition_base_t)(__ndk_b), (struct Window *)(remPtr), (struct Gadget *)(gadget), (WORD)(numGad))
 
 static __inline__ VOID
 __intuition_ActivateWindow(struct IntuitionBase *__base, struct Window * window)
@@ -1196,7 +1268,8 @@ __intuition_ActivateWindow(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ActivateWindow(window) __intuition_ActivateWindow((INTUITION_BASE_NAME), (struct Window *)(window))
+#define ActivateWindow(window) __intuition_ActivateWindow((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ActivateWindow_base(__ndk_b, window) __intuition_ActivateWindow((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ VOID
 __intuition_RefreshWindowFrame(struct IntuitionBase *__base, struct Window * window)
@@ -1212,7 +1285,8 @@ __intuition_RefreshWindowFrame(struct IntuitionBase *__base, struct Window * win
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RefreshWindowFrame(window) __intuition_RefreshWindowFrame((INTUITION_BASE_NAME), (struct Window *)(window))
+#define RefreshWindowFrame(window) __intuition_RefreshWindowFrame((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __RefreshWindowFrame_base(__ndk_b, window) __intuition_RefreshWindowFrame((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ BOOL
 __intuition_ActivateGadget(struct IntuitionBase *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester)
@@ -1229,7 +1303,8 @@ __intuition_ActivateGadget(struct IntuitionBase *__base, struct Gadget * gadgets
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ActivateGadget(gadgets, window, requester) __intuition_ActivateGadget((INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
+#define ActivateGadget(gadgets, window, requester) __intuition_ActivateGadget((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
+#define __ActivateGadget_base(__ndk_b, gadgets, window, requester) __intuition_ActivateGadget((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ VOID
 __intuition_NewModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, UWORD flags, UWORD horizPot, UWORD vertPot, UWORD horizBody, UWORD vertBody, WORD numGad)
@@ -1250,7 +1325,8 @@ __intuition_NewModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define NewModifyProp(gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody, numGad) __intuition_NewModifyProp((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody), (WORD)(numGad))
+#define NewModifyProp(gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody, numGad) __intuition_NewModifyProp((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody), (WORD)(numGad))
+#define __NewModifyProp_base(__ndk_b, gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody, numGad) __intuition_NewModifyProp((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody), (WORD)(numGad))
 
 static __inline__ LONG
 __intuition_QueryOverscan(struct IntuitionBase *__base, ULONG displayID, struct Rectangle * rect, WORD oScanType)
@@ -1266,7 +1342,8 @@ __intuition_QueryOverscan(struct IntuitionBase *__base, ULONG displayID, struct 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define QueryOverscan(displayID, rect, oScanType) __intuition_QueryOverscan((INTUITION_BASE_NAME), (ULONG)(displayID), (struct Rectangle *)(rect), (WORD)(oScanType))
+#define QueryOverscan(displayID, rect, oScanType) __intuition_QueryOverscan((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG)(displayID), (struct Rectangle *)(rect), (WORD)(oScanType))
+#define __QueryOverscan_base(__ndk_b, displayID, rect, oScanType) __intuition_QueryOverscan((__intuition_base_t)(__ndk_b), (ULONG)(displayID), (struct Rectangle *)(rect), (WORD)(oScanType))
 
 static __inline__ VOID
 __intuition_MoveWindowInFrontOf(struct IntuitionBase *__base, struct Window * window, struct Window * behindWindow)
@@ -1282,7 +1359,8 @@ __intuition_MoveWindowInFrontOf(struct IntuitionBase *__base, struct Window * wi
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define MoveWindowInFrontOf(window, behindWindow) __intuition_MoveWindowInFrontOf((INTUITION_BASE_NAME), (struct Window *)(window), (struct Window *)(behindWindow))
+#define MoveWindowInFrontOf(window, behindWindow) __intuition_MoveWindowInFrontOf((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (struct Window *)(behindWindow))
+#define __MoveWindowInFrontOf_base(__ndk_b, window, behindWindow) __intuition_MoveWindowInFrontOf((__intuition_base_t)(__ndk_b), (struct Window *)(window), (struct Window *)(behindWindow))
 
 static __inline__ VOID
 __intuition_ChangeWindowBox(struct IntuitionBase *__base, struct Window * window, WORD left, WORD top, WORD width, WORD height)
@@ -1300,7 +1378,8 @@ __intuition_ChangeWindowBox(struct IntuitionBase *__base, struct Window * window
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ChangeWindowBox(window, left, top, width, height) __intuition_ChangeWindowBox((INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height))
+#define ChangeWindowBox(window, left, top, width, height) __intuition_ChangeWindowBox((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height))
+#define __ChangeWindowBox_base(__ndk_b, window, left, top, width, height) __intuition_ChangeWindowBox((__intuition_base_t)(__ndk_b), (struct Window *)(window), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height))
 
 static __inline__ struct Hook *
 __intuition_SetEditHook(struct IntuitionBase *__base, struct Hook * hook)
@@ -1316,7 +1395,8 @@ __intuition_SetEditHook(struct IntuitionBase *__base, struct Hook * hook)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Hook *)_d0;
 }
-#define SetEditHook(hook) __intuition_SetEditHook((INTUITION_BASE_NAME), (struct Hook *)(hook))
+#define SetEditHook(hook) __intuition_SetEditHook((__intuition_base_t)(INTUITION_BASE_NAME), (struct Hook *)(hook))
+#define __SetEditHook_base(__ndk_b, hook) __intuition_SetEditHook((__intuition_base_t)(__ndk_b), (struct Hook *)(hook))
 
 static __inline__ LONG
 __intuition_SetMouseQueue(struct IntuitionBase *__base, struct Window * window, UWORD queueLength)
@@ -1332,7 +1412,8 @@ __intuition_SetMouseQueue(struct IntuitionBase *__base, struct Window * window, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SetMouseQueue(window, queueLength) __intuition_SetMouseQueue((INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(queueLength))
+#define SetMouseQueue(window, queueLength) __intuition_SetMouseQueue((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(queueLength))
+#define __SetMouseQueue_base(__ndk_b, window, queueLength) __intuition_SetMouseQueue((__intuition_base_t)(__ndk_b), (struct Window *)(window), (UWORD)(queueLength))
 
 static __inline__ VOID
 __intuition_ZipWindow(struct IntuitionBase *__base, struct Window * window)
@@ -1348,7 +1429,8 @@ __intuition_ZipWindow(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ZipWindow(window) __intuition_ZipWindow((INTUITION_BASE_NAME), (struct Window *)(window))
+#define ZipWindow(window) __intuition_ZipWindow((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ZipWindow_base(__ndk_b, window) __intuition_ZipWindow((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ struct Screen *
 __intuition_LockPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
@@ -1364,7 +1446,8 @@ __intuition_LockPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Screen *)_d0;
 }
-#define LockPubScreen(name) __intuition_LockPubScreen((INTUITION_BASE_NAME), (CONST_STRPTR)(name))
+#define LockPubScreen(name) __intuition_LockPubScreen((__intuition_base_t)(INTUITION_BASE_NAME), (CONST_STRPTR)(name))
+#define __LockPubScreen_base(__ndk_b, name) __intuition_LockPubScreen((__intuition_base_t)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ VOID
 __intuition_UnlockPubScreen(struct IntuitionBase *__base, CONST_STRPTR name, struct Screen * screen)
@@ -1380,7 +1463,8 @@ __intuition_UnlockPubScreen(struct IntuitionBase *__base, CONST_STRPTR name, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockPubScreen(name, screen) __intuition_UnlockPubScreen((INTUITION_BASE_NAME), (CONST_STRPTR)(name), (struct Screen *)(screen))
+#define UnlockPubScreen(name, screen) __intuition_UnlockPubScreen((__intuition_base_t)(INTUITION_BASE_NAME), (CONST_STRPTR)(name), (struct Screen *)(screen))
+#define __UnlockPubScreen_base(__ndk_b, name, screen) __intuition_UnlockPubScreen((__intuition_base_t)(__ndk_b), (CONST_STRPTR)(name), (struct Screen *)(screen))
 
 static __inline__ struct List *
 __intuition_LockPubScreenList(struct IntuitionBase *__base)
@@ -1396,7 +1480,8 @@ __intuition_LockPubScreenList(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct List *)_d0;
 }
-#define LockPubScreenList() __intuition_LockPubScreenList((INTUITION_BASE_NAME))
+#define LockPubScreenList() __intuition_LockPubScreenList((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __LockPubScreenList_base(__ndk_b) __intuition_LockPubScreenList((__intuition_base_t)(__ndk_b))
 
 static __inline__ VOID
 __intuition_UnlockPubScreenList(struct IntuitionBase *__base)
@@ -1412,7 +1497,8 @@ __intuition_UnlockPubScreenList(struct IntuitionBase *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define UnlockPubScreenList() __intuition_UnlockPubScreenList((INTUITION_BASE_NAME))
+#define UnlockPubScreenList() __intuition_UnlockPubScreenList((__intuition_base_t)(INTUITION_BASE_NAME))
+#define __UnlockPubScreenList_base(__ndk_b) __intuition_UnlockPubScreenList((__intuition_base_t)(__ndk_b))
 
 static __inline__ STRPTR
 __intuition_NextPubScreen(struct IntuitionBase *__base, CONST struct Screen * screen, STRPTR namebuf)
@@ -1428,7 +1514,8 @@ __intuition_NextPubScreen(struct IntuitionBase *__base, CONST struct Screen * sc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (STRPTR)_d0;
 }
-#define NextPubScreen(screen, namebuf) __intuition_NextPubScreen((INTUITION_BASE_NAME), (CONST struct Screen *)(screen), (STRPTR)(namebuf))
+#define NextPubScreen(screen, namebuf) __intuition_NextPubScreen((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct Screen *)(screen), (STRPTR)(namebuf))
+#define __NextPubScreen_base(__ndk_b, screen, namebuf) __intuition_NextPubScreen((__intuition_base_t)(__ndk_b), (CONST struct Screen *)(screen), (STRPTR)(namebuf))
 
 static __inline__ VOID
 __intuition_SetDefaultPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
@@ -1444,7 +1531,8 @@ __intuition_SetDefaultPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetDefaultPubScreen(name) __intuition_SetDefaultPubScreen((INTUITION_BASE_NAME), (CONST_STRPTR)(name))
+#define SetDefaultPubScreen(name) __intuition_SetDefaultPubScreen((__intuition_base_t)(INTUITION_BASE_NAME), (CONST_STRPTR)(name))
+#define __SetDefaultPubScreen_base(__ndk_b, name) __intuition_SetDefaultPubScreen((__intuition_base_t)(__ndk_b), (CONST_STRPTR)(name))
 
 static __inline__ UWORD
 __intuition_SetPubScreenModes(struct IntuitionBase *__base, UWORD modes)
@@ -1460,7 +1548,8 @@ __intuition_SetPubScreenModes(struct IntuitionBase *__base, UWORD modes)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define SetPubScreenModes(modes) __intuition_SetPubScreenModes((INTUITION_BASE_NAME), (UWORD)(modes))
+#define SetPubScreenModes(modes) __intuition_SetPubScreenModes((__intuition_base_t)(INTUITION_BASE_NAME), (UWORD)(modes))
+#define __SetPubScreenModes_base(__ndk_b, modes) __intuition_SetPubScreenModes((__intuition_base_t)(__ndk_b), (UWORD)(modes))
 
 static __inline__ UWORD
 __intuition_PubScreenStatus(struct IntuitionBase *__base, struct Screen * screen, UWORD statusFlags)
@@ -1476,7 +1565,8 @@ __intuition_PubScreenStatus(struct IntuitionBase *__base, struct Screen * screen
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (UWORD)_d0;
 }
-#define PubScreenStatus(screen, statusFlags) __intuition_PubScreenStatus((INTUITION_BASE_NAME), (struct Screen *)(screen), (UWORD)(statusFlags))
+#define PubScreenStatus(screen, statusFlags) __intuition_PubScreenStatus((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen), (UWORD)(statusFlags))
+#define __PubScreenStatus_base(__ndk_b, screen, statusFlags) __intuition_PubScreenStatus((__intuition_base_t)(__ndk_b), (struct Screen *)(screen), (UWORD)(statusFlags))
 
 static __inline__ struct RastPort *
 __intuition_ObtainGIRPort(struct IntuitionBase *__base, struct GadgetInfo * gInfo)
@@ -1492,7 +1582,8 @@ __intuition_ObtainGIRPort(struct IntuitionBase *__base, struct GadgetInfo * gInf
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct RastPort *)_d0;
 }
-#define ObtainGIRPort(gInfo) __intuition_ObtainGIRPort((INTUITION_BASE_NAME), (struct GadgetInfo *)(gInfo))
+#define ObtainGIRPort(gInfo) __intuition_ObtainGIRPort((__intuition_base_t)(INTUITION_BASE_NAME), (struct GadgetInfo *)(gInfo))
+#define __ObtainGIRPort_base(__ndk_b, gInfo) __intuition_ObtainGIRPort((__intuition_base_t)(__ndk_b), (struct GadgetInfo *)(gInfo))
 
 static __inline__ VOID
 __intuition_ReleaseGIRPort(struct IntuitionBase *__base, struct RastPort * rp)
@@ -1508,7 +1599,8 @@ __intuition_ReleaseGIRPort(struct IntuitionBase *__base, struct RastPort * rp)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ReleaseGIRPort(rp) __intuition_ReleaseGIRPort((INTUITION_BASE_NAME), (struct RastPort *)(rp))
+#define ReleaseGIRPort(rp) __intuition_ReleaseGIRPort((__intuition_base_t)(INTUITION_BASE_NAME), (struct RastPort *)(rp))
+#define __ReleaseGIRPort_base(__ndk_b, rp) __intuition_ReleaseGIRPort((__intuition_base_t)(__ndk_b), (struct RastPort *)(rp))
 
 static __inline__ VOID
 __intuition_GadgetMouse(struct IntuitionBase *__base, struct Gadget * gadget, struct GadgetInfo * gInfo, WORD * mousePoint)
@@ -1525,7 +1617,8 @@ __intuition_GadgetMouse(struct IntuitionBase *__base, struct Gadget * gadget, st
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GadgetMouse(gadget, gInfo, mousePoint) __intuition_GadgetMouse((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct GadgetInfo *)(gInfo), (WORD *)(mousePoint))
+#define GadgetMouse(gadget, gInfo, mousePoint) __intuition_GadgetMouse((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct GadgetInfo *)(gInfo), (WORD *)(mousePoint))
+#define __GadgetMouse_base(__ndk_b, gadget, gInfo, mousePoint) __intuition_GadgetMouse((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadget), (struct GadgetInfo *)(gInfo), (WORD *)(mousePoint))
 
 static __inline__ VOID
 __intuition_GetDefaultPubScreen(struct IntuitionBase *__base, STRPTR nameBuffer)
@@ -1541,7 +1634,8 @@ __intuition_GetDefaultPubScreen(struct IntuitionBase *__base, STRPTR nameBuffer)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetDefaultPubScreen(nameBuffer) __intuition_GetDefaultPubScreen((INTUITION_BASE_NAME), (STRPTR)(nameBuffer))
+#define GetDefaultPubScreen(nameBuffer) __intuition_GetDefaultPubScreen((__intuition_base_t)(INTUITION_BASE_NAME), (STRPTR)(nameBuffer))
+#define __GetDefaultPubScreen_base(__ndk_b, nameBuffer) __intuition_GetDefaultPubScreen((__intuition_base_t)(__ndk_b), (STRPTR)(nameBuffer))
 
 static __inline__ LONG
 __intuition_EasyRequestArgs(struct IntuitionBase *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG * idcmpPtr, CONST_APTR args)
@@ -1559,9 +1653,19 @@ __intuition_EasyRequestArgs(struct IntuitionBase *__base, struct Window * window
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define EasyRequestArgs(window, easyStruct, idcmpPtr, args) __intuition_EasyRequestArgs((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)(args))
+#define EasyRequestArgs(window, easyStruct, idcmpPtr, args) __intuition_EasyRequestArgs((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)(args))
+#define __EasyRequestArgs_base(__ndk_b, window, easyStruct, idcmpPtr, args) __intuition_EasyRequestArgs((__intuition_base_t)(__ndk_b), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)(args))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) LONG
+___intuition_EasyRequest(__intuition_base_t __ndk_base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG * idcmpPtr, ...)
+{
+	return __intuition_EasyRequestArgs(__ndk_base, (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)((ULONG)&idcmpPtr + sizeof(idcmpPtr)));
+}
+#define EasyRequest(window, easyStruct, idcmpPtr, ...) ___intuition_EasyRequest((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), ##__VA_ARGS__)
+#else
 #define EasyRequest(window, easyStruct, idcmpPtr, ...) (EasyRequest)((struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), ##__VA_ARGS__)
+#endif
 
 static __inline__ struct Window *
 __intuition_BuildEasyRequestArgs(struct IntuitionBase *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG idcmp, CONST_APTR args)
@@ -1578,9 +1682,19 @@ __intuition_BuildEasyRequestArgs(struct IntuitionBase *__base, struct Window * w
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Window *)_d0;
 }
-#define BuildEasyRequestArgs(window, easyStruct, idcmp, args) __intuition_BuildEasyRequestArgs((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)(args))
+#define BuildEasyRequestArgs(window, easyStruct, idcmp, args) __intuition_BuildEasyRequestArgs((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)(args))
+#define __BuildEasyRequestArgs_base(__ndk_b, window, easyStruct, idcmp, args) __intuition_BuildEasyRequestArgs((__intuition_base_t)(__ndk_b), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)(args))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct Window *
+___intuition_BuildEasyRequest(__intuition_base_t __ndk_base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG idcmp, ...)
+{
+	return __intuition_BuildEasyRequestArgs(__ndk_base, (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)((ULONG)&idcmp + sizeof(idcmp)));
+}
+#define BuildEasyRequest(window, easyStruct, idcmp, ...) ___intuition_BuildEasyRequest((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), ##__VA_ARGS__)
+#else
 #define BuildEasyRequest(window, easyStruct, idcmp, ...) (BuildEasyRequest)((struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), ##__VA_ARGS__)
+#endif
 
 static __inline__ LONG
 __intuition_SysReqHandler(struct IntuitionBase *__base, struct Window * window, ULONG * idcmpPtr, BOOL waitInput)
@@ -1596,7 +1710,8 @@ __intuition_SysReqHandler(struct IntuitionBase *__base, struct Window * window, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define SysReqHandler(window, idcmpPtr, waitInput) __intuition_SysReqHandler((INTUITION_BASE_NAME), (struct Window *)(window), (ULONG *)(idcmpPtr), (BOOL)(waitInput))
+#define SysReqHandler(window, idcmpPtr, waitInput) __intuition_SysReqHandler((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (ULONG *)(idcmpPtr), (BOOL)(waitInput))
+#define __SysReqHandler_base(__ndk_b, window, idcmpPtr, waitInput) __intuition_SysReqHandler((__intuition_base_t)(__ndk_b), (struct Window *)(window), (ULONG *)(idcmpPtr), (BOOL)(waitInput))
 
 static __inline__ struct Window *
 __intuition_OpenWindowTagList(struct IntuitionBase *__base, CONST struct NewWindow * newWindow, CONST struct TagItem * tagList)
@@ -1612,9 +1727,19 @@ __intuition_OpenWindowTagList(struct IntuitionBase *__base, CONST struct NewWind
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Window *)_d0;
 }
-#define OpenWindowTagList(newWindow, tagList) __intuition_OpenWindowTagList((INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)(tagList))
+#define OpenWindowTagList(newWindow, tagList) __intuition_OpenWindowTagList((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)(tagList))
+#define __OpenWindowTagList_base(__ndk_b, newWindow, tagList) __intuition_OpenWindowTagList((__intuition_base_t)(__ndk_b), (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct Window *
+___intuition_OpenWindowTags(__intuition_base_t __ndk_base, CONST struct NewWindow * newWindow, Tag tag1Type, ...)
+{
+	return __intuition_OpenWindowTagList(__ndk_base, (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)&tag1Type);
+}
+#define OpenWindowTags(newWindow, ...) ___intuition_OpenWindowTags((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow), ##__VA_ARGS__)
+#else
 #define OpenWindowTags(newWindow, ...) (OpenWindowTags)((CONST struct NewWindow *)(newWindow), ##__VA_ARGS__)
+#endif
 
 static __inline__ struct Screen *
 __intuition_OpenScreenTagList(struct IntuitionBase *__base, CONST struct NewScreen * newScreen, CONST struct TagItem * tagList)
@@ -1630,9 +1755,19 @@ __intuition_OpenScreenTagList(struct IntuitionBase *__base, CONST struct NewScre
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct Screen *)_d0;
 }
-#define OpenScreenTagList(newScreen, tagList) __intuition_OpenScreenTagList((INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)(tagList))
+#define OpenScreenTagList(newScreen, tagList) __intuition_OpenScreenTagList((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)(tagList))
+#define __OpenScreenTagList_base(__ndk_b, newScreen, tagList) __intuition_OpenScreenTagList((__intuition_base_t)(__ndk_b), (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) struct Screen *
+___intuition_OpenScreenTags(__intuition_base_t __ndk_base, CONST struct NewScreen * newScreen, Tag tag1Type, ...)
+{
+	return __intuition_OpenScreenTagList(__ndk_base, (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)&tag1Type);
+}
+#define OpenScreenTags(newScreen, ...) ___intuition_OpenScreenTags((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen), ##__VA_ARGS__)
+#else
 #define OpenScreenTags(newScreen, ...) (OpenScreenTags)((CONST struct NewScreen *)(newScreen), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __intuition_DrawImageState(struct IntuitionBase *__base, struct RastPort * rp, struct Image * image, WORD leftOffset, WORD topOffset, ULONG state, CONST struct DrawInfo * drawInfo)
@@ -1650,7 +1785,8 @@ __intuition_DrawImageState(struct IntuitionBase *__base, struct RastPort * rp, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DrawImageState(rp, image, leftOffset, topOffset, state, drawInfo) __intuition_DrawImageState((INTUITION_BASE_NAME), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset), (ULONG)(state), (CONST struct DrawInfo *)(drawInfo))
+#define DrawImageState(rp, image, leftOffset, topOffset, state, drawInfo) __intuition_DrawImageState((__intuition_base_t)(INTUITION_BASE_NAME), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset), (ULONG)(state), (CONST struct DrawInfo *)(drawInfo))
+#define __DrawImageState_base(__ndk_b, rp, image, leftOffset, topOffset, state, drawInfo) __intuition_DrawImageState((__intuition_base_t)(__ndk_b), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset), (ULONG)(state), (CONST struct DrawInfo *)(drawInfo))
 
 static __inline__ BOOL
 __intuition_PointInImage(struct IntuitionBase *__base, ULONG point, struct Image * image)
@@ -1666,7 +1802,8 @@ __intuition_PointInImage(struct IntuitionBase *__base, ULONG point, struct Image
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define PointInImage(point, image) __intuition_PointInImage((INTUITION_BASE_NAME), (ULONG)(point), (struct Image *)(image))
+#define PointInImage(point, image) __intuition_PointInImage((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG)(point), (struct Image *)(image))
+#define __PointInImage_base(__ndk_b, point, image) __intuition_PointInImage((__intuition_base_t)(__ndk_b), (ULONG)(point), (struct Image *)(image))
 
 static __inline__ VOID
 __intuition_EraseImage(struct IntuitionBase *__base, struct RastPort * rp, struct Image * image, WORD leftOffset, WORD topOffset)
@@ -1682,7 +1819,8 @@ __intuition_EraseImage(struct IntuitionBase *__base, struct RastPort * rp, struc
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define EraseImage(rp, image, leftOffset, topOffset) __intuition_EraseImage((INTUITION_BASE_NAME), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
+#define EraseImage(rp, image, leftOffset, topOffset) __intuition_EraseImage((__intuition_base_t)(INTUITION_BASE_NAME), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
+#define __EraseImage_base(__ndk_b, rp, image, leftOffset, topOffset) __intuition_EraseImage((__intuition_base_t)(__ndk_b), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
 
 static __inline__ APTR
 __intuition_NewObjectA(struct IntuitionBase *__base, struct IClass * classPtr, CONST_STRPTR classID, CONST struct TagItem * tagList)
@@ -1699,9 +1837,19 @@ __intuition_NewObjectA(struct IntuitionBase *__base, struct IClass * classPtr, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define NewObjectA(classPtr, classID, tagList) __intuition_NewObjectA((INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)(tagList))
+#define NewObjectA(classPtr, classID, tagList) __intuition_NewObjectA((__intuition_base_t)(INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)(tagList))
+#define __NewObjectA_base(__ndk_b, classPtr, classID, tagList) __intuition_NewObjectA((__intuition_base_t)(__ndk_b), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) APTR
+___intuition_NewObject(__intuition_base_t __ndk_base, struct IClass * classPtr, CONST_STRPTR classID, Tag tag1, ...)
+{
+	return __intuition_NewObjectA(__ndk_base, (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)&tag1);
+}
+#define NewObject(classPtr, classID, ...) ___intuition_NewObject((__intuition_base_t)(INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), ##__VA_ARGS__)
+#else
 #define NewObject(classPtr, classID, ...) (NewObject)((struct IClass *)(classPtr), (CONST_STRPTR)(classID), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __intuition_DisposeObject(struct IntuitionBase *__base, APTR object)
@@ -1717,7 +1865,8 @@ __intuition_DisposeObject(struct IntuitionBase *__base, APTR object)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define DisposeObject(object) __intuition_DisposeObject((INTUITION_BASE_NAME), (APTR)(object))
+#define DisposeObject(object) __intuition_DisposeObject((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(object))
+#define __DisposeObject_base(__ndk_b, object) __intuition_DisposeObject((__intuition_base_t)(__ndk_b), (APTR)(object))
 
 static __inline__ ULONG
 __intuition_SetAttrsA(struct IntuitionBase *__base, APTR object, CONST struct TagItem * tagList)
@@ -1733,9 +1882,19 @@ __intuition_SetAttrsA(struct IntuitionBase *__base, APTR object, CONST struct Ta
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetAttrsA(object, tagList) __intuition_SetAttrsA((INTUITION_BASE_NAME), (APTR)(object), (CONST struct TagItem *)(tagList))
+#define SetAttrsA(object, tagList) __intuition_SetAttrsA((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(object), (CONST struct TagItem *)(tagList))
+#define __SetAttrsA_base(__ndk_b, object, tagList) __intuition_SetAttrsA((__intuition_base_t)(__ndk_b), (APTR)(object), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___intuition_SetAttrs(__intuition_base_t __ndk_base, APTR object, Tag tag1, ...)
+{
+	return __intuition_SetAttrsA(__ndk_base, (APTR)(object), (CONST struct TagItem *)&tag1);
+}
+#define SetAttrs(object, ...) ___intuition_SetAttrs((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(object), ##__VA_ARGS__)
+#else
 #define SetAttrs(object, ...) (SetAttrs)((APTR)(object), ##__VA_ARGS__)
+#endif
 
 static __inline__ ULONG
 __intuition_GetAttr(struct IntuitionBase *__base, ULONG attrID, APTR object, ULONG * storagePtr)
@@ -1751,7 +1910,8 @@ __intuition_GetAttr(struct IntuitionBase *__base, ULONG attrID, APTR object, ULO
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define GetAttr(attrID, object, storagePtr) __intuition_GetAttr((INTUITION_BASE_NAME), (ULONG)(attrID), (APTR)(object), (ULONG *)(storagePtr))
+#define GetAttr(attrID, object, storagePtr) __intuition_GetAttr((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG)(attrID), (APTR)(object), (ULONG *)(storagePtr))
+#define __GetAttr_base(__ndk_b, attrID, object, storagePtr) __intuition_GetAttr((__intuition_base_t)(__ndk_b), (ULONG)(attrID), (APTR)(object), (ULONG *)(storagePtr))
 
 static __inline__ ULONG
 __intuition_SetGadgetAttrsA(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, CONST struct TagItem * tagList)
@@ -1769,9 +1929,19 @@ __intuition_SetGadgetAttrsA(struct IntuitionBase *__base, struct Gadget * gadget
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define SetGadgetAttrsA(gadget, window, requester, tagList) __intuition_SetGadgetAttrsA((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)(tagList))
+#define SetGadgetAttrsA(gadget, window, requester, tagList) __intuition_SetGadgetAttrsA((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)(tagList))
+#define __SetGadgetAttrsA_base(__ndk_b, gadget, window, requester, tagList) __intuition_SetGadgetAttrsA((__intuition_base_t)(__ndk_b), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)(tagList))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___intuition_SetGadgetAttrs(__intuition_base_t __ndk_base, struct Gadget * gadget, struct Window * window, struct Requester * requester, Tag tag1, ...)
+{
+	return __intuition_SetGadgetAttrsA(__ndk_base, (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)&tag1);
+}
+#define SetGadgetAttrs(gadget, window, requester, ...) ___intuition_SetGadgetAttrs((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
+#else
 #define SetGadgetAttrs(gadget, window, requester, ...) (SetGadgetAttrs)((struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
+#endif
 
 static __inline__ APTR
 __intuition_NextObject(struct IntuitionBase *__base, APTR objectPtrPtr)
@@ -1787,7 +1957,8 @@ __intuition_NextObject(struct IntuitionBase *__base, APTR objectPtrPtr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (APTR)_d0;
 }
-#define NextObject(objectPtrPtr) __intuition_NextObject((INTUITION_BASE_NAME), (APTR)(objectPtrPtr))
+#define NextObject(objectPtrPtr) __intuition_NextObject((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(objectPtrPtr))
+#define __NextObject_base(__ndk_b, objectPtrPtr) __intuition_NextObject((__intuition_base_t)(__ndk_b), (APTR)(objectPtrPtr))
 
 static __inline__ struct IClass *
 __intuition_MakeClass(struct IntuitionBase *__base, CONST_STRPTR classID, CONST_STRPTR superClassID, CONST struct IClass * superClassPtr, UWORD instanceSize, ULONG flags)
@@ -1804,7 +1975,8 @@ __intuition_MakeClass(struct IntuitionBase *__base, CONST_STRPTR classID, CONST_
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct IClass *)_d0;
 }
-#define MakeClass(classID, superClassID, superClassPtr, instanceSize, flags) __intuition_MakeClass((INTUITION_BASE_NAME), (CONST_STRPTR)(classID), (CONST_STRPTR)(superClassID), (CONST struct IClass *)(superClassPtr), (UWORD)(instanceSize), (ULONG)(flags))
+#define MakeClass(classID, superClassID, superClassPtr, instanceSize, flags) __intuition_MakeClass((__intuition_base_t)(INTUITION_BASE_NAME), (CONST_STRPTR)(classID), (CONST_STRPTR)(superClassID), (CONST struct IClass *)(superClassPtr), (UWORD)(instanceSize), (ULONG)(flags))
+#define __MakeClass_base(__ndk_b, classID, superClassID, superClassPtr, instanceSize, flags) __intuition_MakeClass((__intuition_base_t)(__ndk_b), (CONST_STRPTR)(classID), (CONST_STRPTR)(superClassID), (CONST struct IClass *)(superClassPtr), (UWORD)(instanceSize), (ULONG)(flags))
 
 static __inline__ VOID
 __intuition_AddClass(struct IntuitionBase *__base, struct IClass * classPtr)
@@ -1820,7 +1992,8 @@ __intuition_AddClass(struct IntuitionBase *__base, struct IClass * classPtr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddClass(classPtr) __intuition_AddClass((INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define AddClass(classPtr) __intuition_AddClass((__intuition_base_t)(INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define __AddClass_base(__ndk_b, classPtr) __intuition_AddClass((__intuition_base_t)(__ndk_b), (struct IClass *)(classPtr))
 
 static __inline__ struct DrawInfo *
 __intuition_GetScreenDrawInfo(struct IntuitionBase *__base, struct Screen * screen)
@@ -1836,7 +2009,8 @@ __intuition_GetScreenDrawInfo(struct IntuitionBase *__base, struct Screen * scre
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct DrawInfo *)_d0;
 }
-#define GetScreenDrawInfo(screen) __intuition_GetScreenDrawInfo((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define GetScreenDrawInfo(screen) __intuition_GetScreenDrawInfo((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __GetScreenDrawInfo_base(__ndk_b, screen) __intuition_GetScreenDrawInfo((__intuition_base_t)(__ndk_b), (struct Screen *)(screen))
 
 static __inline__ VOID
 __intuition_FreeScreenDrawInfo(struct IntuitionBase *__base, struct Screen * screen, struct DrawInfo * drawInfo)
@@ -1852,7 +2026,8 @@ __intuition_FreeScreenDrawInfo(struct IntuitionBase *__base, struct Screen * scr
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeScreenDrawInfo(screen, drawInfo) __intuition_FreeScreenDrawInfo((INTUITION_BASE_NAME), (struct Screen *)(screen), (struct DrawInfo *)(drawInfo))
+#define FreeScreenDrawInfo(screen, drawInfo) __intuition_FreeScreenDrawInfo((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen), (struct DrawInfo *)(drawInfo))
+#define __FreeScreenDrawInfo_base(__ndk_b, screen, drawInfo) __intuition_FreeScreenDrawInfo((__intuition_base_t)(__ndk_b), (struct Screen *)(screen), (struct DrawInfo *)(drawInfo))
 
 static __inline__ BOOL
 __intuition_ResetMenuStrip(struct IntuitionBase *__base, struct Window * window, struct Menu * menu)
@@ -1868,7 +2043,8 @@ __intuition_ResetMenuStrip(struct IntuitionBase *__base, struct Window * window,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ResetMenuStrip(window, menu) __intuition_ResetMenuStrip((INTUITION_BASE_NAME), (struct Window *)(window), (struct Menu *)(menu))
+#define ResetMenuStrip(window, menu) __intuition_ResetMenuStrip((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (struct Menu *)(menu))
+#define __ResetMenuStrip_base(__ndk_b, window, menu) __intuition_ResetMenuStrip((__intuition_base_t)(__ndk_b), (struct Window *)(window), (struct Menu *)(menu))
 
 static __inline__ VOID
 __intuition_RemoveClass(struct IntuitionBase *__base, struct IClass * classPtr)
@@ -1884,7 +2060,8 @@ __intuition_RemoveClass(struct IntuitionBase *__base, struct IClass * classPtr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define RemoveClass(classPtr) __intuition_RemoveClass((INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define RemoveClass(classPtr) __intuition_RemoveClass((__intuition_base_t)(INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define __RemoveClass_base(__ndk_b, classPtr) __intuition_RemoveClass((__intuition_base_t)(__ndk_b), (struct IClass *)(classPtr))
 
 static __inline__ BOOL
 __intuition_FreeClass(struct IntuitionBase *__base, struct IClass * classPtr)
@@ -1900,7 +2077,8 @@ __intuition_FreeClass(struct IntuitionBase *__base, struct IClass * classPtr)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define FreeClass(classPtr) __intuition_FreeClass((INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define FreeClass(classPtr) __intuition_FreeClass((__intuition_base_t)(INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define __FreeClass_base(__ndk_b, classPtr) __intuition_FreeClass((__intuition_base_t)(__ndk_b), (struct IClass *)(classPtr))
 
 static __inline__ struct ScreenBuffer *
 __intuition_AllocScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, struct BitMap * bm, ULONG flags)
@@ -1916,7 +2094,8 @@ __intuition_AllocScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (struct ScreenBuffer *)_d0;
 }
-#define AllocScreenBuffer(sc, bm, flags) __intuition_AllocScreenBuffer((INTUITION_BASE_NAME), (struct Screen *)(sc), (struct BitMap *)(bm), (ULONG)(flags))
+#define AllocScreenBuffer(sc, bm, flags) __intuition_AllocScreenBuffer((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(sc), (struct BitMap *)(bm), (ULONG)(flags))
+#define __AllocScreenBuffer_base(__ndk_b, sc, bm, flags) __intuition_AllocScreenBuffer((__intuition_base_t)(__ndk_b), (struct Screen *)(sc), (struct BitMap *)(bm), (ULONG)(flags))
 
 static __inline__ VOID
 __intuition_FreeScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, struct ScreenBuffer * sb)
@@ -1932,7 +2111,8 @@ __intuition_FreeScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define FreeScreenBuffer(sc, sb) __intuition_FreeScreenBuffer((INTUITION_BASE_NAME), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
+#define FreeScreenBuffer(sc, sb) __intuition_FreeScreenBuffer((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
+#define __FreeScreenBuffer_base(__ndk_b, sc, sb) __intuition_FreeScreenBuffer((__intuition_base_t)(__ndk_b), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
 
 static __inline__ ULONG
 __intuition_ChangeScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, struct ScreenBuffer * sb)
@@ -1948,7 +2128,8 @@ __intuition_ChangeScreenBuffer(struct IntuitionBase *__base, struct Screen * sc,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define ChangeScreenBuffer(sc, sb) __intuition_ChangeScreenBuffer((INTUITION_BASE_NAME), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
+#define ChangeScreenBuffer(sc, sb) __intuition_ChangeScreenBuffer((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
+#define __ChangeScreenBuffer_base(__ndk_b, sc, sb) __intuition_ChangeScreenBuffer((__intuition_base_t)(__ndk_b), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
 
 static __inline__ VOID
 __intuition_ScreenDepth(struct IntuitionBase *__base, struct Screen * screen, ULONG flags, APTR reserved)
@@ -1964,7 +2145,8 @@ __intuition_ScreenDepth(struct IntuitionBase *__base, struct Screen * screen, UL
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScreenDepth(screen, flags, reserved) __intuition_ScreenDepth((INTUITION_BASE_NAME), (struct Screen *)(screen), (ULONG)(flags), (APTR)(reserved))
+#define ScreenDepth(screen, flags, reserved) __intuition_ScreenDepth((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen), (ULONG)(flags), (APTR)(reserved))
+#define __ScreenDepth_base(__ndk_b, screen, flags, reserved) __intuition_ScreenDepth((__intuition_base_t)(__ndk_b), (struct Screen *)(screen), (ULONG)(flags), (APTR)(reserved))
 
 static __inline__ VOID
 __intuition_ScreenPosition(struct IntuitionBase *__base, struct Screen * screen, ULONG flags, LONG x1, LONG y1, LONG x2, LONG y2)
@@ -1983,7 +2165,8 @@ __intuition_ScreenPosition(struct IntuitionBase *__base, struct Screen * screen,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScreenPosition(screen, flags, x1, y1, x2, y2) __intuition_ScreenPosition((INTUITION_BASE_NAME), (struct Screen *)(screen), (ULONG)(flags), (LONG)(x1), (LONG)(y1), (LONG)(x2), (LONG)(y2))
+#define ScreenPosition(screen, flags, x1, y1, x2, y2) __intuition_ScreenPosition((__intuition_base_t)(INTUITION_BASE_NAME), (struct Screen *)(screen), (ULONG)(flags), (LONG)(x1), (LONG)(y1), (LONG)(x2), (LONG)(y2))
+#define __ScreenPosition_base(__ndk_b, screen, flags, x1, y1, x2, y2) __intuition_ScreenPosition((__intuition_base_t)(__ndk_b), (struct Screen *)(screen), (ULONG)(flags), (LONG)(x1), (LONG)(y1), (LONG)(x2), (LONG)(y2))
 
 static __inline__ VOID
 __intuition_ScrollWindowRaster(struct IntuitionBase *__base, struct Window * win, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
@@ -2003,7 +2186,8 @@ __intuition_ScrollWindowRaster(struct IntuitionBase *__base, struct Window * win
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define ScrollWindowRaster(win, dx, dy, xMin, yMin, xMax, yMax) __intuition_ScrollWindowRaster((INTUITION_BASE_NAME), (struct Window *)(win), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define ScrollWindowRaster(win, dx, dy, xMin, yMin, xMax, yMax) __intuition_ScrollWindowRaster((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(win), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __ScrollWindowRaster_base(__ndk_b, win, dx, dy, xMin, yMin, xMax, yMax) __intuition_ScrollWindowRaster((__intuition_base_t)(__ndk_b), (struct Window *)(win), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ VOID
 __intuition_LendMenus(struct IntuitionBase *__base, struct Window * fromwindow, struct Window * towindow)
@@ -2019,7 +2203,8 @@ __intuition_LendMenus(struct IntuitionBase *__base, struct Window * fromwindow, 
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define LendMenus(fromwindow, towindow) __intuition_LendMenus((INTUITION_BASE_NAME), (struct Window *)(fromwindow), (struct Window *)(towindow))
+#define LendMenus(fromwindow, towindow) __intuition_LendMenus((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(fromwindow), (struct Window *)(towindow))
+#define __LendMenus_base(__ndk_b, fromwindow, towindow) __intuition_LendMenus((__intuition_base_t)(__ndk_b), (struct Window *)(fromwindow), (struct Window *)(towindow))
 
 static __inline__ ULONG
 __intuition_DoGadgetMethodA(struct IntuitionBase *__base, struct Gadget * gad, struct Window * win, struct Requester * req, Msg message)
@@ -2037,9 +2222,19 @@ __intuition_DoGadgetMethodA(struct IntuitionBase *__base, struct Gadget * gad, s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define DoGadgetMethodA(gad, win, req, message) __intuition_DoGadgetMethodA((INTUITION_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)(message))
+#define DoGadgetMethodA(gad, win, req, message) __intuition_DoGadgetMethodA((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)(message))
+#define __DoGadgetMethodA_base(__ndk_b, gad, win, req, message) __intuition_DoGadgetMethodA((__intuition_base_t)(__ndk_b), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)(message))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___intuition_DoGadgetMethod(__intuition_base_t __ndk_base, struct Gadget * gad, struct Window * win, struct Requester * req, ULONG methodID, ...)
+{
+	return __intuition_DoGadgetMethodA(__ndk_base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)&methodID);
+}
+#define DoGadgetMethod(gad, win, req, ...) ___intuition_DoGadgetMethod((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+#else
 #define DoGadgetMethod(gad, win, req, ...) (DoGadgetMethod)((struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+#endif
 
 static __inline__ VOID
 __intuition_SetWindowPointerA(struct IntuitionBase *__base, struct Window * win, CONST struct TagItem * taglist)
@@ -2055,9 +2250,19 @@ __intuition_SetWindowPointerA(struct IntuitionBase *__base, struct Window * win,
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SetWindowPointerA(win, taglist) __intuition_SetWindowPointerA((INTUITION_BASE_NAME), (struct Window *)(win), (CONST struct TagItem *)(taglist))
+#define SetWindowPointerA(win, taglist) __intuition_SetWindowPointerA((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(win), (CONST struct TagItem *)(taglist))
+#define __SetWindowPointerA_base(__ndk_b, win, taglist) __intuition_SetWindowPointerA((__intuition_base_t)(__ndk_b), (struct Window *)(win), (CONST struct TagItem *)(taglist))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) VOID
+___intuition_SetWindowPointer(__intuition_base_t __ndk_base, struct Window * win, Tag tag1, ...)
+{
+	__intuition_SetWindowPointerA(__ndk_base, (struct Window *)(win), (CONST struct TagItem *)&tag1);
+}
+#define SetWindowPointer(win, ...) ___intuition_SetWindowPointer((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(win), ##__VA_ARGS__)
+#else
 #define SetWindowPointer(win, ...) (SetWindowPointer)((struct Window *)(win), ##__VA_ARGS__)
+#endif
 
 static __inline__ BOOL
 __intuition_TimedDisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_STRPTR string, UWORD height, ULONG time)
@@ -2073,7 +2278,8 @@ __intuition_TimedDisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, C
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define TimedDisplayAlert(alertNumber, string, height, time) __intuition_TimedDisplayAlert((INTUITION_BASE_NAME), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height), (ULONG)(time))
+#define TimedDisplayAlert(alertNumber, string, height, time) __intuition_TimedDisplayAlert((__intuition_base_t)(INTUITION_BASE_NAME), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height), (ULONG)(time))
+#define __TimedDisplayAlert_base(__ndk_b, alertNumber, string, height, time) __intuition_TimedDisplayAlert((__intuition_base_t)(__ndk_b), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height), (ULONG)(time))
 
 static __inline__ VOID
 __intuition_HelpControl(struct IntuitionBase *__base, struct Window * win, ULONG flags)
@@ -2089,7 +2295,8 @@ __intuition_HelpControl(struct IntuitionBase *__base, struct Window * win, ULONG
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define HelpControl(win, flags) __intuition_HelpControl((INTUITION_BASE_NAME), (struct Window *)(win), (ULONG)(flags))
+#define HelpControl(win, flags) __intuition_HelpControl((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(win), (ULONG)(flags))
+#define __HelpControl_base(__ndk_b, win, flags) __intuition_HelpControl((__intuition_base_t)(__ndk_b), (struct Window *)(win), (ULONG)(flags))
 
 static __inline__ BOOL
 __intuition_ShowWindow(struct IntuitionBase *__base, struct Window * window, struct Window * other)
@@ -2105,7 +2312,8 @@ __intuition_ShowWindow(struct IntuitionBase *__base, struct Window * window, str
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define ShowWindow(window, other) __intuition_ShowWindow((INTUITION_BASE_NAME), (struct Window *)(window), (struct Window *)(other))
+#define ShowWindow(window, other) __intuition_ShowWindow((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window), (struct Window *)(other))
+#define __ShowWindow_base(__ndk_b, window, other) __intuition_ShowWindow((__intuition_base_t)(__ndk_b), (struct Window *)(window), (struct Window *)(other))
 
 static __inline__ BOOL
 __intuition_HideWindow(struct IntuitionBase *__base, struct Window * window)
@@ -2121,7 +2329,8 @@ __intuition_HideWindow(struct IntuitionBase *__base, struct Window * window)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (BOOL)_d0;
 }
-#define HideWindow(window) __intuition_HideWindow((INTUITION_BASE_NAME), (struct Window *)(window))
+#define HideWindow(window) __intuition_HideWindow((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(window))
+#define __HideWindow_base(__ndk_b, window) __intuition_HideWindow((__intuition_base_t)(__ndk_b), (struct Window *)(window))
 
 static __inline__ ULONG
 __intuition_IntuitionControlA(struct IntuitionBase *__base, APTR object, CONST struct TagItem * taglist)
@@ -2137,8 +2346,18 @@ __intuition_IntuitionControlA(struct IntuitionBase *__base, APTR object, CONST s
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (ULONG)_d0;
 }
-#define IntuitionControlA(object, taglist) __intuition_IntuitionControlA((INTUITION_BASE_NAME), (APTR)(object), (CONST struct TagItem *)(taglist))
+#define IntuitionControlA(object, taglist) __intuition_IntuitionControlA((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(object), (CONST struct TagItem *)(taglist))
+#define __IntuitionControlA_base(__ndk_b, object, taglist) __intuition_IntuitionControlA((__intuition_base_t)(__ndk_b), (APTR)(object), (CONST struct TagItem *)(taglist))
 
+#ifndef NO_INLINE_STDARG
+static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
+___intuition_IntuitionControl(__intuition_base_t __ndk_base, APTR object, Tag tag1, ...)
+{
+	return __intuition_IntuitionControlA(__ndk_base, (APTR)(object), (CONST struct TagItem *)&tag1);
+}
+#define IntuitionControl(object, ...) ___intuition_IntuitionControl((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(object), ##__VA_ARGS__)
+#else
 #define IntuitionControl(object, ...) (IntuitionControl)((APTR)(object), ##__VA_ARGS__)
+#endif
 
 #endif /* INLINE_INTUITION_H */

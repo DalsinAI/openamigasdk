@@ -54,4 +54,6 @@
 #define GETFONT_SpecialModeBitMapHeight	(GETFONT_Dummy + 34)
 #define GETFONT_SpecialModeBitMapWidth	(GETFONT_Dummy + 33)
 
+#define gfRequestFont(obj, win)	DoMethod((obj), GFONT_REQUEST, (win))
+
 #endif /* GADGETS_GETFONT_H */

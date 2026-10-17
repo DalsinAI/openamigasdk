@@ -88,4 +88,33 @@ struct IOExtSer {
 
 #define SERIALNAME	"serial.device"
 
+/* io_Flags bits and masks the device keeps for itself */
+#define IOSERB_ACTIVE		4
+#define IOSERF_ACTIVE		(1<<4)
+#define IOSERB_ABORT		5
+#define IOSERF_ABORT		(1<<5)
+#define IOSERB_QUEUED		6
+#define IOSERF_QUEUED		(1<<6)
+#define IOSERB_BUFRREAD		7
+#define IOSERF_BUFRREAD		(1<<7)
+
+/* io_Status bits */
+#define IOSTB_OVERRUN		0
+#define IOSTF_OVERRUN		(1<<0)
+#define IOSTB_WROTEBREAK	1
+#define IOSTF_WROTEBREAK	(1<<1)
+#define IOSTB_READBREAK		2
+#define IOSTF_READBREAK		(1<<2)
+#define IOSTB_XOFFWRITE		3
+#define IOSTF_XOFFWRITE		(1<<3)
+#define IOSTB_XOFFREAD		4
+#define IOSTF_XOFFREAD		(1<<4)
+
+/* errors the device never returns any more, kept for old sources */
+#define SerErr_InvBaud		3
+#define SerErr_NotOpen		7
+#define SerErr_PortReset	8
+#define SerErr_InitErr		10
+#define SerErr_NoCTS		14
+
 #endif /* DEVICES_SERIAL_H */

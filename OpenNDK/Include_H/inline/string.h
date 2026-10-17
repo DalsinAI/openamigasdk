@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__string_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __string_STRING_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define STRING_GetClass() __string_STRING_GetClass((STRING_BASE_NAME))
+#define STRING_GetClass() __string_STRING_GetClass((__string_base_t)(STRING_BASE_NAME))
+#define __STRING_GetClass_base(__ndk_b) __string_STRING_GetClass((__string_base_t)(__ndk_b))
 
 #endif /* INLINE_STRING_H */

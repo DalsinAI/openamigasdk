@@ -10,6 +10,7 @@
 #include <devices/timer.h>
 #include <libraries/lowlevel.h>
 #include <utility/tagitem.h>
+#include <exec/interrupts.h>
 
 #ifdef __cplusplus
 extern "C" {

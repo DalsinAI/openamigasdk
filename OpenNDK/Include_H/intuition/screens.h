@@ -283,4 +283,9 @@ struct ScreenBuffer
 #define OSERR_NORTGBITMAP	10
 #define SA_OffScreenDragging	(SA_Dummy + 42)
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_IOBSOLETE_H
+#include <intuition/iobsolete.h>
+#endif
+
 #endif /* INTUITION_SCREENS_H */

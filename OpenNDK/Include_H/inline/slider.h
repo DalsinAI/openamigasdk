@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__slider_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __slider_SLIDER_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define SLIDER_GetClass() __slider_SLIDER_GetClass((SLIDER_BASE_NAME))
+#define SLIDER_GetClass() __slider_SLIDER_GetClass((__slider_base_t)(SLIDER_BASE_NAME))
+#define __SLIDER_GetClass_base(__ndk_b) __slider_SLIDER_GetClass((__slider_base_t)(__ndk_b))
 
 #endif /* INLINE_SLIDER_H */

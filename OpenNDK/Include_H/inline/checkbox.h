@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__checkbox_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __checkbox_CHECKBOX_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define CHECKBOX_GetClass() __checkbox_CHECKBOX_GetClass((CHECKBOX_BASE_NAME))
+#define CHECKBOX_GetClass() __checkbox_CHECKBOX_GetClass((__checkbox_base_t)(CHECKBOX_BASE_NAME))
+#define __CHECKBOX_GetClass_base(__ndk_b) __checkbox_CHECKBOX_GetClass((__checkbox_base_t)(__ndk_b))
 
 #endif /* INLINE_CHECKBOX_H */

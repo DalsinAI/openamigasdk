@@ -8,6 +8,7 @@
 ==public
 ==include <exec/types.h>
 ==include <exec/libraries.h>
+==include <libraries/mathlibrary.h>
 ==version 36
 FLOAT IEEESPAtan(FLOAT parm) (d0)
 FLOAT IEEESPSin(FLOAT parm) (d0)

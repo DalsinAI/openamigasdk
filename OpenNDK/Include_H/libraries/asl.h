@@ -443,4 +443,6 @@ struct AslSemaphore
 #define FO_SPECIALMODE_OUTLINE	1
 #define FO_SPECIALMODE_SHADOW	2
 
+#define ASL_SEMAPHORE_NAME	"asl.library"
+
 #endif /* LIBRARIES_ASL_H */

@@ -58,7 +58,10 @@ struct ClipRect
     struct Rectangle bounds;
     struct ClipRect *vlink;	/* private */
     struct Layer    *home;	/* private: the layer this piece belongs to */
-    APTR             reserved;	/* private */
+    APTR             reserved;
+#ifdef NEWCLIPRECTS_1_1
+    LONG             Flags;		/* with NEWCLIPRECTS_1_1 only */
+#endif	/* private */
 };
 
 /* Private ClipRect bits */

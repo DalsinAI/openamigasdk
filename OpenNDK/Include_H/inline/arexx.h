@@ -14,6 +14,7 @@
 #endif
 
 struct Library;
+typedef struct Library *__arexx_base_t;
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -37,6 +38,7 @@ __arexx_AREXX_GetClass(struct Library *__base)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (Class *)_d0;
 }
-#define AREXX_GetClass() __arexx_AREXX_GetClass((AREXX_BASE_NAME))
+#define AREXX_GetClass() __arexx_AREXX_GetClass((__arexx_base_t)(AREXX_BASE_NAME))
+#define __AREXX_GetClass_base(__ndk_b) __arexx_AREXX_GetClass((__arexx_base_t)(__ndk_b))
 
 #endif /* INLINE_AREXX_H */

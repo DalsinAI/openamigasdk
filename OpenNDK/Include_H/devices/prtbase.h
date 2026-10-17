@@ -213,4 +213,13 @@ struct PrinterSegment {
 #define PRTA_ShadingNames	(PRTA_Dummy + 21)
 #define PRTA_TopBorder		(PRTA_Dummy + 31)
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef LIBRARIES_DOSEXTENS_H
+#include <libraries/dosextens.h>
+#endif
+
+#define PRT_STDARGS		__STDARGS__
+/* a unit's flags live in its message port's node priority */
+#define du_Flags		mp_Node.ln_Pri
+
 #endif /* DEVICES_PRTBASE_H */
