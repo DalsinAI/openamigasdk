@@ -24,7 +24,7 @@ struct TagItem {
 #define TAG_SKIP	(3L)	/* skip this item and ti_Data more */
 
 /* Tags at or above this are a caller's own */
-#define TAG_USER	((ULONG)(1L<<31))
+#define TAG_USER	((ULONG)(1UL<<31))
 
 /* FilterTagItems() logic */
 #define TAGFILTER_AND	0
