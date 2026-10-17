@@ -141,7 +141,7 @@ struct PrinterData {
 
 /* What a driver describes itself with */
 struct PrinterExtendedData {
-	char	*ped_PrinterName;
+	STRPTR	ped_PrinterName;
 	VOID	(* PRT_STDARGS ped_Init)(struct PrinterData *pd);
 	VOID	(* PRT_STDARGS ped_Expunge)(void);
 	int	(* PRT_STDARGS ped_Open)(struct IORequest *ior);
@@ -155,12 +155,12 @@ struct PrinterExtendedData {
 	ULONG	ped_MaxYDots;
 	UWORD	ped_XDotsInch;
 	UWORD	ped_YDotsInch;
-	char	***ped_Commands;	/* the escape sequence of each aXXX */
+	STRPTR	**ped_Commands;	/* the escape sequence of each aXXX */
 	LONG	(* PRT_STDARGS ped_DoSpecial)(UWORD *command, UBYTE output_buffer[], BYTE *current_line_position, BYTE *current_line_spacing, BYTE *crlf_flag, STRPTR params);
 	LONG	(* PRT_STDARGS ped_Render)(LONG ct, LONG x, LONG y, LONG status, ...);
 	LONG	ped_TimeoutSecs;
 	/* V33 */
-	char	**ped_8BitChars;	/* text for 0xA0-0xFF */
+	STRPTR	*ped_8BitChars;	/* text for 0xA0-0xFF */
 	LONG	ped_PrintMode;
 	/* V34 */
 	LONG	(* PRT_STDARGS ped_ConvFunc)(STRPTR buf, TEXT c, LONG crlf_flag);

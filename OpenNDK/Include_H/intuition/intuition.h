@@ -45,7 +45,7 @@ struct Menu
     WORD LeftEdge, TopEdge;
     WORD Width, Height;
     UWORD Flags;
-    STRPTR MenuName;
+    CONST_STRPTR MenuName;
     struct MenuItem *FirstItem;
     WORD JazzX, JazzY, BeatX, BeatY;	/* Intuition's own */
 };
@@ -330,8 +330,8 @@ struct PropInfo
 /* A string gadget */
 struct StringInfo
 {
-    UBYTE *Buffer;
-    UBYTE *UndoBuffer;
+    STRPTR	Buffer;
+    STRPTR	UndoBuffer;
     WORD BufferPos;
     WORD MaxChars;			/* buffer size, the NUL included */
     WORD DispPos;
@@ -486,7 +486,7 @@ struct Window
     UWORD MaxWidth, MaxHeight;
     ULONG Flags;
     struct Menu *MenuStrip;
-    UBYTE *Title;
+    STRPTR	Title;
     struct Requester *FirstRequest;
     struct Requester *DMRequest;
     WORD ReqCount;
@@ -505,7 +505,7 @@ struct Window
     struct IntuiMessage *MessageKey;
     UBYTE DetailPen, BlockPen;
     struct Image *CheckMark;
-    UBYTE *ScreenTitle;
+    STRPTR	ScreenTitle;
     WORD GZZMouseX;			/* a GimmeZeroZero window's inner values */
     WORD GZZMouseY;
     WORD GZZWidth;
