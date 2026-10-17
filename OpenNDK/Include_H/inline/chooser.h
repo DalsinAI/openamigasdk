@@ -115,7 +115,7 @@ __SetChooserNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__chooser_SetChooserNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__chooser_SetChooserNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define SetChooserNodeAttrs(node, ...) __SetChooserNodeAttrs_va((CHOOSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
@@ -142,7 +142,7 @@ __GetChooserNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__chooser_GetChooserNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__chooser_GetChooserNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define GetChooserNodeAttrs(node, ...) __GetChooserNodeAttrs_va((CHOOSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)

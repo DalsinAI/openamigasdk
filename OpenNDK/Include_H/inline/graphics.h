@@ -1996,7 +1996,7 @@ __VideoControlTags_va(void *__base, struct ColorMap * colorMap, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, colorMap);
-	BOOL _r = (BOOL)__graphics_VideoControl(__base, colorMap, (struct TagItem *)_ap);
+	BOOL _r = (BOOL)__graphics_VideoControl(__base, (struct ColorMap *)(colorMap), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2240,7 +2240,7 @@ __WeighTAMatchTags_va(void *__base, CONST struct TextAttr * reqTextAttr, CONST s
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, targetTextAttr);
-	WORD _r = (WORD)__graphics_WeighTAMatch(__base, reqTextAttr, targetTextAttr, (CONST struct TagItem *)_ap);
+	WORD _r = (WORD)__graphics_WeighTAMatch(__base, (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2287,7 +2287,7 @@ __ExtendFontTags_va(void *__base, struct TextFont * font, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, font);
-	ULONG _r = (ULONG)__graphics_ExtendFont(__base, font, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__graphics_ExtendFont(__base, (struct TextFont *)(font), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2368,7 +2368,7 @@ __ObtainBestPen_va(void *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, b);
-	LONG _r = (LONG)__graphics_ObtainBestPenA(__base, cm, r, g, b, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__graphics_ObtainBestPenA(__base, (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2589,7 +2589,7 @@ __GetExtSprite_va(void *__base, struct ExtSprite * ss, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, ss);
-	LONG _r = (LONG)__graphics_GetExtSpriteA(__base, ss, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__graphics_GetExtSpriteA(__base, (struct ExtSprite *)(ss), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2853,7 +2853,7 @@ __AllocSpriteData_va(void *__base, CONST struct BitMap * bm, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, bm);
-	struct ExtSprite * _r = (struct ExtSprite *)__graphics_AllocSpriteDataA(__base, bm, (CONST struct TagItem *)_ap);
+	struct ExtSprite * _r = (struct ExtSprite *)__graphics_AllocSpriteDataA(__base, (CONST struct BitMap *)(bm), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2883,7 +2883,7 @@ __ChangeExtSprite_va(void *__base, struct ViewPort * vp, struct ExtSprite * olds
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, newsprite);
-	LONG _r = (LONG)__graphics_ChangeExtSpriteA(__base, vp, oldsprite, newsprite, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__graphics_ChangeExtSpriteA(__base, (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2929,7 +2929,7 @@ __SetRPAttrs_va(void *__base, struct RastPort * rp, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, rp);
-	__graphics_SetRPAttrsA(__base, rp, (CONST struct TagItem *)_ap);
+	__graphics_SetRPAttrsA(__base, (struct RastPort *)(rp), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define SetRPAttrs(rp, ...) __SetRPAttrs_va((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), ##__VA_ARGS__)
@@ -2956,7 +2956,7 @@ __GetRPAttrs_va(void *__base, CONST struct RastPort * rp, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, rp);
-	__graphics_GetRPAttrsA(__base, rp, (CONST struct TagItem *)_ap);
+	__graphics_GetRPAttrsA(__base, (CONST struct RastPort *)(rp), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define GetRPAttrs(rp, ...) __GetRPAttrs_va((GRAPHICS_BASE_NAME), (CONST struct RastPort *)(rp), ##__VA_ARGS__)

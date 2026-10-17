@@ -87,7 +87,7 @@ __SetInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, glyphEngine);
-	ULONG _r = (ULONG)__bullet_SetInfoA(__base, glyphEngine, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__bullet_SetInfoA(__base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -115,7 +115,7 @@ __ObtainInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, glyphEngine);
-	ULONG _r = (ULONG)__bullet_ObtainInfoA(__base, glyphEngine, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__bullet_ObtainInfoA(__base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -143,7 +143,7 @@ __ReleaseInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, glyphEngine);
-	ULONG _r = (ULONG)__bullet_ReleaseInfoA(__base, glyphEngine, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__bullet_ReleaseInfoA(__base, (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

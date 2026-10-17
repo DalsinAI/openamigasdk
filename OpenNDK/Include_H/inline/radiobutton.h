@@ -70,7 +70,7 @@ __AllocRadioButtonNode_va(void *__base, UWORD columns, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, columns);
-	struct Node * _r = (struct Node *)__radiobutton_AllocRadioButtonNodeA(__base, columns, (struct TagItem *)_ap);
+	struct Node * _r = (struct Node *)__radiobutton_AllocRadioButtonNodeA(__base, (ULONG)(columns), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -115,7 +115,7 @@ __SetRadioButtonNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__radiobutton_SetRadioButtonNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__radiobutton_SetRadioButtonNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define SetRadioButtonNodeAttrs(node, ...) __SetRadioButtonNodeAttrs_va((RADIOBUTTON_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
@@ -142,7 +142,7 @@ __GetRadioButtonNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__radiobutton_GetRadioButtonNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__radiobutton_GetRadioButtonNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define GetRadioButtonNodeAttrs(node, ...) __GetRadioButtonNodeAttrs_va((RADIOBUTTON_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)

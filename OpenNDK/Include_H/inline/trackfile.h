@@ -53,7 +53,7 @@ __TFStartUnitTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, unitNumber);
-	LONG _r = (LONG)__trackfile_TFStartUnitTagList(__base, unitNumber, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__trackfile_TFStartUnitTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -81,7 +81,7 @@ __TFStopUnitTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, unitNumber);
-	LONG _r = (LONG)__trackfile_TFStopUnitTagList(__base, unitNumber, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__trackfile_TFStopUnitTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -109,7 +109,7 @@ __TFInsertMediaTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, unitNumber);
-	LONG _r = (LONG)__trackfile_TFInsertMediaTagList(__base, unitNumber, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__trackfile_TFInsertMediaTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -137,7 +137,7 @@ __TFEjectMediaTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, unitNumber);
-	LONG _r = (LONG)__trackfile_TFEjectMediaTagList(__base, unitNumber, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__trackfile_TFEjectMediaTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -199,7 +199,7 @@ __TFChangeUnitTags_va(void *__base, LONG unitNumber, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, unitNumber);
-	LONG _r = (LONG)__trackfile_TFChangeUnitTagList(__base, unitNumber, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__trackfile_TFChangeUnitTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

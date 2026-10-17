@@ -70,7 +70,7 @@ __AllocSpeedButtonNode_va(void *__base, UWORD number, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, number);
-	struct Node * _r = (struct Node *)__speedbar_AllocSpeedButtonNodeA(__base, number, (struct TagItem *)_ap);
+	struct Node * _r = (struct Node *)__speedbar_AllocSpeedButtonNodeA(__base, (ULONG)(number), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -115,7 +115,7 @@ __SetSpeedButtonNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__speedbar_SetSpeedButtonNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__speedbar_SetSpeedButtonNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define SetSpeedButtonNodeAttrs(node, ...) __SetSpeedButtonNodeAttrs_va((SPEEDBAR_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
@@ -142,7 +142,7 @@ __GetSpeedButtonNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__speedbar_GetSpeedButtonNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__speedbar_GetSpeedButtonNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define GetSpeedButtonNodeAttrs(node, ...) __GetSpeedButtonNodeAttrs_va((SPEEDBAR_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)

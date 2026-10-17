@@ -380,6 +380,10 @@ VA_ATTR = """#ifndef __OPENNDK_VA_ATTR
 """
 
 
+# varargs calls the vendor's inline headers name without a base argument
+GLOBAL_BASE_VA = {"NewObject"}
+
+
 def varargs_inline(lib, f, bn):
     """A varargs call (OpenWindowTags, Printf) as the vendor's inline
     headers have it: a small function in the program, kept out of line so
@@ -398,7 +402,15 @@ def varargs_inline(lib, f, bn):
         return ""                               # nothing to start the list from
     fn = "__%s_va" % f.name
     params = ([] if base_arg else ["void *__base"]) + [a.decl for a in fixed] + ["..."]
-    call = ([] if base_arg else ["__base"]) + [a.name for a in fixed] + ["(%s)_ap" % base.args[-1].type]
+    call = ([] if base_arg else ["__base"]) + ["(%s)(%s)" % (t.type, a.name) for a, t in zip(fixed, base.args)]
+    call.append("(%s)_ap" % base.args[-1].type)
+    glob = f.name in GLOBAL_BASE_VA and not base_arg
+    if glob:
+        # the vendor's form for this one: a function of the call's own name
+        # that reaches the base by its global name, so that NewObject can be
+        # passed around as a function
+        params = params[1:]
+        call[0] = "(%s)" % bn
     body = ["\t__builtin_va_list _ap;", "\t__builtin_va_start(_ap, %s);" % last]
     target = "__%s_%s" % (lib.stem.replace(".", "_"), base.name)
     if base.ret_kind() == "void" or f.ret_kind() == "void":
@@ -409,7 +421,9 @@ def varargs_inline(lib, f, bn):
     out = "static __inline__ __OPENNDK_VA_ATTR %s\n%s(%s)\n{\n%s\n}\n" % (
         f.ret, fn, ", ".join(params), "\n".join(body))
     args = ([] if base_arg else ["(%s)" % bn]) + ["(%s)(%s)" % (a.type, a.name) for a in fixed]
-    if fixed:
+    if glob:
+        out += "#define %s %s\n" % (f.name, fn)
+    elif fixed:
         out += "#define %s(%s, ...) %s(%s, ##__VA_ARGS__)\n" % (
             f.name, ", ".join(a.name for a in fixed), fn, ", ".join(args))
     else:

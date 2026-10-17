@@ -566,7 +566,7 @@ __AllocNamedObject_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	struct NamedObject * _r = (struct NamedObject *)__utility_AllocNamedObjectA(__base, name, (CONST struct TagItem *)_ap);
+	struct NamedObject * _r = (struct NamedObject *)__utility_AllocNamedObjectA(__base, (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -715,7 +715,7 @@ __SNPrintf_va(void *__base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR format
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, format);
-	LONG _r = (LONG)__utility_VSNPrintf(__base, buffer, bufferSize, format, (CONST_APTR)_ap);
+	LONG _r = (LONG)__utility_VSNPrintf(__base, (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

@@ -17,7 +17,7 @@ JOBS=${JOBS:-6}
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
-fake_stove() { # $1 name, $2 include folder
+fake_stove() { # $1 name, $2 include folder, $3 a folder searched last (optional)
     s="$tmp/stove-$1"
     # a tree of links (not one link per folder), so that the scripts'
     # find "$P" -name ... still finds the .fd files
@@ -28,14 +28,32 @@ fake_stove() { # $1 name, $2 include folder
         n=$(basename "$b")
         case $n in
         *-gcc|*-g++|*-c++|*-cpp)
-            printf '#!/bin/sh\nexec "%s" -isystem "%s" "$@"\n' "$b" "$2" > "$s/prefix/bin/$n"
+            if [ -n "${3:-}" ]; then
+                printf '#!/bin/sh\nexec "%s" -isystem "%s" -idirafter "%s" "$@"\n' "$b" "$2" "$3"
+            else
+                printf '#!/bin/sh\nexec "%s" -isystem "%s" "$@"\n' "$b" "$2"
+            fi > "$s/prefix/bin/$n"
             chmod +x "$s/prefix/bin/$n" ;;
         *) ln -s "$b" "$s/prefix/bin/$n" ;;
         esac
     done
 }
-fake_stove vendor "$REAL/prefix/m68k-amigaos/ndk-include.vendor"
-fake_stove openndk "$HERE/OpenNDK/Include_H"
+# The third-party network SDK headers (Roadshow's bsdsocket and the AmiTCP
+# ones) the vendor folder carried and OpenNDK has no file for: the stove
+# keeps them reachable in its include folder (amigachrome's
+# scripts/stove_openndk.py), and so does this run, after everything else.
+VENDOR="$REAL/prefix/m68k-amigaos/ndk-include.vendor"
+extras="$tmp/extras"
+(cd "$VENDOR" && find . -type f -name '*.h' | sed 's|^\./||') | while read -r f; do
+    [ -e "$HERE/OpenNDK/Include_H/$f" ] && continue
+    case $f in
+    amitcp/*|arpa/*|bsdsocket/*|net/*|netinet/*|sys/*|netdb.h|pwd.h|resolv.h|syslog.h|utmp.h) ;;
+    *) head -15 "$VENDOR/$f" | grep -qi roadshow || continue ;;
+    esac
+    mkdir -p "$extras/$(dirname "$f")"; ln -s "$VENDOR/$f" "$extras/$f"
+done
+fake_stove vendor "$VENDOR"
+fake_stove openndk "$HERE/OpenNDK/Include_H" "$extras"
 [ -d "$REAL/prefix/m68k-amigaos/ndk-include.vendor" ] || { echo "no vendor NDK kept in $REAL"; exit 2; }
 
 for m in vendor openndk; do

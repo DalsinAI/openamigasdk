@@ -70,7 +70,7 @@ __AllocListBrowserNode_va(void *__base, UWORD columns, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, columns);
-	struct Node * _r = (struct Node *)__listbrowser_AllocListBrowserNodeA(__base, columns, (struct TagItem *)_ap);
+	struct Node * _r = (struct Node *)__listbrowser_AllocListBrowserNodeA(__base, (ULONG)(columns), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -115,7 +115,7 @@ __SetListBrowserNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__listbrowser_SetListBrowserNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__listbrowser_SetListBrowserNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define SetListBrowserNodeAttrs(node, ...) __SetListBrowserNodeAttrs_va((LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
@@ -142,7 +142,7 @@ __GetListBrowserNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__listbrowser_GetListBrowserNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__listbrowser_GetListBrowserNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define GetListBrowserNodeAttrs(node, ...) __GetListBrowserNodeAttrs_va((LISTBROWSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
@@ -271,7 +271,7 @@ __AllocLBColumnInfo_va(void *__base, UWORD columns, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, columns);
-	struct ColumnInfo * _r = (struct ColumnInfo *)__listbrowser_AllocLBColumnInfoA(__base, columns, (struct TagItem *)_ap);
+	struct ColumnInfo * _r = (struct ColumnInfo *)__listbrowser_AllocLBColumnInfoA(__base, (ULONG)(columns), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -299,7 +299,7 @@ __SetLBColumnInfoAttrs_va(void *__base, struct ColumnInfo * columninfo, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, columninfo);
-	LONG _r = (LONG)__listbrowser_SetLBColumnInfoAttrsA(__base, columninfo, (struct TagItem *)_ap);
+	LONG _r = (LONG)__listbrowser_SetLBColumnInfoAttrsA(__base, (struct ColumnInfo *)(columninfo), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -327,7 +327,7 @@ __GetLBColumnInfoAttrs_va(void *__base, struct ColumnInfo * columninfo, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, columninfo);
-	LONG _r = (LONG)__listbrowser_GetLBColumnInfoAttrsA(__base, columninfo, (struct TagItem *)_ap);
+	LONG _r = (LONG)__listbrowser_GetLBColumnInfoAttrsA(__base, (struct ColumnInfo *)(columninfo), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

@@ -311,7 +311,7 @@ union printerIO {
 
 /* More names from the 3.2 interface */
 #define PPRA_Dummy		0x80070000UL
-#define PDHOOK_STD		1
+#define PDHOOK_STD		((struct Hook *)1)	/* the device's own, by its 3.2 name */
 #define PPRA_PubScreen		(PPRA_Dummy + 3)
 #define PPRA_Screen		(PPRA_Dummy + 2)
 #define PPRA_Window		(PPRA_Dummy + 1)

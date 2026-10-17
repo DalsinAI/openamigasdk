@@ -104,7 +104,7 @@ __AllocAslRequestTags_va(void *__base, ULONG reqType, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, reqType);
-	APTR _r = (APTR)__asl_AllocAslRequest(__base, reqType, (CONST struct TagItem *)_ap);
+	APTR _r = (APTR)__asl_AllocAslRequest(__base, (ULONG)(reqType), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -149,7 +149,7 @@ __AslRequestTags_va(void *__base, APTR requester, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, requester);
-	BOOL _r = (BOOL)__asl_AslRequest(__base, requester, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__asl_AslRequest(__base, (APTR)(requester), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

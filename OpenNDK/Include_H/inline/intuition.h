@@ -1668,7 +1668,7 @@ __EasyRequest_va(void *__base, struct Window * window, CONST struct EasyStruct *
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, idcmpPtr);
-	LONG _r = (LONG)__intuition_EasyRequestArgs(__base, window, easyStruct, idcmpPtr, (CONST_APTR)_ap);
+	LONG _r = (LONG)__intuition_EasyRequestArgs(__base, (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -1697,7 +1697,7 @@ __BuildEasyRequest_va(void *__base, struct Window * window, CONST struct EasyStr
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, idcmp);
-	struct Window * _r = (struct Window *)__intuition_BuildEasyRequestArgs(__base, window, easyStruct, idcmp, (CONST_APTR)_ap);
+	struct Window * _r = (struct Window *)__intuition_BuildEasyRequestArgs(__base, (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -1742,7 +1742,7 @@ __OpenWindowTags_va(void *__base, CONST struct NewWindow * newWindow, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, newWindow);
-	struct Window * _r = (struct Window *)__intuition_OpenWindowTagList(__base, newWindow, (CONST struct TagItem *)_ap);
+	struct Window * _r = (struct Window *)__intuition_OpenWindowTagList(__base, (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -1770,7 +1770,7 @@ __OpenScreenTags_va(void *__base, CONST struct NewScreen * newScreen, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, newScreen);
-	struct Screen * _r = (struct Screen *)__intuition_OpenScreenTagList(__base, newScreen, (CONST struct TagItem *)_ap);
+	struct Screen * _r = (struct Screen *)__intuition_OpenScreenTagList(__base, (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -1848,15 +1848,15 @@ __intuition_NewObjectA(void *__base, struct IClass * classPtr, CONST_STRPTR clas
 #define __NewObjectA_base(__in_base, classPtr, classID, tagList) __intuition_NewObjectA((__in_base), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)(tagList))
 
 static __inline__ __OPENNDK_VA_ATTR APTR
-__NewObject_va(void *__base, struct IClass * classPtr, CONST_STRPTR classID, ...)
+__NewObject_va(struct IClass * classPtr, CONST_STRPTR classID, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, classID);
-	APTR _r = (APTR)__intuition_NewObjectA(__base, classPtr, classID, (CONST struct TagItem *)_ap);
+	APTR _r = (APTR)__intuition_NewObjectA((INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
-#define NewObject(classPtr, classID, ...) __NewObject_va((INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), ##__VA_ARGS__)
+#define NewObject __NewObject_va
 
 static __inline__ VOID
 __intuition_DisposeObject(void *__base, APTR object)
@@ -1897,7 +1897,7 @@ __SetAttrs_va(void *__base, APTR object, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, object);
-	ULONG _r = (ULONG)__intuition_SetAttrsA(__base, object, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__intuition_SetAttrsA(__base, (APTR)(object), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -1944,7 +1944,7 @@ __SetGadgetAttrs_va(void *__base, struct Gadget * gadget, struct Window * window
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, requester);
-	ULONG _r = (ULONG)__intuition_SetGadgetAttrsA(__base, gadget, window, requester, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__intuition_SetGadgetAttrsA(__base, (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2237,7 +2237,7 @@ __DoGadgetMethod_va(void *__base, struct Gadget * gad, struct Window * win, stru
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, req);
-	ULONG _r = (ULONG)__intuition_DoGadgetMethodA(__base, gad, win, req, (Msg)_ap);
+	ULONG _r = (ULONG)__intuition_DoGadgetMethodA(__base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2265,7 +2265,7 @@ __SetWindowPointer_va(void *__base, struct Window * win, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, win);
-	__intuition_SetWindowPointerA(__base, win, (CONST struct TagItem *)_ap);
+	__intuition_SetWindowPointerA(__base, (struct Window *)(win), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define SetWindowPointer(win, ...) __SetWindowPointer_va((INTUITION_BASE_NAME), (struct Window *)(win), ##__VA_ARGS__)
@@ -2360,7 +2360,7 @@ __IntuitionControl_va(void *__base, APTR object, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, object);
-	ULONG _r = (ULONG)__intuition_IntuitionControlA(__base, object, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__intuition_IntuitionControlA(__base, (APTR)(object), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

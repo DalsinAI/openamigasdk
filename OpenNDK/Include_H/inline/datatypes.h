@@ -53,7 +53,7 @@ __ObtainDataType_va(void *__base, ULONG type, APTR handle, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, handle);
-	struct DataType * _r = (struct DataType *)__datatypes_ObtainDataTypeA(__base, type, handle, (CONST struct TagItem *)_ap);
+	struct DataType * _r = (struct DataType *)__datatypes_ObtainDataTypeA(__base, (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -98,7 +98,7 @@ __NewDTObject_va(void *__base, APTR name, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	Object * _r = (Object *)__datatypes_NewDTObjectA(__base, name, (CONST struct TagItem *)_ap);
+	Object * _r = (Object *)__datatypes_NewDTObjectA(__base, (STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -145,7 +145,7 @@ __SetDTAttrs_va(void *__base, Object * o, struct Window * win, struct Requester 
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, req);
-	ULONG _r = (ULONG)__datatypes_SetDTAttrsA(__base, o, win, req, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__datatypes_SetDTAttrsA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -174,7 +174,7 @@ __GetDTAttrs_va(void *__base, Object * o, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, o);
-	ULONG _r = (ULONG)__datatypes_GetDTAttrsA(__base, o, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__datatypes_GetDTAttrsA(__base, (Object *)(o), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -222,7 +222,7 @@ __RefreshDTObject_va(void *__base, Object * o, struct Window * win, struct Reque
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, req);
-	__datatypes_RefreshDTObjectA(__base, o, win, req, (CONST struct TagItem *)_ap);
+	__datatypes_RefreshDTObjectA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define RefreshDTObject(o, win, req, ...) __RefreshDTObject_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
@@ -232,7 +232,7 @@ __RefreshDTObjects_va(void *__base, Object * o, struct Window * win, struct Requ
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, req);
-	__datatypes_RefreshDTObjectA(__base, o, win, req, (CONST struct TagItem *)_ap);
+	__datatypes_RefreshDTObjectA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define RefreshDTObjects(o, win, req, ...) __RefreshDTObjects_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
@@ -278,7 +278,7 @@ __DoDTMethod_va(void *__base, Object * o, struct Window * win, struct Requester 
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, req);
-	ULONG _r = (ULONG)__datatypes_DoDTMethodA(__base, o, win, req, (Msg)_ap);
+	ULONG _r = (ULONG)__datatypes_DoDTMethodA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -359,7 +359,7 @@ __PrintDTObject_va(void *__base, Object * o, struct Window * w, struct Requester
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, r);
-	ULONG _r = (ULONG)__datatypes_PrintDTObjectA(__base, o, w, r, (struct dtPrint *)_ap);
+	ULONG _r = (ULONG)__datatypes_PrintDTObjectA(__base, (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -510,7 +510,7 @@ __SaveDTObject_va(void *__base, Object * o, struct Window * win, struct Requeste
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, saveicon);
-	ULONG _r = (ULONG)__datatypes_SaveDTObjectA(__base, o, win, req, file, mode, saveicon, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__datatypes_SaveDTObjectA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
