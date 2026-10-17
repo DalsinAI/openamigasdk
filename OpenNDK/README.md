@@ -78,9 +78,11 @@ its `proto/` header, and `__NOLIBBASE__` leaves out the base's declaration.
   confirms them. Still
   open: `dos/ansiio.h`, `resources/ciabase.h`,
   `reaction/reaction_author.h` and the TextEdit
-  `filetypes.h`. OpenNDK keeps `struct timeval` in timer's calls and
-  `struct DiscResourceUnit` in `GetUnit`, which the NDK's SFDs name
-  differently; both are the same layout. `reaction/reaction_macros.h`
+  `filetypes.h`. OpenNDK keeps `struct DiscResourceUnit` in `GetUnit`,
+  which the NDK's SFD names differently; it is the same layout. Timer's
+  calls take `TimeVal_Type`, and `devices/timer.h` works beside a C
+  library's own `struct timeval` (`_TIMEVAL_DEFINED`,
+  `__USE_NEW_TIMEVAL__`). `reaction/reaction_macros.h`
   defines `CheckMark` as the NDK's does, so a unit that includes it can't
   name the `CheckMark` field of `struct Window` either.
 - **Not yet written:** the assembler structure includes (`Include_I` other

@@ -31,9 +31,9 @@ struct Preferences
     UWORD BaudRate;			/* BAUD_ */
 
     /* Timing */
-    struct timeval KeyRptSpeed;
-    struct timeval KeyRptDelay;
-    struct timeval DoubleClick;
+    TimeVal_Type KeyRptSpeed;
+    TimeVal_Type KeyRptDelay;
+    TimeVal_Type DoubleClick;
 
     /* The pointer */
     UWORD PointerMatrix[POINTERSIZE];
