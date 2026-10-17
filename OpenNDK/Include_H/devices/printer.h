@@ -24,6 +24,9 @@
 #ifndef UTILITY_HOOKS_H
 #include <utility/hooks.h>
 #endif
+#ifndef EXEC_LISTS_H
+#include <exec/lists.h>
+#endif
 
 struct RastPort;
 struct ColorMap;

@@ -16,6 +16,9 @@
 #ifndef UTILITY_HOOKS_H
 #include <utility/hooks.h>
 #endif
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
 
 /* Layer_Info locking is by semaphore */
 #define NEWLOCKS
@@ -57,8 +60,11 @@ struct ClipRect
     struct BitMap   *BitMap;	/* private backing store */
     struct Rectangle bounds;
     struct ClipRect *vlink;	/* private */
-    struct Layer    *home;	/* private: the layer this piece belongs to */
+    struct Layer_Info *home;	/* private: the Layer_Info whose pool it came from, or NULL */
     APTR             reserved;	/* private */
+#ifdef NEWCLIPRECTS_1_1
+    LONG             Flags;	/* private: layers' own bits for this piece */
+#endif
 };
 
 /* Private ClipRect bits */

@@ -11,6 +11,7 @@
 ==include <intuition/intuition.h>
 ==include <intuition/classes.h>
 ==include <intuition/classusr.h>
+==include <gadgets/scroller.h>
 ==version 44
 Class * SCROLLER_GetClass() ()
 ==end

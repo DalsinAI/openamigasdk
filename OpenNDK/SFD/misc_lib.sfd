@@ -7,6 +7,7 @@
 ==bias 6
 ==public
 ==include <exec/types.h>
+==include <exec/libraries.h>
 ==version 33
 UBYTE * AllocMiscResource(ULONG unitNum, CONST_STRPTR name) (d0,a1)
 VOID FreeMiscResource(ULONG unitNum) (d0)

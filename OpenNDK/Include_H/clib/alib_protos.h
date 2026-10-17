@@ -37,6 +37,12 @@
 #ifndef LIBRARIES_COMMODITIES_H
 #include <libraries/commodities.h>
 #endif
+#ifndef GRAPHICS_GRAPHINT_H
+#include <graphics/graphint.h>
+#endif
+#ifndef REXX_STORAGE_H
+#include <rexx/storage.h>
+#endif
 
 #ifdef __cplusplus
 extern "C" {

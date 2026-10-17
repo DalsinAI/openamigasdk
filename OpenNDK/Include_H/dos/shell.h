@@ -17,6 +17,9 @@
 #ifndef UTILITY_HOOKS_H
 #include <utility/hooks.h>
 #endif
+#ifndef UTILITY_TAGITEM_H
+#include <utility/tagitem.h>
+#endif
 
 /* The Shell's CLI structure: CommandLineInterface's fields, then more */
 struct ExtendedCommandLineInterface

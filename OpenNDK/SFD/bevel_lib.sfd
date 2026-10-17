@@ -11,6 +11,7 @@
 ==include <intuition/intuition.h>
 ==include <intuition/classes.h>
 ==include <intuition/classusr.h>
+==include <images/bevel.h>
 ==version 44
 Class * BEVEL_GetClass() ()
 ==end

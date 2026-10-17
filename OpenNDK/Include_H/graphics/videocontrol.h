@@ -8,6 +8,9 @@
 #ifndef UTILITY_TAGITEM_H
 #include <utility/tagitem.h>
 #endif
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
 
 #define VTAG_END_CM		0x00000000
 #define VTAG_CHROMAKEY_CLR               0x80000000

@@ -8,6 +8,7 @@
 #include <exec/types.h>
 #include <exec/resident.h>
 #include <resources/card.h>
+#include <exec/libraries.h>
 
 #ifdef __cplusplus
 extern "C" {

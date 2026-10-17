@@ -17,6 +17,9 @@
 #ifndef TOOLS_TEXTEDIT_PLUGIN_H
 #include <tools/TextEdit/plugin.h>
 #endif
+#ifndef INTUITION_CLASSUSR_H
+#include <intuition/classusr.h>
+#endif
 
 /* What TextEdit offers an extension; each entry is a function */
 struct TextEditInterface

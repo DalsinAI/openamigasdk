@@ -13,6 +13,7 @@
 ==include <intuition/classusr.h>
 ==include <exec/nodes.h>
 ==include <gadgets/radiobutton.h>
+==include <utility/tagitem.h>
 ==version 44
 Class * RADIOBUTTON_GetClass() ()
 struct Node * AllocRadioButtonNodeA(ULONG columns, struct TagItem * tags) (d0,a0)

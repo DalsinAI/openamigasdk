@@ -210,4 +210,8 @@ struct impDomainFrame
 #define SDOWNBACKMAGE		6
 #define SHIFTKEYIMAGE		42
 
+#ifndef INTUITION_IOBSOLETE_H
+#include <intuition/iobsolete.h>
+#endif
+
 #endif /* INTUITION_IMAGECLASS_H */

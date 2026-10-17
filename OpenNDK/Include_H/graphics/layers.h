@@ -16,6 +16,9 @@
 #ifndef GRAPHICS_CLIP_H
 #include <graphics/clip.h>
 #endif
+#ifndef GRAPHICS_GFX_H
+#include <graphics/gfx.h>
+#endif
 
 /* Layer Flags */
 #define LAYERSIMPLE		1	/* refreshed by the owner */

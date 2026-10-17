@@ -8,6 +8,9 @@
 #ifndef EXEC_NODES_H
 #include <exec/nodes.h>
 #endif
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
 
 struct ExtendedNode
 {

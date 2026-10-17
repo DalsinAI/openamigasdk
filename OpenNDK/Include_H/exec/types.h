@@ -32,6 +32,19 @@
 #define CONST	const
 #endif
 
+/* C99 and later (or AMIGA_STDC_C99): the C library's fixed-width types
+ * come with these, as with 3.2. Left out when the compiler finds no
+ * <stdint.h> (a bare cross compiler with -nostdinc). */
+#if defined(__STDC__) && ((defined(__STDC_VERSION__) && __STDC_VERSION__ >= 199901L) || defined(AMIGA_STDC_C99))
+#ifdef __has_include
+#if __has_include(<stdint.h>)
+#include <stdint.h>
+#endif
+#else
+#include <stdint.h>
+#endif
+#endif
+
 /* Pointers */
 typedef void		*APTR;		/* any pointer */
 typedef const void	*CONST_APTR;	/* any pointer to data not written */

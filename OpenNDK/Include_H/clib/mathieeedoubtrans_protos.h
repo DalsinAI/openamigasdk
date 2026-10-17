@@ -7,6 +7,7 @@
 
 #include <exec/types.h>
 #include <exec/libraries.h>
+#include <libraries/mathlibrary.h>
 
 #ifdef __cplusplus
 extern "C" {
