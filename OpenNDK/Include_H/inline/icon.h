@@ -293,7 +293,7 @@ __DupDiskObject_va(void *__base, CONST struct DiskObject * diskObject, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, diskObject);
-	struct DiskObject * _r = (struct DiskObject *)__icon_DupDiskObjectA(__base, diskObject, (CONST struct TagItem *)_ap);
+	struct DiskObject * _r = (struct DiskObject *)__icon_DupDiskObjectA(__base, (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -321,7 +321,7 @@ __IconControl_va(void *__base, struct DiskObject * icon, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, icon);
-	ULONG _r = (ULONG)__icon_IconControlA(__base, icon, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__icon_IconControlA(__base, (struct DiskObject *)(icon), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -352,7 +352,7 @@ __DrawIconState_va(void *__base, struct RastPort * rp, CONST struct DiskObject *
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, state);
-	__icon_DrawIconStateA(__base, rp, icon, label, leftOffset, topOffset, state, (CONST struct TagItem *)_ap);
+	__icon_DrawIconStateA(__base, (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define DrawIconState(rp, icon, label, leftOffset, topOffset, state, ...) __DrawIconState_va((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), ##__VA_ARGS__)
@@ -381,7 +381,7 @@ __GetIconRectangle_va(void *__base, struct RastPort * rp, CONST struct DiskObjec
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, rect);
-	BOOL _r = (BOOL)__icon_GetIconRectangleA(__base, rp, icon, label, rect, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__icon_GetIconRectangleA(__base, (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -426,7 +426,7 @@ __GetIconTags_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	struct DiskObject * _r = (struct DiskObject *)__icon_GetIconTagList(__base, name, (CONST struct TagItem *)_ap);
+	struct DiskObject * _r = (struct DiskObject *)__icon_GetIconTagList(__base, (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -455,7 +455,7 @@ __PutIconTags_va(void *__base, CONST_STRPTR name, CONST struct DiskObject * icon
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, icon);
-	BOOL _r = (BOOL)__icon_PutIconTagList(__base, name, icon, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__icon_PutIconTagList(__base, (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -484,7 +484,7 @@ __LayoutIcon_va(void *__base, struct DiskObject * icon, struct Screen * screen, 
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, screen);
-	BOOL _r = (BOOL)__icon_LayoutIconA(__base, icon, screen, (struct TagItem *)_ap);
+	BOOL _r = (BOOL)__icon_LayoutIconA(__base, (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

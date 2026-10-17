@@ -216,7 +216,7 @@ __ESetInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, eEngine);
-	ULONG _r = (ULONG)__diskfont_ESetInfoA(__base, eEngine, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__diskfont_ESetInfoA(__base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -244,7 +244,7 @@ __EObtainInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, eEngine);
-	ULONG _r = (ULONG)__diskfont_EObtainInfoA(__base, eEngine, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__diskfont_EObtainInfoA(__base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -272,7 +272,7 @@ __EReleaseInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, eEngine);
-	ULONG _r = (ULONG)__diskfont_EReleaseInfoA(__base, eEngine, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__diskfont_EReleaseInfoA(__base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -353,7 +353,7 @@ __WriteDiskFontHeader_va(void *__base, CONST struct TextFont * font, CONST_STRPT
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, fileName);
-	LONG _r = (LONG)__diskfont_WriteDiskFontHeaderA(__base, font, fileName, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__diskfont_WriteDiskFontHeaderA(__base, (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

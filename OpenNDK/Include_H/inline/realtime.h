@@ -132,7 +132,7 @@ __SetPlayerAttrs_va(void *__base, struct Player * player, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, player);
-	BOOL _r = (BOOL)__realtime_SetPlayerAttrsA(__base, player, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__realtime_SetPlayerAttrsA(__base, (struct Player *)(player), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -228,7 +228,7 @@ __GetPlayerAttrs_va(void *__base, CONST struct Player * player, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, player);
-	ULONG _r = (ULONG)__realtime_GetPlayerAttrsA(__base, player, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__realtime_GetPlayerAttrsA(__base, (CONST struct Player *)(player), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

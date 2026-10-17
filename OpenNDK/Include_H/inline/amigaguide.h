@@ -87,7 +87,7 @@ __OpenAmigaGuide_va(void *__base, struct NewAmigaGuide * nag, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, nag);
-	APTR _r = (APTR)__amigaguide_OpenAmigaGuideA(__base, nag, (CONST struct TagItem *)_ap);
+	APTR _r = (APTR)__amigaguide_OpenAmigaGuideA(__base, (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -115,7 +115,7 @@ __OpenAmigaGuideAsync_va(void *__base, struct NewAmigaGuide * nag, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, nag);
-	APTR _r = (APTR)__amigaguide_OpenAmigaGuideAsyncA(__base, nag, (CONST struct TagItem *)_ap);
+	APTR _r = (APTR)__amigaguide_OpenAmigaGuideAsyncA(__base, (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -211,7 +211,7 @@ __SetAmigaGuideContext_va(void *__base, APTR cl, ULONG id, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, id);
-	LONG _r = (LONG)__amigaguide_SetAmigaGuideContextA(__base, cl, id, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__amigaguide_SetAmigaGuideContextA(__base, (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -239,7 +239,7 @@ __SendAmigaGuideContext_va(void *__base, APTR cl, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, cl);
-	LONG _r = (LONG)__amigaguide_SendAmigaGuideContextA(__base, cl, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__amigaguide_SendAmigaGuideContextA(__base, (APTR)(cl), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -267,7 +267,7 @@ __SendAmigaGuideCmd_va(void *__base, APTR cl, CONST_STRPTR cmd, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, cmd);
-	LONG _r = (LONG)__amigaguide_SendAmigaGuideCmdA(__base, cl, cmd, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__amigaguide_SendAmigaGuideCmdA(__base, (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -295,7 +295,7 @@ __SetAmigaGuideAttrs_va(void *__base, APTR cl, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, cl);
-	LONG _r = (LONG)__amigaguide_SetAmigaGuideAttrsA(__base, cl, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__amigaguide_SetAmigaGuideAttrsA(__base, (APTR)(cl), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -374,7 +374,7 @@ __AddAmigaGuideHost_va(void *__base, struct Hook * h, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	APTR _r = (APTR)__amigaguide_AddAmigaGuideHostA(__base, h, name, (CONST struct TagItem *)_ap);
+	APTR _r = (APTR)__amigaguide_AddAmigaGuideHostA(__base, (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -402,7 +402,7 @@ __RemoveAmigaGuideHost_va(void *__base, APTR hh, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, hh);
-	LONG _r = (LONG)__amigaguide_RemoveAmigaGuideHostA(__base, hh, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__amigaguide_RemoveAmigaGuideHostA(__base, (APTR)(hh), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

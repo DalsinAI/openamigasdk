@@ -603,7 +603,7 @@ __AllocDosObjectTags_va(void *__base, ULONG type, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, type);
-	APTR _r = (APTR)__dos_AllocDosObject(__base, type, (CONST struct TagItem *)_ap);
+	APTR _r = (APTR)__dos_AllocDosObject(__base, (ULONG)(type), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -1086,7 +1086,7 @@ __FWritef_va(void *__base, BPTR fh, CONST_STRPTR format, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, format);
-	__dos_VFWritef(__base, fh, format, (CONST LONG *)_ap);
+	__dos_VFWritef(__base, (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)_ap);
 	__builtin_va_end(_ap);
 }
 #define FWritef(fh, format, ...) __FWritef_va((DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
@@ -1115,7 +1115,7 @@ __FPrintf_va(void *__base, BPTR fh, CONST_STRPTR format, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, format);
-	LONG _r = (LONG)__dos_VFPrintf(__base, fh, format, (CONST_APTR)_ap);
+	LONG _r = (LONG)__dos_VFPrintf(__base, (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -1881,7 +1881,7 @@ __SystemTags_va(void *__base, CONST_STRPTR command, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, command);
-	LONG _r = (LONG)__dos_SystemTagList(__base, command, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__dos_SystemTagList(__base, (CONST_STRPTR)(command), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2371,7 +2371,7 @@ __NewLoadSegTags_va(void *__base, CONST_STRPTR file, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, file);
-	BPTR _r = (BPTR)__dos_NewLoadSeg(__base, file, (CONST struct TagItem *)_ap);
+	BPTR _r = (BPTR)__dos_NewLoadSeg(__base, (CONST_STRPTR)(file), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -2884,7 +2884,7 @@ __Printf_va(void *__base, CONST_STRPTR format, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, format);
-	LONG _r = (LONG)__dos_VPrintf(__base, format, (CONST_APTR)_ap);
+	LONG _r = (LONG)__dos_VPrintf(__base, (CONST_STRPTR)(format), (CONST_APTR)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -3091,7 +3091,7 @@ __DoShellMethod_va(void *__base, ULONG method, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, method);
-	APTR _r = (APTR)__dos_DoShellMethodTagList(__base, method, (CONST struct TagItem *)_ap);
+	APTR _r = (APTR)__dos_DoShellMethodTagList(__base, (ULONG)(method), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

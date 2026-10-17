@@ -109,6 +109,8 @@ struct BitMap
 #define BMB_RTGTAGS		8
 #define BMF_CHECKMASK		0xF80
 #define BMF_CHECKVALUE		0x700
+/* A bitmap whose flags carry the RTG tags */
+#define BITMAPFLAGS_ARE_EXTENDED(f)	(((f) & BMF_CHECKMASK) == BMF_CHECKVALUE)
 #define BMF_FRIENDISTAG		0x400
 #define BMF_HIJACKED		128
 #define BMF_INVALID		0x800

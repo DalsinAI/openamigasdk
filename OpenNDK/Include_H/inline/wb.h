@@ -71,7 +71,7 @@ __AddAppWindow_va(void *__base, ULONG id, ULONG userdata, struct Window * window
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, msgport);
-	struct AppWindow * _r = (struct AppWindow *)__wb_AddAppWindowA(__base, id, userdata, window, msgport, (CONST struct TagItem *)_ap);
+	struct AppWindow * _r = (struct AppWindow *)__wb_AddAppWindowA(__base, (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -118,7 +118,7 @@ __AddAppIcon_va(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struc
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, diskobj);
-	struct AppIcon * _r = (struct AppIcon *)__wb_AddAppIconA(__base, id, userdata, text, msgport, lock, diskobj, (CONST struct TagItem *)_ap);
+	struct AppIcon * _r = (struct AppIcon *)__wb_AddAppIconA(__base, (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -164,7 +164,7 @@ __AddAppMenuItem_va(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, s
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, msgport);
-	struct AppMenuItem * _r = (struct AppMenuItem *)__wb_AddAppMenuItemA(__base, id, userdata, text, msgport, (CONST struct TagItem *)_ap);
+	struct AppMenuItem * _r = (struct AppMenuItem *)__wb_AddAppMenuItemA(__base, (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -227,7 +227,7 @@ __OpenWorkbenchObject_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	BOOL _r = (BOOL)__wb_OpenWorkbenchObjectA(__base, name, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__wb_OpenWorkbenchObjectA(__base, (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -255,7 +255,7 @@ __CloseWorkbenchObject_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	BOOL _r = (BOOL)__wb_CloseWorkbenchObjectA(__base, name, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__wb_CloseWorkbenchObjectA(__base, (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -283,7 +283,7 @@ __WorkbenchControl_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	BOOL _r = (BOOL)__wb_WorkbenchControlA(__base, name, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__wb_WorkbenchControlA(__base, (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -311,7 +311,7 @@ __AddAppWindowDropZone_va(void *__base, struct AppWindow * aw, ULONG id, ULONG u
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, userdata);
-	struct AppWindowDropZone * _r = (struct AppWindowDropZone *)__wb_AddAppWindowDropZoneA(__base, aw, id, userdata, (CONST struct TagItem *)_ap);
+	struct AppWindowDropZone * _r = (struct AppWindowDropZone *)__wb_AddAppWindowDropZoneA(__base, (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -357,7 +357,7 @@ __ChangeWorkbenchSelection_va(void *__base, CONST_STRPTR name, struct Hook * hoo
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, hook);
-	BOOL _r = (BOOL)__wb_ChangeWorkbenchSelectionA(__base, name, hook, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__wb_ChangeWorkbenchSelectionA(__base, (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -385,7 +385,7 @@ __MakeWorkbenchObjectVisible_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	BOOL _r = (BOOL)__wb_MakeWorkbenchObjectVisibleA(__base, name, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__wb_MakeWorkbenchObjectVisibleA(__base, (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -413,7 +413,7 @@ __WhichWorkbenchObject_va(void *__base, struct Window * window, LONG x, LONG y, 
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, y);
-	ULONG _r = (ULONG)__wb_WhichWorkbenchObjectA(__base, window, x, y, (CONST struct TagItem *)_ap);
+	ULONG _r = (ULONG)__wb_WhichWorkbenchObjectA(__base, (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

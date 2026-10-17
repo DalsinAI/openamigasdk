@@ -62,7 +62,7 @@ struct MemList {
 #define MEMF_REVERSE	(1L<<18)
 #define MEMF_TOTAL	(1L<<19)
 
-#define MEMF_NO_EXPUNGE	(1L<<31)
+#define MEMF_NO_EXPUNGE	(1UL<<31)
 
 /* Allocation granule */
 #define MEM_BLOCKSIZE	8L

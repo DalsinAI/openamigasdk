@@ -54,7 +54,7 @@ __CreateGadget_va(void *__base, ULONG kind, struct Gadget * gad, CONST struct Ne
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, ng);
-	struct Gadget * _r = (struct Gadget *)__gadtools_CreateGadgetA(__base, kind, gad, ng, (CONST struct TagItem *)_ap);
+	struct Gadget * _r = (struct Gadget *)__gadtools_CreateGadgetA(__base, (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -101,7 +101,7 @@ __GT_SetGadgetAttrs_va(void *__base, struct Gadget * gad, struct Window * win, s
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, req);
-	__gadtools_GT_SetGadgetAttrsA(__base, gad, win, req, (CONST struct TagItem *)_ap);
+	__gadtools_GT_SetGadgetAttrsA(__base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define GT_SetGadgetAttrs(gad, win, req, ...) __GT_SetGadgetAttrs_va((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
@@ -128,7 +128,7 @@ __CreateMenus_va(void *__base, CONST struct NewMenu * newmenu, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, newmenu);
-	struct Menu * _r = (struct Menu *)__gadtools_CreateMenusA(__base, newmenu, (CONST struct TagItem *)_ap);
+	struct Menu * _r = (struct Menu *)__gadtools_CreateMenusA(__base, (CONST struct NewMenu *)(newmenu), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -174,7 +174,7 @@ __LayoutMenuItems_va(void *__base, struct MenuItem * firstitem, APTR vi, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, vi);
-	BOOL _r = (BOOL)__gadtools_LayoutMenuItemsA(__base, firstitem, vi, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__gadtools_LayoutMenuItemsA(__base, (struct MenuItem *)(firstitem), (APTR)(vi), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -203,7 +203,7 @@ __LayoutMenus_va(void *__base, struct Menu * firstmenu, APTR vi, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, vi);
-	BOOL _r = (BOOL)__gadtools_LayoutMenusA(__base, firstmenu, vi, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__gadtools_LayoutMenusA(__base, (struct Menu *)(firstmenu), (APTR)(vi), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -369,7 +369,7 @@ __DrawBevelBox_va(void *__base, struct RastPort * rport, LONG left, LONG top, LO
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, height);
-	__gadtools_DrawBevelBoxA(__base, rport, left, top, width, height, (CONST struct TagItem *)_ap);
+	__gadtools_DrawBevelBoxA(__base, (struct RastPort *)(rport), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define DrawBevelBox(rport, left, top, width, height, ...) __DrawBevelBox_va((GADTOOLS_BASE_NAME), (struct RastPort *)(rport), (LONG)(left), (LONG)(top), (LONG)(width), (LONG)(height), ##__VA_ARGS__)
@@ -396,7 +396,7 @@ __GetVisualInfo_va(void *__base, struct Screen * screen, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, screen);
-	APTR _r = (APTR)__gadtools_GetVisualInfoA(__base, screen, (CONST struct TagItem *)_ap);
+	APTR _r = (APTR)__gadtools_GetVisualInfoA(__base, (struct Screen *)(screen), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -442,7 +442,7 @@ __SetDesignFont_va(void *__base, APTR vi, CONST struct TextAttr * tattr, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, tattr);
-	LONG _r = (LONG)__gadtools_SetDesignFontA(__base, vi, tattr, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__gadtools_SetDesignFontA(__base, (APTR)(vi), (CONST struct TextAttr *)(tattr), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -470,7 +470,7 @@ __ScaleGadgetRect_va(void *__base, struct NewGadget * ng, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, ng);
-	LONG _r = (LONG)__gadtools_ScaleGadgetRectA(__base, ng, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__gadtools_ScaleGadgetRectA(__base, (struct NewGadget *)(ng), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
@@ -500,7 +500,7 @@ __GT_GetGadgetAttrs_va(void *__base, struct Gadget * gad, struct Window * win, s
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, req);
-	LONG _r = (LONG)__gadtools_GT_GetGadgetAttrsA(__base, gad, win, req, (CONST struct TagItem *)_ap);
+	LONG _r = (LONG)__gadtools_GT_GetGadgetAttrsA(__base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

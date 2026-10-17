@@ -381,7 +381,7 @@ __OpenCatalog_va(void *__base, CONST struct Locale * locale, CONST_STRPTR name, 
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, name);
-	struct Catalog * _r = (struct Catalog *)__locale_OpenCatalogA(__base, locale, name, (CONST struct TagItem *)_ap);
+	struct Catalog * _r = (struct Catalog *)__locale_OpenCatalogA(__base, (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

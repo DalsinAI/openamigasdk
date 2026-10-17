@@ -115,7 +115,7 @@ __SetClickTabNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__clicktab_SetClickTabNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__clicktab_SetClickTabNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define SetClickTabNodeAttrs(node, ...) __SetClickTabNodeAttrs_va((CLICKTAB_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
@@ -142,7 +142,7 @@ __GetClickTabNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, node);
-	__clicktab_GetClickTabNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__clicktab_GetClickTabNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 }
 #define GetClickTabNodeAttrs(node, ...) __GetClickTabNodeAttrs_va((CLICKTAB_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)

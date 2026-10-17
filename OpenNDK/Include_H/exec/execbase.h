@@ -141,7 +141,7 @@ struct ExecBase {
 #define CACRF_DBE		(1L<<12)
 #define CACRF_WriteAllocate	(1L<<13)
 #define CACRF_EnableE		(1L<<30)
-#define CACRF_CopyBack		(1L<<31)
+#define CACRF_CopyBack		(1UL<<31)
 
 /* Flags for CachePreDMA() and CachePostDMA() */
 #define DMA_Continue		(1L<<1)

@@ -161,7 +161,7 @@ __SetPageGadgetAttrs_va(void *__base, struct Gadget * gadget, Object * object, s
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, requester);
-	ULONG _r = (ULONG)__layout_SetPageGadgetAttrsA(__base, gadget, object, window, requester, (struct TagItem *)_ap);
+	ULONG _r = (ULONG)__layout_SetPageGadgetAttrsA(__base, (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), (struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }

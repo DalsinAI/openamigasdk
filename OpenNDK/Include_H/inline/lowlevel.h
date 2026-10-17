@@ -302,7 +302,7 @@ __SetJoyPortAttrs_va(void *__base, ULONG portNumber, ...)
 {
 	__builtin_va_list _ap;
 	__builtin_va_start(_ap, portNumber);
-	BOOL _r = (BOOL)__lowlevel_SetJoyPortAttrsA(__base, portNumber, (CONST struct TagItem *)_ap);
+	BOOL _r = (BOOL)__lowlevel_SetJoyPortAttrsA(__base, (ULONG)(portNumber), (CONST struct TagItem *)_ap);
 	__builtin_va_end(_ap);
 	return _r;
 }
