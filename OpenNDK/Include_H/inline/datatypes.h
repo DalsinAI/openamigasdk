@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -48,7 +48,7 @@ __datatypes_ObtainDataTypeA(void *__base, ULONG type, APTR handle, CONST struct 
 #define ObtainDataTypeA(type, handle, attrs) __datatypes_ObtainDataTypeA((DATATYPES_BASE_NAME), (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)(attrs))
 #define __ObtainDataTypeA_base(__in_base, type, handle, attrs) __datatypes_ObtainDataTypeA((__in_base), (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR struct DataType *
+static __OPENNDK_VA_ATTR struct DataType *
 __ObtainDataType_va(void *__base, ULONG type, APTR handle, ...)
 {
 	__builtin_va_list _ap;
@@ -93,7 +93,7 @@ __datatypes_NewDTObjectA(void *__base, STRPTR name, CONST struct TagItem * attrs
 #define NewDTObjectA(name, attrs) __datatypes_NewDTObjectA((DATATYPES_BASE_NAME), (STRPTR)(name), (CONST struct TagItem *)(attrs))
 #define __NewDTObjectA_base(__in_base, name, attrs) __datatypes_NewDTObjectA((__in_base), (STRPTR)(name), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR Object *
+static __OPENNDK_VA_ATTR Object *
 __NewDTObject_va(void *__base, APTR name, ...)
 {
 	__builtin_va_list _ap;
@@ -140,7 +140,7 @@ __datatypes_SetDTAttrsA(void *__base, Object * o, struct Window * win, struct Re
 #define SetDTAttrsA(o, win, req, attrs) __datatypes_SetDTAttrsA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
 #define __SetDTAttrsA_base(__in_base, o, win, req, attrs) __datatypes_SetDTAttrsA((__in_base), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __SetDTAttrs_va(void *__base, Object * o, struct Window * win, struct Requester * req, ...)
 {
 	__builtin_va_list _ap;
@@ -169,7 +169,7 @@ __datatypes_GetDTAttrsA(void *__base, Object * o, CONST struct TagItem * attrs)
 #define GetDTAttrsA(o, attrs) __datatypes_GetDTAttrsA((DATATYPES_BASE_NAME), (Object *)(o), (CONST struct TagItem *)(attrs))
 #define __GetDTAttrsA_base(__in_base, o, attrs) __datatypes_GetDTAttrsA((__in_base), (Object *)(o), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __GetDTAttrs_va(void *__base, Object * o, ...)
 {
 	__builtin_va_list _ap;
@@ -217,7 +217,7 @@ __datatypes_RefreshDTObjectA(void *__base, Object * o, struct Window * win, stru
 #define RefreshDTObjectA(o, win, req, attrs) __datatypes_RefreshDTObjectA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
 #define __RefreshDTObjectA_base(__in_base, o, win, req, attrs) __datatypes_RefreshDTObjectA((__in_base), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __RefreshDTObject_va(void *__base, Object * o, struct Window * win, struct Requester * req, ...)
 {
 	__builtin_va_list _ap;
@@ -227,7 +227,7 @@ __RefreshDTObject_va(void *__base, Object * o, struct Window * win, struct Reque
 }
 #define RefreshDTObject(o, win, req, ...) __RefreshDTObject_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __RefreshDTObjects_va(void *__base, Object * o, struct Window * win, struct Requester * req, ...)
 {
 	__builtin_va_list _ap;
@@ -273,7 +273,7 @@ __datatypes_DoDTMethodA(void *__base, Object * o, struct Window * win, struct Re
 #define DoDTMethodA(o, win, req, msg) __datatypes_DoDTMethodA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)(msg))
 #define __DoDTMethodA_base(__in_base, o, win, req, msg) __datatypes_DoDTMethodA((__in_base), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)(msg))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __DoDTMethod_va(void *__base, Object * o, struct Window * win, struct Requester * req, ...)
 {
 	__builtin_va_list _ap;
@@ -354,7 +354,7 @@ __datatypes_PrintDTObjectA(void *__base, Object * o, struct Window * w, struct R
 #define PrintDTObjectA(o, w, r, msg) __datatypes_PrintDTObjectA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)(msg))
 #define __PrintDTObjectA_base(__in_base, o, w, r, msg) __datatypes_PrintDTObjectA((__in_base), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)(msg))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __PrintDTObject_va(void *__base, Object * o, struct Window * w, struct Requester * r, ...)
 {
 	__builtin_va_list _ap;
@@ -505,7 +505,7 @@ __datatypes_SaveDTObjectA(void *__base, Object * o, struct Window * win, struct 
 #define SaveDTObjectA(o, win, req, file, mode, saveicon, attrs) __datatypes_SaveDTObjectA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)(attrs))
 #define __SaveDTObjectA_base(__in_base, o, win, req, file, mode, saveicon, attrs) __datatypes_SaveDTObjectA((__in_base), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __SaveDTObject_va(void *__base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, ...)
 {
 	__builtin_va_list _ap;

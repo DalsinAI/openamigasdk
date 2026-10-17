@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -49,7 +49,7 @@ __gadtools_CreateGadgetA(void *__base, ULONG kind, struct Gadget * gad, CONST st
 #define CreateGadgetA(kind, gad, ng, taglist) __gadtools_CreateGadgetA((GADTOOLS_BASE_NAME), (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
 #define __CreateGadgetA_base(__in_base, kind, gad, ng, taglist) __gadtools_CreateGadgetA((__in_base), (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR struct Gadget *
+static __OPENNDK_VA_ATTR struct Gadget *
 __CreateGadget_va(void *__base, ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, ...)
 {
 	__builtin_va_list _ap;
@@ -96,7 +96,7 @@ __gadtools_GT_SetGadgetAttrsA(void *__base, struct Gadget * gad, struct Window *
 #define GT_SetGadgetAttrsA(gad, win, req, taglist) __gadtools_GT_SetGadgetAttrsA((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
 #define __GT_SetGadgetAttrsA_base(__in_base, gad, win, req, taglist) __gadtools_GT_SetGadgetAttrsA((__in_base), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __GT_SetGadgetAttrs_va(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
 {
 	__builtin_va_list _ap;
@@ -123,7 +123,7 @@ __gadtools_CreateMenusA(void *__base, CONST struct NewMenu * newmenu, CONST stru
 #define CreateMenusA(newmenu, taglist) __gadtools_CreateMenusA((GADTOOLS_BASE_NAME), (CONST struct NewMenu *)(newmenu), (CONST struct TagItem *)(taglist))
 #define __CreateMenusA_base(__in_base, newmenu, taglist) __gadtools_CreateMenusA((__in_base), (CONST struct NewMenu *)(newmenu), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR struct Menu *
+static __OPENNDK_VA_ATTR struct Menu *
 __CreateMenus_va(void *__base, CONST struct NewMenu * newmenu, ...)
 {
 	__builtin_va_list _ap;
@@ -169,7 +169,7 @@ __gadtools_LayoutMenuItemsA(void *__base, struct MenuItem * firstitem, APTR vi, 
 #define LayoutMenuItemsA(firstitem, vi, taglist) __gadtools_LayoutMenuItemsA((GADTOOLS_BASE_NAME), (struct MenuItem *)(firstitem), (APTR)(vi), (CONST struct TagItem *)(taglist))
 #define __LayoutMenuItemsA_base(__in_base, firstitem, vi, taglist) __gadtools_LayoutMenuItemsA((__in_base), (struct MenuItem *)(firstitem), (APTR)(vi), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __LayoutMenuItems_va(void *__base, struct MenuItem * firstitem, APTR vi, ...)
 {
 	__builtin_va_list _ap;
@@ -198,7 +198,7 @@ __gadtools_LayoutMenusA(void *__base, struct Menu * firstmenu, APTR vi, CONST st
 #define LayoutMenusA(firstmenu, vi, taglist) __gadtools_LayoutMenusA((GADTOOLS_BASE_NAME), (struct Menu *)(firstmenu), (APTR)(vi), (CONST struct TagItem *)(taglist))
 #define __LayoutMenusA_base(__in_base, firstmenu, vi, taglist) __gadtools_LayoutMenusA((__in_base), (struct Menu *)(firstmenu), (APTR)(vi), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __LayoutMenus_va(void *__base, struct Menu * firstmenu, APTR vi, ...)
 {
 	__builtin_va_list _ap;
@@ -364,7 +364,7 @@ __gadtools_DrawBevelBoxA(void *__base, struct RastPort * rport, WORD left, WORD 
 #define DrawBevelBoxA(rport, left, top, width, height, taglist) __gadtools_DrawBevelBoxA((GADTOOLS_BASE_NAME), (struct RastPort *)(rport), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height), (CONST struct TagItem *)(taglist))
 #define __DrawBevelBoxA_base(__in_base, rport, left, top, width, height, taglist) __gadtools_DrawBevelBoxA((__in_base), (struct RastPort *)(rport), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __DrawBevelBox_va(void *__base, struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, ...)
 {
 	__builtin_va_list _ap;
@@ -391,7 +391,7 @@ __gadtools_GetVisualInfoA(void *__base, struct Screen * screen, CONST struct Tag
 #define GetVisualInfoA(screen, taglist) __gadtools_GetVisualInfoA((GADTOOLS_BASE_NAME), (struct Screen *)(screen), (CONST struct TagItem *)(taglist))
 #define __GetVisualInfoA_base(__in_base, screen, taglist) __gadtools_GetVisualInfoA((__in_base), (struct Screen *)(screen), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR APTR
+static __OPENNDK_VA_ATTR APTR
 __GetVisualInfo_va(void *__base, struct Screen * screen, ...)
 {
 	__builtin_va_list _ap;
@@ -437,7 +437,7 @@ __gadtools_SetDesignFontA(void *__base, APTR vi, CONST struct TextAttr * tattr, 
 #define SetDesignFontA(vi, tattr, taglist) __gadtools_SetDesignFontA((GADTOOLS_BASE_NAME), (APTR)(vi), (CONST struct TextAttr *)(tattr), (CONST struct TagItem *)(taglist))
 #define __SetDesignFontA_base(__in_base, vi, tattr, taglist) __gadtools_SetDesignFontA((__in_base), (APTR)(vi), (CONST struct TextAttr *)(tattr), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __SetDesignFont_va(void *__base, APTR vi, CONST struct TextAttr * tattr, ...)
 {
 	__builtin_va_list _ap;
@@ -465,7 +465,7 @@ __gadtools_ScaleGadgetRectA(void *__base, struct NewGadget * ng, CONST struct Ta
 #define ScaleGadgetRectA(ng, taglist) __gadtools_ScaleGadgetRectA((GADTOOLS_BASE_NAME), (struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
 #define __ScaleGadgetRectA_base(__in_base, ng, taglist) __gadtools_ScaleGadgetRectA((__in_base), (struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __ScaleGadgetRect_va(void *__base, struct NewGadget * ng, ...)
 {
 	__builtin_va_list _ap;
@@ -495,7 +495,7 @@ __gadtools_GT_GetGadgetAttrsA(void *__base, struct Gadget * gad, struct Window *
 #define GT_GetGadgetAttrsA(gad, win, req, taglist) __gadtools_GT_GetGadgetAttrsA((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
 #define __GT_GetGadgetAttrsA_base(__in_base, gad, win, req, taglist) __gadtools_GT_GetGadgetAttrsA((__in_base), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __GT_GetGadgetAttrs_va(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
 {
 	__builtin_va_list _ap;

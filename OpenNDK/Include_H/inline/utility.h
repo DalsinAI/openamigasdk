@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -561,7 +561,7 @@ __utility_AllocNamedObjectA(void *__base, CONST_STRPTR name, CONST struct TagIte
 #define AllocNamedObjectA(name, tagList) __utility_AllocNamedObjectA((UTILITY_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tagList))
 #define __AllocNamedObjectA_base(__in_base, name, tagList) __utility_AllocNamedObjectA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR struct NamedObject *
+static __OPENNDK_VA_ATTR struct NamedObject *
 __AllocNamedObject_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
@@ -710,7 +710,7 @@ __utility_VSNPrintf(void *__base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR 
 #define VSNPrintf(buffer, bufferSize, format, args) __utility_VSNPrintf((UTILITY_BASE_NAME), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)(args))
 #define __VSNPrintf_base(__in_base, buffer, bufferSize, format, args) __utility_VSNPrintf((__in_base), (STRPTR)(buffer), (ULONG)(bufferSize), (CONST_STRPTR)(format), (CONST_APTR)(args))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __SNPrintf_va(void *__base, STRPTR buffer, ULONG bufferSize, CONST_STRPTR format, ...)
 {
 	__builtin_va_list _ap;

@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -156,7 +156,7 @@ __layout_SetPageGadgetAttrsA(void *__base, struct Gadget * gadget, Object * obje
 #define SetPageGadgetAttrsA(gadget, object, window, requester, tags) __layout_SetPageGadgetAttrsA((LAYOUT_BASE_NAME), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), (struct TagItem *)(tags))
 #define __SetPageGadgetAttrsA_base(__in_base, gadget, object, window, requester, tags) __layout_SetPageGadgetAttrsA((__in_base), (struct Gadget *)(gadget), (Object *)(object), (struct Window *)(window), (struct Requester *)(requester), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __SetPageGadgetAttrs_va(void *__base, struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, ...)
 {
 	__builtin_va_list _ap;

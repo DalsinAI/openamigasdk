@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -65,7 +65,7 @@ __radiobutton_AllocRadioButtonNodeA(void *__base, ULONG columns, struct TagItem 
 #define AllocRadioButtonNodeA(columns, tags) __radiobutton_AllocRadioButtonNodeA((RADIOBUTTON_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
 #define __AllocRadioButtonNodeA_base(__in_base, columns, tags) __radiobutton_AllocRadioButtonNodeA((__in_base), (ULONG)(columns), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct Node *
+static __OPENNDK_VA_ATTR struct Node *
 __AllocRadioButtonNode_va(void *__base, UWORD columns, ...)
 {
 	__builtin_va_list _ap;
@@ -110,7 +110,7 @@ __radiobutton_SetRadioButtonNodeAttrsA(void *__base, struct Node * node, struct 
 #define SetRadioButtonNodeAttrsA(node, tags) __radiobutton_SetRadioButtonNodeAttrsA((RADIOBUTTON_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
 #define __SetRadioButtonNodeAttrsA_base(__in_base, node, tags) __radiobutton_SetRadioButtonNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __SetRadioButtonNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
@@ -137,7 +137,7 @@ __radiobutton_GetRadioButtonNodeAttrsA(void *__base, struct Node * node, struct 
 #define GetRadioButtonNodeAttrsA(node, tags) __radiobutton_GetRadioButtonNodeAttrsA((RADIOBUTTON_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
 #define __GetRadioButtonNodeAttrsA_base(__in_base, node, tags) __radiobutton_GetRadioButtonNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __GetRadioButtonNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;

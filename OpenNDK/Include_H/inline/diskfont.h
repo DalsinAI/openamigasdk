@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -150,7 +150,7 @@ __diskfont_SetDiskFontCtrlA(void *__base, CONST struct TagItem * taglist)
 #define SetDiskFontCtrlA(taglist) __diskfont_SetDiskFontCtrlA((DISKFONT_BASE_NAME), (CONST struct TagItem *)(taglist))
 #define __SetDiskFontCtrlA_base(__in_base, taglist) __diskfont_SetDiskFontCtrlA((__in_base), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __SetDiskFontCtrl_va(void *__base, ...)
 {
 	__builtin_va_list _ap;
@@ -211,7 +211,7 @@ __diskfont_ESetInfoA(void *__base, struct EGlyphEngine * eEngine, CONST struct T
 #define ESetInfoA(eEngine, taglist) __diskfont_ESetInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 #define __ESetInfoA_base(__in_base, eEngine, taglist) __diskfont_ESetInfoA((__in_base), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __ESetInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
 {
 	__builtin_va_list _ap;
@@ -239,7 +239,7 @@ __diskfont_EObtainInfoA(void *__base, struct EGlyphEngine * eEngine, CONST struc
 #define EObtainInfoA(eEngine, taglist) __diskfont_EObtainInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 #define __EObtainInfoA_base(__in_base, eEngine, taglist) __diskfont_EObtainInfoA((__in_base), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __EObtainInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
 {
 	__builtin_va_list _ap;
@@ -267,7 +267,7 @@ __diskfont_EReleaseInfoA(void *__base, struct EGlyphEngine * eEngine, CONST stru
 #define EReleaseInfoA(eEngine, taglist) __diskfont_EReleaseInfoA((DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 #define __EReleaseInfoA_base(__in_base, eEngine, taglist) __diskfont_EReleaseInfoA((__in_base), (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __EReleaseInfo_va(void *__base, struct EGlyphEngine * eEngine, ...)
 {
 	__builtin_va_list _ap;
@@ -348,7 +348,7 @@ __diskfont_WriteDiskFontHeaderA(void *__base, CONST struct TextFont * font, CONS
 #define WriteDiskFontHeaderA(font, fileName, tagList) __diskfont_WriteDiskFontHeaderA((DISKFONT_BASE_NAME), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)(tagList))
 #define __WriteDiskFontHeaderA_base(__in_base, font, fileName, tagList) __diskfont_WriteDiskFontHeaderA((__in_base), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __WriteDiskFontHeader_va(void *__base, CONST struct TextFont * font, CONST_STRPTR fileName, ...)
 {
 	__builtin_va_list _ap;

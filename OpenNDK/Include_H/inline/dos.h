@@ -17,9 +17,9 @@ struct DosLibrary;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -598,7 +598,7 @@ __dos_AllocDosObject(void *__base, ULONG type, CONST struct TagItem * tags)
 
 #define AllocDosObjectTagList(...) AllocDosObject(__VA_ARGS__)
 
-static __inline__ __OPENNDK_VA_ATTR APTR
+static __OPENNDK_VA_ATTR APTR
 __AllocDosObjectTags_va(void *__base, ULONG type, ...)
 {
 	__builtin_va_list _ap;
@@ -1081,7 +1081,7 @@ __dos_VFWritef(void *__base, BPTR fh, CONST_STRPTR format, CONST LONG * argarray
 #define VFWritef(fh, format, argarray) __dos_VFWritef((DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)(argarray))
 #define __VFWritef_base(__in_base, fh, format, argarray) __dos_VFWritef((__in_base), (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)(argarray))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __FWritef_va(void *__base, BPTR fh, CONST_STRPTR format, ...)
 {
 	__builtin_va_list _ap;
@@ -1110,7 +1110,7 @@ __dos_VFPrintf(void *__base, BPTR fh, CONST_STRPTR format, CONST_APTR argarray)
 #define VFPrintf(fh, format, argarray) __dos_VFPrintf((DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
 #define __VFPrintf_base(__in_base, fh, format, argarray) __dos_VFPrintf((__in_base), (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __FPrintf_va(void *__base, BPTR fh, CONST_STRPTR format, ...)
 {
 	__builtin_va_list _ap;
@@ -1550,7 +1550,7 @@ __dos_CreateNewProc(void *__base, CONST struct TagItem * tags)
 
 #define CreateNewProcTagList(...) CreateNewProc(__VA_ARGS__)
 
-static __inline__ __OPENNDK_VA_ATTR struct Process *
+static __OPENNDK_VA_ATTR struct Process *
 __CreateNewProcTags_va(void *__base, ...)
 {
 	__builtin_va_list _ap;
@@ -1876,7 +1876,7 @@ __dos_SystemTagList(void *__base, CONST_STRPTR command, CONST struct TagItem * t
 
 #define System(...) SystemTagList(__VA_ARGS__)
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __SystemTags_va(void *__base, CONST_STRPTR command, ...)
 {
 	__builtin_va_list _ap;
@@ -2366,7 +2366,7 @@ __dos_NewLoadSeg(void *__base, CONST_STRPTR file, CONST struct TagItem * tags)
 
 #define NewLoadSegTagList(...) NewLoadSeg(__VA_ARGS__)
 
-static __inline__ __OPENNDK_VA_ATTR BPTR
+static __OPENNDK_VA_ATTR BPTR
 __NewLoadSegTags_va(void *__base, CONST_STRPTR file, ...)
 {
 	__builtin_va_list _ap;
@@ -2879,7 +2879,7 @@ __dos_VPrintf(void *__base, CONST_STRPTR format, CONST_APTR argarray)
 #define VPrintf(format, argarray) __dos_VPrintf((DOS_BASE_NAME), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
 #define __VPrintf_base(__in_base, format, argarray) __dos_VPrintf((__in_base), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __Printf_va(void *__base, CONST_STRPTR format, ...)
 {
 	__builtin_va_list _ap;
@@ -3086,7 +3086,7 @@ __dos_DoShellMethodTagList(void *__base, ULONG method, CONST struct TagItem * ta
 #define DoShellMethodTagList(method, tags) __dos_DoShellMethodTagList((DOS_BASE_NAME), (ULONG)(method), (CONST struct TagItem *)(tags))
 #define __DoShellMethodTagList_base(__in_base, method, tags) __dos_DoShellMethodTagList((__in_base), (ULONG)(method), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR APTR
+static __OPENNDK_VA_ATTR APTR
 __DoShellMethod_va(void *__base, ULONG method, ...)
 {
 	__builtin_va_list _ap;
