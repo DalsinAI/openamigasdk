@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -65,7 +65,7 @@ __clicktab_AllocClickTabNodeA(void *__base, struct TagItem * tags)
 #define AllocClickTabNodeA(tags) __clicktab_AllocClickTabNodeA((CLICKTAB_BASE_NAME), (struct TagItem *)(tags))
 #define __AllocClickTabNodeA_base(__in_base, tags) __clicktab_AllocClickTabNodeA((__in_base), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct Node *
+static __OPENNDK_VA_ATTR struct Node *
 __AllocClickTabNode_va(void *__base, ...)
 {
 	__builtin_va_list _ap;
@@ -110,7 +110,7 @@ __clicktab_SetClickTabNodeAttrsA(void *__base, struct Node * node, struct TagIte
 #define SetClickTabNodeAttrsA(node, tags) __clicktab_SetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
 #define __SetClickTabNodeAttrsA_base(__in_base, node, tags) __clicktab_SetClickTabNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __SetClickTabNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
@@ -137,7 +137,7 @@ __clicktab_GetClickTabNodeAttrsA(void *__base, struct Node * node, struct TagIte
 #define GetClickTabNodeAttrsA(node, tags) __clicktab_GetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
 #define __GetClickTabNodeAttrsA_base(__in_base, node, tags) __clicktab_GetClickTabNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __GetClickTabNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;

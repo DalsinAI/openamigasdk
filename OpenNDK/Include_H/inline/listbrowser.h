@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -65,7 +65,7 @@ __listbrowser_AllocListBrowserNodeA(void *__base, ULONG columns, struct TagItem 
 #define AllocListBrowserNodeA(columns, tags) __listbrowser_AllocListBrowserNodeA((LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
 #define __AllocListBrowserNodeA_base(__in_base, columns, tags) __listbrowser_AllocListBrowserNodeA((__in_base), (ULONG)(columns), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct Node *
+static __OPENNDK_VA_ATTR struct Node *
 __AllocListBrowserNode_va(void *__base, UWORD columns, ...)
 {
 	__builtin_va_list _ap;
@@ -110,7 +110,7 @@ __listbrowser_SetListBrowserNodeAttrsA(void *__base, struct Node * node, struct 
 #define SetListBrowserNodeAttrsA(node, tags) __listbrowser_SetListBrowserNodeAttrsA((LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
 #define __SetListBrowserNodeAttrsA_base(__in_base, node, tags) __listbrowser_SetListBrowserNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __SetListBrowserNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
@@ -137,7 +137,7 @@ __listbrowser_GetListBrowserNodeAttrsA(void *__base, struct Node * node, struct 
 #define GetListBrowserNodeAttrsA(node, tags) __listbrowser_GetListBrowserNodeAttrsA((LISTBROWSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
 #define __GetListBrowserNodeAttrsA_base(__in_base, node, tags) __listbrowser_GetListBrowserNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __GetListBrowserNodeAttrs_va(void *__base, struct Node * node, ...)
 {
 	__builtin_va_list _ap;
@@ -266,7 +266,7 @@ __listbrowser_AllocLBColumnInfoA(void *__base, ULONG columns, struct TagItem * t
 #define AllocLBColumnInfoA(columns, tags) __listbrowser_AllocLBColumnInfoA((LISTBROWSER_BASE_NAME), (ULONG)(columns), (struct TagItem *)(tags))
 #define __AllocLBColumnInfoA_base(__in_base, columns, tags) __listbrowser_AllocLBColumnInfoA((__in_base), (ULONG)(columns), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct ColumnInfo *
+static __OPENNDK_VA_ATTR struct ColumnInfo *
 __AllocLBColumnInfo_va(void *__base, UWORD columns, ...)
 {
 	__builtin_va_list _ap;
@@ -294,7 +294,7 @@ __listbrowser_SetLBColumnInfoAttrsA(void *__base, struct ColumnInfo * columninfo
 #define SetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
 #define __SetLBColumnInfoAttrsA_base(__in_base, columninfo, tags) __listbrowser_SetLBColumnInfoAttrsA((__in_base), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __SetLBColumnInfoAttrs_va(void *__base, struct ColumnInfo * columninfo, ...)
 {
 	__builtin_va_list _ap;
@@ -322,7 +322,7 @@ __listbrowser_GetLBColumnInfoAttrsA(void *__base, struct ColumnInfo * columninfo
 #define GetLBColumnInfoAttrsA(columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((LISTBROWSER_BASE_NAME), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
 #define __GetLBColumnInfoAttrsA_base(__in_base, columninfo, tags) __listbrowser_GetLBColumnInfoAttrsA((__in_base), (struct ColumnInfo *)(columninfo), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __GetLBColumnInfoAttrs_va(void *__base, struct ColumnInfo * columninfo, ...)
 {
 	__builtin_va_list _ap;

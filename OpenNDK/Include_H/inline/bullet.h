@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -82,7 +82,7 @@ __bullet_SetInfoA(void *__base, struct GlyphEngine * glyphEngine, CONST struct T
 #define SetInfoA(glyphEngine, tagList) __bullet_SetInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 #define __SetInfoA_base(__in_base, glyphEngine, tagList) __bullet_SetInfoA((__in_base), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __SetInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
 {
 	__builtin_va_list _ap;
@@ -110,7 +110,7 @@ __bullet_ObtainInfoA(void *__base, struct GlyphEngine * glyphEngine, CONST struc
 #define ObtainInfoA(glyphEngine, tagList) __bullet_ObtainInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 #define __ObtainInfoA_base(__in_base, glyphEngine, tagList) __bullet_ObtainInfoA((__in_base), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __ObtainInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
 {
 	__builtin_va_list _ap;
@@ -138,7 +138,7 @@ __bullet_ReleaseInfoA(void *__base, struct GlyphEngine * glyphEngine, CONST stru
 #define ReleaseInfoA(glyphEngine, tagList) __bullet_ReleaseInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 #define __ReleaseInfoA_base(__in_base, glyphEngine, tagList) __bullet_ReleaseInfoA((__in_base), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __ReleaseInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
 {
 	__builtin_va_list _ap;

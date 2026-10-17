@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -82,7 +82,7 @@ __amigaguide_OpenAmigaGuideA(void *__base, struct NewAmigaGuide * nag, CONST str
 #define OpenAmigaGuideA(nag, attrs) __amigaguide_OpenAmigaGuideA((AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
 #define __OpenAmigaGuideA_base(__in_base, nag, attrs) __amigaguide_OpenAmigaGuideA((__in_base), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR APTR
+static __OPENNDK_VA_ATTR APTR
 __OpenAmigaGuide_va(void *__base, struct NewAmigaGuide * nag, ...)
 {
 	__builtin_va_list _ap;
@@ -110,7 +110,7 @@ __amigaguide_OpenAmigaGuideAsyncA(void *__base, struct NewAmigaGuide * nag, CONS
 #define OpenAmigaGuideAsyncA(nag, attrs) __amigaguide_OpenAmigaGuideAsyncA((AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
 #define __OpenAmigaGuideAsyncA_base(__in_base, nag, attrs) __amigaguide_OpenAmigaGuideAsyncA((__in_base), (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR APTR
+static __OPENNDK_VA_ATTR APTR
 __OpenAmigaGuideAsync_va(void *__base, struct NewAmigaGuide * nag, ...)
 {
 	__builtin_va_list _ap;
@@ -206,7 +206,7 @@ __amigaguide_SetAmigaGuideContextA(void *__base, APTR cl, ULONG id, CONST struct
 #define SetAmigaGuideContextA(cl, id, attrs) __amigaguide_SetAmigaGuideContextA((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)(attrs))
 #define __SetAmigaGuideContextA_base(__in_base, cl, id, attrs) __amigaguide_SetAmigaGuideContextA((__in_base), (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __SetAmigaGuideContext_va(void *__base, APTR cl, ULONG id, ...)
 {
 	__builtin_va_list _ap;
@@ -234,7 +234,7 @@ __amigaguide_SendAmigaGuideContextA(void *__base, APTR cl, CONST struct TagItem 
 #define SendAmigaGuideContextA(cl, attrs) __amigaguide_SendAmigaGuideContextA((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST struct TagItem *)(attrs))
 #define __SendAmigaGuideContextA_base(__in_base, cl, attrs) __amigaguide_SendAmigaGuideContextA((__in_base), (APTR)(cl), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __SendAmigaGuideContext_va(void *__base, APTR cl, ...)
 {
 	__builtin_va_list _ap;
@@ -262,7 +262,7 @@ __amigaguide_SendAmigaGuideCmdA(void *__base, APTR cl, CONST_STRPTR cmd, CONST s
 #define SendAmigaGuideCmdA(cl, cmd, attrs) __amigaguide_SendAmigaGuideCmdA((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)(attrs))
 #define __SendAmigaGuideCmdA_base(__in_base, cl, cmd, attrs) __amigaguide_SendAmigaGuideCmdA((__in_base), (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __SendAmigaGuideCmd_va(void *__base, APTR cl, CONST_STRPTR cmd, ...)
 {
 	__builtin_va_list _ap;
@@ -290,7 +290,7 @@ __amigaguide_SetAmigaGuideAttrsA(void *__base, APTR cl, CONST struct TagItem * a
 #define SetAmigaGuideAttrsA(cl, attrs) __amigaguide_SetAmigaGuideAttrsA((AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST struct TagItem *)(attrs))
 #define __SetAmigaGuideAttrsA_base(__in_base, cl, attrs) __amigaguide_SetAmigaGuideAttrsA((__in_base), (APTR)(cl), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __SetAmigaGuideAttrs_va(void *__base, APTR cl, ...)
 {
 	__builtin_va_list _ap;
@@ -369,7 +369,7 @@ __amigaguide_AddAmigaGuideHostA(void *__base, struct Hook * h, CONST_STRPTR name
 #define AddAmigaGuideHostA(h, name, attrs) __amigaguide_AddAmigaGuideHostA((AMIGAGUIDE_BASE_NAME), (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)(attrs))
 #define __AddAmigaGuideHostA_base(__in_base, h, name, attrs) __amigaguide_AddAmigaGuideHostA((__in_base), (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR APTR
+static __OPENNDK_VA_ATTR APTR
 __AddAmigaGuideHost_va(void *__base, struct Hook * h, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
@@ -397,7 +397,7 @@ __amigaguide_RemoveAmigaGuideHostA(void *__base, APTR hh, CONST struct TagItem *
 #define RemoveAmigaGuideHostA(hh, attrs) __amigaguide_RemoveAmigaGuideHostA((AMIGAGUIDE_BASE_NAME), (APTR)(hh), (CONST struct TagItem *)(attrs))
 #define __RemoveAmigaGuideHostA_base(__in_base, hh, attrs) __amigaguide_RemoveAmigaGuideHostA((__in_base), (APTR)(hh), (CONST struct TagItem *)(attrs))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __RemoveAmigaGuideHost_va(void *__base, APTR hh, ...)
 {
 	__builtin_va_list _ap;

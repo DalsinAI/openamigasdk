@@ -17,9 +17,9 @@ struct LocaleBase;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -376,7 +376,7 @@ __locale_OpenCatalogA(void *__base, CONST struct Locale * locale, CONST_STRPTR n
 #define OpenCatalogA(locale, name, tags) __locale_OpenCatalogA((LOCALE_BASE_NAME), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 #define __OpenCatalogA_base(__in_base, locale, name, tags) __locale_OpenCatalogA((__in_base), (CONST struct Locale *)(locale), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct Catalog *
+static __OPENNDK_VA_ATTR struct Catalog *
 __OpenCatalog_va(void *__base, CONST struct Locale * locale, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
