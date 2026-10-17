@@ -26,7 +26,7 @@ python3 "$NDK/tools/ndkgen.py" --out "$OUT/gen" --stubs "$OUT/stubs" "$NDK"/SFD/
 # -nostdinc keeps the vendor NDK out even when the compiler was set up with
 # one; the compiler's own include folder still gives stdarg.h
 CFLAGS="-nostdinc -isystem $($CC -print-file-name=include) -I$NDK/Include_H
-  -O2 -m68000 -fomit-frame-pointer -fno-builtin -Wall -Wextra -Werror
+  -O2 -m68040 -fomit-frame-pointer -fno-builtin -Wall -Wextra -Werror
   -Wno-unused-parameter ${EXTRA_CFLAGS:-}"
 n=0
 for src in "$OUT"/stubs/*.c "$NDK"/lib/alib/*.c "$NDK"/lib/alib/*.S; do

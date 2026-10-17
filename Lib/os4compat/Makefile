@@ -9,7 +9,7 @@ SDK      ?= ../..
 CC       ?= m68k-amigaos-gcc
 AR       ?= m68k-amigaos-ar
 PYTHON   ?= python3
-CPU      ?= -m68020
+CPU      ?= -m68040
 # -fno-delete-null-pointer-checks: address 0 is memory on an Amiga; without it GCC
 # puts TRAP #7 (Software Failure 80000027) where it proves a pointer null.
 CFLAGS   ?= -O2 -fno-delete-null-pointer-checks -Wall -Wno-pointer-sign -fno-common

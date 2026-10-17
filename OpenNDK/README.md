@@ -33,8 +33,13 @@ With the os32-gcc16 stove (GCC 16 for m68k-amigaos):
 ```sh
 sh OpenNDK/lib/build.sh                     # makes lib/build/<prefix>/libamiga.a
 m68k-amigaos-gcc -nostdinc -isystem "$(m68k-amigaos-gcc -print-file-name=include)" \
-    -I OpenNDK/Include_H -O2 -fomit-frame-pointer -c prog.c
+    -I OpenNDK/Include_H -m68040 -O2 -fomit-frame-pointer -c prog.c
 ```
+
+When you link against libnix, add the SDK's soft-float specs file
+(`-specs=<SDK>/Lib/m68k-soft-m68040.specs`, an absolute path): without it
+`-m68040` links libnix's FPU maths, which soft-float code can't call
+(see the SDK's README).
 
 `-nostdinc` keeps a vendor NDK installed in the compiler's own search path
 out. A C library (libnix, clib2) brings its own `stdio.h` and friends:
