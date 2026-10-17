@@ -121,9 +121,9 @@ __realtime_SetPlayerAttrsA(struct RealTimeBase *__base, struct Player * player, 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___realtime_SetPlayerAttrs(__realtime_base_t __ndk_base, struct Player * player, Tag tag1, ...)
+___realtime_SetPlayerAttrs(__realtime_base_t __ndk_base, struct Player * player, ...)
 {
-	return __realtime_SetPlayerAttrsA(__ndk_base, (struct Player *)(player), (CONST struct TagItem *)&tag1);
+	return __realtime_SetPlayerAttrsA(__ndk_base, (struct Player *)(player), (CONST struct TagItem *)((ULONG)&player + sizeof(player)));
 }
 #define SetPlayerAttrs(player, ...) ___realtime_SetPlayerAttrs((__realtime_base_t)(REALTIME_BASE_NAME), (struct Player *)(player), ##__VA_ARGS__)
 #else
@@ -217,9 +217,9 @@ __realtime_GetPlayerAttrsA(struct RealTimeBase *__base, CONST struct Player * pl
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___realtime_GetPlayerAttrs(__realtime_base_t __ndk_base, CONST struct Player * player, Tag tag1, ...)
+___realtime_GetPlayerAttrs(__realtime_base_t __ndk_base, CONST struct Player * player, ...)
 {
-	return __realtime_GetPlayerAttrsA(__ndk_base, (CONST struct Player *)(player), (CONST struct TagItem *)&tag1);
+	return __realtime_GetPlayerAttrsA(__ndk_base, (CONST struct Player *)(player), (CONST struct TagItem *)((ULONG)&player + sizeof(player)));
 }
 #define GetPlayerAttrs(player, ...) ___realtime_GetPlayerAttrs((__realtime_base_t)(REALTIME_BASE_NAME), (CONST struct Player *)(player), ##__VA_ARGS__)
 #else

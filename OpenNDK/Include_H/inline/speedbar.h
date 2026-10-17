@@ -60,9 +60,9 @@ __speedbar_AllocSpeedButtonNodeA(struct Library *__base, ULONG number, struct Ta
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Node *
-___speedbar_AllocSpeedButtonNode(__speedbar_base_t __ndk_base, UWORD number, Tag tag1, ...)
+___speedbar_AllocSpeedButtonNode(__speedbar_base_t __ndk_base, UWORD number, ...)
 {
-	return __speedbar_AllocSpeedButtonNodeA(__ndk_base, (UWORD)(number), (struct TagItem *)&tag1);
+	return __speedbar_AllocSpeedButtonNodeA(__ndk_base, (ULONG)(number), (struct TagItem *)((ULONG)&number + sizeof(number)));
 }
 #define AllocSpeedButtonNode(number, ...) ___speedbar_AllocSpeedButtonNode((__speedbar_base_t)(SPEEDBAR_BASE_NAME), (UWORD)(number), ##__VA_ARGS__)
 #else
@@ -105,9 +105,9 @@ __speedbar_SetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___speedbar_SetSpeedButtonNodeAttrs(__speedbar_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___speedbar_SetSpeedButtonNodeAttrs(__speedbar_base_t __ndk_base, struct Node * node, ...)
 {
-	__speedbar_SetSpeedButtonNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__speedbar_SetSpeedButtonNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define SetSpeedButtonNodeAttrs(node, ...) ___speedbar_SetSpeedButtonNodeAttrs((__speedbar_base_t)(SPEEDBAR_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else
@@ -133,9 +133,9 @@ __speedbar_GetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___speedbar_GetSpeedButtonNodeAttrs(__speedbar_base_t __ndk_base, struct Node * node, Tag tag1, ...)
+___speedbar_GetSpeedButtonNodeAttrs(__speedbar_base_t __ndk_base, struct Node * node, ...)
 {
-	__speedbar_GetSpeedButtonNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)&tag1);
+	__speedbar_GetSpeedButtonNodeAttrsA(__ndk_base, (struct Node *)(node), (struct TagItem *)((ULONG)&node + sizeof(node)));
 }
 #define GetSpeedButtonNodeAttrs(node, ...) ___speedbar_GetSpeedButtonNodeAttrs((__speedbar_base_t)(SPEEDBAR_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 #else

@@ -17,6 +17,12 @@
 #include <graphics/gfx.h>
 #endif
 
+
+/* structures the hooks below take pointers to */
+struct View;
+struct Rectangle;
+struct MonitorSpec;
+
 struct MonitorSpec
 {
     struct ExtendedNode ms_Node;
@@ -30,21 +36,21 @@ struct MonitorSpec
     UWORD     min_row;
     struct SpecialMonitor *ms_Special;
     UWORD     ms_OpenCount;
-    LONG    (*ms_transform)();
-    LONG    (*ms_translate)();
-    LONG    (*ms_scale)();
+    LONG (* __ASM__ ms_transform)(__REG__(a0, struct MonitorSpec *), __REG__(a1, Point *), __REG__(d0, UWORD), __REG__(a2, Point *));
+    LONG (* __ASM__ ms_translate)(__REG__(a0, struct MonitorSpec *), __REG__(a1, Point *), __REG__(d0, UWORD), __REG__(a2, Point *));
+    LONG (* __ASM__ ms_scale)(__REG__(a0, struct MonitorSpec *), __REG__(a1, Point *), __REG__(d0, UWORD), __REG__(a2, Point *));
     UWORD     ms_xoffset;
     UWORD     ms_yoffset;
     struct Rectangle ms_LegalView;
-    LONG    (*ms_maxoscan)();
-    LONG    (*ms_videoscan)();
+    LONG (* __ASM__ ms_maxoscan)(__REG__(a0, struct MonitorSpec *), __REG__(a1, struct Rectangle *), __REG__(d0, ULONG));
+    LONG (* __ASM__ ms_videoscan)(__REG__(a0, struct MonitorSpec *), __REG__(a1, struct Rectangle *), __REG__(d0, ULONG));
     UWORD     DeniseMinDisplayColumn;
     ULONG     DisplayCompatible;
     struct List DisplayInfoDataBase;
     struct SignalSemaphore DisplayInfoDataBaseSemaphore;
-    LONG    (*ms_MrgCop)();
-    LONG    (*ms_LoadView)();
-    LONG    (*ms_KillView)();
+    LONG (* __STDARGS__ ms_MrgCop)(struct View *);
+    LONG (* __STDARGS__ ms_LoadView)(struct View *);
+    LONG (* __ASM__ ms_KillView)(__REG__(a0, struct MonitorSpec *));
 };
 
 #define TO_MONITOR	0
@@ -153,7 +159,7 @@ struct SpecialMonitor
 {
     struct ExtendedNode spm_Node;
     UWORD   spm_Flags;
-    LONG  (*do_monitor)();
+    LONG (* __STDARGS__ do_monitor)(struct MonitorSpec *);
     LONG  (*reserved1)();
     LONG  (*reserved2)();
     LONG  (*reserved3)();

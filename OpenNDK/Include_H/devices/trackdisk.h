@@ -74,7 +74,7 @@
 struct IOExtTD {
 	struct IOStdReq	iotd_Req;
 	ULONG		iotd_Count;	/* the change count expected */
-	ULONG		iotd_SecLabel;	/* sector label buffer */
+	APTR		iotd_SecLabel;	/* sector label buffer */
 };
 
 /* What TD_GETGEOMETRY fills */

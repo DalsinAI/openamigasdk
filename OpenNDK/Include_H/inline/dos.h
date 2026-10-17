@@ -593,9 +593,9 @@ __dos_AllocDosObject(struct DosLibrary *__base, ULONG type, CONST struct TagItem
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
-___dos_AllocDosObjectTags(__dos_base_t __ndk_base, ULONG type, Tag tag1, ...)
+___dos_AllocDosObjectTags(__dos_base_t __ndk_base, ULONG type, ...)
 {
-	return __dos_AllocDosObject(__ndk_base, (ULONG)(type), (CONST struct TagItem *)&tag1);
+	return __dos_AllocDosObject(__ndk_base, (ULONG)(type), (CONST struct TagItem *)((ULONG)&type + sizeof(type)));
 }
 #define AllocDosObjectTags(type, ...) ___dos_AllocDosObjectTags((__dos_base_t)(DOS_BASE_NAME), (ULONG)(type), ##__VA_ARGS__)
 #else
@@ -1871,9 +1871,9 @@ __dos_SystemTagList(struct DosLibrary *__base, CONST_STRPTR command, CONST struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___dos_SystemTags(__dos_base_t __ndk_base, CONST_STRPTR command, Tag tag1, ...)
+___dos_SystemTags(__dos_base_t __ndk_base, CONST_STRPTR command, ...)
 {
-	return __dos_SystemTagList(__ndk_base, (CONST_STRPTR)(command), (CONST struct TagItem *)&tag1);
+	return __dos_SystemTagList(__ndk_base, (CONST_STRPTR)(command), (CONST struct TagItem *)((ULONG)&command + sizeof(command)));
 }
 #define SystemTags(command, ...) ___dos_SystemTags((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(command), ##__VA_ARGS__)
 #else
@@ -2361,9 +2361,9 @@ __dos_NewLoadSeg(struct DosLibrary *__base, CONST_STRPTR file, CONST struct TagI
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BPTR
-___dos_NewLoadSegTags(__dos_base_t __ndk_base, CONST_STRPTR file, Tag tag1, ...)
+___dos_NewLoadSegTags(__dos_base_t __ndk_base, CONST_STRPTR file, ...)
 {
-	return __dos_NewLoadSeg(__ndk_base, (CONST_STRPTR)(file), (CONST struct TagItem *)&tag1);
+	return __dos_NewLoadSeg(__ndk_base, (CONST_STRPTR)(file), (CONST struct TagItem *)((ULONG)&file + sizeof(file)));
 }
 #define NewLoadSegTags(file, ...) ___dos_NewLoadSegTags((__dos_base_t)(DOS_BASE_NAME), (CONST_STRPTR)(file), ##__VA_ARGS__)
 #else
@@ -3081,9 +3081,9 @@ __dos_DoShellMethodTagList(struct DosLibrary *__base, ULONG method, CONST struct
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
-___dos_DoShellMethod(__dos_base_t __ndk_base, ULONG method, Tag tag1, ...)
+___dos_DoShellMethod(__dos_base_t __ndk_base, ULONG method, ...)
 {
-	return __dos_DoShellMethodTagList(__ndk_base, (ULONG)(method), (CONST struct TagItem *)&tag1);
+	return __dos_DoShellMethodTagList(__ndk_base, (ULONG)(method), (CONST struct TagItem *)((ULONG)&method + sizeof(method)));
 }
 #define DoShellMethod(method, ...) ___dos_DoShellMethod((__dos_base_t)(DOS_BASE_NAME), (ULONG)(method), ##__VA_ARGS__)
 #else

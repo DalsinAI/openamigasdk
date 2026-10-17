@@ -392,14 +392,20 @@ def varargs_inline(lib, f):
     if not fixed and not rest:
         return old
     last = g.args[-1]
-    if rest:
-        addr = "(%s)&%s" % (last.type, rest[0].name)
-    else:
+    if fixed:
+        # the first tag or value is one of the "..." too, as NDK 3.2's GCC
+        # form has it (a NULL there is no pointer-to-integer conversion);
+        # on the 68k each stack argument fills a 4-byte slot, so the first
+        # one starts where the last fixed argument's slot ends
+        rest = []
         addr = "(%s)((ULONG)&%s + sizeof(%s))" % (last.type, fixed[-1].name, fixed[-1].name)
+    else:
+        addr = "(%s)&%s" % (last.type, rest[0].name)
     fname = "___%s_%s" % (lib.stem.replace(".", "_"), f.name)
     params = ["%s __ndk_base" % base_t(lib)] + [a.decl for a in fixed + rest] + ["..."]
+    # each fixed argument goes on as the tag/array call's own type
     call = "__%s_%s(__ndk_base%s)" % (lib.stem.replace(".", "_"), g.name,
-                                      "".join(", (%s)(%s)" % (a.type, a.name) for a in fixed) + ", " + addr)
+                                      "".join(", (%s)(%s)" % (ga.type, a.name) for a, ga in zip(fixed, g.args)) + ", " + addr)
     body = ("\t%s;" % call) if f.ret_kind() == "void" else ("\treturn %s;" % call)
     names = [a.name for a in fixed]
     margs = ["(%s)(%s)" % (base_t(lib), "%s_BASE_NAME" % lib.guard)] + ["(%s)(%s)" % (a.type, a.name) for a in fixed]

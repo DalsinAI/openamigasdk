@@ -1732,9 +1732,9 @@ __intuition_OpenWindowTagList(struct IntuitionBase *__base, CONST struct NewWind
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Window *
-___intuition_OpenWindowTags(__intuition_base_t __ndk_base, CONST struct NewWindow * newWindow, Tag tag1Type, ...)
+___intuition_OpenWindowTags(__intuition_base_t __ndk_base, CONST struct NewWindow * newWindow, ...)
 {
-	return __intuition_OpenWindowTagList(__ndk_base, (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)&tag1Type);
+	return __intuition_OpenWindowTagList(__ndk_base, (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)((ULONG)&newWindow + sizeof(newWindow)));
 }
 #define OpenWindowTags(newWindow, ...) ___intuition_OpenWindowTags((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow), ##__VA_ARGS__)
 #else
@@ -1760,9 +1760,9 @@ __intuition_OpenScreenTagList(struct IntuitionBase *__base, CONST struct NewScre
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct Screen *
-___intuition_OpenScreenTags(__intuition_base_t __ndk_base, CONST struct NewScreen * newScreen, Tag tag1Type, ...)
+___intuition_OpenScreenTags(__intuition_base_t __ndk_base, CONST struct NewScreen * newScreen, ...)
 {
-	return __intuition_OpenScreenTagList(__ndk_base, (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)&tag1Type);
+	return __intuition_OpenScreenTagList(__ndk_base, (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)((ULONG)&newScreen + sizeof(newScreen)));
 }
 #define OpenScreenTags(newScreen, ...) ___intuition_OpenScreenTags((__intuition_base_t)(INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen), ##__VA_ARGS__)
 #else
@@ -1842,9 +1842,9 @@ __intuition_NewObjectA(struct IntuitionBase *__base, struct IClass * classPtr, C
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
-___intuition_NewObject(__intuition_base_t __ndk_base, struct IClass * classPtr, CONST_STRPTR classID, Tag tag1, ...)
+___intuition_NewObject(__intuition_base_t __ndk_base, struct IClass * classPtr, CONST_STRPTR classID, ...)
 {
-	return __intuition_NewObjectA(__ndk_base, (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)&tag1);
+	return __intuition_NewObjectA(__ndk_base, (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)((ULONG)&classID + sizeof(classID)));
 }
 #define NewObject(classPtr, classID, ...) ___intuition_NewObject((__intuition_base_t)(INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), ##__VA_ARGS__)
 #else
@@ -1887,9 +1887,9 @@ __intuition_SetAttrsA(struct IntuitionBase *__base, APTR object, CONST struct Ta
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___intuition_SetAttrs(__intuition_base_t __ndk_base, APTR object, Tag tag1, ...)
+___intuition_SetAttrs(__intuition_base_t __ndk_base, APTR object, ...)
 {
-	return __intuition_SetAttrsA(__ndk_base, (APTR)(object), (CONST struct TagItem *)&tag1);
+	return __intuition_SetAttrsA(__ndk_base, (APTR)(object), (CONST struct TagItem *)((ULONG)&object + sizeof(object)));
 }
 #define SetAttrs(object, ...) ___intuition_SetAttrs((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(object), ##__VA_ARGS__)
 #else
@@ -1934,9 +1934,9 @@ __intuition_SetGadgetAttrsA(struct IntuitionBase *__base, struct Gadget * gadget
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___intuition_SetGadgetAttrs(__intuition_base_t __ndk_base, struct Gadget * gadget, struct Window * window, struct Requester * requester, Tag tag1, ...)
+___intuition_SetGadgetAttrs(__intuition_base_t __ndk_base, struct Gadget * gadget, struct Window * window, struct Requester * requester, ...)
 {
-	return __intuition_SetGadgetAttrsA(__ndk_base, (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)&tag1);
+	return __intuition_SetGadgetAttrsA(__ndk_base, (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)((ULONG)&requester + sizeof(requester)));
 }
 #define SetGadgetAttrs(gadget, window, requester, ...) ___intuition_SetGadgetAttrs((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
 #else
@@ -2227,9 +2227,9 @@ __intuition_DoGadgetMethodA(struct IntuitionBase *__base, struct Gadget * gad, s
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___intuition_DoGadgetMethod(__intuition_base_t __ndk_base, struct Gadget * gad, struct Window * win, struct Requester * req, ULONG methodID, ...)
+___intuition_DoGadgetMethod(__intuition_base_t __ndk_base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
 {
-	return __intuition_DoGadgetMethodA(__ndk_base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)&methodID);
+	return __intuition_DoGadgetMethodA(__ndk_base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)((ULONG)&req + sizeof(req)));
 }
 #define DoGadgetMethod(gad, win, req, ...) ___intuition_DoGadgetMethod((__intuition_base_t)(INTUITION_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 #else
@@ -2255,9 +2255,9 @@ __intuition_SetWindowPointerA(struct IntuitionBase *__base, struct Window * win,
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___intuition_SetWindowPointer(__intuition_base_t __ndk_base, struct Window * win, Tag tag1, ...)
+___intuition_SetWindowPointer(__intuition_base_t __ndk_base, struct Window * win, ...)
 {
-	__intuition_SetWindowPointerA(__ndk_base, (struct Window *)(win), (CONST struct TagItem *)&tag1);
+	__intuition_SetWindowPointerA(__ndk_base, (struct Window *)(win), (CONST struct TagItem *)((ULONG)&win + sizeof(win)));
 }
 #define SetWindowPointer(win, ...) ___intuition_SetWindowPointer((__intuition_base_t)(INTUITION_BASE_NAME), (struct Window *)(win), ##__VA_ARGS__)
 #else
@@ -2351,9 +2351,9 @@ __intuition_IntuitionControlA(struct IntuitionBase *__base, APTR object, CONST s
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___intuition_IntuitionControl(__intuition_base_t __ndk_base, APTR object, Tag tag1, ...)
+___intuition_IntuitionControl(__intuition_base_t __ndk_base, APTR object, ...)
 {
-	return __intuition_IntuitionControlA(__ndk_base, (APTR)(object), (CONST struct TagItem *)&tag1);
+	return __intuition_IntuitionControlA(__ndk_base, (APTR)(object), (CONST struct TagItem *)((ULONG)&object + sizeof(object)));
 }
 #define IntuitionControl(object, ...) ___intuition_IntuitionControl((__intuition_base_t)(INTUITION_BASE_NAME), (APTR)(object), ##__VA_ARGS__)
 #else

@@ -43,9 +43,9 @@ __trackfile_TFStartUnitTagList(struct Device *__base, LONG unitNumber, CONST str
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___trackfile_TFStartUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+___trackfile_TFStartUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, ...)
 {
-	return __trackfile_TFStartUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+	return __trackfile_TFStartUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)((ULONG)&unitNumber + sizeof(unitNumber)));
 }
 #define TFStartUnitTags(unitNumber, ...) ___trackfile_TFStartUnitTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 #else
@@ -71,9 +71,9 @@ __trackfile_TFStopUnitTagList(struct Device *__base, LONG unitNumber, CONST stru
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___trackfile_TFStopUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+___trackfile_TFStopUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, ...)
 {
-	return __trackfile_TFStopUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+	return __trackfile_TFStopUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)((ULONG)&unitNumber + sizeof(unitNumber)));
 }
 #define TFStopUnitTags(unitNumber, ...) ___trackfile_TFStopUnitTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 #else
@@ -99,9 +99,9 @@ __trackfile_TFInsertMediaTagList(struct Device *__base, LONG unitNumber, CONST s
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___trackfile_TFInsertMediaTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+___trackfile_TFInsertMediaTags(__trackfile_base_t __ndk_base, LONG unitNumber, ...)
 {
-	return __trackfile_TFInsertMediaTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+	return __trackfile_TFInsertMediaTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)((ULONG)&unitNumber + sizeof(unitNumber)));
 }
 #define TFInsertMediaTags(unitNumber, ...) ___trackfile_TFInsertMediaTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 #else
@@ -127,9 +127,9 @@ __trackfile_TFEjectMediaTagList(struct Device *__base, LONG unitNumber, CONST st
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___trackfile_TFEjectMediaTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+___trackfile_TFEjectMediaTags(__trackfile_base_t __ndk_base, LONG unitNumber, ...)
 {
-	return __trackfile_TFEjectMediaTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+	return __trackfile_TFEjectMediaTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)((ULONG)&unitNumber + sizeof(unitNumber)));
 }
 #define TFEjectMediaTags(unitNumber, ...) ___trackfile_TFEjectMediaTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 #else
@@ -189,9 +189,9 @@ __trackfile_TFChangeUnitTagList(struct Device *__base, LONG unitNumber, CONST st
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___trackfile_TFChangeUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, Tag tag1, ...)
+___trackfile_TFChangeUnitTags(__trackfile_base_t __ndk_base, LONG unitNumber, ...)
 {
-	return __trackfile_TFChangeUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)&tag1);
+	return __trackfile_TFChangeUnitTagList(__ndk_base, (LONG)(unitNumber), (CONST struct TagItem *)((ULONG)&unitNumber + sizeof(unitNumber)));
 }
 #define TFChangeUnitTags(unitNumber, ...) ___trackfile_TFChangeUnitTags((__trackfile_base_t)(TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 #else

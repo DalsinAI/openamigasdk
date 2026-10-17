@@ -206,9 +206,9 @@ __diskfont_ESetInfoA(struct Library *__base, struct EGlyphEngine * eEngine, CONS
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___diskfont_ESetInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, Tag tag1, ...)
+___diskfont_ESetInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, ...)
 {
-	return __diskfont_ESetInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)&tag1);
+	return __diskfont_ESetInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)((ULONG)&eEngine + sizeof(eEngine)));
 }
 #define ESetInfo(eEngine, ...) ___diskfont_ESetInfo((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
 #else
@@ -234,9 +234,9 @@ __diskfont_EObtainInfoA(struct Library *__base, struct EGlyphEngine * eEngine, C
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___diskfont_EObtainInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, Tag tag1, ...)
+___diskfont_EObtainInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, ...)
 {
-	return __diskfont_EObtainInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)&tag1);
+	return __diskfont_EObtainInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)((ULONG)&eEngine + sizeof(eEngine)));
 }
 #define EObtainInfo(eEngine, ...) ___diskfont_EObtainInfo((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
 #else
@@ -262,9 +262,9 @@ __diskfont_EReleaseInfoA(struct Library *__base, struct EGlyphEngine * eEngine, 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___diskfont_EReleaseInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, Tag tag1, ...)
+___diskfont_EReleaseInfo(__diskfont_base_t __ndk_base, struct EGlyphEngine * eEngine, ...)
 {
-	return __diskfont_EReleaseInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)&tag1);
+	return __diskfont_EReleaseInfoA(__ndk_base, (struct EGlyphEngine *)(eEngine), (CONST struct TagItem *)((ULONG)&eEngine + sizeof(eEngine)));
 }
 #define EReleaseInfo(eEngine, ...) ___diskfont_EReleaseInfo((__diskfont_base_t)(DISKFONT_BASE_NAME), (struct EGlyphEngine *)(eEngine), ##__VA_ARGS__)
 #else
@@ -343,9 +343,9 @@ __diskfont_WriteDiskFontHeaderA(struct Library *__base, CONST struct TextFont * 
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___diskfont_WriteDiskFontHeader(__diskfont_base_t __ndk_base, CONST struct TextFont * font, CONST_STRPTR fileName, Tag tag1, ...)
+___diskfont_WriteDiskFontHeader(__diskfont_base_t __ndk_base, CONST struct TextFont * font, CONST_STRPTR fileName, ...)
 {
-	return __diskfont_WriteDiskFontHeaderA(__ndk_base, (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)&tag1);
+	return __diskfont_WriteDiskFontHeaderA(__ndk_base, (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), (CONST struct TagItem *)((ULONG)&fileName + sizeof(fileName)));
 }
 #define WriteDiskFontHeader(font, fileName, ...) ___diskfont_WriteDiskFontHeader((__diskfont_base_t)(DISKFONT_BASE_NAME), (CONST struct TextFont *)(font), (CONST_STRPTR)(fileName), ##__VA_ARGS__)
 #else

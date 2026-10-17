@@ -283,9 +283,9 @@ __icon_DupDiskObjectA(struct Library *__base, CONST struct DiskObject * diskObje
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct DiskObject *
-___icon_DupDiskObject(__icon_base_t __ndk_base, CONST struct DiskObject * diskObject, Tag tag1, ...)
+___icon_DupDiskObject(__icon_base_t __ndk_base, CONST struct DiskObject * diskObject, ...)
 {
-	return __icon_DupDiskObjectA(__ndk_base, (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)&tag1);
+	return __icon_DupDiskObjectA(__ndk_base, (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)((ULONG)&diskObject + sizeof(diskObject)));
 }
 #define DupDiskObject(diskObject, ...) ___icon_DupDiskObject((__icon_base_t)(ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject), ##__VA_ARGS__)
 #else
@@ -311,9 +311,9 @@ __icon_IconControlA(struct Library *__base, struct DiskObject * icon, CONST stru
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___icon_IconControl(__icon_base_t __ndk_base, struct DiskObject * icon, Tag tag1, ...)
+___icon_IconControl(__icon_base_t __ndk_base, struct DiskObject * icon, ...)
 {
-	return __icon_IconControlA(__ndk_base, (struct DiskObject *)(icon), (CONST struct TagItem *)&tag1);
+	return __icon_IconControlA(__ndk_base, (struct DiskObject *)(icon), (CONST struct TagItem *)((ULONG)&icon + sizeof(icon)));
 }
 #define IconControl(icon, ...) ___icon_IconControl((__icon_base_t)(ICON_BASE_NAME), (struct DiskObject *)(icon), ##__VA_ARGS__)
 #else
@@ -342,9 +342,9 @@ __icon_DrawIconStateA(struct Library *__base, struct RastPort * rp, CONST struct
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___icon_DrawIconState(__icon_base_t __ndk_base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, Tag tag1, ...)
+___icon_DrawIconState(__icon_base_t __ndk_base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, ...)
 {
-	__icon_DrawIconStateA(__ndk_base, (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)&tag1);
+	__icon_DrawIconStateA(__ndk_base, (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)((ULONG)&state + sizeof(state)));
 }
 #define DrawIconState(rp, icon, label, leftOffset, topOffset, state, ...) ___icon_DrawIconState((__icon_base_t)(ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), ##__VA_ARGS__)
 #else
@@ -372,9 +372,9 @@ __icon_GetIconRectangleA(struct Library *__base, struct RastPort * rp, CONST str
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___icon_GetIconRectangle(__icon_base_t __ndk_base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, Tag tag1, ...)
+___icon_GetIconRectangle(__icon_base_t __ndk_base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, ...)
 {
-	return __icon_GetIconRectangleA(__ndk_base, (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)&tag1);
+	return __icon_GetIconRectangleA(__ndk_base, (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)((ULONG)&rect + sizeof(rect)));
 }
 #define GetIconRectangle(rp, icon, label, rect, ...) ___icon_GetIconRectangle((__icon_base_t)(ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), ##__VA_ARGS__)
 #else
@@ -417,9 +417,9 @@ __icon_GetIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct Ta
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct DiskObject *
-___icon_GetIconTags(__icon_base_t __ndk_base, CONST_STRPTR name, Tag tag1, ...)
+___icon_GetIconTags(__icon_base_t __ndk_base, CONST_STRPTR name, ...)
 {
-	return __icon_GetIconTagList(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+	return __icon_GetIconTagList(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define GetIconTags(name, ...) ___icon_GetIconTags((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
@@ -446,9 +446,9 @@ __icon_PutIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct Di
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___icon_PutIconTags(__icon_base_t __ndk_base, CONST_STRPTR name, CONST struct DiskObject * icon, Tag tag1, ...)
+___icon_PutIconTags(__icon_base_t __ndk_base, CONST_STRPTR name, CONST struct DiskObject * icon, ...)
 {
-	return __icon_PutIconTagList(__ndk_base, (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)&tag1);
+	return __icon_PutIconTagList(__ndk_base, (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)((ULONG)&icon + sizeof(icon)));
 }
 #define PutIconTags(name, icon, ...) ___icon_PutIconTags((__icon_base_t)(ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), ##__VA_ARGS__)
 #else
@@ -475,9 +475,9 @@ __icon_LayoutIconA(struct Library *__base, struct DiskObject * icon, struct Scre
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___icon_LayoutIcon(__icon_base_t __ndk_base, struct DiskObject * icon, struct Screen * screen, Tag tag1, ...)
+___icon_LayoutIcon(__icon_base_t __ndk_base, struct DiskObject * icon, struct Screen * screen, ...)
 {
-	return __icon_LayoutIconA(__ndk_base, (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)&tag1);
+	return __icon_LayoutIconA(__ndk_base, (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)((ULONG)&screen + sizeof(screen)));
 }
 #define LayoutIcon(icon, screen, ...) ___icon_LayoutIcon((__icon_base_t)(ICON_BASE_NAME), (struct DiskObject *)(icon), (struct Screen *)(screen), ##__VA_ARGS__)
 #else

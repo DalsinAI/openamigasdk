@@ -77,9 +77,9 @@ __amigaguide_OpenAmigaGuideA(struct Library *__base, struct NewAmigaGuide * nag,
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
-___amigaguide_OpenAmigaGuide(__amigaguide_base_t __ndk_base, struct NewAmigaGuide * nag, Tag tag1, ...)
+___amigaguide_OpenAmigaGuide(__amigaguide_base_t __ndk_base, struct NewAmigaGuide * nag, ...)
 {
-	return __amigaguide_OpenAmigaGuideA(__ndk_base, (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)&tag1);
+	return __amigaguide_OpenAmigaGuideA(__ndk_base, (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)((ULONG)&nag + sizeof(nag)));
 }
 #define OpenAmigaGuide(nag, ...) ___amigaguide_OpenAmigaGuide((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
 #else
@@ -105,9 +105,9 @@ __amigaguide_OpenAmigaGuideAsyncA(struct Library *__base, struct NewAmigaGuide *
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
-___amigaguide_OpenAmigaGuideAsync(__amigaguide_base_t __ndk_base, struct NewAmigaGuide * nag, Tag tag1, ...)
+___amigaguide_OpenAmigaGuideAsync(__amigaguide_base_t __ndk_base, struct NewAmigaGuide * nag, ...)
 {
-	return __amigaguide_OpenAmigaGuideAsyncA(__ndk_base, (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)&tag1);
+	return __amigaguide_OpenAmigaGuideAsyncA(__ndk_base, (struct NewAmigaGuide *)(nag), (CONST struct TagItem *)((ULONG)&nag + sizeof(nag)));
 }
 #define OpenAmigaGuideAsync(nag, ...) ___amigaguide_OpenAmigaGuideAsync((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct NewAmigaGuide *)(nag), ##__VA_ARGS__)
 #else
@@ -201,9 +201,9 @@ __amigaguide_SetAmigaGuideContextA(struct Library *__base, APTR cl, ULONG id, CO
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___amigaguide_SetAmigaGuideContext(__amigaguide_base_t __ndk_base, APTR cl, ULONG id, Tag tag1, ...)
+___amigaguide_SetAmigaGuideContext(__amigaguide_base_t __ndk_base, APTR cl, ULONG id, ...)
 {
-	return __amigaguide_SetAmigaGuideContextA(__ndk_base, (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)&tag1);
+	return __amigaguide_SetAmigaGuideContextA(__ndk_base, (APTR)(cl), (ULONG)(id), (CONST struct TagItem *)((ULONG)&id + sizeof(id)));
 }
 #define SetAmigaGuideContext(cl, id, ...) ___amigaguide_SetAmigaGuideContext((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (ULONG)(id), ##__VA_ARGS__)
 #else
@@ -229,9 +229,9 @@ __amigaguide_SendAmigaGuideContextA(struct Library *__base, APTR cl, CONST struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___amigaguide_SendAmigaGuideContext(__amigaguide_base_t __ndk_base, APTR cl, Tag tag1, ...)
+___amigaguide_SendAmigaGuideContext(__amigaguide_base_t __ndk_base, APTR cl, ...)
 {
-	return __amigaguide_SendAmigaGuideContextA(__ndk_base, (APTR)(cl), (CONST struct TagItem *)&tag1);
+	return __amigaguide_SendAmigaGuideContextA(__ndk_base, (APTR)(cl), (CONST struct TagItem *)((ULONG)&cl + sizeof(cl)));
 }
 #define SendAmigaGuideContext(cl, ...) ___amigaguide_SendAmigaGuideContext((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), ##__VA_ARGS__)
 #else
@@ -257,9 +257,9 @@ __amigaguide_SendAmigaGuideCmdA(struct Library *__base, APTR cl, CONST_STRPTR cm
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___amigaguide_SendAmigaGuideCmd(__amigaguide_base_t __ndk_base, APTR cl, CONST_STRPTR cmd, Tag tag1, ...)
+___amigaguide_SendAmigaGuideCmd(__amigaguide_base_t __ndk_base, APTR cl, CONST_STRPTR cmd, ...)
 {
-	return __amigaguide_SendAmigaGuideCmdA(__ndk_base, (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)&tag1);
+	return __amigaguide_SendAmigaGuideCmdA(__ndk_base, (APTR)(cl), (CONST_STRPTR)(cmd), (CONST struct TagItem *)((ULONG)&cmd + sizeof(cmd)));
 }
 #define SendAmigaGuideCmd(cl, cmd, ...) ___amigaguide_SendAmigaGuideCmd((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), (CONST_STRPTR)(cmd), ##__VA_ARGS__)
 #else
@@ -285,9 +285,9 @@ __amigaguide_SetAmigaGuideAttrsA(struct Library *__base, APTR cl, CONST struct T
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___amigaguide_SetAmigaGuideAttrs(__amigaguide_base_t __ndk_base, APTR cl, Tag tag1, ...)
+___amigaguide_SetAmigaGuideAttrs(__amigaguide_base_t __ndk_base, APTR cl, ...)
 {
-	return __amigaguide_SetAmigaGuideAttrsA(__ndk_base, (APTR)(cl), (CONST struct TagItem *)&tag1);
+	return __amigaguide_SetAmigaGuideAttrsA(__ndk_base, (APTR)(cl), (CONST struct TagItem *)((ULONG)&cl + sizeof(cl)));
 }
 #define SetAmigaGuideAttrs(cl, ...) ___amigaguide_SetAmigaGuideAttrs((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(cl), ##__VA_ARGS__)
 #else
@@ -364,9 +364,9 @@ __amigaguide_AddAmigaGuideHostA(struct Library *__base, struct Hook * h, CONST_S
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) APTR
-___amigaguide_AddAmigaGuideHost(__amigaguide_base_t __ndk_base, struct Hook * h, CONST_STRPTR name, Tag tag1, ...)
+___amigaguide_AddAmigaGuideHost(__amigaguide_base_t __ndk_base, struct Hook * h, CONST_STRPTR name, ...)
 {
-	return __amigaguide_AddAmigaGuideHostA(__ndk_base, (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+	return __amigaguide_AddAmigaGuideHostA(__ndk_base, (struct Hook *)(h), (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define AddAmigaGuideHost(h, name, ...) ___amigaguide_AddAmigaGuideHost((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (struct Hook *)(h), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else
@@ -392,9 +392,9 @@ __amigaguide_RemoveAmigaGuideHostA(struct Library *__base, APTR hh, CONST struct
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___amigaguide_RemoveAmigaGuideHost(__amigaguide_base_t __ndk_base, APTR hh, Tag tag1, ...)
+___amigaguide_RemoveAmigaGuideHost(__amigaguide_base_t __ndk_base, APTR hh, ...)
 {
-	return __amigaguide_RemoveAmigaGuideHostA(__ndk_base, (APTR)(hh), (CONST struct TagItem *)&tag1);
+	return __amigaguide_RemoveAmigaGuideHostA(__ndk_base, (APTR)(hh), (CONST struct TagItem *)((ULONG)&hh + sizeof(hh)));
 }
 #define RemoveAmigaGuideHost(hh, ...) ___amigaguide_RemoveAmigaGuideHost((__amigaguide_base_t)(AMIGAGUIDE_BASE_NAME), (APTR)(hh), ##__VA_ARGS__)
 #else

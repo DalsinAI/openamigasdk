@@ -556,9 +556,9 @@ __utility_AllocNamedObjectA(struct Library *__base, CONST_STRPTR name, CONST str
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct NamedObject *
-___utility_AllocNamedObject(__utility_base_t __ndk_base, CONST_STRPTR name, Tag tag1, ...)
+___utility_AllocNamedObject(__utility_base_t __ndk_base, CONST_STRPTR name, ...)
 {
-	return __utility_AllocNamedObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)&tag1);
+	return __utility_AllocNamedObjectA(__ndk_base, (CONST_STRPTR)(name), (CONST struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define AllocNamedObject(name, ...) ___utility_AllocNamedObject((__utility_base_t)(UTILITY_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 #else

@@ -1986,9 +1986,9 @@ __graphics_VideoControl(struct GfxBase *__base, struct ColorMap * colorMap, stru
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) BOOL
-___graphics_VideoControlTags(__graphics_base_t __ndk_base, struct ColorMap * colorMap, Tag tag1Type, ...)
+___graphics_VideoControlTags(__graphics_base_t __ndk_base, struct ColorMap * colorMap, ...)
 {
-	return __graphics_VideoControl(__ndk_base, (struct ColorMap *)(colorMap), (struct TagItem *)&tag1Type);
+	return __graphics_VideoControl(__ndk_base, (struct ColorMap *)(colorMap), (struct TagItem *)((ULONG)&colorMap + sizeof(colorMap)));
 }
 #define VideoControlTags(colorMap, ...) ___graphics_VideoControlTags((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), ##__VA_ARGS__)
 #else
@@ -2230,9 +2230,9 @@ __graphics_WeighTAMatch(struct GfxBase *__base, CONST struct TextAttr * reqTextA
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) WORD
-___graphics_WeighTAMatchTags(__graphics_base_t __ndk_base, CONST struct TextAttr * reqTextAttr, CONST struct TextAttr * targetTextAttr, Tag tag1Type, ...)
+___graphics_WeighTAMatchTags(__graphics_base_t __ndk_base, CONST struct TextAttr * reqTextAttr, CONST struct TextAttr * targetTextAttr, ...)
 {
-	return __graphics_WeighTAMatch(__ndk_base, (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)&tag1Type);
+	return __graphics_WeighTAMatch(__ndk_base, (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)((ULONG)&targetTextAttr + sizeof(targetTextAttr)));
 }
 #define WeighTAMatchTags(reqTextAttr, targetTextAttr, ...) ___graphics_WeighTAMatchTags((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), ##__VA_ARGS__)
 #else
@@ -2277,9 +2277,9 @@ __graphics_ExtendFont(struct GfxBase *__base, struct TextFont * font, CONST stru
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) ULONG
-___graphics_ExtendFontTags(__graphics_base_t __ndk_base, struct TextFont * font, Tag tag1Type, ...)
+___graphics_ExtendFontTags(__graphics_base_t __ndk_base, struct TextFont * font, ...)
 {
-	return __graphics_ExtendFont(__ndk_base, (struct TextFont *)(font), (CONST struct TagItem *)&tag1Type);
+	return __graphics_ExtendFont(__ndk_base, (struct TextFont *)(font), (CONST struct TagItem *)((ULONG)&font + sizeof(font)));
 }
 #define ExtendFontTags(font, ...) ___graphics_ExtendFontTags((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct TextFont *)(font), ##__VA_ARGS__)
 #else
@@ -2358,9 +2358,9 @@ __graphics_ObtainBestPenA(struct GfxBase *__base, struct ColorMap * cm, ULONG r,
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___graphics_ObtainBestPen(__graphics_base_t __ndk_base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, Tag tag1Type, ...)
+___graphics_ObtainBestPen(__graphics_base_t __ndk_base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, ...)
 {
-	return __graphics_ObtainBestPenA(__ndk_base, (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)&tag1Type);
+	return __graphics_ObtainBestPenA(__ndk_base, (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)((ULONG)&b + sizeof(b)));
 }
 #define ObtainBestPen(cm, r, g, b, ...) ___graphics_ObtainBestPen((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), ##__VA_ARGS__)
 #else
@@ -2579,9 +2579,9 @@ __graphics_GetExtSpriteA(struct GfxBase *__base, struct ExtSprite * ss, CONST st
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___graphics_GetExtSprite(__graphics_base_t __ndk_base, struct ExtSprite * ss, Tag tag1Type, ...)
+___graphics_GetExtSprite(__graphics_base_t __ndk_base, struct ExtSprite * ss, ...)
 {
-	return __graphics_GetExtSpriteA(__ndk_base, (struct ExtSprite *)(ss), (CONST struct TagItem *)&tag1Type);
+	return __graphics_GetExtSpriteA(__ndk_base, (struct ExtSprite *)(ss), (CONST struct TagItem *)((ULONG)&ss + sizeof(ss)));
 }
 #define GetExtSprite(ss, ...) ___graphics_GetExtSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ExtSprite *)(ss), ##__VA_ARGS__)
 #else
@@ -2843,9 +2843,9 @@ __graphics_AllocSpriteDataA(struct GfxBase *__base, CONST struct BitMap * bm, CO
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) struct ExtSprite *
-___graphics_AllocSpriteData(__graphics_base_t __ndk_base, CONST struct BitMap * bm, Tag tag1Type, ...)
+___graphics_AllocSpriteData(__graphics_base_t __ndk_base, CONST struct BitMap * bm, ...)
 {
-	return __graphics_AllocSpriteDataA(__ndk_base, (CONST struct BitMap *)(bm), (CONST struct TagItem *)&tag1Type);
+	return __graphics_AllocSpriteDataA(__ndk_base, (CONST struct BitMap *)(bm), (CONST struct TagItem *)((ULONG)&bm + sizeof(bm)));
 }
 #define AllocSpriteData(bm, ...) ___graphics_AllocSpriteData((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), ##__VA_ARGS__)
 #else
@@ -2873,9 +2873,9 @@ __graphics_ChangeExtSpriteA(struct GfxBase *__base, struct ViewPort * vp, struct
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___graphics_ChangeExtSprite(__graphics_base_t __ndk_base, struct ViewPort * vp, struct ExtSprite * oldsprite, struct ExtSprite * newsprite, Tag tag1Type, ...)
+___graphics_ChangeExtSprite(__graphics_base_t __ndk_base, struct ViewPort * vp, struct ExtSprite * oldsprite, struct ExtSprite * newsprite, ...)
 {
-	return __graphics_ChangeExtSpriteA(__ndk_base, (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)&tag1Type);
+	return __graphics_ChangeExtSpriteA(__ndk_base, (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)((ULONG)&newsprite + sizeof(newsprite)));
 }
 #define ChangeExtSprite(vp, oldsprite, newsprite, ...) ___graphics_ChangeExtSprite((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), ##__VA_ARGS__)
 #else
@@ -2919,9 +2919,9 @@ __graphics_SetRPAttrsA(struct GfxBase *__base, struct RastPort * rp, CONST struc
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___graphics_SetRPAttrs(__graphics_base_t __ndk_base, struct RastPort * rp, Tag tag1Type, ...)
+___graphics_SetRPAttrs(__graphics_base_t __ndk_base, struct RastPort * rp, ...)
 {
-	__graphics_SetRPAttrsA(__ndk_base, (struct RastPort *)(rp), (CONST struct TagItem *)&tag1Type);
+	__graphics_SetRPAttrsA(__ndk_base, (struct RastPort *)(rp), (CONST struct TagItem *)((ULONG)&rp + sizeof(rp)));
 }
 #define SetRPAttrs(rp, ...) ___graphics_SetRPAttrs((__graphics_base_t)(GRAPHICS_BASE_NAME), (struct RastPort *)(rp), ##__VA_ARGS__)
 #else
@@ -2947,9 +2947,9 @@ __graphics_GetRPAttrsA(struct GfxBase *__base, CONST struct RastPort * rp, CONST
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) VOID
-___graphics_GetRPAttrs(__graphics_base_t __ndk_base, CONST struct RastPort * rp, Tag tag1Type, ...)
+___graphics_GetRPAttrs(__graphics_base_t __ndk_base, CONST struct RastPort * rp, ...)
 {
-	__graphics_GetRPAttrsA(__ndk_base, (CONST struct RastPort *)(rp), (CONST struct TagItem *)&tag1Type);
+	__graphics_GetRPAttrsA(__ndk_base, (CONST struct RastPort *)(rp), (CONST struct TagItem *)((ULONG)&rp + sizeof(rp)));
 }
 #define GetRPAttrs(rp, ...) ___graphics_GetRPAttrs((__graphics_base_t)(GRAPHICS_BASE_NAME), (CONST struct RastPort *)(rp), ##__VA_ARGS__)
 #else

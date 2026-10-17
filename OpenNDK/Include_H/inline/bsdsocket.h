@@ -1113,9 +1113,9 @@ __bsdsocket_AddInterfaceTagList(struct Library *__base, STRPTR interface_name, S
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___bsdsocket_AddInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR interface_name, STRPTR device_name, LONG unit, Tag tag1, ...)
+___bsdsocket_AddInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR interface_name, STRPTR device_name, LONG unit, ...)
 {
-	return __bsdsocket_AddInterfaceTagList(__ndk_base, (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), (struct TagItem *)&tag1);
+	return __bsdsocket_AddInterfaceTagList(__ndk_base, (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), (struct TagItem *)((ULONG)&unit + sizeof(unit)));
 }
 #define AddInterfaceTags(interface_name, device_name, unit, ...) ___bsdsocket_AddInterfaceTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), (STRPTR)(device_name), (LONG)(unit), ##__VA_ARGS__)
 #else
@@ -1141,9 +1141,9 @@ __bsdsocket_ConfigureInterfaceTagList(struct Library *__base, STRPTR interface_n
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___bsdsocket_ConfigureInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR interface_name, Tag tag1, ...)
+___bsdsocket_ConfigureInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR interface_name, ...)
 {
-	return __bsdsocket_ConfigureInterfaceTagList(__ndk_base, (STRPTR)(interface_name), (struct TagItem *)&tag1);
+	return __bsdsocket_ConfigureInterfaceTagList(__ndk_base, (STRPTR)(interface_name), (struct TagItem *)((ULONG)&interface_name + sizeof(interface_name)));
 }
 #define ConfigureInterfaceTags(interface_name, ...) ___bsdsocket_ConfigureInterfaceTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(interface_name), ##__VA_ARGS__)
 #else
@@ -1203,9 +1203,9 @@ __bsdsocket_QueryInterfaceTagList(struct Library *__base, STRPTR name, struct Ta
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___bsdsocket_QueryInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR name, Tag tag1, ...)
+___bsdsocket_QueryInterfaceTags(__bsdsocket_base_t __ndk_base, STRPTR name, ...)
 {
-	return __bsdsocket_QueryInterfaceTagList(__ndk_base, (STRPTR)(name), (struct TagItem *)&tag1);
+	return __bsdsocket_QueryInterfaceTagList(__ndk_base, (STRPTR)(name), (struct TagItem *)((ULONG)&name + sizeof(name)));
 }
 #define QueryInterfaceTags(name, ...) ___bsdsocket_QueryInterfaceTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (STRPTR)(name), ##__VA_ARGS__)
 #else
@@ -1232,9 +1232,9 @@ __bsdsocket_CreateAddrAllocMessageA(struct Library *__base, LONG version, LONG p
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___bsdsocket_CreateAddrAllocMessage(__bsdsocket_base_t __ndk_base, LONG version, LONG protocol, STRPTR interface_name, struct AddressAllocationMessage **result_ptr, Tag tag1, ...)
+___bsdsocket_CreateAddrAllocMessage(__bsdsocket_base_t __ndk_base, LONG version, LONG protocol, STRPTR interface_name, struct AddressAllocationMessage **result_ptr, ...)
 {
-	return __bsdsocket_CreateAddrAllocMessageA(__ndk_base, (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), (struct TagItem *)&tag1);
+	return __bsdsocket_CreateAddrAllocMessageA(__ndk_base, (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), (struct TagItem *)((ULONG)&result_ptr + sizeof(result_ptr)));
 }
 #define CreateAddrAllocMessage(version, protocol, interface_name, result_ptr, ...) ___bsdsocket_CreateAddrAllocMessage((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(version), (LONG)(protocol), (STRPTR)(interface_name), (struct AddressAllocationMessage **)(result_ptr), ##__VA_ARGS__)
 #else
@@ -1311,9 +1311,9 @@ __bsdsocket_AddNetMonitorHookTagList(struct Library *__base, LONG type, struct H
 
 #ifndef NO_INLINE_STDARG
 static __attribute__((__noinline__, __noclone__, __unused__)) LONG
-___bsdsocket_AddNetMonitorHookTags(__bsdsocket_base_t __ndk_base, LONG type, struct Hook *hook, Tag tag1, ...)
+___bsdsocket_AddNetMonitorHookTags(__bsdsocket_base_t __ndk_base, LONG type, struct Hook *hook, ...)
 {
-	return __bsdsocket_AddNetMonitorHookTagList(__ndk_base, (LONG)(type), (struct Hook *)(hook), (struct TagItem *)&tag1);
+	return __bsdsocket_AddNetMonitorHookTagList(__ndk_base, (LONG)(type), (struct Hook *)(hook), (struct TagItem *)((ULONG)&hook + sizeof(hook)));
 }
 #define AddNetMonitorHookTags(type, hook, ...) ___bsdsocket_AddNetMonitorHookTags((__bsdsocket_base_t)(BSDSOCKET_BASE_NAME), (LONG)(type), (struct Hook *)(hook), ##__VA_ARGS__)
 #else
