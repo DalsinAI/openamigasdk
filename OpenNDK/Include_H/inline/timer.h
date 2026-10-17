@@ -24,7 +24,7 @@ struct Device;
 #endif
 
 static __inline__ VOID
-__timer_AddTime(struct Device *__base, struct timeval * dest, CONST struct timeval * src)
+__timer_AddTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type * src)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
 	register ULONG _a1 __asm("a1") = (ULONG)(src);
@@ -37,10 +37,10 @@ __timer_AddTime(struct Device *__base, struct timeval * dest, CONST struct timev
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define AddTime(dest, src) __timer_AddTime((TIMER_BASE_NAME), (struct timeval *)(dest), (CONST struct timeval *)(src))
+#define AddTime(dest, src) __timer_AddTime((TIMER_BASE_NAME), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ VOID
-__timer_SubTime(struct Device *__base, struct timeval * dest, CONST struct timeval * src)
+__timer_SubTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type * src)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
 	register ULONG _a1 __asm("a1") = (ULONG)(src);
@@ -53,10 +53,10 @@ __timer_SubTime(struct Device *__base, struct timeval * dest, CONST struct timev
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define SubTime(dest, src) __timer_SubTime((TIMER_BASE_NAME), (struct timeval *)(dest), (CONST struct timeval *)(src))
+#define SubTime(dest, src) __timer_SubTime((TIMER_BASE_NAME), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ LONG
-__timer_CmpTime(struct Device *__base, CONST struct timeval * dest, CONST struct timeval * src)
+__timer_CmpTime(struct Device *__base, CONST TimeVal_Type * dest, CONST TimeVal_Type * src)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
 	register ULONG _a1 __asm("a1") = (ULONG)(src);
@@ -69,7 +69,7 @@ __timer_CmpTime(struct Device *__base, CONST struct timeval * dest, CONST struct
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	return (LONG)_d0;
 }
-#define CmpTime(dest, src) __timer_CmpTime((TIMER_BASE_NAME), (CONST struct timeval *)(dest), (CONST struct timeval *)(src))
+#define CmpTime(dest, src) __timer_CmpTime((TIMER_BASE_NAME), (CONST TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ ULONG
 __timer_ReadEClock(struct Device *__base, struct EClockVal * dest)
@@ -88,7 +88,7 @@ __timer_ReadEClock(struct Device *__base, struct EClockVal * dest)
 #define ReadEClock(dest) __timer_ReadEClock((TIMER_BASE_NAME), (struct EClockVal *)(dest))
 
 static __inline__ VOID
-__timer_GetSysTime(struct Device *__base, struct timeval * dest)
+__timer_GetSysTime(struct Device *__base, TimeVal_Type * dest)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
 	register struct Device *_a6 __asm("a6") = __base;
@@ -101,6 +101,6 @@ __timer_GetSysTime(struct Device *__base, struct timeval * dest)
 		: __OPENNDK_FPCLOBBER "cc", "memory");
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
-#define GetSysTime(dest) __timer_GetSysTime((TIMER_BASE_NAME), (struct timeval *)(dest))
+#define GetSysTime(dest) __timer_GetSysTime((TIMER_BASE_NAME), (TimeVal_Type *)(dest))
 
 #endif /* INLINE_TIMER_H */

@@ -15,13 +15,13 @@ extern "C" {
 
 
 /* From version 33 */
-VOID AddTime(struct timeval * dest, CONST struct timeval * src);
-VOID SubTime(struct timeval * dest, CONST struct timeval * src);
-LONG CmpTime(CONST struct timeval * dest, CONST struct timeval * src);
+VOID AddTime(TimeVal_Type * dest, CONST TimeVal_Type * src);
+VOID SubTime(TimeVal_Type * dest, CONST TimeVal_Type * src);
+LONG CmpTime(CONST TimeVal_Type * dest, CONST TimeVal_Type * src);
 
 /* From version 36 */
 ULONG ReadEClock(struct EClockVal * dest);
-VOID GetSysTime(struct timeval * dest);
+VOID GetSysTime(TimeVal_Type * dest);
 
 #ifdef __cplusplus
 }
