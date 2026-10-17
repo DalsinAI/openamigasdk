@@ -25,26 +25,40 @@ def fetch(repo, commit, cache):
 
 
 def sfd_to_fd(sfd):
-    """An FD file from an SFD file: ##base, ##bias, ##public and one line a function."""
-    out, base = [], None
+    """An FD file from an SFD file: ##base, ##bias, ##public and one line a
+    call. A varargs or alias line takes no slot and is left out; ==reserve N
+    moves the next call on, written as a new ##bias."""
+    out, base, bias, skip = [], None, 30, False
     for line in sfd.splitlines():
         s = line.strip()
+        if skip and s and not s.startswith(("==", "*")):
+            skip = False
+            continue
         if s.split()[:1] == ["==base"]:
             base = s.split()[1]
             out.append(f"##base {base}")
         elif s.startswith("==bias"):
-            out.append(f"##bias {s.split()[1]}")
+            bias = int(s.split()[1])
+            out.append(f"##bias {bias}")
+        elif s.startswith("==reserve"):
+            bias += 6 * int(s.split()[1])
+            out.append(f"##bias {bias}")
+        elif s in ("==varargs", "==alias"):
+            skip = True
         elif s in ("==public", "==private"):
             out.append("##" + s[2:])
         elif s == "==end":
             out.append("##end")
         elif s and not s.startswith(("==", "*")):
-            # "ULONG Name(ULONG a, ULONG b)(d0,d1)" -> "Name(a,b)(d0,d1)"
-            head, regs = s.rsplit(")(", 1)
+            # "ULONG Name(ULONG a, ULONG b) (d0,d1)" -> "Name(a,b)(d0,d1)"
+            head, regs = s.rsplit("(", 1)
+            head = head.rstrip()
             ret_name, args = head.split("(", 1)
+            args = args[:-1] if args.endswith(")") else args
             name = ret_name.split()[-1].lstrip("*")
-            names = [a.strip().split()[-1].lstrip("*") for a in args.split(",") if a.strip()]
+            names = [a.strip().split()[-1].lstrip("*") for a in args.split(",") if a.strip() and a.strip() != "VOID"]
             out.append(f"{name}({','.join(names)})({regs}")
+            bias += 6
     return "\n".join(out) + "\n"
 
 
