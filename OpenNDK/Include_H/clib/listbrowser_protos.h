@@ -12,6 +12,7 @@
 #include <intuition/classusr.h>
 #include <exec/lists.h>
 #include <gadgets/listbrowser.h>
+#include <utility/tagitem.h>
 
 #ifdef __cplusplus
 extern "C" {

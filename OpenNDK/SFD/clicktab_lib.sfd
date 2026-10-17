@@ -13,6 +13,7 @@
 ==include <intuition/classusr.h>
 ==include <exec/nodes.h>
 ==include <gadgets/clicktab.h>
+==include <utility/tagitem.h>
 ==version 44
 Class * CLICKTAB_GetClass() ()
 struct Node * AllocClickTabNodeA(struct TagItem * tags) (a0)

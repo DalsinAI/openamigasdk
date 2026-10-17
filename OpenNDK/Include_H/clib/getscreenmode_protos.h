@@ -10,6 +10,7 @@
 #include <intuition/intuition.h>
 #include <intuition/classes.h>
 #include <intuition/classusr.h>
+#include <gadgets/getscreenmode.h>
 
 #ifdef __cplusplus
 extern "C" {

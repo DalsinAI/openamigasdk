@@ -9,6 +9,7 @@
 ==include <exec/types.h>
 ==include <exec/resident.h>
 ==include <resources/card.h>
+==include <exec/libraries.h>
 ==version 39
 struct CardHandle * OwnCard(struct CardHandle * handle) (a1)
 VOID ReleaseCard(struct CardHandle * handle, ULONG flags) (a1,d0)

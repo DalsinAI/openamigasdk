@@ -12,6 +12,9 @@
 #ifndef EXEC_LISTS_H
 #include <exec/lists.h>
 #endif
+#ifndef LIBRARIES_KEYMAP_H
+#include <libraries/keymap.h>
+#endif
 
 /* Lo tables cover keys 0x00-0x3F, Hi tables keys 0x40-0x77 */
 struct KeyMap {

@@ -16,6 +16,12 @@
 #ifndef GRAPHICS_GFX_H
 #include <graphics/gfx.h>
 #endif
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+#ifndef GRAPHICS_VIEW_H
+#include <graphics/view.h>
+#endif
 
 struct View;
 

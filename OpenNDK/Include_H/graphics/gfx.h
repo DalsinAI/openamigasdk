@@ -8,6 +8,9 @@
 #ifndef EXEC_TYPES_H
 #include <exec/types.h>
 #endif
+#ifndef UTILITY_TAGITEM_H
+#include <utility/tagitem.h>
+#endif
 
 /* Set and clear forms of a custom-chip control word */
 #define BITSET	0x8000

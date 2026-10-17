@@ -7,6 +7,7 @@
 
 #include <exec/types.h>
 #include <resources/disk.h>
+#include <exec/libraries.h>
 
 #ifdef __cplusplus
 extern "C" {

@@ -11,6 +11,9 @@
 #ifndef LIBRARIES_IFFPARSE_H
 #include <libraries/iffparse.h>
 #endif
+#ifndef LIBRARIES_ASL_H
+#include <libraries/asl.h>
+#endif
 
 struct AslPrefs
 {

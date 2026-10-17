@@ -8,6 +8,12 @@
 #ifndef UTILITY_TAGITEM_H
 #include <utility/tagitem.h>
 #endif
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+#ifndef INTUITION_INTUITION_H
+#include <intuition/intuition.h>
+#endif
 
 #define POINTERA_Dummy		(TAG_USER + 0x39000)
 

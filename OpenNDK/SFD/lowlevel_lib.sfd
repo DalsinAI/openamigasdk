@@ -11,6 +11,7 @@
 ==include <devices/timer.h>
 ==include <libraries/lowlevel.h>
 ==include <utility/tagitem.h>
+==include <exec/interrupts.h>
 ==version 40
 ULONG ReadJoyPort(ULONG port) (d0)
 UBYTE GetLanguageSelection() ()

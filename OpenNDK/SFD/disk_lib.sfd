@@ -8,6 +8,7 @@
 ==public
 ==include <exec/types.h>
 ==include <resources/disk.h>
+==include <exec/libraries.h>
 ==version 33
 BOOL AllocUnit(LONG unitNum) (d0)
 VOID FreeUnit(LONG unitNum) (d0)

@@ -41,4 +41,8 @@ struct Message {
 	UWORD	mn_Length;	/* total size including this header */
 };
 
+#ifndef EXEC_TASKS_H
+#include <exec/tasks.h>
+#endif
+
 #endif /* EXEC_PORTS_H */

@@ -15,6 +15,9 @@
 #include <graphics/text.h>
 #endif
 
+/* The name of the semaphore the preferences are published under */
+#define RAPREFSSEMAPHORE	"REACTION-PREFS"
+
 /* The preferences the ReAction classes read, under the semaphore */
 struct UIPrefs
 {

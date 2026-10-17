@@ -11,6 +11,12 @@
 #ifndef INTUITION_GADGETCLASS_H
 #include <intuition/gadgetclass.h>
 #endif
+#ifndef EXEC_TYPES_H
+#include <exec/types.h>
+#endif
+#ifndef UTILITY_TAGITEM_H
+#include <utility/tagitem.h>
+#endif
 
 #define TABS_Dummy	(TAG_USER + 0x04000000)
 

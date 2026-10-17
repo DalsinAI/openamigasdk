@@ -13,6 +13,7 @@
 ==include <intuition/classusr.h>
 ==include <exec/nodes.h>
 ==include <gadgets/chooser.h>
+==include <utility/tagitem.h>
 ==version 44
 Class * CHOOSER_GetClass() ()
 struct Node * AllocChooserNodeA(struct TagItem * tags) (a0)

@@ -15,6 +15,9 @@
 #ifndef INTUITION_INTUITION_H
 #include <intuition/intuition.h>
 #endif
+#ifndef INTUITION_GADGETCLASS_H
+#include <intuition/gadgetclass.h>
+#endif
 
 /* ---- Gadget kinds ----------------------------------------------------- */
 

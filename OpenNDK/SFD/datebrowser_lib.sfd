@@ -11,6 +11,7 @@
 ==include <intuition/intuition.h>
 ==include <intuition/classes.h>
 ==include <intuition/classusr.h>
+==include <gadgets/datebrowser.h>
 ==version 44
 Class * DATEBROWSER_GetClass() ()
 UWORD JulianWeekDay(ULONG day, ULONG month, LONG year) (d0,d1,d2)
