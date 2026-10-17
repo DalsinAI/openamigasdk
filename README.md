@@ -13,6 +13,17 @@ Also: **os4compat** (`Lib/os4compat`, `Docs/PORTING-OS4.md`), which builds
 AmigaOS 4 source for OS 3.2 by giving each library OS 4's interfaces and
 adding the OS 4 calls OS 3.2 lacks.
 
+**Building for the 68040, soft float.** Programs are built with `-m68040`
+and no `-m68881`, so one binary runs on a 68040 with or without an FPU; maths
+go through the Amiga's mathieee libraries, which use the FPU when there is
+one. With bebbo-style m68k-amigaos-gcc, `-m68040` alone still links libnix's
+FPU maths (libm881), whose functions return in fp0 where soft-float code
+reads d0/d1. Link with the SDK's specs file to get the soft maths:
+
+    m68k-amigaos-gcc -m68040 -specs=$SDK/Lib/m68k-soft-m68040.specs -noixemul ...
+
+The templates and `os4compat.mk` do this for you.
+
 Part of the Open family (internally, the Great Open Source Reunification
 Project): one platform, AmigaOS 3.2.x with the Open libraries, that is easy
 to set up, and to build and port for.
