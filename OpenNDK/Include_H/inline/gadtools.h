@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,13 +32,13 @@ struct Library;
 #endif
 
 static __inline__ struct Gadget *
-__gadtools_CreateGadgetA(struct Library *__base, ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, CONST struct TagItem * taglist)
+__gadtools_CreateGadgetA(void *__base, ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, CONST struct TagItem * taglist)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(kind);
 	register ULONG _a0 __asm("a0") = (ULONG)(gad);
 	register ULONG _a1 __asm("a1") = (ULONG)(ng);
 	register ULONG _a2 __asm("a2") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -39,14 +47,24 @@ __gadtools_CreateGadgetA(struct Library *__base, ULONG kind, struct Gadget * gad
 	return (struct Gadget *)_d0;
 }
 #define CreateGadgetA(kind, gad, ng, taglist) __gadtools_CreateGadgetA((GADTOOLS_BASE_NAME), (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
+#define __CreateGadgetA_base(__in_base, kind, gad, ng, taglist) __gadtools_CreateGadgetA((__in_base), (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
 
-#define CreateGadget(kind, gad, ng, ...) (CreateGadget)((ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct Gadget *
+__CreateGadget_va(void *__base, ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, ng);
+	struct Gadget * _r = (struct Gadget *)__gadtools_CreateGadgetA(__base, kind, gad, ng, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define CreateGadget(kind, gad, ng, ...) __CreateGadget_va((GADTOOLS_BASE_NAME), (ULONG)(kind), (struct Gadget *)(gad), (CONST struct NewGadget *)(ng), ##__VA_ARGS__)
 
 static __inline__ VOID
-__gadtools_FreeGadgets(struct Library *__base, struct Gadget * gad)
+__gadtools_FreeGadgets(void *__base, struct Gadget * gad)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gad);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -57,15 +75,16 @@ __gadtools_FreeGadgets(struct Library *__base, struct Gadget * gad)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeGadgets(gad) __gadtools_FreeGadgets((GADTOOLS_BASE_NAME), (struct Gadget *)(gad))
+#define __FreeGadgets_base(__in_base, gad) __gadtools_FreeGadgets((__in_base), (struct Gadget *)(gad))
 
 static __inline__ VOID
-__gadtools_GT_SetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist)
+__gadtools_GT_SetGadgetAttrsA(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gad);
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
 	register ULONG _a2 __asm("a2") = (ULONG)(req);
 	register ULONG _a3 __asm("a3") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -75,15 +94,24 @@ __gadtools_GT_SetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struc
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GT_SetGadgetAttrsA(gad, win, req, taglist) __gadtools_GT_SetGadgetAttrsA((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
+#define __GT_SetGadgetAttrsA_base(__in_base, gad, win, req, taglist) __gadtools_GT_SetGadgetAttrsA((__in_base), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
 
-#define GT_SetGadgetAttrs(gad, win, req, ...) (GT_SetGadgetAttrs)((struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__GT_SetGadgetAttrs_va(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, req);
+	__gadtools_GT_SetGadgetAttrsA(__base, gad, win, req, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define GT_SetGadgetAttrs(gad, win, req, ...) __GT_SetGadgetAttrs_va((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
 static __inline__ struct Menu *
-__gadtools_CreateMenusA(struct Library *__base, CONST struct NewMenu * newmenu, CONST struct TagItem * taglist)
+__gadtools_CreateMenusA(void *__base, CONST struct NewMenu * newmenu, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(newmenu);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -93,14 +121,24 @@ __gadtools_CreateMenusA(struct Library *__base, CONST struct NewMenu * newmenu, 
 	return (struct Menu *)_d0;
 }
 #define CreateMenusA(newmenu, taglist) __gadtools_CreateMenusA((GADTOOLS_BASE_NAME), (CONST struct NewMenu *)(newmenu), (CONST struct TagItem *)(taglist))
+#define __CreateMenusA_base(__in_base, newmenu, taglist) __gadtools_CreateMenusA((__in_base), (CONST struct NewMenu *)(newmenu), (CONST struct TagItem *)(taglist))
 
-#define CreateMenus(newmenu, ...) (CreateMenus)((CONST struct NewMenu *)(newmenu), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct Menu *
+__CreateMenus_va(void *__base, CONST struct NewMenu * newmenu, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, newmenu);
+	struct Menu * _r = (struct Menu *)__gadtools_CreateMenusA(__base, newmenu, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define CreateMenus(newmenu, ...) __CreateMenus_va((GADTOOLS_BASE_NAME), (CONST struct NewMenu *)(newmenu), ##__VA_ARGS__)
 
 static __inline__ VOID
-__gadtools_FreeMenus(struct Library *__base, struct Menu * menu)
+__gadtools_FreeMenus(void *__base, struct Menu * menu)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(menu);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -111,14 +149,15 @@ __gadtools_FreeMenus(struct Library *__base, struct Menu * menu)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeMenus(menu) __gadtools_FreeMenus((GADTOOLS_BASE_NAME), (struct Menu *)(menu))
+#define __FreeMenus_base(__in_base, menu) __gadtools_FreeMenus((__in_base), (struct Menu *)(menu))
 
 static __inline__ BOOL
-__gadtools_LayoutMenuItemsA(struct Library *__base, struct MenuItem * firstitem, APTR vi, CONST struct TagItem * taglist)
+__gadtools_LayoutMenuItemsA(void *__base, struct MenuItem * firstitem, APTR vi, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(firstitem);
 	register ULONG _a1 __asm("a1") = (ULONG)(vi);
 	register ULONG _a2 __asm("a2") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -128,16 +167,26 @@ __gadtools_LayoutMenuItemsA(struct Library *__base, struct MenuItem * firstitem,
 	return (BOOL)_d0;
 }
 #define LayoutMenuItemsA(firstitem, vi, taglist) __gadtools_LayoutMenuItemsA((GADTOOLS_BASE_NAME), (struct MenuItem *)(firstitem), (APTR)(vi), (CONST struct TagItem *)(taglist))
+#define __LayoutMenuItemsA_base(__in_base, firstitem, vi, taglist) __gadtools_LayoutMenuItemsA((__in_base), (struct MenuItem *)(firstitem), (APTR)(vi), (CONST struct TagItem *)(taglist))
 
-#define LayoutMenuItems(firstitem, vi, ...) (LayoutMenuItems)((struct MenuItem *)(firstitem), (APTR)(vi), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__LayoutMenuItems_va(void *__base, struct MenuItem * firstitem, APTR vi, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, vi);
+	BOOL _r = (BOOL)__gadtools_LayoutMenuItemsA(__base, firstitem, vi, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define LayoutMenuItems(firstitem, vi, ...) __LayoutMenuItems_va((GADTOOLS_BASE_NAME), (struct MenuItem *)(firstitem), (APTR)(vi), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__gadtools_LayoutMenusA(struct Library *__base, struct Menu * firstmenu, APTR vi, CONST struct TagItem * taglist)
+__gadtools_LayoutMenusA(void *__base, struct Menu * firstmenu, APTR vi, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(firstmenu);
 	register ULONG _a1 __asm("a1") = (ULONG)(vi);
 	register ULONG _a2 __asm("a2") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -147,14 +196,24 @@ __gadtools_LayoutMenusA(struct Library *__base, struct Menu * firstmenu, APTR vi
 	return (BOOL)_d0;
 }
 #define LayoutMenusA(firstmenu, vi, taglist) __gadtools_LayoutMenusA((GADTOOLS_BASE_NAME), (struct Menu *)(firstmenu), (APTR)(vi), (CONST struct TagItem *)(taglist))
+#define __LayoutMenusA_base(__in_base, firstmenu, vi, taglist) __gadtools_LayoutMenusA((__in_base), (struct Menu *)(firstmenu), (APTR)(vi), (CONST struct TagItem *)(taglist))
 
-#define LayoutMenus(firstmenu, vi, ...) (LayoutMenus)((struct Menu *)(firstmenu), (APTR)(vi), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__LayoutMenus_va(void *__base, struct Menu * firstmenu, APTR vi, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, vi);
+	BOOL _r = (BOOL)__gadtools_LayoutMenusA(__base, firstmenu, vi, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define LayoutMenus(firstmenu, vi, ...) __LayoutMenus_va((GADTOOLS_BASE_NAME), (struct Menu *)(firstmenu), (APTR)(vi), ##__VA_ARGS__)
 
 static __inline__ struct IntuiMessage *
-__gadtools_GT_GetIMsg(struct Library *__base, struct MsgPort * iport)
+__gadtools_GT_GetIMsg(void *__base, struct MsgPort * iport)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iport);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -165,12 +224,13 @@ __gadtools_GT_GetIMsg(struct Library *__base, struct MsgPort * iport)
 	return (struct IntuiMessage *)_d0;
 }
 #define GT_GetIMsg(iport) __gadtools_GT_GetIMsg((GADTOOLS_BASE_NAME), (struct MsgPort *)(iport))
+#define __GT_GetIMsg_base(__in_base, iport) __gadtools_GT_GetIMsg((__in_base), (struct MsgPort *)(iport))
 
 static __inline__ VOID
-__gadtools_GT_ReplyIMsg(struct Library *__base, struct IntuiMessage * imsg)
+__gadtools_GT_ReplyIMsg(void *__base, struct IntuiMessage * imsg)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(imsg);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -181,13 +241,14 @@ __gadtools_GT_ReplyIMsg(struct Library *__base, struct IntuiMessage * imsg)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GT_ReplyIMsg(imsg) __gadtools_GT_ReplyIMsg((GADTOOLS_BASE_NAME), (struct IntuiMessage *)(imsg))
+#define __GT_ReplyIMsg_base(__in_base, imsg) __gadtools_GT_ReplyIMsg((__in_base), (struct IntuiMessage *)(imsg))
 
 static __inline__ VOID
-__gadtools_GT_RefreshWindow(struct Library *__base, struct Window * win, struct Requester * req)
+__gadtools_GT_RefreshWindow(void *__base, struct Window * win, struct Requester * req)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(win);
 	register ULONG _a1 __asm("a1") = (ULONG)(req);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -197,12 +258,13 @@ __gadtools_GT_RefreshWindow(struct Library *__base, struct Window * win, struct 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GT_RefreshWindow(win, req) __gadtools_GT_RefreshWindow((GADTOOLS_BASE_NAME), (struct Window *)(win), (struct Requester *)(req))
+#define __GT_RefreshWindow_base(__in_base, win, req) __gadtools_GT_RefreshWindow((__in_base), (struct Window *)(win), (struct Requester *)(req))
 
 static __inline__ VOID
-__gadtools_GT_BeginRefresh(struct Library *__base, struct Window * win)
+__gadtools_GT_BeginRefresh(void *__base, struct Window * win)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(win);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -213,13 +275,14 @@ __gadtools_GT_BeginRefresh(struct Library *__base, struct Window * win)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GT_BeginRefresh(win) __gadtools_GT_BeginRefresh((GADTOOLS_BASE_NAME), (struct Window *)(win))
+#define __GT_BeginRefresh_base(__in_base, win) __gadtools_GT_BeginRefresh((__in_base), (struct Window *)(win))
 
 static __inline__ VOID
-__gadtools_GT_EndRefresh(struct Library *__base, struct Window * win, BOOL complete)
+__gadtools_GT_EndRefresh(void *__base, struct Window * win, BOOL complete)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(win);
 	register ULONG _d0 __asm("d0") = (ULONG)(complete);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -229,12 +292,13 @@ __gadtools_GT_EndRefresh(struct Library *__base, struct Window * win, BOOL compl
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GT_EndRefresh(win, complete) __gadtools_GT_EndRefresh((GADTOOLS_BASE_NAME), (struct Window *)(win), (BOOL)(complete))
+#define __GT_EndRefresh_base(__in_base, win, complete) __gadtools_GT_EndRefresh((__in_base), (struct Window *)(win), (BOOL)(complete))
 
 static __inline__ struct IntuiMessage *
-__gadtools_GT_FilterIMsg(struct Library *__base, CONST struct IntuiMessage * imsg)
+__gadtools_GT_FilterIMsg(void *__base, CONST struct IntuiMessage * imsg)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(imsg);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -245,12 +309,13 @@ __gadtools_GT_FilterIMsg(struct Library *__base, CONST struct IntuiMessage * ims
 	return (struct IntuiMessage *)_d0;
 }
 #define GT_FilterIMsg(imsg) __gadtools_GT_FilterIMsg((GADTOOLS_BASE_NAME), (CONST struct IntuiMessage *)(imsg))
+#define __GT_FilterIMsg_base(__in_base, imsg) __gadtools_GT_FilterIMsg((__in_base), (CONST struct IntuiMessage *)(imsg))
 
 static __inline__ struct IntuiMessage *
-__gadtools_GT_PostFilterIMsg(struct Library *__base, struct IntuiMessage * imsg)
+__gadtools_GT_PostFilterIMsg(void *__base, struct IntuiMessage * imsg)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(imsg);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -261,12 +326,13 @@ __gadtools_GT_PostFilterIMsg(struct Library *__base, struct IntuiMessage * imsg)
 	return (struct IntuiMessage *)_d0;
 }
 #define GT_PostFilterIMsg(imsg) __gadtools_GT_PostFilterIMsg((GADTOOLS_BASE_NAME), (struct IntuiMessage *)(imsg))
+#define __GT_PostFilterIMsg_base(__in_base, imsg) __gadtools_GT_PostFilterIMsg((__in_base), (struct IntuiMessage *)(imsg))
 
 static __inline__ struct Gadget *
-__gadtools_CreateContext(struct Library *__base, struct Gadget ** glistptr)
+__gadtools_CreateContext(void *__base, struct Gadget ** glistptr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(glistptr);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -277,9 +343,10 @@ __gadtools_CreateContext(struct Library *__base, struct Gadget ** glistptr)
 	return (struct Gadget *)_d0;
 }
 #define CreateContext(glistptr) __gadtools_CreateContext((GADTOOLS_BASE_NAME), (struct Gadget **)(glistptr))
+#define __CreateContext_base(__in_base, glistptr) __gadtools_CreateContext((__in_base), (struct Gadget **)(glistptr))
 
 static __inline__ VOID
-__gadtools_DrawBevelBoxA(struct Library *__base, struct RastPort * rport, WORD left, WORD top, WORD width, WORD height, CONST struct TagItem * taglist)
+__gadtools_DrawBevelBoxA(void *__base, struct RastPort * rport, WORD left, WORD top, WORD width, WORD height, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rport);
 	register ULONG _d0 __asm("d0") = (ULONG)(left);
@@ -287,7 +354,7 @@ __gadtools_DrawBevelBoxA(struct Library *__base, struct RastPort * rport, WORD l
 	register ULONG _d2 __asm("d2") = (ULONG)(width);
 	register ULONG _d3 __asm("d3") = (ULONG)(height);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -120(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6), "r" (_d2), "r" (_d3)
@@ -295,15 +362,24 @@ __gadtools_DrawBevelBoxA(struct Library *__base, struct RastPort * rport, WORD l
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DrawBevelBoxA(rport, left, top, width, height, taglist) __gadtools_DrawBevelBoxA((GADTOOLS_BASE_NAME), (struct RastPort *)(rport), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height), (CONST struct TagItem *)(taglist))
+#define __DrawBevelBoxA_base(__in_base, rport, left, top, width, height, taglist) __gadtools_DrawBevelBoxA((__in_base), (struct RastPort *)(rport), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height), (CONST struct TagItem *)(taglist))
 
-#define DrawBevelBox(rport, left, top, width, height, ...) (DrawBevelBox)((struct RastPort *)(rport), (LONG)(left), (LONG)(top), (LONG)(width), (LONG)(height), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__DrawBevelBox_va(void *__base, struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, height);
+	__gadtools_DrawBevelBoxA(__base, rport, left, top, width, height, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define DrawBevelBox(rport, left, top, width, height, ...) __DrawBevelBox_va((GADTOOLS_BASE_NAME), (struct RastPort *)(rport), (LONG)(left), (LONG)(top), (LONG)(width), (LONG)(height), ##__VA_ARGS__)
 
 static __inline__ APTR
-__gadtools_GetVisualInfoA(struct Library *__base, struct Screen * screen, CONST struct TagItem * taglist)
+__gadtools_GetVisualInfoA(void *__base, struct Screen * screen, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -313,14 +389,24 @@ __gadtools_GetVisualInfoA(struct Library *__base, struct Screen * screen, CONST 
 	return (APTR)_d0;
 }
 #define GetVisualInfoA(screen, taglist) __gadtools_GetVisualInfoA((GADTOOLS_BASE_NAME), (struct Screen *)(screen), (CONST struct TagItem *)(taglist))
+#define __GetVisualInfoA_base(__in_base, screen, taglist) __gadtools_GetVisualInfoA((__in_base), (struct Screen *)(screen), (CONST struct TagItem *)(taglist))
 
-#define GetVisualInfo(screen, ...) (GetVisualInfo)((struct Screen *)(screen), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR APTR
+__GetVisualInfo_va(void *__base, struct Screen * screen, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, screen);
+	APTR _r = (APTR)__gadtools_GetVisualInfoA(__base, screen, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define GetVisualInfo(screen, ...) __GetVisualInfo_va((GADTOOLS_BASE_NAME), (struct Screen *)(screen), ##__VA_ARGS__)
 
 static __inline__ VOID
-__gadtools_FreeVisualInfo(struct Library *__base, APTR vi)
+__gadtools_FreeVisualInfo(void *__base, APTR vi)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vi);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -331,14 +417,15 @@ __gadtools_FreeVisualInfo(struct Library *__base, APTR vi)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeVisualInfo(vi) __gadtools_FreeVisualInfo((GADTOOLS_BASE_NAME), (APTR)(vi))
+#define __FreeVisualInfo_base(__in_base, vi) __gadtools_FreeVisualInfo((__in_base), (APTR)(vi))
 
 static __inline__ LONG
-__gadtools_SetDesignFontA(struct Library *__base, APTR vi, CONST struct TextAttr * tattr, CONST struct TagItem * taglist)
+__gadtools_SetDesignFontA(void *__base, APTR vi, CONST struct TextAttr * tattr, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vi);
 	register ULONG _a1 __asm("a1") = (ULONG)(tattr);
 	register ULONG _a2 __asm("a2") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -138(%/a6)"
@@ -348,15 +435,25 @@ __gadtools_SetDesignFontA(struct Library *__base, APTR vi, CONST struct TextAttr
 	return (LONG)_d0;
 }
 #define SetDesignFontA(vi, tattr, taglist) __gadtools_SetDesignFontA((GADTOOLS_BASE_NAME), (APTR)(vi), (CONST struct TextAttr *)(tattr), (CONST struct TagItem *)(taglist))
+#define __SetDesignFontA_base(__in_base, vi, tattr, taglist) __gadtools_SetDesignFontA((__in_base), (APTR)(vi), (CONST struct TextAttr *)(tattr), (CONST struct TagItem *)(taglist))
 
-#define SetDesignFont(vi, tattr, ...) (SetDesignFont)((APTR)(vi), (CONST struct TextAttr *)(tattr), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__SetDesignFont_va(void *__base, APTR vi, CONST struct TextAttr * tattr, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, tattr);
+	LONG _r = (LONG)__gadtools_SetDesignFontA(__base, vi, tattr, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetDesignFont(vi, tattr, ...) __SetDesignFont_va((GADTOOLS_BASE_NAME), (APTR)(vi), (CONST struct TextAttr *)(tattr), ##__VA_ARGS__)
 
 static __inline__ LONG
-__gadtools_ScaleGadgetRectA(struct Library *__base, struct NewGadget * ng, CONST struct TagItem * taglist)
+__gadtools_ScaleGadgetRectA(void *__base, struct NewGadget * ng, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(ng);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
@@ -366,17 +463,27 @@ __gadtools_ScaleGadgetRectA(struct Library *__base, struct NewGadget * ng, CONST
 	return (LONG)_d0;
 }
 #define ScaleGadgetRectA(ng, taglist) __gadtools_ScaleGadgetRectA((GADTOOLS_BASE_NAME), (struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
+#define __ScaleGadgetRectA_base(__in_base, ng, taglist) __gadtools_ScaleGadgetRectA((__in_base), (struct NewGadget *)(ng), (CONST struct TagItem *)(taglist))
 
-#define ScaleGadgetRect(ng, ...) (ScaleGadgetRect)((struct NewGadget *)(ng), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__ScaleGadgetRect_va(void *__base, struct NewGadget * ng, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, ng);
+	LONG _r = (LONG)__gadtools_ScaleGadgetRectA(__base, ng, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ScaleGadgetRect(ng, ...) __ScaleGadgetRect_va((GADTOOLS_BASE_NAME), (struct NewGadget *)(ng), ##__VA_ARGS__)
 
 static __inline__ LONG
-__gadtools_GT_GetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist)
+__gadtools_GT_GetGadgetAttrsA(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gad);
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
 	register ULONG _a2 __asm("a2") = (ULONG)(req);
 	register ULONG _a3 __asm("a3") = (ULONG)(taglist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -174(%/a6)"
@@ -386,7 +493,17 @@ __gadtools_GT_GetGadgetAttrsA(struct Library *__base, struct Gadget * gad, struc
 	return (LONG)_d0;
 }
 #define GT_GetGadgetAttrsA(gad, win, req, taglist) __gadtools_GT_GetGadgetAttrsA((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
+#define __GT_GetGadgetAttrsA_base(__in_base, gad, win, req, taglist) __gadtools_GT_GetGadgetAttrsA((__in_base), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(taglist))
 
-#define GT_GetGadgetAttrs(gad, win, req, ...) (GT_GetGadgetAttrs)((struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__GT_GetGadgetAttrs_va(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, req);
+	LONG _r = (LONG)__gadtools_GT_GetGadgetAttrsA(__base, gad, win, req, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define GT_GetGadgetAttrs(gad, win, req, ...) __GT_GetGadgetAttrs_va((GADTOOLS_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
 #endif /* INLINE_GADTOOLS_H */

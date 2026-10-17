@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,12 +25,12 @@ struct Library;
 #endif
 
 static __inline__ APTR
-__nonvolatile_GetCopyNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR itemName, BOOL killRequesters)
+__nonvolatile_GetCopyNV(void *__base, CONST_STRPTR appName, CONST_STRPTR itemName, BOOL killRequesters)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(appName);
 	register ULONG _a1 __asm("a1") = (ULONG)(itemName);
 	register ULONG _d1 __asm("d1") = (ULONG)(killRequesters);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
 		: "=r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -38,12 +39,13 @@ __nonvolatile_GetCopyNV(struct Library *__base, CONST_STRPTR appName, CONST_STRP
 	return (APTR)_d0;
 }
 #define GetCopyNV(appName, itemName, killRequesters) __nonvolatile_GetCopyNV((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (BOOL)(killRequesters))
+#define __GetCopyNV_base(__in_base, appName, itemName, killRequesters) __nonvolatile_GetCopyNV((__in_base), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (BOOL)(killRequesters))
 
 static __inline__ VOID
-__nonvolatile_FreeNVData(struct Library *__base, APTR data)
+__nonvolatile_FreeNVData(void *__base, APTR data)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(data);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,16 +56,17 @@ __nonvolatile_FreeNVData(struct Library *__base, APTR data)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeNVData(data) __nonvolatile_FreeNVData((NONVOLATILE_BASE_NAME), (APTR)(data))
+#define __FreeNVData_base(__in_base, data) __nonvolatile_FreeNVData((__in_base), (APTR)(data))
 
 static __inline__ UWORD
-__nonvolatile_StoreNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR itemName, CONST_APTR data, ULONG length, BOOL killRequesters)
+__nonvolatile_StoreNV(void *__base, CONST_STRPTR appName, CONST_STRPTR itemName, CONST_APTR data, ULONG length, BOOL killRequesters)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(appName);
 	register ULONG _a1 __asm("a1") = (ULONG)(itemName);
 	register ULONG _a2 __asm("a2") = (ULONG)(data);
 	register ULONG _d0 __asm("d0") = (ULONG)(length);
 	register ULONG _d1 __asm("d1") = (ULONG)(killRequesters);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -42(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
@@ -71,14 +74,15 @@ __nonvolatile_StoreNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR
 	return (UWORD)_d0;
 }
 #define StoreNV(appName, itemName, data, length, killRequesters) __nonvolatile_StoreNV((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (CONST_APTR)(data), (ULONG)(length), (BOOL)(killRequesters))
+#define __StoreNV_base(__in_base, appName, itemName, data, length, killRequesters) __nonvolatile_StoreNV((__in_base), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (CONST_APTR)(data), (ULONG)(length), (BOOL)(killRequesters))
 
 static __inline__ BOOL
-__nonvolatile_DeleteNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR itemName, BOOL killRequesters)
+__nonvolatile_DeleteNV(void *__base, CONST_STRPTR appName, CONST_STRPTR itemName, BOOL killRequesters)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(appName);
 	register ULONG _a1 __asm("a1") = (ULONG)(itemName);
 	register ULONG _d1 __asm("d1") = (ULONG)(killRequesters);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
 		: "=r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -87,12 +91,13 @@ __nonvolatile_DeleteNV(struct Library *__base, CONST_STRPTR appName, CONST_STRPT
 	return (BOOL)_d0;
 }
 #define DeleteNV(appName, itemName, killRequesters) __nonvolatile_DeleteNV((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (BOOL)(killRequesters))
+#define __DeleteNV_base(__in_base, appName, itemName, killRequesters) __nonvolatile_DeleteNV((__in_base), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (BOOL)(killRequesters))
 
 static __inline__ struct NVInfo *
-__nonvolatile_GetNVInfo(struct Library *__base, BOOL killRequesters)
+__nonvolatile_GetNVInfo(void *__base, BOOL killRequesters)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(killRequesters);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -103,13 +108,14 @@ __nonvolatile_GetNVInfo(struct Library *__base, BOOL killRequesters)
 	return (struct NVInfo *)_d0;
 }
 #define GetNVInfo(killRequesters) __nonvolatile_GetNVInfo((NONVOLATILE_BASE_NAME), (BOOL)(killRequesters))
+#define __GetNVInfo_base(__in_base, killRequesters) __nonvolatile_GetNVInfo((__in_base), (BOOL)(killRequesters))
 
 static __inline__ struct MinList *
-__nonvolatile_GetNVList(struct Library *__base, CONST_STRPTR appName, BOOL killRequesters)
+__nonvolatile_GetNVList(void *__base, CONST_STRPTR appName, BOOL killRequesters)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(appName);
 	register ULONG _d1 __asm("d1") = (ULONG)(killRequesters);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -119,15 +125,16 @@ __nonvolatile_GetNVList(struct Library *__base, CONST_STRPTR appName, BOOL killR
 	return (struct MinList *)_d0;
 }
 #define GetNVList(appName, killRequesters) __nonvolatile_GetNVList((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (BOOL)(killRequesters))
+#define __GetNVList_base(__in_base, appName, killRequesters) __nonvolatile_GetNVList((__in_base), (CONST_STRPTR)(appName), (BOOL)(killRequesters))
 
 static __inline__ BOOL
-__nonvolatile_SetNVProtection(struct Library *__base, CONST_STRPTR appName, CONST_STRPTR itemName, LONG mask, BOOL killRequesters)
+__nonvolatile_SetNVProtection(void *__base, CONST_STRPTR appName, CONST_STRPTR itemName, LONG mask, BOOL killRequesters)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(appName);
 	register ULONG _a1 __asm("a1") = (ULONG)(itemName);
 	register ULONG _d2 __asm("d2") = (ULONG)(mask);
 	register ULONG _d1 __asm("d1") = (ULONG)(killRequesters);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
 		: "=r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -136,5 +143,6 @@ __nonvolatile_SetNVProtection(struct Library *__base, CONST_STRPTR appName, CONS
 	return (BOOL)_d0;
 }
 #define SetNVProtection(appName, itemName, mask, killRequesters) __nonvolatile_SetNVProtection((NONVOLATILE_BASE_NAME), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (LONG)(mask), (BOOL)(killRequesters))
+#define __SetNVProtection_base(__in_base, appName, itemName, mask, killRequesters) __nonvolatile_SetNVProtection((__in_base), (CONST_STRPTR)(appName), (CONST_STRPTR)(itemName), (LONG)(mask), (BOOL)(killRequesters))
 
 #endif /* INLINE_NONVOLATILE_H */

@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +32,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__speedbar_SPEEDBAR_GetClass(struct Library *__base)
+__speedbar_SPEEDBAR_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,13 +46,14 @@ __speedbar_SPEEDBAR_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define SPEEDBAR_GetClass() __speedbar_SPEEDBAR_GetClass((SPEEDBAR_BASE_NAME))
+#define __SPEEDBAR_GetClass_base(__in_base) __speedbar_SPEEDBAR_GetClass((__in_base))
 
 static __inline__ struct Node *
-__speedbar_AllocSpeedButtonNodeA(struct Library *__base, ULONG number, struct TagItem * tags)
+__speedbar_AllocSpeedButtonNodeA(void *__base, ULONG number, struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(number);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
@@ -54,14 +63,24 @@ __speedbar_AllocSpeedButtonNodeA(struct Library *__base, ULONG number, struct Ta
 	return (struct Node *)_d0;
 }
 #define AllocSpeedButtonNodeA(number, tags) __speedbar_AllocSpeedButtonNodeA((SPEEDBAR_BASE_NAME), (ULONG)(number), (struct TagItem *)(tags))
+#define __AllocSpeedButtonNodeA_base(__in_base, number, tags) __speedbar_AllocSpeedButtonNodeA((__in_base), (ULONG)(number), (struct TagItem *)(tags))
 
-#define AllocSpeedButtonNode(number, ...) (AllocSpeedButtonNode)((UWORD)(number), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct Node *
+__AllocSpeedButtonNode_va(void *__base, UWORD number, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, number);
+	struct Node * _r = (struct Node *)__speedbar_AllocSpeedButtonNodeA(__base, number, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocSpeedButtonNode(number, ...) __AllocSpeedButtonNode_va((SPEEDBAR_BASE_NAME), (UWORD)(number), ##__VA_ARGS__)
 
 static __inline__ VOID
-__speedbar_FreeSpeedButtonNode(struct Library *__base, struct Node * node)
+__speedbar_FreeSpeedButtonNode(void *__base, struct Node * node)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -72,13 +91,14 @@ __speedbar_FreeSpeedButtonNode(struct Library *__base, struct Node * node)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeSpeedButtonNode(node) __speedbar_FreeSpeedButtonNode((SPEEDBAR_BASE_NAME), (struct Node *)(node))
+#define __FreeSpeedButtonNode_base(__in_base, node) __speedbar_FreeSpeedButtonNode((__in_base), (struct Node *)(node))
 
 static __inline__ VOID
-__speedbar_SetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
+__speedbar_SetSpeedButtonNodeAttrsA(void *__base, struct Node * node, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -88,15 +108,24 @@ __speedbar_SetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetSpeedButtonNodeAttrsA(node, tags) __speedbar_SetSpeedButtonNodeAttrsA((SPEEDBAR_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __SetSpeedButtonNodeAttrsA_base(__in_base, node, tags) __speedbar_SetSpeedButtonNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-#define SetSpeedButtonNodeAttrs(node, ...) (SetSpeedButtonNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__SetSpeedButtonNodeAttrs_va(void *__base, struct Node * node, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, node);
+	__speedbar_SetSpeedButtonNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define SetSpeedButtonNodeAttrs(node, ...) __SetSpeedButtonNodeAttrs_va((SPEEDBAR_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
-__speedbar_GetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
+__speedbar_GetSpeedButtonNodeAttrsA(void *__base, struct Node * node, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -106,7 +135,16 @@ __speedbar_GetSpeedButtonNodeAttrsA(struct Library *__base, struct Node * node, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GetSpeedButtonNodeAttrsA(node, tags) __speedbar_GetSpeedButtonNodeAttrsA((SPEEDBAR_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __GetSpeedButtonNodeAttrsA_base(__in_base, node, tags) __speedbar_GetSpeedButtonNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-#define GetSpeedButtonNodeAttrs(node, ...) (GetSpeedButtonNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__GetSpeedButtonNodeAttrs_va(void *__base, struct Node * node, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, node);
+	__speedbar_GetSpeedButtonNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define GetSpeedButtonNodeAttrs(node, ...) __GetSpeedButtonNodeAttrs_va((SPEEDBAR_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 
 #endif /* INLINE_SPEEDBAR_H */

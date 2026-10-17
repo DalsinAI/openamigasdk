@@ -10,7 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern struct DiscResource *DiskBase;
+extern struct DiskResource *DiskBase;
 #ifdef __cplusplus
 }
 #endif

@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +32,10 @@ struct Library;
 #endif
 
 static __inline__ VOID
-__icon_FreeFreeList(struct Library *__base, struct FreeList * freelist)
+__icon_FreeFreeList(void *__base, struct FreeList * freelist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(freelist);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -38,14 +46,15 @@ __icon_FreeFreeList(struct Library *__base, struct FreeList * freelist)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeFreeList(freelist) __icon_FreeFreeList((ICON_BASE_NAME), (struct FreeList *)(freelist))
+#define __FreeFreeList_base(__in_base, freelist) __icon_FreeFreeList((__in_base), (struct FreeList *)(freelist))
 
 static __inline__ BOOL
-__icon_AddFreeList(struct Library *__base, struct FreeList * freelist, CONST_APTR mem, ULONG size)
+__icon_AddFreeList(void *__base, struct FreeList * freelist, CONST_APTR mem, ULONG size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(freelist);
 	register ULONG _a1 __asm("a1") = (ULONG)(mem);
 	register ULONG _a2 __asm("a2") = (ULONG)(size);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
@@ -55,12 +64,13 @@ __icon_AddFreeList(struct Library *__base, struct FreeList * freelist, CONST_APT
 	return (BOOL)_d0;
 }
 #define AddFreeList(freelist, mem, size) __icon_AddFreeList((ICON_BASE_NAME), (struct FreeList *)(freelist), (CONST_APTR)(mem), (ULONG)(size))
+#define __AddFreeList_base(__in_base, freelist, mem, size) __icon_AddFreeList((__in_base), (struct FreeList *)(freelist), (CONST_APTR)(mem), (ULONG)(size))
 
 static __inline__ struct DiskObject *
-__icon_GetDiskObject(struct Library *__base, CONST_STRPTR name)
+__icon_GetDiskObject(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -71,13 +81,14 @@ __icon_GetDiskObject(struct Library *__base, CONST_STRPTR name)
 	return (struct DiskObject *)_d0;
 }
 #define GetDiskObject(name) __icon_GetDiskObject((ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define __GetDiskObject_base(__in_base, name) __icon_GetDiskObject((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
-__icon_PutDiskObject(struct Library *__base, CONST_STRPTR name, CONST struct DiskObject * diskobj)
+__icon_PutDiskObject(void *__base, CONST_STRPTR name, CONST struct DiskObject * diskobj)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(diskobj);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -87,12 +98,13 @@ __icon_PutDiskObject(struct Library *__base, CONST_STRPTR name, CONST struct Dis
 	return (BOOL)_d0;
 }
 #define PutDiskObject(name, diskobj) __icon_PutDiskObject((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(diskobj))
+#define __PutDiskObject_base(__in_base, name, diskobj) __icon_PutDiskObject((__in_base), (CONST_STRPTR)(name), (CONST struct DiskObject *)(diskobj))
 
 static __inline__ VOID
-__icon_FreeDiskObject(struct Library *__base, struct DiskObject * diskobj)
+__icon_FreeDiskObject(void *__base, struct DiskObject * diskobj)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(diskobj);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -103,13 +115,14 @@ __icon_FreeDiskObject(struct Library *__base, struct DiskObject * diskobj)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeDiskObject(diskobj) __icon_FreeDiskObject((ICON_BASE_NAME), (struct DiskObject *)(diskobj))
+#define __FreeDiskObject_base(__in_base, diskobj) __icon_FreeDiskObject((__in_base), (struct DiskObject *)(diskobj))
 
 static __inline__ UBYTE *
-__icon_FindToolType(struct Library *__base, CONST STRPTR * toolTypeArray, CONST_STRPTR typeName)
+__icon_FindToolType(void *__base, CONST STRPTR * toolTypeArray, CONST_STRPTR typeName)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(toolTypeArray);
 	register ULONG _a1 __asm("a1") = (ULONG)(typeName);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -119,13 +132,14 @@ __icon_FindToolType(struct Library *__base, CONST STRPTR * toolTypeArray, CONST_
 	return (UBYTE *)_d0;
 }
 #define FindToolType(toolTypeArray, typeName) __icon_FindToolType((ICON_BASE_NAME), (CONST STRPTR *)(toolTypeArray), (CONST_STRPTR)(typeName))
+#define __FindToolType_base(__in_base, toolTypeArray, typeName) __icon_FindToolType((__in_base), (CONST STRPTR *)(toolTypeArray), (CONST_STRPTR)(typeName))
 
 static __inline__ BOOL
-__icon_MatchToolValue(struct Library *__base, CONST_STRPTR typeString, CONST_STRPTR value)
+__icon_MatchToolValue(void *__base, CONST_STRPTR typeString, CONST_STRPTR value)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(typeString);
 	register ULONG _a1 __asm("a1") = (ULONG)(value);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -135,13 +149,14 @@ __icon_MatchToolValue(struct Library *__base, CONST_STRPTR typeString, CONST_STR
 	return (BOOL)_d0;
 }
 #define MatchToolValue(typeString, value) __icon_MatchToolValue((ICON_BASE_NAME), (CONST_STRPTR)(typeString), (CONST_STRPTR)(value))
+#define __MatchToolValue_base(__in_base, typeString, value) __icon_MatchToolValue((__in_base), (CONST_STRPTR)(typeString), (CONST_STRPTR)(value))
 
 static __inline__ STRPTR
-__icon_BumpRevision(struct Library *__base, STRPTR newname, CONST_STRPTR oldname)
+__icon_BumpRevision(void *__base, STRPTR newname, CONST_STRPTR oldname)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(newname);
 	register ULONG _a1 __asm("a1") = (ULONG)(oldname);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -108(%/a6)"
@@ -151,14 +166,15 @@ __icon_BumpRevision(struct Library *__base, STRPTR newname, CONST_STRPTR oldname
 	return (STRPTR)_d0;
 }
 #define BumpRevision(newname, oldname) __icon_BumpRevision((ICON_BASE_NAME), (STRPTR)(newname), (CONST_STRPTR)(oldname))
+#define __BumpRevision_base(__in_base, newname, oldname) __icon_BumpRevision((__in_base), (STRPTR)(newname), (CONST_STRPTR)(oldname))
 
 static __inline__ APTR
-__icon_FreeAlloc(struct Library *__base, struct FreeList * freelist, ULONG len, ULONG type)
+__icon_FreeAlloc(void *__base, struct FreeList * freelist, ULONG len, ULONG type)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(freelist);
 	register ULONG _a1 __asm("a1") = (ULONG)(len);
 	register ULONG _a2 __asm("a2") = (ULONG)(type);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
@@ -168,12 +184,13 @@ __icon_FreeAlloc(struct Library *__base, struct FreeList * freelist, ULONG len, 
 	return (APTR)_d0;
 }
 #define FreeAlloc(freelist, len, type) __icon_FreeAlloc((ICON_BASE_NAME), (struct FreeList *)(freelist), (ULONG)(len), (ULONG)(type))
+#define __FreeAlloc_base(__in_base, freelist, len, type) __icon_FreeAlloc((__in_base), (struct FreeList *)(freelist), (ULONG)(len), (ULONG)(type))
 
 static __inline__ struct DiskObject *
-__icon_GetDefDiskObject(struct Library *__base, LONG type)
+__icon_GetDefDiskObject(void *__base, LONG type)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -184,12 +201,13 @@ __icon_GetDefDiskObject(struct Library *__base, LONG type)
 	return (struct DiskObject *)_d0;
 }
 #define GetDefDiskObject(type) __icon_GetDefDiskObject((ICON_BASE_NAME), (LONG)(type))
+#define __GetDefDiskObject_base(__in_base, type) __icon_GetDefDiskObject((__in_base), (LONG)(type))
 
 static __inline__ BOOL
-__icon_PutDefDiskObject(struct Library *__base, CONST struct DiskObject * diskObject)
+__icon_PutDefDiskObject(void *__base, CONST struct DiskObject * diskObject)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(diskObject);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -200,12 +218,13 @@ __icon_PutDefDiskObject(struct Library *__base, CONST struct DiskObject * diskOb
 	return (BOOL)_d0;
 }
 #define PutDefDiskObject(diskObject) __icon_PutDefDiskObject((ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject))
+#define __PutDefDiskObject_base(__in_base, diskObject) __icon_PutDefDiskObject((__in_base), (CONST struct DiskObject *)(diskObject))
 
 static __inline__ struct DiskObject *
-__icon_GetDiskObjectNew(struct Library *__base, CONST_STRPTR name)
+__icon_GetDiskObjectNew(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -216,12 +235,13 @@ __icon_GetDiskObjectNew(struct Library *__base, CONST_STRPTR name)
 	return (struct DiskObject *)_d0;
 }
 #define GetDiskObjectNew(name) __icon_GetDiskObjectNew((ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define __GetDiskObjectNew_base(__in_base, name) __icon_GetDiskObjectNew((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
-__icon_DeleteDiskObject(struct Library *__base, CONST_STRPTR name)
+__icon_DeleteDiskObject(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -232,13 +252,14 @@ __icon_DeleteDiskObject(struct Library *__base, CONST_STRPTR name)
 	return (BOOL)_d0;
 }
 #define DeleteDiskObject(name) __icon_DeleteDiskObject((ICON_BASE_NAME), (CONST_STRPTR)(name))
+#define __DeleteDiskObject_base(__in_base, name) __icon_DeleteDiskObject((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ VOID
-__icon_FreeFree(struct Library *__base, struct FreeList * freelist, APTR address)
+__icon_FreeFree(void *__base, struct FreeList * freelist, APTR address)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(freelist);
 	register ULONG _a1 __asm("a1") = (ULONG)(address);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
@@ -248,13 +269,14 @@ __icon_FreeFree(struct Library *__base, struct FreeList * freelist, APTR address
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeFree(freelist, address) __icon_FreeFree((ICON_BASE_NAME), (struct FreeList *)(freelist), (APTR)(address))
+#define __FreeFree_base(__in_base, freelist, address) __icon_FreeFree((__in_base), (struct FreeList *)(freelist), (APTR)(address))
 
 static __inline__ struct DiskObject *
-__icon_DupDiskObjectA(struct Library *__base, CONST struct DiskObject * diskObject, CONST struct TagItem * tags)
+__icon_DupDiskObjectA(void *__base, CONST struct DiskObject * diskObject, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(diskObject);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -150(%/a6)"
@@ -264,15 +286,25 @@ __icon_DupDiskObjectA(struct Library *__base, CONST struct DiskObject * diskObje
 	return (struct DiskObject *)_d0;
 }
 #define DupDiskObjectA(diskObject, tags) __icon_DupDiskObjectA((ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)(tags))
+#define __DupDiskObjectA_base(__in_base, diskObject, tags) __icon_DupDiskObjectA((__in_base), (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)(tags))
 
-#define DupDiskObject(diskObject, ...) (DupDiskObject)((CONST struct DiskObject *)(diskObject), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct DiskObject *
+__DupDiskObject_va(void *__base, CONST struct DiskObject * diskObject, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, diskObject);
+	struct DiskObject * _r = (struct DiskObject *)__icon_DupDiskObjectA(__base, diskObject, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define DupDiskObject(diskObject, ...) __DupDiskObject_va((ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__icon_IconControlA(struct Library *__base, struct DiskObject * icon, CONST struct TagItem * tags)
+__icon_IconControlA(void *__base, struct DiskObject * icon, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(icon);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -156(%/a6)"
@@ -282,11 +314,21 @@ __icon_IconControlA(struct Library *__base, struct DiskObject * icon, CONST stru
 	return (ULONG)_d0;
 }
 #define IconControlA(icon, tags) __icon_IconControlA((ICON_BASE_NAME), (struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
+#define __IconControlA_base(__in_base, icon, tags) __icon_IconControlA((__in_base), (struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
 
-#define IconControl(icon, ...) (IconControl)((struct DiskObject *)(icon), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__IconControl_va(void *__base, struct DiskObject * icon, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, icon);
+	ULONG _r = (ULONG)__icon_IconControlA(__base, icon, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define IconControl(icon, ...) __IconControl_va((ICON_BASE_NAME), (struct DiskObject *)(icon), ##__VA_ARGS__)
 
 static __inline__ VOID
-__icon_DrawIconStateA(struct Library *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, CONST struct TagItem * tags)
+__icon_DrawIconStateA(void *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(icon);
@@ -295,7 +337,7 @@ __icon_DrawIconStateA(struct Library *__base, struct RastPort * rp, CONST struct
 	register ULONG _d1 __asm("d1") = (ULONG)(topOffset);
 	register ULONG _d2 __asm("d2") = (ULONG)(state);
 	register ULONG _a3 __asm("a3") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -162(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a3), "r" (_a6), "r" (_d2)
@@ -303,17 +345,26 @@ __icon_DrawIconStateA(struct Library *__base, struct RastPort * rp, CONST struct
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DrawIconStateA(rp, icon, label, leftOffset, topOffset, state, tags) __icon_DrawIconStateA((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)(tags))
+#define __DrawIconStateA_base(__in_base, rp, icon, label, leftOffset, topOffset, state, tags) __icon_DrawIconStateA((__in_base), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)(tags))
 
-#define DrawIconState(rp, icon, label, leftOffset, topOffset, state, ...) (DrawIconState)((struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__DrawIconState_va(void *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, state);
+	__icon_DrawIconStateA(__base, rp, icon, label, leftOffset, topOffset, state, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define DrawIconState(rp, icon, label, leftOffset, topOffset, state, ...) __DrawIconState_va((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__icon_GetIconRectangleA(struct Library *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, CONST struct TagItem * tags)
+__icon_GetIconRectangleA(void *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(icon);
 	register ULONG _a2 __asm("a2") = (ULONG)(label);
 	register ULONG _a3 __asm("a3") = (ULONG)(rect);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("move.l %/a4,-(%/sp)\n\tmove.l %[s0],%/a4\n\tjsr -168(%/a6)\n\tmove.l (%/sp)+,%/a4"
@@ -323,14 +374,24 @@ __icon_GetIconRectangleA(struct Library *__base, struct RastPort * rp, CONST str
 	return (BOOL)_d0;
 }
 #define GetIconRectangleA(rp, icon, label, rect, tags) __icon_GetIconRectangleA((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)(tags))
+#define __GetIconRectangleA_base(__in_base, rp, icon, label, rect, tags) __icon_GetIconRectangleA((__in_base), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)(tags))
 
-#define GetIconRectangle(rp, icon, label, rect, ...) (GetIconRectangle)((struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__GetIconRectangle_va(void *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, rect);
+	BOOL _r = (BOOL)__icon_GetIconRectangleA(__base, rp, icon, label, rect, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define GetIconRectangle(rp, icon, label, rect, ...) __GetIconRectangle_va((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), ##__VA_ARGS__)
 
 static __inline__ struct DiskObject *
-__icon_NewDiskObject(struct Library *__base, LONG type)
+__icon_NewDiskObject(void *__base, LONG type)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -341,13 +402,14 @@ __icon_NewDiskObject(struct Library *__base, LONG type)
 	return (struct DiskObject *)_d0;
 }
 #define NewDiskObject(type) __icon_NewDiskObject((ICON_BASE_NAME), (LONG)(type))
+#define __NewDiskObject_base(__in_base, type) __icon_NewDiskObject((__in_base), (LONG)(type))
 
 static __inline__ struct DiskObject *
-__icon_GetIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct TagItem * tags)
+__icon_GetIconTagList(void *__base, CONST_STRPTR name, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -180(%/a6)"
@@ -357,16 +419,26 @@ __icon_GetIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct Ta
 	return (struct DiskObject *)_d0;
 }
 #define GetIconTagList(name, tags) __icon_GetIconTagList((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
+#define __GetIconTagList_base(__in_base, name, tags) __icon_GetIconTagList((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-#define GetIconTags(name, ...) (GetIconTags)((CONST_STRPTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct DiskObject *
+__GetIconTags_va(void *__base, CONST_STRPTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	struct DiskObject * _r = (struct DiskObject *)__icon_GetIconTagList(__base, name, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define GetIconTags(name, ...) __GetIconTags_va((ICON_BASE_NAME), (CONST_STRPTR)(name), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__icon_PutIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct DiskObject * icon, CONST struct TagItem * tags)
+__icon_PutIconTagList(void *__base, CONST_STRPTR name, CONST struct DiskObject * icon, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(icon);
 	register ULONG _a2 __asm("a2") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -186(%/a6)"
@@ -376,16 +448,26 @@ __icon_PutIconTagList(struct Library *__base, CONST_STRPTR name, CONST struct Di
 	return (BOOL)_d0;
 }
 #define PutIconTagList(name, icon, tags) __icon_PutIconTagList((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
+#define __PutIconTagList_base(__in_base, name, icon, tags) __icon_PutIconTagList((__in_base), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
 
-#define PutIconTags(name, icon, ...) (PutIconTags)((CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__PutIconTags_va(void *__base, CONST_STRPTR name, CONST struct DiskObject * icon, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, icon);
+	BOOL _r = (BOOL)__icon_PutIconTagList(__base, name, icon, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define PutIconTags(name, icon, ...) __PutIconTags_va((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__icon_LayoutIconA(struct Library *__base, struct DiskObject * icon, struct Screen * screen, struct TagItem * tags)
+__icon_LayoutIconA(void *__base, struct DiskObject * icon, struct Screen * screen, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(icon);
 	register ULONG _a1 __asm("a1") = (ULONG)(screen);
 	register ULONG _a2 __asm("a2") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -192(%/a6)"
@@ -395,14 +477,24 @@ __icon_LayoutIconA(struct Library *__base, struct DiskObject * icon, struct Scre
 	return (BOOL)_d0;
 }
 #define LayoutIconA(icon, screen, tags) __icon_LayoutIconA((ICON_BASE_NAME), (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)(tags))
+#define __LayoutIconA_base(__in_base, icon, screen, tags) __icon_LayoutIconA((__in_base), (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)(tags))
 
-#define LayoutIcon(icon, screen, ...) (LayoutIcon)((struct DiskObject *)(icon), (struct Screen *)(screen), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__LayoutIcon_va(void *__base, struct DiskObject * icon, struct Screen * screen, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, screen);
+	BOOL _r = (BOOL)__icon_LayoutIconA(__base, icon, screen, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define LayoutIcon(icon, screen, ...) __LayoutIcon_va((ICON_BASE_NAME), (struct DiskObject *)(icon), (struct Screen *)(screen), ##__VA_ARGS__)
 
 static __inline__ VOID
-__icon_ChangeToSelectedIconColor(struct Library *__base, struct ColorRegister * cr)
+__icon_ChangeToSelectedIconColor(void *__base, struct ColorRegister * cr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cr);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -413,14 +505,15 @@ __icon_ChangeToSelectedIconColor(struct Library *__base, struct ColorRegister * 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ChangeToSelectedIconColor(cr) __icon_ChangeToSelectedIconColor((ICON_BASE_NAME), (struct ColorRegister *)(cr))
+#define __ChangeToSelectedIconColor_base(__in_base, cr) __icon_ChangeToSelectedIconColor((__in_base), (struct ColorRegister *)(cr))
 
 static __inline__ STRPTR
-__icon_BumpRevisionLength(struct Library *__base, STRPTR newname, CONST_STRPTR oldname, ULONG maxLength)
+__icon_BumpRevisionLength(void *__base, STRPTR newname, CONST_STRPTR oldname, ULONG maxLength)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(newname);
 	register ULONG _a1 __asm("a1") = (ULONG)(oldname);
 	register ULONG _d0 __asm("d0") = (ULONG)(maxLength);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -204(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -429,5 +522,6 @@ __icon_BumpRevisionLength(struct Library *__base, STRPTR newname, CONST_STRPTR o
 	return (STRPTR)_d0;
 }
 #define BumpRevisionLength(newname, oldname, maxLength) __icon_BumpRevisionLength((ICON_BASE_NAME), (STRPTR)(newname), (CONST_STRPTR)(oldname), (ULONG)(maxLength))
+#define __BumpRevisionLength_base(__in_base, newname, oldname, maxLength) __icon_BumpRevisionLength((__in_base), (STRPTR)(newname), (CONST_STRPTR)(oldname), (ULONG)(maxLength))
 
 #endif /* INLINE_ICON_H */

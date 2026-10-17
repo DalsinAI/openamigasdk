@@ -353,6 +353,7 @@ def inline(lib):
            "#ifndef CLIB_%s_PROTOS_H\n#include <clib/%s_protos.h>\n#endif\n" % (lib.guard, lib.stem),
            "#ifndef %s\n#define %s %s\n#endif\n" % (bn, bn, lib.base),
            base_decl(lib),
+           VA_ATTR if any(f.varargs_of for f in lib.public()) else "",
            "#ifndef __OPENNDK_FPCLOBBER\n#ifdef __HAVE_68881__\n"
            "#define __OPENNDK_FPCLOBBER \"fp0\", \"fp1\",\n#else\n"
            "#define __OPENNDK_FPCLOBBER\n#endif\n#endif\n"]
@@ -362,22 +363,58 @@ def inline(lib):
                        else "#define %s() %s()\n" % (f.name, f.alias_of.name))
             continue
         if f.varargs_of:
-            # a real function in libamiga.a; the macro casts its fixed
-            # arguments to their types, as for the other calls
-            out.append(varargs_macro(f))
+            out.append(varargs_inline(lib, f, bn))
             continue
         out.append(inline_func(lib, f, bn))
     out.append("#endif /* %s */" % g)
     return "\n".join(out) + "\n"
 
 
-def varargs_macro(f):
-    fixed = f.args[:len(f.varargs_of.args) - 1]
-    if not fixed:
-        return ""
-    names = [a.name for a in fixed]
-    return "#define %s(%s, ...) (%s)(%s, ##__VA_ARGS__)\n" % (
-        f.name, ", ".join(names), f.name, ", ".join("(%s)(%s)" % (a.type, a.name) for a in fixed))
+VA_ATTR = """#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+"""
+
+
+def varargs_inline(lib, f, bn):
+    """A varargs call (OpenWindowTags, Printf) as the vendor's inline
+    headers have it: a small function in the program, kept out of line so
+    its variable arguments sit on the stack side by side, that hands their
+    address to the call's array form. Nothing comes from libamiga.a, so it
+    builds with -nostdlib too. Everything after the fixed arguments, a
+    first tag included, goes through the "...", as in the vendor's
+    headers, so a NULL or a pointer is taken there without a cast. The
+    macro casts the fixed arguments to their types."""
+    base = f.varargs_of
+    nfixed = len(base.args) - 1
+    fixed = f.args[:nfixed]
+    base_arg = lib.base_is_arg(base)
+    last = fixed[-1].name if fixed else (None if base_arg else "__base")
+    if last is None:
+        return ""                               # nothing to start the list from
+    fn = "__%s_va" % f.name
+    params = ([] if base_arg else ["void *__base"]) + [a.decl for a in fixed] + ["..."]
+    call = ([] if base_arg else ["__base"]) + [a.name for a in fixed] + ["(%s)_ap" % base.args[-1].type]
+    body = ["\t__builtin_va_list _ap;", "\t__builtin_va_start(_ap, %s);" % last]
+    target = "__%s_%s" % (lib.stem.replace(".", "_"), base.name)
+    if base.ret_kind() == "void" or f.ret_kind() == "void":
+        body += ["\t%s(%s);" % (target, ", ".join(call)), "\t__builtin_va_end(_ap);"]
+    else:
+        body += ["\t%s _r = (%s)%s(%s);" % (f.ret, f.ret, target, ", ".join(call)),
+                 "\t__builtin_va_end(_ap);", "\treturn _r;"]
+    out = "static __inline__ __OPENNDK_VA_ATTR %s\n%s(%s)\n{\n%s\n}\n" % (
+        f.ret, fn, ", ".join(params), "\n".join(body))
+    args = ([] if base_arg else ["(%s)" % bn]) + ["(%s)(%s)" % (a.type, a.name) for a in fixed]
+    if fixed:
+        out += "#define %s(%s, ...) %s(%s, ##__VA_ARGS__)\n" % (
+            f.name, ", ".join(a.name for a in fixed), fn, ", ".join(args))
+    else:
+        out += "#define %s(...) %s(%s, ##__VA_ARGS__)\n" % (f.name, fn, ", ".join(args))
+    return out
 
 
 def same_call(f, g):
@@ -408,7 +445,10 @@ def cast_in(a, var):
 def inline_func(lib, f, bn):
     fname = "__%s_%s" % (lib.stem.replace(".", "_"), f.name)
     base_arg = lib.base_is_arg(f)
-    params = ([] if base_arg else ["%s__base" % (lib.basetype + ("" if lib.basetype.endswith("*") else " "))])
+    # the base is taken as a void *, as the vendor's inline macros take it:
+    # a program may keep it as a struct Library * or as the library's own
+    # structure, in C or C++
+    params = ([] if base_arg else ["void *__base"])
     params += [a.decl for a in f.args]
     body = []
     regvars = {}                                 # register -> variable name
@@ -425,7 +465,7 @@ def inline_func(lib, f, bn):
         if len(a.regs) > 1:
             regvars[a.regs[1]] = var + "_lo"
     if not base_arg:
-        body.append("\tregister %s_a6 __asm(\"a6\") = __base;" % (lib.basetype + ("" if lib.basetype.endswith("*") else " ")))
+        body.append("\tregister void *_a6 __asm(\"a6\") = __base;")
         regvars["a6"] = "_a6"
     rk = f.ret_kind()
     outs, ins = [], []
@@ -469,6 +509,12 @@ def inline_func(lib, f, bn):
     callargs = ([] if base_arg else ["(%s)" % bn]) + ["(%s)(%s)" % (a.type, a.name) for a in f.args]
     macro = "#define %s(%s) %s(%s)" % (f.name, ", ".join(a.name for a in f.args), fname,
                                          ", ".join(callargs))
+    if not base_arg:
+        # the same call with a base of the caller's choosing, by the name
+        # the vendor's inline headers give it
+        macro += "\n#define __%s_base(%s) %s(%s)" % (
+            f.name, ", ".join(["__in_base"] + [a.name for a in f.args]), fname,
+            ", ".join(["(__in_base)"] + callargs[1:]))
     return "%s\n{\n%s\n}\n%s\n" % (sig, "\n".join(body), macro)
 
 

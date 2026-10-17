@@ -2,7 +2,7 @@
 * disk.resource's calls, for OpenNDK.
 * Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
 ==base _DiskBase
-==basetype struct DiscResource *
+==basetype struct DiskResource *
 ==libname disk.resource
 ==bias 6
 ==public

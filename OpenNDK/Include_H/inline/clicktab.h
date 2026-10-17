@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +32,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__clicktab_CLICKTAB_GetClass(struct Library *__base)
+__clicktab_CLICKTAB_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,12 +46,13 @@ __clicktab_CLICKTAB_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define CLICKTAB_GetClass() __clicktab_CLICKTAB_GetClass((CLICKTAB_BASE_NAME))
+#define __CLICKTAB_GetClass_base(__in_base) __clicktab_CLICKTAB_GetClass((__in_base))
 
 static __inline__ struct Node *
-__clicktab_AllocClickTabNodeA(struct Library *__base, struct TagItem * tags)
+__clicktab_AllocClickTabNodeA(void *__base, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,13 +63,24 @@ __clicktab_AllocClickTabNodeA(struct Library *__base, struct TagItem * tags)
 	return (struct Node *)_d0;
 }
 #define AllocClickTabNodeA(tags) __clicktab_AllocClickTabNodeA((CLICKTAB_BASE_NAME), (struct TagItem *)(tags))
+#define __AllocClickTabNodeA_base(__in_base, tags) __clicktab_AllocClickTabNodeA((__in_base), (struct TagItem *)(tags))
 
+static __inline__ __OPENNDK_VA_ATTR struct Node *
+__AllocClickTabNode_va(void *__base, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, __base);
+	struct Node * _r = (struct Node *)__clicktab_AllocClickTabNodeA(__base, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocClickTabNode(...) __AllocClickTabNode_va((CLICKTAB_BASE_NAME), ##__VA_ARGS__)
 
 static __inline__ VOID
-__clicktab_FreeClickTabNode(struct Library *__base, struct Node * node)
+__clicktab_FreeClickTabNode(void *__base, struct Node * node)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -71,13 +91,14 @@ __clicktab_FreeClickTabNode(struct Library *__base, struct Node * node)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeClickTabNode(node) __clicktab_FreeClickTabNode((CLICKTAB_BASE_NAME), (struct Node *)(node))
+#define __FreeClickTabNode_base(__in_base, node) __clicktab_FreeClickTabNode((__in_base), (struct Node *)(node))
 
 static __inline__ VOID
-__clicktab_SetClickTabNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
+__clicktab_SetClickTabNodeAttrsA(void *__base, struct Node * node, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -87,15 +108,24 @@ __clicktab_SetClickTabNodeAttrsA(struct Library *__base, struct Node * node, str
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetClickTabNodeAttrsA(node, tags) __clicktab_SetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __SetClickTabNodeAttrsA_base(__in_base, node, tags) __clicktab_SetClickTabNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-#define SetClickTabNodeAttrs(node, ...) (SetClickTabNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__SetClickTabNodeAttrs_va(void *__base, struct Node * node, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, node);
+	__clicktab_SetClickTabNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define SetClickTabNodeAttrs(node, ...) __SetClickTabNodeAttrs_va((CLICKTAB_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
-__clicktab_GetClickTabNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
+__clicktab_GetClickTabNodeAttrsA(void *__base, struct Node * node, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -105,7 +135,16 @@ __clicktab_GetClickTabNodeAttrsA(struct Library *__base, struct Node * node, str
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GetClickTabNodeAttrsA(node, tags) __clicktab_GetClickTabNodeAttrsA((CLICKTAB_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __GetClickTabNodeAttrsA_base(__in_base, node, tags) __clicktab_GetClickTabNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-#define GetClickTabNodeAttrs(node, ...) (GetClickTabNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__GetClickTabNodeAttrs_va(void *__base, struct Node * node, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, node);
+	__clicktab_GetClickTabNodeAttrsA(__base, node, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define GetClickTabNodeAttrs(node, ...) __GetClickTabNodeAttrs_va((CLICKTAB_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 
 #endif /* INLINE_CLICKTAB_H */

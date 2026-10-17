@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +32,9 @@ struct Library;
 #endif
 
 static __inline__ struct GlyphEngine *
-__bullet_OpenEngine(struct Library *__base)
+__bullet_OpenEngine(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,12 +46,13 @@ __bullet_OpenEngine(struct Library *__base)
 	return (struct GlyphEngine *)_d0;
 }
 #define OpenEngine() __bullet_OpenEngine((BULLET_BASE_NAME))
+#define __OpenEngine_base(__in_base) __bullet_OpenEngine((__in_base))
 
 static __inline__ VOID
-__bullet_CloseEngine(struct Library *__base, struct GlyphEngine * glyphEngine)
+__bullet_CloseEngine(void *__base, struct GlyphEngine * glyphEngine)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(glyphEngine);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,13 +63,14 @@ __bullet_CloseEngine(struct Library *__base, struct GlyphEngine * glyphEngine)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseEngine(glyphEngine) __bullet_CloseEngine((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine))
+#define __CloseEngine_base(__in_base, glyphEngine) __bullet_CloseEngine((__in_base), (struct GlyphEngine *)(glyphEngine))
 
 static __inline__ ULONG
-__bullet_SetInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
+__bullet_SetInfoA(void *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(glyphEngine);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -70,15 +80,25 @@ __bullet_SetInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONS
 	return (ULONG)_d0;
 }
 #define SetInfoA(glyphEngine, tagList) __bullet_SetInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define __SetInfoA_base(__in_base, glyphEngine, tagList) __bullet_SetInfoA((__in_base), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
-#define SetInfo(glyphEngine, ...) (SetInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__SetInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, glyphEngine);
+	ULONG _r = (ULONG)__bullet_SetInfoA(__base, glyphEngine, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetInfo(glyphEngine, ...) __SetInfo_va((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__bullet_ObtainInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
+__bullet_ObtainInfoA(void *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(glyphEngine);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -88,15 +108,25 @@ __bullet_ObtainInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, C
 	return (ULONG)_d0;
 }
 #define ObtainInfoA(glyphEngine, tagList) __bullet_ObtainInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define __ObtainInfoA_base(__in_base, glyphEngine, tagList) __bullet_ObtainInfoA((__in_base), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
-#define ObtainInfo(glyphEngine, ...) (ObtainInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__ObtainInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, glyphEngine);
+	ULONG _r = (ULONG)__bullet_ObtainInfoA(__base, glyphEngine, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ObtainInfo(glyphEngine, ...) __ObtainInfo_va((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__bullet_ReleaseInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
+__bullet_ReleaseInfoA(void *__base, struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(glyphEngine);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -106,7 +136,17 @@ __bullet_ReleaseInfoA(struct Library *__base, struct GlyphEngine * glyphEngine, 
 	return (ULONG)_d0;
 }
 #define ReleaseInfoA(glyphEngine, tagList) __bullet_ReleaseInfoA((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
+#define __ReleaseInfoA_base(__in_base, glyphEngine, tagList) __bullet_ReleaseInfoA((__in_base), (struct GlyphEngine *)(glyphEngine), (CONST struct TagItem *)(tagList))
 
-#define ReleaseInfo(glyphEngine, ...) (ReleaseInfo)((struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__ReleaseInfo_va(void *__base, struct GlyphEngine * glyphEngine, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, glyphEngine);
+	ULONG _r = (ULONG)__bullet_ReleaseInfoA(__base, glyphEngine, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ReleaseInfo(glyphEngine, ...) __ReleaseInfo_va((BULLET_BASE_NAME), (struct GlyphEngine *)(glyphEngine), ##__VA_ARGS__)
 
 #endif /* INLINE_BULLET_H */

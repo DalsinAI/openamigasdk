@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +25,11 @@ struct Library;
 #endif
 
 static __inline__ FLOAT
-__mathtrans_SPAtan(struct Library *__base, FLOAT parm)
+__mathtrans_SPAtan(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -39,13 +40,14 @@ __mathtrans_SPAtan(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPAtan(parm) __mathtrans_SPAtan((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPAtan_base(__in_base, parm) __mathtrans_SPAtan((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPSin(struct Library *__base, FLOAT parm)
+__mathtrans_SPSin(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -56,13 +58,14 @@ __mathtrans_SPSin(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPSin(parm) __mathtrans_SPSin((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPSin_base(__in_base, parm) __mathtrans_SPSin((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPCos(struct Library *__base, FLOAT parm)
+__mathtrans_SPCos(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -73,13 +76,14 @@ __mathtrans_SPCos(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPCos(parm) __mathtrans_SPCos((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPCos_base(__in_base, parm) __mathtrans_SPCos((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPTan(struct Library *__base, FLOAT parm)
+__mathtrans_SPTan(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -90,14 +94,15 @@ __mathtrans_SPTan(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPTan(parm) __mathtrans_SPTan((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPTan_base(__in_base, parm) __mathtrans_SPTan((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPSincos(struct Library *__base, FLOAT * cosResult, FLOAT parm)
+__mathtrans_SPSincos(void *__base, FLOAT * cosResult, FLOAT parm)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(cosResult);
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -107,13 +112,14 @@ __mathtrans_SPSincos(struct Library *__base, FLOAT * cosResult, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPSincos(cosResult, parm) __mathtrans_SPSincos((MATHTRANS_BASE_NAME), (FLOAT *)(cosResult), (FLOAT)(parm))
+#define __SPSincos_base(__in_base, cosResult, parm) __mathtrans_SPSincos((__in_base), (FLOAT *)(cosResult), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPSinh(struct Library *__base, FLOAT parm)
+__mathtrans_SPSinh(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -124,13 +130,14 @@ __mathtrans_SPSinh(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPSinh(parm) __mathtrans_SPSinh((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPSinh_base(__in_base, parm) __mathtrans_SPSinh((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPCosh(struct Library *__base, FLOAT parm)
+__mathtrans_SPCosh(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -141,13 +148,14 @@ __mathtrans_SPCosh(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPCosh(parm) __mathtrans_SPCosh((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPCosh_base(__in_base, parm) __mathtrans_SPCosh((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPTanh(struct Library *__base, FLOAT parm)
+__mathtrans_SPTanh(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -158,13 +166,14 @@ __mathtrans_SPTanh(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPTanh(parm) __mathtrans_SPTanh((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPTanh_base(__in_base, parm) __mathtrans_SPTanh((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPExp(struct Library *__base, FLOAT parm)
+__mathtrans_SPExp(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -175,13 +184,14 @@ __mathtrans_SPExp(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPExp(parm) __mathtrans_SPExp((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPExp_base(__in_base, parm) __mathtrans_SPExp((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPLog(struct Library *__base, FLOAT parm)
+__mathtrans_SPLog(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -192,15 +202,16 @@ __mathtrans_SPLog(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPLog(parm) __mathtrans_SPLog((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPLog_base(__in_base, parm) __mathtrans_SPLog((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPPow(struct Library *__base, FLOAT power, FLOAT arg)
+__mathtrans_SPPow(void *__base, FLOAT power, FLOAT arg)
 {
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = power;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = arg;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -210,13 +221,14 @@ __mathtrans_SPPow(struct Library *__base, FLOAT power, FLOAT arg)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPPow(power, arg) __mathtrans_SPPow((MATHTRANS_BASE_NAME), (FLOAT)(power), (FLOAT)(arg))
+#define __SPPow_base(__in_base, power, arg) __mathtrans_SPPow((__in_base), (FLOAT)(power), (FLOAT)(arg))
 
 static __inline__ FLOAT
-__mathtrans_SPSqrt(struct Library *__base, FLOAT parm)
+__mathtrans_SPSqrt(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -227,13 +239,14 @@ __mathtrans_SPSqrt(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPSqrt(parm) __mathtrans_SPSqrt((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPSqrt_base(__in_base, parm) __mathtrans_SPSqrt((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPTieee(struct Library *__base, FLOAT parm)
+__mathtrans_SPTieee(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -244,13 +257,14 @@ __mathtrans_SPTieee(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPTieee(parm) __mathtrans_SPTieee((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPTieee_base(__in_base, parm) __mathtrans_SPTieee((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPFieee(struct Library *__base, FLOAT parm)
+__mathtrans_SPFieee(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -261,13 +275,14 @@ __mathtrans_SPFieee(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPFieee(parm) __mathtrans_SPFieee((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPFieee_base(__in_base, parm) __mathtrans_SPFieee((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPAsin(struct Library *__base, FLOAT parm)
+__mathtrans_SPAsin(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -278,13 +293,14 @@ __mathtrans_SPAsin(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPAsin(parm) __mathtrans_SPAsin((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPAsin_base(__in_base, parm) __mathtrans_SPAsin((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPAcos(struct Library *__base, FLOAT parm)
+__mathtrans_SPAcos(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -295,13 +311,14 @@ __mathtrans_SPAcos(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPAcos(parm) __mathtrans_SPAcos((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPAcos_base(__in_base, parm) __mathtrans_SPAcos((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathtrans_SPLog10(struct Library *__base, FLOAT parm)
+__mathtrans_SPLog10(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -312,5 +329,6 @@ __mathtrans_SPLog10(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define SPLog10(parm) __mathtrans_SPLog10((MATHTRANS_BASE_NAME), (FLOAT)(parm))
+#define __SPLog10_base(__in_base, parm) __mathtrans_SPLog10((__in_base), (FLOAT)(parm))
 
 #endif /* INLINE_MATHTRANS_H */

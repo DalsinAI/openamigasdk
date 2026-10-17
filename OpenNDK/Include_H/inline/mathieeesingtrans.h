@@ -13,7 +13,8 @@
 #define MATHIEEESINGTRANS_BASE_NAME MathIeeeSingTransBase
 #endif
 
-struct Library;
+struct MathIEEEBase;
+
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -24,11 +25,11 @@ struct Library;
 #endif
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPAtan(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPAtan(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -39,13 +40,14 @@ __mathieeesingtrans_IEEESPAtan(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPAtan(parm) __mathieeesingtrans_IEEESPAtan((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPAtan_base(__in_base, parm) __mathieeesingtrans_IEEESPAtan((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPSin(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPSin(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -56,13 +58,14 @@ __mathieeesingtrans_IEEESPSin(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPSin(parm) __mathieeesingtrans_IEEESPSin((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPSin_base(__in_base, parm) __mathieeesingtrans_IEEESPSin((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPCos(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPCos(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -73,13 +76,14 @@ __mathieeesingtrans_IEEESPCos(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPCos(parm) __mathieeesingtrans_IEEESPCos((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPCos_base(__in_base, parm) __mathieeesingtrans_IEEESPCos((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPTan(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPTan(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -90,14 +94,15 @@ __mathieeesingtrans_IEEESPTan(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPTan(parm) __mathieeesingtrans_IEEESPTan((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPTan_base(__in_base, parm) __mathieeesingtrans_IEEESPTan((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPSincos(struct Library *__base, FLOAT * cosptr, FLOAT parm)
+__mathieeesingtrans_IEEESPSincos(void *__base, FLOAT * cosptr, FLOAT parm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cosptr);
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -107,13 +112,14 @@ __mathieeesingtrans_IEEESPSincos(struct Library *__base, FLOAT * cosptr, FLOAT p
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPSincos(cosptr, parm) __mathieeesingtrans_IEEESPSincos((MATHIEEESINGTRANS_BASE_NAME), (FLOAT *)(cosptr), (FLOAT)(parm))
+#define __IEEESPSincos_base(__in_base, cosptr, parm) __mathieeesingtrans_IEEESPSincos((__in_base), (FLOAT *)(cosptr), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPSinh(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPSinh(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -124,13 +130,14 @@ __mathieeesingtrans_IEEESPSinh(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPSinh(parm) __mathieeesingtrans_IEEESPSinh((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPSinh_base(__in_base, parm) __mathieeesingtrans_IEEESPSinh((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPCosh(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPCosh(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -141,13 +148,14 @@ __mathieeesingtrans_IEEESPCosh(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPCosh(parm) __mathieeesingtrans_IEEESPCosh((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPCosh_base(__in_base, parm) __mathieeesingtrans_IEEESPCosh((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPTanh(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPTanh(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -158,13 +166,14 @@ __mathieeesingtrans_IEEESPTanh(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPTanh(parm) __mathieeesingtrans_IEEESPTanh((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPTanh_base(__in_base, parm) __mathieeesingtrans_IEEESPTanh((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPExp(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPExp(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -175,13 +184,14 @@ __mathieeesingtrans_IEEESPExp(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPExp(parm) __mathieeesingtrans_IEEESPExp((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPExp_base(__in_base, parm) __mathieeesingtrans_IEEESPExp((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPLog(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPLog(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -192,15 +202,16 @@ __mathieeesingtrans_IEEESPLog(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPLog(parm) __mathieeesingtrans_IEEESPLog((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPLog_base(__in_base, parm) __mathieeesingtrans_IEEESPLog((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPPow(struct Library *__base, FLOAT power, FLOAT arg)
+__mathieeesingtrans_IEEESPPow(void *__base, FLOAT power, FLOAT arg)
 {
 	union { FLOAT f; ULONG u; } _d1_u; _d1_u.f = power;
 	register ULONG _d1 __asm("d1") = _d1_u.u;
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = arg;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -210,13 +221,14 @@ __mathieeesingtrans_IEEESPPow(struct Library *__base, FLOAT power, FLOAT arg)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPPow(power, arg) __mathieeesingtrans_IEEESPPow((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(power), (FLOAT)(arg))
+#define __IEEESPPow_base(__in_base, power, arg) __mathieeesingtrans_IEEESPPow((__in_base), (FLOAT)(power), (FLOAT)(arg))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPSqrt(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPSqrt(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -227,13 +239,14 @@ __mathieeesingtrans_IEEESPSqrt(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPSqrt(parm) __mathieeesingtrans_IEEESPSqrt((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPSqrt_base(__in_base, parm) __mathieeesingtrans_IEEESPSqrt((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPTieee(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPTieee(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -244,13 +257,14 @@ __mathieeesingtrans_IEEESPTieee(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPTieee(parm) __mathieeesingtrans_IEEESPTieee((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPTieee_base(__in_base, parm) __mathieeesingtrans_IEEESPTieee((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPFieee(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPFieee(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -261,13 +275,14 @@ __mathieeesingtrans_IEEESPFieee(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPFieee(parm) __mathieeesingtrans_IEEESPFieee((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPFieee_base(__in_base, parm) __mathieeesingtrans_IEEESPFieee((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPAsin(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPAsin(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -278,13 +293,14 @@ __mathieeesingtrans_IEEESPAsin(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPAsin(parm) __mathieeesingtrans_IEEESPAsin((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPAsin_base(__in_base, parm) __mathieeesingtrans_IEEESPAsin((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPAcos(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPAcos(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -295,13 +311,14 @@ __mathieeesingtrans_IEEESPAcos(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPAcos(parm) __mathieeesingtrans_IEEESPAcos((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPAcos_base(__in_base, parm) __mathieeesingtrans_IEEESPAcos((__in_base), (FLOAT)(parm))
 
 static __inline__ FLOAT
-__mathieeesingtrans_IEEESPLog10(struct Library *__base, FLOAT parm)
+__mathieeesingtrans_IEEESPLog10(void *__base, FLOAT parm)
 {
 	union { FLOAT f; ULONG u; } _d0_u; _d0_u.f = parm;
 	register ULONG _d0 __asm("d0") = _d0_u.u;
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -312,5 +329,6 @@ __mathieeesingtrans_IEEESPLog10(struct Library *__base, FLOAT parm)
 	{ union { ULONG u; FLOAT f; } _r; _r.u = _d0; return _r.f; }
 }
 #define IEEESPLog10(parm) __mathieeesingtrans_IEEESPLog10((MATHIEEESINGTRANS_BASE_NAME), (FLOAT)(parm))
+#define __IEEESPLog10_base(__in_base, parm) __mathieeesingtrans_IEEESPLog10((__in_base), (FLOAT)(parm))
 
 #endif /* INLINE_MATHIEEESINGTRANS_H */

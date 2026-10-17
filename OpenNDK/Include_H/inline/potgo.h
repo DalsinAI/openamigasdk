@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +25,10 @@ struct Library;
 #endif
 
 static __inline__ UWORD
-__potgo_AllocPotBits(struct Library *__base, UWORD bits)
+__potgo_AllocPotBits(void *__base, UWORD bits)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(bits);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -38,12 +39,13 @@ __potgo_AllocPotBits(struct Library *__base, UWORD bits)
 	return (UWORD)_d0;
 }
 #define AllocPotBits(bits) __potgo_AllocPotBits((POTGO_BASE_NAME), (UWORD)(bits))
+#define __AllocPotBits_base(__in_base, bits) __potgo_AllocPotBits((__in_base), (UWORD)(bits))
 
 static __inline__ VOID
-__potgo_FreePotBits(struct Library *__base, UWORD bits)
+__potgo_FreePotBits(void *__base, UWORD bits)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(bits);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -54,13 +56,14 @@ __potgo_FreePotBits(struct Library *__base, UWORD bits)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreePotBits(bits) __potgo_FreePotBits((POTGO_BASE_NAME), (UWORD)(bits))
+#define __FreePotBits_base(__in_base, bits) __potgo_FreePotBits((__in_base), (UWORD)(bits))
 
 static __inline__ VOID
-__potgo_WritePotgo(struct Library *__base, UWORD word, UWORD mask)
+__potgo_WritePotgo(void *__base, UWORD word, UWORD mask)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(word);
 	register ULONG _d1 __asm("d1") = (ULONG)(mask);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -18(%/a6)"
@@ -70,5 +73,6 @@ __potgo_WritePotgo(struct Library *__base, UWORD word, UWORD mask)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WritePotgo(word, mask) __potgo_WritePotgo((POTGO_BASE_NAME), (UWORD)(word), (UWORD)(mask))
+#define __WritePotgo_base(__in_base, word, mask) __potgo_WritePotgo((__in_base), (UWORD)(word), (UWORD)(mask))
 
 #endif /* INLINE_POTGO_H */
