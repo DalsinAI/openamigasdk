@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -288,7 +288,7 @@ __icon_DupDiskObjectA(void *__base, CONST struct DiskObject * diskObject, CONST 
 #define DupDiskObjectA(diskObject, tags) __icon_DupDiskObjectA((ICON_BASE_NAME), (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)(tags))
 #define __DupDiskObjectA_base(__in_base, diskObject, tags) __icon_DupDiskObjectA((__in_base), (CONST struct DiskObject *)(diskObject), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct DiskObject *
+static __OPENNDK_VA_ATTR struct DiskObject *
 __DupDiskObject_va(void *__base, CONST struct DiskObject * diskObject, ...)
 {
 	__builtin_va_list _ap;
@@ -316,7 +316,7 @@ __icon_IconControlA(void *__base, struct DiskObject * icon, CONST struct TagItem
 #define IconControlA(icon, tags) __icon_IconControlA((ICON_BASE_NAME), (struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
 #define __IconControlA_base(__in_base, icon, tags) __icon_IconControlA((__in_base), (struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __IconControl_va(void *__base, struct DiskObject * icon, ...)
 {
 	__builtin_va_list _ap;
@@ -347,7 +347,7 @@ __icon_DrawIconStateA(void *__base, struct RastPort * rp, CONST struct DiskObjec
 #define DrawIconStateA(rp, icon, label, leftOffset, topOffset, state, tags) __icon_DrawIconStateA((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)(tags))
 #define __DrawIconStateA_base(__in_base, rp, icon, label, leftOffset, topOffset, state, tags) __icon_DrawIconStateA((__in_base), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (LONG)(leftOffset), (LONG)(topOffset), (ULONG)(state), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __DrawIconState_va(void *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, ...)
 {
 	__builtin_va_list _ap;
@@ -376,7 +376,7 @@ __icon_GetIconRectangleA(void *__base, struct RastPort * rp, CONST struct DiskOb
 #define GetIconRectangleA(rp, icon, label, rect, tags) __icon_GetIconRectangleA((ICON_BASE_NAME), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)(tags))
 #define __GetIconRectangleA_base(__in_base, rp, icon, label, rect, tags) __icon_GetIconRectangleA((__in_base), (struct RastPort *)(rp), (CONST struct DiskObject *)(icon), (CONST_STRPTR)(label), (struct Rectangle *)(rect), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __GetIconRectangle_va(void *__base, struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, ...)
 {
 	__builtin_va_list _ap;
@@ -421,7 +421,7 @@ __icon_GetIconTagList(void *__base, CONST_STRPTR name, CONST struct TagItem * ta
 #define GetIconTagList(name, tags) __icon_GetIconTagList((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 #define __GetIconTagList_base(__in_base, name, tags) __icon_GetIconTagList((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct DiskObject *
+static __OPENNDK_VA_ATTR struct DiskObject *
 __GetIconTags_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
@@ -450,7 +450,7 @@ __icon_PutIconTagList(void *__base, CONST_STRPTR name, CONST struct DiskObject *
 #define PutIconTagList(name, icon, tags) __icon_PutIconTagList((ICON_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
 #define __PutIconTagList_base(__in_base, name, icon, tags) __icon_PutIconTagList((__in_base), (CONST_STRPTR)(name), (CONST struct DiskObject *)(icon), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __PutIconTags_va(void *__base, CONST_STRPTR name, CONST struct DiskObject * icon, ...)
 {
 	__builtin_va_list _ap;
@@ -479,7 +479,7 @@ __icon_LayoutIconA(void *__base, struct DiskObject * icon, struct Screen * scree
 #define LayoutIconA(icon, screen, tags) __icon_LayoutIconA((ICON_BASE_NAME), (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)(tags))
 #define __LayoutIconA_base(__in_base, icon, screen, tags) __icon_LayoutIconA((__in_base), (struct DiskObject *)(icon), (struct Screen *)(screen), (struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __LayoutIcon_va(void *__base, struct DiskObject * icon, struct Screen * screen, ...)
 {
 	__builtin_va_list _ap;

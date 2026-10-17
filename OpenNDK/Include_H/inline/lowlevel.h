@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -150,7 +150,7 @@ __lowlevel_SystemControlA(void *__base, CONST struct TagItem * tagList)
 #define SystemControlA(tagList) __lowlevel_SystemControlA((LOWLEVEL_BASE_NAME), (CONST struct TagItem *)(tagList))
 #define __SystemControlA_base(__in_base, tagList) __lowlevel_SystemControlA((__in_base), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __SystemControl_va(void *__base, ...)
 {
 	__builtin_va_list _ap;
@@ -297,7 +297,7 @@ __lowlevel_SetJoyPortAttrsA(void *__base, ULONG portNumber, CONST struct TagItem
 #define SetJoyPortAttrsA(portNumber, tagList) __lowlevel_SetJoyPortAttrsA((LOWLEVEL_BASE_NAME), (ULONG)(portNumber), (CONST struct TagItem *)(tagList))
 #define __SetJoyPortAttrsA_base(__in_base, portNumber, tagList) __lowlevel_SetJoyPortAttrsA((__in_base), (ULONG)(portNumber), (CONST struct TagItem *)(tagList))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __SetJoyPortAttrs_va(void *__base, ULONG portNumber, ...)
 {
 	__builtin_va_list _ap;

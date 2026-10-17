@@ -17,9 +17,9 @@ struct Library;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -66,7 +66,7 @@ __wb_AddAppWindowA(void *__base, ULONG id, ULONG userdata, struct Window * windo
 #define AddAppWindowA(id, userdata, window, msgport, taglist) __wb_AddAppWindowA((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
 #define __AddAppWindowA_base(__in_base, id, userdata, window, msgport, taglist) __wb_AddAppWindowA((__in_base), (ULONG)(id), (ULONG)(userdata), (struct Window *)(window), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR struct AppWindow *
+static __OPENNDK_VA_ATTR struct AppWindow *
 __AddAppWindow_va(void *__base, ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, ...)
 {
 	__builtin_va_list _ap;
@@ -113,7 +113,7 @@ __wb_AddAppIconA(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, stru
 #define AddAppIconA(id, userdata, text, msgport, lock, diskobj, taglist) __wb_AddAppIconA((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)(taglist))
 #define __AddAppIconA_base(__in_base, id, userdata, text, msgport, lock, diskobj, taglist) __wb_AddAppIconA((__in_base), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (BPTR)(lock), (struct DiskObject *)(diskobj), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR struct AppIcon *
+static __OPENNDK_VA_ATTR struct AppIcon *
 __AddAppIcon_va(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, ...)
 {
 	__builtin_va_list _ap;
@@ -159,7 +159,7 @@ __wb_AddAppMenuItemA(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, 
 #define AddAppMenuItemA(id, userdata, text, msgport, taglist) __wb_AddAppMenuItemA((WB_BASE_NAME), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
 #define __AddAppMenuItemA_base(__in_base, id, userdata, text, msgport, taglist) __wb_AddAppMenuItemA((__in_base), (ULONG)(id), (ULONG)(userdata), (CONST_STRPTR)(text), (struct MsgPort *)(msgport), (CONST struct TagItem *)(taglist))
 
-static __inline__ __OPENNDK_VA_ATTR struct AppMenuItem *
+static __OPENNDK_VA_ATTR struct AppMenuItem *
 __AddAppMenuItem_va(void *__base, ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, ...)
 {
 	__builtin_va_list _ap;
@@ -222,7 +222,7 @@ __wb_OpenWorkbenchObjectA(void *__base, CONST_STRPTR name, CONST struct TagItem 
 #define OpenWorkbenchObjectA(name, tags) __wb_OpenWorkbenchObjectA((WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 #define __OpenWorkbenchObjectA_base(__in_base, name, tags) __wb_OpenWorkbenchObjectA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __OpenWorkbenchObject_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
@@ -250,7 +250,7 @@ __wb_CloseWorkbenchObjectA(void *__base, CONST_STRPTR name, CONST struct TagItem
 #define CloseWorkbenchObjectA(name, tags) __wb_CloseWorkbenchObjectA((WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 #define __CloseWorkbenchObjectA_base(__in_base, name, tags) __wb_CloseWorkbenchObjectA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __CloseWorkbenchObject_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
@@ -278,7 +278,7 @@ __wb_WorkbenchControlA(void *__base, CONST_STRPTR name, CONST struct TagItem * t
 #define WorkbenchControlA(name, tags) __wb_WorkbenchControlA((WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 #define __WorkbenchControlA_base(__in_base, name, tags) __wb_WorkbenchControlA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __WorkbenchControl_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
@@ -306,7 +306,7 @@ __wb_AddAppWindowDropZoneA(void *__base, struct AppWindow * aw, ULONG id, ULONG 
 #define AddAppWindowDropZoneA(aw, id, userdata, tags) __wb_AddAppWindowDropZoneA((WB_BASE_NAME), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)(tags))
 #define __AddAppWindowDropZoneA_base(__in_base, aw, id, userdata, tags) __wb_AddAppWindowDropZoneA((__in_base), (struct AppWindow *)(aw), (ULONG)(id), (ULONG)(userdata), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct AppWindowDropZone *
+static __OPENNDK_VA_ATTR struct AppWindowDropZone *
 __AddAppWindowDropZone_va(void *__base, struct AppWindow * aw, ULONG id, ULONG userdata, ...)
 {
 	__builtin_va_list _ap;
@@ -352,7 +352,7 @@ __wb_ChangeWorkbenchSelectionA(void *__base, CONST_STRPTR name, struct Hook * ho
 #define ChangeWorkbenchSelectionA(name, hook, tags) __wb_ChangeWorkbenchSelectionA((WB_BASE_NAME), (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)(tags))
 #define __ChangeWorkbenchSelectionA_base(__in_base, name, hook, tags) __wb_ChangeWorkbenchSelectionA((__in_base), (CONST_STRPTR)(name), (struct Hook *)(hook), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __ChangeWorkbenchSelection_va(void *__base, CONST_STRPTR name, struct Hook * hook, ...)
 {
 	__builtin_va_list _ap;
@@ -380,7 +380,7 @@ __wb_MakeWorkbenchObjectVisibleA(void *__base, CONST_STRPTR name, CONST struct T
 #define MakeWorkbenchObjectVisibleA(name, tags) __wb_MakeWorkbenchObjectVisibleA((WB_BASE_NAME), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 #define __MakeWorkbenchObjectVisibleA_base(__in_base, name, tags) __wb_MakeWorkbenchObjectVisibleA((__in_base), (CONST_STRPTR)(name), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __MakeWorkbenchObjectVisible_va(void *__base, CONST_STRPTR name, ...)
 {
 	__builtin_va_list _ap;
@@ -408,7 +408,7 @@ __wb_WhichWorkbenchObjectA(void *__base, struct Window * window, LONG x, LONG y,
 #define WhichWorkbenchObjectA(window, x, y, tags) __wb_WhichWorkbenchObjectA((WB_BASE_NAME), (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)(tags))
 #define __WhichWorkbenchObjectA_base(__in_base, window, x, y, tags) __wb_WhichWorkbenchObjectA((__in_base), (struct Window *)(window), (LONG)(x), (LONG)(y), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __WhichWorkbenchObject_va(void *__base, struct Window * window, LONG x, LONG y, ...)
 {
 	__builtin_va_list _ap;

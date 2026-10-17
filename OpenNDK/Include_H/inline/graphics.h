@@ -17,9 +17,9 @@ struct GfxBase;
 
 #ifndef __OPENNDK_VA_ATTR
 #if defined(__GNUC__) && __GNUC__ >= 8
-#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #else
-#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#define __OPENNDK_VA_ATTR __attribute__((unused, noinline, optimize("omit-frame-pointer"), optimize("O1")))
 #endif
 #endif
 
@@ -1991,7 +1991,7 @@ __graphics_VideoControl(void *__base, struct ColorMap * colorMap, struct TagItem
 #define VideoControl(colorMap, tagarray) __graphics_VideoControl((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (struct TagItem *)(tagarray))
 #define __VideoControl_base(__in_base, colorMap, tagarray) __graphics_VideoControl((__in_base), (struct ColorMap *)(colorMap), (struct TagItem *)(tagarray))
 
-static __inline__ __OPENNDK_VA_ATTR BOOL
+static __OPENNDK_VA_ATTR BOOL
 __VideoControlTags_va(void *__base, struct ColorMap * colorMap, ...)
 {
 	__builtin_va_list _ap;
@@ -2235,7 +2235,7 @@ __graphics_WeighTAMatch(void *__base, CONST struct TextAttr * reqTextAttr, CONST
 #define WeighTAMatch(reqTextAttr, targetTextAttr, targetTags) __graphics_WeighTAMatch((GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)(targetTags))
 #define __WeighTAMatch_base(__in_base, reqTextAttr, targetTextAttr, targetTags) __graphics_WeighTAMatch((__in_base), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)(targetTags))
 
-static __inline__ __OPENNDK_VA_ATTR WORD
+static __OPENNDK_VA_ATTR WORD
 __WeighTAMatchTags_va(void *__base, CONST struct TextAttr * reqTextAttr, CONST struct TextAttr * targetTextAttr, ...)
 {
 	__builtin_va_list _ap;
@@ -2282,7 +2282,7 @@ __graphics_ExtendFont(void *__base, struct TextFont * font, CONST struct TagItem
 #define ExtendFont(font, fontTags) __graphics_ExtendFont((GRAPHICS_BASE_NAME), (struct TextFont *)(font), (CONST struct TagItem *)(fontTags))
 #define __ExtendFont_base(__in_base, font, fontTags) __graphics_ExtendFont((__in_base), (struct TextFont *)(font), (CONST struct TagItem *)(fontTags))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __ExtendFontTags_va(void *__base, struct TextFont * font, ...)
 {
 	__builtin_va_list _ap;
@@ -2363,7 +2363,7 @@ __graphics_ObtainBestPenA(void *__base, struct ColorMap * cm, ULONG r, ULONG g, 
 #define ObtainBestPenA(cm, r, g, b, tags) __graphics_ObtainBestPenA((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)(tags))
 #define __ObtainBestPenA_base(__in_base, cm, r, g, b, tags) __graphics_ObtainBestPenA((__in_base), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __ObtainBestPen_va(void *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, ...)
 {
 	__builtin_va_list _ap;
@@ -2584,7 +2584,7 @@ __graphics_GetExtSpriteA(void *__base, struct ExtSprite * ss, CONST struct TagIt
 #define GetExtSpriteA(ss, tags) __graphics_GetExtSpriteA((GRAPHICS_BASE_NAME), (struct ExtSprite *)(ss), (CONST struct TagItem *)(tags))
 #define __GetExtSpriteA_base(__in_base, ss, tags) __graphics_GetExtSpriteA((__in_base), (struct ExtSprite *)(ss), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __GetExtSprite_va(void *__base, struct ExtSprite * ss, ...)
 {
 	__builtin_va_list _ap;
@@ -2848,7 +2848,7 @@ __graphics_AllocSpriteDataA(void *__base, CONST struct BitMap * bm, CONST struct
 #define AllocSpriteDataA(bm, tags) __graphics_AllocSpriteDataA((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), (CONST struct TagItem *)(tags))
 #define __AllocSpriteDataA_base(__in_base, bm, tags) __graphics_AllocSpriteDataA((__in_base), (CONST struct BitMap *)(bm), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR struct ExtSprite *
+static __OPENNDK_VA_ATTR struct ExtSprite *
 __AllocSpriteData_va(void *__base, CONST struct BitMap * bm, ...)
 {
 	__builtin_va_list _ap;
@@ -2878,7 +2878,7 @@ __graphics_ChangeExtSpriteA(void *__base, struct ViewPort * vp, struct ExtSprite
 #define ChangeExtSpriteA(vp, oldsprite, newsprite, tags) __graphics_ChangeExtSpriteA((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)(tags))
 #define __ChangeExtSpriteA_base(__in_base, vp, oldsprite, newsprite, tags) __graphics_ChangeExtSpriteA((__in_base), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR LONG
+static __OPENNDK_VA_ATTR LONG
 __ChangeExtSprite_va(void *__base, struct ViewPort * vp, struct ExtSprite * oldsprite, struct ExtSprite * newsprite, ...)
 {
 	__builtin_va_list _ap;
@@ -2924,7 +2924,7 @@ __graphics_SetRPAttrsA(void *__base, struct RastPort * rp, CONST struct TagItem 
 #define SetRPAttrsA(rp, tags) __graphics_SetRPAttrsA((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST struct TagItem *)(tags))
 #define __SetRPAttrsA_base(__in_base, rp, tags) __graphics_SetRPAttrsA((__in_base), (struct RastPort *)(rp), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __SetRPAttrs_va(void *__base, struct RastPort * rp, ...)
 {
 	__builtin_va_list _ap;
@@ -2951,7 +2951,7 @@ __graphics_GetRPAttrsA(void *__base, CONST struct RastPort * rp, CONST struct Ta
 #define GetRPAttrsA(rp, tags) __graphics_GetRPAttrsA((GRAPHICS_BASE_NAME), (CONST struct RastPort *)(rp), (CONST struct TagItem *)(tags))
 #define __GetRPAttrsA_base(__in_base, rp, tags) __graphics_GetRPAttrsA((__in_base), (CONST struct RastPort *)(rp), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR VOID
+static __OPENNDK_VA_ATTR VOID
 __GetRPAttrs_va(void *__base, CONST struct RastPort * rp, ...)
 {
 	__builtin_va_list _ap;
@@ -2978,7 +2978,7 @@ __graphics_BestModeIDA(void *__base, CONST struct TagItem * tags)
 #define BestModeIDA(tags) __graphics_BestModeIDA((GRAPHICS_BASE_NAME), (CONST struct TagItem *)(tags))
 #define __BestModeIDA_base(__in_base, tags) __graphics_BestModeIDA((__in_base), (CONST struct TagItem *)(tags))
 
-static __inline__ __OPENNDK_VA_ATTR ULONG
+static __OPENNDK_VA_ATTR ULONG
 __BestModeID_va(void *__base, ...)
 {
 	__builtin_va_list _ap;
