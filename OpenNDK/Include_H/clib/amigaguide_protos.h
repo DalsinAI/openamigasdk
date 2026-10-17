@@ -12,6 +12,7 @@
 #include <libraries/amigaguide.h>
 #include <utility/tagitem.h>
 #include <utility/hooks.h>
+#include <rexx/storage.h>
 
 #ifdef __cplusplus
 extern "C" {

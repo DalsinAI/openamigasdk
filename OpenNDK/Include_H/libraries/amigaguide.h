@@ -32,6 +32,9 @@
 #ifndef UTILITY_TAGITEM_H
 #include <utility/tagitem.h>
 #endif
+#ifndef INTUITION_CLASSUSR_H
+#include <intuition/classusr.h>
+#endif
 
 /* Message types a viewer sends its client (agm_Type) */
 #define APSH_TOOL_ID		11000L

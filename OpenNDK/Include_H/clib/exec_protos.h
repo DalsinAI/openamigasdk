@@ -13,6 +13,9 @@
 #include <exec/io.h>
 #include <exec/semaphores.h>
 #include <dos/dos.h>
+#include <exec/execbase.h>
+#include <exec/interrupts.h>
+#include <exec/resident.h>
 
 #ifdef __cplusplus
 extern "C" {

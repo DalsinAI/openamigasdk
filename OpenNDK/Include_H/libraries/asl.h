@@ -30,6 +30,9 @@
 #ifndef GRAPHICS_DISPLAYINFO_H
 #include <graphics/displayinfo.h>
 #endif
+#ifndef EXEC_SEMAPHORES_H
+#include <exec/semaphores.h>
+#endif
 
 #define AslName		"asl.library"
 #define ASL_TB		(TAG_USER + 0x80000)

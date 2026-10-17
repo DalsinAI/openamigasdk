@@ -11,6 +11,9 @@
 #ifndef INTUITION_GADGETCLASS_H
 #include <intuition/gadgetclass.h>
 #endif
+#ifndef INTUITION_CGHOOKS_H
+#include <intuition/cghooks.h>
+#endif
 
 /* GM_CLIPRECT's message */
 struct gpClipRect

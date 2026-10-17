@@ -14,6 +14,9 @@
 #ifndef INTUITION_CGHOOKS_H
 #include <intuition/cghooks.h>
 #endif
+#ifndef REACTION_REACTION_H
+#include <reaction/reaction.h>
+#endif
 
 /* A method that takes only the gadget's context */
 struct spGeneral

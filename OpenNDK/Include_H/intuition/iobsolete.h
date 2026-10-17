@@ -10,6 +10,9 @@
 #ifndef EXEC_TYPES_H
 #include <exec/types.h>
 #endif
+#ifndef INTUITION_INTUITION_H
+#include <intuition/intuition.h>
+#endif
 
 #ifndef INTUI_V36_NAMES_ONLY
 

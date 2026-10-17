@@ -15,6 +15,9 @@
 #ifndef GRAPHICS_RASTPORT_H
 #include <graphics/rastport.h>
 #endif
+#ifndef DEVICES_PRTBASE_H
+#include <devices/prtbase.h>
+#endif
 
 /* Indexes into a colorEntry, and their additive names */
 #define PCMYELLOW	0

@@ -42,6 +42,9 @@
 #ifndef UTILITY_TAGITEM_H
 #include <utility/tagitem.h>
 #endif
+#ifndef LIBRARIES_DOSEXTENS_H
+#include <libraries/dosextens.h>
+#endif
 
 /* The device's library node and command table */
 /* The driver's and the device's calls take their arguments on the stack */

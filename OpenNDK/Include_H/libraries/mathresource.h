@@ -10,3 +10,6 @@
 #endif
 
 #endif /* LIBRARIES_MATHRESOURCE_H */
+#ifndef EXEC_NODES_H
+#include <exec/nodes.h>
+#endif

@@ -11,6 +11,9 @@
 #ifndef EXEC_LISTS_H
 #include <exec/lists.h>
 #endif
+#ifndef DOS_DOS_H
+#include <dos/dos.h>
+#endif
 
 #ifndef BPTR_DEFINED
 #define BPTR_DEFINED

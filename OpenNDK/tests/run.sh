@@ -3,7 +3,8 @@
 # OpenNDK's own tests, with no vendor NDK anywhere:
 #   1. every generated file is up to date with its SFD
 #   2. every header compiles on its own, in C and C++
-#   3. the structure sizes in sizes.c
+#   3. the structure sizes in sizes.c, and every field's offset in the
+#      structures tests/layout.list names (layout.c)
 #   4. a program built with the proto/ headers makes the calls it should
 #   5. libamiga.a builds
 #   6. with GUEST=<amigachrome-guest checkout> (and GFX=<openamigagfx>),
@@ -25,7 +26,7 @@ cmp -s "$T/macros.h" "$NDK/Include_H/inline/macros.h" || { echo "inline/macros.h
 echo "== headers"
 "$NDK/tests/compile_headers.sh"
 
-FLAGS="-nostdinc -isystem $($CC -print-file-name=include) -I$NDK/Include_H -m68040 -O2 -fomit-frame-pointer -Wall -Wextra -Werror"
+FLAGS="-nostdinc -isystem $($CC -print-file-name=include) -idirafter $NDK/check/shim -I$NDK/Include_H -m68040 -O2 -fomit-frame-pointer -Wall -Wextra -Werror"
 echo "== all headers in one unit"
 # every header at once: two headers defining one name differently show here
 # (the IEEE math headers rename the same functions as mathffp.h, as they
@@ -40,6 +41,15 @@ echo "== sizes"
 # shellcheck disable=SC2086
 "$CC" $FLAGS -std=gnu11 -fsyntax-only "$NDK/tests/sizes.c"
 echo "sizes ok"
+
+echo "== layouts"
+# every field's offset in tests/layout.list's structures, as 3.2 has them
+# (check/layout_numbers.py); struct ClipRect both with and without Flags
+# shellcheck disable=SC2086
+"$CC" $FLAGS -std=gnu11 -fsyntax-only "$NDK/tests/layout.c"
+# shellcheck disable=SC2086
+"$CC" $FLAGS -std=gnu11 -fsyntax-only -DNEWCLIPRECTS_1_1 "$NDK/tests/layout.c"
+echo "layouts ok"
 
 echo "== a program"
 # shellcheck disable=SC2086

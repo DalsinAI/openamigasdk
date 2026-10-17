@@ -14,6 +14,9 @@
 #ifndef INTUITION_CGHOOKS_H
 #include <intuition/cghooks.h>
 #endif
+#ifndef IMAGES_BEVEL_H
+#include <images/bevel.h>
+#endif
 
 #define GA_TEXTEDITOR_Dummy		(REACTION_Dummy + 0x26000)
 

@@ -13,6 +13,7 @@
 ==include <intuition/classusr.h>
 ==include <exec/nodes.h>
 ==include <gadgets/speedbar.h>
+==include <utility/tagitem.h>
 ==version 44
 Class * SPEEDBAR_GetClass() ()
 struct Node * AllocSpeedButtonNodeA(ULONG number, struct TagItem * tags) (d0,a0)

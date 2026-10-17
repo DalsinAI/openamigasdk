@@ -13,6 +13,15 @@
 #ifndef GRAPHICS_RASTPORT_H
 #include <graphics/rastport.h>
 #endif
+#ifndef GRAPHICS_GFXBASE_H
+#include <graphics/gfxbase.h>
+#endif
+#ifndef HARDWARE_CUSTOM_H
+#include <hardware/custom.h>
+#endif
+#ifndef HARDWARE_DMABITS_H
+#include <hardware/dmabits.h>
+#endif
 
 /*
  * DMA and interrupt switches. These write the custom chips directly, so
