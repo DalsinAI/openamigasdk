@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__checkbox_CHECKBOX_GetClass(struct Library *__base)
+__checkbox_CHECKBOX_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,5 +39,6 @@ __checkbox_CHECKBOX_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define CHECKBOX_GetClass() __checkbox_CHECKBOX_GetClass((CHECKBOX_BASE_NAME))
+#define __CHECKBOX_GetClass_base(__in_base) __checkbox_CHECKBOX_GetClass((__in_base))
 
 #endif /* INLINE_CHECKBOX_H */

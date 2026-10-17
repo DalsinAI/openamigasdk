@@ -15,6 +15,7 @@
 
 struct ExpansionBase;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +25,10 @@ struct ExpansionBase;
 #endif
 
 static __inline__ VOID
-__expansion_AddConfigDev(struct ExpansionBase *__base, struct ConfigDev * configDev)
+__expansion_AddConfigDev(void *__base, struct ConfigDev * configDev)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(configDev);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -38,15 +39,16 @@ __expansion_AddConfigDev(struct ExpansionBase *__base, struct ConfigDev * config
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddConfigDev(configDev) __expansion_AddConfigDev((EXPANSION_BASE_NAME), (struct ConfigDev *)(configDev))
+#define __AddConfigDev_base(__in_base, configDev) __expansion_AddConfigDev((__in_base), (struct ConfigDev *)(configDev))
 
 static __inline__ BOOL
-__expansion_AddBootNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags, struct DeviceNode * deviceNode, struct ConfigDev * configDev)
+__expansion_AddBootNode(void *__base, LONG bootPri, ULONG flags, struct DeviceNode * deviceNode, struct ConfigDev * configDev)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(bootPri);
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
 	register ULONG _a0 __asm("a0") = (ULONG)(deviceNode);
 	register ULONG _a1 __asm("a1") = (ULONG)(configDev);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -54,12 +56,13 @@ __expansion_AddBootNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags,
 	return (BOOL)_d0;
 }
 #define AddBootNode(bootPri, flags, deviceNode, configDev) __expansion_AddBootNode((EXPANSION_BASE_NAME), (LONG)(bootPri), (ULONG)(flags), (struct DeviceNode *)(deviceNode), (struct ConfigDev *)(configDev))
+#define __AddBootNode_base(__in_base, bootPri, flags, deviceNode, configDev) __expansion_AddBootNode((__in_base), (LONG)(bootPri), (ULONG)(flags), (struct DeviceNode *)(deviceNode), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
-__expansion_AllocBoardMem(struct ExpansionBase *__base, ULONG slotSpec)
+__expansion_AllocBoardMem(void *__base, ULONG slotSpec)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(slotSpec);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -70,11 +73,12 @@ __expansion_AllocBoardMem(struct ExpansionBase *__base, ULONG slotSpec)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AllocBoardMem(slotSpec) __expansion_AllocBoardMem((EXPANSION_BASE_NAME), (ULONG)(slotSpec))
+#define __AllocBoardMem_base(__in_base, slotSpec) __expansion_AllocBoardMem((__in_base), (ULONG)(slotSpec))
 
 static __inline__ struct ConfigDev *
-__expansion_AllocConfigDev(struct ExpansionBase *__base)
+__expansion_AllocConfigDev(void *__base)
 {
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -86,13 +90,14 @@ __expansion_AllocConfigDev(struct ExpansionBase *__base)
 	return (struct ConfigDev *)_d0;
 }
 #define AllocConfigDev() __expansion_AllocConfigDev((EXPANSION_BASE_NAME))
+#define __AllocConfigDev_base(__in_base) __expansion_AllocConfigDev((__in_base))
 
 static __inline__ APTR
-__expansion_AllocExpansionMem(struct ExpansionBase *__base, ULONG numSlots, ULONG slotAlign)
+__expansion_AllocExpansionMem(void *__base, ULONG numSlots, ULONG slotAlign)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(numSlots);
 	register ULONG _d1 __asm("d1") = (ULONG)(slotAlign);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -102,13 +107,14 @@ __expansion_AllocExpansionMem(struct ExpansionBase *__base, ULONG numSlots, ULON
 	return (APTR)_d0;
 }
 #define AllocExpansionMem(numSlots, slotAlign) __expansion_AllocExpansionMem((EXPANSION_BASE_NAME), (ULONG)(numSlots), (ULONG)(slotAlign))
+#define __AllocExpansionMem_base(__in_base, numSlots, slotAlign) __expansion_AllocExpansionMem((__in_base), (ULONG)(numSlots), (ULONG)(slotAlign))
 
 static __inline__ VOID
-__expansion_ConfigBoard(struct ExpansionBase *__base, APTR board, struct ConfigDev * configDev)
+__expansion_ConfigBoard(void *__base, APTR board, struct ConfigDev * configDev)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(board);
 	register ULONG _a1 __asm("a1") = (ULONG)(configDev);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -118,12 +124,13 @@ __expansion_ConfigBoard(struct ExpansionBase *__base, APTR board, struct ConfigD
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ConfigBoard(board, configDev) __expansion_ConfigBoard((EXPANSION_BASE_NAME), (APTR)(board), (struct ConfigDev *)(configDev))
+#define __ConfigBoard_base(__in_base, board, configDev) __expansion_ConfigBoard((__in_base), (APTR)(board), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
-__expansion_ConfigChain(struct ExpansionBase *__base, APTR baseAddr)
+__expansion_ConfigChain(void *__base, APTR baseAddr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(baseAddr);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -134,14 +141,15 @@ __expansion_ConfigChain(struct ExpansionBase *__base, APTR baseAddr)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ConfigChain(baseAddr) __expansion_ConfigChain((EXPANSION_BASE_NAME), (APTR)(baseAddr))
+#define __ConfigChain_base(__in_base, baseAddr) __expansion_ConfigChain((__in_base), (APTR)(baseAddr))
 
 static __inline__ struct ConfigDev *
-__expansion_FindConfigDev(struct ExpansionBase *__base, CONST struct ConfigDev * oldConfigDev, LONG manufacturer, LONG product)
+__expansion_FindConfigDev(void *__base, CONST struct ConfigDev * oldConfigDev, LONG manufacturer, LONG product)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(oldConfigDev);
 	register ULONG _d0 __asm("d0") = (ULONG)(manufacturer);
 	register ULONG _d1 __asm("d1") = (ULONG)(product);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -150,13 +158,14 @@ __expansion_FindConfigDev(struct ExpansionBase *__base, CONST struct ConfigDev *
 	return (struct ConfigDev *)_d0;
 }
 #define FindConfigDev(oldConfigDev, manufacturer, product) __expansion_FindConfigDev((EXPANSION_BASE_NAME), (CONST struct ConfigDev *)(oldConfigDev), (LONG)(manufacturer), (LONG)(product))
+#define __FindConfigDev_base(__in_base, oldConfigDev, manufacturer, product) __expansion_FindConfigDev((__in_base), (CONST struct ConfigDev *)(oldConfigDev), (LONG)(manufacturer), (LONG)(product))
 
 static __inline__ VOID
-__expansion_FreeBoardMem(struct ExpansionBase *__base, ULONG startSlot, ULONG slotSpec)
+__expansion_FreeBoardMem(void *__base, ULONG startSlot, ULONG slotSpec)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(startSlot);
 	register ULONG _d1 __asm("d1") = (ULONG)(slotSpec);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -166,12 +175,13 @@ __expansion_FreeBoardMem(struct ExpansionBase *__base, ULONG startSlot, ULONG sl
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeBoardMem(startSlot, slotSpec) __expansion_FreeBoardMem((EXPANSION_BASE_NAME), (ULONG)(startSlot), (ULONG)(slotSpec))
+#define __FreeBoardMem_base(__in_base, startSlot, slotSpec) __expansion_FreeBoardMem((__in_base), (ULONG)(startSlot), (ULONG)(slotSpec))
 
 static __inline__ VOID
-__expansion_FreeConfigDev(struct ExpansionBase *__base, struct ConfigDev * configDev)
+__expansion_FreeConfigDev(void *__base, struct ConfigDev * configDev)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(configDev);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -182,13 +192,14 @@ __expansion_FreeConfigDev(struct ExpansionBase *__base, struct ConfigDev * confi
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeConfigDev(configDev) __expansion_FreeConfigDev((EXPANSION_BASE_NAME), (struct ConfigDev *)(configDev))
+#define __FreeConfigDev_base(__in_base, configDev) __expansion_FreeConfigDev((__in_base), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
-__expansion_FreeExpansionMem(struct ExpansionBase *__base, ULONG startSlot, ULONG numSlots)
+__expansion_FreeExpansionMem(void *__base, ULONG startSlot, ULONG numSlots)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(startSlot);
 	register ULONG _d1 __asm("d1") = (ULONG)(numSlots);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -198,13 +209,14 @@ __expansion_FreeExpansionMem(struct ExpansionBase *__base, ULONG startSlot, ULON
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeExpansionMem(startSlot, numSlots) __expansion_FreeExpansionMem((EXPANSION_BASE_NAME), (ULONG)(startSlot), (ULONG)(numSlots))
+#define __FreeExpansionMem_base(__in_base, startSlot, numSlots) __expansion_FreeExpansionMem((__in_base), (ULONG)(startSlot), (ULONG)(numSlots))
 
 static __inline__ UBYTE
-__expansion_ReadExpansionByte(struct ExpansionBase *__base, CONST_APTR board, ULONG offset)
+__expansion_ReadExpansionByte(void *__base, CONST_APTR board, ULONG offset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(board);
 	register ULONG _d0 __asm("d0") = (ULONG)(offset);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -214,13 +226,14 @@ __expansion_ReadExpansionByte(struct ExpansionBase *__base, CONST_APTR board, UL
 	return (UBYTE)_d0;
 }
 #define ReadExpansionByte(board, offset) __expansion_ReadExpansionByte((EXPANSION_BASE_NAME), (CONST_APTR)(board), (ULONG)(offset))
+#define __ReadExpansionByte_base(__in_base, board, offset) __expansion_ReadExpansionByte((__in_base), (CONST_APTR)(board), (ULONG)(offset))
 
 static __inline__ VOID
-__expansion_ReadExpansionRom(struct ExpansionBase *__base, CONST_APTR board, struct ConfigDev * configDev)
+__expansion_ReadExpansionRom(void *__base, CONST_APTR board, struct ConfigDev * configDev)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(board);
 	register ULONG _a1 __asm("a1") = (ULONG)(configDev);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -230,12 +243,13 @@ __expansion_ReadExpansionRom(struct ExpansionBase *__base, CONST_APTR board, str
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReadExpansionRom(board, configDev) __expansion_ReadExpansionRom((EXPANSION_BASE_NAME), (CONST_APTR)(board), (struct ConfigDev *)(configDev))
+#define __ReadExpansionRom_base(__in_base, board, configDev) __expansion_ReadExpansionRom((__in_base), (CONST_APTR)(board), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
-__expansion_RemConfigDev(struct ExpansionBase *__base, struct ConfigDev * configDev)
+__expansion_RemConfigDev(void *__base, struct ConfigDev * configDev)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(configDev);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -246,14 +260,15 @@ __expansion_RemConfigDev(struct ExpansionBase *__base, struct ConfigDev * config
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemConfigDev(configDev) __expansion_RemConfigDev((EXPANSION_BASE_NAME), (struct ConfigDev *)(configDev))
+#define __RemConfigDev_base(__in_base, configDev) __expansion_RemConfigDev((__in_base), (struct ConfigDev *)(configDev))
 
 static __inline__ VOID
-__expansion_WriteExpansionByte(struct ExpansionBase *__base, APTR board, ULONG offset, UBYTE byte)
+__expansion_WriteExpansionByte(void *__base, APTR board, ULONG offset, UBYTE byte)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(board);
 	register ULONG _d0 __asm("d0") = (ULONG)(offset);
 	register ULONG _d1 __asm("d1") = (ULONG)(byte);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -262,11 +277,12 @@ __expansion_WriteExpansionByte(struct ExpansionBase *__base, APTR board, ULONG o
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WriteExpansionByte(board, offset, byte) __expansion_WriteExpansionByte((EXPANSION_BASE_NAME), (APTR)(board), (ULONG)(offset), (UBYTE)(byte))
+#define __WriteExpansionByte_base(__in_base, board, offset, byte) __expansion_WriteExpansionByte((__in_base), (APTR)(board), (ULONG)(offset), (UBYTE)(byte))
 
 static __inline__ VOID
-__expansion_ObtainConfigBinding(struct ExpansionBase *__base)
+__expansion_ObtainConfigBinding(void *__base)
 {
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -278,11 +294,12 @@ __expansion_ObtainConfigBinding(struct ExpansionBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ObtainConfigBinding() __expansion_ObtainConfigBinding((EXPANSION_BASE_NAME))
+#define __ObtainConfigBinding_base(__in_base) __expansion_ObtainConfigBinding((__in_base))
 
 static __inline__ VOID
-__expansion_ReleaseConfigBinding(struct ExpansionBase *__base)
+__expansion_ReleaseConfigBinding(void *__base)
 {
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -294,13 +311,14 @@ __expansion_ReleaseConfigBinding(struct ExpansionBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleaseConfigBinding() __expansion_ReleaseConfigBinding((EXPANSION_BASE_NAME))
+#define __ReleaseConfigBinding_base(__in_base) __expansion_ReleaseConfigBinding((__in_base))
 
 static __inline__ VOID
-__expansion_SetCurrentBinding(struct ExpansionBase *__base, struct CurrentBinding * currentBinding, ULONG bindingSize)
+__expansion_SetCurrentBinding(void *__base, struct CurrentBinding * currentBinding, ULONG bindingSize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(currentBinding);
 	register ULONG _d0 __asm("d0") = (ULONG)(bindingSize);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
@@ -310,13 +328,14 @@ __expansion_SetCurrentBinding(struct ExpansionBase *__base, struct CurrentBindin
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetCurrentBinding(currentBinding, bindingSize) __expansion_SetCurrentBinding((EXPANSION_BASE_NAME), (struct CurrentBinding *)(currentBinding), (ULONG)(bindingSize))
+#define __SetCurrentBinding_base(__in_base, currentBinding, bindingSize) __expansion_SetCurrentBinding((__in_base), (struct CurrentBinding *)(currentBinding), (ULONG)(bindingSize))
 
 static __inline__ ULONG
-__expansion_GetCurrentBinding(struct ExpansionBase *__base, CONST struct CurrentBinding * currentBinding, ULONG bindingSize)
+__expansion_GetCurrentBinding(void *__base, CONST struct CurrentBinding * currentBinding, ULONG bindingSize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(currentBinding);
 	register ULONG _d0 __asm("d0") = (ULONG)(bindingSize);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -138(%/a6)"
@@ -326,12 +345,13 @@ __expansion_GetCurrentBinding(struct ExpansionBase *__base, CONST struct Current
 	return (ULONG)_d0;
 }
 #define GetCurrentBinding(currentBinding, bindingSize) __expansion_GetCurrentBinding((EXPANSION_BASE_NAME), (CONST struct CurrentBinding *)(currentBinding), (ULONG)(bindingSize))
+#define __GetCurrentBinding_base(__in_base, currentBinding, bindingSize) __expansion_GetCurrentBinding((__in_base), (CONST struct CurrentBinding *)(currentBinding), (ULONG)(bindingSize))
 
 static __inline__ struct DeviceNode *
-__expansion_MakeDosNode(struct ExpansionBase *__base, CONST_APTR parmPacket)
+__expansion_MakeDosNode(void *__base, CONST_APTR parmPacket)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(parmPacket);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -342,14 +362,15 @@ __expansion_MakeDosNode(struct ExpansionBase *__base, CONST_APTR parmPacket)
 	return (struct DeviceNode *)_d0;
 }
 #define MakeDosNode(parmPacket) __expansion_MakeDosNode((EXPANSION_BASE_NAME), (CONST_APTR)(parmPacket))
+#define __MakeDosNode_base(__in_base, parmPacket) __expansion_MakeDosNode((__in_base), (CONST_APTR)(parmPacket))
 
 static __inline__ BOOL
-__expansion_AddDosNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags, struct DeviceNode * deviceNode)
+__expansion_AddDosNode(void *__base, LONG bootPri, ULONG flags, struct DeviceNode * deviceNode)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(bootPri);
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
 	register ULONG _a0 __asm("a0") = (ULONG)(deviceNode);
-	register struct ExpansionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -150(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -358,5 +379,6 @@ __expansion_AddDosNode(struct ExpansionBase *__base, LONG bootPri, ULONG flags, 
 	return (BOOL)_d0;
 }
 #define AddDosNode(bootPri, flags, deviceNode) __expansion_AddDosNode((EXPANSION_BASE_NAME), (LONG)(bootPri), (ULONG)(flags), (struct DeviceNode *)(deviceNode))
+#define __AddDosNode_base(__in_base, bootPri, flags, deviceNode) __expansion_AddDosNode((__in_base), (LONG)(bootPri), (ULONG)(flags), (struct DeviceNode *)(deviceNode))
 
 #endif /* INLINE_EXPANSION_H */

@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__datebrowser_DATEBROWSER_GetClass(struct Library *__base)
+__datebrowser_DATEBROWSER_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,14 +39,15 @@ __datebrowser_DATEBROWSER_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define DATEBROWSER_GetClass() __datebrowser_DATEBROWSER_GetClass((DATEBROWSER_BASE_NAME))
+#define __DATEBROWSER_GetClass_base(__in_base) __datebrowser_DATEBROWSER_GetClass((__in_base))
 
 static __inline__ UWORD
-__datebrowser_JulianWeekDay(struct Library *__base, ULONG day, ULONG month, LONG year)
+__datebrowser_JulianWeekDay(void *__base, ULONG day, ULONG month, LONG year)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(day);
 	register ULONG _d1 __asm("d1") = (ULONG)(month);
 	register ULONG _d2 __asm("d2") = (ULONG)(year);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
@@ -55,13 +57,14 @@ __datebrowser_JulianWeekDay(struct Library *__base, ULONG day, ULONG month, LONG
 	return (UWORD)_d0;
 }
 #define JulianWeekDay(day, month, year) __datebrowser_JulianWeekDay((DATEBROWSER_BASE_NAME), (ULONG)(day), (ULONG)(month), (LONG)(year))
+#define __JulianWeekDay_base(__in_base, day, month, year) __datebrowser_JulianWeekDay((__in_base), (ULONG)(day), (ULONG)(month), (LONG)(year))
 
 static __inline__ UWORD
-__datebrowser_JulianMonthDays(struct Library *__base, ULONG month, LONG year)
+__datebrowser_JulianMonthDays(void *__base, ULONG month, LONG year)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(month);
 	register ULONG _d1 __asm("d1") = (ULONG)(year);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -71,12 +74,13 @@ __datebrowser_JulianMonthDays(struct Library *__base, ULONG month, LONG year)
 	return (UWORD)_d0;
 }
 #define JulianMonthDays(month, year) __datebrowser_JulianMonthDays((DATEBROWSER_BASE_NAME), (ULONG)(month), (LONG)(year))
+#define __JulianMonthDays_base(__in_base, month, year) __datebrowser_JulianMonthDays((__in_base), (ULONG)(month), (LONG)(year))
 
 static __inline__ BOOL
-__datebrowser_JulianLeapYear(struct Library *__base, LONG year)
+__datebrowser_JulianLeapYear(void *__base, LONG year)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(year);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -87,5 +91,6 @@ __datebrowser_JulianLeapYear(struct Library *__base, LONG year)
 	return (BOOL)_d0;
 }
 #define JulianLeapYear(year) __datebrowser_JulianLeapYear((DATEBROWSER_BASE_NAME), (LONG)(year))
+#define __JulianLeapYear_base(__in_base, year) __datebrowser_JulianLeapYear((__in_base), (LONG)(year))
 
 #endif /* INLINE_DATEBROWSER_H */

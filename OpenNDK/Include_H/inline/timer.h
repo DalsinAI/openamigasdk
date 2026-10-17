@@ -15,6 +15,7 @@
 
 struct Device;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +25,11 @@ struct Device;
 #endif
 
 static __inline__ VOID
-__timer_AddTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type * src)
+__timer_AddTime(void *__base, TimeVal_Type * dest, CONST TimeVal_Type * src)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
 	register ULONG _a1 __asm("a1") = (ULONG)(src);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -38,13 +39,14 @@ __timer_AddTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type *
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddTime(dest, src) __timer_AddTime((TIMER_BASE_NAME), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define __AddTime_base(__in_base, dest, src) __timer_AddTime((__in_base), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ VOID
-__timer_SubTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type * src)
+__timer_SubTime(void *__base, TimeVal_Type * dest, CONST TimeVal_Type * src)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
 	register ULONG _a1 __asm("a1") = (ULONG)(src);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -54,13 +56,14 @@ __timer_SubTime(struct Device *__base, TimeVal_Type * dest, CONST TimeVal_Type *
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SubTime(dest, src) __timer_SubTime((TIMER_BASE_NAME), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define __SubTime_base(__in_base, dest, src) __timer_SubTime((__in_base), (TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ LONG
-__timer_CmpTime(struct Device *__base, CONST TimeVal_Type * dest, CONST TimeVal_Type * src)
+__timer_CmpTime(void *__base, CONST TimeVal_Type * dest, CONST TimeVal_Type * src)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
 	register ULONG _a1 __asm("a1") = (ULONG)(src);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -70,12 +73,13 @@ __timer_CmpTime(struct Device *__base, CONST TimeVal_Type * dest, CONST TimeVal_
 	return (LONG)_d0;
 }
 #define CmpTime(dest, src) __timer_CmpTime((TIMER_BASE_NAME), (CONST TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
+#define __CmpTime_base(__in_base, dest, src) __timer_CmpTime((__in_base), (CONST TimeVal_Type *)(dest), (CONST TimeVal_Type *)(src))
 
 static __inline__ ULONG
-__timer_ReadEClock(struct Device *__base, struct EClockVal * dest)
+__timer_ReadEClock(void *__base, struct EClockVal * dest)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -86,12 +90,13 @@ __timer_ReadEClock(struct Device *__base, struct EClockVal * dest)
 	return (ULONG)_d0;
 }
 #define ReadEClock(dest) __timer_ReadEClock((TIMER_BASE_NAME), (struct EClockVal *)(dest))
+#define __ReadEClock_base(__in_base, dest) __timer_ReadEClock((__in_base), (struct EClockVal *)(dest))
 
 static __inline__ VOID
-__timer_GetSysTime(struct Device *__base, TimeVal_Type * dest)
+__timer_GetSysTime(void *__base, TimeVal_Type * dest)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dest);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -102,5 +107,6 @@ __timer_GetSysTime(struct Device *__base, TimeVal_Type * dest)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GetSysTime(dest) __timer_GetSysTime((TIMER_BASE_NAME), (TimeVal_Type *)(dest))
+#define __GetSysTime_base(__in_base, dest) __timer_GetSysTime((__in_base), (TimeVal_Type *)(dest))
 
 #endif /* INLINE_TIMER_H */

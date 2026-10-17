@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__virtual_VIRTUAL_GetClass(struct Library *__base)
+__virtual_VIRTUAL_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,15 +39,16 @@ __virtual_VIRTUAL_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define VIRTUAL_GetClass() __virtual_VIRTUAL_GetClass((VIRTUAL_BASE_NAME))
+#define __VIRTUAL_GetClass_base(__in_base) __virtual_VIRTUAL_GetClass((__in_base))
 
 static __inline__ VOID
-__virtual_RefreshVirtualGadget(struct Library *__base, struct Gadget * gadget, Object * obj, struct Window * window, struct Requester * requester)
+__virtual_RefreshVirtualGadget(void *__base, struct Gadget * gadget, Object * obj, struct Window * window, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(obj);
 	register ULONG _a2 __asm("a2") = (ULONG)(window);
 	register ULONG _a3 __asm("a3") = (ULONG)(requester);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
@@ -56,16 +58,17 @@ __virtual_RefreshVirtualGadget(struct Library *__base, struct Gadget * gadget, O
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RefreshVirtualGadget(gadget, obj, window, requester) __virtual_RefreshVirtualGadget((VIRTUAL_BASE_NAME), (struct Gadget *)(gadget), (Object *)(obj), (struct Window *)(window), (struct Requester *)(requester))
+#define __RefreshVirtualGadget_base(__in_base, gadget, obj, window, requester) __virtual_RefreshVirtualGadget((__in_base), (struct Gadget *)(gadget), (Object *)(obj), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ BOOL
-__virtual_RethinkVirtualSize(struct Library *__base, Object * virt_obj, Object * rootlayout, struct TextFont * font, struct Screen * screen, struct LayoutLimits * layoutlimits)
+__virtual_RethinkVirtualSize(void *__base, Object * virt_obj, Object * rootlayout, struct TextFont * font, struct Screen * screen, struct LayoutLimits * layoutlimits)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(virt_obj);
 	register ULONG _a1 __asm("a1") = (ULONG)(rootlayout);
 	register ULONG _a2 __asm("a2") = (ULONG)(font);
 	register ULONG _a3 __asm("a3") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(layoutlimits);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -74,5 +77,6 @@ __virtual_RethinkVirtualSize(struct Library *__base, Object * virt_obj, Object *
 	return (BOOL)_d0;
 }
 #define RethinkVirtualSize(virt_obj, rootlayout, font, screen, layoutlimits) __virtual_RethinkVirtualSize((VIRTUAL_BASE_NAME), (Object *)(virt_obj), (Object *)(rootlayout), (struct TextFont *)(font), (struct Screen *)(screen), (struct LayoutLimits *)(layoutlimits))
+#define __RethinkVirtualSize_base(__in_base, virt_obj, rootlayout, font, screen, layoutlimits) __virtual_RethinkVirtualSize((__in_base), (Object *)(virt_obj), (Object *)(rootlayout), (struct TextFont *)(font), (struct Screen *)(screen), (struct LayoutLimits *)(layoutlimits))
 
 #endif /* INLINE_VIRTUAL_H */

@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,12 +25,12 @@ struct Library;
 #endif
 
 static __inline__ CxObj *
-__commodities_CreateCxObj(struct Library *__base, ULONG type, LONG arg1, LONG arg2)
+__commodities_CreateCxObj(void *__base, ULONG type, LONG arg1, LONG arg2)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _a0 __asm("a0") = (ULONG)(arg1);
 	register ULONG _a1 __asm("a1") = (ULONG)(arg2);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -30(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -38,13 +39,14 @@ __commodities_CreateCxObj(struct Library *__base, ULONG type, LONG arg1, LONG ar
 	return (CxObj *)_d0;
 }
 #define CreateCxObj(type, arg1, arg2) __commodities_CreateCxObj((COMMODITIES_BASE_NAME), (ULONG)(type), (LONG)(arg1), (LONG)(arg2))
+#define __CreateCxObj_base(__in_base, type, arg1, arg2) __commodities_CreateCxObj((__in_base), (ULONG)(type), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ CxObj *
-__commodities_CxBroker(struct Library *__base, CONST struct NewBroker * nb, LONG * error)
+__commodities_CxBroker(void *__base, CONST struct NewBroker * nb, LONG * error)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(nb);
 	register ULONG _d0 __asm("d0") = (ULONG)(error);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
@@ -54,13 +56,14 @@ __commodities_CxBroker(struct Library *__base, CONST struct NewBroker * nb, LONG
 	return (CxObj *)_d0;
 }
 #define CxBroker(nb, error) __commodities_CxBroker((COMMODITIES_BASE_NAME), (CONST struct NewBroker *)(nb), (LONG *)(error))
+#define __CxBroker_base(__in_base, nb, error) __commodities_CxBroker((__in_base), (CONST struct NewBroker *)(nb), (LONG *)(error))
 
 static __inline__ LONG
-__commodities_ActivateCxObj(struct Library *__base, CxObj * co, LONG doIt)
+__commodities_ActivateCxObj(void *__base, CxObj * co, LONG doIt)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(co);
 	register ULONG _d0 __asm("d0") = (ULONG)(doIt);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -70,12 +73,13 @@ __commodities_ActivateCxObj(struct Library *__base, CxObj * co, LONG doIt)
 	return (LONG)_d0;
 }
 #define ActivateCxObj(co, doIt) __commodities_ActivateCxObj((COMMODITIES_BASE_NAME), (CxObj *)(co), (LONG)(doIt))
+#define __ActivateCxObj_base(__in_base, co, doIt) __commodities_ActivateCxObj((__in_base), (CxObj *)(co), (LONG)(doIt))
 
 static __inline__ VOID
-__commodities_DeleteCxObj(struct Library *__base, CxObj * co)
+__commodities_DeleteCxObj(void *__base, CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -86,12 +90,13 @@ __commodities_DeleteCxObj(struct Library *__base, CxObj * co)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeleteCxObj(co) __commodities_DeleteCxObj((COMMODITIES_BASE_NAME), (CxObj *)(co))
+#define __DeleteCxObj_base(__in_base, co) __commodities_DeleteCxObj((__in_base), (CxObj *)(co))
 
 static __inline__ VOID
-__commodities_DeleteCxObjAll(struct Library *__base, CxObj * co)
+__commodities_DeleteCxObjAll(void *__base, CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -102,12 +107,13 @@ __commodities_DeleteCxObjAll(struct Library *__base, CxObj * co)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeleteCxObjAll(co) __commodities_DeleteCxObjAll((COMMODITIES_BASE_NAME), (CxObj *)(co))
+#define __DeleteCxObjAll_base(__in_base, co) __commodities_DeleteCxObjAll((__in_base), (CxObj *)(co))
 
 static __inline__ ULONG
-__commodities_CxObjType(struct Library *__base, CONST CxObj * co)
+__commodities_CxObjType(void *__base, CONST CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -118,12 +124,13 @@ __commodities_CxObjType(struct Library *__base, CONST CxObj * co)
 	return (ULONG)_d0;
 }
 #define CxObjType(co) __commodities_CxObjType((COMMODITIES_BASE_NAME), (CONST CxObj *)(co))
+#define __CxObjType_base(__in_base, co) __commodities_CxObjType((__in_base), (CONST CxObj *)(co))
 
 static __inline__ LONG
-__commodities_CxObjError(struct Library *__base, CONST CxObj * co)
+__commodities_CxObjError(void *__base, CONST CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -134,12 +141,13 @@ __commodities_CxObjError(struct Library *__base, CONST CxObj * co)
 	return (LONG)_d0;
 }
 #define CxObjError(co) __commodities_CxObjError((COMMODITIES_BASE_NAME), (CONST CxObj *)(co))
+#define __CxObjError_base(__in_base, co) __commodities_CxObjError((__in_base), (CONST CxObj *)(co))
 
 static __inline__ VOID
-__commodities_ClearCxObjError(struct Library *__base, CxObj * co)
+__commodities_ClearCxObjError(void *__base, CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -150,13 +158,14 @@ __commodities_ClearCxObjError(struct Library *__base, CxObj * co)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ClearCxObjError(co) __commodities_ClearCxObjError((COMMODITIES_BASE_NAME), (CxObj *)(co))
+#define __ClearCxObjError_base(__in_base, co) __commodities_ClearCxObjError((__in_base), (CxObj *)(co))
 
 static __inline__ LONG
-__commodities_SetCxObjPri(struct Library *__base, CxObj * co, LONG pri)
+__commodities_SetCxObjPri(void *__base, CxObj * co, LONG pri)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(co);
 	register ULONG _d0 __asm("d0") = (ULONG)(pri);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -166,13 +175,14 @@ __commodities_SetCxObjPri(struct Library *__base, CxObj * co, LONG pri)
 	return (LONG)_d0;
 }
 #define SetCxObjPri(co, pri) __commodities_SetCxObjPri((COMMODITIES_BASE_NAME), (CxObj *)(co), (LONG)(pri))
+#define __SetCxObjPri_base(__in_base, co, pri) __commodities_SetCxObjPri((__in_base), (CxObj *)(co), (LONG)(pri))
 
 static __inline__ VOID
-__commodities_AttachCxObj(struct Library *__base, CxObj * headObj, CxObj * co)
+__commodities_AttachCxObj(void *__base, CxObj * headObj, CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(headObj);
 	register ULONG _a1 __asm("a1") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -182,13 +192,14 @@ __commodities_AttachCxObj(struct Library *__base, CxObj * headObj, CxObj * co)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AttachCxObj(headObj, co) __commodities_AttachCxObj((COMMODITIES_BASE_NAME), (CxObj *)(headObj), (CxObj *)(co))
+#define __AttachCxObj_base(__in_base, headObj, co) __commodities_AttachCxObj((__in_base), (CxObj *)(headObj), (CxObj *)(co))
 
 static __inline__ VOID
-__commodities_EnqueueCxObj(struct Library *__base, CxObj * headObj, CxObj * co)
+__commodities_EnqueueCxObj(void *__base, CxObj * headObj, CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(headObj);
 	register ULONG _a1 __asm("a1") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -198,14 +209,15 @@ __commodities_EnqueueCxObj(struct Library *__base, CxObj * headObj, CxObj * co)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define EnqueueCxObj(headObj, co) __commodities_EnqueueCxObj((COMMODITIES_BASE_NAME), (CxObj *)(headObj), (CxObj *)(co))
+#define __EnqueueCxObj_base(__in_base, headObj, co) __commodities_EnqueueCxObj((__in_base), (CxObj *)(headObj), (CxObj *)(co))
 
 static __inline__ VOID
-__commodities_InsertCxObj(struct Library *__base, CxObj * headObj, CxObj * co, CxObj * pred)
+__commodities_InsertCxObj(void *__base, CxObj * headObj, CxObj * co, CxObj * pred)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(headObj);
 	register ULONG _a1 __asm("a1") = (ULONG)(co);
 	register ULONG _a2 __asm("a2") = (ULONG)(pred);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -215,12 +227,13 @@ __commodities_InsertCxObj(struct Library *__base, CxObj * headObj, CxObj * co, C
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InsertCxObj(headObj, co, pred) __commodities_InsertCxObj((COMMODITIES_BASE_NAME), (CxObj *)(headObj), (CxObj *)(co), (CxObj *)(pred))
+#define __InsertCxObj_base(__in_base, headObj, co, pred) __commodities_InsertCxObj((__in_base), (CxObj *)(headObj), (CxObj *)(co), (CxObj *)(pred))
 
 static __inline__ VOID
-__commodities_RemoveCxObj(struct Library *__base, CxObj * co)
+__commodities_RemoveCxObj(void *__base, CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -231,13 +244,14 @@ __commodities_RemoveCxObj(struct Library *__base, CxObj * co)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemoveCxObj(co) __commodities_RemoveCxObj((COMMODITIES_BASE_NAME), (CxObj *)(co))
+#define __RemoveCxObj_base(__in_base, co) __commodities_RemoveCxObj((__in_base), (CxObj *)(co))
 
 static __inline__ VOID
-__commodities_SetTranslate(struct Library *__base, CxObj * translator, struct InputEvent * events)
+__commodities_SetTranslate(void *__base, CxObj * translator, struct InputEvent * events)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(translator);
 	register ULONG _a1 __asm("a1") = (ULONG)(events);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
@@ -247,13 +261,14 @@ __commodities_SetTranslate(struct Library *__base, CxObj * translator, struct In
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetTranslate(translator, events) __commodities_SetTranslate((COMMODITIES_BASE_NAME), (CxObj *)(translator), (struct InputEvent *)(events))
+#define __SetTranslate_base(__in_base, translator, events) __commodities_SetTranslate((__in_base), (CxObj *)(translator), (struct InputEvent *)(events))
 
 static __inline__ VOID
-__commodities_SetFilter(struct Library *__base, CxObj * filter, CONST_STRPTR text)
+__commodities_SetFilter(void *__base, CxObj * filter, CONST_STRPTR text)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(filter);
 	register ULONG _a1 __asm("a1") = (ULONG)(text);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -263,13 +278,14 @@ __commodities_SetFilter(struct Library *__base, CxObj * filter, CONST_STRPTR tex
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetFilter(filter, text) __commodities_SetFilter((COMMODITIES_BASE_NAME), (CxObj *)(filter), (CONST_STRPTR)(text))
+#define __SetFilter_base(__in_base, filter, text) __commodities_SetFilter((__in_base), (CxObj *)(filter), (CONST_STRPTR)(text))
 
 static __inline__ VOID
-__commodities_SetFilterIX(struct Library *__base, CxObj * filter, CONST IX * ix)
+__commodities_SetFilterIX(void *__base, CxObj * filter, CONST IX * ix)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(filter);
 	register ULONG _a1 __asm("a1") = (ULONG)(ix);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -279,13 +295,14 @@ __commodities_SetFilterIX(struct Library *__base, CxObj * filter, CONST IX * ix)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetFilterIX(filter, ix) __commodities_SetFilterIX((COMMODITIES_BASE_NAME), (CxObj *)(filter), (CONST IX *)(ix))
+#define __SetFilterIX_base(__in_base, filter, ix) __commodities_SetFilterIX((__in_base), (CxObj *)(filter), (CONST IX *)(ix))
 
 static __inline__ LONG
-__commodities_ParseIX(struct Library *__base, CONST_STRPTR description, IX * ix)
+__commodities_ParseIX(void *__base, CONST_STRPTR description, IX * ix)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(description);
 	register ULONG _a1 __asm("a1") = (ULONG)(ix);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
@@ -295,12 +312,13 @@ __commodities_ParseIX(struct Library *__base, CONST_STRPTR description, IX * ix)
 	return (LONG)_d0;
 }
 #define ParseIX(description, ix) __commodities_ParseIX((COMMODITIES_BASE_NAME), (CONST_STRPTR)(description), (IX *)(ix))
+#define __ParseIX_base(__in_base, description, ix) __commodities_ParseIX((__in_base), (CONST_STRPTR)(description), (IX *)(ix))
 
 static __inline__ ULONG
-__commodities_CxMsgType(struct Library *__base, CONST CxMsg * cxm)
+__commodities_CxMsgType(void *__base, CONST CxMsg * cxm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cxm);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -311,12 +329,13 @@ __commodities_CxMsgType(struct Library *__base, CONST CxMsg * cxm)
 	return (ULONG)_d0;
 }
 #define CxMsgType(cxm) __commodities_CxMsgType((COMMODITIES_BASE_NAME), (CONST CxMsg *)(cxm))
+#define __CxMsgType_base(__in_base, cxm) __commodities_CxMsgType((__in_base), (CONST CxMsg *)(cxm))
 
 static __inline__ APTR
-__commodities_CxMsgData(struct Library *__base, CONST CxMsg * cxm)
+__commodities_CxMsgData(void *__base, CONST CxMsg * cxm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cxm);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -327,12 +346,13 @@ __commodities_CxMsgData(struct Library *__base, CONST CxMsg * cxm)
 	return (APTR)_d0;
 }
 #define CxMsgData(cxm) __commodities_CxMsgData((COMMODITIES_BASE_NAME), (CONST CxMsg *)(cxm))
+#define __CxMsgData_base(__in_base, cxm) __commodities_CxMsgData((__in_base), (CONST CxMsg *)(cxm))
 
 static __inline__ LONG
-__commodities_CxMsgID(struct Library *__base, CONST CxMsg * cxm)
+__commodities_CxMsgID(void *__base, CONST CxMsg * cxm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cxm);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -343,14 +363,15 @@ __commodities_CxMsgID(struct Library *__base, CONST CxMsg * cxm)
 	return (LONG)_d0;
 }
 #define CxMsgID(cxm) __commodities_CxMsgID((COMMODITIES_BASE_NAME), (CONST CxMsg *)(cxm))
+#define __CxMsgID_base(__in_base, cxm) __commodities_CxMsgID((__in_base), (CONST CxMsg *)(cxm))
 
 static __inline__ VOID
-__commodities_DivertCxMsg(struct Library *__base, CxMsg * cxm, CxObj * headObj, CxObj * returnObj)
+__commodities_DivertCxMsg(void *__base, CxMsg * cxm, CxObj * headObj, CxObj * returnObj)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cxm);
 	register ULONG _a1 __asm("a1") = (ULONG)(headObj);
 	register ULONG _a2 __asm("a2") = (ULONG)(returnObj);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -156(%/a6)"
@@ -360,13 +381,14 @@ __commodities_DivertCxMsg(struct Library *__base, CxMsg * cxm, CxObj * headObj, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DivertCxMsg(cxm, headObj, returnObj) __commodities_DivertCxMsg((COMMODITIES_BASE_NAME), (CxMsg *)(cxm), (CxObj *)(headObj), (CxObj *)(returnObj))
+#define __DivertCxMsg_base(__in_base, cxm, headObj, returnObj) __commodities_DivertCxMsg((__in_base), (CxMsg *)(cxm), (CxObj *)(headObj), (CxObj *)(returnObj))
 
 static __inline__ VOID
-__commodities_RouteCxMsg(struct Library *__base, CxMsg * cxm, CxObj * co)
+__commodities_RouteCxMsg(void *__base, CxMsg * cxm, CxObj * co)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cxm);
 	register ULONG _a1 __asm("a1") = (ULONG)(co);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
@@ -376,12 +398,13 @@ __commodities_RouteCxMsg(struct Library *__base, CxMsg * cxm, CxObj * co)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RouteCxMsg(cxm, co) __commodities_RouteCxMsg((COMMODITIES_BASE_NAME), (CxMsg *)(cxm), (CxObj *)(co))
+#define __RouteCxMsg_base(__in_base, cxm, co) __commodities_RouteCxMsg((__in_base), (CxMsg *)(cxm), (CxObj *)(co))
 
 static __inline__ VOID
-__commodities_DisposeCxMsg(struct Library *__base, CxMsg * cxm)
+__commodities_DisposeCxMsg(void *__base, CxMsg * cxm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cxm);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -392,14 +415,15 @@ __commodities_DisposeCxMsg(struct Library *__base, CxMsg * cxm)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DisposeCxMsg(cxm) __commodities_DisposeCxMsg((COMMODITIES_BASE_NAME), (CxMsg *)(cxm))
+#define __DisposeCxMsg_base(__in_base, cxm) __commodities_DisposeCxMsg((__in_base), (CxMsg *)(cxm))
 
 static __inline__ BOOL
-__commodities_InvertKeyMap(struct Library *__base, ULONG ansiCode, struct InputEvent * event, CONST struct KeyMap * km)
+__commodities_InvertKeyMap(void *__base, ULONG ansiCode, struct InputEvent * event, CONST struct KeyMap * km)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(ansiCode);
 	register ULONG _a0 __asm("a0") = (ULONG)(event);
 	register ULONG _a1 __asm("a1") = (ULONG)(km);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -174(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -408,12 +432,13 @@ __commodities_InvertKeyMap(struct Library *__base, ULONG ansiCode, struct InputE
 	return (BOOL)_d0;
 }
 #define InvertKeyMap(ansiCode, event, km) __commodities_InvertKeyMap((COMMODITIES_BASE_NAME), (ULONG)(ansiCode), (struct InputEvent *)(event), (CONST struct KeyMap *)(km))
+#define __InvertKeyMap_base(__in_base, ansiCode, event, km) __commodities_InvertKeyMap((__in_base), (ULONG)(ansiCode), (struct InputEvent *)(event), (CONST struct KeyMap *)(km))
 
 static __inline__ VOID
-__commodities_AddIEvents(struct Library *__base, struct InputEvent * events)
+__commodities_AddIEvents(void *__base, struct InputEvent * events)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(events);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -424,13 +449,14 @@ __commodities_AddIEvents(struct Library *__base, struct InputEvent * events)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddIEvents(events) __commodities_AddIEvents((COMMODITIES_BASE_NAME), (struct InputEvent *)(events))
+#define __AddIEvents_base(__in_base, events) __commodities_AddIEvents((__in_base), (struct InputEvent *)(events))
 
 static __inline__ BOOL
-__commodities_MatchIX(struct Library *__base, CONST struct InputEvent * event, CONST IX * ix)
+__commodities_MatchIX(void *__base, CONST struct InputEvent * event, CONST IX * ix)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(event);
 	register ULONG _a1 __asm("a1") = (ULONG)(ix);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -204(%/a6)"
@@ -440,5 +466,6 @@ __commodities_MatchIX(struct Library *__base, CONST struct InputEvent * event, C
 	return (BOOL)_d0;
 }
 #define MatchIX(event, ix) __commodities_MatchIX((COMMODITIES_BASE_NAME), (CONST struct InputEvent *)(event), (CONST IX *)(ix))
+#define __MatchIX_base(__in_base, event, ix) __commodities_MatchIX((__in_base), (CONST struct InputEvent *)(event), (CONST IX *)(ix))
 
 #endif /* INLINE_COMMODITIES_H */

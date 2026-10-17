@@ -15,6 +15,14 @@
 
 struct DosLibrary;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +32,11 @@ struct DosLibrary;
 #endif
 
 static __inline__ BPTR
-__dos_Open(struct DosLibrary *__base, CONST_STRPTR name, LONG accessMode)
+__dos_Open(void *__base, CONST_STRPTR name, LONG accessMode)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(accessMode);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -39,12 +47,13 @@ __dos_Open(struct DosLibrary *__base, CONST_STRPTR name, LONG accessMode)
 	return (BPTR)_d0;
 }
 #define Open(name, accessMode) __dos_Open((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(accessMode))
+#define __Open_base(__in_base, name, accessMode) __dos_Open((__in_base), (CONST_STRPTR)(name), (LONG)(accessMode))
 
 static __inline__ LONG
-__dos_Close(struct DosLibrary *__base, BPTR file)
+__dos_Close(void *__base, BPTR file)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(file);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -55,14 +64,15 @@ __dos_Close(struct DosLibrary *__base, BPTR file)
 	return (LONG)_d0;
 }
 #define Close(file) __dos_Close((DOS_BASE_NAME), (BPTR)(file))
+#define __Close_base(__in_base, file) __dos_Close((__in_base), (BPTR)(file))
 
 static __inline__ LONG
-__dos_Read(struct DosLibrary *__base, BPTR file, APTR buffer, LONG length)
+__dos_Read(void *__base, BPTR file, APTR buffer, LONG length)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(file);
 	register ULONG _d2 __asm("d2") = (ULONG)(buffer);
 	register ULONG _d3 __asm("d3") = (ULONG)(length);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -73,14 +83,15 @@ __dos_Read(struct DosLibrary *__base, BPTR file, APTR buffer, LONG length)
 	return (LONG)_d0;
 }
 #define Read(file, buffer, length) __dos_Read((DOS_BASE_NAME), (BPTR)(file), (APTR)(buffer), (LONG)(length))
+#define __Read_base(__in_base, file, buffer, length) __dos_Read((__in_base), (BPTR)(file), (APTR)(buffer), (LONG)(length))
 
 static __inline__ LONG
-__dos_Write(struct DosLibrary *__base, BPTR file, CONST_APTR buffer, LONG length)
+__dos_Write(void *__base, BPTR file, CONST_APTR buffer, LONG length)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(file);
 	register ULONG _d2 __asm("d2") = (ULONG)(buffer);
 	register ULONG _d3 __asm("d3") = (ULONG)(length);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -91,11 +102,12 @@ __dos_Write(struct DosLibrary *__base, BPTR file, CONST_APTR buffer, LONG length
 	return (LONG)_d0;
 }
 #define Write(file, buffer, length) __dos_Write((DOS_BASE_NAME), (BPTR)(file), (CONST_APTR)(buffer), (LONG)(length))
+#define __Write_base(__in_base, file, buffer, length) __dos_Write((__in_base), (BPTR)(file), (CONST_APTR)(buffer), (LONG)(length))
 
 static __inline__ BPTR
-__dos_Input(struct DosLibrary *__base)
+__dos_Input(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -107,11 +119,12 @@ __dos_Input(struct DosLibrary *__base)
 	return (BPTR)_d0;
 }
 #define Input() __dos_Input((DOS_BASE_NAME))
+#define __Input_base(__in_base) __dos_Input((__in_base))
 
 static __inline__ BPTR
-__dos_Output(struct DosLibrary *__base)
+__dos_Output(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -123,14 +136,15 @@ __dos_Output(struct DosLibrary *__base)
 	return (BPTR)_d0;
 }
 #define Output() __dos_Output((DOS_BASE_NAME))
+#define __Output_base(__in_base) __dos_Output((__in_base))
 
 static __inline__ LONG
-__dos_Seek(struct DosLibrary *__base, BPTR file, LONG position, LONG offset)
+__dos_Seek(void *__base, BPTR file, LONG position, LONG offset)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(file);
 	register ULONG _d2 __asm("d2") = (ULONG)(position);
 	register ULONG _d3 __asm("d3") = (ULONG)(offset);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -141,12 +155,13 @@ __dos_Seek(struct DosLibrary *__base, BPTR file, LONG position, LONG offset)
 	return (LONG)_d0;
 }
 #define Seek(file, position, offset) __dos_Seek((DOS_BASE_NAME), (BPTR)(file), (LONG)(position), (LONG)(offset))
+#define __Seek_base(__in_base, file, position, offset) __dos_Seek((__in_base), (BPTR)(file), (LONG)(position), (LONG)(offset))
 
 static __inline__ LONG
-__dos_DeleteFile(struct DosLibrary *__base, CONST_STRPTR name)
+__dos_DeleteFile(void *__base, CONST_STRPTR name)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -157,13 +172,14 @@ __dos_DeleteFile(struct DosLibrary *__base, CONST_STRPTR name)
 	return (LONG)_d0;
 }
 #define DeleteFile(name) __dos_DeleteFile((DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __DeleteFile_base(__in_base, name) __dos_DeleteFile((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ LONG
-__dos_Rename(struct DosLibrary *__base, CONST_STRPTR oldName, CONST_STRPTR newName)
+__dos_Rename(void *__base, CONST_STRPTR oldName, CONST_STRPTR newName)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(oldName);
 	register ULONG _d2 __asm("d2") = (ULONG)(newName);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -174,13 +190,14 @@ __dos_Rename(struct DosLibrary *__base, CONST_STRPTR oldName, CONST_STRPTR newNa
 	return (LONG)_d0;
 }
 #define Rename(oldName, newName) __dos_Rename((DOS_BASE_NAME), (CONST_STRPTR)(oldName), (CONST_STRPTR)(newName))
+#define __Rename_base(__in_base, oldName, newName) __dos_Rename((__in_base), (CONST_STRPTR)(oldName), (CONST_STRPTR)(newName))
 
 static __inline__ BPTR
-__dos_Lock(struct DosLibrary *__base, CONST_STRPTR name, LONG type)
+__dos_Lock(void *__base, CONST_STRPTR name, LONG type)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(type);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -191,12 +208,13 @@ __dos_Lock(struct DosLibrary *__base, CONST_STRPTR name, LONG type)
 	return (BPTR)_d0;
 }
 #define Lock(name, type) __dos_Lock((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(type))
+#define __Lock_base(__in_base, name, type) __dos_Lock((__in_base), (CONST_STRPTR)(name), (LONG)(type))
 
 static __inline__ VOID
-__dos_UnLock(struct DosLibrary *__base, BPTR lock)
+__dos_UnLock(void *__base, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -207,12 +225,13 @@ __dos_UnLock(struct DosLibrary *__base, BPTR lock)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnLock(lock) __dos_UnLock((DOS_BASE_NAME), (BPTR)(lock))
+#define __UnLock_base(__in_base, lock) __dos_UnLock((__in_base), (BPTR)(lock))
 
 static __inline__ BPTR
-__dos_DupLock(struct DosLibrary *__base, BPTR lock)
+__dos_DupLock(void *__base, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -223,13 +242,14 @@ __dos_DupLock(struct DosLibrary *__base, BPTR lock)
 	return (BPTR)_d0;
 }
 #define DupLock(lock) __dos_DupLock((DOS_BASE_NAME), (BPTR)(lock))
+#define __DupLock_base(__in_base, lock) __dos_DupLock((__in_base), (BPTR)(lock))
 
 static __inline__ LONG
-__dos_Examine(struct DosLibrary *__base, BPTR lock, struct FileInfoBlock * fileInfoBlock)
+__dos_Examine(void *__base, BPTR lock, struct FileInfoBlock * fileInfoBlock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
 	register ULONG _d2 __asm("d2") = (ULONG)(fileInfoBlock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -240,13 +260,14 @@ __dos_Examine(struct DosLibrary *__base, BPTR lock, struct FileInfoBlock * fileI
 	return (LONG)_d0;
 }
 #define Examine(lock, fileInfoBlock) __dos_Examine((DOS_BASE_NAME), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
+#define __Examine_base(__in_base, lock, fileInfoBlock) __dos_Examine((__in_base), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
 
 static __inline__ LONG
-__dos_ExNext(struct DosLibrary *__base, BPTR lock, struct FileInfoBlock * fileInfoBlock)
+__dos_ExNext(void *__base, BPTR lock, struct FileInfoBlock * fileInfoBlock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
 	register ULONG _d2 __asm("d2") = (ULONG)(fileInfoBlock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -257,13 +278,14 @@ __dos_ExNext(struct DosLibrary *__base, BPTR lock, struct FileInfoBlock * fileIn
 	return (LONG)_d0;
 }
 #define ExNext(lock, fileInfoBlock) __dos_ExNext((DOS_BASE_NAME), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
+#define __ExNext_base(__in_base, lock, fileInfoBlock) __dos_ExNext((__in_base), (BPTR)(lock), (struct FileInfoBlock *)(fileInfoBlock))
 
 static __inline__ LONG
-__dos_Info(struct DosLibrary *__base, BPTR lock, struct InfoData * parameterBlock)
+__dos_Info(void *__base, BPTR lock, struct InfoData * parameterBlock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
 	register ULONG _d2 __asm("d2") = (ULONG)(parameterBlock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -274,12 +296,13 @@ __dos_Info(struct DosLibrary *__base, BPTR lock, struct InfoData * parameterBloc
 	return (LONG)_d0;
 }
 #define Info(lock, parameterBlock) __dos_Info((DOS_BASE_NAME), (BPTR)(lock), (struct InfoData *)(parameterBlock))
+#define __Info_base(__in_base, lock, parameterBlock) __dos_Info((__in_base), (BPTR)(lock), (struct InfoData *)(parameterBlock))
 
 static __inline__ BPTR
-__dos_CreateDir(struct DosLibrary *__base, CONST_STRPTR name)
+__dos_CreateDir(void *__base, CONST_STRPTR name)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -290,12 +313,13 @@ __dos_CreateDir(struct DosLibrary *__base, CONST_STRPTR name)
 	return (BPTR)_d0;
 }
 #define CreateDir(name) __dos_CreateDir((DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __CreateDir_base(__in_base, name) __dos_CreateDir((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BPTR
-__dos_CurrentDir(struct DosLibrary *__base, BPTR lock)
+__dos_CurrentDir(void *__base, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -306,11 +330,12 @@ __dos_CurrentDir(struct DosLibrary *__base, BPTR lock)
 	return (BPTR)_d0;
 }
 #define CurrentDir(lock) __dos_CurrentDir((DOS_BASE_NAME), (BPTR)(lock))
+#define __CurrentDir_base(__in_base, lock) __dos_CurrentDir((__in_base), (BPTR)(lock))
 
 static __inline__ LONG
-__dos_IoErr(struct DosLibrary *__base)
+__dos_IoErr(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -322,15 +347,16 @@ __dos_IoErr(struct DosLibrary *__base)
 	return (LONG)_d0;
 }
 #define IoErr() __dos_IoErr((DOS_BASE_NAME))
+#define __IoErr_base(__in_base) __dos_IoErr((__in_base))
 
 static __inline__ struct MsgPort *
-__dos_CreateProc(struct DosLibrary *__base, CONST_STRPTR name, LONG pri, BPTR segList, LONG stackSize)
+__dos_CreateProc(void *__base, CONST_STRPTR name, LONG pri, BPTR segList, LONG stackSize)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(pri);
 	register ULONG _d3 __asm("d3") = (ULONG)(segList);
 	register ULONG _d4 __asm("d4") = (ULONG)(stackSize);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -341,12 +367,13 @@ __dos_CreateProc(struct DosLibrary *__base, CONST_STRPTR name, LONG pri, BPTR se
 	return (struct MsgPort *)_d0;
 }
 #define CreateProc(name, pri, segList, stackSize) __dos_CreateProc((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(pri), (BPTR)(segList), (LONG)(stackSize))
+#define __CreateProc_base(__in_base, name, pri, segList, stackSize) __dos_CreateProc((__in_base), (CONST_STRPTR)(name), (LONG)(pri), (BPTR)(segList), (LONG)(stackSize))
 
 static __inline__ VOID
-__dos_Exit(struct DosLibrary *__base, LONG returnCode)
+__dos_Exit(void *__base, LONG returnCode)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(returnCode);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -357,12 +384,13 @@ __dos_Exit(struct DosLibrary *__base, LONG returnCode)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Exit(returnCode) __dos_Exit((DOS_BASE_NAME), (LONG)(returnCode))
+#define __Exit_base(__in_base, returnCode) __dos_Exit((__in_base), (LONG)(returnCode))
 
 static __inline__ BPTR
-__dos_LoadSeg(struct DosLibrary *__base, CONST_STRPTR name)
+__dos_LoadSeg(void *__base, CONST_STRPTR name)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -373,12 +401,13 @@ __dos_LoadSeg(struct DosLibrary *__base, CONST_STRPTR name)
 	return (BPTR)_d0;
 }
 #define LoadSeg(name) __dos_LoadSeg((DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __LoadSeg_base(__in_base, name) __dos_LoadSeg((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ VOID
-__dos_UnLoadSeg(struct DosLibrary *__base, BPTR seglist)
+__dos_UnLoadSeg(void *__base, BPTR seglist)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(seglist);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -389,12 +418,13 @@ __dos_UnLoadSeg(struct DosLibrary *__base, BPTR seglist)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnLoadSeg(seglist) __dos_UnLoadSeg((DOS_BASE_NAME), (BPTR)(seglist))
+#define __UnLoadSeg_base(__in_base, seglist) __dos_UnLoadSeg((__in_base), (BPTR)(seglist))
 
 static __inline__ struct MsgPort *
-__dos_DeviceProc(struct DosLibrary *__base, CONST_STRPTR name)
+__dos_DeviceProc(void *__base, CONST_STRPTR name)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -405,13 +435,14 @@ __dos_DeviceProc(struct DosLibrary *__base, CONST_STRPTR name)
 	return (struct MsgPort *)_d0;
 }
 #define DeviceProc(name) __dos_DeviceProc((DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __DeviceProc_base(__in_base, name) __dos_DeviceProc((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ LONG
-__dos_SetComment(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR comment)
+__dos_SetComment(void *__base, CONST_STRPTR name, CONST_STRPTR comment)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(comment);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -422,13 +453,14 @@ __dos_SetComment(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR comm
 	return (LONG)_d0;
 }
 #define SetComment(name, comment) __dos_SetComment((DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(comment))
+#define __SetComment_base(__in_base, name, comment) __dos_SetComment((__in_base), (CONST_STRPTR)(name), (CONST_STRPTR)(comment))
 
 static __inline__ LONG
-__dos_SetProtection(struct DosLibrary *__base, CONST_STRPTR name, LONG protect)
+__dos_SetProtection(void *__base, CONST_STRPTR name, LONG protect)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(protect);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -439,12 +471,13 @@ __dos_SetProtection(struct DosLibrary *__base, CONST_STRPTR name, LONG protect)
 	return (LONG)_d0;
 }
 #define SetProtection(name, protect) __dos_SetProtection((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(protect))
+#define __SetProtection_base(__in_base, name, protect) __dos_SetProtection((__in_base), (CONST_STRPTR)(name), (LONG)(protect))
 
 static __inline__ struct DateStamp *
-__dos_DateStamp(struct DosLibrary *__base, struct DateStamp * date)
+__dos_DateStamp(void *__base, struct DateStamp * date)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(date);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -455,12 +488,13 @@ __dos_DateStamp(struct DosLibrary *__base, struct DateStamp * date)
 	return (struct DateStamp *)_d0;
 }
 #define DateStamp(date) __dos_DateStamp((DOS_BASE_NAME), (struct DateStamp *)(date))
+#define __DateStamp_base(__in_base, date) __dos_DateStamp((__in_base), (struct DateStamp *)(date))
 
 static __inline__ VOID
-__dos_Delay(struct DosLibrary *__base, LONG timeout)
+__dos_Delay(void *__base, LONG timeout)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(timeout);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -471,13 +505,14 @@ __dos_Delay(struct DosLibrary *__base, LONG timeout)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Delay(timeout) __dos_Delay((DOS_BASE_NAME), (LONG)(timeout))
+#define __Delay_base(__in_base, timeout) __dos_Delay((__in_base), (LONG)(timeout))
 
 static __inline__ LONG
-__dos_WaitForChar(struct DosLibrary *__base, BPTR file, LONG timeout)
+__dos_WaitForChar(void *__base, BPTR file, LONG timeout)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(file);
 	register ULONG _d2 __asm("d2") = (ULONG)(timeout);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -488,12 +523,13 @@ __dos_WaitForChar(struct DosLibrary *__base, BPTR file, LONG timeout)
 	return (LONG)_d0;
 }
 #define WaitForChar(file, timeout) __dos_WaitForChar((DOS_BASE_NAME), (BPTR)(file), (LONG)(timeout))
+#define __WaitForChar_base(__in_base, file, timeout) __dos_WaitForChar((__in_base), (BPTR)(file), (LONG)(timeout))
 
 static __inline__ BPTR
-__dos_ParentDir(struct DosLibrary *__base, BPTR lock)
+__dos_ParentDir(void *__base, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -504,12 +540,13 @@ __dos_ParentDir(struct DosLibrary *__base, BPTR lock)
 	return (BPTR)_d0;
 }
 #define ParentDir(lock) __dos_ParentDir((DOS_BASE_NAME), (BPTR)(lock))
+#define __ParentDir_base(__in_base, lock) __dos_ParentDir((__in_base), (BPTR)(lock))
 
 static __inline__ LONG
-__dos_IsInteractive(struct DosLibrary *__base, BPTR file)
+__dos_IsInteractive(void *__base, BPTR file)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(file);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -520,14 +557,15 @@ __dos_IsInteractive(struct DosLibrary *__base, BPTR file)
 	return (LONG)_d0;
 }
 #define IsInteractive(file) __dos_IsInteractive((DOS_BASE_NAME), (BPTR)(file))
+#define __IsInteractive_base(__in_base, file) __dos_IsInteractive((__in_base), (BPTR)(file))
 
 static __inline__ LONG
-__dos_Execute(struct DosLibrary *__base, CONST_STRPTR string, BPTR file, BPTR file2)
+__dos_Execute(void *__base, CONST_STRPTR string, BPTR file, BPTR file2)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(string);
 	register ULONG _d2 __asm("d2") = (ULONG)(file);
 	register ULONG _d3 __asm("d3") = (ULONG)(file2);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -538,13 +576,14 @@ __dos_Execute(struct DosLibrary *__base, CONST_STRPTR string, BPTR file, BPTR fi
 	return (LONG)_d0;
 }
 #define Execute(string, file, file2) __dos_Execute((DOS_BASE_NAME), (CONST_STRPTR)(string), (BPTR)(file), (BPTR)(file2))
+#define __Execute_base(__in_base, string, file, file2) __dos_Execute((__in_base), (CONST_STRPTR)(string), (BPTR)(file), (BPTR)(file2))
 
 static __inline__ APTR
-__dos_AllocDosObject(struct DosLibrary *__base, ULONG type, CONST struct TagItem * tags)
+__dos_AllocDosObject(void *__base, ULONG type, CONST struct TagItem * tags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(type);
 	register ULONG _d2 __asm("d2") = (ULONG)(tags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -555,17 +594,27 @@ __dos_AllocDosObject(struct DosLibrary *__base, ULONG type, CONST struct TagItem
 	return (APTR)_d0;
 }
 #define AllocDosObject(type, tags) __dos_AllocDosObject((DOS_BASE_NAME), (ULONG)(type), (CONST struct TagItem *)(tags))
+#define __AllocDosObject_base(__in_base, type, tags) __dos_AllocDosObject((__in_base), (ULONG)(type), (CONST struct TagItem *)(tags))
 
 #define AllocDosObjectTagList(...) AllocDosObject(__VA_ARGS__)
 
-#define AllocDosObjectTags(type, ...) (AllocDosObjectTags)((ULONG)(type), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR APTR
+__AllocDosObjectTags_va(void *__base, ULONG type, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, type);
+	APTR _r = (APTR)__dos_AllocDosObject(__base, (ULONG)(type), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocDosObjectTags(type, ...) __AllocDosObjectTags_va((DOS_BASE_NAME), (ULONG)(type), ##__VA_ARGS__)
 
 static __inline__ VOID
-__dos_FreeDosObject(struct DosLibrary *__base, ULONG type, APTR ptr)
+__dos_FreeDosObject(void *__base, ULONG type, APTR ptr)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(type);
 	register ULONG _d2 __asm("d2") = (ULONG)(ptr);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -576,9 +625,10 @@ __dos_FreeDosObject(struct DosLibrary *__base, ULONG type, APTR ptr)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeDosObject(type, ptr) __dos_FreeDosObject((DOS_BASE_NAME), (ULONG)(type), (APTR)(ptr))
+#define __FreeDosObject_base(__in_base, type, ptr) __dos_FreeDosObject((__in_base), (ULONG)(type), (APTR)(ptr))
 
 static __inline__ LONG
-__dos_DoPkt(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3, LONG arg4, LONG arg5)
+__dos_DoPkt(void *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3, LONG arg4, LONG arg5)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(port);
 	register ULONG _d2 __asm("d2") = (ULONG)(action);
@@ -587,7 +637,7 @@ __dos_DoPkt(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG 
 	register ULONG _d5 __asm("d5") = (ULONG)(arg3);
 	register ULONG _d6 __asm("d6") = (ULONG)(arg4);
 	register ULONG _d7 __asm("d7") = (ULONG)(arg5);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -598,13 +648,14 @@ __dos_DoPkt(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG 
 	return (LONG)_d0;
 }
 #define DoPkt(port, action, arg1, arg2, arg3, arg4, arg5) __dos_DoPkt((DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4), (LONG)(arg5))
+#define __DoPkt_base(__in_base, port, action, arg1, arg2, arg3, arg4, arg5) __dos_DoPkt((__in_base), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4), (LONG)(arg5))
 
 static __inline__ LONG
-__dos_DoPkt0(struct DosLibrary *__base, struct MsgPort * port, LONG action)
+__dos_DoPkt0(void *__base, struct MsgPort * port, LONG action)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(port);
 	register ULONG _d2 __asm("d2") = (ULONG)(action);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -615,14 +666,15 @@ __dos_DoPkt0(struct DosLibrary *__base, struct MsgPort * port, LONG action)
 	return (LONG)_d0;
 }
 #define DoPkt0(port, action) __dos_DoPkt0((DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action))
+#define __DoPkt0_base(__in_base, port, action) __dos_DoPkt0((__in_base), (struct MsgPort *)(port), (LONG)(action))
 
 static __inline__ LONG
-__dos_DoPkt1(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1)
+__dos_DoPkt1(void *__base, struct MsgPort * port, LONG action, LONG arg1)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(port);
 	register ULONG _d2 __asm("d2") = (ULONG)(action);
 	register ULONG _d3 __asm("d3") = (ULONG)(arg1);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -633,15 +685,16 @@ __dos_DoPkt1(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 	return (LONG)_d0;
 }
 #define DoPkt1(port, action, arg1) __dos_DoPkt1((DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1))
+#define __DoPkt1_base(__in_base, port, action, arg1) __dos_DoPkt1((__in_base), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1))
 
 static __inline__ LONG
-__dos_DoPkt2(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2)
+__dos_DoPkt2(void *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(port);
 	register ULONG _d2 __asm("d2") = (ULONG)(action);
 	register ULONG _d3 __asm("d3") = (ULONG)(arg1);
 	register ULONG _d4 __asm("d4") = (ULONG)(arg2);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -652,16 +705,17 @@ __dos_DoPkt2(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 	return (LONG)_d0;
 }
 #define DoPkt2(port, action, arg1, arg2) __dos_DoPkt2((DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2))
+#define __DoPkt2_base(__in_base, port, action, arg1, arg2) __dos_DoPkt2((__in_base), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2))
 
 static __inline__ LONG
-__dos_DoPkt3(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3)
+__dos_DoPkt3(void *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(port);
 	register ULONG _d2 __asm("d2") = (ULONG)(action);
 	register ULONG _d3 __asm("d3") = (ULONG)(arg1);
 	register ULONG _d4 __asm("d4") = (ULONG)(arg2);
 	register ULONG _d5 __asm("d5") = (ULONG)(arg3);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -672,9 +726,10 @@ __dos_DoPkt3(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 	return (LONG)_d0;
 }
 #define DoPkt3(port, action, arg1, arg2, arg3) __dos_DoPkt3((DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3))
+#define __DoPkt3_base(__in_base, port, action, arg1, arg2, arg3) __dos_DoPkt3((__in_base), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3))
 
 static __inline__ LONG
-__dos_DoPkt4(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3, LONG arg4)
+__dos_DoPkt4(void *__base, struct MsgPort * port, LONG action, LONG arg1, LONG arg2, LONG arg3, LONG arg4)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(port);
 	register ULONG _d2 __asm("d2") = (ULONG)(action);
@@ -682,7 +737,7 @@ __dos_DoPkt4(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 	register ULONG _d4 __asm("d4") = (ULONG)(arg2);
 	register ULONG _d5 __asm("d5") = (ULONG)(arg3);
 	register ULONG _d6 __asm("d6") = (ULONG)(arg4);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -693,14 +748,15 @@ __dos_DoPkt4(struct DosLibrary *__base, struct MsgPort * port, LONG action, LONG
 	return (LONG)_d0;
 }
 #define DoPkt4(port, action, arg1, arg2, arg3, arg4) __dos_DoPkt4((DOS_BASE_NAME), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4))
+#define __DoPkt4_base(__in_base, port, action, arg1, arg2, arg3, arg4) __dos_DoPkt4((__in_base), (struct MsgPort *)(port), (LONG)(action), (LONG)(arg1), (LONG)(arg2), (LONG)(arg3), (LONG)(arg4))
 
 static __inline__ VOID
-__dos_SendPkt(struct DosLibrary *__base, struct DosPacket * dp, struct MsgPort * port, struct MsgPort * replyport)
+__dos_SendPkt(void *__base, struct DosPacket * dp, struct MsgPort * port, struct MsgPort * replyport)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dp);
 	register ULONG _d2 __asm("d2") = (ULONG)(port);
 	register ULONG _d3 __asm("d3") = (ULONG)(replyport);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -711,11 +767,12 @@ __dos_SendPkt(struct DosLibrary *__base, struct DosPacket * dp, struct MsgPort *
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SendPkt(dp, port, replyport) __dos_SendPkt((DOS_BASE_NAME), (struct DosPacket *)(dp), (struct MsgPort *)(port), (struct MsgPort *)(replyport))
+#define __SendPkt_base(__in_base, dp, port, replyport) __dos_SendPkt((__in_base), (struct DosPacket *)(dp), (struct MsgPort *)(port), (struct MsgPort *)(replyport))
 
 static __inline__ struct DosPacket *
-__dos_WaitPkt(struct DosLibrary *__base)
+__dos_WaitPkt(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -727,14 +784,15 @@ __dos_WaitPkt(struct DosLibrary *__base)
 	return (struct DosPacket *)_d0;
 }
 #define WaitPkt() __dos_WaitPkt((DOS_BASE_NAME))
+#define __WaitPkt_base(__in_base) __dos_WaitPkt((__in_base))
 
 static __inline__ VOID
-__dos_ReplyPkt(struct DosLibrary *__base, struct DosPacket * dp, LONG res1, LONG res2)
+__dos_ReplyPkt(void *__base, struct DosPacket * dp, LONG res1, LONG res2)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dp);
 	register ULONG _d2 __asm("d2") = (ULONG)(res1);
 	register ULONG _d3 __asm("d3") = (ULONG)(res2);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -745,13 +803,14 @@ __dos_ReplyPkt(struct DosLibrary *__base, struct DosPacket * dp, LONG res1, LONG
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReplyPkt(dp, res1, res2) __dos_ReplyPkt((DOS_BASE_NAME), (struct DosPacket *)(dp), (LONG)(res1), (LONG)(res2))
+#define __ReplyPkt_base(__in_base, dp, res1, res2) __dos_ReplyPkt((__in_base), (struct DosPacket *)(dp), (LONG)(res1), (LONG)(res2))
 
 static __inline__ VOID
-__dos_AbortPkt(struct DosLibrary *__base, struct MsgPort * port, struct DosPacket * pkt)
+__dos_AbortPkt(void *__base, struct MsgPort * port, struct DosPacket * pkt)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(port);
 	register ULONG _d2 __asm("d2") = (ULONG)(pkt);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -762,16 +821,17 @@ __dos_AbortPkt(struct DosLibrary *__base, struct MsgPort * port, struct DosPacke
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AbortPkt(port, pkt) __dos_AbortPkt((DOS_BASE_NAME), (struct MsgPort *)(port), (struct DosPacket *)(pkt))
+#define __AbortPkt_base(__in_base, port, pkt) __dos_AbortPkt((__in_base), (struct MsgPort *)(port), (struct DosPacket *)(pkt))
 
 static __inline__ BOOL
-__dos_LockRecord(struct DosLibrary *__base, BPTR fh, ULONG offset, ULONG length, ULONG mode, ULONG timeout)
+__dos_LockRecord(void *__base, BPTR fh, ULONG offset, ULONG length, ULONG mode, ULONG timeout)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(offset);
 	register ULONG _d3 __asm("d3") = (ULONG)(length);
 	register ULONG _d4 __asm("d4") = (ULONG)(mode);
 	register ULONG _d5 __asm("d5") = (ULONG)(timeout);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -782,13 +842,14 @@ __dos_LockRecord(struct DosLibrary *__base, BPTR fh, ULONG offset, ULONG length,
 	return (BOOL)_d0;
 }
 #define LockRecord(fh, offset, length, mode, timeout) __dos_LockRecord((DOS_BASE_NAME), (BPTR)(fh), (ULONG)(offset), (ULONG)(length), (ULONG)(mode), (ULONG)(timeout))
+#define __LockRecord_base(__in_base, fh, offset, length, mode, timeout) __dos_LockRecord((__in_base), (BPTR)(fh), (ULONG)(offset), (ULONG)(length), (ULONG)(mode), (ULONG)(timeout))
 
 static __inline__ BOOL
-__dos_LockRecords(struct DosLibrary *__base, struct RecordLock * recArray, ULONG timeout)
+__dos_LockRecords(void *__base, struct RecordLock * recArray, ULONG timeout)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(recArray);
 	register ULONG _d2 __asm("d2") = (ULONG)(timeout);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -799,14 +860,15 @@ __dos_LockRecords(struct DosLibrary *__base, struct RecordLock * recArray, ULONG
 	return (BOOL)_d0;
 }
 #define LockRecords(recArray, timeout) __dos_LockRecords((DOS_BASE_NAME), (struct RecordLock *)(recArray), (ULONG)(timeout))
+#define __LockRecords_base(__in_base, recArray, timeout) __dos_LockRecords((__in_base), (struct RecordLock *)(recArray), (ULONG)(timeout))
 
 static __inline__ BOOL
-__dos_UnLockRecord(struct DosLibrary *__base, BPTR fh, ULONG offset, ULONG length)
+__dos_UnLockRecord(void *__base, BPTR fh, ULONG offset, ULONG length)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(offset);
 	register ULONG _d3 __asm("d3") = (ULONG)(length);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -817,12 +879,13 @@ __dos_UnLockRecord(struct DosLibrary *__base, BPTR fh, ULONG offset, ULONG lengt
 	return (BOOL)_d0;
 }
 #define UnLockRecord(fh, offset, length) __dos_UnLockRecord((DOS_BASE_NAME), (BPTR)(fh), (ULONG)(offset), (ULONG)(length))
+#define __UnLockRecord_base(__in_base, fh, offset, length) __dos_UnLockRecord((__in_base), (BPTR)(fh), (ULONG)(offset), (ULONG)(length))
 
 static __inline__ BOOL
-__dos_UnLockRecords(struct DosLibrary *__base, struct RecordLock * recArray)
+__dos_UnLockRecords(void *__base, struct RecordLock * recArray)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(recArray);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -833,12 +896,13 @@ __dos_UnLockRecords(struct DosLibrary *__base, struct RecordLock * recArray)
 	return (BOOL)_d0;
 }
 #define UnLockRecords(recArray) __dos_UnLockRecords((DOS_BASE_NAME), (struct RecordLock *)(recArray))
+#define __UnLockRecords_base(__in_base, recArray) __dos_UnLockRecords((__in_base), (struct RecordLock *)(recArray))
 
 static __inline__ BPTR
-__dos_SelectInput(struct DosLibrary *__base, BPTR fh)
+__dos_SelectInput(void *__base, BPTR fh)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -849,12 +913,13 @@ __dos_SelectInput(struct DosLibrary *__base, BPTR fh)
 	return (BPTR)_d0;
 }
 #define SelectInput(fh) __dos_SelectInput((DOS_BASE_NAME), (BPTR)(fh))
+#define __SelectInput_base(__in_base, fh) __dos_SelectInput((__in_base), (BPTR)(fh))
 
 static __inline__ BPTR
-__dos_SelectOutput(struct DosLibrary *__base, BPTR fh)
+__dos_SelectOutput(void *__base, BPTR fh)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -865,12 +930,13 @@ __dos_SelectOutput(struct DosLibrary *__base, BPTR fh)
 	return (BPTR)_d0;
 }
 #define SelectOutput(fh) __dos_SelectOutput((DOS_BASE_NAME), (BPTR)(fh))
+#define __SelectOutput_base(__in_base, fh) __dos_SelectOutput((__in_base), (BPTR)(fh))
 
 static __inline__ LONG
-__dos_FGetC(struct DosLibrary *__base, BPTR fh)
+__dos_FGetC(void *__base, BPTR fh)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -881,13 +947,14 @@ __dos_FGetC(struct DosLibrary *__base, BPTR fh)
 	return (LONG)_d0;
 }
 #define FGetC(fh) __dos_FGetC((DOS_BASE_NAME), (BPTR)(fh))
+#define __FGetC_base(__in_base, fh) __dos_FGetC((__in_base), (BPTR)(fh))
 
 static __inline__ LONG
-__dos_FPutC(struct DosLibrary *__base, BPTR fh, LONG ch)
+__dos_FPutC(void *__base, BPTR fh, LONG ch)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(ch);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -898,13 +965,14 @@ __dos_FPutC(struct DosLibrary *__base, BPTR fh, LONG ch)
 	return (LONG)_d0;
 }
 #define FPutC(fh, ch) __dos_FPutC((DOS_BASE_NAME), (BPTR)(fh), (LONG)(ch))
+#define __FPutC_base(__in_base, fh, ch) __dos_FPutC((__in_base), (BPTR)(fh), (LONG)(ch))
 
 static __inline__ LONG
-__dos_UnGetC(struct DosLibrary *__base, BPTR fh, LONG character)
+__dos_UnGetC(void *__base, BPTR fh, LONG character)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(character);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -915,15 +983,16 @@ __dos_UnGetC(struct DosLibrary *__base, BPTR fh, LONG character)
 	return (LONG)_d0;
 }
 #define UnGetC(fh, character) __dos_UnGetC((DOS_BASE_NAME), (BPTR)(fh), (LONG)(character))
+#define __UnGetC_base(__in_base, fh, character) __dos_UnGetC((__in_base), (BPTR)(fh), (LONG)(character))
 
 static __inline__ LONG
-__dos_FRead(struct DosLibrary *__base, BPTR fh, APTR block, ULONG blocklen, ULONG number)
+__dos_FRead(void *__base, BPTR fh, APTR block, ULONG blocklen, ULONG number)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(block);
 	register ULONG _d3 __asm("d3") = (ULONG)(blocklen);
 	register ULONG _d4 __asm("d4") = (ULONG)(number);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -934,15 +1003,16 @@ __dos_FRead(struct DosLibrary *__base, BPTR fh, APTR block, ULONG blocklen, ULON
 	return (LONG)_d0;
 }
 #define FRead(fh, block, blocklen, number) __dos_FRead((DOS_BASE_NAME), (BPTR)(fh), (APTR)(block), (ULONG)(blocklen), (ULONG)(number))
+#define __FRead_base(__in_base, fh, block, blocklen, number) __dos_FRead((__in_base), (BPTR)(fh), (APTR)(block), (ULONG)(blocklen), (ULONG)(number))
 
 static __inline__ LONG
-__dos_FWrite(struct DosLibrary *__base, BPTR fh, CONST_APTR block, ULONG blocklen, ULONG number)
+__dos_FWrite(void *__base, BPTR fh, CONST_APTR block, ULONG blocklen, ULONG number)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(block);
 	register ULONG _d3 __asm("d3") = (ULONG)(blocklen);
 	register ULONG _d4 __asm("d4") = (ULONG)(number);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -953,14 +1023,15 @@ __dos_FWrite(struct DosLibrary *__base, BPTR fh, CONST_APTR block, ULONG blockle
 	return (LONG)_d0;
 }
 #define FWrite(fh, block, blocklen, number) __dos_FWrite((DOS_BASE_NAME), (BPTR)(fh), (CONST_APTR)(block), (ULONG)(blocklen), (ULONG)(number))
+#define __FWrite_base(__in_base, fh, block, blocklen, number) __dos_FWrite((__in_base), (BPTR)(fh), (CONST_APTR)(block), (ULONG)(blocklen), (ULONG)(number))
 
 static __inline__ STRPTR
-__dos_FGets(struct DosLibrary *__base, BPTR fh, STRPTR buf, ULONG buflen)
+__dos_FGets(void *__base, BPTR fh, STRPTR buf, ULONG buflen)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(buf);
 	register ULONG _d3 __asm("d3") = (ULONG)(buflen);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -971,13 +1042,14 @@ __dos_FGets(struct DosLibrary *__base, BPTR fh, STRPTR buf, ULONG buflen)
 	return (STRPTR)_d0;
 }
 #define FGets(fh, buf, buflen) __dos_FGets((DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buf), (ULONG)(buflen))
+#define __FGets_base(__in_base, fh, buf, buflen) __dos_FGets((__in_base), (BPTR)(fh), (STRPTR)(buf), (ULONG)(buflen))
 
 static __inline__ LONG
-__dos_FPuts(struct DosLibrary *__base, BPTR fh, CONST_STRPTR str)
+__dos_FPuts(void *__base, BPTR fh, CONST_STRPTR str)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(str);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -988,14 +1060,15 @@ __dos_FPuts(struct DosLibrary *__base, BPTR fh, CONST_STRPTR str)
 	return (LONG)_d0;
 }
 #define FPuts(fh, str) __dos_FPuts((DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(str))
+#define __FPuts_base(__in_base, fh, str) __dos_FPuts((__in_base), (BPTR)(fh), (CONST_STRPTR)(str))
 
 static __inline__ VOID
-__dos_VFWritef(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST LONG * argarray)
+__dos_VFWritef(void *__base, BPTR fh, CONST_STRPTR format, CONST LONG * argarray)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(format);
 	register ULONG _d3 __asm("d3") = (ULONG)(argarray);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1006,16 +1079,25 @@ __dos_VFWritef(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST LO
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define VFWritef(fh, format, argarray) __dos_VFWritef((DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)(argarray))
+#define __VFWritef_base(__in_base, fh, format, argarray) __dos_VFWritef((__in_base), (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)(argarray))
 
-#define FWritef(fh, format, ...) (FWritef)((BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__FWritef_va(void *__base, BPTR fh, CONST_STRPTR format, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, format);
+	__dos_VFWritef(__base, (BPTR)(fh), (CONST_STRPTR)(format), (CONST LONG *)_ap);
+	__builtin_va_end(_ap);
+}
+#define FWritef(fh, format, ...) __FWritef_va((DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
 
 static __inline__ LONG
-__dos_VFPrintf(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST_APTR argarray)
+__dos_VFPrintf(void *__base, BPTR fh, CONST_STRPTR format, CONST_APTR argarray)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(format);
 	register ULONG _d3 __asm("d3") = (ULONG)(argarray);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1026,14 +1108,24 @@ __dos_VFPrintf(struct DosLibrary *__base, BPTR fh, CONST_STRPTR format, CONST_AP
 	return (LONG)_d0;
 }
 #define VFPrintf(fh, format, argarray) __dos_VFPrintf((DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
+#define __VFPrintf_base(__in_base, fh, format, argarray) __dos_VFPrintf((__in_base), (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
 
-#define FPrintf(fh, format, ...) (FPrintf)((BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__FPrintf_va(void *__base, BPTR fh, CONST_STRPTR format, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, format);
+	LONG _r = (LONG)__dos_VFPrintf(__base, (BPTR)(fh), (CONST_STRPTR)(format), (CONST_APTR)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define FPrintf(fh, format, ...) __FPrintf_va((DOS_BASE_NAME), (BPTR)(fh), (CONST_STRPTR)(format), ##__VA_ARGS__)
 
 static __inline__ LONG
-__dos_Flush(struct DosLibrary *__base, BPTR fh)
+__dos_Flush(void *__base, BPTR fh)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1044,15 +1136,16 @@ __dos_Flush(struct DosLibrary *__base, BPTR fh)
 	return (LONG)_d0;
 }
 #define Flush(fh) __dos_Flush((DOS_BASE_NAME), (BPTR)(fh))
+#define __Flush_base(__in_base, fh) __dos_Flush((__in_base), (BPTR)(fh))
 
 static __inline__ LONG
-__dos_SetVBuf(struct DosLibrary *__base, BPTR fh, STRPTR buff, LONG type, LONG size)
+__dos_SetVBuf(void *__base, BPTR fh, STRPTR buff, LONG type, LONG size)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(buff);
 	register ULONG _d3 __asm("d3") = (ULONG)(type);
 	register ULONG _d4 __asm("d4") = (ULONG)(size);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1063,12 +1156,13 @@ __dos_SetVBuf(struct DosLibrary *__base, BPTR fh, STRPTR buff, LONG type, LONG s
 	return (LONG)_d0;
 }
 #define SetVBuf(fh, buff, type, size) __dos_SetVBuf((DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buff), (LONG)(type), (LONG)(size))
+#define __SetVBuf_base(__in_base, fh, buff, type, size) __dos_SetVBuf((__in_base), (BPTR)(fh), (STRPTR)(buff), (LONG)(type), (LONG)(size))
 
 static __inline__ BPTR
-__dos_DupLockFromFH(struct DosLibrary *__base, BPTR fh)
+__dos_DupLockFromFH(void *__base, BPTR fh)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1079,12 +1173,13 @@ __dos_DupLockFromFH(struct DosLibrary *__base, BPTR fh)
 	return (BPTR)_d0;
 }
 #define DupLockFromFH(fh) __dos_DupLockFromFH((DOS_BASE_NAME), (BPTR)(fh))
+#define __DupLockFromFH_base(__in_base, fh) __dos_DupLockFromFH((__in_base), (BPTR)(fh))
 
 static __inline__ BPTR
-__dos_OpenFromLock(struct DosLibrary *__base, BPTR lock)
+__dos_OpenFromLock(void *__base, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1095,12 +1190,13 @@ __dos_OpenFromLock(struct DosLibrary *__base, BPTR lock)
 	return (BPTR)_d0;
 }
 #define OpenFromLock(lock) __dos_OpenFromLock((DOS_BASE_NAME), (BPTR)(lock))
+#define __OpenFromLock_base(__in_base, lock) __dos_OpenFromLock((__in_base), (BPTR)(lock))
 
 static __inline__ BPTR
-__dos_ParentOfFH(struct DosLibrary *__base, BPTR fh)
+__dos_ParentOfFH(void *__base, BPTR fh)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1111,13 +1207,14 @@ __dos_ParentOfFH(struct DosLibrary *__base, BPTR fh)
 	return (BPTR)_d0;
 }
 #define ParentOfFH(fh) __dos_ParentOfFH((DOS_BASE_NAME), (BPTR)(fh))
+#define __ParentOfFH_base(__in_base, fh) __dos_ParentOfFH((__in_base), (BPTR)(fh))
 
 static __inline__ BOOL
-__dos_ExamineFH(struct DosLibrary *__base, BPTR fh, struct FileInfoBlock * fib)
+__dos_ExamineFH(void *__base, BPTR fh, struct FileInfoBlock * fib)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(fib);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1128,13 +1225,14 @@ __dos_ExamineFH(struct DosLibrary *__base, BPTR fh, struct FileInfoBlock * fib)
 	return (BOOL)_d0;
 }
 #define ExamineFH(fh, fib) __dos_ExamineFH((DOS_BASE_NAME), (BPTR)(fh), (struct FileInfoBlock *)(fib))
+#define __ExamineFH_base(__in_base, fh, fib) __dos_ExamineFH((__in_base), (BPTR)(fh), (struct FileInfoBlock *)(fib))
 
 static __inline__ LONG
-__dos_SetFileDate(struct DosLibrary *__base, CONST_STRPTR name, CONST struct DateStamp * date)
+__dos_SetFileDate(void *__base, CONST_STRPTR name, CONST struct DateStamp * date)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(date);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1145,14 +1243,15 @@ __dos_SetFileDate(struct DosLibrary *__base, CONST_STRPTR name, CONST struct Dat
 	return (LONG)_d0;
 }
 #define SetFileDate(name, date) __dos_SetFileDate((DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST struct DateStamp *)(date))
+#define __SetFileDate_base(__in_base, name, date) __dos_SetFileDate((__in_base), (CONST_STRPTR)(name), (CONST struct DateStamp *)(date))
 
 static __inline__ LONG
-__dos_NameFromLock(struct DosLibrary *__base, BPTR lock, STRPTR buffer, LONG len)
+__dos_NameFromLock(void *__base, BPTR lock, STRPTR buffer, LONG len)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
 	register ULONG _d2 __asm("d2") = (ULONG)(buffer);
 	register ULONG _d3 __asm("d3") = (ULONG)(len);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1163,14 +1262,15 @@ __dos_NameFromLock(struct DosLibrary *__base, BPTR lock, STRPTR buffer, LONG len
 	return (LONG)_d0;
 }
 #define NameFromLock(lock, buffer, len) __dos_NameFromLock((DOS_BASE_NAME), (BPTR)(lock), (STRPTR)(buffer), (LONG)(len))
+#define __NameFromLock_base(__in_base, lock, buffer, len) __dos_NameFromLock((__in_base), (BPTR)(lock), (STRPTR)(buffer), (LONG)(len))
 
 static __inline__ LONG
-__dos_NameFromFH(struct DosLibrary *__base, BPTR fh, STRPTR buffer, LONG len)
+__dos_NameFromFH(void *__base, BPTR fh, STRPTR buffer, LONG len)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(buffer);
 	register ULONG _d3 __asm("d3") = (ULONG)(len);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1181,16 +1281,17 @@ __dos_NameFromFH(struct DosLibrary *__base, BPTR fh, STRPTR buffer, LONG len)
 	return (LONG)_d0;
 }
 #define NameFromFH(fh, buffer, len) __dos_NameFromFH((DOS_BASE_NAME), (BPTR)(fh), (STRPTR)(buffer), (LONG)(len))
+#define __NameFromFH_base(__in_base, fh, buffer, len) __dos_NameFromFH((__in_base), (BPTR)(fh), (STRPTR)(buffer), (LONG)(len))
 
 static __inline__ WORD
-__dos_SplitName(struct DosLibrary *__base, CONST_STRPTR name, UBYTE separator, STRPTR buf, WORD oldpos, LONG size)
+__dos_SplitName(void *__base, CONST_STRPTR name, UBYTE separator, STRPTR buf, WORD oldpos, LONG size)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(separator);
 	register ULONG _d3 __asm("d3") = (ULONG)(buf);
 	register ULONG _d4 __asm("d4") = (ULONG)(oldpos);
 	register ULONG _d5 __asm("d5") = (ULONG)(size);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1201,13 +1302,14 @@ __dos_SplitName(struct DosLibrary *__base, CONST_STRPTR name, UBYTE separator, S
 	return (WORD)_d0;
 }
 #define SplitName(name, separator, buf, oldpos, size) __dos_SplitName((DOS_BASE_NAME), (CONST_STRPTR)(name), (UBYTE)(separator), (STRPTR)(buf), (WORD)(oldpos), (LONG)(size))
+#define __SplitName_base(__in_base, name, separator, buf, oldpos, size) __dos_SplitName((__in_base), (CONST_STRPTR)(name), (UBYTE)(separator), (STRPTR)(buf), (WORD)(oldpos), (LONG)(size))
 
 static __inline__ LONG
-__dos_SameLock(struct DosLibrary *__base, BPTR lock1, BPTR lock2)
+__dos_SameLock(void *__base, BPTR lock1, BPTR lock2)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock1);
 	register ULONG _d2 __asm("d2") = (ULONG)(lock2);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1218,13 +1320,14 @@ __dos_SameLock(struct DosLibrary *__base, BPTR lock1, BPTR lock2)
 	return (LONG)_d0;
 }
 #define SameLock(lock1, lock2) __dos_SameLock((DOS_BASE_NAME), (BPTR)(lock1), (BPTR)(lock2))
+#define __SameLock_base(__in_base, lock1, lock2) __dos_SameLock((__in_base), (BPTR)(lock1), (BPTR)(lock2))
 
 static __inline__ LONG
-__dos_SetMode(struct DosLibrary *__base, BPTR fh, LONG mode)
+__dos_SetMode(void *__base, BPTR fh, LONG mode)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(mode);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1235,16 +1338,17 @@ __dos_SetMode(struct DosLibrary *__base, BPTR fh, LONG mode)
 	return (LONG)_d0;
 }
 #define SetMode(fh, mode) __dos_SetMode((DOS_BASE_NAME), (BPTR)(fh), (LONG)(mode))
+#define __SetMode_base(__in_base, fh, mode) __dos_SetMode((__in_base), (BPTR)(fh), (LONG)(mode))
 
 static __inline__ LONG
-__dos_ExAll(struct DosLibrary *__base, BPTR lock, struct ExAllData * buffer, LONG size, LONG data, struct ExAllControl * control)
+__dos_ExAll(void *__base, BPTR lock, struct ExAllData * buffer, LONG size, LONG data, struct ExAllControl * control)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
 	register ULONG _d2 __asm("d2") = (ULONG)(buffer);
 	register ULONG _d3 __asm("d3") = (ULONG)(size);
 	register ULONG _d4 __asm("d4") = (ULONG)(data);
 	register ULONG _d5 __asm("d5") = (ULONG)(control);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1255,16 +1359,17 @@ __dos_ExAll(struct DosLibrary *__base, BPTR lock, struct ExAllData * buffer, LON
 	return (LONG)_d0;
 }
 #define ExAll(lock, buffer, size, data, control) __dos_ExAll((DOS_BASE_NAME), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
+#define __ExAll_base(__in_base, lock, buffer, size, data, control) __dos_ExAll((__in_base), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
 
 static __inline__ LONG
-__dos_ReadLink(struct DosLibrary *__base, struct MsgPort * port, BPTR lock, CONST_STRPTR path, STRPTR buffer, ULONG size)
+__dos_ReadLink(void *__base, struct MsgPort * port, BPTR lock, CONST_STRPTR path, STRPTR buffer, ULONG size)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(port);
 	register ULONG _d2 __asm("d2") = (ULONG)(lock);
 	register ULONG _d3 __asm("d3") = (ULONG)(path);
 	register ULONG _d4 __asm("d4") = (ULONG)(buffer);
 	register ULONG _d5 __asm("d5") = (ULONG)(size);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1275,14 +1380,15 @@ __dos_ReadLink(struct DosLibrary *__base, struct MsgPort * port, BPTR lock, CONS
 	return (LONG)_d0;
 }
 #define ReadLink(port, lock, path, buffer, size) __dos_ReadLink((DOS_BASE_NAME), (struct MsgPort *)(port), (BPTR)(lock), (CONST_STRPTR)(path), (STRPTR)(buffer), (ULONG)(size))
+#define __ReadLink_base(__in_base, port, lock, path, buffer, size) __dos_ReadLink((__in_base), (struct MsgPort *)(port), (BPTR)(lock), (CONST_STRPTR)(path), (STRPTR)(buffer), (ULONG)(size))
 
 static __inline__ LONG
-__dos_MakeLink(struct DosLibrary *__base, CONST_STRPTR name, LONG dest, LONG soft)
+__dos_MakeLink(void *__base, CONST_STRPTR name, LONG dest, LONG soft)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(dest);
 	register ULONG _d3 __asm("d3") = (ULONG)(soft);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1293,14 +1399,15 @@ __dos_MakeLink(struct DosLibrary *__base, CONST_STRPTR name, LONG dest, LONG sof
 	return (LONG)_d0;
 }
 #define MakeLink(name, dest, soft) __dos_MakeLink((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(dest), (LONG)(soft))
+#define __MakeLink_base(__in_base, name, dest, soft) __dos_MakeLink((__in_base), (CONST_STRPTR)(name), (LONG)(dest), (LONG)(soft))
 
 static __inline__ LONG
-__dos_ChangeMode(struct DosLibrary *__base, LONG type, BPTR fh, LONG newmode)
+__dos_ChangeMode(void *__base, LONG type, BPTR fh, LONG newmode)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(type);
 	register ULONG _d2 __asm("d2") = (ULONG)(fh);
 	register ULONG _d3 __asm("d3") = (ULONG)(newmode);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1311,14 +1418,15 @@ __dos_ChangeMode(struct DosLibrary *__base, LONG type, BPTR fh, LONG newmode)
 	return (LONG)_d0;
 }
 #define ChangeMode(type, fh, newmode) __dos_ChangeMode((DOS_BASE_NAME), (LONG)(type), (BPTR)(fh), (LONG)(newmode))
+#define __ChangeMode_base(__in_base, type, fh, newmode) __dos_ChangeMode((__in_base), (LONG)(type), (BPTR)(fh), (LONG)(newmode))
 
 static __inline__ LONG
-__dos_SetFileSize(struct DosLibrary *__base, BPTR fh, LONG pos, LONG mode)
+__dos_SetFileSize(void *__base, BPTR fh, LONG pos, LONG mode)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
 	register ULONG _d2 __asm("d2") = (ULONG)(pos);
 	register ULONG _d3 __asm("d3") = (ULONG)(mode);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1329,12 +1437,13 @@ __dos_SetFileSize(struct DosLibrary *__base, BPTR fh, LONG pos, LONG mode)
 	return (LONG)_d0;
 }
 #define SetFileSize(fh, pos, mode) __dos_SetFileSize((DOS_BASE_NAME), (BPTR)(fh), (LONG)(pos), (LONG)(mode))
+#define __SetFileSize_base(__in_base, fh, pos, mode) __dos_SetFileSize((__in_base), (BPTR)(fh), (LONG)(pos), (LONG)(mode))
 
 static __inline__ LONG
-__dos_SetIoErr(struct DosLibrary *__base, LONG result)
+__dos_SetIoErr(void *__base, LONG result)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(result);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1345,15 +1454,16 @@ __dos_SetIoErr(struct DosLibrary *__base, LONG result)
 	return (LONG)_d0;
 }
 #define SetIoErr(result) __dos_SetIoErr((DOS_BASE_NAME), (LONG)(result))
+#define __SetIoErr_base(__in_base, result) __dos_SetIoErr((__in_base), (LONG)(result))
 
 static __inline__ BOOL
-__dos_Fault(struct DosLibrary *__base, LONG code, CONST_STRPTR header, STRPTR buffer, LONG len)
+__dos_Fault(void *__base, LONG code, CONST_STRPTR header, STRPTR buffer, LONG len)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(code);
 	register ULONG _d2 __asm("d2") = (ULONG)(header);
 	register ULONG _d3 __asm("d3") = (ULONG)(buffer);
 	register ULONG _d4 __asm("d4") = (ULONG)(len);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1364,13 +1474,14 @@ __dos_Fault(struct DosLibrary *__base, LONG code, CONST_STRPTR header, STRPTR bu
 	return (BOOL)_d0;
 }
 #define Fault(code, header, buffer, len) __dos_Fault((DOS_BASE_NAME), (LONG)(code), (CONST_STRPTR)(header), (STRPTR)(buffer), (LONG)(len))
+#define __Fault_base(__in_base, code, header, buffer, len) __dos_Fault((__in_base), (LONG)(code), (CONST_STRPTR)(header), (STRPTR)(buffer), (LONG)(len))
 
 static __inline__ BOOL
-__dos_PrintFault(struct DosLibrary *__base, LONG code, CONST_STRPTR header)
+__dos_PrintFault(void *__base, LONG code, CONST_STRPTR header)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(code);
 	register ULONG _d2 __asm("d2") = (ULONG)(header);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1381,15 +1492,16 @@ __dos_PrintFault(struct DosLibrary *__base, LONG code, CONST_STRPTR header)
 	return (BOOL)_d0;
 }
 #define PrintFault(code, header) __dos_PrintFault((DOS_BASE_NAME), (LONG)(code), (CONST_STRPTR)(header))
+#define __PrintFault_base(__in_base, code, header) __dos_PrintFault((__in_base), (LONG)(code), (CONST_STRPTR)(header))
 
 static __inline__ LONG
-__dos_ErrorReport(struct DosLibrary *__base, LONG code, LONG type, ULONG arg1, struct MsgPort * device)
+__dos_ErrorReport(void *__base, LONG code, LONG type, ULONG arg1, struct MsgPort * device)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(code);
 	register ULONG _d2 __asm("d2") = (ULONG)(type);
 	register ULONG _d3 __asm("d3") = (ULONG)(arg1);
 	register ULONG _d4 __asm("d4") = (ULONG)(device);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1400,11 +1512,12 @@ __dos_ErrorReport(struct DosLibrary *__base, LONG code, LONG type, ULONG arg1, s
 	return (LONG)_d0;
 }
 #define ErrorReport(code, type, arg1, device) __dos_ErrorReport((DOS_BASE_NAME), (LONG)(code), (LONG)(type), (ULONG)(arg1), (struct MsgPort *)(device))
+#define __ErrorReport_base(__in_base, code, type, arg1, device) __dos_ErrorReport((__in_base), (LONG)(code), (LONG)(type), (ULONG)(arg1), (struct MsgPort *)(device))
 
 static __inline__ struct CommandLineInterface *
-__dos_Cli(struct DosLibrary *__base)
+__dos_Cli(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1416,12 +1529,13 @@ __dos_Cli(struct DosLibrary *__base)
 	return (struct CommandLineInterface *)_d0;
 }
 #define Cli() __dos_Cli((DOS_BASE_NAME))
+#define __Cli_base(__in_base) __dos_Cli((__in_base))
 
 static __inline__ struct Process *
-__dos_CreateNewProc(struct DosLibrary *__base, CONST struct TagItem * tags)
+__dos_CreateNewProc(void *__base, CONST struct TagItem * tags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(tags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1432,18 +1546,29 @@ __dos_CreateNewProc(struct DosLibrary *__base, CONST struct TagItem * tags)
 	return (struct Process *)_d0;
 }
 #define CreateNewProc(tags) __dos_CreateNewProc((DOS_BASE_NAME), (CONST struct TagItem *)(tags))
+#define __CreateNewProc_base(__in_base, tags) __dos_CreateNewProc((__in_base), (CONST struct TagItem *)(tags))
 
 #define CreateNewProcTagList(...) CreateNewProc(__VA_ARGS__)
 
+static __inline__ __OPENNDK_VA_ATTR struct Process *
+__CreateNewProcTags_va(void *__base, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, __base);
+	struct Process * _r = (struct Process *)__dos_CreateNewProc(__base, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define CreateNewProcTags(...) __CreateNewProcTags_va((DOS_BASE_NAME), ##__VA_ARGS__)
 
 static __inline__ LONG
-__dos_RunCommand(struct DosLibrary *__base, BPTR seg, LONG stack, CONST_STRPTR paramptr, LONG paramlen)
+__dos_RunCommand(void *__base, BPTR seg, LONG stack, CONST_STRPTR paramptr, LONG paramlen)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(seg);
 	register ULONG _d2 __asm("d2") = (ULONG)(stack);
 	register ULONG _d3 __asm("d3") = (ULONG)(paramptr);
 	register ULONG _d4 __asm("d4") = (ULONG)(paramlen);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1454,11 +1579,12 @@ __dos_RunCommand(struct DosLibrary *__base, BPTR seg, LONG stack, CONST_STRPTR p
 	return (LONG)_d0;
 }
 #define RunCommand(seg, stack, paramptr, paramlen) __dos_RunCommand((DOS_BASE_NAME), (BPTR)(seg), (LONG)(stack), (CONST_STRPTR)(paramptr), (LONG)(paramlen))
+#define __RunCommand_base(__in_base, seg, stack, paramptr, paramlen) __dos_RunCommand((__in_base), (BPTR)(seg), (LONG)(stack), (CONST_STRPTR)(paramptr), (LONG)(paramlen))
 
 static __inline__ struct MsgPort *
-__dos_GetConsoleTask(struct DosLibrary *__base)
+__dos_GetConsoleTask(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1470,12 +1596,13 @@ __dos_GetConsoleTask(struct DosLibrary *__base)
 	return (struct MsgPort *)_d0;
 }
 #define GetConsoleTask() __dos_GetConsoleTask((DOS_BASE_NAME))
+#define __GetConsoleTask_base(__in_base) __dos_GetConsoleTask((__in_base))
 
 static __inline__ struct MsgPort *
-__dos_SetConsoleTask(struct DosLibrary *__base, CONST struct MsgPort * task)
+__dos_SetConsoleTask(void *__base, CONST struct MsgPort * task)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(task);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1486,11 +1613,12 @@ __dos_SetConsoleTask(struct DosLibrary *__base, CONST struct MsgPort * task)
 	return (struct MsgPort *)_d0;
 }
 #define SetConsoleTask(task) __dos_SetConsoleTask((DOS_BASE_NAME), (CONST struct MsgPort *)(task))
+#define __SetConsoleTask_base(__in_base, task) __dos_SetConsoleTask((__in_base), (CONST struct MsgPort *)(task))
 
 static __inline__ struct MsgPort *
-__dos_GetFileSysTask(struct DosLibrary *__base)
+__dos_GetFileSysTask(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1502,12 +1630,13 @@ __dos_GetFileSysTask(struct DosLibrary *__base)
 	return (struct MsgPort *)_d0;
 }
 #define GetFileSysTask() __dos_GetFileSysTask((DOS_BASE_NAME))
+#define __GetFileSysTask_base(__in_base) __dos_GetFileSysTask((__in_base))
 
 static __inline__ struct MsgPort *
-__dos_SetFileSysTask(struct DosLibrary *__base, CONST struct MsgPort * task)
+__dos_SetFileSysTask(void *__base, CONST struct MsgPort * task)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(task);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1518,11 +1647,12 @@ __dos_SetFileSysTask(struct DosLibrary *__base, CONST struct MsgPort * task)
 	return (struct MsgPort *)_d0;
 }
 #define SetFileSysTask(task) __dos_SetFileSysTask((DOS_BASE_NAME), (CONST struct MsgPort *)(task))
+#define __SetFileSysTask_base(__in_base, task) __dos_SetFileSysTask((__in_base), (CONST struct MsgPort *)(task))
 
 static __inline__ STRPTR
-__dos_GetArgStr(struct DosLibrary *__base)
+__dos_GetArgStr(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1534,12 +1664,13 @@ __dos_GetArgStr(struct DosLibrary *__base)
 	return (STRPTR)_d0;
 }
 #define GetArgStr() __dos_GetArgStr((DOS_BASE_NAME))
+#define __GetArgStr_base(__in_base) __dos_GetArgStr((__in_base))
 
 static __inline__ STRPTR
-__dos_SetArgStr(struct DosLibrary *__base, CONST_STRPTR string)
+__dos_SetArgStr(void *__base, CONST_STRPTR string)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(string);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1550,12 +1681,13 @@ __dos_SetArgStr(struct DosLibrary *__base, CONST_STRPTR string)
 	return (STRPTR)_d0;
 }
 #define SetArgStr(string) __dos_SetArgStr((DOS_BASE_NAME), (CONST_STRPTR)(string))
+#define __SetArgStr_base(__in_base, string) __dos_SetArgStr((__in_base), (CONST_STRPTR)(string))
 
 static __inline__ struct Process *
-__dos_FindCliProc(struct DosLibrary *__base, ULONG num)
+__dos_FindCliProc(void *__base, ULONG num)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(num);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1566,11 +1698,12 @@ __dos_FindCliProc(struct DosLibrary *__base, ULONG num)
 	return (struct Process *)_d0;
 }
 #define FindCliProc(num) __dos_FindCliProc((DOS_BASE_NAME), (ULONG)(num))
+#define __FindCliProc_base(__in_base, num) __dos_FindCliProc((__in_base), (ULONG)(num))
 
 static __inline__ ULONG
-__dos_MaxCli(struct DosLibrary *__base)
+__dos_MaxCli(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1582,12 +1715,13 @@ __dos_MaxCli(struct DosLibrary *__base)
 	return (ULONG)_d0;
 }
 #define MaxCli() __dos_MaxCli((DOS_BASE_NAME))
+#define __MaxCli_base(__in_base) __dos_MaxCli((__in_base))
 
 static __inline__ BOOL
-__dos_SetCurrentDirName(struct DosLibrary *__base, CONST_STRPTR name)
+__dos_SetCurrentDirName(void *__base, CONST_STRPTR name)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1598,13 +1732,14 @@ __dos_SetCurrentDirName(struct DosLibrary *__base, CONST_STRPTR name)
 	return (BOOL)_d0;
 }
 #define SetCurrentDirName(name) __dos_SetCurrentDirName((DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __SetCurrentDirName_base(__in_base, name) __dos_SetCurrentDirName((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
-__dos_GetCurrentDirName(struct DosLibrary *__base, STRPTR buf, LONG len)
+__dos_GetCurrentDirName(void *__base, STRPTR buf, LONG len)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(buf);
 	register ULONG _d2 __asm("d2") = (ULONG)(len);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1615,12 +1750,13 @@ __dos_GetCurrentDirName(struct DosLibrary *__base, STRPTR buf, LONG len)
 	return (BOOL)_d0;
 }
 #define GetCurrentDirName(buf, len) __dos_GetCurrentDirName((DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
+#define __GetCurrentDirName_base(__in_base, buf, len) __dos_GetCurrentDirName((__in_base), (STRPTR)(buf), (LONG)(len))
 
 static __inline__ BOOL
-__dos_SetProgramName(struct DosLibrary *__base, CONST_STRPTR name)
+__dos_SetProgramName(void *__base, CONST_STRPTR name)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1631,13 +1767,14 @@ __dos_SetProgramName(struct DosLibrary *__base, CONST_STRPTR name)
 	return (BOOL)_d0;
 }
 #define SetProgramName(name) __dos_SetProgramName((DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __SetProgramName_base(__in_base, name) __dos_SetProgramName((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
-__dos_GetProgramName(struct DosLibrary *__base, STRPTR buf, LONG len)
+__dos_GetProgramName(void *__base, STRPTR buf, LONG len)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(buf);
 	register ULONG _d2 __asm("d2") = (ULONG)(len);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1648,12 +1785,13 @@ __dos_GetProgramName(struct DosLibrary *__base, STRPTR buf, LONG len)
 	return (BOOL)_d0;
 }
 #define GetProgramName(buf, len) __dos_GetProgramName((DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
+#define __GetProgramName_base(__in_base, buf, len) __dos_GetProgramName((__in_base), (STRPTR)(buf), (LONG)(len))
 
 static __inline__ BOOL
-__dos_SetPrompt(struct DosLibrary *__base, CONST_STRPTR name)
+__dos_SetPrompt(void *__base, CONST_STRPTR name)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1664,13 +1802,14 @@ __dos_SetPrompt(struct DosLibrary *__base, CONST_STRPTR name)
 	return (BOOL)_d0;
 }
 #define SetPrompt(name) __dos_SetPrompt((DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __SetPrompt_base(__in_base, name) __dos_SetPrompt((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
-__dos_GetPrompt(struct DosLibrary *__base, STRPTR buf, LONG len)
+__dos_GetPrompt(void *__base, STRPTR buf, LONG len)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(buf);
 	register ULONG _d2 __asm("d2") = (ULONG)(len);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1681,12 +1820,13 @@ __dos_GetPrompt(struct DosLibrary *__base, STRPTR buf, LONG len)
 	return (BOOL)_d0;
 }
 #define GetPrompt(buf, len) __dos_GetPrompt((DOS_BASE_NAME), (STRPTR)(buf), (LONG)(len))
+#define __GetPrompt_base(__in_base, buf, len) __dos_GetPrompt((__in_base), (STRPTR)(buf), (LONG)(len))
 
 static __inline__ BPTR
-__dos_SetProgramDir(struct DosLibrary *__base, BPTR lock)
+__dos_SetProgramDir(void *__base, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1697,11 +1837,12 @@ __dos_SetProgramDir(struct DosLibrary *__base, BPTR lock)
 	return (BPTR)_d0;
 }
 #define SetProgramDir(lock) __dos_SetProgramDir((DOS_BASE_NAME), (BPTR)(lock))
+#define __SetProgramDir_base(__in_base, lock) __dos_SetProgramDir((__in_base), (BPTR)(lock))
 
 static __inline__ BPTR
-__dos_GetProgramDir(struct DosLibrary *__base)
+__dos_GetProgramDir(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1713,13 +1854,14 @@ __dos_GetProgramDir(struct DosLibrary *__base)
 	return (BPTR)_d0;
 }
 #define GetProgramDir() __dos_GetProgramDir((DOS_BASE_NAME))
+#define __GetProgramDir_base(__in_base) __dos_GetProgramDir((__in_base))
 
 static __inline__ LONG
-__dos_SystemTagList(struct DosLibrary *__base, CONST_STRPTR command, CONST struct TagItem * tags)
+__dos_SystemTagList(void *__base, CONST_STRPTR command, CONST struct TagItem * tags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(command);
 	register ULONG _d2 __asm("d2") = (ULONG)(tags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1730,17 +1872,27 @@ __dos_SystemTagList(struct DosLibrary *__base, CONST_STRPTR command, CONST struc
 	return (LONG)_d0;
 }
 #define SystemTagList(command, tags) __dos_SystemTagList((DOS_BASE_NAME), (CONST_STRPTR)(command), (CONST struct TagItem *)(tags))
+#define __SystemTagList_base(__in_base, command, tags) __dos_SystemTagList((__in_base), (CONST_STRPTR)(command), (CONST struct TagItem *)(tags))
 
 #define System(...) SystemTagList(__VA_ARGS__)
 
-#define SystemTags(command, ...) (SystemTags)((CONST_STRPTR)(command), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__SystemTags_va(void *__base, CONST_STRPTR command, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, command);
+	LONG _r = (LONG)__dos_SystemTagList(__base, (CONST_STRPTR)(command), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SystemTags(command, ...) __SystemTags_va((DOS_BASE_NAME), (CONST_STRPTR)(command), ##__VA_ARGS__)
 
 static __inline__ LONG
-__dos_AssignLock(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
+__dos_AssignLock(void *__base, CONST_STRPTR name, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1751,13 +1903,14 @@ __dos_AssignLock(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
 	return (LONG)_d0;
 }
 #define AssignLock(name, lock) __dos_AssignLock((DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
+#define __AssignLock_base(__in_base, name, lock) __dos_AssignLock((__in_base), (CONST_STRPTR)(name), (BPTR)(lock))
 
 static __inline__ BOOL
-__dos_AssignLate(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR path)
+__dos_AssignLate(void *__base, CONST_STRPTR name, CONST_STRPTR path)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(path);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1768,13 +1921,14 @@ __dos_AssignLate(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR path
 	return (BOOL)_d0;
 }
 #define AssignLate(name, path) __dos_AssignLate((DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
+#define __AssignLate_base(__in_base, name, path) __dos_AssignLate((__in_base), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
 
 static __inline__ BOOL
-__dos_AssignPath(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR path)
+__dos_AssignPath(void *__base, CONST_STRPTR name, CONST_STRPTR path)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(path);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1785,13 +1939,14 @@ __dos_AssignPath(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR path
 	return (BOOL)_d0;
 }
 #define AssignPath(name, path) __dos_AssignPath((DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
+#define __AssignPath_base(__in_base, name, path) __dos_AssignPath((__in_base), (CONST_STRPTR)(name), (CONST_STRPTR)(path))
 
 static __inline__ BOOL
-__dos_AssignAdd(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
+__dos_AssignAdd(void *__base, CONST_STRPTR name, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1802,13 +1957,14 @@ __dos_AssignAdd(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
 	return (BOOL)_d0;
 }
 #define AssignAdd(name, lock) __dos_AssignAdd((DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
+#define __AssignAdd_base(__in_base, name, lock) __dos_AssignAdd((__in_base), (CONST_STRPTR)(name), (BPTR)(lock))
 
 static __inline__ LONG
-__dos_RemAssignList(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
+__dos_RemAssignList(void *__base, CONST_STRPTR name, BPTR lock)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(lock);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1819,13 +1975,14 @@ __dos_RemAssignList(struct DosLibrary *__base, CONST_STRPTR name, BPTR lock)
 	return (LONG)_d0;
 }
 #define RemAssignList(name, lock) __dos_RemAssignList((DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(lock))
+#define __RemAssignList_base(__in_base, name, lock) __dos_RemAssignList((__in_base), (CONST_STRPTR)(name), (BPTR)(lock))
 
 static __inline__ struct DevProc *
-__dos_GetDeviceProc(struct DosLibrary *__base, CONST_STRPTR name, struct DevProc * dp)
+__dos_GetDeviceProc(void *__base, CONST_STRPTR name, struct DevProc * dp)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(dp);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1836,12 +1993,13 @@ __dos_GetDeviceProc(struct DosLibrary *__base, CONST_STRPTR name, struct DevProc
 	return (struct DevProc *)_d0;
 }
 #define GetDeviceProc(name, dp) __dos_GetDeviceProc((DOS_BASE_NAME), (CONST_STRPTR)(name), (struct DevProc *)(dp))
+#define __GetDeviceProc_base(__in_base, name, dp) __dos_GetDeviceProc((__in_base), (CONST_STRPTR)(name), (struct DevProc *)(dp))
 
 static __inline__ VOID
-__dos_FreeDeviceProc(struct DosLibrary *__base, struct DevProc * dp)
+__dos_FreeDeviceProc(void *__base, struct DevProc * dp)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dp);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1852,12 +2010,13 @@ __dos_FreeDeviceProc(struct DosLibrary *__base, struct DevProc * dp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeDeviceProc(dp) __dos_FreeDeviceProc((DOS_BASE_NAME), (struct DevProc *)(dp))
+#define __FreeDeviceProc_base(__in_base, dp) __dos_FreeDeviceProc((__in_base), (struct DevProc *)(dp))
 
 static __inline__ struct DosList *
-__dos_LockDosList(struct DosLibrary *__base, ULONG flags)
+__dos_LockDosList(void *__base, ULONG flags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1868,12 +2027,13 @@ __dos_LockDosList(struct DosLibrary *__base, ULONG flags)
 	return (struct DosList *)_d0;
 }
 #define LockDosList(flags) __dos_LockDosList((DOS_BASE_NAME), (ULONG)(flags))
+#define __LockDosList_base(__in_base, flags) __dos_LockDosList((__in_base), (ULONG)(flags))
 
 static __inline__ VOID
-__dos_UnLockDosList(struct DosLibrary *__base, ULONG flags)
+__dos_UnLockDosList(void *__base, ULONG flags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1884,12 +2044,13 @@ __dos_UnLockDosList(struct DosLibrary *__base, ULONG flags)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnLockDosList(flags) __dos_UnLockDosList((DOS_BASE_NAME), (ULONG)(flags))
+#define __UnLockDosList_base(__in_base, flags) __dos_UnLockDosList((__in_base), (ULONG)(flags))
 
 static __inline__ struct DosList *
-__dos_AttemptLockDosList(struct DosLibrary *__base, ULONG flags)
+__dos_AttemptLockDosList(void *__base, ULONG flags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1900,12 +2061,13 @@ __dos_AttemptLockDosList(struct DosLibrary *__base, ULONG flags)
 	return (struct DosList *)_d0;
 }
 #define AttemptLockDosList(flags) __dos_AttemptLockDosList((DOS_BASE_NAME), (ULONG)(flags))
+#define __AttemptLockDosList_base(__in_base, flags) __dos_AttemptLockDosList((__in_base), (ULONG)(flags))
 
 static __inline__ BOOL
-__dos_RemDosEntry(struct DosLibrary *__base, struct DosList * dlist)
+__dos_RemDosEntry(void *__base, struct DosList * dlist)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dlist);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1916,12 +2078,13 @@ __dos_RemDosEntry(struct DosLibrary *__base, struct DosList * dlist)
 	return (BOOL)_d0;
 }
 #define RemDosEntry(dlist) __dos_RemDosEntry((DOS_BASE_NAME), (struct DosList *)(dlist))
+#define __RemDosEntry_base(__in_base, dlist) __dos_RemDosEntry((__in_base), (struct DosList *)(dlist))
 
 static __inline__ LONG
-__dos_AddDosEntry(struct DosLibrary *__base, struct DosList * dlist)
+__dos_AddDosEntry(void *__base, struct DosList * dlist)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dlist);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1932,14 +2095,15 @@ __dos_AddDosEntry(struct DosLibrary *__base, struct DosList * dlist)
 	return (LONG)_d0;
 }
 #define AddDosEntry(dlist) __dos_AddDosEntry((DOS_BASE_NAME), (struct DosList *)(dlist))
+#define __AddDosEntry_base(__in_base, dlist) __dos_AddDosEntry((__in_base), (struct DosList *)(dlist))
 
 static __inline__ struct DosList *
-__dos_FindDosEntry(struct DosLibrary *__base, CONST struct DosList * dlist, CONST_STRPTR name, ULONG flags)
+__dos_FindDosEntry(void *__base, CONST struct DosList * dlist, CONST_STRPTR name, ULONG flags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dlist);
 	register ULONG _d2 __asm("d2") = (ULONG)(name);
 	register ULONG _d3 __asm("d3") = (ULONG)(flags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1950,13 +2114,14 @@ __dos_FindDosEntry(struct DosLibrary *__base, CONST struct DosList * dlist, CONS
 	return (struct DosList *)_d0;
 }
 #define FindDosEntry(dlist, name, flags) __dos_FindDosEntry((DOS_BASE_NAME), (CONST struct DosList *)(dlist), (CONST_STRPTR)(name), (ULONG)(flags))
+#define __FindDosEntry_base(__in_base, dlist, name, flags) __dos_FindDosEntry((__in_base), (CONST struct DosList *)(dlist), (CONST_STRPTR)(name), (ULONG)(flags))
 
 static __inline__ struct DosList *
-__dos_NextDosEntry(struct DosLibrary *__base, CONST struct DosList * dlist, ULONG flags)
+__dos_NextDosEntry(void *__base, CONST struct DosList * dlist, ULONG flags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dlist);
 	register ULONG _d2 __asm("d2") = (ULONG)(flags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1967,13 +2132,14 @@ __dos_NextDosEntry(struct DosLibrary *__base, CONST struct DosList * dlist, ULON
 	return (struct DosList *)_d0;
 }
 #define NextDosEntry(dlist, flags) __dos_NextDosEntry((DOS_BASE_NAME), (CONST struct DosList *)(dlist), (ULONG)(flags))
+#define __NextDosEntry_base(__in_base, dlist, flags) __dos_NextDosEntry((__in_base), (CONST struct DosList *)(dlist), (ULONG)(flags))
 
 static __inline__ struct DosList *
-__dos_MakeDosEntry(struct DosLibrary *__base, CONST_STRPTR name, LONG type)
+__dos_MakeDosEntry(void *__base, CONST_STRPTR name, LONG type)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(type);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1984,12 +2150,13 @@ __dos_MakeDosEntry(struct DosLibrary *__base, CONST_STRPTR name, LONG type)
 	return (struct DosList *)_d0;
 }
 #define MakeDosEntry(name, type) __dos_MakeDosEntry((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(type))
+#define __MakeDosEntry_base(__in_base, name, type) __dos_MakeDosEntry((__in_base), (CONST_STRPTR)(name), (LONG)(type))
 
 static __inline__ VOID
-__dos_FreeDosEntry(struct DosLibrary *__base, struct DosList * dlist)
+__dos_FreeDosEntry(void *__base, struct DosList * dlist)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dlist);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2000,12 +2167,13 @@ __dos_FreeDosEntry(struct DosLibrary *__base, struct DosList * dlist)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeDosEntry(dlist) __dos_FreeDosEntry((DOS_BASE_NAME), (struct DosList *)(dlist))
+#define __FreeDosEntry_base(__in_base, dlist) __dos_FreeDosEntry((__in_base), (struct DosList *)(dlist))
 
 static __inline__ BOOL
-__dos_IsFileSystem(struct DosLibrary *__base, CONST_STRPTR name)
+__dos_IsFileSystem(void *__base, CONST_STRPTR name)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2016,14 +2184,15 @@ __dos_IsFileSystem(struct DosLibrary *__base, CONST_STRPTR name)
 	return (BOOL)_d0;
 }
 #define IsFileSystem(name) __dos_IsFileSystem((DOS_BASE_NAME), (CONST_STRPTR)(name))
+#define __IsFileSystem_base(__in_base, name) __dos_IsFileSystem((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ BOOL
-__dos_Format(struct DosLibrary *__base, CONST_STRPTR filesystem, CONST_STRPTR volumename, ULONG dostype)
+__dos_Format(void *__base, CONST_STRPTR filesystem, CONST_STRPTR volumename, ULONG dostype)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(filesystem);
 	register ULONG _d2 __asm("d2") = (ULONG)(volumename);
 	register ULONG _d3 __asm("d3") = (ULONG)(dostype);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2034,13 +2203,14 @@ __dos_Format(struct DosLibrary *__base, CONST_STRPTR filesystem, CONST_STRPTR vo
 	return (BOOL)_d0;
 }
 #define Format(filesystem, volumename, dostype) __dos_Format((DOS_BASE_NAME), (CONST_STRPTR)(filesystem), (CONST_STRPTR)(volumename), (ULONG)(dostype))
+#define __Format_base(__in_base, filesystem, volumename, dostype) __dos_Format((__in_base), (CONST_STRPTR)(filesystem), (CONST_STRPTR)(volumename), (ULONG)(dostype))
 
 static __inline__ LONG
-__dos_Relabel(struct DosLibrary *__base, CONST_STRPTR drive, CONST_STRPTR newname)
+__dos_Relabel(void *__base, CONST_STRPTR drive, CONST_STRPTR newname)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(drive);
 	register ULONG _d2 __asm("d2") = (ULONG)(newname);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2051,13 +2221,14 @@ __dos_Relabel(struct DosLibrary *__base, CONST_STRPTR drive, CONST_STRPTR newnam
 	return (LONG)_d0;
 }
 #define Relabel(drive, newname) __dos_Relabel((DOS_BASE_NAME), (CONST_STRPTR)(drive), (CONST_STRPTR)(newname))
+#define __Relabel_base(__in_base, drive, newname) __dos_Relabel((__in_base), (CONST_STRPTR)(drive), (CONST_STRPTR)(newname))
 
 static __inline__ LONG
-__dos_Inhibit(struct DosLibrary *__base, CONST_STRPTR name, LONG onoff)
+__dos_Inhibit(void *__base, CONST_STRPTR name, LONG onoff)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(onoff);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2068,13 +2239,14 @@ __dos_Inhibit(struct DosLibrary *__base, CONST_STRPTR name, LONG onoff)
 	return (LONG)_d0;
 }
 #define Inhibit(name, onoff) __dos_Inhibit((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(onoff))
+#define __Inhibit_base(__in_base, name, onoff) __dos_Inhibit((__in_base), (CONST_STRPTR)(name), (LONG)(onoff))
 
 static __inline__ LONG
-__dos_AddBuffers(struct DosLibrary *__base, CONST_STRPTR name, LONG number)
+__dos_AddBuffers(void *__base, CONST_STRPTR name, LONG number)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(number);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2085,13 +2257,14 @@ __dos_AddBuffers(struct DosLibrary *__base, CONST_STRPTR name, LONG number)
 	return (LONG)_d0;
 }
 #define AddBuffers(name, number) __dos_AddBuffers((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(number))
+#define __AddBuffers_base(__in_base, name, number) __dos_AddBuffers((__in_base), (CONST_STRPTR)(name), (LONG)(number))
 
 static __inline__ LONG
-__dos_CompareDates(struct DosLibrary *__base, CONST struct DateStamp * date1, CONST struct DateStamp * date2)
+__dos_CompareDates(void *__base, CONST struct DateStamp * date1, CONST struct DateStamp * date2)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(date1);
 	register ULONG _d2 __asm("d2") = (ULONG)(date2);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2102,12 +2275,13 @@ __dos_CompareDates(struct DosLibrary *__base, CONST struct DateStamp * date1, CO
 	return (LONG)_d0;
 }
 #define CompareDates(date1, date2) __dos_CompareDates((DOS_BASE_NAME), (CONST struct DateStamp *)(date1), (CONST struct DateStamp *)(date2))
+#define __CompareDates_base(__in_base, date1, date2) __dos_CompareDates((__in_base), (CONST struct DateStamp *)(date1), (CONST struct DateStamp *)(date2))
 
 static __inline__ LONG
-__dos_DateToStr(struct DosLibrary *__base, struct DateTime * datetime)
+__dos_DateToStr(void *__base, struct DateTime * datetime)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(datetime);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2118,12 +2292,13 @@ __dos_DateToStr(struct DosLibrary *__base, struct DateTime * datetime)
 	return (LONG)_d0;
 }
 #define DateToStr(datetime) __dos_DateToStr((DOS_BASE_NAME), (struct DateTime *)(datetime))
+#define __DateToStr_base(__in_base, datetime) __dos_DateToStr((__in_base), (struct DateTime *)(datetime))
 
 static __inline__ LONG
-__dos_StrToDate(struct DosLibrary *__base, struct DateTime * datetime)
+__dos_StrToDate(void *__base, struct DateTime * datetime)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(datetime);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2134,15 +2309,16 @@ __dos_StrToDate(struct DosLibrary *__base, struct DateTime * datetime)
 	return (LONG)_d0;
 }
 #define StrToDate(datetime) __dos_StrToDate((DOS_BASE_NAME), (struct DateTime *)(datetime))
+#define __StrToDate_base(__in_base, datetime) __dos_StrToDate((__in_base), (struct DateTime *)(datetime))
 
 static __inline__ BPTR
-__dos_InternalLoadSeg(struct DosLibrary *__base, BPTR fh, BPTR table, CONST LONG * funcarray, LONG * stack)
+__dos_InternalLoadSeg(void *__base, BPTR fh, BPTR table, CONST LONG * funcarray, LONG * stack)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(fh);
 	register ULONG _a0 __asm("a0") = (ULONG)(table);
 	register ULONG _a1 __asm("a1") = (ULONG)(funcarray);
 	register ULONG _a2 __asm("a2") = (ULONG)(stack);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -756(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -2151,13 +2327,14 @@ __dos_InternalLoadSeg(struct DosLibrary *__base, BPTR fh, BPTR table, CONST LONG
 	return (BPTR)_d0;
 }
 #define InternalLoadSeg(fh, table, funcarray, stack) __dos_InternalLoadSeg((DOS_BASE_NAME), (BPTR)(fh), (BPTR)(table), (CONST LONG *)(funcarray), (LONG *)(stack))
+#define __InternalLoadSeg_base(__in_base, fh, table, funcarray, stack) __dos_InternalLoadSeg((__in_base), (BPTR)(fh), (BPTR)(table), (CONST LONG *)(funcarray), (LONG *)(stack))
 
 static __inline__ BOOL
-__dos_InternalUnLoadSeg(struct DosLibrary *__base, BPTR seglist, VOID (*CONST freefunc)())
+__dos_InternalUnLoadSeg(void *__base, BPTR seglist, VOID (*CONST freefunc)())
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(seglist);
 	register ULONG _a1 __asm("a1") = (ULONG)(freefunc);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -762(%/a6)"
@@ -2167,13 +2344,14 @@ __dos_InternalUnLoadSeg(struct DosLibrary *__base, BPTR seglist, VOID (*CONST fr
 	return (BOOL)_d0;
 }
 #define InternalUnLoadSeg(seglist, freefunc) __dos_InternalUnLoadSeg((DOS_BASE_NAME), (BPTR)(seglist), (VOID (*CONST )())(freefunc))
+#define __InternalUnLoadSeg_base(__in_base, seglist, freefunc) __dos_InternalUnLoadSeg((__in_base), (BPTR)(seglist), (VOID (*CONST )())(freefunc))
 
 static __inline__ BPTR
-__dos_NewLoadSeg(struct DosLibrary *__base, CONST_STRPTR file, CONST struct TagItem * tags)
+__dos_NewLoadSeg(void *__base, CONST_STRPTR file, CONST struct TagItem * tags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(file);
 	register ULONG _d2 __asm("d2") = (ULONG)(tags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2184,18 +2362,28 @@ __dos_NewLoadSeg(struct DosLibrary *__base, CONST_STRPTR file, CONST struct TagI
 	return (BPTR)_d0;
 }
 #define NewLoadSeg(file, tags) __dos_NewLoadSeg((DOS_BASE_NAME), (CONST_STRPTR)(file), (CONST struct TagItem *)(tags))
+#define __NewLoadSeg_base(__in_base, file, tags) __dos_NewLoadSeg((__in_base), (CONST_STRPTR)(file), (CONST struct TagItem *)(tags))
 
 #define NewLoadSegTagList(...) NewLoadSeg(__VA_ARGS__)
 
-#define NewLoadSegTags(file, ...) (NewLoadSegTags)((CONST_STRPTR)(file), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BPTR
+__NewLoadSegTags_va(void *__base, CONST_STRPTR file, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, file);
+	BPTR _r = (BPTR)__dos_NewLoadSeg(__base, (CONST_STRPTR)(file), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define NewLoadSegTags(file, ...) __NewLoadSegTags_va((DOS_BASE_NAME), (CONST_STRPTR)(file), ##__VA_ARGS__)
 
 static __inline__ LONG
-__dos_AddSegment(struct DosLibrary *__base, CONST_STRPTR name, BPTR seg, LONG system)
+__dos_AddSegment(void *__base, CONST_STRPTR name, BPTR seg, LONG system)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(seg);
 	register ULONG _d3 __asm("d3") = (ULONG)(system);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2206,14 +2394,15 @@ __dos_AddSegment(struct DosLibrary *__base, CONST_STRPTR name, BPTR seg, LONG sy
 	return (LONG)_d0;
 }
 #define AddSegment(name, seg, system) __dos_AddSegment((DOS_BASE_NAME), (CONST_STRPTR)(name), (BPTR)(seg), (LONG)(system))
+#define __AddSegment_base(__in_base, name, seg, system) __dos_AddSegment((__in_base), (CONST_STRPTR)(name), (BPTR)(seg), (LONG)(system))
 
 static __inline__ struct Segment *
-__dos_FindSegment(struct DosLibrary *__base, CONST_STRPTR name, CONST struct Segment * seg, LONG system)
+__dos_FindSegment(void *__base, CONST_STRPTR name, CONST struct Segment * seg, LONG system)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(seg);
 	register ULONG _d3 __asm("d3") = (ULONG)(system);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2224,12 +2413,13 @@ __dos_FindSegment(struct DosLibrary *__base, CONST_STRPTR name, CONST struct Seg
 	return (struct Segment *)_d0;
 }
 #define FindSegment(name, seg, system) __dos_FindSegment((DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST struct Segment *)(seg), (LONG)(system))
+#define __FindSegment_base(__in_base, name, seg, system) __dos_FindSegment((__in_base), (CONST_STRPTR)(name), (CONST struct Segment *)(seg), (LONG)(system))
 
 static __inline__ LONG
-__dos_RemSegment(struct DosLibrary *__base, struct Segment * seg)
+__dos_RemSegment(void *__base, struct Segment * seg)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(seg);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2240,12 +2430,13 @@ __dos_RemSegment(struct DosLibrary *__base, struct Segment * seg)
 	return (LONG)_d0;
 }
 #define RemSegment(seg) __dos_RemSegment((DOS_BASE_NAME), (struct Segment *)(seg))
+#define __RemSegment_base(__in_base, seg) __dos_RemSegment((__in_base), (struct Segment *)(seg))
 
 static __inline__ LONG
-__dos_CheckSignal(struct DosLibrary *__base, LONG mask)
+__dos_CheckSignal(void *__base, LONG mask)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(mask);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2256,14 +2447,15 @@ __dos_CheckSignal(struct DosLibrary *__base, LONG mask)
 	return (LONG)_d0;
 }
 #define CheckSignal(mask) __dos_CheckSignal((DOS_BASE_NAME), (LONG)(mask))
+#define __CheckSignal_base(__in_base, mask) __dos_CheckSignal((__in_base), (LONG)(mask))
 
 static __inline__ struct RDArgs *
-__dos_ReadArgs(struct DosLibrary *__base, CONST_STRPTR arg_template, LONG * array, struct RDArgs * args)
+__dos_ReadArgs(void *__base, CONST_STRPTR arg_template, LONG * array, struct RDArgs * args)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(arg_template);
 	register ULONG _d2 __asm("d2") = (ULONG)(array);
 	register ULONG _d3 __asm("d3") = (ULONG)(args);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2274,13 +2466,14 @@ __dos_ReadArgs(struct DosLibrary *__base, CONST_STRPTR arg_template, LONG * arra
 	return (struct RDArgs *)_d0;
 }
 #define ReadArgs(arg_template, array, args) __dos_ReadArgs((DOS_BASE_NAME), (CONST_STRPTR)(arg_template), (LONG *)(array), (struct RDArgs *)(args))
+#define __ReadArgs_base(__in_base, arg_template, array, args) __dos_ReadArgs((__in_base), (CONST_STRPTR)(arg_template), (LONG *)(array), (struct RDArgs *)(args))
 
 static __inline__ LONG
-__dos_FindArg(struct DosLibrary *__base, CONST_STRPTR arg_template, CONST_STRPTR keyword)
+__dos_FindArg(void *__base, CONST_STRPTR arg_template, CONST_STRPTR keyword)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(arg_template);
 	register ULONG _d2 __asm("d2") = (ULONG)(keyword);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2291,14 +2484,15 @@ __dos_FindArg(struct DosLibrary *__base, CONST_STRPTR arg_template, CONST_STRPTR
 	return (LONG)_d0;
 }
 #define FindArg(arg_template, keyword) __dos_FindArg((DOS_BASE_NAME), (CONST_STRPTR)(arg_template), (CONST_STRPTR)(keyword))
+#define __FindArg_base(__in_base, arg_template, keyword) __dos_FindArg((__in_base), (CONST_STRPTR)(arg_template), (CONST_STRPTR)(keyword))
 
 static __inline__ LONG
-__dos_ReadItem(struct DosLibrary *__base, STRPTR name, LONG maxchars, struct CSource * cSource)
+__dos_ReadItem(void *__base, STRPTR name, LONG maxchars, struct CSource * cSource)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(maxchars);
 	register ULONG _d3 __asm("d3") = (ULONG)(cSource);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2309,13 +2503,14 @@ __dos_ReadItem(struct DosLibrary *__base, STRPTR name, LONG maxchars, struct CSo
 	return (LONG)_d0;
 }
 #define ReadItem(name, maxchars, cSource) __dos_ReadItem((DOS_BASE_NAME), (STRPTR)(name), (LONG)(maxchars), (struct CSource *)(cSource))
+#define __ReadItem_base(__in_base, name, maxchars, cSource) __dos_ReadItem((__in_base), (STRPTR)(name), (LONG)(maxchars), (struct CSource *)(cSource))
 
 static __inline__ LONG
-__dos_StrToLong(struct DosLibrary *__base, CONST_STRPTR string, LONG * value)
+__dos_StrToLong(void *__base, CONST_STRPTR string, LONG * value)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(string);
 	register ULONG _d2 __asm("d2") = (ULONG)(value);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2326,13 +2521,14 @@ __dos_StrToLong(struct DosLibrary *__base, CONST_STRPTR string, LONG * value)
 	return (LONG)_d0;
 }
 #define StrToLong(string, value) __dos_StrToLong((DOS_BASE_NAME), (CONST_STRPTR)(string), (LONG *)(value))
+#define __StrToLong_base(__in_base, string, value) __dos_StrToLong((__in_base), (CONST_STRPTR)(string), (LONG *)(value))
 
 static __inline__ LONG
-__dos_MatchFirst(struct DosLibrary *__base, CONST_STRPTR pat, struct AnchorPath * anchor)
+__dos_MatchFirst(void *__base, CONST_STRPTR pat, struct AnchorPath * anchor)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(pat);
 	register ULONG _d2 __asm("d2") = (ULONG)(anchor);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2343,12 +2539,13 @@ __dos_MatchFirst(struct DosLibrary *__base, CONST_STRPTR pat, struct AnchorPath 
 	return (LONG)_d0;
 }
 #define MatchFirst(pat, anchor) __dos_MatchFirst((DOS_BASE_NAME), (CONST_STRPTR)(pat), (struct AnchorPath *)(anchor))
+#define __MatchFirst_base(__in_base, pat, anchor) __dos_MatchFirst((__in_base), (CONST_STRPTR)(pat), (struct AnchorPath *)(anchor))
 
 static __inline__ LONG
-__dos_MatchNext(struct DosLibrary *__base, struct AnchorPath * anchor)
+__dos_MatchNext(void *__base, struct AnchorPath * anchor)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(anchor);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2359,12 +2556,13 @@ __dos_MatchNext(struct DosLibrary *__base, struct AnchorPath * anchor)
 	return (LONG)_d0;
 }
 #define MatchNext(anchor) __dos_MatchNext((DOS_BASE_NAME), (struct AnchorPath *)(anchor))
+#define __MatchNext_base(__in_base, anchor) __dos_MatchNext((__in_base), (struct AnchorPath *)(anchor))
 
 static __inline__ VOID
-__dos_MatchEnd(struct DosLibrary *__base, struct AnchorPath * anchor)
+__dos_MatchEnd(void *__base, struct AnchorPath * anchor)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(anchor);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2375,14 +2573,15 @@ __dos_MatchEnd(struct DosLibrary *__base, struct AnchorPath * anchor)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define MatchEnd(anchor) __dos_MatchEnd((DOS_BASE_NAME), (struct AnchorPath *)(anchor))
+#define __MatchEnd_base(__in_base, anchor) __dos_MatchEnd((__in_base), (struct AnchorPath *)(anchor))
 
 static __inline__ LONG
-__dos_ParsePattern(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE *patbuf, LONG patbuflen)
+__dos_ParsePattern(void *__base, CONST_STRPTR pat, UBYTE *patbuf, LONG patbuflen)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(pat);
 	register ULONG _d2 __asm("d2") = (ULONG)(patbuf);
 	register ULONG _d3 __asm("d3") = (ULONG)(patbuflen);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2393,13 +2592,14 @@ __dos_ParsePattern(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE *patbuf, L
 	return (LONG)_d0;
 }
 #define ParsePattern(pat, patbuf, patbuflen) __dos_ParsePattern((DOS_BASE_NAME), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
+#define __ParsePattern_base(__in_base, pat, patbuf, patbuflen) __dos_ParsePattern((__in_base), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
 
 static __inline__ BOOL
-__dos_MatchPattern(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_STRPTR str)
+__dos_MatchPattern(void *__base, CONST UBYTE *patbuf, CONST_STRPTR str)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(patbuf);
 	register ULONG _d2 __asm("d2") = (ULONG)(str);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2410,12 +2610,13 @@ __dos_MatchPattern(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_STRPTR 
 	return (BOOL)_d0;
 }
 #define MatchPattern(patbuf, str) __dos_MatchPattern((DOS_BASE_NAME), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
+#define __MatchPattern_base(__in_base, patbuf, str) __dos_MatchPattern((__in_base), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
 
 static __inline__ VOID
-__dos_FreeArgs(struct DosLibrary *__base, struct RDArgs * args)
+__dos_FreeArgs(void *__base, struct RDArgs * args)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(args);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2426,12 +2627,13 @@ __dos_FreeArgs(struct DosLibrary *__base, struct RDArgs * args)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeArgs(args) __dos_FreeArgs((DOS_BASE_NAME), (struct RDArgs *)(args))
+#define __FreeArgs_base(__in_base, args) __dos_FreeArgs((__in_base), (struct RDArgs *)(args))
 
 static __inline__ STRPTR
-__dos_FilePart(struct DosLibrary *__base, CONST_STRPTR path)
+__dos_FilePart(void *__base, CONST_STRPTR path)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(path);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2442,12 +2644,13 @@ __dos_FilePart(struct DosLibrary *__base, CONST_STRPTR path)
 	return (STRPTR)_d0;
 }
 #define FilePart(path) __dos_FilePart((DOS_BASE_NAME), (CONST_STRPTR)(path))
+#define __FilePart_base(__in_base, path) __dos_FilePart((__in_base), (CONST_STRPTR)(path))
 
 static __inline__ STRPTR
-__dos_PathPart(struct DosLibrary *__base, CONST_STRPTR path)
+__dos_PathPart(void *__base, CONST_STRPTR path)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(path);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2458,14 +2661,15 @@ __dos_PathPart(struct DosLibrary *__base, CONST_STRPTR path)
 	return (STRPTR)_d0;
 }
 #define PathPart(path) __dos_PathPart((DOS_BASE_NAME), (CONST_STRPTR)(path))
+#define __PathPart_base(__in_base, path) __dos_PathPart((__in_base), (CONST_STRPTR)(path))
 
 static __inline__ BOOL
-__dos_AddPart(struct DosLibrary *__base, STRPTR dirname, CONST_STRPTR filename, ULONG size)
+__dos_AddPart(void *__base, STRPTR dirname, CONST_STRPTR filename, ULONG size)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(dirname);
 	register ULONG _d2 __asm("d2") = (ULONG)(filename);
 	register ULONG _d3 __asm("d3") = (ULONG)(size);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2476,12 +2680,13 @@ __dos_AddPart(struct DosLibrary *__base, STRPTR dirname, CONST_STRPTR filename, 
 	return (BOOL)_d0;
 }
 #define AddPart(dirname, filename, size) __dos_AddPart((DOS_BASE_NAME), (STRPTR)(dirname), (CONST_STRPTR)(filename), (ULONG)(size))
+#define __AddPart_base(__in_base, dirname, filename, size) __dos_AddPart((__in_base), (STRPTR)(dirname), (CONST_STRPTR)(filename), (ULONG)(size))
 
 static __inline__ BOOL
-__dos_StartNotify(struct DosLibrary *__base, struct NotifyRequest * notify)
+__dos_StartNotify(void *__base, struct NotifyRequest * notify)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(notify);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2492,12 +2697,13 @@ __dos_StartNotify(struct DosLibrary *__base, struct NotifyRequest * notify)
 	return (BOOL)_d0;
 }
 #define StartNotify(notify) __dos_StartNotify((DOS_BASE_NAME), (struct NotifyRequest *)(notify))
+#define __StartNotify_base(__in_base, notify) __dos_StartNotify((__in_base), (struct NotifyRequest *)(notify))
 
 static __inline__ VOID
-__dos_EndNotify(struct DosLibrary *__base, struct NotifyRequest * notify)
+__dos_EndNotify(void *__base, struct NotifyRequest * notify)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(notify);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2508,15 +2714,16 @@ __dos_EndNotify(struct DosLibrary *__base, struct NotifyRequest * notify)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define EndNotify(notify) __dos_EndNotify((DOS_BASE_NAME), (struct NotifyRequest *)(notify))
+#define __EndNotify_base(__in_base, notify) __dos_EndNotify((__in_base), (struct NotifyRequest *)(notify))
 
 static __inline__ BOOL
-__dos_SetVar(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR buffer, LONG size, LONG flags)
+__dos_SetVar(void *__base, CONST_STRPTR name, CONST_STRPTR buffer, LONG size, LONG flags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(buffer);
 	register ULONG _d3 __asm("d3") = (ULONG)(size);
 	register ULONG _d4 __asm("d4") = (ULONG)(flags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2527,15 +2734,16 @@ __dos_SetVar(struct DosLibrary *__base, CONST_STRPTR name, CONST_STRPTR buffer, 
 	return (BOOL)_d0;
 }
 #define SetVar(name, buffer, size, flags) __dos_SetVar((DOS_BASE_NAME), (CONST_STRPTR)(name), (CONST_STRPTR)(buffer), (LONG)(size), (LONG)(flags))
+#define __SetVar_base(__in_base, name, buffer, size, flags) __dos_SetVar((__in_base), (CONST_STRPTR)(name), (CONST_STRPTR)(buffer), (LONG)(size), (LONG)(flags))
 
 static __inline__ LONG
-__dos_GetVar(struct DosLibrary *__base, CONST_STRPTR name, STRPTR buffer, LONG size, LONG flags)
+__dos_GetVar(void *__base, CONST_STRPTR name, STRPTR buffer, LONG size, LONG flags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(buffer);
 	register ULONG _d3 __asm("d3") = (ULONG)(size);
 	register ULONG _d4 __asm("d4") = (ULONG)(flags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2546,13 +2754,14 @@ __dos_GetVar(struct DosLibrary *__base, CONST_STRPTR name, STRPTR buffer, LONG s
 	return (LONG)_d0;
 }
 #define GetVar(name, buffer, size, flags) __dos_GetVar((DOS_BASE_NAME), (CONST_STRPTR)(name), (STRPTR)(buffer), (LONG)(size), (LONG)(flags))
+#define __GetVar_base(__in_base, name, buffer, size, flags) __dos_GetVar((__in_base), (CONST_STRPTR)(name), (STRPTR)(buffer), (LONG)(size), (LONG)(flags))
 
 static __inline__ LONG
-__dos_DeleteVar(struct DosLibrary *__base, CONST_STRPTR name, ULONG flags)
+__dos_DeleteVar(void *__base, CONST_STRPTR name, ULONG flags)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(flags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2563,13 +2772,14 @@ __dos_DeleteVar(struct DosLibrary *__base, CONST_STRPTR name, ULONG flags)
 	return (LONG)_d0;
 }
 #define DeleteVar(name, flags) __dos_DeleteVar((DOS_BASE_NAME), (CONST_STRPTR)(name), (ULONG)(flags))
+#define __DeleteVar_base(__in_base, name, flags) __dos_DeleteVar((__in_base), (CONST_STRPTR)(name), (ULONG)(flags))
 
 static __inline__ struct LocalVar *
-__dos_FindVar(struct DosLibrary *__base, CONST_STRPTR name, ULONG type)
+__dos_FindVar(void *__base, CONST_STRPTR name, ULONG type)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(type);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2580,12 +2790,13 @@ __dos_FindVar(struct DosLibrary *__base, CONST_STRPTR name, ULONG type)
 	return (struct LocalVar *)_d0;
 }
 #define FindVar(name, type) __dos_FindVar((DOS_BASE_NAME), (CONST_STRPTR)(name), (ULONG)(type))
+#define __FindVar_base(__in_base, name, type) __dos_FindVar((__in_base), (CONST_STRPTR)(name), (ULONG)(type))
 
 static __inline__ LONG
-__dos_CliInitNewcli(struct DosLibrary *__base, struct DosPacket * dp)
+__dos_CliInitNewcli(void *__base, struct DosPacket * dp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dp);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2596,12 +2807,13 @@ __dos_CliInitNewcli(struct DosLibrary *__base, struct DosPacket * dp)
 	return (LONG)_d0;
 }
 #define CliInitNewcli(dp) __dos_CliInitNewcli((DOS_BASE_NAME), (struct DosPacket *)(dp))
+#define __CliInitNewcli_base(__in_base, dp) __dos_CliInitNewcli((__in_base), (struct DosPacket *)(dp))
 
 static __inline__ LONG
-__dos_CliInitRun(struct DosLibrary *__base, struct DosPacket * dp)
+__dos_CliInitRun(void *__base, struct DosPacket * dp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dp);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2612,13 +2824,14 @@ __dos_CliInitRun(struct DosLibrary *__base, struct DosPacket * dp)
 	return (LONG)_d0;
 }
 #define CliInitRun(dp) __dos_CliInitRun((DOS_BASE_NAME), (struct DosPacket *)(dp))
+#define __CliInitRun_base(__in_base, dp) __dos_CliInitRun((__in_base), (struct DosPacket *)(dp))
 
 static __inline__ LONG
-__dos_WriteChars(struct DosLibrary *__base, CONST_STRPTR buf, ULONG buflen)
+__dos_WriteChars(void *__base, CONST_STRPTR buf, ULONG buflen)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(buf);
 	register ULONG _d2 __asm("d2") = (ULONG)(buflen);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2629,12 +2842,13 @@ __dos_WriteChars(struct DosLibrary *__base, CONST_STRPTR buf, ULONG buflen)
 	return (LONG)_d0;
 }
 #define WriteChars(buf, buflen) __dos_WriteChars((DOS_BASE_NAME), (CONST_STRPTR)(buf), (ULONG)(buflen))
+#define __WriteChars_base(__in_base, buf, buflen) __dos_WriteChars((__in_base), (CONST_STRPTR)(buf), (ULONG)(buflen))
 
 static __inline__ LONG
-__dos_PutStr(struct DosLibrary *__base, CONST_STRPTR str)
+__dos_PutStr(void *__base, CONST_STRPTR str)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(str);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2645,13 +2859,14 @@ __dos_PutStr(struct DosLibrary *__base, CONST_STRPTR str)
 	return (LONG)_d0;
 }
 #define PutStr(str) __dos_PutStr((DOS_BASE_NAME), (CONST_STRPTR)(str))
+#define __PutStr_base(__in_base, str) __dos_PutStr((__in_base), (CONST_STRPTR)(str))
 
 static __inline__ LONG
-__dos_VPrintf(struct DosLibrary *__base, CONST_STRPTR format, CONST_APTR argarray)
+__dos_VPrintf(void *__base, CONST_STRPTR format, CONST_APTR argarray)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(format);
 	register ULONG _d2 __asm("d2") = (ULONG)(argarray);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2662,16 +2877,26 @@ __dos_VPrintf(struct DosLibrary *__base, CONST_STRPTR format, CONST_APTR argarra
 	return (LONG)_d0;
 }
 #define VPrintf(format, argarray) __dos_VPrintf((DOS_BASE_NAME), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
+#define __VPrintf_base(__in_base, format, argarray) __dos_VPrintf((__in_base), (CONST_STRPTR)(format), (CONST_APTR)(argarray))
 
-#define Printf(format, ...) (Printf)((CONST_STRPTR)(format), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__Printf_va(void *__base, CONST_STRPTR format, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, format);
+	LONG _r = (LONG)__dos_VPrintf(__base, (CONST_STRPTR)(format), (CONST_APTR)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define Printf(format, ...) __Printf_va((DOS_BASE_NAME), (CONST_STRPTR)(format), ##__VA_ARGS__)
 
 static __inline__ LONG
-__dos_ParsePatternNoCase(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE * patbuf, LONG patbuflen)
+__dos_ParsePatternNoCase(void *__base, CONST_STRPTR pat, UBYTE * patbuf, LONG patbuflen)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(pat);
 	register ULONG _d2 __asm("d2") = (ULONG)(patbuf);
 	register ULONG _d3 __asm("d3") = (ULONG)(patbuflen);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2682,13 +2907,14 @@ __dos_ParsePatternNoCase(struct DosLibrary *__base, CONST_STRPTR pat, UBYTE * pa
 	return (LONG)_d0;
 }
 #define ParsePatternNoCase(pat, patbuf, patbuflen) __dos_ParsePatternNoCase((DOS_BASE_NAME), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
+#define __ParsePatternNoCase_base(__in_base, pat, patbuf, patbuflen) __dos_ParsePatternNoCase((__in_base), (CONST_STRPTR)(pat), (UBYTE *)(patbuf), (LONG)(patbuflen))
 
 static __inline__ BOOL
-__dos_MatchPatternNoCase(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_STRPTR str)
+__dos_MatchPatternNoCase(void *__base, CONST UBYTE *patbuf, CONST_STRPTR str)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(patbuf);
 	register ULONG _d2 __asm("d2") = (ULONG)(str);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2699,13 +2925,14 @@ __dos_MatchPatternNoCase(struct DosLibrary *__base, CONST UBYTE *patbuf, CONST_S
 	return (BOOL)_d0;
 }
 #define MatchPatternNoCase(patbuf, str) __dos_MatchPatternNoCase((DOS_BASE_NAME), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
+#define __MatchPatternNoCase_base(__in_base, patbuf, str) __dos_MatchPatternNoCase((__in_base), (CONST UBYTE *)(patbuf), (CONST_STRPTR)(str))
 
 static __inline__ BOOL
-__dos_SameDevice(struct DosLibrary *__base, BPTR lock1, BPTR lock2)
+__dos_SameDevice(void *__base, BPTR lock1, BPTR lock2)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock1);
 	register ULONG _d2 __asm("d2") = (ULONG)(lock2);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2716,16 +2943,17 @@ __dos_SameDevice(struct DosLibrary *__base, BPTR lock1, BPTR lock2)
 	return (BOOL)_d0;
 }
 #define SameDevice(lock1, lock2) __dos_SameDevice((DOS_BASE_NAME), (BPTR)(lock1), (BPTR)(lock2))
+#define __SameDevice_base(__in_base, lock1, lock2) __dos_SameDevice((__in_base), (BPTR)(lock1), (BPTR)(lock2))
 
 static __inline__ VOID
-__dos_ExAllEnd(struct DosLibrary *__base, BPTR lock, struct ExAllData * buffer, LONG size, LONG data, struct ExAllControl * control)
+__dos_ExAllEnd(void *__base, BPTR lock, struct ExAllData * buffer, LONG size, LONG data, struct ExAllControl * control)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(lock);
 	register ULONG _d2 __asm("d2") = (ULONG)(buffer);
 	register ULONG _d3 __asm("d3") = (ULONG)(size);
 	register ULONG _d4 __asm("d4") = (ULONG)(data);
 	register ULONG _d5 __asm("d5") = (ULONG)(control);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2736,13 +2964,14 @@ __dos_ExAllEnd(struct DosLibrary *__base, BPTR lock, struct ExAllData * buffer, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ExAllEnd(lock, buffer, size, data, control) __dos_ExAllEnd((DOS_BASE_NAME), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
+#define __ExAllEnd_base(__in_base, lock, buffer, size, data, control) __dos_ExAllEnd((__in_base), (BPTR)(lock), (struct ExAllData *)(buffer), (LONG)(size), (LONG)(data), (struct ExAllControl *)(control))
 
 static __inline__ BOOL
-__dos_SetOwner(struct DosLibrary *__base, CONST_STRPTR name, LONG owner_info)
+__dos_SetOwner(void *__base, CONST_STRPTR name, LONG owner_info)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(name);
 	register ULONG _d2 __asm("d2") = (ULONG)(owner_info);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2753,12 +2982,13 @@ __dos_SetOwner(struct DosLibrary *__base, CONST_STRPTR name, LONG owner_info)
 	return (BOOL)_d0;
 }
 #define SetOwner(name, owner_info) __dos_SetOwner((DOS_BASE_NAME), (CONST_STRPTR)(name), (LONG)(owner_info))
+#define __SetOwner_base(__in_base, name, owner_info) __dos_SetOwner((__in_base), (CONST_STRPTR)(name), (LONG)(owner_info))
 
 static __inline__ LONG
-__dos_VolumeRequestHook(struct DosLibrary *__base, CONST_STRPTR vol)
+__dos_VolumeRequestHook(void *__base, CONST_STRPTR vol)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(vol);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2769,11 +2999,12 @@ __dos_VolumeRequestHook(struct DosLibrary *__base, CONST_STRPTR vol)
 	return (LONG)_d0;
 }
 #define VolumeRequestHook(vol) __dos_VolumeRequestHook((DOS_BASE_NAME), (CONST_STRPTR)(vol))
+#define __VolumeRequestHook_base(__in_base, vol) __dos_VolumeRequestHook((__in_base), (CONST_STRPTR)(vol))
 
 static __inline__ BPTR
-__dos_GetCurrentDir(struct DosLibrary *__base)
+__dos_GetCurrentDir(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -2785,12 +3016,13 @@ __dos_GetCurrentDir(struct DosLibrary *__base)
 	return (BPTR)_d0;
 }
 #define GetCurrentDir() __dos_GetCurrentDir((DOS_BASE_NAME))
+#define __GetCurrentDir_base(__in_base) __dos_GetCurrentDir((__in_base))
 
 static __inline__ LONG
-__dos_PutErrStr(struct DosLibrary *__base, CONST_STRPTR str)
+__dos_PutErrStr(void *__base, CONST_STRPTR str)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(str);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2801,11 +3033,12 @@ __dos_PutErrStr(struct DosLibrary *__base, CONST_STRPTR str)
 	return (LONG)_d0;
 }
 #define PutErrStr(str) __dos_PutErrStr((DOS_BASE_NAME), (CONST_STRPTR)(str))
+#define __PutErrStr_base(__in_base, str) __dos_PutErrStr((__in_base), (CONST_STRPTR)(str))
 
 static __inline__ LONG
-__dos_ErrorOutput(struct DosLibrary *__base)
+__dos_ErrorOutput(void *__base)
 {
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -2817,12 +3050,13 @@ __dos_ErrorOutput(struct DosLibrary *__base)
 	return (LONG)_d0;
 }
 #define ErrorOutput() __dos_ErrorOutput((DOS_BASE_NAME))
+#define __ErrorOutput_base(__in_base) __dos_ErrorOutput((__in_base))
 
 static __inline__ LONG
-__dos_SelectError(struct DosLibrary *__base, BPTR fh)
+__dos_SelectError(void *__base, BPTR fh)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(fh);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2833,13 +3067,14 @@ __dos_SelectError(struct DosLibrary *__base, BPTR fh)
 	return (LONG)_d0;
 }
 #define SelectError(fh) __dos_SelectError((DOS_BASE_NAME), (BPTR)(fh))
+#define __SelectError_base(__in_base, fh) __dos_SelectError((__in_base), (BPTR)(fh))
 
 static __inline__ APTR
-__dos_DoShellMethodTagList(struct DosLibrary *__base, ULONG method, CONST struct TagItem * tags)
+__dos_DoShellMethodTagList(void *__base, ULONG method, CONST struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(method);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -1152(%/a6)"
@@ -2849,15 +3084,25 @@ __dos_DoShellMethodTagList(struct DosLibrary *__base, ULONG method, CONST struct
 	return (APTR)_d0;
 }
 #define DoShellMethodTagList(method, tags) __dos_DoShellMethodTagList((DOS_BASE_NAME), (ULONG)(method), (CONST struct TagItem *)(tags))
+#define __DoShellMethodTagList_base(__in_base, method, tags) __dos_DoShellMethodTagList((__in_base), (ULONG)(method), (CONST struct TagItem *)(tags))
 
-#define DoShellMethod(method, ...) (DoShellMethod)((ULONG)(method), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR APTR
+__DoShellMethod_va(void *__base, ULONG method, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, method);
+	APTR _r = (APTR)__dos_DoShellMethodTagList(__base, (ULONG)(method), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define DoShellMethod(method, ...) __DoShellMethod_va((DOS_BASE_NAME), (ULONG)(method), ##__VA_ARGS__)
 
 static __inline__ LONG
-__dos_ScanStackToken(struct DosLibrary *__base, BPTR seg, LONG defaultstack)
+__dos_ScanStackToken(void *__base, BPTR seg, LONG defaultstack)
 {
 	register ULONG _d1 __asm("d1") = (ULONG)(seg);
 	register ULONG _d2 __asm("d2") = (ULONG)(defaultstack);
-	register struct DosLibrary *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2868,5 +3113,6 @@ __dos_ScanStackToken(struct DosLibrary *__base, BPTR seg, LONG defaultstack)
 	return (LONG)_d0;
 }
 #define ScanStackToken(seg, defaultstack) __dos_ScanStackToken((DOS_BASE_NAME), (BPTR)(seg), (LONG)(defaultstack))
+#define __ScanStackToken_base(__in_base, seg, defaultstack) __dos_ScanStackToken((__in_base), (BPTR)(seg), (LONG)(defaultstack))
 
 #endif /* INLINE_DOS_H */

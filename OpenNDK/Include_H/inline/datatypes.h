@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,12 +32,12 @@ struct Library;
 #endif
 
 static __inline__ struct DataType *
-__datatypes_ObtainDataTypeA(struct Library *__base, ULONG type, APTR handle, CONST struct TagItem * attrs)
+__datatypes_ObtainDataTypeA(void *__base, ULONG type, APTR handle, CONST struct TagItem * attrs)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(type);
 	register ULONG _a0 __asm("a0") = (ULONG)(handle);
 	register ULONG _a1 __asm("a1") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -38,14 +46,24 @@ __datatypes_ObtainDataTypeA(struct Library *__base, ULONG type, APTR handle, CON
 	return (struct DataType *)_d0;
 }
 #define ObtainDataTypeA(type, handle, attrs) __datatypes_ObtainDataTypeA((DATATYPES_BASE_NAME), (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)(attrs))
+#define __ObtainDataTypeA_base(__in_base, type, handle, attrs) __datatypes_ObtainDataTypeA((__in_base), (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)(attrs))
 
-#define ObtainDataType(type, handle, ...) (ObtainDataType)((ULONG)(type), (APTR)(handle), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct DataType *
+__ObtainDataType_va(void *__base, ULONG type, APTR handle, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, handle);
+	struct DataType * _r = (struct DataType *)__datatypes_ObtainDataTypeA(__base, (ULONG)(type), (APTR)(handle), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ObtainDataType(type, handle, ...) __ObtainDataType_va((DATATYPES_BASE_NAME), (ULONG)(type), (APTR)(handle), ##__VA_ARGS__)
 
 static __inline__ VOID
-__datatypes_ReleaseDataType(struct Library *__base, struct DataType * dt)
+__datatypes_ReleaseDataType(void *__base, struct DataType * dt)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dt);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -56,13 +74,14 @@ __datatypes_ReleaseDataType(struct Library *__base, struct DataType * dt)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleaseDataType(dt) __datatypes_ReleaseDataType((DATATYPES_BASE_NAME), (struct DataType *)(dt))
+#define __ReleaseDataType_base(__in_base, dt) __datatypes_ReleaseDataType((__in_base), (struct DataType *)(dt))
 
 static __inline__ Object *
-__datatypes_NewDTObjectA(struct Library *__base, STRPTR name, CONST struct TagItem * attrs)
+__datatypes_NewDTObjectA(void *__base, STRPTR name, CONST struct TagItem * attrs)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(name);
 	register ULONG _a0 __asm("a0") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -72,14 +91,24 @@ __datatypes_NewDTObjectA(struct Library *__base, STRPTR name, CONST struct TagIt
 	return (Object *)_d0;
 }
 #define NewDTObjectA(name, attrs) __datatypes_NewDTObjectA((DATATYPES_BASE_NAME), (STRPTR)(name), (CONST struct TagItem *)(attrs))
+#define __NewDTObjectA_base(__in_base, name, attrs) __datatypes_NewDTObjectA((__in_base), (STRPTR)(name), (CONST struct TagItem *)(attrs))
 
-#define NewDTObject(name, ...) (NewDTObject)((APTR)(name), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR Object *
+__NewDTObject_va(void *__base, APTR name, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, name);
+	Object * _r = (Object *)__datatypes_NewDTObjectA(__base, (STRPTR)(name), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define NewDTObject(name, ...) __NewDTObject_va((DATATYPES_BASE_NAME), (APTR)(name), ##__VA_ARGS__)
 
 static __inline__ VOID
-__datatypes_DisposeDTObject(struct Library *__base, Object * o)
+__datatypes_DisposeDTObject(void *__base, Object * o)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -90,15 +119,16 @@ __datatypes_DisposeDTObject(struct Library *__base, Object * o)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DisposeDTObject(o) __datatypes_DisposeDTObject((DATATYPES_BASE_NAME), (Object *)(o))
+#define __DisposeDTObject_base(__in_base, o) __datatypes_DisposeDTObject((__in_base), (Object *)(o))
 
 static __inline__ ULONG
-__datatypes_SetDTAttrsA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs)
+__datatypes_SetDTAttrsA(void *__base, Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
 	register ULONG _a2 __asm("a2") = (ULONG)(req);
 	register ULONG _a3 __asm("a3") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -108,15 +138,25 @@ __datatypes_SetDTAttrsA(struct Library *__base, Object * o, struct Window * win,
 	return (ULONG)_d0;
 }
 #define SetDTAttrsA(o, win, req, attrs) __datatypes_SetDTAttrsA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
+#define __SetDTAttrsA_base(__in_base, o, win, req, attrs) __datatypes_SetDTAttrsA((__in_base), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
 
-#define SetDTAttrs(o, win, req, ...) (SetDTAttrs)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__SetDTAttrs_va(void *__base, Object * o, struct Window * win, struct Requester * req, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, req);
+	ULONG _r = (ULONG)__datatypes_SetDTAttrsA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetDTAttrs(o, win, req, ...) __SetDTAttrs_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__datatypes_GetDTAttrsA(struct Library *__base, Object * o, CONST struct TagItem * attrs)
+__datatypes_GetDTAttrsA(void *__base, Object * o, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a2 __asm("a2") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -127,17 +167,27 @@ __datatypes_GetDTAttrsA(struct Library *__base, Object * o, CONST struct TagItem
 	return (ULONG)_d0;
 }
 #define GetDTAttrsA(o, attrs) __datatypes_GetDTAttrsA((DATATYPES_BASE_NAME), (Object *)(o), (CONST struct TagItem *)(attrs))
+#define __GetDTAttrsA_base(__in_base, o, attrs) __datatypes_GetDTAttrsA((__in_base), (Object *)(o), (CONST struct TagItem *)(attrs))
 
-#define GetDTAttrs(o, ...) (GetDTAttrs)((Object *)(o), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__GetDTAttrs_va(void *__base, Object * o, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, o);
+	ULONG _r = (ULONG)__datatypes_GetDTAttrsA(__base, (Object *)(o), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define GetDTAttrs(o, ...) __GetDTAttrs_va((DATATYPES_BASE_NAME), (Object *)(o), ##__VA_ARGS__)
 
 static __inline__ LONG
-__datatypes_AddDTObject(struct Library *__base, struct Window * win, struct Requester * req, Object * o, LONG pos)
+__datatypes_AddDTObject(void *__base, struct Window * win, struct Requester * req, Object * o, LONG pos)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(win);
 	register ULONG _a1 __asm("a1") = (ULONG)(req);
 	register ULONG _a2 __asm("a2") = (ULONG)(o);
 	register ULONG _d0 __asm("d0") = (ULONG)(pos);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -72(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -146,15 +196,16 @@ __datatypes_AddDTObject(struct Library *__base, struct Window * win, struct Requ
 	return (LONG)_d0;
 }
 #define AddDTObject(win, req, o, pos) __datatypes_AddDTObject((DATATYPES_BASE_NAME), (struct Window *)(win), (struct Requester *)(req), (Object *)(o), (LONG)(pos))
+#define __AddDTObject_base(__in_base, win, req, o, pos) __datatypes_AddDTObject((__in_base), (struct Window *)(win), (struct Requester *)(req), (Object *)(o), (LONG)(pos))
 
 static __inline__ VOID
-__datatypes_RefreshDTObjectA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs)
+__datatypes_RefreshDTObjectA(void *__base, Object * o, struct Window * win, struct Requester * req, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
 	register ULONG _a2 __asm("a2") = (ULONG)(req);
 	register ULONG _a3 __asm("a3") = (ULONG)(attrs);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -164,17 +215,34 @@ __datatypes_RefreshDTObjectA(struct Library *__base, Object * o, struct Window *
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RefreshDTObjectA(o, win, req, attrs) __datatypes_RefreshDTObjectA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
+#define __RefreshDTObjectA_base(__in_base, o, win, req, attrs) __datatypes_RefreshDTObjectA((__in_base), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)(attrs))
 
-#define RefreshDTObject(o, win, req, ...) (RefreshDTObject)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__RefreshDTObject_va(void *__base, Object * o, struct Window * win, struct Requester * req, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, req);
+	__datatypes_RefreshDTObjectA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define RefreshDTObject(o, win, req, ...) __RefreshDTObject_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
-#define RefreshDTObjects(o, win, req, ...) (RefreshDTObjects)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__RefreshDTObjects_va(void *__base, Object * o, struct Window * win, struct Requester * req, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, req);
+	__datatypes_RefreshDTObjectA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define RefreshDTObjects(o, win, req, ...) __RefreshDTObjects_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__datatypes_DoAsyncLayout(struct Library *__base, Object * o, struct gpLayout * gpl)
+__datatypes_DoAsyncLayout(void *__base, Object * o, struct gpLayout * gpl)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(gpl);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -184,15 +252,16 @@ __datatypes_DoAsyncLayout(struct Library *__base, Object * o, struct gpLayout * 
 	return (ULONG)_d0;
 }
 #define DoAsyncLayout(o, gpl) __datatypes_DoAsyncLayout((DATATYPES_BASE_NAME), (Object *)(o), (struct gpLayout *)(gpl))
+#define __DoAsyncLayout_base(__in_base, o, gpl) __datatypes_DoAsyncLayout((__in_base), (Object *)(o), (struct gpLayout *)(gpl))
 
 static __inline__ ULONG
-__datatypes_DoDTMethodA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, Msg msg)
+__datatypes_DoDTMethodA(void *__base, Object * o, struct Window * win, struct Requester * req, Msg msg)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
 	register ULONG _a2 __asm("a2") = (ULONG)(req);
 	register ULONG _a3 __asm("a3") = (ULONG)(msg);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -202,15 +271,25 @@ __datatypes_DoDTMethodA(struct Library *__base, Object * o, struct Window * win,
 	return (ULONG)_d0;
 }
 #define DoDTMethodA(o, win, req, msg) __datatypes_DoDTMethodA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)(msg))
+#define __DoDTMethodA_base(__in_base, o, win, req, msg) __datatypes_DoDTMethodA((__in_base), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)(msg))
 
-#define DoDTMethod(o, win, req, ...) (DoDTMethod)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__DoDTMethod_va(void *__base, Object * o, struct Window * win, struct Requester * req, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, req);
+	ULONG _r = (ULONG)__datatypes_DoDTMethodA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (Msg)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define DoDTMethod(o, win, req, ...) __DoDTMethod_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
 static __inline__ LONG
-__datatypes_RemoveDTObject(struct Library *__base, struct Window * win, Object * o)
+__datatypes_RemoveDTObject(void *__base, struct Window * win, Object * o)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(win);
 	register ULONG _a1 __asm("a1") = (ULONG)(o);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -220,12 +299,13 @@ __datatypes_RemoveDTObject(struct Library *__base, struct Window * win, Object *
 	return (LONG)_d0;
 }
 #define RemoveDTObject(win, o) __datatypes_RemoveDTObject((DATATYPES_BASE_NAME), (struct Window *)(win), (Object *)(o))
+#define __RemoveDTObject_base(__in_base, win, o) __datatypes_RemoveDTObject((__in_base), (struct Window *)(win), (Object *)(o))
 
 static __inline__ ULONG *
-__datatypes_GetDTMethods(struct Library *__base, CONST Object * object)
+__datatypes_GetDTMethods(void *__base, CONST Object * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -236,12 +316,13 @@ __datatypes_GetDTMethods(struct Library *__base, CONST Object * object)
 	return (ULONG *)_d0;
 }
 #define GetDTMethods(object) __datatypes_GetDTMethods((DATATYPES_BASE_NAME), (CONST Object *)(object))
+#define __GetDTMethods_base(__in_base, object) __datatypes_GetDTMethods((__in_base), (CONST Object *)(object))
 
 static __inline__ struct DTMethods *
-__datatypes_GetDTTriggerMethods(struct Library *__base, Object * object)
+__datatypes_GetDTTriggerMethods(void *__base, Object * object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -252,15 +333,16 @@ __datatypes_GetDTTriggerMethods(struct Library *__base, Object * object)
 	return (struct DTMethods *)_d0;
 }
 #define GetDTTriggerMethods(object) __datatypes_GetDTTriggerMethods((DATATYPES_BASE_NAME), (Object *)(object))
+#define __GetDTTriggerMethods_base(__in_base, object) __datatypes_GetDTTriggerMethods((__in_base), (Object *)(object))
 
 static __inline__ ULONG
-__datatypes_PrintDTObjectA(struct Library *__base, Object * o, struct Window * w, struct Requester * r, struct dtPrint * msg)
+__datatypes_PrintDTObjectA(void *__base, Object * o, struct Window * w, struct Requester * r, struct dtPrint * msg)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(w);
 	register ULONG _a2 __asm("a2") = (ULONG)(r);
 	register ULONG _a3 __asm("a3") = (ULONG)(msg);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
@@ -270,14 +352,24 @@ __datatypes_PrintDTObjectA(struct Library *__base, Object * o, struct Window * w
 	return (ULONG)_d0;
 }
 #define PrintDTObjectA(o, w, r, msg) __datatypes_PrintDTObjectA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)(msg))
+#define __PrintDTObjectA_base(__in_base, o, w, r, msg) __datatypes_PrintDTObjectA((__in_base), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)(msg))
 
-#define PrintDTObject(o, w, r, ...) (PrintDTObject)((Object *)(o), (struct Window *)(w), (struct Requester *)(r), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__PrintDTObject_va(void *__base, Object * o, struct Window * w, struct Requester * r, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, r);
+	ULONG _r = (ULONG)__datatypes_PrintDTObjectA(__base, (Object *)(o), (struct Window *)(w), (struct Requester *)(r), (struct dtPrint *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define PrintDTObject(o, w, r, ...) __PrintDTObject_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(w), (struct Requester *)(r), ##__VA_ARGS__)
 
 static __inline__ CONST_STRPTR
-__datatypes_GetDTString(struct Library *__base, ULONG id)
+__datatypes_GetDTString(void *__base, ULONG id)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(id);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -288,13 +380,14 @@ __datatypes_GetDTString(struct Library *__base, ULONG id)
 	return (CONST_STRPTR)_d0;
 }
 #define GetDTString(id) __datatypes_GetDTString((DATATYPES_BASE_NAME), (ULONG)(id))
+#define __GetDTString_base(__in_base, id) __datatypes_GetDTString((__in_base), (ULONG)(id))
 
 static __inline__ ULONG *
-__datatypes_FindMethod(struct Library *__base, ULONG * methods, ULONG searchmethodid)
+__datatypes_FindMethod(void *__base, ULONG * methods, ULONG searchmethodid)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(methods);
 	register ULONG _a1 __asm("a1") = (ULONG)(searchmethodid);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -258(%/a6)"
@@ -304,14 +397,15 @@ __datatypes_FindMethod(struct Library *__base, ULONG * methods, ULONG searchmeth
 	return (ULONG *)_d0;
 }
 #define FindMethod(methods, searchmethodid) __datatypes_FindMethod((DATATYPES_BASE_NAME), (ULONG *)(methods), (ULONG)(searchmethodid))
+#define __FindMethod_base(__in_base, methods, searchmethodid) __datatypes_FindMethod((__in_base), (ULONG *)(methods), (ULONG)(searchmethodid))
 
 static __inline__ struct DTMethod *
-__datatypes_FindTriggerMethod(struct Library *__base, struct DTMethod * dtm, CONST_STRPTR command, ULONG method)
+__datatypes_FindTriggerMethod(void *__base, struct DTMethod * dtm, CONST_STRPTR command, ULONG method)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dtm);
 	register ULONG _a1 __asm("a1") = (ULONG)(command);
 	register ULONG _d0 __asm("d0") = (ULONG)(method);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -264(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -320,14 +414,15 @@ __datatypes_FindTriggerMethod(struct Library *__base, struct DTMethod * dtm, CON
 	return (struct DTMethod *)_d0;
 }
 #define FindTriggerMethod(dtm, command, method) __datatypes_FindTriggerMethod((DATATYPES_BASE_NAME), (struct DTMethod *)(dtm), (CONST_STRPTR)(command), (ULONG)(method))
+#define __FindTriggerMethod_base(__in_base, dtm, command, method) __datatypes_FindTriggerMethod((__in_base), (struct DTMethod *)(dtm), (CONST_STRPTR)(command), (ULONG)(method))
 
 static __inline__ ULONG *
-__datatypes_CopyDTMethods(struct Library *__base, ULONG * methods, ULONG * include, ULONG * exclude)
+__datatypes_CopyDTMethods(void *__base, ULONG * methods, ULONG * include, ULONG * exclude)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(methods);
 	register ULONG _a1 __asm("a1") = (ULONG)(include);
 	register ULONG _a2 __asm("a2") = (ULONG)(exclude);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -270(%/a6)"
@@ -337,14 +432,15 @@ __datatypes_CopyDTMethods(struct Library *__base, ULONG * methods, ULONG * inclu
 	return (ULONG *)_d0;
 }
 #define CopyDTMethods(methods, include, exclude) __datatypes_CopyDTMethods((DATATYPES_BASE_NAME), (ULONG *)(methods), (ULONG *)(include), (ULONG *)(exclude))
+#define __CopyDTMethods_base(__in_base, methods, include, exclude) __datatypes_CopyDTMethods((__in_base), (ULONG *)(methods), (ULONG *)(include), (ULONG *)(exclude))
 
 static __inline__ struct DTMethod *
-__datatypes_CopyDTTriggerMethods(struct Library *__base, struct DTMethod * methods, struct DTMethod * include, struct DTMethod * exclude)
+__datatypes_CopyDTTriggerMethods(void *__base, struct DTMethod * methods, struct DTMethod * include, struct DTMethod * exclude)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(methods);
 	register ULONG _a1 __asm("a1") = (ULONG)(include);
 	register ULONG _a2 __asm("a2") = (ULONG)(exclude);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -276(%/a6)"
@@ -354,12 +450,13 @@ __datatypes_CopyDTTriggerMethods(struct Library *__base, struct DTMethod * metho
 	return (struct DTMethod *)_d0;
 }
 #define CopyDTTriggerMethods(methods, include, exclude) __datatypes_CopyDTTriggerMethods((DATATYPES_BASE_NAME), (struct DTMethod *)(methods), (struct DTMethod *)(include), (struct DTMethod *)(exclude))
+#define __CopyDTTriggerMethods_base(__in_base, methods, include, exclude) __datatypes_CopyDTTriggerMethods((__in_base), (struct DTMethod *)(methods), (struct DTMethod *)(include), (struct DTMethod *)(exclude))
 
 static __inline__ APTR
-__datatypes_FreeDTMethods(struct Library *__base, APTR methods)
+__datatypes_FreeDTMethods(void *__base, APTR methods)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(methods);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -370,12 +467,13 @@ __datatypes_FreeDTMethods(struct Library *__base, APTR methods)
 	return (APTR)_d0;
 }
 #define FreeDTMethods(methods) __datatypes_FreeDTMethods((DATATYPES_BASE_NAME), (APTR)(methods))
+#define __FreeDTMethods_base(__in_base, methods) __datatypes_FreeDTMethods((__in_base), (APTR)(methods))
 
 static __inline__ ULONG
-__datatypes_GetDTTriggerMethodDataFlags(struct Library *__base, ULONG method)
+__datatypes_GetDTTriggerMethodDataFlags(void *__base, ULONG method)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(method);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -386,9 +484,10 @@ __datatypes_GetDTTriggerMethodDataFlags(struct Library *__base, ULONG method)
 	return (ULONG)_d0;
 }
 #define GetDTTriggerMethodDataFlags(method) __datatypes_GetDTTriggerMethodDataFlags((DATATYPES_BASE_NAME), (ULONG)(method))
+#define __GetDTTriggerMethodDataFlags_base(__in_base, method) __datatypes_GetDTTriggerMethodDataFlags((__in_base), (ULONG)(method))
 
 static __inline__ ULONG
-__datatypes_SaveDTObjectA(struct Library *__base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, LONG saveicon, CONST struct TagItem * attrs)
+__datatypes_SaveDTObjectA(void *__base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, LONG saveicon, CONST struct TagItem * attrs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
@@ -396,7 +495,7 @@ __datatypes_SaveDTObjectA(struct Library *__base, Object * o, struct Window * wi
 	register ULONG _a3 __asm("a3") = (ULONG)(file);
 	register ULONG _d0 __asm("d0") = (ULONG)(mode);
 	register ULONG _d1 __asm("d1") = (ULONG)(saveicon);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("move.l %/a4,-(%/sp)\n\tmove.l %[s0],%/a4\n\tjsr -294(%/a6)\n\tmove.l (%/sp)+,%/a4"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a3), "r" (_a6), [s0] "r" ((ULONG)(attrs))
@@ -404,14 +503,24 @@ __datatypes_SaveDTObjectA(struct Library *__base, Object * o, struct Window * wi
 	return (ULONG)_d0;
 }
 #define SaveDTObjectA(o, win, req, file, mode, saveicon, attrs) __datatypes_SaveDTObjectA((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)(attrs))
+#define __SaveDTObjectA_base(__in_base, o, win, req, file, mode, saveicon, attrs) __datatypes_SaveDTObjectA((__in_base), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)(attrs))
 
-#define SaveDTObject(o, win, req, file, mode, saveicon, ...) (SaveDTObject)((Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (BOOL)(saveicon), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__SaveDTObject_va(void *__base, Object * o, struct Window * win, struct Requester * req, CONST_STRPTR file, ULONG mode, BOOL saveicon, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, saveicon);
+	ULONG _r = (ULONG)__datatypes_SaveDTObjectA(__base, (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (LONG)(saveicon), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SaveDTObject(o, win, req, file, mode, saveicon, ...) __SaveDTObject_va((DATATYPES_BASE_NAME), (Object *)(o), (struct Window *)(win), (struct Requester *)(req), (CONST_STRPTR)(file), (ULONG)(mode), (BOOL)(saveicon), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__datatypes_StartDragSelect(struct Library *__base, Object * o)
+__datatypes_StartDragSelect(void *__base, Object * o)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -422,5 +531,6 @@ __datatypes_StartDragSelect(struct Library *__base, Object * o)
 	return (ULONG)_d0;
 }
 #define StartDragSelect(o) __datatypes_StartDragSelect((DATATYPES_BASE_NAME), (Object *)(o))
+#define __StartDragSelect_base(__in_base, o) __datatypes_StartDragSelect((__in_base), (Object *)(o))
 
 #endif /* INLINE_DATATYPES_H */

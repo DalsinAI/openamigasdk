@@ -13,7 +13,7 @@
 struct LocalVar {
 	struct Node	lv_Node;	/* ln_Type: LV_; ln_Name: the name */
 	UWORD		lv_Flags;
-	UBYTE		*lv_Value;
+	STRPTR	lv_Value;
 	ULONG		lv_Len;
 };
 

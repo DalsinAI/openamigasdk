@@ -42,7 +42,7 @@
 #define HUNKB_FAST	31
 #define HUNKF_ADVISORY	(1L<<29)
 #define HUNKF_CHIP	(1L<<30)
-#define HUNKF_FAST	(1L<<31)
+#define HUNKF_FAST	(1UL<<31)
 
 /* HUNK_EXT symbol types */
 #define EXT_SYMB	0

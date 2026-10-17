@@ -13,7 +13,8 @@
 #define DISK_BASE_NAME DiskBase
 #endif
 
-struct DiscResource;
+struct DiskResource;
+
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
@@ -24,10 +25,10 @@ struct DiscResource;
 #endif
 
 static __inline__ BOOL
-__disk_AllocUnit(struct DiscResource *__base, LONG unitNum)
+__disk_AllocUnit(void *__base, LONG unitNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNum);
-	register struct DiscResource *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -38,12 +39,13 @@ __disk_AllocUnit(struct DiscResource *__base, LONG unitNum)
 	return (BOOL)_d0;
 }
 #define AllocUnit(unitNum) __disk_AllocUnit((DISK_BASE_NAME), (LONG)(unitNum))
+#define __AllocUnit_base(__in_base, unitNum) __disk_AllocUnit((__in_base), (LONG)(unitNum))
 
 static __inline__ VOID
-__disk_FreeUnit(struct DiscResource *__base, LONG unitNum)
+__disk_FreeUnit(void *__base, LONG unitNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNum);
-	register struct DiscResource *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -54,12 +56,13 @@ __disk_FreeUnit(struct DiscResource *__base, LONG unitNum)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeUnit(unitNum) __disk_FreeUnit((DISK_BASE_NAME), (LONG)(unitNum))
+#define __FreeUnit_base(__in_base, unitNum) __disk_FreeUnit((__in_base), (LONG)(unitNum))
 
 static __inline__ struct DiscResourceUnit *
-__disk_GetUnit(struct DiscResource *__base, struct DiscResourceUnit * unitPointer)
+__disk_GetUnit(void *__base, struct DiscResourceUnit * unitPointer)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(unitPointer);
-	register struct DiscResource *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -70,11 +73,12 @@ __disk_GetUnit(struct DiscResource *__base, struct DiscResourceUnit * unitPointe
 	return (struct DiscResourceUnit *)_d0;
 }
 #define GetUnit(unitPointer) __disk_GetUnit((DISK_BASE_NAME), (struct DiscResourceUnit *)(unitPointer))
+#define __GetUnit_base(__in_base, unitPointer) __disk_GetUnit((__in_base), (struct DiscResourceUnit *)(unitPointer))
 
 static __inline__ VOID
-__disk_GiveUnit(struct DiscResource *__base)
+__disk_GiveUnit(void *__base)
 {
-	register struct DiscResource *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -86,12 +90,13 @@ __disk_GiveUnit(struct DiscResource *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GiveUnit() __disk_GiveUnit((DISK_BASE_NAME))
+#define __GiveUnit_base(__in_base) __disk_GiveUnit((__in_base))
 
 static __inline__ LONG
-__disk_GetUnitID(struct DiscResource *__base, LONG unitNum)
+__disk_GetUnitID(void *__base, LONG unitNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNum);
-	register struct DiscResource *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -102,12 +107,13 @@ __disk_GetUnitID(struct DiscResource *__base, LONG unitNum)
 	return (LONG)_d0;
 }
 #define GetUnitID(unitNum) __disk_GetUnitID((DISK_BASE_NAME), (LONG)(unitNum))
+#define __GetUnitID_base(__in_base, unitNum) __disk_GetUnitID((__in_base), (LONG)(unitNum))
 
 static __inline__ LONG
-__disk_ReadUnitID(struct DiscResource *__base, LONG unitNum)
+__disk_ReadUnitID(void *__base, LONG unitNum)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNum);
-	register struct DiscResource *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -118,5 +124,6 @@ __disk_ReadUnitID(struct DiscResource *__base, LONG unitNum)
 	return (LONG)_d0;
 }
 #define ReadUnitID(unitNum) __disk_ReadUnitID((DISK_BASE_NAME), (LONG)(unitNum))
+#define __ReadUnitID_base(__in_base, unitNum) __disk_ReadUnitID((__in_base), (LONG)(unitNum))
 
 #endif /* INLINE_DISK_H */

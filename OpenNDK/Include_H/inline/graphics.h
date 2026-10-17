@@ -15,6 +15,14 @@
 
 struct GfxBase;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,7 +32,7 @@ struct GfxBase;
 #endif
 
 static __inline__ LONG
-__graphics_BltBitMap(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct BitMap * destBitMap, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm, UBYTE mask, PLANEPTR tempA)
+__graphics_BltBitMap(void *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct BitMap * destBitMap, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm, UBYTE mask, PLANEPTR tempA)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcBitMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -37,7 +45,7 @@ __graphics_BltBitMap(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WO
 	register ULONG _d6 __asm("d6") = (ULONG)(minterm);
 	register ULONG _d7 __asm("d7") = (ULONG)(mask);
 	register ULONG _a2 __asm("a2") = (ULONG)(tempA);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -30(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4), "r" (_d5), "r" (_d6), "r" (_d7)
@@ -45,9 +53,10 @@ __graphics_BltBitMap(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WO
 	return (LONG)_d0;
 }
 #define BltBitMap(srcBitMap, xSrc, ySrc, destBitMap, xDest, yDest, xSize, ySize, minterm, mask, tempA) __graphics_BltBitMap((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct BitMap *)(destBitMap), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (UBYTE)(mask), (PLANEPTR)(tempA))
+#define __BltBitMap_base(__in_base, srcBitMap, xSrc, ySrc, destBitMap, xDest, yDest, xSize, ySize, minterm, mask, tempA) __graphics_BltBitMap((__in_base), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct BitMap *)(destBitMap), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (UBYTE)(mask), (PLANEPTR)(tempA))
 
 static __inline__ VOID
-__graphics_BltTemplate(struct GfxBase *__base, CONST PLANEPTR source, WORD xSrc, WORD srcMod, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize)
+__graphics_BltTemplate(void *__base, CONST PLANEPTR source, WORD xSrc, WORD srcMod, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(source);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -57,7 +66,7 @@ __graphics_BltTemplate(struct GfxBase *__base, CONST PLANEPTR source, WORD xSrc,
 	register ULONG _d3 __asm("d3") = (ULONG)(yDest);
 	register ULONG _d4 __asm("d4") = (ULONG)(xSize);
 	register ULONG _d5 __asm("d5") = (ULONG)(ySize);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4), "r" (_d5)
@@ -65,12 +74,13 @@ __graphics_BltTemplate(struct GfxBase *__base, CONST PLANEPTR source, WORD xSrc,
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define BltTemplate(source, xSrc, srcMod, destRP, xDest, yDest, xSize, ySize) __graphics_BltTemplate((GRAPHICS_BASE_NAME), (CONST PLANEPTR)(source), (WORD)(xSrc), (WORD)(srcMod), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize))
+#define __BltTemplate_base(__in_base, source, xSrc, srcMod, destRP, xDest, yDest, xSize, ySize) __graphics_BltTemplate((__in_base), (CONST PLANEPTR)(source), (WORD)(xSrc), (WORD)(srcMod), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize))
 
 static __inline__ VOID
-__graphics_ClearEOL(struct GfxBase *__base, struct RastPort * rp)
+__graphics_ClearEOL(void *__base, struct RastPort * rp)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -81,12 +91,13 @@ __graphics_ClearEOL(struct GfxBase *__base, struct RastPort * rp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ClearEOL(rp) __graphics_ClearEOL((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __ClearEOL_base(__in_base, rp) __graphics_ClearEOL((__in_base), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_ClearScreen(struct GfxBase *__base, struct RastPort * rp)
+__graphics_ClearScreen(void *__base, struct RastPort * rp)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -97,14 +108,15 @@ __graphics_ClearScreen(struct GfxBase *__base, struct RastPort * rp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ClearScreen(rp) __graphics_ClearScreen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __ClearScreen_base(__in_base, rp) __graphics_ClearScreen((__in_base), (struct RastPort *)(rp))
 
 static __inline__ WORD
-__graphics_TextLength(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD count)
+__graphics_TextLength(void *__base, struct RastPort * rp, CONST_STRPTR string, UWORD count)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
 	register ULONG _d0 __asm("d0") = (ULONG)(count);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -113,14 +125,15 @@ __graphics_TextLength(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR
 	return (WORD)_d0;
 }
 #define TextLength(rp, string, count) __graphics_TextLength((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
+#define __TextLength_base(__in_base, rp, string, count) __graphics_TextLength((__in_base), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
 
 static __inline__ LONG
-__graphics_Text(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD count)
+__graphics_Text(void *__base, struct RastPort * rp, CONST_STRPTR string, UWORD count)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
 	register ULONG _d0 __asm("d0") = (ULONG)(count);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -129,13 +142,14 @@ __graphics_Text(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR strin
 	return (LONG)_d0;
 }
 #define Text(rp, string, count) __graphics_Text((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
+#define __Text_base(__in_base, rp, string, count) __graphics_Text((__in_base), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(count))
 
 static __inline__ LONG
-__graphics_SetFont(struct GfxBase *__base, struct RastPort * rp, CONST struct TextFont * textFont)
+__graphics_SetFont(void *__base, struct RastPort * rp, CONST struct TextFont * textFont)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(textFont);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -145,12 +159,13 @@ __graphics_SetFont(struct GfxBase *__base, struct RastPort * rp, CONST struct Te
 	return (LONG)_d0;
 }
 #define SetFont(rp, textFont) __graphics_SetFont((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST struct TextFont *)(textFont))
+#define __SetFont_base(__in_base, rp, textFont) __graphics_SetFont((__in_base), (struct RastPort *)(rp), (CONST struct TextFont *)(textFont))
 
 static __inline__ struct TextFont *
-__graphics_OpenFont(struct GfxBase *__base, CONST struct TextAttr * textAttr)
+__graphics_OpenFont(void *__base, CONST struct TextAttr * textAttr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(textAttr);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -161,12 +176,13 @@ __graphics_OpenFont(struct GfxBase *__base, CONST struct TextAttr * textAttr)
 	return (struct TextFont *)_d0;
 }
 #define OpenFont(textAttr) __graphics_OpenFont((GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(textAttr))
+#define __OpenFont_base(__in_base, textAttr) __graphics_OpenFont((__in_base), (CONST struct TextAttr *)(textAttr))
 
 static __inline__ VOID
-__graphics_CloseFont(struct GfxBase *__base, struct TextFont * textFont)
+__graphics_CloseFont(void *__base, struct TextFont * textFont)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(textFont);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -177,12 +193,13 @@ __graphics_CloseFont(struct GfxBase *__base, struct TextFont * textFont)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseFont(textFont) __graphics_CloseFont((GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define __CloseFont_base(__in_base, textFont) __graphics_CloseFont((__in_base), (struct TextFont *)(textFont))
 
 static __inline__ ULONG
-__graphics_AskSoftStyle(struct GfxBase *__base, struct RastPort * rp)
+__graphics_AskSoftStyle(void *__base, struct RastPort * rp)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -193,14 +210,15 @@ __graphics_AskSoftStyle(struct GfxBase *__base, struct RastPort * rp)
 	return (ULONG)_d0;
 }
 #define AskSoftStyle(rp) __graphics_AskSoftStyle((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __AskSoftStyle_base(__in_base, rp) __graphics_AskSoftStyle((__in_base), (struct RastPort *)(rp))
 
 static __inline__ ULONG
-__graphics_SetSoftStyle(struct GfxBase *__base, struct RastPort * rp, ULONG style, ULONG enable)
+__graphics_SetSoftStyle(void *__base, struct RastPort * rp, ULONG style, ULONG enable)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(style);
 	register ULONG _d1 __asm("d1") = (ULONG)(enable);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -209,13 +227,14 @@ __graphics_SetSoftStyle(struct GfxBase *__base, struct RastPort * rp, ULONG styl
 	return (ULONG)_d0;
 }
 #define SetSoftStyle(rp, style, enable) __graphics_SetSoftStyle((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(style), (ULONG)(enable))
+#define __SetSoftStyle_base(__in_base, rp, style, enable) __graphics_SetSoftStyle((__in_base), (struct RastPort *)(rp), (ULONG)(style), (ULONG)(enable))
 
 static __inline__ VOID
-__graphics_AddBob(struct GfxBase *__base, struct Bob * bob, struct RastPort * rp)
+__graphics_AddBob(void *__base, struct Bob * bob, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(bob);
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -225,13 +244,14 @@ __graphics_AddBob(struct GfxBase *__base, struct Bob * bob, struct RastPort * rp
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddBob(bob, rp) __graphics_AddBob((GRAPHICS_BASE_NAME), (struct Bob *)(bob), (struct RastPort *)(rp))
+#define __AddBob_base(__in_base, bob, rp) __graphics_AddBob((__in_base), (struct Bob *)(bob), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_AddVSprite(struct GfxBase *__base, struct VSprite * vSprite, struct RastPort * rp)
+__graphics_AddVSprite(void *__base, struct VSprite * vSprite, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vSprite);
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -241,12 +261,13 @@ __graphics_AddVSprite(struct GfxBase *__base, struct VSprite * vSprite, struct R
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddVSprite(vSprite, rp) __graphics_AddVSprite((GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite), (struct RastPort *)(rp))
+#define __AddVSprite_base(__in_base, vSprite, rp) __graphics_AddVSprite((__in_base), (struct VSprite *)(vSprite), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_DoCollision(struct GfxBase *__base, struct RastPort * rp)
+__graphics_DoCollision(void *__base, struct RastPort * rp)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -257,13 +278,14 @@ __graphics_DoCollision(struct GfxBase *__base, struct RastPort * rp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DoCollision(rp) __graphics_DoCollision((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __DoCollision_base(__in_base, rp) __graphics_DoCollision((__in_base), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_DrawGList(struct GfxBase *__base, struct RastPort * rp, struct ViewPort * vp)
+__graphics_DrawGList(void *__base, struct RastPort * rp, struct ViewPort * vp)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -114(%/a6)"
@@ -273,14 +295,15 @@ __graphics_DrawGList(struct GfxBase *__base, struct RastPort * rp, struct ViewPo
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DrawGList(rp, vp) __graphics_DrawGList((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (struct ViewPort *)(vp))
+#define __DrawGList_base(__in_base, rp, vp) __graphics_DrawGList((__in_base), (struct RastPort *)(rp), (struct ViewPort *)(vp))
 
 static __inline__ VOID
-__graphics_InitGels(struct GfxBase *__base, struct VSprite * head, struct VSprite * tail, struct GelsInfo * gelsInfo)
+__graphics_InitGels(void *__base, struct VSprite * head, struct VSprite * tail, struct GelsInfo * gelsInfo)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(head);
 	register ULONG _a1 __asm("a1") = (ULONG)(tail);
 	register ULONG _a2 __asm("a2") = (ULONG)(gelsInfo);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -290,12 +313,13 @@ __graphics_InitGels(struct GfxBase *__base, struct VSprite * head, struct VSprit
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitGels(head, tail, gelsInfo) __graphics_InitGels((GRAPHICS_BASE_NAME), (struct VSprite *)(head), (struct VSprite *)(tail), (struct GelsInfo *)(gelsInfo))
+#define __InitGels_base(__in_base, head, tail, gelsInfo) __graphics_InitGels((__in_base), (struct VSprite *)(head), (struct VSprite *)(tail), (struct GelsInfo *)(gelsInfo))
 
 static __inline__ VOID
-__graphics_InitMasks(struct GfxBase *__base, struct VSprite * vSprite)
+__graphics_InitMasks(void *__base, struct VSprite * vSprite)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vSprite);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -306,14 +330,15 @@ __graphics_InitMasks(struct GfxBase *__base, struct VSprite * vSprite)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitMasks(vSprite) __graphics_InitMasks((GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite))
+#define __InitMasks_base(__in_base, vSprite) __graphics_InitMasks((__in_base), (struct VSprite *)(vSprite))
 
 static __inline__ VOID
-__graphics_RemIBob(struct GfxBase *__base, struct Bob * bob, struct RastPort * rp, struct ViewPort * vp)
+__graphics_RemIBob(void *__base, struct Bob * bob, struct RastPort * rp, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(bob);
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a2 __asm("a2") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
@@ -323,12 +348,13 @@ __graphics_RemIBob(struct GfxBase *__base, struct Bob * bob, struct RastPort * r
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemIBob(bob, rp, vp) __graphics_RemIBob((GRAPHICS_BASE_NAME), (struct Bob *)(bob), (struct RastPort *)(rp), (struct ViewPort *)(vp))
+#define __RemIBob_base(__in_base, bob, rp, vp) __graphics_RemIBob((__in_base), (struct Bob *)(bob), (struct RastPort *)(rp), (struct ViewPort *)(vp))
 
 static __inline__ VOID
-__graphics_RemVSprite(struct GfxBase *__base, struct VSprite * vSprite)
+__graphics_RemVSprite(void *__base, struct VSprite * vSprite)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vSprite);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -339,14 +365,15 @@ __graphics_RemVSprite(struct GfxBase *__base, struct VSprite * vSprite)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemVSprite(vSprite) __graphics_RemVSprite((GRAPHICS_BASE_NAME), (struct VSprite *)(vSprite))
+#define __RemVSprite_base(__in_base, vSprite) __graphics_RemVSprite((__in_base), (struct VSprite *)(vSprite))
 
 static __inline__ VOID
-__graphics_SetCollision(struct GfxBase *__base, ULONG num, VOID (*CONST routine)(struct VSprite * gelA, struct VSprite * gelB), struct GelsInfo * gelsInfo)
+__graphics_SetCollision(void *__base, ULONG num, VOID (*CONST routine)(struct VSprite * gelA, struct VSprite * gelB), struct GelsInfo * gelsInfo)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(num);
 	register ULONG _a0 __asm("a0") = (ULONG)(routine);
 	register ULONG _a1 __asm("a1") = (ULONG)(gelsInfo);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -355,12 +382,13 @@ __graphics_SetCollision(struct GfxBase *__base, ULONG num, VOID (*CONST routine)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetCollision(num, routine, gelsInfo) __graphics_SetCollision((GRAPHICS_BASE_NAME), (ULONG)(num), (VOID (*CONST )(struct VSprite * gelA, struct VSprite * gelB))(routine), (struct GelsInfo *)(gelsInfo))
+#define __SetCollision_base(__in_base, num, routine, gelsInfo) __graphics_SetCollision((__in_base), (ULONG)(num), (VOID (*CONST )(struct VSprite * gelA, struct VSprite * gelB))(routine), (struct GelsInfo *)(gelsInfo))
 
 static __inline__ VOID
-__graphics_SortGList(struct GfxBase *__base, struct RastPort * rp)
+__graphics_SortGList(void *__base, struct RastPort * rp)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -371,14 +399,15 @@ __graphics_SortGList(struct GfxBase *__base, struct RastPort * rp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SortGList(rp) __graphics_SortGList((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __SortGList_base(__in_base, rp) __graphics_SortGList((__in_base), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_AddAnimOb(struct GfxBase *__base, struct AnimOb * anOb, struct AnimOb ** anKey, struct RastPort * rp)
+__graphics_AddAnimOb(void *__base, struct AnimOb * anOb, struct AnimOb ** anKey, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(anOb);
 	register ULONG _a1 __asm("a1") = (ULONG)(anKey);
 	register ULONG _a2 __asm("a2") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -156(%/a6)"
@@ -388,13 +417,14 @@ __graphics_AddAnimOb(struct GfxBase *__base, struct AnimOb * anOb, struct AnimOb
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddAnimOb(anOb, anKey, rp) __graphics_AddAnimOb((GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
+#define __AddAnimOb_base(__in_base, anOb, anKey, rp) __graphics_AddAnimOb((__in_base), (struct AnimOb *)(anOb), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_Animate(struct GfxBase *__base, struct AnimOb ** anKey, struct RastPort * rp)
+__graphics_Animate(void *__base, struct AnimOb ** anKey, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(anKey);
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
@@ -404,14 +434,15 @@ __graphics_Animate(struct GfxBase *__base, struct AnimOb ** anKey, struct RastPo
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Animate(anKey, rp) __graphics_Animate((GRAPHICS_BASE_NAME), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
+#define __Animate_base(__in_base, anKey, rp) __graphics_Animate((__in_base), (struct AnimOb **)(anKey), (struct RastPort *)(rp))
 
 static __inline__ BOOL
-__graphics_GetGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct RastPort * rp, BOOL flag)
+__graphics_GetGBuffers(void *__base, struct AnimOb * anOb, struct RastPort * rp, BOOL flag)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(anOb);
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(flag);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -168(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -420,12 +451,13 @@ __graphics_GetGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct Rast
 	return (BOOL)_d0;
 }
 #define GetGBuffers(anOb, rp, flag) __graphics_GetGBuffers((GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
+#define __GetGBuffers_base(__in_base, anOb, rp, flag) __graphics_GetGBuffers((__in_base), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
 
 static __inline__ VOID
-__graphics_InitGMasks(struct GfxBase *__base, struct AnimOb * anOb)
+__graphics_InitGMasks(void *__base, struct AnimOb * anOb)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(anOb);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -436,16 +468,17 @@ __graphics_InitGMasks(struct GfxBase *__base, struct AnimOb * anOb)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitGMasks(anOb) __graphics_InitGMasks((GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb))
+#define __InitGMasks_base(__in_base, anOb) __graphics_InitGMasks((__in_base), (struct AnimOb *)(anOb))
 
 static __inline__ VOID
-__graphics_DrawEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCenter, WORD yCenter, WORD a, WORD b)
+__graphics_DrawEllipse(void *__base, struct RastPort * rp, WORD xCenter, WORD yCenter, WORD a, WORD b)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xCenter);
 	register ULONG _d1 __asm("d1") = (ULONG)(yCenter);
 	register ULONG _d2 __asm("d2") = (ULONG)(a);
 	register ULONG _d3 __asm("d3") = (ULONG)(b);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -180(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -454,16 +487,17 @@ __graphics_DrawEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCente
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DrawEllipse(rp, xCenter, yCenter, a, b) __graphics_DrawEllipse((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
+#define __DrawEllipse_base(__in_base, rp, xCenter, yCenter, a, b) __graphics_DrawEllipse((__in_base), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
 
 static __inline__ LONG
-__graphics_AreaEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCenter, WORD yCenter, WORD a, WORD b)
+__graphics_AreaEllipse(void *__base, struct RastPort * rp, WORD xCenter, WORD yCenter, WORD a, WORD b)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xCenter);
 	register ULONG _d1 __asm("d1") = (ULONG)(yCenter);
 	register ULONG _d2 __asm("d2") = (ULONG)(a);
 	register ULONG _d3 __asm("d3") = (ULONG)(b);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -186(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -472,14 +506,15 @@ __graphics_AreaEllipse(struct GfxBase *__base, struct RastPort * rp, WORD xCente
 	return (LONG)_d0;
 }
 #define AreaEllipse(rp, xCenter, yCenter, a, b) __graphics_AreaEllipse((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
+#define __AreaEllipse_base(__in_base, rp, xCenter, yCenter, a, b) __graphics_AreaEllipse((__in_base), (struct RastPort *)(rp), (WORD)(xCenter), (WORD)(yCenter), (WORD)(a), (WORD)(b))
 
 static __inline__ VOID
-__graphics_LoadRGB4(struct GfxBase *__base, struct ViewPort * vp, CONST UWORD * colors, WORD count)
+__graphics_LoadRGB4(void *__base, struct ViewPort * vp, CONST UWORD * colors, WORD count)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _a1 __asm("a1") = (ULONG)(colors);
 	register ULONG _d0 __asm("d0") = (ULONG)(count);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -192(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -488,12 +523,13 @@ __graphics_LoadRGB4(struct GfxBase *__base, struct ViewPort * vp, CONST UWORD * 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LoadRGB4(vp, colors, count) __graphics_LoadRGB4((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (CONST UWORD *)(colors), (WORD)(count))
+#define __LoadRGB4_base(__in_base, vp, colors, count) __graphics_LoadRGB4((__in_base), (struct ViewPort *)(vp), (CONST UWORD *)(colors), (WORD)(count))
 
 static __inline__ VOID
-__graphics_InitRastPort(struct GfxBase *__base, struct RastPort * rp)
+__graphics_InitRastPort(void *__base, struct RastPort * rp)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -504,12 +540,13 @@ __graphics_InitRastPort(struct GfxBase *__base, struct RastPort * rp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitRastPort(rp) __graphics_InitRastPort((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __InitRastPort_base(__in_base, rp) __graphics_InitRastPort((__in_base), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_InitVPort(struct GfxBase *__base, struct ViewPort * vp)
+__graphics_InitVPort(void *__base, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -520,12 +557,13 @@ __graphics_InitVPort(struct GfxBase *__base, struct ViewPort * vp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitVPort(vp) __graphics_InitVPort((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __InitVPort_base(__in_base, vp) __graphics_InitVPort((__in_base), (struct ViewPort *)(vp))
 
 static __inline__ ULONG
-__graphics_MrgCop(struct GfxBase *__base, struct View * view)
+__graphics_MrgCop(void *__base, struct View * view)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(view);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -536,13 +574,14 @@ __graphics_MrgCop(struct GfxBase *__base, struct View * view)
 	return (ULONG)_d0;
 }
 #define MrgCop(view) __graphics_MrgCop((GRAPHICS_BASE_NAME), (struct View *)(view))
+#define __MrgCop_base(__in_base, view) __graphics_MrgCop((__in_base), (struct View *)(view))
 
 static __inline__ ULONG
-__graphics_MakeVPort(struct GfxBase *__base, struct View * view, struct ViewPort * vp)
+__graphics_MakeVPort(void *__base, struct View * view, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(view);
 	register ULONG _a1 __asm("a1") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -216(%/a6)"
@@ -552,12 +591,13 @@ __graphics_MakeVPort(struct GfxBase *__base, struct View * view, struct ViewPort
 	return (ULONG)_d0;
 }
 #define MakeVPort(view, vp) __graphics_MakeVPort((GRAPHICS_BASE_NAME), (struct View *)(view), (struct ViewPort *)(vp))
+#define __MakeVPort_base(__in_base, view, vp) __graphics_MakeVPort((__in_base), (struct View *)(view), (struct ViewPort *)(vp))
 
 static __inline__ VOID
-__graphics_LoadView(struct GfxBase *__base, struct View * view)
+__graphics_LoadView(void *__base, struct View * view)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(view);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -568,11 +608,12 @@ __graphics_LoadView(struct GfxBase *__base, struct View * view)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LoadView(view) __graphics_LoadView((GRAPHICS_BASE_NAME), (struct View *)(view))
+#define __LoadView_base(__in_base, view) __graphics_LoadView((__in_base), (struct View *)(view))
 
 static __inline__ VOID
-__graphics_WaitBlit(struct GfxBase *__base)
+__graphics_WaitBlit(void *__base)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -584,13 +625,14 @@ __graphics_WaitBlit(struct GfxBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WaitBlit() __graphics_WaitBlit((GRAPHICS_BASE_NAME))
+#define __WaitBlit_base(__in_base) __graphics_WaitBlit((__in_base))
 
 static __inline__ VOID
-__graphics_SetRast(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
+__graphics_SetRast(void *__base, struct RastPort * rp, UBYTE pen)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(pen);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -234(%/a6)"
@@ -600,14 +642,15 @@ __graphics_SetRast(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetRast(rp, pen) __graphics_SetRast((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define __SetRast_base(__in_base, rp, pen) __graphics_SetRast((__in_base), (struct RastPort *)(rp), (UBYTE)(pen))
 
 static __inline__ VOID
-__graphics_Move(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
+__graphics_Move(void *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -240(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -616,14 +659,15 @@ __graphics_Move(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Move(rp, x, y) __graphics_Move((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __Move_base(__in_base, rp, x, y) __graphics_Move((__in_base), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ VOID
-__graphics_Draw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
+__graphics_Draw(void *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -246(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -632,14 +676,15 @@ __graphics_Draw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Draw(rp, x, y) __graphics_Draw((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __Draw_base(__in_base, rp, x, y) __graphics_Draw((__in_base), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ LONG
-__graphics_AreaMove(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
+__graphics_AreaMove(void *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -252(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -648,14 +693,15 @@ __graphics_AreaMove(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y
 	return (LONG)_d0;
 }
 #define AreaMove(rp, x, y) __graphics_AreaMove((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __AreaMove_base(__in_base, rp, x, y) __graphics_AreaMove((__in_base), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ LONG
-__graphics_AreaDraw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
+__graphics_AreaDraw(void *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -258(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -664,12 +710,13 @@ __graphics_AreaDraw(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y
 	return (LONG)_d0;
 }
 #define AreaDraw(rp, x, y) __graphics_AreaDraw((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __AreaDraw_base(__in_base, rp, x, y) __graphics_AreaDraw((__in_base), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ LONG
-__graphics_AreaEnd(struct GfxBase *__base, struct RastPort * rp)
+__graphics_AreaEnd(void *__base, struct RastPort * rp)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -680,11 +727,12 @@ __graphics_AreaEnd(struct GfxBase *__base, struct RastPort * rp)
 	return (LONG)_d0;
 }
 #define AreaEnd(rp) __graphics_AreaEnd((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __AreaEnd_base(__in_base, rp) __graphics_AreaEnd((__in_base), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_WaitTOF(struct GfxBase *__base)
+__graphics_WaitTOF(void *__base)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -696,12 +744,13 @@ __graphics_WaitTOF(struct GfxBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WaitTOF() __graphics_WaitTOF((GRAPHICS_BASE_NAME))
+#define __WaitTOF_base(__in_base) __graphics_WaitTOF((__in_base))
 
 static __inline__ VOID
-__graphics_QBlit(struct GfxBase *__base, struct bltnode * blit)
+__graphics_QBlit(void *__base, struct bltnode * blit)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(blit);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -712,14 +761,15 @@ __graphics_QBlit(struct GfxBase *__base, struct bltnode * blit)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define QBlit(blit) __graphics_QBlit((GRAPHICS_BASE_NAME), (struct bltnode *)(blit))
+#define __QBlit_base(__in_base, blit) __graphics_QBlit((__in_base), (struct bltnode *)(blit))
 
 static __inline__ VOID
-__graphics_InitArea(struct GfxBase *__base, struct AreaInfo * areaInfo, APTR vectorBuffer, WORD maxVectors)
+__graphics_InitArea(void *__base, struct AreaInfo * areaInfo, APTR vectorBuffer, WORD maxVectors)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(areaInfo);
 	register ULONG _a1 __asm("a1") = (ULONG)(vectorBuffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(maxVectors);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -282(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -728,16 +778,17 @@ __graphics_InitArea(struct GfxBase *__base, struct AreaInfo * areaInfo, APTR vec
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitArea(areaInfo, vectorBuffer, maxVectors) __graphics_InitArea((GRAPHICS_BASE_NAME), (struct AreaInfo *)(areaInfo), (APTR)(vectorBuffer), (WORD)(maxVectors))
+#define __InitArea_base(__in_base, areaInfo, vectorBuffer, maxVectors) __graphics_InitArea((__in_base), (struct AreaInfo *)(areaInfo), (APTR)(vectorBuffer), (WORD)(maxVectors))
 
 static __inline__ VOID
-__graphics_SetRGB4(struct GfxBase *__base, struct ViewPort * vp, WORD index, UBYTE red, UBYTE green, UBYTE blue)
+__graphics_SetRGB4(void *__base, struct ViewPort * vp, WORD index, UBYTE red, UBYTE green, UBYTE blue)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _d0 __asm("d0") = (ULONG)(index);
 	register ULONG _d1 __asm("d1") = (ULONG)(red);
 	register ULONG _d2 __asm("d2") = (ULONG)(green);
 	register ULONG _d3 __asm("d3") = (ULONG)(blue);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -288(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -746,12 +797,13 @@ __graphics_SetRGB4(struct GfxBase *__base, struct ViewPort * vp, WORD index, UBY
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetRGB4(vp, index, red, green, blue) __graphics_SetRGB4((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
+#define __SetRGB4_base(__in_base, vp, index, red, green, blue) __graphics_SetRGB4((__in_base), (struct ViewPort *)(vp), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
 
 static __inline__ VOID
-__graphics_QBSBlit(struct GfxBase *__base, struct bltnode * blit)
+__graphics_QBSBlit(void *__base, struct bltnode * blit)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(blit);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -762,14 +814,15 @@ __graphics_QBSBlit(struct GfxBase *__base, struct bltnode * blit)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define QBSBlit(blit) __graphics_QBSBlit((GRAPHICS_BASE_NAME), (struct bltnode *)(blit))
+#define __QBSBlit_base(__in_base, blit) __graphics_QBSBlit((__in_base), (struct bltnode *)(blit))
 
 static __inline__ VOID
-__graphics_BltClear(struct GfxBase *__base, PLANEPTR memBlock, ULONG byteCount, ULONG flags)
+__graphics_BltClear(void *__base, PLANEPTR memBlock, ULONG byteCount, ULONG flags)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(memBlock);
 	register ULONG _d0 __asm("d0") = (ULONG)(byteCount);
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -300(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -778,16 +831,17 @@ __graphics_BltClear(struct GfxBase *__base, PLANEPTR memBlock, ULONG byteCount, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define BltClear(memBlock, byteCount, flags) __graphics_BltClear((GRAPHICS_BASE_NAME), (PLANEPTR)(memBlock), (ULONG)(byteCount), (ULONG)(flags))
+#define __BltClear_base(__in_base, memBlock, byteCount, flags) __graphics_BltClear((__in_base), (PLANEPTR)(memBlock), (ULONG)(byteCount), (ULONG)(flags))
 
 static __inline__ VOID
-__graphics_RectFill(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
+__graphics_RectFill(void *__base, struct RastPort * rp, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xMin);
 	register ULONG _d1 __asm("d1") = (ULONG)(yMin);
 	register ULONG _d2 __asm("d2") = (ULONG)(xMax);
 	register ULONG _d3 __asm("d3") = (ULONG)(yMax);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -306(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -796,9 +850,10 @@ __graphics_RectFill(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WOR
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RectFill(rp, xMin, yMin, xMax, yMax) __graphics_RectFill((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __RectFill_base(__in_base, rp, xMin, yMin, xMax, yMax) __graphics_RectFill((__in_base), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ VOID
-__graphics_BltPattern(struct GfxBase *__base, struct RastPort * rp, CONST PLANEPTR mask, WORD xMin, WORD yMin, WORD xMax, WORD yMax, UWORD maskBPR)
+__graphics_BltPattern(void *__base, struct RastPort * rp, CONST PLANEPTR mask, WORD xMin, WORD yMin, WORD xMax, WORD yMax, UWORD maskBPR)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(mask);
@@ -807,7 +862,7 @@ __graphics_BltPattern(struct GfxBase *__base, struct RastPort * rp, CONST PLANEP
 	register ULONG _d2 __asm("d2") = (ULONG)(xMax);
 	register ULONG _d3 __asm("d3") = (ULONG)(yMax);
 	register ULONG _d4 __asm("d4") = (ULONG)(maskBPR);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -312(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4)
@@ -815,14 +870,15 @@ __graphics_BltPattern(struct GfxBase *__base, struct RastPort * rp, CONST PLANEP
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define BltPattern(rp, mask, xMin, yMin, xMax, yMax, maskBPR) __graphics_BltPattern((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST PLANEPTR)(mask), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax), (UWORD)(maskBPR))
+#define __BltPattern_base(__in_base, rp, mask, xMin, yMin, xMax, yMax, maskBPR) __graphics_BltPattern((__in_base), (struct RastPort *)(rp), (CONST PLANEPTR)(mask), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax), (UWORD)(maskBPR))
 
 static __inline__ ULONG
-__graphics_ReadPixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
+__graphics_ReadPixel(void *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -318(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -831,14 +887,15 @@ __graphics_ReadPixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD 
 	return (ULONG)_d0;
 }
 #define ReadPixel(rp, x, y) __graphics_ReadPixel((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __ReadPixel_base(__in_base, rp, x, y) __graphics_ReadPixel((__in_base), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ LONG
-__graphics_WritePixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD y)
+__graphics_WritePixel(void *__base, struct RastPort * rp, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -324(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -847,15 +904,16 @@ __graphics_WritePixel(struct GfxBase *__base, struct RastPort * rp, WORD x, WORD
 	return (LONG)_d0;
 }
 #define WritePixel(rp, x, y) __graphics_WritePixel((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
+#define __WritePixel_base(__in_base, rp, x, y) __graphics_WritePixel((__in_base), (struct RastPort *)(rp), (WORD)(x), (WORD)(y))
 
 static __inline__ BOOL
-__graphics_Flood(struct GfxBase *__base, struct RastPort * rp, ULONG mode, WORD x, WORD y)
+__graphics_Flood(void *__base, struct RastPort * rp, ULONG mode, WORD x, WORD y)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d2 __asm("d2") = (ULONG)(mode);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -330(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -864,14 +922,15 @@ __graphics_Flood(struct GfxBase *__base, struct RastPort * rp, ULONG mode, WORD 
 	return (BOOL)_d0;
 }
 #define Flood(rp, mode, x, y) __graphics_Flood((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(mode), (WORD)(x), (WORD)(y))
+#define __Flood_base(__in_base, rp, mode, x, y) __graphics_Flood((__in_base), (struct RastPort *)(rp), (ULONG)(mode), (WORD)(x), (WORD)(y))
 
 static __inline__ VOID
-__graphics_PolyDraw(struct GfxBase *__base, struct RastPort * rp, WORD count, CONST WORD * polyTable)
+__graphics_PolyDraw(void *__base, struct RastPort * rp, WORD count, CONST WORD * polyTable)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(count);
 	register ULONG _a0 __asm("a0") = (ULONG)(polyTable);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -336(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -880,13 +939,14 @@ __graphics_PolyDraw(struct GfxBase *__base, struct RastPort * rp, WORD count, CO
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define PolyDraw(rp, count, polyTable) __graphics_PolyDraw((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(count), (CONST WORD *)(polyTable))
+#define __PolyDraw_base(__in_base, rp, count, polyTable) __graphics_PolyDraw((__in_base), (struct RastPort *)(rp), (WORD)(count), (CONST WORD *)(polyTable))
 
 static __inline__ VOID
-__graphics_SetAPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
+__graphics_SetAPen(void *__base, struct RastPort * rp, UBYTE pen)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(pen);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -342(%/a6)"
@@ -896,13 +956,14 @@ __graphics_SetAPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetAPen(rp, pen) __graphics_SetAPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define __SetAPen_base(__in_base, rp, pen) __graphics_SetAPen((__in_base), (struct RastPort *)(rp), (UBYTE)(pen))
 
 static __inline__ VOID
-__graphics_SetBPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
+__graphics_SetBPen(void *__base, struct RastPort * rp, UBYTE pen)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(pen);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -348(%/a6)"
@@ -912,13 +973,14 @@ __graphics_SetBPen(struct GfxBase *__base, struct RastPort * rp, UBYTE pen)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetBPen(rp, pen) __graphics_SetBPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(pen))
+#define __SetBPen_base(__in_base, rp, pen) __graphics_SetBPen((__in_base), (struct RastPort *)(rp), (UBYTE)(pen))
 
 static __inline__ VOID
-__graphics_SetDrMd(struct GfxBase *__base, struct RastPort * rp, UBYTE drawMode)
+__graphics_SetDrMd(void *__base, struct RastPort * rp, UBYTE drawMode)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(drawMode);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -354(%/a6)"
@@ -928,12 +990,13 @@ __graphics_SetDrMd(struct GfxBase *__base, struct RastPort * rp, UBYTE drawMode)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetDrMd(rp, drawMode) __graphics_SetDrMd((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UBYTE)(drawMode))
+#define __SetDrMd_base(__in_base, rp, drawMode) __graphics_SetDrMd((__in_base), (struct RastPort *)(rp), (UBYTE)(drawMode))
 
 static __inline__ VOID
-__graphics_InitView(struct GfxBase *__base, struct View * view)
+__graphics_InitView(void *__base, struct View * view)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(view);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -944,12 +1007,13 @@ __graphics_InitView(struct GfxBase *__base, struct View * view)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitView(view) __graphics_InitView((GRAPHICS_BASE_NAME), (struct View *)(view))
+#define __InitView_base(__in_base, view) __graphics_InitView((__in_base), (struct View *)(view))
 
 static __inline__ VOID
-__graphics_CBump(struct GfxBase *__base, struct UCopList * copList)
+__graphics_CBump(void *__base, struct UCopList * copList)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(copList);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -960,14 +1024,15 @@ __graphics_CBump(struct GfxBase *__base, struct UCopList * copList)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CBump(copList) __graphics_CBump((GRAPHICS_BASE_NAME), (struct UCopList *)(copList))
+#define __CBump_base(__in_base, copList) __graphics_CBump((__in_base), (struct UCopList *)(copList))
 
 static __inline__ LONG
-__graphics_CMove(struct GfxBase *__base, struct UCopList * copList, APTR destination, WORD data)
+__graphics_CMove(void *__base, struct UCopList * copList, APTR destination, WORD data)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(copList);
 	register ULONG _d0 __asm("d0") = (ULONG)(destination);
 	register ULONG _d1 __asm("d1") = (ULONG)(data);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -372(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -976,14 +1041,15 @@ __graphics_CMove(struct GfxBase *__base, struct UCopList * copList, APTR destina
 	return (LONG)_d0;
 }
 #define CMove(copList, destination, data) __graphics_CMove((GRAPHICS_BASE_NAME), (struct UCopList *)(copList), (APTR)(destination), (WORD)(data))
+#define __CMove_base(__in_base, copList, destination, data) __graphics_CMove((__in_base), (struct UCopList *)(copList), (APTR)(destination), (WORD)(data))
 
 static __inline__ LONG
-__graphics_CWait(struct GfxBase *__base, struct UCopList * copList, WORD v, WORD h)
+__graphics_CWait(void *__base, struct UCopList * copList, WORD v, WORD h)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(copList);
 	register ULONG _d0 __asm("d0") = (ULONG)(v);
 	register ULONG _d1 __asm("d1") = (ULONG)(h);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -378(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -992,11 +1058,12 @@ __graphics_CWait(struct GfxBase *__base, struct UCopList * copList, WORD v, WORD
 	return (LONG)_d0;
 }
 #define CWait(copList, v, h) __graphics_CWait((GRAPHICS_BASE_NAME), (struct UCopList *)(copList), (WORD)(v), (WORD)(h))
+#define __CWait_base(__in_base, copList, v, h) __graphics_CWait((__in_base), (struct UCopList *)(copList), (WORD)(v), (WORD)(h))
 
 static __inline__ LONG
-__graphics_VBeamPos(struct GfxBase *__base)
+__graphics_VBeamPos(void *__base)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1008,15 +1075,16 @@ __graphics_VBeamPos(struct GfxBase *__base)
 	return (LONG)_d0;
 }
 #define VBeamPos() __graphics_VBeamPos((GRAPHICS_BASE_NAME))
+#define __VBeamPos_base(__in_base) __graphics_VBeamPos((__in_base))
 
 static __inline__ VOID
-__graphics_InitBitMap(struct GfxBase *__base, struct BitMap * bitMap, BYTE depth, WORD width, WORD height)
+__graphics_InitBitMap(void *__base, struct BitMap * bitMap, BYTE depth, WORD width, WORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(bitMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(depth);
 	register ULONG _d1 __asm("d1") = (ULONG)(width);
 	register ULONG _d2 __asm("d2") = (ULONG)(height);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -390(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -1025,9 +1093,10 @@ __graphics_InitBitMap(struct GfxBase *__base, struct BitMap * bitMap, BYTE depth
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitBitMap(bitMap, depth, width, height) __graphics_InitBitMap((GRAPHICS_BASE_NAME), (struct BitMap *)(bitMap), (BYTE)(depth), (WORD)(width), (WORD)(height))
+#define __InitBitMap_base(__in_base, bitMap, depth, width, height) __graphics_InitBitMap((__in_base), (struct BitMap *)(bitMap), (BYTE)(depth), (WORD)(width), (WORD)(height))
 
 static __inline__ VOID
-__graphics_ScrollRaster(struct GfxBase *__base, struct RastPort * rp, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
+__graphics_ScrollRaster(void *__base, struct RastPort * rp, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -1036,7 +1105,7 @@ __graphics_ScrollRaster(struct GfxBase *__base, struct RastPort * rp, WORD dx, W
 	register ULONG _d3 __asm("d3") = (ULONG)(yMin);
 	register ULONG _d4 __asm("d4") = (ULONG)(xMax);
 	register ULONG _d5 __asm("d5") = (ULONG)(yMax);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -396(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -1045,12 +1114,13 @@ __graphics_ScrollRaster(struct GfxBase *__base, struct RastPort * rp, WORD dx, W
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScrollRaster(rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRaster((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __ScrollRaster_base(__in_base, rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRaster((__in_base), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ VOID
-__graphics_WaitBOVP(struct GfxBase *__base, struct ViewPort * vp)
+__graphics_WaitBOVP(void *__base, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1061,13 +1131,14 @@ __graphics_WaitBOVP(struct GfxBase *__base, struct ViewPort * vp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WaitBOVP(vp) __graphics_WaitBOVP((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __WaitBOVP_base(__in_base, vp) __graphics_WaitBOVP((__in_base), (struct ViewPort *)(vp))
 
 static __inline__ WORD
-__graphics_GetSprite(struct GfxBase *__base, struct SimpleSprite * sprite, WORD num)
+__graphics_GetSprite(void *__base, struct SimpleSprite * sprite, WORD num)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sprite);
 	register ULONG _d0 __asm("d0") = (ULONG)(num);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -408(%/a6)"
@@ -1077,12 +1148,13 @@ __graphics_GetSprite(struct GfxBase *__base, struct SimpleSprite * sprite, WORD 
 	return (WORD)_d0;
 }
 #define GetSprite(sprite, num) __graphics_GetSprite((GRAPHICS_BASE_NAME), (struct SimpleSprite *)(sprite), (WORD)(num))
+#define __GetSprite_base(__in_base, sprite, num) __graphics_GetSprite((__in_base), (struct SimpleSprite *)(sprite), (WORD)(num))
 
 static __inline__ VOID
-__graphics_FreeSprite(struct GfxBase *__base, WORD num)
+__graphics_FreeSprite(void *__base, WORD num)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(num);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1093,14 +1165,15 @@ __graphics_FreeSprite(struct GfxBase *__base, WORD num)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeSprite(num) __graphics_FreeSprite((GRAPHICS_BASE_NAME), (WORD)(num))
+#define __FreeSprite_base(__in_base, num) __graphics_FreeSprite((__in_base), (WORD)(num))
 
 static __inline__ VOID
-__graphics_ChangeSprite(struct GfxBase *__base, struct ViewPort * vp, struct SimpleSprite * sprite, UWORD * newData)
+__graphics_ChangeSprite(void *__base, struct ViewPort * vp, struct SimpleSprite * sprite, UWORD * newData)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _a1 __asm("a1") = (ULONG)(sprite);
 	register ULONG _a2 __asm("a2") = (ULONG)(newData);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -420(%/a6)"
@@ -1110,15 +1183,16 @@ __graphics_ChangeSprite(struct GfxBase *__base, struct ViewPort * vp, struct Sim
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ChangeSprite(vp, sprite, newData) __graphics_ChangeSprite((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (UWORD *)(newData))
+#define __ChangeSprite_base(__in_base, vp, sprite, newData) __graphics_ChangeSprite((__in_base), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (UWORD *)(newData))
 
 static __inline__ VOID
-__graphics_MoveSprite(struct GfxBase *__base, struct ViewPort * vp, struct SimpleSprite * sprite, WORD x, WORD y)
+__graphics_MoveSprite(void *__base, struct ViewPort * vp, struct SimpleSprite * sprite, WORD x, WORD y)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _a1 __asm("a1") = (ULONG)(sprite);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -426(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -1126,11 +1200,12 @@ __graphics_MoveSprite(struct GfxBase *__base, struct ViewPort * vp, struct Simpl
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define MoveSprite(vp, sprite, x, y) __graphics_MoveSprite((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (WORD)(x), (WORD)(y))
+#define __MoveSprite_base(__in_base, vp, sprite, x, y) __graphics_MoveSprite((__in_base), (struct ViewPort *)(vp), (struct SimpleSprite *)(sprite), (WORD)(x), (WORD)(y))
 
 static __inline__ VOID
-__graphics_LockLayerRom(struct GfxBase *__base, struct Layer * layer)
+__graphics_LockLayerRom(void *__base, struct Layer * layer)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1142,11 +1217,12 @@ __graphics_LockLayerRom(struct GfxBase *__base, struct Layer * layer)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LockLayerRom(layer) __graphics_LockLayerRom((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __LockLayerRom_base(__in_base, layer) __graphics_LockLayerRom((__in_base), (struct Layer *)(layer))
 
 static __inline__ VOID
-__graphics_UnlockLayerRom(struct GfxBase *__base, struct Layer * layer)
+__graphics_UnlockLayerRom(void *__base, struct Layer * layer)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1158,12 +1234,13 @@ __graphics_UnlockLayerRom(struct GfxBase *__base, struct Layer * layer)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockLayerRom(layer) __graphics_UnlockLayerRom((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __UnlockLayerRom_base(__in_base, layer) __graphics_UnlockLayerRom((__in_base), (struct Layer *)(layer))
 
 static __inline__ VOID
-__graphics_SyncSBitMap(struct GfxBase *__base, struct Layer * layer)
+__graphics_SyncSBitMap(void *__base, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1174,12 +1251,13 @@ __graphics_SyncSBitMap(struct GfxBase *__base, struct Layer * layer)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SyncSBitMap(layer) __graphics_SyncSBitMap((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __SyncSBitMap_base(__in_base, layer) __graphics_SyncSBitMap((__in_base), (struct Layer *)(layer))
 
 static __inline__ VOID
-__graphics_CopySBitMap(struct GfxBase *__base, struct Layer * layer)
+__graphics_CopySBitMap(void *__base, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1190,11 +1268,12 @@ __graphics_CopySBitMap(struct GfxBase *__base, struct Layer * layer)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CopySBitMap(layer) __graphics_CopySBitMap((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __CopySBitMap_base(__in_base, layer) __graphics_CopySBitMap((__in_base), (struct Layer *)(layer))
 
 static __inline__ VOID
-__graphics_OwnBlitter(struct GfxBase *__base)
+__graphics_OwnBlitter(void *__base)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1206,11 +1285,12 @@ __graphics_OwnBlitter(struct GfxBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define OwnBlitter() __graphics_OwnBlitter((GRAPHICS_BASE_NAME))
+#define __OwnBlitter_base(__in_base) __graphics_OwnBlitter((__in_base))
 
 static __inline__ VOID
-__graphics_DisownBlitter(struct GfxBase *__base)
+__graphics_DisownBlitter(void *__base)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1222,14 +1302,15 @@ __graphics_DisownBlitter(struct GfxBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DisownBlitter() __graphics_DisownBlitter((GRAPHICS_BASE_NAME))
+#define __DisownBlitter_base(__in_base) __graphics_DisownBlitter((__in_base))
 
 static __inline__ struct TmpRas *
-__graphics_InitTmpRas(struct GfxBase *__base, struct TmpRas * tmpRas, PLANEPTR buffer, LONG size)
+__graphics_InitTmpRas(void *__base, struct TmpRas * tmpRas, PLANEPTR buffer, LONG size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tmpRas);
 	register ULONG _a1 __asm("a1") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -468(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1238,13 +1319,14 @@ __graphics_InitTmpRas(struct GfxBase *__base, struct TmpRas * tmpRas, PLANEPTR b
 	return (struct TmpRas *)_d0;
 }
 #define InitTmpRas(tmpRas, buffer, size) __graphics_InitTmpRas((GRAPHICS_BASE_NAME), (struct TmpRas *)(tmpRas), (PLANEPTR)(buffer), (LONG)(size))
+#define __InitTmpRas_base(__in_base, tmpRas, buffer, size) __graphics_InitTmpRas((__in_base), (struct TmpRas *)(tmpRas), (PLANEPTR)(buffer), (LONG)(size))
 
 static __inline__ VOID
-__graphics_AskFont(struct GfxBase *__base, struct RastPort * rp, struct TextAttr * textAttr)
+__graphics_AskFont(void *__base, struct RastPort * rp, struct TextAttr * textAttr)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(textAttr);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -474(%/a6)"
@@ -1254,12 +1336,13 @@ __graphics_AskFont(struct GfxBase *__base, struct RastPort * rp, struct TextAttr
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AskFont(rp, textAttr) __graphics_AskFont((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (struct TextAttr *)(textAttr))
+#define __AskFont_base(__in_base, rp, textAttr) __graphics_AskFont((__in_base), (struct RastPort *)(rp), (struct TextAttr *)(textAttr))
 
 static __inline__ VOID
-__graphics_AddFont(struct GfxBase *__base, struct TextFont * textFont)
+__graphics_AddFont(void *__base, struct TextFont * textFont)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(textFont);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1270,12 +1353,13 @@ __graphics_AddFont(struct GfxBase *__base, struct TextFont * textFont)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddFont(textFont) __graphics_AddFont((GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define __AddFont_base(__in_base, textFont) __graphics_AddFont((__in_base), (struct TextFont *)(textFont))
 
 static __inline__ VOID
-__graphics_RemFont(struct GfxBase *__base, struct TextFont * textFont)
+__graphics_RemFont(void *__base, struct TextFont * textFont)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(textFont);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1286,13 +1370,14 @@ __graphics_RemFont(struct GfxBase *__base, struct TextFont * textFont)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemFont(textFont) __graphics_RemFont((GRAPHICS_BASE_NAME), (struct TextFont *)(textFont))
+#define __RemFont_base(__in_base, textFont) __graphics_RemFont((__in_base), (struct TextFont *)(textFont))
 
 static __inline__ PLANEPTR
-__graphics_AllocRaster(struct GfxBase *__base, UWORD width, UWORD height)
+__graphics_AllocRaster(void *__base, UWORD width, UWORD height)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(width);
 	register ULONG _d1 __asm("d1") = (ULONG)(height);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -492(%/a6)"
@@ -1302,14 +1387,15 @@ __graphics_AllocRaster(struct GfxBase *__base, UWORD width, UWORD height)
 	return (PLANEPTR)_d0;
 }
 #define AllocRaster(width, height) __graphics_AllocRaster((GRAPHICS_BASE_NAME), (UWORD)(width), (UWORD)(height))
+#define __AllocRaster_base(__in_base, width, height) __graphics_AllocRaster((__in_base), (UWORD)(width), (UWORD)(height))
 
 static __inline__ VOID
-__graphics_FreeRaster(struct GfxBase *__base, PLANEPTR p, UWORD width, UWORD height)
+__graphics_FreeRaster(void *__base, PLANEPTR p, UWORD width, UWORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(p);
 	register ULONG _d0 __asm("d0") = (ULONG)(width);
 	register ULONG _d1 __asm("d1") = (ULONG)(height);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -498(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -1318,13 +1404,14 @@ __graphics_FreeRaster(struct GfxBase *__base, PLANEPTR p, UWORD width, UWORD hei
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeRaster(p, width, height) __graphics_FreeRaster((GRAPHICS_BASE_NAME), (PLANEPTR)(p), (UWORD)(width), (UWORD)(height))
+#define __FreeRaster_base(__in_base, p, width, height) __graphics_FreeRaster((__in_base), (PLANEPTR)(p), (UWORD)(width), (UWORD)(height))
 
 static __inline__ VOID
-__graphics_AndRectRegion(struct GfxBase *__base, struct Region * region, CONST struct Rectangle * rectangle)
+__graphics_AndRectRegion(void *__base, struct Region * region, CONST struct Rectangle * rectangle)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(region);
 	register ULONG _a1 __asm("a1") = (ULONG)(rectangle);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -504(%/a6)"
@@ -1334,13 +1421,14 @@ __graphics_AndRectRegion(struct GfxBase *__base, struct Region * region, CONST s
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AndRectRegion(region, rectangle) __graphics_AndRectRegion((GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define __AndRectRegion_base(__in_base, region, rectangle) __graphics_AndRectRegion((__in_base), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
 
 static __inline__ BOOL
-__graphics_OrRectRegion(struct GfxBase *__base, struct Region * region, CONST struct Rectangle * rectangle)
+__graphics_OrRectRegion(void *__base, struct Region * region, CONST struct Rectangle * rectangle)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(region);
 	register ULONG _a1 __asm("a1") = (ULONG)(rectangle);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -510(%/a6)"
@@ -1350,11 +1438,12 @@ __graphics_OrRectRegion(struct GfxBase *__base, struct Region * region, CONST st
 	return (BOOL)_d0;
 }
 #define OrRectRegion(region, rectangle) __graphics_OrRectRegion((GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define __OrRectRegion_base(__in_base, region, rectangle) __graphics_OrRectRegion((__in_base), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
 
 static __inline__ struct Region *
-__graphics_NewRegion(struct GfxBase *__base)
+__graphics_NewRegion(void *__base)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1366,13 +1455,14 @@ __graphics_NewRegion(struct GfxBase *__base)
 	return (struct Region *)_d0;
 }
 #define NewRegion() __graphics_NewRegion((GRAPHICS_BASE_NAME))
+#define __NewRegion_base(__in_base) __graphics_NewRegion((__in_base))
 
 static __inline__ BOOL
-__graphics_ClearRectRegion(struct GfxBase *__base, struct Region * region, CONST struct Rectangle * rectangle)
+__graphics_ClearRectRegion(void *__base, struct Region * region, CONST struct Rectangle * rectangle)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(region);
 	register ULONG _a1 __asm("a1") = (ULONG)(rectangle);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -522(%/a6)"
@@ -1382,12 +1472,13 @@ __graphics_ClearRectRegion(struct GfxBase *__base, struct Region * region, CONST
 	return (BOOL)_d0;
 }
 #define ClearRectRegion(region, rectangle) __graphics_ClearRectRegion((GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define __ClearRectRegion_base(__in_base, region, rectangle) __graphics_ClearRectRegion((__in_base), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
 
 static __inline__ VOID
-__graphics_ClearRegion(struct GfxBase *__base, struct Region * region)
+__graphics_ClearRegion(void *__base, struct Region * region)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(region);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1398,12 +1489,13 @@ __graphics_ClearRegion(struct GfxBase *__base, struct Region * region)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ClearRegion(region) __graphics_ClearRegion((GRAPHICS_BASE_NAME), (struct Region *)(region))
+#define __ClearRegion_base(__in_base, region) __graphics_ClearRegion((__in_base), (struct Region *)(region))
 
 static __inline__ VOID
-__graphics_DisposeRegion(struct GfxBase *__base, struct Region * region)
+__graphics_DisposeRegion(void *__base, struct Region * region)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(region);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1414,12 +1506,13 @@ __graphics_DisposeRegion(struct GfxBase *__base, struct Region * region)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DisposeRegion(region) __graphics_DisposeRegion((GRAPHICS_BASE_NAME), (struct Region *)(region))
+#define __DisposeRegion_base(__in_base, region) __graphics_DisposeRegion((__in_base), (struct Region *)(region))
 
 static __inline__ VOID
-__graphics_FreeVPortCopLists(struct GfxBase *__base, struct ViewPort * vp)
+__graphics_FreeVPortCopLists(void *__base, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1430,12 +1523,13 @@ __graphics_FreeVPortCopLists(struct GfxBase *__base, struct ViewPort * vp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeVPortCopLists(vp) __graphics_FreeVPortCopLists((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __FreeVPortCopLists_base(__in_base, vp) __graphics_FreeVPortCopLists((__in_base), (struct ViewPort *)(vp))
 
 static __inline__ VOID
-__graphics_FreeCopList(struct GfxBase *__base, struct CopList * copList)
+__graphics_FreeCopList(void *__base, struct CopList * copList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(copList);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1446,9 +1540,10 @@ __graphics_FreeCopList(struct GfxBase *__base, struct CopList * copList)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeCopList(copList) __graphics_FreeCopList((GRAPHICS_BASE_NAME), (struct CopList *)(copList))
+#define __FreeCopList_base(__in_base, copList) __graphics_FreeCopList((__in_base), (struct CopList *)(copList))
 
 static __inline__ VOID
-__graphics_ClipBlit(struct GfxBase *__base, struct RastPort * srcRP, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm)
+__graphics_ClipBlit(void *__base, struct RastPort * srcRP, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcRP);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -1459,7 +1554,7 @@ __graphics_ClipBlit(struct GfxBase *__base, struct RastPort * srcRP, WORD xSrc, 
 	register ULONG _d4 __asm("d4") = (ULONG)(xSize);
 	register ULONG _d5 __asm("d5") = (ULONG)(ySize);
 	register ULONG _d6 __asm("d6") = (ULONG)(minterm);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -552(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4), "r" (_d5), "r" (_d6)
@@ -1467,13 +1562,14 @@ __graphics_ClipBlit(struct GfxBase *__base, struct RastPort * srcRP, WORD xSrc, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ClipBlit(srcRP, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_ClipBlit((GRAPHICS_BASE_NAME), (struct RastPort *)(srcRP), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
+#define __ClipBlit_base(__in_base, srcRP, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_ClipBlit((__in_base), (struct RastPort *)(srcRP), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
 
 static __inline__ BOOL
-__graphics_XorRectRegion(struct GfxBase *__base, struct Region * region, CONST struct Rectangle * rectangle)
+__graphics_XorRectRegion(void *__base, struct Region * region, CONST struct Rectangle * rectangle)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(region);
 	register ULONG _a1 __asm("a1") = (ULONG)(rectangle);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -558(%/a6)"
@@ -1483,12 +1579,13 @@ __graphics_XorRectRegion(struct GfxBase *__base, struct Region * region, CONST s
 	return (BOOL)_d0;
 }
 #define XorRectRegion(region, rectangle) __graphics_XorRectRegion((GRAPHICS_BASE_NAME), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
+#define __XorRectRegion_base(__in_base, region, rectangle) __graphics_XorRectRegion((__in_base), (struct Region *)(region), (CONST struct Rectangle *)(rectangle))
 
 static __inline__ VOID
-__graphics_FreeCprList(struct GfxBase *__base, struct cprlist * cprList)
+__graphics_FreeCprList(void *__base, struct cprlist * cprList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cprList);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1499,12 +1596,13 @@ __graphics_FreeCprList(struct GfxBase *__base, struct cprlist * cprList)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeCprList(cprList) __graphics_FreeCprList((GRAPHICS_BASE_NAME), (struct cprlist *)(cprList))
+#define __FreeCprList_base(__in_base, cprList) __graphics_FreeCprList((__in_base), (struct cprlist *)(cprList))
 
 static __inline__ struct ColorMap *
-__graphics_GetColorMap(struct GfxBase *__base, LONG entries)
+__graphics_GetColorMap(void *__base, LONG entries)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(entries);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1515,12 +1613,13 @@ __graphics_GetColorMap(struct GfxBase *__base, LONG entries)
 	return (struct ColorMap *)_d0;
 }
 #define GetColorMap(entries) __graphics_GetColorMap((GRAPHICS_BASE_NAME), (LONG)(entries))
+#define __GetColorMap_base(__in_base, entries) __graphics_GetColorMap((__in_base), (LONG)(entries))
 
 static __inline__ VOID
-__graphics_FreeColorMap(struct GfxBase *__base, struct ColorMap * colorMap)
+__graphics_FreeColorMap(void *__base, struct ColorMap * colorMap)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(colorMap);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1531,13 +1630,14 @@ __graphics_FreeColorMap(struct GfxBase *__base, struct ColorMap * colorMap)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeColorMap(colorMap) __graphics_FreeColorMap((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap))
+#define __FreeColorMap_base(__in_base, colorMap) __graphics_FreeColorMap((__in_base), (struct ColorMap *)(colorMap))
 
 static __inline__ ULONG
-__graphics_GetRGB4(struct GfxBase *__base, struct ColorMap * colorMap, LONG entry)
+__graphics_GetRGB4(void *__base, struct ColorMap * colorMap, LONG entry)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(colorMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(entry);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -582(%/a6)"
@@ -1547,12 +1647,13 @@ __graphics_GetRGB4(struct GfxBase *__base, struct ColorMap * colorMap, LONG entr
 	return (ULONG)_d0;
 }
 #define GetRGB4(colorMap, entry) __graphics_GetRGB4((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (LONG)(entry))
+#define __GetRGB4_base(__in_base, colorMap, entry) __graphics_GetRGB4((__in_base), (struct ColorMap *)(colorMap), (LONG)(entry))
 
 static __inline__ VOID
-__graphics_ScrollVPort(struct GfxBase *__base, struct ViewPort * vp)
+__graphics_ScrollVPort(void *__base, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1563,13 +1664,14 @@ __graphics_ScrollVPort(struct GfxBase *__base, struct ViewPort * vp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScrollVPort(vp) __graphics_ScrollVPort((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __ScrollVPort_base(__in_base, vp) __graphics_ScrollVPort((__in_base), (struct ViewPort *)(vp))
 
 static __inline__ struct CopList *
-__graphics_UCopperListInit(struct GfxBase *__base, struct UCopList * uCopList, WORD n)
+__graphics_UCopperListInit(void *__base, struct UCopList * uCopList, WORD n)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(uCopList);
 	register ULONG _d0 __asm("d0") = (ULONG)(n);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -594(%/a6)"
@@ -1579,14 +1681,15 @@ __graphics_UCopperListInit(struct GfxBase *__base, struct UCopList * uCopList, W
 	return (struct CopList *)_d0;
 }
 #define UCopperListInit(uCopList, n) __graphics_UCopperListInit((GRAPHICS_BASE_NAME), (struct UCopList *)(uCopList), (WORD)(n))
+#define __UCopperListInit_base(__in_base, uCopList, n) __graphics_UCopperListInit((__in_base), (struct UCopList *)(uCopList), (WORD)(n))
 
 static __inline__ VOID
-__graphics_FreeGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct RastPort * rp, BOOL flag)
+__graphics_FreeGBuffers(void *__base, struct AnimOb * anOb, struct RastPort * rp, BOOL flag)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(anOb);
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(flag);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -600(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1595,9 +1698,10 @@ __graphics_FreeGBuffers(struct GfxBase *__base, struct AnimOb * anOb, struct Ras
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeGBuffers(anOb, rp, flag) __graphics_FreeGBuffers((GRAPHICS_BASE_NAME), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
+#define __FreeGBuffers_base(__in_base, anOb, rp, flag) __graphics_FreeGBuffers((__in_base), (struct AnimOb *)(anOb), (struct RastPort *)(rp), (BOOL)(flag))
 
 static __inline__ VOID
-__graphics_BltBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm)
+__graphics_BltBitMapRastPort(void *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcBitMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -1608,7 +1712,7 @@ __graphics_BltBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBi
 	register ULONG _d4 __asm("d4") = (ULONG)(xSize);
 	register ULONG _d5 __asm("d5") = (ULONG)(ySize);
 	register ULONG _d6 __asm("d6") = (ULONG)(minterm);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -606(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4), "r" (_d5), "r" (_d6)
@@ -1616,13 +1720,14 @@ __graphics_BltBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBi
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define BltBitMapRastPort(srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_BltBitMapRastPort((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
+#define __BltBitMapRastPort_base(__in_base, srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm) __graphics_BltBitMapRastPort((__in_base), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm))
 
 static __inline__ BOOL
-__graphics_OrRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegion, struct Region * destRegion)
+__graphics_OrRegionRegion(void *__base, CONST struct Region * srcRegion, struct Region * destRegion)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcRegion);
 	register ULONG _a1 __asm("a1") = (ULONG)(destRegion);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -612(%/a6)"
@@ -1632,13 +1737,14 @@ __graphics_OrRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegio
 	return (BOOL)_d0;
 }
 #define OrRegionRegion(srcRegion, destRegion) __graphics_OrRegionRegion((GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define __OrRegionRegion_base(__in_base, srcRegion, destRegion) __graphics_OrRegionRegion((__in_base), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
 
 static __inline__ BOOL
-__graphics_XorRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegion, struct Region * destRegion)
+__graphics_XorRegionRegion(void *__base, CONST struct Region * srcRegion, struct Region * destRegion)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcRegion);
 	register ULONG _a1 __asm("a1") = (ULONG)(destRegion);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -618(%/a6)"
@@ -1648,13 +1754,14 @@ __graphics_XorRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegi
 	return (BOOL)_d0;
 }
 #define XorRegionRegion(srcRegion, destRegion) __graphics_XorRegionRegion((GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define __XorRegionRegion_base(__in_base, srcRegion, destRegion) __graphics_XorRegionRegion((__in_base), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
 
 static __inline__ BOOL
-__graphics_AndRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegion, struct Region * destRegion)
+__graphics_AndRegionRegion(void *__base, CONST struct Region * srcRegion, struct Region * destRegion)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcRegion);
 	register ULONG _a1 __asm("a1") = (ULONG)(destRegion);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -624(%/a6)"
@@ -1664,16 +1771,17 @@ __graphics_AndRegionRegion(struct GfxBase *__base, CONST struct Region * srcRegi
 	return (BOOL)_d0;
 }
 #define AndRegionRegion(srcRegion, destRegion) __graphics_AndRegionRegion((GRAPHICS_BASE_NAME), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
+#define __AndRegionRegion_base(__in_base, srcRegion, destRegion) __graphics_AndRegionRegion((__in_base), (CONST struct Region *)(srcRegion), (struct Region *)(destRegion))
 
 static __inline__ VOID
-__graphics_SetRGB4CM(struct GfxBase *__base, struct ColorMap * colorMap, WORD index, UBYTE red, UBYTE green, UBYTE blue)
+__graphics_SetRGB4CM(void *__base, struct ColorMap * colorMap, WORD index, UBYTE red, UBYTE green, UBYTE blue)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(colorMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(index);
 	register ULONG _d1 __asm("d1") = (ULONG)(red);
 	register ULONG _d2 __asm("d2") = (ULONG)(green);
 	register ULONG _d3 __asm("d3") = (ULONG)(blue);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -630(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -1682,9 +1790,10 @@ __graphics_SetRGB4CM(struct GfxBase *__base, struct ColorMap * colorMap, WORD in
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetRGB4CM(colorMap, index, red, green, blue) __graphics_SetRGB4CM((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
+#define __SetRGB4CM_base(__in_base, colorMap, index, red, green, blue) __graphics_SetRGB4CM((__in_base), (struct ColorMap *)(colorMap), (WORD)(index), (UBYTE)(red), (UBYTE)(green), (UBYTE)(blue))
 
 static __inline__ VOID
-__graphics_BltMaskBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm, CONST PLANEPTR bltMask)
+__graphics_BltMaskBitMapRastPort(void *__base, CONST struct BitMap * srcBitMap, WORD xSrc, WORD ySrc, struct RastPort * destRP, WORD xDest, WORD yDest, WORD xSize, WORD ySize, UBYTE minterm, CONST PLANEPTR bltMask)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(srcBitMap);
 	register ULONG _d0 __asm("d0") = (ULONG)(xSrc);
@@ -1696,7 +1805,7 @@ __graphics_BltMaskBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * s
 	register ULONG _d5 __asm("d5") = (ULONG)(ySize);
 	register ULONG _d6 __asm("d6") = (ULONG)(minterm);
 	register ULONG _a2 __asm("a2") = (ULONG)(bltMask);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -636(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4), "r" (_d5), "r" (_d6)
@@ -1704,11 +1813,12 @@ __graphics_BltMaskBitMapRastPort(struct GfxBase *__base, CONST struct BitMap * s
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define BltMaskBitMapRastPort(srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm, bltMask) __graphics_BltMaskBitMapRastPort((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (CONST PLANEPTR)(bltMask))
+#define __BltMaskBitMapRastPort_base(__in_base, srcBitMap, xSrc, ySrc, destRP, xDest, yDest, xSize, ySize, minterm, bltMask) __graphics_BltMaskBitMapRastPort((__in_base), (CONST struct BitMap *)(srcBitMap), (WORD)(xSrc), (WORD)(ySrc), (struct RastPort *)(destRP), (WORD)(xDest), (WORD)(yDest), (WORD)(xSize), (WORD)(ySize), (UBYTE)(minterm), (CONST PLANEPTR)(bltMask))
 
 static __inline__ BOOL
-__graphics_AttemptLockLayerRom(struct GfxBase *__base, struct Layer * layer)
+__graphics_AttemptLockLayerRom(void *__base, struct Layer * layer)
 {
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1720,12 +1830,13 @@ __graphics_AttemptLockLayerRom(struct GfxBase *__base, struct Layer * layer)
 	return (BOOL)_d0;
 }
 #define AttemptLockLayerRom(layer) __graphics_AttemptLockLayerRom((GRAPHICS_BASE_NAME), (struct Layer *)(layer))
+#define __AttemptLockLayerRom_base(__in_base, layer) __graphics_AttemptLockLayerRom((__in_base), (struct Layer *)(layer))
 
 static __inline__ APTR
-__graphics_GfxNew(struct GfxBase *__base, ULONG gfxNodeType)
+__graphics_GfxNew(void *__base, ULONG gfxNodeType)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(gfxNodeType);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1736,12 +1847,13 @@ __graphics_GfxNew(struct GfxBase *__base, ULONG gfxNodeType)
 	return (APTR)_d0;
 }
 #define GfxNew(gfxNodeType) __graphics_GfxNew((GRAPHICS_BASE_NAME), (ULONG)(gfxNodeType))
+#define __GfxNew_base(__in_base, gfxNodeType) __graphics_GfxNew((__in_base), (ULONG)(gfxNodeType))
 
 static __inline__ VOID
-__graphics_GfxFree(struct GfxBase *__base, APTR gfxNodePtr)
+__graphics_GfxFree(void *__base, APTR gfxNodePtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gfxNodePtr);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1752,13 +1864,14 @@ __graphics_GfxFree(struct GfxBase *__base, APTR gfxNodePtr)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GfxFree(gfxNodePtr) __graphics_GfxFree((GRAPHICS_BASE_NAME), (APTR)(gfxNodePtr))
+#define __GfxFree_base(__in_base, gfxNodePtr) __graphics_GfxFree((__in_base), (APTR)(gfxNodePtr))
 
 static __inline__ VOID
-__graphics_GfxAssociate(struct GfxBase *__base, CONST_APTR associateNode, APTR gfxNodePtr)
+__graphics_GfxAssociate(void *__base, CONST_APTR associateNode, APTR gfxNodePtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(associateNode);
 	register ULONG _a1 __asm("a1") = (ULONG)(gfxNodePtr);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -672(%/a6)"
@@ -1768,12 +1881,13 @@ __graphics_GfxAssociate(struct GfxBase *__base, CONST_APTR associateNode, APTR g
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GfxAssociate(associateNode, gfxNodePtr) __graphics_GfxAssociate((GRAPHICS_BASE_NAME), (CONST_APTR)(associateNode), (APTR)(gfxNodePtr))
+#define __GfxAssociate_base(__in_base, associateNode, gfxNodePtr) __graphics_GfxAssociate((__in_base), (CONST_APTR)(associateNode), (APTR)(gfxNodePtr))
 
 static __inline__ VOID
-__graphics_BitMapScale(struct GfxBase *__base, struct BitScaleArgs * bitScaleArgs)
+__graphics_BitMapScale(void *__base, struct BitScaleArgs * bitScaleArgs)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(bitScaleArgs);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1784,14 +1898,15 @@ __graphics_BitMapScale(struct GfxBase *__base, struct BitScaleArgs * bitScaleArg
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define BitMapScale(bitScaleArgs) __graphics_BitMapScale((GRAPHICS_BASE_NAME), (struct BitScaleArgs *)(bitScaleArgs))
+#define __BitMapScale_base(__in_base, bitScaleArgs) __graphics_BitMapScale((__in_base), (struct BitScaleArgs *)(bitScaleArgs))
 
 static __inline__ UWORD
-__graphics_ScalerDiv(struct GfxBase *__base, UWORD factor, UWORD numerator, UWORD denominator)
+__graphics_ScalerDiv(void *__base, UWORD factor, UWORD numerator, UWORD denominator)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(factor);
 	register ULONG _d1 __asm("d1") = (ULONG)(numerator);
 	register ULONG _d2 __asm("d2") = (ULONG)(denominator);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -684(%/a6)"
@@ -1801,15 +1916,16 @@ __graphics_ScalerDiv(struct GfxBase *__base, UWORD factor, UWORD numerator, UWOR
 	return (UWORD)_d0;
 }
 #define ScalerDiv(factor, numerator, denominator) __graphics_ScalerDiv((GRAPHICS_BASE_NAME), (UWORD)(factor), (UWORD)(numerator), (UWORD)(denominator))
+#define __ScalerDiv_base(__in_base, factor, numerator, denominator) __graphics_ScalerDiv((__in_base), (UWORD)(factor), (UWORD)(numerator), (UWORD)(denominator))
 
 static __inline__ WORD
-__graphics_TextExtent(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, WORD count, struct TextExtent * textExtent)
+__graphics_TextExtent(void *__base, struct RastPort * rp, CONST_STRPTR string, WORD count, struct TextExtent * textExtent)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
 	register ULONG _d0 __asm("d0") = (ULONG)(count);
 	register ULONG _a2 __asm("a2") = (ULONG)(textExtent);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -690(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1818,9 +1934,10 @@ __graphics_TextExtent(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR
 	return (WORD)_d0;
 }
 #define TextExtent(rp, string, count, textExtent) __graphics_TextExtent((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (WORD)(count), (struct TextExtent *)(textExtent))
+#define __TextExtent_base(__in_base, rp, string, count, textExtent) __graphics_TextExtent((__in_base), (struct RastPort *)(rp), (CONST_STRPTR)(string), (WORD)(count), (struct TextExtent *)(textExtent))
 
 static __inline__ ULONG
-__graphics_TextFit(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR string, UWORD strLen, CONST struct TextExtent * textExtent, CONST struct TextExtent * constrainingExtent, WORD strDirection, UWORD constrainingBitWidth, UWORD constrainingBitHeight)
+__graphics_TextFit(void *__base, struct RastPort * rp, CONST_STRPTR string, UWORD strLen, CONST struct TextExtent * textExtent, CONST struct TextExtent * constrainingExtent, WORD strDirection, UWORD constrainingBitWidth, UWORD constrainingBitHeight)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
@@ -1830,7 +1947,7 @@ __graphics_TextFit(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR st
 	register ULONG _d1 __asm("d1") = (ULONG)(strDirection);
 	register ULONG _d2 __asm("d2") = (ULONG)(constrainingBitWidth);
 	register ULONG _d3 __asm("d3") = (ULONG)(constrainingBitHeight);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -696(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a3), "r" (_a6), "r" (_d2), "r" (_d3)
@@ -1838,12 +1955,13 @@ __graphics_TextFit(struct GfxBase *__base, struct RastPort * rp, CONST_STRPTR st
 	return (ULONG)_d0;
 }
 #define TextFit(rp, string, strLen, textExtent, constrainingExtent, strDirection, constrainingBitWidth, constrainingBitHeight) __graphics_TextFit((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(strLen), (CONST struct TextExtent *)(textExtent), (CONST struct TextExtent *)(constrainingExtent), (WORD)(strDirection), (UWORD)(constrainingBitWidth), (UWORD)(constrainingBitHeight))
+#define __TextFit_base(__in_base, rp, string, strLen, textExtent, constrainingExtent, strDirection, constrainingBitWidth, constrainingBitHeight) __graphics_TextFit((__in_base), (struct RastPort *)(rp), (CONST_STRPTR)(string), (UWORD)(strLen), (CONST struct TextExtent *)(textExtent), (CONST struct TextExtent *)(constrainingExtent), (WORD)(strDirection), (UWORD)(constrainingBitWidth), (UWORD)(constrainingBitHeight))
 
 static __inline__ APTR
-__graphics_GfxLookUp(struct GfxBase *__base, CONST_APTR associateNode)
+__graphics_GfxLookUp(void *__base, CONST_APTR associateNode)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(associateNode);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1854,13 +1972,14 @@ __graphics_GfxLookUp(struct GfxBase *__base, CONST_APTR associateNode)
 	return (APTR)_d0;
 }
 #define GfxLookUp(associateNode) __graphics_GfxLookUp((GRAPHICS_BASE_NAME), (CONST_APTR)(associateNode))
+#define __GfxLookUp_base(__in_base, associateNode) __graphics_GfxLookUp((__in_base), (CONST_APTR)(associateNode))
 
 static __inline__ BOOL
-__graphics_VideoControl(struct GfxBase *__base, struct ColorMap * colorMap, struct TagItem * tagarray)
+__graphics_VideoControl(void *__base, struct ColorMap * colorMap, struct TagItem * tagarray)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(colorMap);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagarray);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -708(%/a6)"
@@ -1870,15 +1989,25 @@ __graphics_VideoControl(struct GfxBase *__base, struct ColorMap * colorMap, stru
 	return (BOOL)_d0;
 }
 #define VideoControl(colorMap, tagarray) __graphics_VideoControl((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), (struct TagItem *)(tagarray))
+#define __VideoControl_base(__in_base, colorMap, tagarray) __graphics_VideoControl((__in_base), (struct ColorMap *)(colorMap), (struct TagItem *)(tagarray))
 
-#define VideoControlTags(colorMap, ...) (VideoControlTags)((struct ColorMap *)(colorMap), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__VideoControlTags_va(void *__base, struct ColorMap * colorMap, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, colorMap);
+	BOOL _r = (BOOL)__graphics_VideoControl(__base, (struct ColorMap *)(colorMap), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define VideoControlTags(colorMap, ...) __VideoControlTags_va((GRAPHICS_BASE_NAME), (struct ColorMap *)(colorMap), ##__VA_ARGS__)
 
 static __inline__ struct MonitorSpec *
-__graphics_OpenMonitor(struct GfxBase *__base, CONST_STRPTR monitorName, ULONG displayID)
+__graphics_OpenMonitor(void *__base, CONST_STRPTR monitorName, ULONG displayID)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(monitorName);
 	register ULONG _d0 __asm("d0") = (ULONG)(displayID);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -714(%/a6)"
@@ -1888,12 +2017,13 @@ __graphics_OpenMonitor(struct GfxBase *__base, CONST_STRPTR monitorName, ULONG d
 	return (struct MonitorSpec *)_d0;
 }
 #define OpenMonitor(monitorName, displayID) __graphics_OpenMonitor((GRAPHICS_BASE_NAME), (CONST_STRPTR)(monitorName), (ULONG)(displayID))
+#define __OpenMonitor_base(__in_base, monitorName, displayID) __graphics_OpenMonitor((__in_base), (CONST_STRPTR)(monitorName), (ULONG)(displayID))
 
 static __inline__ BOOL
-__graphics_CloseMonitor(struct GfxBase *__base, struct MonitorSpec * monitorSpec)
+__graphics_CloseMonitor(void *__base, struct MonitorSpec * monitorSpec)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(monitorSpec);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1904,12 +2034,13 @@ __graphics_CloseMonitor(struct GfxBase *__base, struct MonitorSpec * monitorSpec
 	return (BOOL)_d0;
 }
 #define CloseMonitor(monitorSpec) __graphics_CloseMonitor((GRAPHICS_BASE_NAME), (struct MonitorSpec *)(monitorSpec))
+#define __CloseMonitor_base(__in_base, monitorSpec) __graphics_CloseMonitor((__in_base), (struct MonitorSpec *)(monitorSpec))
 
 static __inline__ DisplayInfoHandle
-__graphics_FindDisplayInfo(struct GfxBase *__base, ULONG displayID)
+__graphics_FindDisplayInfo(void *__base, ULONG displayID)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(displayID);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1920,12 +2051,13 @@ __graphics_FindDisplayInfo(struct GfxBase *__base, ULONG displayID)
 	return (DisplayInfoHandle)_d0;
 }
 #define FindDisplayInfo(displayID) __graphics_FindDisplayInfo((GRAPHICS_BASE_NAME), (ULONG)(displayID))
+#define __FindDisplayInfo_base(__in_base, displayID) __graphics_FindDisplayInfo((__in_base), (ULONG)(displayID))
 
 static __inline__ ULONG
-__graphics_NextDisplayInfo(struct GfxBase *__base, ULONG displayID)
+__graphics_NextDisplayInfo(void *__base, ULONG displayID)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(displayID);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1936,16 +2068,17 @@ __graphics_NextDisplayInfo(struct GfxBase *__base, ULONG displayID)
 	return (ULONG)_d0;
 }
 #define NextDisplayInfo(displayID) __graphics_NextDisplayInfo((GRAPHICS_BASE_NAME), (ULONG)(displayID))
+#define __NextDisplayInfo_base(__in_base, displayID) __graphics_NextDisplayInfo((__in_base), (ULONG)(displayID))
 
 static __inline__ ULONG
-__graphics_GetDisplayInfoData(struct GfxBase *__base, CONST DisplayInfoHandle handle, APTR buf, ULONG size, ULONG tagID, ULONG displayID)
+__graphics_GetDisplayInfoData(void *__base, CONST DisplayInfoHandle handle, APTR buf, ULONG size, ULONG tagID, ULONG displayID)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(handle);
 	register ULONG _a1 __asm("a1") = (ULONG)(buf);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
 	register ULONG _d1 __asm("d1") = (ULONG)(tagID);
 	register ULONG _d2 __asm("d2") = (ULONG)(displayID);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -756(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6), "r" (_d2)
@@ -1953,13 +2086,14 @@ __graphics_GetDisplayInfoData(struct GfxBase *__base, CONST DisplayInfoHandle ha
 	return (ULONG)_d0;
 }
 #define GetDisplayInfoData(handle, buf, size, tagID, displayID) __graphics_GetDisplayInfoData((GRAPHICS_BASE_NAME), (CONST DisplayInfoHandle)(handle), (APTR)(buf), (ULONG)(size), (ULONG)(tagID), (ULONG)(displayID))
+#define __GetDisplayInfoData_base(__in_base, handle, buf, size, tagID, displayID) __graphics_GetDisplayInfoData((__in_base), (CONST DisplayInfoHandle)(handle), (APTR)(buf), (ULONG)(size), (ULONG)(tagID), (ULONG)(displayID))
 
 static __inline__ VOID
-__graphics_FontExtent(struct GfxBase *__base, CONST struct TextFont * font, struct TextExtent * fontExtent)
+__graphics_FontExtent(void *__base, CONST struct TextFont * font, struct TextExtent * fontExtent)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(font);
 	register ULONG _a1 __asm("a1") = (ULONG)(fontExtent);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -762(%/a6)"
@@ -1969,9 +2103,10 @@ __graphics_FontExtent(struct GfxBase *__base, CONST struct TextFont * font, stru
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FontExtent(font, fontExtent) __graphics_FontExtent((GRAPHICS_BASE_NAME), (CONST struct TextFont *)(font), (struct TextExtent *)(fontExtent))
+#define __FontExtent_base(__in_base, font, fontExtent) __graphics_FontExtent((__in_base), (CONST struct TextFont *)(font), (struct TextExtent *)(fontExtent))
 
 static __inline__ LONG
-__graphics_ReadPixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD width, UBYTE * array, struct RastPort * tempRP)
+__graphics_ReadPixelLine8(void *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD width, UBYTE * array, struct RastPort * tempRP)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -1979,7 +2114,7 @@ __graphics_ReadPixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xs
 	register ULONG _d2 __asm("d2") = (ULONG)(width);
 	register ULONG _a2 __asm("a2") = (ULONG)(array);
 	register ULONG _a1 __asm("a1") = (ULONG)(tempRP);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -768(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2)
@@ -1987,9 +2122,10 @@ __graphics_ReadPixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xs
 	return (LONG)_d0;
 }
 #define ReadPixelLine8(rp, xstart, ystart, width, array, tempRP) __graphics_ReadPixelLine8((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
+#define __ReadPixelLine8_base(__in_base, rp, xstart, ystart, width, array, tempRP) __graphics_ReadPixelLine8((__in_base), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
 
 static __inline__ LONG
-__graphics_WritePixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD width, UBYTE * array, struct RastPort * tempRP)
+__graphics_WritePixelLine8(void *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD width, UBYTE * array, struct RastPort * tempRP)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -1997,7 +2133,7 @@ __graphics_WritePixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD x
 	register ULONG _d2 __asm("d2") = (ULONG)(width);
 	register ULONG _a2 __asm("a2") = (ULONG)(array);
 	register ULONG _a1 __asm("a1") = (ULONG)(tempRP);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -774(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2)
@@ -2005,9 +2141,10 @@ __graphics_WritePixelLine8(struct GfxBase *__base, struct RastPort * rp, UWORD x
 	return (LONG)_d0;
 }
 #define WritePixelLine8(rp, xstart, ystart, width, array, tempRP) __graphics_WritePixelLine8((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
+#define __WritePixelLine8_base(__in_base, rp, xstart, ystart, width, array, tempRP) __graphics_WritePixelLine8((__in_base), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(width), (UBYTE *)(array), (struct RastPort *)(tempRP))
 
 static __inline__ LONG
-__graphics_ReadPixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, UBYTE * array, struct RastPort * temprp)
+__graphics_ReadPixelArray8(void *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, UBYTE * array, struct RastPort * temprp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -2016,7 +2153,7 @@ __graphics_ReadPixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD x
 	register ULONG _d3 __asm("d3") = (ULONG)(ystop);
 	register ULONG _a2 __asm("a2") = (ULONG)(array);
 	register ULONG _a1 __asm("a1") = (ULONG)(temprp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -780(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2), "r" (_d3)
@@ -2024,9 +2161,10 @@ __graphics_ReadPixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD x
 	return (LONG)_d0;
 }
 #define ReadPixelArray8(rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_ReadPixelArray8((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
+#define __ReadPixelArray8_base(__in_base, rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_ReadPixelArray8((__in_base), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
 
 static __inline__ LONG
-__graphics_WritePixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, UBYTE * array, struct RastPort * temprp)
+__graphics_WritePixelArray8(void *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, UBYTE * array, struct RastPort * temprp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -2035,7 +2173,7 @@ __graphics_WritePixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD 
 	register ULONG _d3 __asm("d3") = (ULONG)(ystop);
 	register ULONG _a2 __asm("a2") = (ULONG)(array);
 	register ULONG _a1 __asm("a1") = (ULONG)(temprp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -786(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2), "r" (_d3)
@@ -2043,12 +2181,13 @@ __graphics_WritePixelArray8(struct GfxBase *__base, struct RastPort * rp, UWORD 
 	return (LONG)_d0;
 }
 #define WritePixelArray8(rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_WritePixelArray8((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
+#define __WritePixelArray8_base(__in_base, rp, xstart, ystart, xstop, ystop, array, temprp) __graphics_WritePixelArray8((__in_base), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (UBYTE *)(array), (struct RastPort *)(temprp))
 
 static __inline__ LONG
-__graphics_GetVPModeID(struct GfxBase *__base, CONST struct ViewPort * vp)
+__graphics_GetVPModeID(void *__base, CONST struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2059,12 +2198,13 @@ __graphics_GetVPModeID(struct GfxBase *__base, CONST struct ViewPort * vp)
 	return (LONG)_d0;
 }
 #define GetVPModeID(vp) __graphics_GetVPModeID((GRAPHICS_BASE_NAME), (CONST struct ViewPort *)(vp))
+#define __GetVPModeID_base(__in_base, vp) __graphics_GetVPModeID((__in_base), (CONST struct ViewPort *)(vp))
 
 static __inline__ LONG
-__graphics_ModeNotAvailable(struct GfxBase *__base, ULONG modeID)
+__graphics_ModeNotAvailable(void *__base, ULONG modeID)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(modeID);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2075,14 +2215,15 @@ __graphics_ModeNotAvailable(struct GfxBase *__base, ULONG modeID)
 	return (LONG)_d0;
 }
 #define ModeNotAvailable(modeID) __graphics_ModeNotAvailable((GRAPHICS_BASE_NAME), (ULONG)(modeID))
+#define __ModeNotAvailable_base(__in_base, modeID) __graphics_ModeNotAvailable((__in_base), (ULONG)(modeID))
 
 static __inline__ WORD
-__graphics_WeighTAMatch(struct GfxBase *__base, CONST struct TextAttr * reqTextAttr, CONST struct TextAttr * targetTextAttr, CONST struct TagItem * targetTags)
+__graphics_WeighTAMatch(void *__base, CONST struct TextAttr * reqTextAttr, CONST struct TextAttr * targetTextAttr, CONST struct TagItem * targetTags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(reqTextAttr);
 	register ULONG _a1 __asm("a1") = (ULONG)(targetTextAttr);
 	register ULONG _a2 __asm("a2") = (ULONG)(targetTags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -804(%/a6)"
@@ -2092,18 +2233,28 @@ __graphics_WeighTAMatch(struct GfxBase *__base, CONST struct TextAttr * reqTextA
 	return (WORD)_d0;
 }
 #define WeighTAMatch(reqTextAttr, targetTextAttr, targetTags) __graphics_WeighTAMatch((GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)(targetTags))
+#define __WeighTAMatch_base(__in_base, reqTextAttr, targetTextAttr, targetTags) __graphics_WeighTAMatch((__in_base), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)(targetTags))
 
-#define WeighTAMatchTags(reqTextAttr, targetTextAttr, ...) (WeighTAMatchTags)((CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR WORD
+__WeighTAMatchTags_va(void *__base, CONST struct TextAttr * reqTextAttr, CONST struct TextAttr * targetTextAttr, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, targetTextAttr);
+	WORD _r = (WORD)__graphics_WeighTAMatch(__base, (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define WeighTAMatchTags(reqTextAttr, targetTextAttr, ...) __WeighTAMatchTags_va((GRAPHICS_BASE_NAME), (CONST struct TextAttr *)(reqTextAttr), (CONST struct TextAttr *)(targetTextAttr), ##__VA_ARGS__)
 
 static __inline__ VOID
-__graphics_EraseRect(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
+__graphics_EraseRect(void *__base, struct RastPort * rp, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xMin);
 	register ULONG _d1 __asm("d1") = (ULONG)(yMin);
 	register ULONG _d2 __asm("d2") = (ULONG)(xMax);
 	register ULONG _d3 __asm("d3") = (ULONG)(yMax);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -810(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -2112,13 +2263,14 @@ __graphics_EraseRect(struct GfxBase *__base, struct RastPort * rp, WORD xMin, WO
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define EraseRect(rp, xMin, yMin, xMax, yMax) __graphics_EraseRect((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __EraseRect_base(__in_base, rp, xMin, yMin, xMax, yMax) __graphics_EraseRect((__in_base), (struct RastPort *)(rp), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ ULONG
-__graphics_ExtendFont(struct GfxBase *__base, struct TextFont * font, CONST struct TagItem * fontTags)
+__graphics_ExtendFont(void *__base, struct TextFont * font, CONST struct TagItem * fontTags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(font);
 	register ULONG _a1 __asm("a1") = (ULONG)(fontTags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -816(%/a6)"
@@ -2128,14 +2280,24 @@ __graphics_ExtendFont(struct GfxBase *__base, struct TextFont * font, CONST stru
 	return (ULONG)_d0;
 }
 #define ExtendFont(font, fontTags) __graphics_ExtendFont((GRAPHICS_BASE_NAME), (struct TextFont *)(font), (CONST struct TagItem *)(fontTags))
+#define __ExtendFont_base(__in_base, font, fontTags) __graphics_ExtendFont((__in_base), (struct TextFont *)(font), (CONST struct TagItem *)(fontTags))
 
-#define ExtendFontTags(font, ...) (ExtendFontTags)((struct TextFont *)(font), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__ExtendFontTags_va(void *__base, struct TextFont * font, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, font);
+	ULONG _r = (ULONG)__graphics_ExtendFont(__base, (struct TextFont *)(font), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ExtendFontTags(font, ...) __ExtendFontTags_va((GRAPHICS_BASE_NAME), (struct TextFont *)(font), ##__VA_ARGS__)
 
 static __inline__ VOID
-__graphics_StripFont(struct GfxBase *__base, struct TextFont * font)
+__graphics_StripFont(void *__base, struct TextFont * font)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(font);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2146,13 +2308,14 @@ __graphics_StripFont(struct GfxBase *__base, struct TextFont * font)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define StripFont(font) __graphics_StripFont((GRAPHICS_BASE_NAME), (struct TextFont *)(font))
+#define __StripFont_base(__in_base, font) __graphics_StripFont((__in_base), (struct TextFont *)(font))
 
 static __inline__ UWORD
-__graphics_CalcIVG(struct GfxBase *__base, struct View * v, struct ViewPort * vp)
+__graphics_CalcIVG(void *__base, struct View * v, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(v);
 	register ULONG _a1 __asm("a1") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -828(%/a6)"
@@ -2162,13 +2325,14 @@ __graphics_CalcIVG(struct GfxBase *__base, struct View * v, struct ViewPort * vp
 	return (UWORD)_d0;
 }
 #define CalcIVG(v, vp) __graphics_CalcIVG((GRAPHICS_BASE_NAME), (struct View *)(v), (struct ViewPort *)(vp))
+#define __CalcIVG_base(__in_base, v, vp) __graphics_CalcIVG((__in_base), (struct View *)(v), (struct ViewPort *)(vp))
 
 static __inline__ LONG
-__graphics_AttachPalExtra(struct GfxBase *__base, struct ColorMap * cm, struct ViewPort * vp)
+__graphics_AttachPalExtra(void *__base, struct ColorMap * cm, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cm);
 	register ULONG _a1 __asm("a1") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -834(%/a6)"
@@ -2178,16 +2342,17 @@ __graphics_AttachPalExtra(struct GfxBase *__base, struct ColorMap * cm, struct V
 	return (LONG)_d0;
 }
 #define AttachPalExtra(cm, vp) __graphics_AttachPalExtra((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (struct ViewPort *)(vp))
+#define __AttachPalExtra_base(__in_base, cm, vp) __graphics_AttachPalExtra((__in_base), (struct ColorMap *)(cm), (struct ViewPort *)(vp))
 
 static __inline__ LONG
-__graphics_ObtainBestPenA(struct GfxBase *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, CONST struct TagItem * tags)
+__graphics_ObtainBestPenA(void *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cm);
 	register ULONG _d1 __asm("d1") = (ULONG)(r);
 	register ULONG _d2 __asm("d2") = (ULONG)(g);
 	register ULONG _d3 __asm("d3") = (ULONG)(b);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	__asm__ __volatile__ ("jsr -840(%/a6)"
 		: "=r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -2196,18 +2361,28 @@ __graphics_ObtainBestPenA(struct GfxBase *__base, struct ColorMap * cm, ULONG r,
 	return (LONG)_d0;
 }
 #define ObtainBestPenA(cm, r, g, b, tags) __graphics_ObtainBestPenA((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)(tags))
+#define __ObtainBestPenA_base(__in_base, cm, r, g, b, tags) __graphics_ObtainBestPenA((__in_base), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)(tags))
 
-#define ObtainBestPen(cm, r, g, b, ...) (ObtainBestPen)((struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__ObtainBestPen_va(void *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, b);
+	LONG _r = (LONG)__graphics_ObtainBestPenA(__base, (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ObtainBestPen(cm, r, g, b, ...) __ObtainBestPen_va((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), ##__VA_ARGS__)
 
 static __inline__ VOID
-__graphics_SetRGB32(struct GfxBase *__base, struct ViewPort * vp, ULONG n, ULONG r, ULONG g, ULONG b)
+__graphics_SetRGB32(void *__base, struct ViewPort * vp, ULONG n, ULONG r, ULONG g, ULONG b)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _d0 __asm("d0") = (ULONG)(n);
 	register ULONG _d1 __asm("d1") = (ULONG)(r);
 	register ULONG _d2 __asm("d2") = (ULONG)(g);
 	register ULONG _d3 __asm("d3") = (ULONG)(b);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -852(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -2216,12 +2391,13 @@ __graphics_SetRGB32(struct GfxBase *__base, struct ViewPort * vp, ULONG n, ULONG
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetRGB32(vp, n, r, g, b) __graphics_SetRGB32((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
+#define __SetRGB32_base(__in_base, vp, n, r, g, b) __graphics_SetRGB32((__in_base), (struct ViewPort *)(vp), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
 
 static __inline__ ULONG
-__graphics_GetAPen(struct GfxBase *__base, struct RastPort * rp)
+__graphics_GetAPen(void *__base, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2232,12 +2408,13 @@ __graphics_GetAPen(struct GfxBase *__base, struct RastPort * rp)
 	return (ULONG)_d0;
 }
 #define GetAPen(rp) __graphics_GetAPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __GetAPen_base(__in_base, rp) __graphics_GetAPen((__in_base), (struct RastPort *)(rp))
 
 static __inline__ ULONG
-__graphics_GetBPen(struct GfxBase *__base, struct RastPort * rp)
+__graphics_GetBPen(void *__base, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2248,12 +2425,13 @@ __graphics_GetBPen(struct GfxBase *__base, struct RastPort * rp)
 	return (ULONG)_d0;
 }
 #define GetBPen(rp) __graphics_GetBPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __GetBPen_base(__in_base, rp) __graphics_GetBPen((__in_base), (struct RastPort *)(rp))
 
 static __inline__ ULONG
-__graphics_GetDrMd(struct GfxBase *__base, struct RastPort * rp)
+__graphics_GetDrMd(void *__base, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2264,12 +2442,13 @@ __graphics_GetDrMd(struct GfxBase *__base, struct RastPort * rp)
 	return (ULONG)_d0;
 }
 #define GetDrMd(rp) __graphics_GetDrMd((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __GetDrMd_base(__in_base, rp) __graphics_GetDrMd((__in_base), (struct RastPort *)(rp))
 
 static __inline__ ULONG
-__graphics_GetOutlinePen(struct GfxBase *__base, struct RastPort * rp)
+__graphics_GetOutlinePen(void *__base, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2280,13 +2459,14 @@ __graphics_GetOutlinePen(struct GfxBase *__base, struct RastPort * rp)
 	return (ULONG)_d0;
 }
 #define GetOutlinePen(rp) __graphics_GetOutlinePen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp))
+#define __GetOutlinePen_base(__in_base, rp) __graphics_GetOutlinePen((__in_base), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__graphics_LoadRGB32(struct GfxBase *__base, struct ViewPort * vp, CONST ULONG * table)
+__graphics_LoadRGB32(void *__base, struct ViewPort * vp, CONST ULONG * table)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _a1 __asm("a1") = (ULONG)(table);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -882(%/a6)"
@@ -2296,12 +2476,13 @@ __graphics_LoadRGB32(struct GfxBase *__base, struct ViewPort * vp, CONST ULONG *
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LoadRGB32(vp, table) __graphics_LoadRGB32((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (CONST ULONG *)(table))
+#define __LoadRGB32_base(__in_base, vp, table) __graphics_LoadRGB32((__in_base), (struct ViewPort *)(vp), (CONST ULONG *)(table))
 
 static __inline__ ULONG
-__graphics_SetChipRev(struct GfxBase *__base, ULONG want)
+__graphics_SetChipRev(void *__base, ULONG want)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(want);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2312,15 +2493,16 @@ __graphics_SetChipRev(struct GfxBase *__base, ULONG want)
 	return (ULONG)_d0;
 }
 #define SetChipRev(want) __graphics_SetChipRev((GRAPHICS_BASE_NAME), (ULONG)(want))
+#define __SetChipRev_base(__in_base, want) __graphics_SetChipRev((__in_base), (ULONG)(want))
 
 static __inline__ VOID
-__graphics_SetABPenDrMd(struct GfxBase *__base, struct RastPort * rp, ULONG frontPen, ULONG backPen, ULONG drawmode)
+__graphics_SetABPenDrMd(void *__base, struct RastPort * rp, ULONG frontPen, ULONG backPen, ULONG drawmode)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(frontPen);
 	register ULONG _d1 __asm("d1") = (ULONG)(backPen);
 	register ULONG _d2 __asm("d2") = (ULONG)(drawmode);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -894(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -2329,15 +2511,16 @@ __graphics_SetABPenDrMd(struct GfxBase *__base, struct RastPort * rp, ULONG fron
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetABPenDrMd(rp, frontPen, backPen, drawmode) __graphics_SetABPenDrMd((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(frontPen), (ULONG)(backPen), (ULONG)(drawmode))
+#define __SetABPenDrMd_base(__in_base, rp, frontPen, backPen, drawmode) __graphics_SetABPenDrMd((__in_base), (struct RastPort *)(rp), (ULONG)(frontPen), (ULONG)(backPen), (ULONG)(drawmode))
 
 static __inline__ VOID
-__graphics_GetRGB32(struct GfxBase *__base, CONST struct ColorMap * cm, ULONG firstcolor, ULONG ncolors, ULONG * table)
+__graphics_GetRGB32(void *__base, CONST struct ColorMap * cm, ULONG firstcolor, ULONG ncolors, ULONG * table)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cm);
 	register ULONG _d0 __asm("d0") = (ULONG)(firstcolor);
 	register ULONG _d1 __asm("d1") = (ULONG)(ncolors);
 	register ULONG _a1 __asm("a1") = (ULONG)(table);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -900(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -2345,16 +2528,17 @@ __graphics_GetRGB32(struct GfxBase *__base, CONST struct ColorMap * cm, ULONG fi
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GetRGB32(cm, firstcolor, ncolors, table) __graphics_GetRGB32((GRAPHICS_BASE_NAME), (CONST struct ColorMap *)(cm), (ULONG)(firstcolor), (ULONG)(ncolors), (ULONG *)(table))
+#define __GetRGB32_base(__in_base, cm, firstcolor, ncolors, table) __graphics_GetRGB32((__in_base), (CONST struct ColorMap *)(cm), (ULONG)(firstcolor), (ULONG)(ncolors), (ULONG *)(table))
 
 static __inline__ struct BitMap *
-__graphics_AllocBitMap(struct GfxBase *__base, ULONG sizex, ULONG sizey, ULONG depth, ULONG flags, CONST struct BitMap * friend_bitmap)
+__graphics_AllocBitMap(void *__base, ULONG sizex, ULONG sizey, ULONG depth, ULONG flags, CONST struct BitMap * friend_bitmap)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(sizex);
 	register ULONG _d1 __asm("d1") = (ULONG)(sizey);
 	register ULONG _d2 __asm("d2") = (ULONG)(depth);
 	register ULONG _d3 __asm("d3") = (ULONG)(flags);
 	register ULONG _a0 __asm("a0") = (ULONG)(friend_bitmap);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -918(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -2363,12 +2547,13 @@ __graphics_AllocBitMap(struct GfxBase *__base, ULONG sizex, ULONG sizey, ULONG d
 	return (struct BitMap *)_d0;
 }
 #define AllocBitMap(sizex, sizey, depth, flags, friend_bitmap) __graphics_AllocBitMap((GRAPHICS_BASE_NAME), (ULONG)(sizex), (ULONG)(sizey), (ULONG)(depth), (ULONG)(flags), (CONST struct BitMap *)(friend_bitmap))
+#define __AllocBitMap_base(__in_base, sizex, sizey, depth, flags, friend_bitmap) __graphics_AllocBitMap((__in_base), (ULONG)(sizex), (ULONG)(sizey), (ULONG)(depth), (ULONG)(flags), (CONST struct BitMap *)(friend_bitmap))
 
 static __inline__ VOID
-__graphics_FreeBitMap(struct GfxBase *__base, struct BitMap * bm)
+__graphics_FreeBitMap(void *__base, struct BitMap * bm)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(bm);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2379,13 +2564,14 @@ __graphics_FreeBitMap(struct GfxBase *__base, struct BitMap * bm)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeBitMap(bm) __graphics_FreeBitMap((GRAPHICS_BASE_NAME), (struct BitMap *)(bm))
+#define __FreeBitMap_base(__in_base, bm) __graphics_FreeBitMap((__in_base), (struct BitMap *)(bm))
 
 static __inline__ LONG
-__graphics_GetExtSpriteA(struct GfxBase *__base, struct ExtSprite * ss, CONST struct TagItem * tags)
+__graphics_GetExtSpriteA(void *__base, struct ExtSprite * ss, CONST struct TagItem * tags)
 {
 	register ULONG _a2 __asm("a2") = (ULONG)(ss);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -2396,16 +2582,26 @@ __graphics_GetExtSpriteA(struct GfxBase *__base, struct ExtSprite * ss, CONST st
 	return (LONG)_d0;
 }
 #define GetExtSpriteA(ss, tags) __graphics_GetExtSpriteA((GRAPHICS_BASE_NAME), (struct ExtSprite *)(ss), (CONST struct TagItem *)(tags))
+#define __GetExtSpriteA_base(__in_base, ss, tags) __graphics_GetExtSpriteA((__in_base), (struct ExtSprite *)(ss), (CONST struct TagItem *)(tags))
 
-#define GetExtSprite(ss, ...) (GetExtSprite)((struct ExtSprite *)(ss), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__GetExtSprite_va(void *__base, struct ExtSprite * ss, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, ss);
+	LONG _r = (LONG)__graphics_GetExtSpriteA(__base, (struct ExtSprite *)(ss), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define GetExtSprite(ss, ...) __GetExtSprite_va((GRAPHICS_BASE_NAME), (struct ExtSprite *)(ss), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__graphics_CoerceMode(struct GfxBase *__base, struct ViewPort * vp, ULONG monitorid, ULONG flags)
+__graphics_CoerceMode(void *__base, struct ViewPort * vp, ULONG monitorid, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _d0 __asm("d0") = (ULONG)(monitorid);
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -936(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -2414,14 +2610,15 @@ __graphics_CoerceMode(struct GfxBase *__base, struct ViewPort * vp, ULONG monito
 	return (ULONG)_d0;
 }
 #define CoerceMode(vp, monitorid, flags) __graphics_CoerceMode((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (ULONG)(monitorid), (ULONG)(flags))
+#define __CoerceMode_base(__in_base, vp, monitorid, flags) __graphics_CoerceMode((__in_base), (struct ViewPort *)(vp), (ULONG)(monitorid), (ULONG)(flags))
 
 static __inline__ VOID
-__graphics_ChangeVPBitMap(struct GfxBase *__base, struct ViewPort * vp, struct BitMap * bm, struct DBufInfo * db)
+__graphics_ChangeVPBitMap(void *__base, struct ViewPort * vp, struct BitMap * bm, struct DBufInfo * db)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _a1 __asm("a1") = (ULONG)(bm);
 	register ULONG _a2 __asm("a2") = (ULONG)(db);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -942(%/a6)"
@@ -2431,13 +2628,14 @@ __graphics_ChangeVPBitMap(struct GfxBase *__base, struct ViewPort * vp, struct B
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ChangeVPBitMap(vp, bm, db) __graphics_ChangeVPBitMap((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct BitMap *)(bm), (struct DBufInfo *)(db))
+#define __ChangeVPBitMap_base(__in_base, vp, bm, db) __graphics_ChangeVPBitMap((__in_base), (struct ViewPort *)(vp), (struct BitMap *)(bm), (struct DBufInfo *)(db))
 
 static __inline__ VOID
-__graphics_ReleasePen(struct GfxBase *__base, struct ColorMap * cm, ULONG n)
+__graphics_ReleasePen(void *__base, struct ColorMap * cm, ULONG n)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cm);
 	register ULONG _d0 __asm("d0") = (ULONG)(n);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -948(%/a6)"
@@ -2447,9 +2645,10 @@ __graphics_ReleasePen(struct GfxBase *__base, struct ColorMap * cm, ULONG n)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleasePen(cm, n) __graphics_ReleasePen((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n))
+#define __ReleasePen_base(__in_base, cm, n) __graphics_ReleasePen((__in_base), (struct ColorMap *)(cm), (ULONG)(n))
 
 static __inline__ ULONG
-__graphics_ObtainPen(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULONG r, ULONG g, ULONG b, LONG f)
+__graphics_ObtainPen(void *__base, struct ColorMap * cm, ULONG n, ULONG r, ULONG g, ULONG b, LONG f)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cm);
 	register ULONG _d0 __asm("d0") = (ULONG)(n);
@@ -2457,7 +2656,7 @@ __graphics_ObtainPen(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULON
 	register ULONG _d2 __asm("d2") = (ULONG)(g);
 	register ULONG _d3 __asm("d3") = (ULONG)(b);
 	register ULONG _d4 __asm("d4") = (ULONG)(f);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -954(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -2466,13 +2665,14 @@ __graphics_ObtainPen(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULON
 	return (ULONG)_d0;
 }
 #define ObtainPen(cm, n, r, g, b, f) __graphics_ObtainPen((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(f))
+#define __ObtainPen_base(__in_base, cm, n, r, g, b, f) __graphics_ObtainPen((__in_base), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(f))
 
 static __inline__ ULONG
-__graphics_GetBitMapAttr(struct GfxBase *__base, CONST struct BitMap * bm, ULONG attrnum)
+__graphics_GetBitMapAttr(void *__base, CONST struct BitMap * bm, ULONG attrnum)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(bm);
 	register ULONG _d1 __asm("d1") = (ULONG)(attrnum);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -960(%/a6)"
@@ -2482,12 +2682,13 @@ __graphics_GetBitMapAttr(struct GfxBase *__base, CONST struct BitMap * bm, ULONG
 	return (ULONG)_d0;
 }
 #define GetBitMapAttr(bm, attrnum) __graphics_GetBitMapAttr((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), (ULONG)(attrnum))
+#define __GetBitMapAttr_base(__in_base, bm, attrnum) __graphics_GetBitMapAttr((__in_base), (CONST struct BitMap *)(bm), (ULONG)(attrnum))
 
 static __inline__ struct DBufInfo *
-__graphics_AllocDBufInfo(struct GfxBase *__base, struct ViewPort * vp)
+__graphics_AllocDBufInfo(void *__base, struct ViewPort * vp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2498,12 +2699,13 @@ __graphics_AllocDBufInfo(struct GfxBase *__base, struct ViewPort * vp)
 	return (struct DBufInfo *)_d0;
 }
 #define AllocDBufInfo(vp) __graphics_AllocDBufInfo((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp))
+#define __AllocDBufInfo_base(__in_base, vp) __graphics_AllocDBufInfo((__in_base), (struct ViewPort *)(vp))
 
 static __inline__ VOID
-__graphics_FreeDBufInfo(struct GfxBase *__base, struct DBufInfo * dbi)
+__graphics_FreeDBufInfo(void *__base, struct DBufInfo * dbi)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(dbi);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -2514,13 +2716,14 @@ __graphics_FreeDBufInfo(struct GfxBase *__base, struct DBufInfo * dbi)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeDBufInfo(dbi) __graphics_FreeDBufInfo((GRAPHICS_BASE_NAME), (struct DBufInfo *)(dbi))
+#define __FreeDBufInfo_base(__in_base, dbi) __graphics_FreeDBufInfo((__in_base), (struct DBufInfo *)(dbi))
 
 static __inline__ ULONG
-__graphics_SetOutlinePen(struct GfxBase *__base, struct RastPort * rp, ULONG pen)
+__graphics_SetOutlinePen(void *__base, struct RastPort * rp, ULONG pen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(pen);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -978(%/a6)"
@@ -2530,13 +2733,14 @@ __graphics_SetOutlinePen(struct GfxBase *__base, struct RastPort * rp, ULONG pen
 	return (ULONG)_d0;
 }
 #define SetOutlinePen(rp, pen) __graphics_SetOutlinePen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(pen))
+#define __SetOutlinePen_base(__in_base, rp, pen) __graphics_SetOutlinePen((__in_base), (struct RastPort *)(rp), (ULONG)(pen))
 
 static __inline__ ULONG
-__graphics_SetWriteMask(struct GfxBase *__base, struct RastPort * rp, ULONG msk)
+__graphics_SetWriteMask(void *__base, struct RastPort * rp, ULONG msk)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(msk);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -984(%/a6)"
@@ -2546,13 +2750,14 @@ __graphics_SetWriteMask(struct GfxBase *__base, struct RastPort * rp, ULONG msk)
 	return (ULONG)_d0;
 }
 #define SetWriteMask(rp, msk) __graphics_SetWriteMask((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(msk))
+#define __SetWriteMask_base(__in_base, rp, msk) __graphics_SetWriteMask((__in_base), (struct RastPort *)(rp), (ULONG)(msk))
 
 static __inline__ VOID
-__graphics_SetMaxPen(struct GfxBase *__base, struct RastPort * rp, ULONG maxpen)
+__graphics_SetMaxPen(void *__base, struct RastPort * rp, ULONG maxpen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(maxpen);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -990(%/a6)"
@@ -2562,16 +2767,17 @@ __graphics_SetMaxPen(struct GfxBase *__base, struct RastPort * rp, ULONG maxpen)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetMaxPen(rp, maxpen) __graphics_SetMaxPen((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (ULONG)(maxpen))
+#define __SetMaxPen_base(__in_base, rp, maxpen) __graphics_SetMaxPen((__in_base), (struct RastPort *)(rp), (ULONG)(maxpen))
 
 static __inline__ VOID
-__graphics_SetRGB32CM(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULONG r, ULONG g, ULONG b)
+__graphics_SetRGB32CM(void *__base, struct ColorMap * cm, ULONG n, ULONG r, ULONG g, ULONG b)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(cm);
 	register ULONG _d0 __asm("d0") = (ULONG)(n);
 	register ULONG _d1 __asm("d1") = (ULONG)(r);
 	register ULONG _d2 __asm("d2") = (ULONG)(g);
 	register ULONG _d3 __asm("d3") = (ULONG)(b);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -996(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -2580,9 +2786,10 @@ __graphics_SetRGB32CM(struct GfxBase *__base, struct ColorMap * cm, ULONG n, ULO
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetRGB32CM(cm, n, r, g, b) __graphics_SetRGB32CM((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
+#define __SetRGB32CM_base(__in_base, cm, n, r, g, b) __graphics_SetRGB32CM((__in_base), (struct ColorMap *)(cm), (ULONG)(n), (ULONG)(r), (ULONG)(g), (ULONG)(b))
 
 static __inline__ VOID
-__graphics_ScrollRasterBF(struct GfxBase *__base, struct RastPort * rp, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
+__graphics_ScrollRasterBF(void *__base, struct RastPort * rp, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -2591,7 +2798,7 @@ __graphics_ScrollRasterBF(struct GfxBase *__base, struct RastPort * rp, WORD dx,
 	register ULONG _d3 __asm("d3") = (ULONG)(yMin);
 	register ULONG _d4 __asm("d4") = (ULONG)(xMax);
 	register ULONG _d5 __asm("d5") = (ULONG)(yMax);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -1002(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -2600,16 +2807,17 @@ __graphics_ScrollRasterBF(struct GfxBase *__base, struct RastPort * rp, WORD dx,
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScrollRasterBF(rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRasterBF((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __ScrollRasterBF_base(__in_base, rp, dx, dy, xMin, yMin, xMax, yMax) __graphics_ScrollRasterBF((__in_base), (struct RastPort *)(rp), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ LONG
-__graphics_FindColor(struct GfxBase *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, LONG maxcolor)
+__graphics_FindColor(void *__base, struct ColorMap * cm, ULONG r, ULONG g, ULONG b, LONG maxcolor)
 {
 	register ULONG _a3 __asm("a3") = (ULONG)(cm);
 	register ULONG _d1 __asm("d1") = (ULONG)(r);
 	register ULONG _d2 __asm("d2") = (ULONG)(g);
 	register ULONG _d3 __asm("d3") = (ULONG)(b);
 	register ULONG _d4 __asm("d4") = (ULONG)(maxcolor);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -2620,13 +2828,14 @@ __graphics_FindColor(struct GfxBase *__base, struct ColorMap * cm, ULONG r, ULON
 	return (LONG)_d0;
 }
 #define FindColor(cm, r, g, b, maxcolor) __graphics_FindColor((GRAPHICS_BASE_NAME), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(maxcolor))
+#define __FindColor_base(__in_base, cm, r, g, b, maxcolor) __graphics_FindColor((__in_base), (struct ColorMap *)(cm), (ULONG)(r), (ULONG)(g), (ULONG)(b), (LONG)(maxcolor))
 
 static __inline__ struct ExtSprite *
-__graphics_AllocSpriteDataA(struct GfxBase *__base, CONST struct BitMap * bm, CONST struct TagItem * tags)
+__graphics_AllocSpriteDataA(void *__base, CONST struct BitMap * bm, CONST struct TagItem * tags)
 {
 	register ULONG _a2 __asm("a2") = (ULONG)(bm);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -2637,17 +2846,27 @@ __graphics_AllocSpriteDataA(struct GfxBase *__base, CONST struct BitMap * bm, CO
 	return (struct ExtSprite *)_d0;
 }
 #define AllocSpriteDataA(bm, tags) __graphics_AllocSpriteDataA((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), (CONST struct TagItem *)(tags))
+#define __AllocSpriteDataA_base(__in_base, bm, tags) __graphics_AllocSpriteDataA((__in_base), (CONST struct BitMap *)(bm), (CONST struct TagItem *)(tags))
 
-#define AllocSpriteData(bm, ...) (AllocSpriteData)((CONST struct BitMap *)(bm), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct ExtSprite *
+__AllocSpriteData_va(void *__base, CONST struct BitMap * bm, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, bm);
+	struct ExtSprite * _r = (struct ExtSprite *)__graphics_AllocSpriteDataA(__base, (CONST struct BitMap *)(bm), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocSpriteData(bm, ...) __AllocSpriteData_va((GRAPHICS_BASE_NAME), (CONST struct BitMap *)(bm), ##__VA_ARGS__)
 
 static __inline__ LONG
-__graphics_ChangeExtSpriteA(struct GfxBase *__base, struct ViewPort * vp, struct ExtSprite * oldsprite, struct ExtSprite * newsprite, CONST struct TagItem * tags)
+__graphics_ChangeExtSpriteA(void *__base, struct ViewPort * vp, struct ExtSprite * oldsprite, struct ExtSprite * newsprite, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(vp);
 	register ULONG _a1 __asm("a1") = (ULONG)(oldsprite);
 	register ULONG _a2 __asm("a2") = (ULONG)(newsprite);
 	register ULONG _a3 __asm("a3") = (ULONG)(tags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -1026(%/a6)"
@@ -2657,14 +2876,24 @@ __graphics_ChangeExtSpriteA(struct GfxBase *__base, struct ViewPort * vp, struct
 	return (LONG)_d0;
 }
 #define ChangeExtSpriteA(vp, oldsprite, newsprite, tags) __graphics_ChangeExtSpriteA((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)(tags))
+#define __ChangeExtSpriteA_base(__in_base, vp, oldsprite, newsprite, tags) __graphics_ChangeExtSpriteA((__in_base), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)(tags))
 
-#define ChangeExtSprite(vp, oldsprite, newsprite, ...) (ChangeExtSprite)((struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__ChangeExtSprite_va(void *__base, struct ViewPort * vp, struct ExtSprite * oldsprite, struct ExtSprite * newsprite, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, newsprite);
+	LONG _r = (LONG)__graphics_ChangeExtSpriteA(__base, (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define ChangeExtSprite(vp, oldsprite, newsprite, ...) __ChangeExtSprite_va((GRAPHICS_BASE_NAME), (struct ViewPort *)(vp), (struct ExtSprite *)(oldsprite), (struct ExtSprite *)(newsprite), ##__VA_ARGS__)
 
 static __inline__ VOID
-__graphics_FreeSpriteData(struct GfxBase *__base, struct ExtSprite * sp)
+__graphics_FreeSpriteData(void *__base, struct ExtSprite * sp)
 {
 	register ULONG _a2 __asm("a2") = (ULONG)(sp);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -2676,13 +2905,14 @@ __graphics_FreeSpriteData(struct GfxBase *__base, struct ExtSprite * sp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeSpriteData(sp) __graphics_FreeSpriteData((GRAPHICS_BASE_NAME), (struct ExtSprite *)(sp))
+#define __FreeSpriteData_base(__in_base, sp) __graphics_FreeSpriteData((__in_base), (struct ExtSprite *)(sp))
 
 static __inline__ VOID
-__graphics_SetRPAttrsA(struct GfxBase *__base, struct RastPort * rp, CONST struct TagItem * tags)
+__graphics_SetRPAttrsA(void *__base, struct RastPort * rp, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -1038(%/a6)"
@@ -2692,15 +2922,24 @@ __graphics_SetRPAttrsA(struct GfxBase *__base, struct RastPort * rp, CONST struc
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetRPAttrsA(rp, tags) __graphics_SetRPAttrsA((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (CONST struct TagItem *)(tags))
+#define __SetRPAttrsA_base(__in_base, rp, tags) __graphics_SetRPAttrsA((__in_base), (struct RastPort *)(rp), (CONST struct TagItem *)(tags))
 
-#define SetRPAttrs(rp, ...) (SetRPAttrs)((struct RastPort *)(rp), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__SetRPAttrs_va(void *__base, struct RastPort * rp, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, rp);
+	__graphics_SetRPAttrsA(__base, (struct RastPort *)(rp), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define SetRPAttrs(rp, ...) __SetRPAttrs_va((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), ##__VA_ARGS__)
 
 static __inline__ VOID
-__graphics_GetRPAttrsA(struct GfxBase *__base, CONST struct RastPort * rp, CONST struct TagItem * tags)
+__graphics_GetRPAttrsA(void *__base, CONST struct RastPort * rp, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -1044(%/a6)"
@@ -2710,14 +2949,23 @@ __graphics_GetRPAttrsA(struct GfxBase *__base, CONST struct RastPort * rp, CONST
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GetRPAttrsA(rp, tags) __graphics_GetRPAttrsA((GRAPHICS_BASE_NAME), (CONST struct RastPort *)(rp), (CONST struct TagItem *)(tags))
+#define __GetRPAttrsA_base(__in_base, rp, tags) __graphics_GetRPAttrsA((__in_base), (CONST struct RastPort *)(rp), (CONST struct TagItem *)(tags))
 
-#define GetRPAttrs(rp, ...) (GetRPAttrs)((CONST struct RastPort *)(rp), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__GetRPAttrs_va(void *__base, CONST struct RastPort * rp, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, rp);
+	__graphics_GetRPAttrsA(__base, (CONST struct RastPort *)(rp), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define GetRPAttrs(rp, ...) __GetRPAttrs_va((GRAPHICS_BASE_NAME), (CONST struct RastPort *)(rp), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__graphics_BestModeIDA(struct GfxBase *__base, CONST struct TagItem * tags)
+__graphics_BestModeIDA(void *__base, CONST struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2728,10 +2976,21 @@ __graphics_BestModeIDA(struct GfxBase *__base, CONST struct TagItem * tags)
 	return (ULONG)_d0;
 }
 #define BestModeIDA(tags) __graphics_BestModeIDA((GRAPHICS_BASE_NAME), (CONST struct TagItem *)(tags))
+#define __BestModeIDA_base(__in_base, tags) __graphics_BestModeIDA((__in_base), (CONST struct TagItem *)(tags))
 
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__BestModeID_va(void *__base, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, __base);
+	ULONG _r = (ULONG)__graphics_BestModeIDA(__base, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define BestModeID(...) __BestModeID_va((GRAPHICS_BASE_NAME), ##__VA_ARGS__)
 
 static __inline__ VOID
-__graphics_WriteChunkyPixels(struct GfxBase *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, CONST UBYTE * array, LONG bytesperrow)
+__graphics_WriteChunkyPixels(void *__base, struct RastPort * rp, UWORD xstart, UWORD ystart, UWORD xstop, UWORD ystop, CONST UBYTE * array, LONG bytesperrow)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _d0 __asm("d0") = (ULONG)(xstart);
@@ -2740,7 +2999,7 @@ __graphics_WriteChunkyPixels(struct GfxBase *__base, struct RastPort * rp, UWORD
 	register ULONG _d3 __asm("d3") = (ULONG)(ystop);
 	register ULONG _a2 __asm("a2") = (ULONG)(array);
 	register ULONG _d4 __asm("d4") = (ULONG)(bytesperrow);
-	register struct GfxBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -1056(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -2749,5 +3008,6 @@ __graphics_WriteChunkyPixels(struct GfxBase *__base, struct RastPort * rp, UWORD
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WriteChunkyPixels(rp, xstart, ystart, xstop, ystop, array, bytesperrow) __graphics_WriteChunkyPixels((GRAPHICS_BASE_NAME), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (CONST UBYTE *)(array), (LONG)(bytesperrow))
+#define __WriteChunkyPixels_base(__in_base, rp, xstart, ystart, xstop, ystop, array, bytesperrow) __graphics_WriteChunkyPixels((__in_base), (struct RastPort *)(rp), (UWORD)(xstart), (UWORD)(ystart), (UWORD)(xstop), (UWORD)(ystop), (CONST UBYTE *)(array), (LONG)(bytesperrow))
 
 #endif /* INLINE_GRAPHICS_H */

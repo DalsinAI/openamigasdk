@@ -10,7 +10,7 @@
 #ifdef __cplusplus
 extern "C" {
 #endif
-extern struct Library *MathIeeeSingTransBase;
+extern struct MathIEEEBase *MathIeeeSingTransBase;
 #ifdef __cplusplus
 }
 #endif

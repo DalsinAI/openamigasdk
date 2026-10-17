@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +25,10 @@ struct Library;
 #endif
 
 static __inline__ VOID
-__layers_InitLayers(struct Library *__base, struct Layer_Info * li)
+__layers_InitLayers(void *__base, struct Layer_Info * li)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -38,9 +39,10 @@ __layers_InitLayers(struct Library *__base, struct Layer_Info * li)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitLayers(li) __layers_InitLayers((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __InitLayers_base(__in_base, li) __layers_InitLayers((__in_base), (struct Layer_Info *)(li))
 
 static __inline__ struct Layer *
-__layers_CreateUpfrontLayer(struct Library *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct BitMap * bm2)
+__layers_CreateUpfrontLayer(void *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct BitMap * bm2)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
 	register ULONG _a1 __asm("a1") = (ULONG)(bm);
@@ -50,7 +52,7 @@ __layers_CreateUpfrontLayer(struct Library *__base, struct Layer_Info * li, stru
 	register ULONG _d3 __asm("d3") = (ULONG)(y1);
 	register ULONG _d4 __asm("d4") = (ULONG)(flags);
 	register ULONG _a2 __asm("a2") = (ULONG)(bm2);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -36(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4)
@@ -58,9 +60,10 @@ __layers_CreateUpfrontLayer(struct Library *__base, struct Layer_Info * li, stru
 	return (struct Layer *)_d0;
 }
 #define CreateUpfrontLayer(li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateUpfrontLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
+#define __CreateUpfrontLayer_base(__in_base, li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateUpfrontLayer((__in_base), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
 
 static __inline__ struct Layer *
-__layers_CreateBehindLayer(struct Library *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct BitMap * bm2)
+__layers_CreateBehindLayer(void *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct BitMap * bm2)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
 	register ULONG _a1 __asm("a1") = (ULONG)(bm);
@@ -70,7 +73,7 @@ __layers_CreateBehindLayer(struct Library *__base, struct Layer_Info * li, struc
 	register ULONG _d3 __asm("d3") = (ULONG)(y1);
 	register ULONG _d4 __asm("d4") = (ULONG)(flags);
 	register ULONG _a2 __asm("a2") = (ULONG)(bm2);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -42(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4)
@@ -78,13 +81,14 @@ __layers_CreateBehindLayer(struct Library *__base, struct Layer_Info * li, struc
 	return (struct Layer *)_d0;
 }
 #define CreateBehindLayer(li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateBehindLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
+#define __CreateBehindLayer_base(__in_base, li, bm, x0, y0, x1, y1, flags, bm2) __layers_CreateBehindLayer((__in_base), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct BitMap *)(bm2))
 
 static __inline__ LONG
-__layers_UpfrontLayer(struct Library *__base, LONG dummy, struct Layer * layer)
+__layers_UpfrontLayer(void *__base, LONG dummy, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dummy);
 	register ULONG _a1 __asm("a1") = (ULONG)(layer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -94,13 +98,14 @@ __layers_UpfrontLayer(struct Library *__base, LONG dummy, struct Layer * layer)
 	return (LONG)_d0;
 }
 #define UpfrontLayer(dummy, layer) __layers_UpfrontLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define __UpfrontLayer_base(__in_base, dummy, layer) __layers_UpfrontLayer((__in_base), (LONG)(dummy), (struct Layer *)(layer))
 
 static __inline__ LONG
-__layers_BehindLayer(struct Library *__base, LONG dummy, struct Layer * layer)
+__layers_BehindLayer(void *__base, LONG dummy, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dummy);
 	register ULONG _a1 __asm("a1") = (ULONG)(layer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -110,15 +115,16 @@ __layers_BehindLayer(struct Library *__base, LONG dummy, struct Layer * layer)
 	return (LONG)_d0;
 }
 #define BehindLayer(dummy, layer) __layers_BehindLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define __BehindLayer_base(__in_base, dummy, layer) __layers_BehindLayer((__in_base), (LONG)(dummy), (struct Layer *)(layer))
 
 static __inline__ LONG
-__layers_MoveLayer(struct Library *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
+__layers_MoveLayer(void *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dummy);
 	register ULONG _a1 __asm("a1") = (ULONG)(layer);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
 	register ULONG _d1 __asm("d1") = (ULONG)(dy);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -60(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -126,15 +132,16 @@ __layers_MoveLayer(struct Library *__base, LONG dummy, struct Layer * layer, LON
 	return (LONG)_d0;
 }
 #define MoveLayer(dummy, layer, dx, dy) __layers_MoveLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define __MoveLayer_base(__in_base, dummy, layer, dx, dy) __layers_MoveLayer((__in_base), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
 
 static __inline__ LONG
-__layers_SizeLayer(struct Library *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
+__layers_SizeLayer(void *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dummy);
 	register ULONG _a1 __asm("a1") = (ULONG)(layer);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
 	register ULONG _d1 __asm("d1") = (ULONG)(dy);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -66(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -142,15 +149,16 @@ __layers_SizeLayer(struct Library *__base, LONG dummy, struct Layer * layer, LON
 	return (LONG)_d0;
 }
 #define SizeLayer(dummy, layer, dx, dy) __layers_SizeLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define __SizeLayer_base(__in_base, dummy, layer, dx, dy) __layers_SizeLayer((__in_base), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
 
 static __inline__ VOID
-__layers_ScrollLayer(struct Library *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
+__layers_ScrollLayer(void *__base, LONG dummy, struct Layer * layer, LONG dx, LONG dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dummy);
 	register ULONG _a1 __asm("a1") = (ULONG)(layer);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
 	register ULONG _d1 __asm("d1") = (ULONG)(dy);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -72(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -158,12 +166,13 @@ __layers_ScrollLayer(struct Library *__base, LONG dummy, struct Layer * layer, L
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScrollLayer(dummy, layer, dx, dy) __layers_ScrollLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
+#define __ScrollLayer_base(__in_base, dummy, layer, dx, dy) __layers_ScrollLayer((__in_base), (LONG)(dummy), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy))
 
 static __inline__ LONG
-__layers_BeginUpdate(struct Library *__base, struct Layer * l)
+__layers_BeginUpdate(void *__base, struct Layer * l)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(l);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -174,13 +183,14 @@ __layers_BeginUpdate(struct Library *__base, struct Layer * l)
 	return (LONG)_d0;
 }
 #define BeginUpdate(l) __layers_BeginUpdate((LAYERS_BASE_NAME), (struct Layer *)(l))
+#define __BeginUpdate_base(__in_base, l) __layers_BeginUpdate((__in_base), (struct Layer *)(l))
 
 static __inline__ VOID
-__layers_EndUpdate(struct Library *__base, struct Layer * layer, UWORD flag)
+__layers_EndUpdate(void *__base, struct Layer * layer, UWORD flag)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
 	register ULONG _d0 __asm("d0") = (ULONG)(flag);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -190,13 +200,14 @@ __layers_EndUpdate(struct Library *__base, struct Layer * layer, UWORD flag)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define EndUpdate(layer, flag) __layers_EndUpdate((LAYERS_BASE_NAME), (struct Layer *)(layer), (UWORD)(flag))
+#define __EndUpdate_base(__in_base, layer, flag) __layers_EndUpdate((__in_base), (struct Layer *)(layer), (UWORD)(flag))
 
 static __inline__ LONG
-__layers_DeleteLayer(struct Library *__base, LONG dummy, struct Layer * layer)
+__layers_DeleteLayer(void *__base, LONG dummy, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dummy);
 	register ULONG _a1 __asm("a1") = (ULONG)(layer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
@@ -206,13 +217,14 @@ __layers_DeleteLayer(struct Library *__base, LONG dummy, struct Layer * layer)
 	return (LONG)_d0;
 }
 #define DeleteLayer(dummy, layer) __layers_DeleteLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define __DeleteLayer_base(__in_base, dummy, layer) __layers_DeleteLayer((__in_base), (LONG)(dummy), (struct Layer *)(layer))
 
 static __inline__ VOID
-__layers_LockLayer(struct Library *__base, LONG dummy, struct Layer * layer)
+__layers_LockLayer(void *__base, LONG dummy, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(dummy);
 	register ULONG _a1 __asm("a1") = (ULONG)(layer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -96(%/a6)"
@@ -222,12 +234,13 @@ __layers_LockLayer(struct Library *__base, LONG dummy, struct Layer * layer)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LockLayer(dummy, layer) __layers_LockLayer((LAYERS_BASE_NAME), (LONG)(dummy), (struct Layer *)(layer))
+#define __LockLayer_base(__in_base, dummy, layer) __layers_LockLayer((__in_base), (LONG)(dummy), (struct Layer *)(layer))
 
 static __inline__ VOID
-__layers_UnlockLayer(struct Library *__base, struct Layer * layer)
+__layers_UnlockLayer(void *__base, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -238,12 +251,13 @@ __layers_UnlockLayer(struct Library *__base, struct Layer * layer)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockLayer(layer) __layers_UnlockLayer((LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define __UnlockLayer_base(__in_base, layer) __layers_UnlockLayer((__in_base), (struct Layer *)(layer))
 
 static __inline__ VOID
-__layers_LockLayers(struct Library *__base, struct Layer_Info * li)
+__layers_LockLayers(void *__base, struct Layer_Info * li)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -254,12 +268,13 @@ __layers_LockLayers(struct Library *__base, struct Layer_Info * li)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LockLayers(li) __layers_LockLayers((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __LockLayers_base(__in_base, li) __layers_LockLayers((__in_base), (struct Layer_Info *)(li))
 
 static __inline__ VOID
-__layers_UnlockLayers(struct Library *__base, struct Layer_Info * li)
+__layers_UnlockLayers(void *__base, struct Layer_Info * li)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -270,12 +285,13 @@ __layers_UnlockLayers(struct Library *__base, struct Layer_Info * li)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockLayers(li) __layers_UnlockLayers((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __UnlockLayers_base(__in_base, li) __layers_UnlockLayers((__in_base), (struct Layer_Info *)(li))
 
 static __inline__ VOID
-__layers_LockLayerInfo(struct Library *__base, struct Layer_Info * li)
+__layers_LockLayerInfo(void *__base, struct Layer_Info * li)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -286,13 +302,14 @@ __layers_LockLayerInfo(struct Library *__base, struct Layer_Info * li)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LockLayerInfo(li) __layers_LockLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __LockLayerInfo_base(__in_base, li) __layers_LockLayerInfo((__in_base), (struct Layer_Info *)(li))
 
 static __inline__ VOID
-__layers_SwapBitsRastPortClipRect(struct Library *__base, struct RastPort * rp, struct ClipRect * cr)
+__layers_SwapBitsRastPortClipRect(void *__base, struct RastPort * rp, struct ClipRect * cr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(cr);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -302,14 +319,15 @@ __layers_SwapBitsRastPortClipRect(struct Library *__base, struct RastPort * rp, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SwapBitsRastPortClipRect(rp, cr) __layers_SwapBitsRastPortClipRect((LAYERS_BASE_NAME), (struct RastPort *)(rp), (struct ClipRect *)(cr))
+#define __SwapBitsRastPortClipRect_base(__in_base, rp, cr) __layers_SwapBitsRastPortClipRect((__in_base), (struct RastPort *)(rp), (struct ClipRect *)(cr))
 
 static __inline__ struct Layer *
-__layers_WhichLayer(struct Library *__base, struct Layer_Info * li, WORD x, WORD y)
+__layers_WhichLayer(void *__base, struct Layer_Info * li, WORD x, WORD y)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
 	register ULONG _d0 __asm("d0") = (ULONG)(x);
 	register ULONG _d1 __asm("d1") = (ULONG)(y);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -318,12 +336,13 @@ __layers_WhichLayer(struct Library *__base, struct Layer_Info * li, WORD x, WORD
 	return (struct Layer *)_d0;
 }
 #define WhichLayer(li, x, y) __layers_WhichLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (WORD)(x), (WORD)(y))
+#define __WhichLayer_base(__in_base, li, x, y) __layers_WhichLayer((__in_base), (struct Layer_Info *)(li), (WORD)(x), (WORD)(y))
 
 static __inline__ VOID
-__layers_UnlockLayerInfo(struct Library *__base, struct Layer_Info * li)
+__layers_UnlockLayerInfo(void *__base, struct Layer_Info * li)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -334,11 +353,12 @@ __layers_UnlockLayerInfo(struct Library *__base, struct Layer_Info * li)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockLayerInfo(li) __layers_UnlockLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __UnlockLayerInfo_base(__in_base, li) __layers_UnlockLayerInfo((__in_base), (struct Layer_Info *)(li))
 
 static __inline__ struct Layer_Info *
-__layers_NewLayerInfo(struct Library *__base)
+__layers_NewLayerInfo(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -350,12 +370,13 @@ __layers_NewLayerInfo(struct Library *__base)
 	return (struct Layer_Info *)_d0;
 }
 #define NewLayerInfo() __layers_NewLayerInfo((LAYERS_BASE_NAME))
+#define __NewLayerInfo_base(__in_base) __layers_NewLayerInfo((__in_base))
 
 static __inline__ VOID
-__layers_DisposeLayerInfo(struct Library *__base, struct Layer_Info * li)
+__layers_DisposeLayerInfo(void *__base, struct Layer_Info * li)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -366,12 +387,13 @@ __layers_DisposeLayerInfo(struct Library *__base, struct Layer_Info * li)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DisposeLayerInfo(li) __layers_DisposeLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __DisposeLayerInfo_base(__in_base, li) __layers_DisposeLayerInfo((__in_base), (struct Layer_Info *)(li))
 
 static __inline__ LONG
-__layers_FattenLayerInfo(struct Library *__base, struct Layer_Info * li)
+__layers_FattenLayerInfo(void *__base, struct Layer_Info * li)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -382,12 +404,13 @@ __layers_FattenLayerInfo(struct Library *__base, struct Layer_Info * li)
 	return (LONG)_d0;
 }
 #define FattenLayerInfo(li) __layers_FattenLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __FattenLayerInfo_base(__in_base, li) __layers_FattenLayerInfo((__in_base), (struct Layer_Info *)(li))
 
 static __inline__ VOID
-__layers_ThinLayerInfo(struct Library *__base, struct Layer_Info * li)
+__layers_ThinLayerInfo(void *__base, struct Layer_Info * li)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -398,13 +421,14 @@ __layers_ThinLayerInfo(struct Library *__base, struct Layer_Info * li)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ThinLayerInfo(li) __layers_ThinLayerInfo((LAYERS_BASE_NAME), (struct Layer_Info *)(li))
+#define __ThinLayerInfo_base(__in_base, li) __layers_ThinLayerInfo((__in_base), (struct Layer_Info *)(li))
 
 static __inline__ LONG
-__layers_MoveLayerInFrontOf(struct Library *__base, struct Layer * layer_to_move, struct Layer * other_layer)
+__layers_MoveLayerInFrontOf(void *__base, struct Layer * layer_to_move, struct Layer * other_layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer_to_move);
 	register ULONG _a1 __asm("a1") = (ULONG)(other_layer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -168(%/a6)"
@@ -414,13 +438,14 @@ __layers_MoveLayerInFrontOf(struct Library *__base, struct Layer * layer_to_move
 	return (LONG)_d0;
 }
 #define MoveLayerInFrontOf(layer_to_move, other_layer) __layers_MoveLayerInFrontOf((LAYERS_BASE_NAME), (struct Layer *)(layer_to_move), (struct Layer *)(other_layer))
+#define __MoveLayerInFrontOf_base(__in_base, layer_to_move, other_layer) __layers_MoveLayerInFrontOf((__in_base), (struct Layer *)(layer_to_move), (struct Layer *)(other_layer))
 
 static __inline__ struct Region *
-__layers_InstallClipRegion(struct Library *__base, struct Layer * layer, CONST struct Region * region)
+__layers_InstallClipRegion(void *__base, struct Layer * layer, CONST struct Region * region)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
 	register ULONG _a1 __asm("a1") = (ULONG)(region);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -174(%/a6)"
@@ -430,16 +455,17 @@ __layers_InstallClipRegion(struct Library *__base, struct Layer * layer, CONST s
 	return (struct Region *)_d0;
 }
 #define InstallClipRegion(layer, region) __layers_InstallClipRegion((LAYERS_BASE_NAME), (struct Layer *)(layer), (CONST struct Region *)(region))
+#define __InstallClipRegion_base(__in_base, layer, region) __layers_InstallClipRegion((__in_base), (struct Layer *)(layer), (CONST struct Region *)(region))
 
 static __inline__ LONG
-__layers_MoveSizeLayer(struct Library *__base, struct Layer * layer, LONG dx, LONG dy, LONG dw, LONG dh)
+__layers_MoveSizeLayer(void *__base, struct Layer * layer, LONG dx, LONG dy, LONG dw, LONG dh)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
 	register ULONG _d1 __asm("d1") = (ULONG)(dy);
 	register ULONG _d2 __asm("d2") = (ULONG)(dw);
 	register ULONG _d3 __asm("d3") = (ULONG)(dh);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -180(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -448,9 +474,10 @@ __layers_MoveSizeLayer(struct Library *__base, struct Layer * layer, LONG dx, LO
 	return (LONG)_d0;
 }
 #define MoveSizeLayer(layer, dx, dy, dw, dh) __layers_MoveSizeLayer((LAYERS_BASE_NAME), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy), (LONG)(dw), (LONG)(dh))
+#define __MoveSizeLayer_base(__in_base, layer, dx, dy, dw, dh) __layers_MoveSizeLayer((__in_base), (struct Layer *)(layer), (LONG)(dx), (LONG)(dy), (LONG)(dw), (LONG)(dh))
 
 static __inline__ struct Layer *
-__layers_CreateUpfrontHookLayer(struct Library *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct Hook * hook, struct BitMap * bm2)
+__layers_CreateUpfrontHookLayer(void *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct Hook * hook, struct BitMap * bm2)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
 	register ULONG _a1 __asm("a1") = (ULONG)(bm);
@@ -461,7 +488,7 @@ __layers_CreateUpfrontHookLayer(struct Library *__base, struct Layer_Info * li, 
 	register ULONG _d4 __asm("d4") = (ULONG)(flags);
 	register ULONG _a3 __asm("a3") = (ULONG)(hook);
 	register ULONG _a2 __asm("a2") = (ULONG)(bm2);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -186(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a3), "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4)
@@ -469,9 +496,10 @@ __layers_CreateUpfrontHookLayer(struct Library *__base, struct Layer_Info * li, 
 	return (struct Layer *)_d0;
 }
 #define CreateUpfrontHookLayer(li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateUpfrontHookLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
+#define __CreateUpfrontHookLayer_base(__in_base, li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateUpfrontHookLayer((__in_base), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
 
 static __inline__ struct Layer *
-__layers_CreateBehindHookLayer(struct Library *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct Hook * hook, struct BitMap * bm2)
+__layers_CreateBehindHookLayer(void *__base, struct Layer_Info * li, struct BitMap * bm, LONG x0, LONG y0, LONG x1, LONG y1, LONG flags, struct Hook * hook, struct BitMap * bm2)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
 	register ULONG _a1 __asm("a1") = (ULONG)(bm);
@@ -482,7 +510,7 @@ __layers_CreateBehindHookLayer(struct Library *__base, struct Layer_Info * li, s
 	register ULONG _d4 __asm("d4") = (ULONG)(flags);
 	register ULONG _a3 __asm("a3") = (ULONG)(hook);
 	register ULONG _a2 __asm("a2") = (ULONG)(bm2);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -192(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a3), "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4)
@@ -490,13 +518,14 @@ __layers_CreateBehindHookLayer(struct Library *__base, struct Layer_Info * li, s
 	return (struct Layer *)_d0;
 }
 #define CreateBehindHookLayer(li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateBehindHookLayer((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
+#define __CreateBehindHookLayer_base(__in_base, li, bm, x0, y0, x1, y1, flags, hook, bm2) __layers_CreateBehindHookLayer((__in_base), (struct Layer_Info *)(li), (struct BitMap *)(bm), (LONG)(x0), (LONG)(y0), (LONG)(x1), (LONG)(y1), (LONG)(flags), (struct Hook *)(hook), (struct BitMap *)(bm2))
 
 static __inline__ struct Hook *
-__layers_InstallLayerHook(struct Library *__base, struct Layer * layer, struct Hook * hook)
+__layers_InstallLayerHook(void *__base, struct Layer * layer, struct Hook * hook)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
 	register ULONG _a1 __asm("a1") = (ULONG)(hook);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -198(%/a6)"
@@ -506,13 +535,14 @@ __layers_InstallLayerHook(struct Library *__base, struct Layer * layer, struct H
 	return (struct Hook *)_d0;
 }
 #define InstallLayerHook(layer, hook) __layers_InstallLayerHook((LAYERS_BASE_NAME), (struct Layer *)(layer), (struct Hook *)(hook))
+#define __InstallLayerHook_base(__in_base, layer, hook) __layers_InstallLayerHook((__in_base), (struct Layer *)(layer), (struct Hook *)(hook))
 
 static __inline__ struct Hook *
-__layers_InstallLayerInfoHook(struct Library *__base, struct Layer_Info * li, CONST struct Hook * hook)
+__layers_InstallLayerInfoHook(void *__base, struct Layer_Info * li, CONST struct Hook * hook)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
 	register ULONG _a1 __asm("a1") = (ULONG)(hook);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -204(%/a6)"
@@ -522,14 +552,15 @@ __layers_InstallLayerInfoHook(struct Library *__base, struct Layer_Info * li, CO
 	return (struct Hook *)_d0;
 }
 #define InstallLayerInfoHook(li, hook) __layers_InstallLayerInfoHook((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (CONST struct Hook *)(hook))
+#define __InstallLayerInfoHook_base(__in_base, li, hook) __layers_InstallLayerInfoHook((__in_base), (struct Layer_Info *)(li), (CONST struct Hook *)(hook))
 
 static __inline__ VOID
-__layers_SortLayerCR(struct Library *__base, struct Layer * layer, WORD dx, WORD dy)
+__layers_SortLayerCR(void *__base, struct Layer * layer, WORD dx, WORD dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
 	register ULONG _d1 __asm("d1") = (ULONG)(dy);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -210(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -538,14 +569,15 @@ __layers_SortLayerCR(struct Library *__base, struct Layer * layer, WORD dx, WORD
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SortLayerCR(layer, dx, dy) __layers_SortLayerCR((LAYERS_BASE_NAME), (struct Layer *)(layer), (WORD)(dx), (WORD)(dy))
+#define __SortLayerCR_base(__in_base, layer, dx, dy) __layers_SortLayerCR((__in_base), (struct Layer *)(layer), (WORD)(dx), (WORD)(dy))
 
 static __inline__ VOID
-__layers_DoHookClipRects(struct Library *__base, struct Hook * hook, struct RastPort * rport, CONST struct Rectangle * rect)
+__layers_DoHookClipRects(void *__base, struct Hook * hook, struct RastPort * rport, CONST struct Rectangle * rect)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(hook);
 	register ULONG _a1 __asm("a1") = (ULONG)(rport);
 	register ULONG _a2 __asm("a2") = (ULONG)(rect);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -216(%/a6)"
@@ -555,12 +587,13 @@ __layers_DoHookClipRects(struct Library *__base, struct Hook * hook, struct Rast
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DoHookClipRects(hook, rport, rect) __layers_DoHookClipRects((LAYERS_BASE_NAME), (struct Hook *)(hook), (struct RastPort *)(rport), (CONST struct Rectangle *)(rect))
+#define __DoHookClipRects_base(__in_base, hook, rport, rect) __layers_DoHookClipRects((__in_base), (struct Hook *)(hook), (struct RastPort *)(rport), (CONST struct Rectangle *)(rect))
 
 static __inline__ BOOL
-__layers_LayerOccluded(struct Library *__base, struct Layer * layer)
+__layers_LayerOccluded(void *__base, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -571,12 +604,13 @@ __layers_LayerOccluded(struct Library *__base, struct Layer * layer)
 	return (BOOL)_d0;
 }
 #define LayerOccluded(layer) __layers_LayerOccluded((LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define __LayerOccluded_base(__in_base, layer) __layers_LayerOccluded((__in_base), (struct Layer *)(layer))
 
 static __inline__ LONG
-__layers_HideLayer(struct Library *__base, struct Layer * layer)
+__layers_HideLayer(void *__base, struct Layer * layer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -587,13 +621,14 @@ __layers_HideLayer(struct Library *__base, struct Layer * layer)
 	return (LONG)_d0;
 }
 #define HideLayer(layer) __layers_HideLayer((LAYERS_BASE_NAME), (struct Layer *)(layer))
+#define __HideLayer_base(__in_base, layer) __layers_HideLayer((__in_base), (struct Layer *)(layer))
 
 static __inline__ LONG
-__layers_ShowLayer(struct Library *__base, struct Layer * layer, struct Layer * in_front_of)
+__layers_ShowLayer(void *__base, struct Layer * layer, struct Layer * in_front_of)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(layer);
 	register ULONG _a1 __asm("a1") = (ULONG)(in_front_of);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -234(%/a6)"
@@ -603,13 +638,14 @@ __layers_ShowLayer(struct Library *__base, struct Layer * layer, struct Layer * 
 	return (LONG)_d0;
 }
 #define ShowLayer(layer, in_front_of) __layers_ShowLayer((LAYERS_BASE_NAME), (struct Layer *)(layer), (struct Layer *)(in_front_of))
+#define __ShowLayer_base(__in_base, layer, in_front_of) __layers_ShowLayer((__in_base), (struct Layer *)(layer), (struct Layer *)(in_front_of))
 
 static __inline__ BOOL
-__layers_SetLayerInfoBounds(struct Library *__base, struct Layer_Info * li, CONST struct Rectangle * bounds)
+__layers_SetLayerInfoBounds(void *__base, struct Layer_Info * li, CONST struct Rectangle * bounds)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(li);
 	register ULONG _a1 __asm("a1") = (ULONG)(bounds);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -240(%/a6)"
@@ -619,5 +655,6 @@ __layers_SetLayerInfoBounds(struct Library *__base, struct Layer_Info * li, CONS
 	return (BOOL)_d0;
 }
 #define SetLayerInfoBounds(li, bounds) __layers_SetLayerInfoBounds((LAYERS_BASE_NAME), (struct Layer_Info *)(li), (CONST struct Rectangle *)(bounds))
+#define __SetLayerInfoBounds_base(__in_base, li, bounds) __layers_SetLayerInfoBounds((__in_base), (struct Layer_Info *)(li), (CONST struct Rectangle *)(bounds))
 
 #endif /* INLINE_LAYERS_H */

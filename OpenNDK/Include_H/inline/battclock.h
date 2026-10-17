@@ -15,6 +15,7 @@
 
 struct Library;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Library;
 #endif
 
 static __inline__ VOID
-__battclock_ResetBattClock(struct Library *__base)
+__battclock_ResetBattClock(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,11 +39,12 @@ __battclock_ResetBattClock(struct Library *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ResetBattClock() __battclock_ResetBattClock((BATTCLOCK_BASE_NAME))
+#define __ResetBattClock_base(__in_base) __battclock_ResetBattClock((__in_base))
 
 static __inline__ ULONG
-__battclock_ReadBattClock(struct Library *__base)
+__battclock_ReadBattClock(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -54,12 +56,13 @@ __battclock_ReadBattClock(struct Library *__base)
 	return (ULONG)_d0;
 }
 #define ReadBattClock() __battclock_ReadBattClock((BATTCLOCK_BASE_NAME))
+#define __ReadBattClock_base(__in_base) __battclock_ReadBattClock((__in_base))
 
 static __inline__ VOID
-__battclock_WriteBattClock(struct Library *__base, ULONG time)
+__battclock_WriteBattClock(void *__base, ULONG time)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(time);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -70,5 +73,6 @@ __battclock_WriteBattClock(struct Library *__base, ULONG time)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WriteBattClock(time) __battclock_WriteBattClock((BATTCLOCK_BASE_NAME), (ULONG)(time))
+#define __WriteBattClock_base(__in_base, time) __battclock_WriteBattClock((__in_base), (ULONG)(time))
 
 #endif /* INLINE_BATTCLOCK_H */

@@ -14,9 +14,14 @@
 #ifndef DOS_DOS_H
 #include <dos/dos.h>
 #endif
+#ifndef DEVICES_TRACKDISK_H
+#include <devices/trackdisk.h>
+#endif
 #ifndef UTILITY_TAGITEM_H
 #include <utility/tagitem.h>
 #endif
+
+#define TRACKFILENAME	"trackfile.device"
 
 /* A unit's checksum, 64 bits */
 struct TrackFileChecksum
@@ -53,24 +58,24 @@ struct TrackFileUnitData
 /* More names from the 3.2 interface */
 #define TF_Dummy		0xA0200400UL
 #define TFEFS_Unsupported	(-1)
-#define TFERROR_Aborted		0xFFFCEABFUL
-#define TFERROR_AlreadyInUse	0xFFFCEAC4UL
-#define TFERROR_Denied		0xFFFCEAB7UL
-#define TFERROR_DuplicateDisk	0xFFFCEAB9UL
-#define TFERROR_DuplicateVolume	0xFFFCEAB8UL
-#define TFERROR_InvalidDriveType	0xFFFCEABEUL
-#define TFERROR_InvalidFile	0xFFFCEAC2UL
-#define TFERROR_InvalidFileSize	0xFFFCEAC1UL
-#define TFERROR_NoFileGiven	0xFFFCEAC0UL
-#define TFERROR_NoMediumPresent	0xFFFCEABCUL
-#define TFERROR_NotSupported	0xFFFCEAB6UL
-#define TFERROR_OutOfMemory	0xFFFCEAC6UL
-#define TFERROR_ProcessFailed	0xFFFCEABDUL
-#define TFERROR_ReadOnlyFile	0xFFFCEABAUL
-#define TFERROR_ReadOnlyVolume	0xFFFCEABBUL
-#define TFERROR_UnitBusy	0xFFFCEAC7UL
-#define TFERROR_UnitNotActive	0xFFFCEAC3UL
-#define TFERROR_UnitNotFound	0xFFFCEAC5UL
+#define TFERROR_Aborted		(-202049)
+#define TFERROR_AlreadyInUse	(-202044)
+#define TFERROR_Denied		(-202057)
+#define TFERROR_DuplicateDisk	(-202055)
+#define TFERROR_DuplicateVolume	(-202056)
+#define TFERROR_InvalidDriveType	(-202050)
+#define TFERROR_InvalidFile	(-202046)
+#define TFERROR_InvalidFileSize	(-202047)
+#define TFERROR_NoFileGiven	(-202048)
+#define TFERROR_NoMediumPresent	(-202052)
+#define TFERROR_NotSupported	(-202058)
+#define TFERROR_OutOfMemory	(-202042)
+#define TFERROR_ProcessFailed	(-202051)
+#define TFERROR_ReadOnlyFile	(-202054)
+#define TFERROR_ReadOnlyVolume	(-202053)
+#define TFERROR_UnitBusy	(-202041)
+#define TFERROR_UnitNotActive	(-202045)
+#define TFERROR_UnitNotFound	(-202043)
 #define TFGUD_AllUnits		(-1)
 #define TFSU_NextAvailableUnit	(-1)
 #define TFUNIT_CONTROL		(-1)

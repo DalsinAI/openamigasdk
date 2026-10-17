@@ -9,7 +9,7 @@ on them. OpenNDK's own inline headers (tools/ndkgen.py) do not use them.
 
 offs is the call's offset as a positive number (0x1e for -30), rN a
 register name without quotes (d0, a1, ...), bt and bn the base's type and
-value. Up to 12 arguments; a4, a5 and a6 are not accepted as argument
+value (bt is accepted and not used: the base goes in a6 as it is). Up to 12 arguments; a4, a5 and a6 are not accepted as argument
 registers here.
 """
 import os
@@ -25,7 +25,8 @@ def macro(n, nr):
     lines = []
     for i in range(1, n + 1):
         lines.append("\tt%d __ndk_v%d = (v%d);" % (i, i, i))
-    lines.append("\tregister bt __ndk_bn __asm(\"a6\") = (bn);")
+    # bt is not used, as in the vendor's macros: any pointer will do as the base
+    lines.append("\tregister void *const __ndk_bn __asm(\"a6\") = (void *)(bn);")
     for i in range(1, n + 1):
         lines.append("\tregister t%d __ndk_r%d __asm(#r%d) = __ndk_v%d;" % (i, i, i, i))
     lines += ["\tregister ULONG __ndk_d0 __asm(\"d0\");",

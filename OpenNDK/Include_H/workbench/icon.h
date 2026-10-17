@@ -18,6 +18,15 @@
 #ifndef WORKBENCH_WORKBENCH_H
 #include <workbench/workbench.h>
 #endif
+#ifndef GRAPHICS_VIEW_H
+#include <graphics/view.h>
+#endif
+#ifndef INTUITION_IMAGECLASS_H
+#include <intuition/imageclass.h>
+#endif
+#ifndef DATATYPES_PICTURECLASS_H
+#include <datatypes/pictureclass.h>
+#endif
 
 #define ICONNAME	"icon.library"
 

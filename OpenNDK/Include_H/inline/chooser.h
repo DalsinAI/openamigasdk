@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +32,9 @@ struct Library;
 #endif
 
 static __inline__ Class *
-__chooser_CHOOSER_GetClass(struct Library *__base)
+__chooser_CHOOSER_GetClass(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,12 +46,13 @@ __chooser_CHOOSER_GetClass(struct Library *__base)
 	return (Class *)_d0;
 }
 #define CHOOSER_GetClass() __chooser_CHOOSER_GetClass((CHOOSER_BASE_NAME))
+#define __CHOOSER_GetClass_base(__in_base) __chooser_CHOOSER_GetClass((__in_base))
 
 static __inline__ struct Node *
-__chooser_AllocChooserNodeA(struct Library *__base, struct TagItem * tags)
+__chooser_AllocChooserNodeA(void *__base, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,13 +63,24 @@ __chooser_AllocChooserNodeA(struct Library *__base, struct TagItem * tags)
 	return (struct Node *)_d0;
 }
 #define AllocChooserNodeA(tags) __chooser_AllocChooserNodeA((CHOOSER_BASE_NAME), (struct TagItem *)(tags))
+#define __AllocChooserNodeA_base(__in_base, tags) __chooser_AllocChooserNodeA((__in_base), (struct TagItem *)(tags))
 
+static __inline__ __OPENNDK_VA_ATTR struct Node *
+__AllocChooserNode_va(void *__base, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, __base);
+	struct Node * _r = (struct Node *)__chooser_AllocChooserNodeA(__base, (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocChooserNode(...) __AllocChooserNode_va((CHOOSER_BASE_NAME), ##__VA_ARGS__)
 
 static __inline__ VOID
-__chooser_FreeChooserNode(struct Library *__base, struct Node * node)
+__chooser_FreeChooserNode(void *__base, struct Node * node)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -71,13 +91,14 @@ __chooser_FreeChooserNode(struct Library *__base, struct Node * node)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeChooserNode(node) __chooser_FreeChooserNode((CHOOSER_BASE_NAME), (struct Node *)(node))
+#define __FreeChooserNode_base(__in_base, node) __chooser_FreeChooserNode((__in_base), (struct Node *)(node))
 
 static __inline__ VOID
-__chooser_SetChooserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
+__chooser_SetChooserNodeAttrsA(void *__base, struct Node * node, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -87,15 +108,24 @@ __chooser_SetChooserNodeAttrsA(struct Library *__base, struct Node * node, struc
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetChooserNodeAttrsA(node, tags) __chooser_SetChooserNodeAttrsA((CHOOSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __SetChooserNodeAttrsA_base(__in_base, node, tags) __chooser_SetChooserNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-#define SetChooserNodeAttrs(node, ...) (SetChooserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__SetChooserNodeAttrs_va(void *__base, struct Node * node, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, node);
+	__chooser_SetChooserNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define SetChooserNodeAttrs(node, ...) __SetChooserNodeAttrs_va((CHOOSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ VOID
-__chooser_GetChooserNodeAttrsA(struct Library *__base, struct Node * node, struct TagItem * tags)
+__chooser_GetChooserNodeAttrsA(void *__base, struct Node * node, struct TagItem * tags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(node);
 	register ULONG _a1 __asm("a1") = (ULONG)(tags);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -105,17 +135,26 @@ __chooser_GetChooserNodeAttrsA(struct Library *__base, struct Node * node, struc
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GetChooserNodeAttrsA(node, tags) __chooser_GetChooserNodeAttrsA((CHOOSER_BASE_NAME), (struct Node *)(node), (struct TagItem *)(tags))
+#define __GetChooserNodeAttrsA_base(__in_base, node, tags) __chooser_GetChooserNodeAttrsA((__in_base), (struct Node *)(node), (struct TagItem *)(tags))
 
-#define GetChooserNodeAttrs(node, ...) (GetChooserNodeAttrs)((struct Node *)(node), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__GetChooserNodeAttrs_va(void *__base, struct Node * node, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, node);
+	__chooser_GetChooserNodeAttrsA(__base, (struct Node *)(node), (struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define GetChooserNodeAttrs(node, ...) __GetChooserNodeAttrs_va((CHOOSER_BASE_NAME), (struct Node *)(node), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__chooser_ShowChooser(struct Library *__base, Object * o, struct Window * w, ULONG xpos, ULONG ypos)
+__chooser_ShowChooser(void *__base, Object * o, struct Window * w, ULONG xpos, ULONG ypos)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(w);
 	register ULONG _d0 __asm("d0") = (ULONG)(xpos);
 	register ULONG _d1 __asm("d1") = (ULONG)(ypos);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -60(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -123,13 +162,14 @@ __chooser_ShowChooser(struct Library *__base, Object * o, struct Window * w, ULO
 	return (ULONG)_d0;
 }
 #define ShowChooser(o, w, xpos, ypos) __chooser_ShowChooser((CHOOSER_BASE_NAME), (Object *)(o), (struct Window *)(w), (ULONG)(xpos), (ULONG)(ypos))
+#define __ShowChooser_base(__in_base, o, w, xpos, ypos) __chooser_ShowChooser((__in_base), (Object *)(o), (struct Window *)(w), (ULONG)(xpos), (ULONG)(ypos))
 
 static __inline__ VOID
-__chooser_HideChooser(struct Library *__base, Object * o, struct Window * w)
+__chooser_HideChooser(void *__base, Object * o, struct Window * w)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(o);
 	register ULONG _a1 __asm("a1") = (ULONG)(w);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
@@ -139,5 +179,6 @@ __chooser_HideChooser(struct Library *__base, Object * o, struct Window * w)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define HideChooser(o, w) __chooser_HideChooser((CHOOSER_BASE_NAME), (Object *)(o), (struct Window *)(w))
+#define __HideChooser_base(__in_base, o, w) __chooser_HideChooser((__in_base), (Object *)(o), (struct Window *)(w))
 
 #endif /* INLINE_CHOOSER_H */

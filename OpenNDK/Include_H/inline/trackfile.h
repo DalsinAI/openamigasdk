@@ -15,6 +15,14 @@
 
 struct Device;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,11 +32,11 @@ struct Device;
 #endif
 
 static __inline__ LONG
-__trackfile_TFStartUnitTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
+__trackfile_TFStartUnitTagList(void *__base, LONG unitNumber, CONST struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
@@ -38,15 +46,25 @@ __trackfile_TFStartUnitTagList(struct Device *__base, LONG unitNumber, CONST str
 	return (LONG)_d0;
 }
 #define TFStartUnitTagList(unitNumber, tags) __trackfile_TFStartUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFStartUnitTagList_base(__in_base, unitNumber, tags) __trackfile_TFStartUnitTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-#define TFStartUnitTags(unitNumber, ...) (TFStartUnitTags)((LONG)(unitNumber), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__TFStartUnitTags_va(void *__base, LONG unitNumber, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, unitNumber);
+	LONG _r = (LONG)__trackfile_TFStartUnitTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define TFStartUnitTags(unitNumber, ...) __TFStartUnitTags_va((TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 
 static __inline__ LONG
-__trackfile_TFStopUnitTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
+__trackfile_TFStopUnitTagList(void *__base, LONG unitNumber, CONST struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -56,15 +74,25 @@ __trackfile_TFStopUnitTagList(struct Device *__base, LONG unitNumber, CONST stru
 	return (LONG)_d0;
 }
 #define TFStopUnitTagList(unitNumber, tags) __trackfile_TFStopUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFStopUnitTagList_base(__in_base, unitNumber, tags) __trackfile_TFStopUnitTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-#define TFStopUnitTags(unitNumber, ...) (TFStopUnitTags)((LONG)(unitNumber), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__TFStopUnitTags_va(void *__base, LONG unitNumber, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, unitNumber);
+	LONG _r = (LONG)__trackfile_TFStopUnitTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define TFStopUnitTags(unitNumber, ...) __TFStopUnitTags_va((TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 
 static __inline__ LONG
-__trackfile_TFInsertMediaTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
+__trackfile_TFInsertMediaTagList(void *__base, LONG unitNumber, CONST struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -74,15 +102,25 @@ __trackfile_TFInsertMediaTagList(struct Device *__base, LONG unitNumber, CONST s
 	return (LONG)_d0;
 }
 #define TFInsertMediaTagList(unitNumber, tags) __trackfile_TFInsertMediaTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFInsertMediaTagList_base(__in_base, unitNumber, tags) __trackfile_TFInsertMediaTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-#define TFInsertMediaTags(unitNumber, ...) (TFInsertMediaTags)((LONG)(unitNumber), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__TFInsertMediaTags_va(void *__base, LONG unitNumber, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, unitNumber);
+	LONG _r = (LONG)__trackfile_TFInsertMediaTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define TFInsertMediaTags(unitNumber, ...) __TFInsertMediaTags_va((TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 
 static __inline__ LONG
-__trackfile_TFEjectMediaTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
+__trackfile_TFEjectMediaTagList(void *__base, LONG unitNumber, CONST struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -92,14 +130,24 @@ __trackfile_TFEjectMediaTagList(struct Device *__base, LONG unitNumber, CONST st
 	return (LONG)_d0;
 }
 #define TFEjectMediaTagList(unitNumber, tags) __trackfile_TFEjectMediaTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFEjectMediaTagList_base(__in_base, unitNumber, tags) __trackfile_TFEjectMediaTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-#define TFEjectMediaTags(unitNumber, ...) (TFEjectMediaTags)((LONG)(unitNumber), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__TFEjectMediaTags_va(void *__base, LONG unitNumber, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, unitNumber);
+	LONG _r = (LONG)__trackfile_TFEjectMediaTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define TFEjectMediaTags(unitNumber, ...) __TFEjectMediaTags_va((TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 
 static __inline__ struct TrackFileUnitData *
-__trackfile_TFGetUnitData(struct Device *__base, LONG unitNumber)
+__trackfile_TFGetUnitData(void *__base, LONG unitNumber)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNumber);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -110,12 +158,13 @@ __trackfile_TFGetUnitData(struct Device *__base, LONG unitNumber)
 	return (struct TrackFileUnitData *)_d0;
 }
 #define TFGetUnitData(unitNumber) __trackfile_TFGetUnitData((TRACKFILE_BASE_NAME), (LONG)(unitNumber))
+#define __TFGetUnitData_base(__in_base, unitNumber) __trackfile_TFGetUnitData((__in_base), (LONG)(unitNumber))
 
 static __inline__ VOID
-__trackfile_TFFreeUnitData(struct Device *__base, struct TrackFileUnitData * data)
+__trackfile_TFFreeUnitData(void *__base, struct TrackFileUnitData * data)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(data);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -126,13 +175,14 @@ __trackfile_TFFreeUnitData(struct Device *__base, struct TrackFileUnitData * dat
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define TFFreeUnitData(data) __trackfile_TFFreeUnitData((TRACKFILE_BASE_NAME), (struct TrackFileUnitData *)(data))
+#define __TFFreeUnitData_base(__in_base, data) __trackfile_TFFreeUnitData((__in_base), (struct TrackFileUnitData *)(data))
 
 static __inline__ LONG
-__trackfile_TFChangeUnitTagList(struct Device *__base, LONG unitNumber, CONST struct TagItem * tags)
+__trackfile_TFChangeUnitTagList(void *__base, LONG unitNumber, CONST struct TagItem * tags)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(tags);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -78(%/a6)"
@@ -142,14 +192,24 @@ __trackfile_TFChangeUnitTagList(struct Device *__base, LONG unitNumber, CONST st
 	return (LONG)_d0;
 }
 #define TFChangeUnitTagList(unitNumber, tags) __trackfile_TFChangeUnitTagList((TRACKFILE_BASE_NAME), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
+#define __TFChangeUnitTagList_base(__in_base, unitNumber, tags) __trackfile_TFChangeUnitTagList((__in_base), (LONG)(unitNumber), (CONST struct TagItem *)(tags))
 
-#define TFChangeUnitTags(unitNumber, ...) (TFChangeUnitTags)((LONG)(unitNumber), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__TFChangeUnitTags_va(void *__base, LONG unitNumber, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, unitNumber);
+	LONG _r = (LONG)__trackfile_TFChangeUnitTagList(__base, (LONG)(unitNumber), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define TFChangeUnitTags(unitNumber, ...) __TFChangeUnitTags_va((TRACKFILE_BASE_NAME), (LONG)(unitNumber), ##__VA_ARGS__)
 
 static __inline__ LONG
-__trackfile_TFExamineFileSize(struct Device *__base, LONG unitNumber)
+__trackfile_TFExamineFileSize(void *__base, LONG unitNumber)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(unitNumber);
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -160,5 +220,6 @@ __trackfile_TFExamineFileSize(struct Device *__base, LONG unitNumber)
 	return (LONG)_d0;
 }
 #define TFExamineFileSize(unitNumber) __trackfile_TFExamineFileSize((TRACKFILE_BASE_NAME), (LONG)(unitNumber))
+#define __TFExamineFileSize_base(__in_base, unitNumber) __trackfile_TFExamineFileSize((__in_base), (LONG)(unitNumber))
 
 #endif /* INLINE_TRACKFILE_H */

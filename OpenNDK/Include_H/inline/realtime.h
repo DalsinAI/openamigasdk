@@ -15,6 +15,14 @@
 
 struct RealTimeBase;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,10 +32,10 @@ struct RealTimeBase;
 #endif
 
 static __inline__ APTR
-__realtime_LockRealTime(struct RealTimeBase *__base, ULONG lockType)
+__realtime_LockRealTime(void *__base, ULONG lockType)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(lockType);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -38,12 +46,13 @@ __realtime_LockRealTime(struct RealTimeBase *__base, ULONG lockType)
 	return (APTR)_d0;
 }
 #define LockRealTime(lockType) __realtime_LockRealTime((REALTIME_BASE_NAME), (ULONG)(lockType))
+#define __LockRealTime_base(__in_base, lockType) __realtime_LockRealTime((__in_base), (ULONG)(lockType))
 
 static __inline__ VOID
-__realtime_UnlockRealTime(struct RealTimeBase *__base, APTR lock)
+__realtime_UnlockRealTime(void *__base, APTR lock)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(lock);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,12 +63,13 @@ __realtime_UnlockRealTime(struct RealTimeBase *__base, APTR lock)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockRealTime(lock) __realtime_UnlockRealTime((REALTIME_BASE_NAME), (APTR)(lock))
+#define __UnlockRealTime_base(__in_base, lock) __realtime_UnlockRealTime((__in_base), (APTR)(lock))
 
 static __inline__ struct Player *
-__realtime_CreatePlayerA(struct RealTimeBase *__base, CONST struct TagItem * tagList)
+__realtime_CreatePlayerA(void *__base, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -70,13 +80,24 @@ __realtime_CreatePlayerA(struct RealTimeBase *__base, CONST struct TagItem * tag
 	return (struct Player *)_d0;
 }
 #define CreatePlayerA(tagList) __realtime_CreatePlayerA((REALTIME_BASE_NAME), (CONST struct TagItem *)(tagList))
+#define __CreatePlayerA_base(__in_base, tagList) __realtime_CreatePlayerA((__in_base), (CONST struct TagItem *)(tagList))
 
+static __inline__ __OPENNDK_VA_ATTR struct Player *
+__CreatePlayer_va(void *__base, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, __base);
+	struct Player * _r = (struct Player *)__realtime_CreatePlayerA(__base, (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define CreatePlayer(...) __CreatePlayer_va((REALTIME_BASE_NAME), ##__VA_ARGS__)
 
 static __inline__ VOID
-__realtime_DeletePlayer(struct RealTimeBase *__base, struct Player * player)
+__realtime_DeletePlayer(void *__base, struct Player * player)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(player);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -87,13 +108,14 @@ __realtime_DeletePlayer(struct RealTimeBase *__base, struct Player * player)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DeletePlayer(player) __realtime_DeletePlayer((REALTIME_BASE_NAME), (struct Player *)(player))
+#define __DeletePlayer_base(__in_base, player) __realtime_DeletePlayer((__in_base), (struct Player *)(player))
 
 static __inline__ BOOL
-__realtime_SetPlayerAttrsA(struct RealTimeBase *__base, struct Player * player, CONST struct TagItem * tagList)
+__realtime_SetPlayerAttrsA(void *__base, struct Player * player, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(player);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -54(%/a6)"
@@ -103,16 +125,26 @@ __realtime_SetPlayerAttrsA(struct RealTimeBase *__base, struct Player * player, 
 	return (BOOL)_d0;
 }
 #define SetPlayerAttrsA(player, tagList) __realtime_SetPlayerAttrsA((REALTIME_BASE_NAME), (struct Player *)(player), (CONST struct TagItem *)(tagList))
+#define __SetPlayerAttrsA_base(__in_base, player, tagList) __realtime_SetPlayerAttrsA((__in_base), (struct Player *)(player), (CONST struct TagItem *)(tagList))
 
-#define SetPlayerAttrs(player, ...) (SetPlayerAttrs)((struct Player *)(player), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__SetPlayerAttrs_va(void *__base, struct Player * player, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, player);
+	BOOL _r = (BOOL)__realtime_SetPlayerAttrsA(__base, (struct Player *)(player), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetPlayerAttrs(player, ...) __SetPlayerAttrs_va((REALTIME_BASE_NAME), (struct Player *)(player), ##__VA_ARGS__)
 
 static __inline__ LONG
-__realtime_SetConductorState(struct RealTimeBase *__base, struct Player * player, ULONG state, LONG time)
+__realtime_SetConductorState(void *__base, struct Player * player, ULONG state, LONG time)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(player);
 	register ULONG _d0 __asm("d0") = (ULONG)(state);
 	register ULONG _d1 __asm("d1") = (ULONG)(time);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -121,14 +153,15 @@ __realtime_SetConductorState(struct RealTimeBase *__base, struct Player * player
 	return (LONG)_d0;
 }
 #define SetConductorState(player, state, time) __realtime_SetConductorState((REALTIME_BASE_NAME), (struct Player *)(player), (ULONG)(state), (LONG)(time))
+#define __SetConductorState_base(__in_base, player, state, time) __realtime_SetConductorState((__in_base), (struct Player *)(player), (ULONG)(state), (LONG)(time))
 
 static __inline__ BOOL
-__realtime_ExternalSync(struct RealTimeBase *__base, struct Player * player, LONG minTime, LONG maxTime)
+__realtime_ExternalSync(void *__base, struct Player * player, LONG minTime, LONG maxTime)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(player);
 	register ULONG _d0 __asm("d0") = (ULONG)(minTime);
 	register ULONG _d1 __asm("d1") = (ULONG)(maxTime);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -66(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -137,12 +170,13 @@ __realtime_ExternalSync(struct RealTimeBase *__base, struct Player * player, LON
 	return (BOOL)_d0;
 }
 #define ExternalSync(player, minTime, maxTime) __realtime_ExternalSync((REALTIME_BASE_NAME), (struct Player *)(player), (LONG)(minTime), (LONG)(maxTime))
+#define __ExternalSync_base(__in_base, player, minTime, maxTime) __realtime_ExternalSync((__in_base), (struct Player *)(player), (LONG)(minTime), (LONG)(maxTime))
 
 static __inline__ struct Conductor *
-__realtime_NextConductor(struct RealTimeBase *__base, CONST struct Conductor * previousConductor)
+__realtime_NextConductor(void *__base, CONST struct Conductor * previousConductor)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(previousConductor);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -153,12 +187,13 @@ __realtime_NextConductor(struct RealTimeBase *__base, CONST struct Conductor * p
 	return (struct Conductor *)_d0;
 }
 #define NextConductor(previousConductor) __realtime_NextConductor((REALTIME_BASE_NAME), (CONST struct Conductor *)(previousConductor))
+#define __NextConductor_base(__in_base, previousConductor) __realtime_NextConductor((__in_base), (CONST struct Conductor *)(previousConductor))
 
 static __inline__ struct Conductor *
-__realtime_FindConductor(struct RealTimeBase *__base, CONST_STRPTR name)
+__realtime_FindConductor(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -169,13 +204,14 @@ __realtime_FindConductor(struct RealTimeBase *__base, CONST_STRPTR name)
 	return (struct Conductor *)_d0;
 }
 #define FindConductor(name) __realtime_FindConductor((REALTIME_BASE_NAME), (CONST_STRPTR)(name))
+#define __FindConductor_base(__in_base, name) __realtime_FindConductor((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ ULONG
-__realtime_GetPlayerAttrsA(struct RealTimeBase *__base, CONST struct Player * player, CONST struct TagItem * tagList)
+__realtime_GetPlayerAttrsA(void *__base, CONST struct Player * player, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(player);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct RealTimeBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -185,7 +221,17 @@ __realtime_GetPlayerAttrsA(struct RealTimeBase *__base, CONST struct Player * pl
 	return (ULONG)_d0;
 }
 #define GetPlayerAttrsA(player, tagList) __realtime_GetPlayerAttrsA((REALTIME_BASE_NAME), (CONST struct Player *)(player), (CONST struct TagItem *)(tagList))
+#define __GetPlayerAttrsA_base(__in_base, player, tagList) __realtime_GetPlayerAttrsA((__in_base), (CONST struct Player *)(player), (CONST struct TagItem *)(tagList))
 
-#define GetPlayerAttrs(player, ...) (GetPlayerAttrs)((CONST struct Player *)(player), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__GetPlayerAttrs_va(void *__base, CONST struct Player * player, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, player);
+	ULONG _r = (ULONG)__realtime_GetPlayerAttrsA(__base, (CONST struct Player *)(player), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define GetPlayerAttrs(player, ...) __GetPlayerAttrs_va((REALTIME_BASE_NAME), (CONST struct Player *)(player), ##__VA_ARGS__)
 
 #endif /* INLINE_REALTIME_H */

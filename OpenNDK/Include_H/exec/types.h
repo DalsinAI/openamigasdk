@@ -35,8 +35,15 @@
 /* Pointers */
 typedef void		*APTR;		/* any pointer */
 typedef const void	*CONST_APTR;	/* any pointer to data not written */
+/* Strings: plain char in C++, as the 3.2 interface has them there, so a
+ * string literal is a CONST_STRPTR without a cast; unsigned char in C */
+#ifdef __cplusplus
+typedef char		*STRPTR;	/* a NUL-terminated string */
+typedef const char	*CONST_STRPTR;
+#else
 typedef unsigned char	*STRPTR;	/* a NUL-terminated string */
 typedef const unsigned char *CONST_STRPTR;
+#endif
 
 /* 32 bits */
 typedef int		LONG;
@@ -77,7 +84,11 @@ typedef short		BOOL;
 #endif
 
 /* Text */
+#ifdef __cplusplus
+typedef char		TEXT;
+#else
 typedef unsigned char	TEXT;
+#endif
 
 #ifndef NULL
 #ifdef __cplusplus
@@ -88,5 +99,8 @@ typedef unsigned char	TEXT;
 #endif
 
 #define BYTEMASK	0xFF
+
+/* __STDARGS__, __SAVE_DS__, __REG__ and the other compiler words */
+#include <clib/compiler-specific.h>
 
 #endif /* EXEC_TYPES_H */

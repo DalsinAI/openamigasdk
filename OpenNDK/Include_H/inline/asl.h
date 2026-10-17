@@ -15,6 +15,14 @@
 
 struct Library;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +32,9 @@ struct Library;
 #endif
 
 static __inline__ struct FileRequester *
-__asl_AllocFileRequest(struct Library *__base)
+__asl_AllocFileRequest(void *__base)
 {
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,12 +46,13 @@ __asl_AllocFileRequest(struct Library *__base)
 	return (struct FileRequester *)_d0;
 }
 #define AllocFileRequest() __asl_AllocFileRequest((ASL_BASE_NAME))
+#define __AllocFileRequest_base(__in_base) __asl_AllocFileRequest((__in_base))
 
 static __inline__ VOID
-__asl_FreeFileRequest(struct Library *__base, struct FileRequester * fileReq)
+__asl_FreeFileRequest(void *__base, struct FileRequester * fileReq)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(fileReq);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,12 +63,13 @@ __asl_FreeFileRequest(struct Library *__base, struct FileRequester * fileReq)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeFileRequest(fileReq) __asl_FreeFileRequest((ASL_BASE_NAME), (struct FileRequester *)(fileReq))
+#define __FreeFileRequest_base(__in_base, fileReq) __asl_FreeFileRequest((__in_base), (struct FileRequester *)(fileReq))
 
 static __inline__ BOOL
-__asl_RequestFile(struct Library *__base, struct FileRequester * fileReq)
+__asl_RequestFile(void *__base, struct FileRequester * fileReq)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(fileReq);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -70,13 +80,14 @@ __asl_RequestFile(struct Library *__base, struct FileRequester * fileReq)
 	return (BOOL)_d0;
 }
 #define RequestFile(fileReq) __asl_RequestFile((ASL_BASE_NAME), (struct FileRequester *)(fileReq))
+#define __RequestFile_base(__in_base, fileReq) __asl_RequestFile((__in_base), (struct FileRequester *)(fileReq))
 
 static __inline__ APTR
-__asl_AllocAslRequest(struct Library *__base, ULONG reqType, CONST struct TagItem * tagList)
+__asl_AllocAslRequest(void *__base, ULONG reqType, CONST struct TagItem * tagList)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(reqType);
 	register ULONG _a0 __asm("a0") = (ULONG)(tagList);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -48(%/a6)"
@@ -86,14 +97,24 @@ __asl_AllocAslRequest(struct Library *__base, ULONG reqType, CONST struct TagIte
 	return (APTR)_d0;
 }
 #define AllocAslRequest(reqType, tagList) __asl_AllocAslRequest((ASL_BASE_NAME), (ULONG)(reqType), (CONST struct TagItem *)(tagList))
+#define __AllocAslRequest_base(__in_base, reqType, tagList) __asl_AllocAslRequest((__in_base), (ULONG)(reqType), (CONST struct TagItem *)(tagList))
 
-#define AllocAslRequestTags(reqType, ...) (AllocAslRequestTags)((ULONG)(reqType), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR APTR
+__AllocAslRequestTags_va(void *__base, ULONG reqType, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, reqType);
+	APTR _r = (APTR)__asl_AllocAslRequest(__base, (ULONG)(reqType), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AllocAslRequestTags(reqType, ...) __AllocAslRequestTags_va((ASL_BASE_NAME), (ULONG)(reqType), ##__VA_ARGS__)
 
 static __inline__ VOID
-__asl_FreeAslRequest(struct Library *__base, APTR requester)
+__asl_FreeAslRequest(void *__base, APTR requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(requester);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -104,13 +125,14 @@ __asl_FreeAslRequest(struct Library *__base, APTR requester)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeAslRequest(requester) __asl_FreeAslRequest((ASL_BASE_NAME), (APTR)(requester))
+#define __FreeAslRequest_base(__in_base, requester) __asl_FreeAslRequest((__in_base), (APTR)(requester))
 
 static __inline__ BOOL
-__asl_AslRequest(struct Library *__base, APTR requester, CONST struct TagItem * tagList)
+__asl_AslRequest(void *__base, APTR requester, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(requester);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -60(%/a6)"
@@ -120,14 +142,24 @@ __asl_AslRequest(struct Library *__base, APTR requester, CONST struct TagItem * 
 	return (BOOL)_d0;
 }
 #define AslRequest(requester, tagList) __asl_AslRequest((ASL_BASE_NAME), (APTR)(requester), (CONST struct TagItem *)(tagList))
+#define __AslRequest_base(__in_base, requester, tagList) __asl_AslRequest((__in_base), (APTR)(requester), (CONST struct TagItem *)(tagList))
 
-#define AslRequestTags(requester, ...) (AslRequestTags)((APTR)(requester), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR BOOL
+__AslRequestTags_va(void *__base, APTR requester, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, requester);
+	BOOL _r = (BOOL)__asl_AslRequest(__base, (APTR)(requester), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define AslRequestTags(requester, ...) __AslRequestTags_va((ASL_BASE_NAME), (APTR)(requester), ##__VA_ARGS__)
 
 static __inline__ VOID
-__asl_AbortAslRequest(struct Library *__base, APTR requester)
+__asl_AbortAslRequest(void *__base, APTR requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(requester);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -138,12 +170,13 @@ __asl_AbortAslRequest(struct Library *__base, APTR requester)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AbortAslRequest(requester) __asl_AbortAslRequest((ASL_BASE_NAME), (APTR)(requester))
+#define __AbortAslRequest_base(__in_base, requester) __asl_AbortAslRequest((__in_base), (APTR)(requester))
 
 static __inline__ VOID
-__asl_ActivateAslRequest(struct Library *__base, APTR requester)
+__asl_ActivateAslRequest(void *__base, APTR requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(requester);
-	register struct Library *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -154,5 +187,6 @@ __asl_ActivateAslRequest(struct Library *__base, APTR requester)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ActivateAslRequest(requester) __asl_ActivateAslRequest((ASL_BASE_NAME), (APTR)(requester))
+#define __ActivateAslRequest_base(__in_base, requester) __asl_ActivateAslRequest((__in_base), (APTR)(requester))
 
 #endif /* INLINE_ASL_H */

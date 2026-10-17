@@ -15,6 +15,14 @@
 
 struct IntuitionBase;
 
+#ifndef __OPENNDK_VA_ATTR
+#if defined(__GNUC__) && __GNUC__ >= 8
+#define __OPENNDK_VA_ATTR __attribute__((noipa, noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#else
+#define __OPENNDK_VA_ATTR __attribute__((noinline, optimize("omit-frame-pointer"), optimize("O1")))
+#endif
+#endif
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +32,9 @@ struct IntuitionBase;
 #endif
 
 static __inline__ VOID
-__intuition_OpenIntuition(struct IntuitionBase *__base)
+__intuition_OpenIntuition(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,12 +46,13 @@ __intuition_OpenIntuition(struct IntuitionBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define OpenIntuition() __intuition_OpenIntuition((INTUITION_BASE_NAME))
+#define __OpenIntuition_base(__in_base) __intuition_OpenIntuition((__in_base))
 
 static __inline__ VOID
-__intuition_Intuition(struct IntuitionBase *__base, struct InputEvent * iEvent)
+__intuition_Intuition(void *__base, struct InputEvent * iEvent)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iEvent);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -54,14 +63,15 @@ __intuition_Intuition(struct IntuitionBase *__base, struct InputEvent * iEvent)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define Intuition(iEvent) __intuition_Intuition((INTUITION_BASE_NAME), (struct InputEvent *)(iEvent))
+#define __Intuition_base(__in_base, iEvent) __intuition_Intuition((__in_base), (struct InputEvent *)(iEvent))
 
 static __inline__ UWORD
-__intuition_AddGadget(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget, UWORD position)
+__intuition_AddGadget(void *__base, struct Window * window, struct Gadget * gadget, UWORD position)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(gadget);
 	register ULONG _d0 __asm("d0") = (ULONG)(position);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -42(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -70,12 +80,13 @@ __intuition_AddGadget(struct IntuitionBase *__base, struct Window * window, stru
 	return (UWORD)_d0;
 }
 #define AddGadget(window, gadget, position) __intuition_AddGadget((INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position))
+#define __AddGadget_base(__in_base, window, gadget, position) __intuition_AddGadget((__in_base), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position))
 
 static __inline__ BOOL
-__intuition_ClearDMRequest(struct IntuitionBase *__base, struct Window * window)
+__intuition_ClearDMRequest(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -86,12 +97,13 @@ __intuition_ClearDMRequest(struct IntuitionBase *__base, struct Window * window)
 	return (BOOL)_d0;
 }
 #define ClearDMRequest(window) __intuition_ClearDMRequest((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ClearDMRequest_base(__in_base, window) __intuition_ClearDMRequest((__in_base), (struct Window *)(window))
 
 static __inline__ VOID
-__intuition_ClearMenuStrip(struct IntuitionBase *__base, struct Window * window)
+__intuition_ClearMenuStrip(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -102,12 +114,13 @@ __intuition_ClearMenuStrip(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ClearMenuStrip(window) __intuition_ClearMenuStrip((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ClearMenuStrip_base(__in_base, window) __intuition_ClearMenuStrip((__in_base), (struct Window *)(window))
 
 static __inline__ VOID
-__intuition_ClearPointer(struct IntuitionBase *__base, struct Window * window)
+__intuition_ClearPointer(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -118,12 +131,13 @@ __intuition_ClearPointer(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ClearPointer(window) __intuition_ClearPointer((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ClearPointer_base(__in_base, window) __intuition_ClearPointer((__in_base), (struct Window *)(window))
 
 static __inline__ BOOL
-__intuition_CloseScreen(struct IntuitionBase *__base, struct Screen * screen)
+__intuition_CloseScreen(void *__base, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -134,12 +148,13 @@ __intuition_CloseScreen(struct IntuitionBase *__base, struct Screen * screen)
 	return (BOOL)_d0;
 }
 #define CloseScreen(screen) __intuition_CloseScreen((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __CloseScreen_base(__in_base, screen) __intuition_CloseScreen((__in_base), (struct Screen *)(screen))
 
 static __inline__ VOID
-__intuition_CloseWindow(struct IntuitionBase *__base, struct Window * window)
+__intuition_CloseWindow(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -150,11 +165,12 @@ __intuition_CloseWindow(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CloseWindow(window) __intuition_CloseWindow((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __CloseWindow_base(__in_base, window) __intuition_CloseWindow((__in_base), (struct Window *)(window))
 
 static __inline__ LONG
-__intuition_CloseWorkBench(struct IntuitionBase *__base)
+__intuition_CloseWorkBench(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -166,13 +182,14 @@ __intuition_CloseWorkBench(struct IntuitionBase *__base)
 	return (LONG)_d0;
 }
 #define CloseWorkBench() __intuition_CloseWorkBench((INTUITION_BASE_NAME))
+#define __CloseWorkBench_base(__in_base) __intuition_CloseWorkBench((__in_base))
 
 static __inline__ VOID
-__intuition_CurrentTime(struct IntuitionBase *__base, ULONG * seconds, ULONG * micros)
+__intuition_CurrentTime(void *__base, ULONG * seconds, ULONG * micros)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(seconds);
 	register ULONG _a1 __asm("a1") = (ULONG)(micros);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -84(%/a6)"
@@ -182,14 +199,15 @@ __intuition_CurrentTime(struct IntuitionBase *__base, ULONG * seconds, ULONG * m
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define CurrentTime(seconds, micros) __intuition_CurrentTime((INTUITION_BASE_NAME), (ULONG *)(seconds), (ULONG *)(micros))
+#define __CurrentTime_base(__in_base, seconds, micros) __intuition_CurrentTime((__in_base), (ULONG *)(seconds), (ULONG *)(micros))
 
 static __inline__ BOOL
-__intuition_DisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_STRPTR string, UWORD height)
+__intuition_DisplayAlert(void *__base, ULONG alertNumber, CONST_STRPTR string, UWORD height)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(alertNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
 	register ULONG _d1 __asm("d1") = (ULONG)(height);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -90(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -198,12 +216,13 @@ __intuition_DisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_
 	return (BOOL)_d0;
 }
 #define DisplayAlert(alertNumber, string, height) __intuition_DisplayAlert((INTUITION_BASE_NAME), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height))
+#define __DisplayAlert_base(__in_base, alertNumber, string, height) __intuition_DisplayAlert((__in_base), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height))
 
 static __inline__ VOID
-__intuition_DisplayBeep(struct IntuitionBase *__base, struct Screen * screen)
+__intuition_DisplayBeep(void *__base, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -214,15 +233,16 @@ __intuition_DisplayBeep(struct IntuitionBase *__base, struct Screen * screen)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DisplayBeep(screen) __intuition_DisplayBeep((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __DisplayBeep_base(__in_base, screen) __intuition_DisplayBeep((__in_base), (struct Screen *)(screen))
 
 static __inline__ BOOL
-__intuition_DoubleClick(struct IntuitionBase *__base, ULONG sSeconds, ULONG sMicros, ULONG cSeconds, ULONG cMicros)
+__intuition_DoubleClick(void *__base, ULONG sSeconds, ULONG sMicros, ULONG cSeconds, ULONG cMicros)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(sSeconds);
 	register ULONG _d1 __asm("d1") = (ULONG)(sMicros);
 	register ULONG _d2 __asm("d2") = (ULONG)(cSeconds);
 	register ULONG _d3 __asm("d3") = (ULONG)(cMicros);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -102(%/a6)"
@@ -232,15 +252,16 @@ __intuition_DoubleClick(struct IntuitionBase *__base, ULONG sSeconds, ULONG sMic
 	return (BOOL)_d0;
 }
 #define DoubleClick(sSeconds, sMicros, cSeconds, cMicros) __intuition_DoubleClick((INTUITION_BASE_NAME), (ULONG)(sSeconds), (ULONG)(sMicros), (ULONG)(cSeconds), (ULONG)(cMicros))
+#define __DoubleClick_base(__in_base, sSeconds, sMicros, cSeconds, cMicros) __intuition_DoubleClick((__in_base), (ULONG)(sSeconds), (ULONG)(sMicros), (ULONG)(cSeconds), (ULONG)(cMicros))
 
 static __inline__ VOID
-__intuition_DrawBorder(struct IntuitionBase *__base, struct RastPort * rp, CONST struct Border * border, WORD leftOffset, WORD topOffset)
+__intuition_DrawBorder(void *__base, struct RastPort * rp, CONST struct Border * border, WORD leftOffset, WORD topOffset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(border);
 	register ULONG _d0 __asm("d0") = (ULONG)(leftOffset);
 	register ULONG _d1 __asm("d1") = (ULONG)(topOffset);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -108(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -248,15 +269,16 @@ __intuition_DrawBorder(struct IntuitionBase *__base, struct RastPort * rp, CONST
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DrawBorder(rp, border, leftOffset, topOffset) __intuition_DrawBorder((INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct Border *)(border), (WORD)(leftOffset), (WORD)(topOffset))
+#define __DrawBorder_base(__in_base, rp, border, leftOffset, topOffset) __intuition_DrawBorder((__in_base), (struct RastPort *)(rp), (CONST struct Border *)(border), (WORD)(leftOffset), (WORD)(topOffset))
 
 static __inline__ VOID
-__intuition_DrawImage(struct IntuitionBase *__base, struct RastPort * rp, CONST struct Image * image, WORD leftOffset, WORD topOffset)
+__intuition_DrawImage(void *__base, struct RastPort * rp, CONST struct Image * image, WORD leftOffset, WORD topOffset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(image);
 	register ULONG _d0 __asm("d0") = (ULONG)(leftOffset);
 	register ULONG _d1 __asm("d1") = (ULONG)(topOffset);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -114(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -264,13 +286,14 @@ __intuition_DrawImage(struct IntuitionBase *__base, struct RastPort * rp, CONST 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DrawImage(rp, image, leftOffset, topOffset) __intuition_DrawImage((INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
+#define __DrawImage_base(__in_base, rp, image, leftOffset, topOffset) __intuition_DrawImage((__in_base), (struct RastPort *)(rp), (CONST struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
 
 static __inline__ VOID
-__intuition_EndRequest(struct IntuitionBase *__base, struct Requester * requester, struct Window * window)
+__intuition_EndRequest(void *__base, struct Requester * requester, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(requester);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -120(%/a6)"
@@ -280,13 +303,14 @@ __intuition_EndRequest(struct IntuitionBase *__base, struct Requester * requeste
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define EndRequest(requester, window) __intuition_EndRequest((INTUITION_BASE_NAME), (struct Requester *)(requester), (struct Window *)(window))
+#define __EndRequest_base(__in_base, requester, window) __intuition_EndRequest((__in_base), (struct Requester *)(requester), (struct Window *)(window))
 
 static __inline__ struct Preferences *
-__intuition_GetDefPrefs(struct IntuitionBase *__base, struct Preferences * preferences, WORD size)
+__intuition_GetDefPrefs(void *__base, struct Preferences * preferences, WORD size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(preferences);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -126(%/a6)"
@@ -296,13 +320,14 @@ __intuition_GetDefPrefs(struct IntuitionBase *__base, struct Preferences * prefe
 	return (struct Preferences *)_d0;
 }
 #define GetDefPrefs(preferences, size) __intuition_GetDefPrefs((INTUITION_BASE_NAME), (struct Preferences *)(preferences), (WORD)(size))
+#define __GetDefPrefs_base(__in_base, preferences, size) __intuition_GetDefPrefs((__in_base), (struct Preferences *)(preferences), (WORD)(size))
 
 static __inline__ struct Preferences *
-__intuition_GetPrefs(struct IntuitionBase *__base, struct Preferences * preferences, WORD size)
+__intuition_GetPrefs(void *__base, struct Preferences * preferences, WORD size)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(preferences);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -132(%/a6)"
@@ -312,12 +337,13 @@ __intuition_GetPrefs(struct IntuitionBase *__base, struct Preferences * preferen
 	return (struct Preferences *)_d0;
 }
 #define GetPrefs(preferences, size) __intuition_GetPrefs((INTUITION_BASE_NAME), (struct Preferences *)(preferences), (WORD)(size))
+#define __GetPrefs_base(__in_base, preferences, size) __intuition_GetPrefs((__in_base), (struct Preferences *)(preferences), (WORD)(size))
 
 static __inline__ VOID
-__intuition_InitRequester(struct IntuitionBase *__base, struct Requester * requester)
+__intuition_InitRequester(void *__base, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(requester);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -328,13 +354,14 @@ __intuition_InitRequester(struct IntuitionBase *__base, struct Requester * reque
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define InitRequester(requester) __intuition_InitRequester((INTUITION_BASE_NAME), (struct Requester *)(requester))
+#define __InitRequester_base(__in_base, requester) __intuition_InitRequester((__in_base), (struct Requester *)(requester))
 
 static __inline__ struct MenuItem *
-__intuition_ItemAddress(struct IntuitionBase *__base, CONST struct Menu * menuStrip, UWORD menuNumber)
+__intuition_ItemAddress(void *__base, CONST struct Menu * menuStrip, UWORD menuNumber)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(menuStrip);
 	register ULONG _d0 __asm("d0") = (ULONG)(menuNumber);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -144(%/a6)"
@@ -344,13 +371,14 @@ __intuition_ItemAddress(struct IntuitionBase *__base, CONST struct Menu * menuSt
 	return (struct MenuItem *)_d0;
 }
 #define ItemAddress(menuStrip, menuNumber) __intuition_ItemAddress((INTUITION_BASE_NAME), (CONST struct Menu *)(menuStrip), (UWORD)(menuNumber))
+#define __ItemAddress_base(__in_base, menuStrip, menuNumber) __intuition_ItemAddress((__in_base), (CONST struct Menu *)(menuStrip), (UWORD)(menuNumber))
 
 static __inline__ BOOL
-__intuition_ModifyIDCMP(struct IntuitionBase *__base, struct Window * window, ULONG flags)
+__intuition_ModifyIDCMP(void *__base, struct Window * window, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -150(%/a6)"
@@ -360,9 +388,10 @@ __intuition_ModifyIDCMP(struct IntuitionBase *__base, struct Window * window, UL
 	return (BOOL)_d0;
 }
 #define ModifyIDCMP(window, flags) __intuition_ModifyIDCMP((INTUITION_BASE_NAME), (struct Window *)(window), (ULONG)(flags))
+#define __ModifyIDCMP_base(__in_base, window, flags) __intuition_ModifyIDCMP((__in_base), (struct Window *)(window), (ULONG)(flags))
 
 static __inline__ VOID
-__intuition_ModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, UWORD flags, UWORD horizPot, UWORD vertPot, UWORD horizBody, UWORD vertBody)
+__intuition_ModifyProp(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, UWORD flags, UWORD horizPot, UWORD vertPot, UWORD horizBody, UWORD vertBody)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
@@ -372,7 +401,7 @@ __intuition_ModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, str
 	register ULONG _d2 __asm("d2") = (ULONG)(vertPot);
 	register ULONG _d3 __asm("d3") = (ULONG)(horizBody);
 	register ULONG _d4 __asm("d4") = (ULONG)(vertBody);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -156(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4)
@@ -380,14 +409,15 @@ __intuition_ModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, str
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ModifyProp(gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody) __intuition_ModifyProp((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody))
+#define __ModifyProp_base(__in_base, gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody) __intuition_ModifyProp((__in_base), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody))
 
 static __inline__ VOID
-__intuition_MoveScreen(struct IntuitionBase *__base, struct Screen * screen, WORD dx, WORD dy)
+__intuition_MoveScreen(void *__base, struct Screen * screen, WORD dx, WORD dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
 	register ULONG _d1 __asm("d1") = (ULONG)(dy);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -162(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -396,14 +426,15 @@ __intuition_MoveScreen(struct IntuitionBase *__base, struct Screen * screen, WOR
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define MoveScreen(screen, dx, dy) __intuition_MoveScreen((INTUITION_BASE_NAME), (struct Screen *)(screen), (WORD)(dx), (WORD)(dy))
+#define __MoveScreen_base(__in_base, screen, dx, dy) __intuition_MoveScreen((__in_base), (struct Screen *)(screen), (WORD)(dx), (WORD)(dy))
 
 static __inline__ VOID
-__intuition_MoveWindow(struct IntuitionBase *__base, struct Window * window, WORD dx, WORD dy)
+__intuition_MoveWindow(void *__base, struct Window * window, WORD dx, WORD dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
 	register ULONG _d1 __asm("d1") = (ULONG)(dy);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -168(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -412,14 +443,15 @@ __intuition_MoveWindow(struct IntuitionBase *__base, struct Window * window, WOR
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define MoveWindow(window, dx, dy) __intuition_MoveWindow((INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
+#define __MoveWindow_base(__in_base, window, dx, dy) __intuition_MoveWindow((__in_base), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
 
 static __inline__ VOID
-__intuition_OffGadget(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester)
+__intuition_OffGadget(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -174(%/a6)"
@@ -429,13 +461,14 @@ __intuition_OffGadget(struct IntuitionBase *__base, struct Gadget * gadget, stru
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define OffGadget(gadget, window, requester) __intuition_OffGadget((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
+#define __OffGadget_base(__in_base, gadget, window, requester) __intuition_OffGadget((__in_base), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ VOID
-__intuition_OffMenu(struct IntuitionBase *__base, struct Window * window, UWORD menuNumber)
+__intuition_OffMenu(void *__base, struct Window * window, UWORD menuNumber)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(menuNumber);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -180(%/a6)"
@@ -445,14 +478,15 @@ __intuition_OffMenu(struct IntuitionBase *__base, struct Window * window, UWORD 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define OffMenu(window, menuNumber) __intuition_OffMenu((INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(menuNumber))
+#define __OffMenu_base(__in_base, window, menuNumber) __intuition_OffMenu((__in_base), (struct Window *)(window), (UWORD)(menuNumber))
 
 static __inline__ VOID
-__intuition_OnGadget(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester)
+__intuition_OnGadget(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -186(%/a6)"
@@ -462,13 +496,14 @@ __intuition_OnGadget(struct IntuitionBase *__base, struct Gadget * gadget, struc
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define OnGadget(gadget, window, requester) __intuition_OnGadget((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
+#define __OnGadget_base(__in_base, gadget, window, requester) __intuition_OnGadget((__in_base), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ VOID
-__intuition_OnMenu(struct IntuitionBase *__base, struct Window * window, UWORD menuNumber)
+__intuition_OnMenu(void *__base, struct Window * window, UWORD menuNumber)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(menuNumber);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -192(%/a6)"
@@ -478,12 +513,13 @@ __intuition_OnMenu(struct IntuitionBase *__base, struct Window * window, UWORD m
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define OnMenu(window, menuNumber) __intuition_OnMenu((INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(menuNumber))
+#define __OnMenu_base(__in_base, window, menuNumber) __intuition_OnMenu((__in_base), (struct Window *)(window), (UWORD)(menuNumber))
 
 static __inline__ struct Screen *
-__intuition_OpenScreen(struct IntuitionBase *__base, CONST struct NewScreen * newScreen)
+__intuition_OpenScreen(void *__base, CONST struct NewScreen * newScreen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(newScreen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -494,12 +530,13 @@ __intuition_OpenScreen(struct IntuitionBase *__base, CONST struct NewScreen * ne
 	return (struct Screen *)_d0;
 }
 #define OpenScreen(newScreen) __intuition_OpenScreen((INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen))
+#define __OpenScreen_base(__in_base, newScreen) __intuition_OpenScreen((__in_base), (CONST struct NewScreen *)(newScreen))
 
 static __inline__ struct Window *
-__intuition_OpenWindow(struct IntuitionBase *__base, CONST struct NewWindow * newWindow)
+__intuition_OpenWindow(void *__base, CONST struct NewWindow * newWindow)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(newWindow);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -510,11 +547,12 @@ __intuition_OpenWindow(struct IntuitionBase *__base, CONST struct NewWindow * ne
 	return (struct Window *)_d0;
 }
 #define OpenWindow(newWindow) __intuition_OpenWindow((INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow))
+#define __OpenWindow_base(__in_base, newWindow) __intuition_OpenWindow((__in_base), (CONST struct NewWindow *)(newWindow))
 
 static __inline__ ULONG
-__intuition_OpenWorkBench(struct IntuitionBase *__base)
+__intuition_OpenWorkBench(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -526,15 +564,16 @@ __intuition_OpenWorkBench(struct IntuitionBase *__base)
 	return (ULONG)_d0;
 }
 #define OpenWorkBench() __intuition_OpenWorkBench((INTUITION_BASE_NAME))
+#define __OpenWorkBench_base(__in_base) __intuition_OpenWorkBench((__in_base))
 
 static __inline__ VOID
-__intuition_PrintIText(struct IntuitionBase *__base, struct RastPort * rp, CONST struct IntuiText * iText, WORD left, WORD top)
+__intuition_PrintIText(void *__base, struct RastPort * rp, CONST struct IntuiText * iText, WORD left, WORD top)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(iText);
 	register ULONG _d0 __asm("d0") = (ULONG)(left);
 	register ULONG _d1 __asm("d1") = (ULONG)(top);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -216(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -542,14 +581,15 @@ __intuition_PrintIText(struct IntuitionBase *__base, struct RastPort * rp, CONST
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define PrintIText(rp, iText, left, top) __intuition_PrintIText((INTUITION_BASE_NAME), (struct RastPort *)(rp), (CONST struct IntuiText *)(iText), (WORD)(left), (WORD)(top))
+#define __PrintIText_base(__in_base, rp, iText, left, top) __intuition_PrintIText((__in_base), (struct RastPort *)(rp), (CONST struct IntuiText *)(iText), (WORD)(left), (WORD)(top))
 
 static __inline__ VOID
-__intuition_RefreshGadgets(struct IntuitionBase *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester)
+__intuition_RefreshGadgets(void *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadgets);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -222(%/a6)"
@@ -559,13 +599,14 @@ __intuition_RefreshGadgets(struct IntuitionBase *__base, struct Gadget * gadgets
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RefreshGadgets(gadgets, window, requester) __intuition_RefreshGadgets((INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
+#define __RefreshGadgets_base(__in_base, gadgets, window, requester) __intuition_RefreshGadgets((__in_base), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ UWORD
-__intuition_RemoveGadget(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget)
+__intuition_RemoveGadget(void *__base, struct Window * window, struct Gadget * gadget)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(gadget);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -228(%/a6)"
@@ -575,13 +616,14 @@ __intuition_RemoveGadget(struct IntuitionBase *__base, struct Window * window, s
 	return (UWORD)_d0;
 }
 #define RemoveGadget(window, gadget) __intuition_RemoveGadget((INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget))
+#define __RemoveGadget_base(__in_base, window, gadget) __intuition_RemoveGadget((__in_base), (struct Window *)(window), (struct Gadget *)(gadget))
 
 static __inline__ VOID
-__intuition_ReportMouse(struct IntuitionBase *__base, BOOL flag, struct Window * window)
+__intuition_ReportMouse(void *__base, BOOL flag, struct Window * window)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(flag);
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -234(%/a6)"
@@ -591,13 +633,14 @@ __intuition_ReportMouse(struct IntuitionBase *__base, BOOL flag, struct Window *
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReportMouse(flag, window) __intuition_ReportMouse((INTUITION_BASE_NAME), (BOOL)(flag), (struct Window *)(window))
+#define __ReportMouse_base(__in_base, flag, window) __intuition_ReportMouse((__in_base), (BOOL)(flag), (struct Window *)(window))
 
 static __inline__ VOID
-__intuition_ReportMouse1(struct IntuitionBase *__base, struct Window * window, BOOL flag)
+__intuition_ReportMouse1(void *__base, struct Window * window, BOOL flag)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(flag);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -234(%/a6)"
@@ -607,13 +650,14 @@ __intuition_ReportMouse1(struct IntuitionBase *__base, struct Window * window, B
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReportMouse1(window, flag) __intuition_ReportMouse1((INTUITION_BASE_NAME), (struct Window *)(window), (BOOL)(flag))
+#define __ReportMouse1_base(__in_base, window, flag) __intuition_ReportMouse1((__in_base), (struct Window *)(window), (BOOL)(flag))
 
 static __inline__ BOOL
-__intuition_Request(struct IntuitionBase *__base, struct Requester * requester, struct Window * window)
+__intuition_Request(void *__base, struct Requester * requester, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(requester);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -240(%/a6)"
@@ -623,12 +667,13 @@ __intuition_Request(struct IntuitionBase *__base, struct Requester * requester, 
 	return (BOOL)_d0;
 }
 #define Request(requester, window) __intuition_Request((INTUITION_BASE_NAME), (struct Requester *)(requester), (struct Window *)(window))
+#define __Request_base(__in_base, requester, window) __intuition_Request((__in_base), (struct Requester *)(requester), (struct Window *)(window))
 
 static __inline__ VOID
-__intuition_ScreenToBack(struct IntuitionBase *__base, struct Screen * screen)
+__intuition_ScreenToBack(void *__base, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -639,12 +684,13 @@ __intuition_ScreenToBack(struct IntuitionBase *__base, struct Screen * screen)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScreenToBack(screen) __intuition_ScreenToBack((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __ScreenToBack_base(__in_base, screen) __intuition_ScreenToBack((__in_base), (struct Screen *)(screen))
 
 static __inline__ VOID
-__intuition_ScreenToFront(struct IntuitionBase *__base, struct Screen * screen)
+__intuition_ScreenToFront(void *__base, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -655,13 +701,14 @@ __intuition_ScreenToFront(struct IntuitionBase *__base, struct Screen * screen)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScreenToFront(screen) __intuition_ScreenToFront((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __ScreenToFront_base(__in_base, screen) __intuition_ScreenToFront((__in_base), (struct Screen *)(screen))
 
 static __inline__ BOOL
-__intuition_SetDMRequest(struct IntuitionBase *__base, struct Window * window, struct Requester * requester)
+__intuition_SetDMRequest(void *__base, struct Window * window, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(requester);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -258(%/a6)"
@@ -671,13 +718,14 @@ __intuition_SetDMRequest(struct IntuitionBase *__base, struct Window * window, s
 	return (BOOL)_d0;
 }
 #define SetDMRequest(window, requester) __intuition_SetDMRequest((INTUITION_BASE_NAME), (struct Window *)(window), (struct Requester *)(requester))
+#define __SetDMRequest_base(__in_base, window, requester) __intuition_SetDMRequest((__in_base), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ BOOL
-__intuition_SetMenuStrip(struct IntuitionBase *__base, struct Window * window, struct Menu * menu)
+__intuition_SetMenuStrip(void *__base, struct Window * window, struct Menu * menu)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(menu);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -264(%/a6)"
@@ -687,9 +735,10 @@ __intuition_SetMenuStrip(struct IntuitionBase *__base, struct Window * window, s
 	return (BOOL)_d0;
 }
 #define SetMenuStrip(window, menu) __intuition_SetMenuStrip((INTUITION_BASE_NAME), (struct Window *)(window), (struct Menu *)(menu))
+#define __SetMenuStrip_base(__in_base, window, menu) __intuition_SetMenuStrip((__in_base), (struct Window *)(window), (struct Menu *)(menu))
 
 static __inline__ VOID
-__intuition_SetPointer(struct IntuitionBase *__base, struct Window * window, UWORD * pointer, WORD height, WORD width, WORD xOffset, WORD yOffset)
+__intuition_SetPointer(void *__base, struct Window * window, UWORD * pointer, WORD height, WORD width, WORD xOffset, WORD yOffset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(pointer);
@@ -697,7 +746,7 @@ __intuition_SetPointer(struct IntuitionBase *__base, struct Window * window, UWO
 	register ULONG _d1 __asm("d1") = (ULONG)(width);
 	register ULONG _d2 __asm("d2") = (ULONG)(xOffset);
 	register ULONG _d3 __asm("d3") = (ULONG)(yOffset);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -270(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6), "r" (_d2), "r" (_d3)
@@ -705,14 +754,15 @@ __intuition_SetPointer(struct IntuitionBase *__base, struct Window * window, UWO
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetPointer(window, pointer, height, width, xOffset, yOffset) __intuition_SetPointer((INTUITION_BASE_NAME), (struct Window *)(window), (UWORD *)(pointer), (WORD)(height), (WORD)(width), (WORD)(xOffset), (WORD)(yOffset))
+#define __SetPointer_base(__in_base, window, pointer, height, width, xOffset, yOffset) __intuition_SetPointer((__in_base), (struct Window *)(window), (UWORD *)(pointer), (WORD)(height), (WORD)(width), (WORD)(xOffset), (WORD)(yOffset))
 
 static __inline__ VOID
-__intuition_SetWindowTitles(struct IntuitionBase *__base, struct Window * window, CONST_STRPTR windowTitle, CONST_STRPTR screenTitle)
+__intuition_SetWindowTitles(void *__base, struct Window * window, CONST_STRPTR windowTitle, CONST_STRPTR screenTitle)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(windowTitle);
 	register ULONG _a2 __asm("a2") = (ULONG)(screenTitle);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -276(%/a6)"
@@ -722,13 +772,14 @@ __intuition_SetWindowTitles(struct IntuitionBase *__base, struct Window * window
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetWindowTitles(window, windowTitle, screenTitle) __intuition_SetWindowTitles((INTUITION_BASE_NAME), (struct Window *)(window), (CONST_STRPTR)(windowTitle), (CONST_STRPTR)(screenTitle))
+#define __SetWindowTitles_base(__in_base, window, windowTitle, screenTitle) __intuition_SetWindowTitles((__in_base), (struct Window *)(window), (CONST_STRPTR)(windowTitle), (CONST_STRPTR)(screenTitle))
 
 static __inline__ VOID
-__intuition_ShowTitle(struct IntuitionBase *__base, struct Screen * screen, BOOL showIt)
+__intuition_ShowTitle(void *__base, struct Screen * screen, BOOL showIt)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(showIt);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -282(%/a6)"
@@ -738,14 +789,15 @@ __intuition_ShowTitle(struct IntuitionBase *__base, struct Screen * screen, BOOL
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ShowTitle(screen, showIt) __intuition_ShowTitle((INTUITION_BASE_NAME), (struct Screen *)(screen), (BOOL)(showIt))
+#define __ShowTitle_base(__in_base, screen, showIt) __intuition_ShowTitle((__in_base), (struct Screen *)(screen), (BOOL)(showIt))
 
 static __inline__ VOID
-__intuition_SizeWindow(struct IntuitionBase *__base, struct Window * window, WORD dx, WORD dy)
+__intuition_SizeWindow(void *__base, struct Window * window, WORD dx, WORD dy)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
 	register ULONG _d1 __asm("d1") = (ULONG)(dy);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -288(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -754,11 +806,12 @@ __intuition_SizeWindow(struct IntuitionBase *__base, struct Window * window, WOR
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SizeWindow(window, dx, dy) __intuition_SizeWindow((INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
+#define __SizeWindow_base(__in_base, window, dx, dy) __intuition_SizeWindow((__in_base), (struct Window *)(window), (WORD)(dx), (WORD)(dy))
 
 static __inline__ struct View *
-__intuition_ViewAddress(struct IntuitionBase *__base)
+__intuition_ViewAddress(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -770,12 +823,13 @@ __intuition_ViewAddress(struct IntuitionBase *__base)
 	return (struct View *)_d0;
 }
 #define ViewAddress() __intuition_ViewAddress((INTUITION_BASE_NAME))
+#define __ViewAddress_base(__in_base) __intuition_ViewAddress((__in_base))
 
 static __inline__ struct ViewPort *
-__intuition_ViewPortAddress(struct IntuitionBase *__base, CONST struct Window * window)
+__intuition_ViewPortAddress(void *__base, CONST struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -786,12 +840,13 @@ __intuition_ViewPortAddress(struct IntuitionBase *__base, CONST struct Window * 
 	return (struct ViewPort *)_d0;
 }
 #define ViewPortAddress(window) __intuition_ViewPortAddress((INTUITION_BASE_NAME), (CONST struct Window *)(window))
+#define __ViewPortAddress_base(__in_base, window) __intuition_ViewPortAddress((__in_base), (CONST struct Window *)(window))
 
 static __inline__ VOID
-__intuition_WindowToBack(struct IntuitionBase *__base, struct Window * window)
+__intuition_WindowToBack(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -802,12 +857,13 @@ __intuition_WindowToBack(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WindowToBack(window) __intuition_WindowToBack((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __WindowToBack_base(__in_base, window) __intuition_WindowToBack((__in_base), (struct Window *)(window))
 
 static __inline__ VOID
-__intuition_WindowToFront(struct IntuitionBase *__base, struct Window * window)
+__intuition_WindowToFront(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -818,16 +874,17 @@ __intuition_WindowToFront(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define WindowToFront(window) __intuition_WindowToFront((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __WindowToFront_base(__in_base, window) __intuition_WindowToFront((__in_base), (struct Window *)(window))
 
 static __inline__ BOOL
-__intuition_WindowLimits(struct IntuitionBase *__base, struct Window * window, LONG widthMin, LONG heightMin, ULONG widthMax, ULONG heightMax)
+__intuition_WindowLimits(void *__base, struct Window * window, LONG widthMin, LONG heightMin, ULONG widthMax, ULONG heightMax)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(widthMin);
 	register ULONG _d1 __asm("d1") = (ULONG)(heightMin);
 	register ULONG _d2 __asm("d2") = (ULONG)(widthMax);
 	register ULONG _d3 __asm("d3") = (ULONG)(heightMax);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -318(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -836,14 +893,15 @@ __intuition_WindowLimits(struct IntuitionBase *__base, struct Window * window, L
 	return (BOOL)_d0;
 }
 #define WindowLimits(window, widthMin, heightMin, widthMax, heightMax) __intuition_WindowLimits((INTUITION_BASE_NAME), (struct Window *)(window), (LONG)(widthMin), (LONG)(heightMin), (ULONG)(widthMax), (ULONG)(heightMax))
+#define __WindowLimits_base(__in_base, window, widthMin, heightMin, widthMax, heightMax) __intuition_WindowLimits((__in_base), (struct Window *)(window), (LONG)(widthMin), (LONG)(heightMin), (ULONG)(widthMax), (ULONG)(heightMax))
 
 static __inline__ struct Preferences *
-__intuition_SetPrefs(struct IntuitionBase *__base, CONST struct Preferences * preferences, LONG size, BOOL inform)
+__intuition_SetPrefs(void *__base, CONST struct Preferences * preferences, LONG size, BOOL inform)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(preferences);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
 	register ULONG _d1 __asm("d1") = (ULONG)(inform);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -324(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -852,12 +910,13 @@ __intuition_SetPrefs(struct IntuitionBase *__base, CONST struct Preferences * pr
 	return (struct Preferences *)_d0;
 }
 #define SetPrefs(preferences, size, inform) __intuition_SetPrefs((INTUITION_BASE_NAME), (CONST struct Preferences *)(preferences), (LONG)(size), (BOOL)(inform))
+#define __SetPrefs_base(__in_base, preferences, size, inform) __intuition_SetPrefs((__in_base), (CONST struct Preferences *)(preferences), (LONG)(size), (BOOL)(inform))
 
 static __inline__ LONG
-__intuition_IntuiTextLength(struct IntuitionBase *__base, CONST struct IntuiText * iText)
+__intuition_IntuiTextLength(void *__base, CONST struct IntuiText * iText)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(iText);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -868,11 +927,12 @@ __intuition_IntuiTextLength(struct IntuitionBase *__base, CONST struct IntuiText
 	return (LONG)_d0;
 }
 #define IntuiTextLength(iText) __intuition_IntuiTextLength((INTUITION_BASE_NAME), (CONST struct IntuiText *)(iText))
+#define __IntuiTextLength_base(__in_base, iText) __intuition_IntuiTextLength((__in_base), (CONST struct IntuiText *)(iText))
 
 static __inline__ BOOL
-__intuition_WBenchToBack(struct IntuitionBase *__base)
+__intuition_WBenchToBack(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -884,11 +944,12 @@ __intuition_WBenchToBack(struct IntuitionBase *__base)
 	return (BOOL)_d0;
 }
 #define WBenchToBack() __intuition_WBenchToBack((INTUITION_BASE_NAME))
+#define __WBenchToBack_base(__in_base) __intuition_WBenchToBack((__in_base))
 
 static __inline__ BOOL
-__intuition_WBenchToFront(struct IntuitionBase *__base)
+__intuition_WBenchToFront(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -900,9 +961,10 @@ __intuition_WBenchToFront(struct IntuitionBase *__base)
 	return (BOOL)_d0;
 }
 #define WBenchToFront() __intuition_WBenchToFront((INTUITION_BASE_NAME))
+#define __WBenchToFront_base(__in_base) __intuition_WBenchToFront((__in_base))
 
 static __inline__ BOOL
-__intuition_AutoRequest(struct IntuitionBase *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG pFlag, ULONG nFlag, UWORD width, UWORD height)
+__intuition_AutoRequest(void *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG pFlag, ULONG nFlag, UWORD width, UWORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(body);
@@ -912,7 +974,7 @@ __intuition_AutoRequest(struct IntuitionBase *__base, struct Window * window, CO
 	register ULONG _d1 __asm("d1") = (ULONG)(nFlag);
 	register ULONG _d2 __asm("d2") = (ULONG)(width);
 	register ULONG _d3 __asm("d3") = (ULONG)(height);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -348(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a3), "r" (_a6), "r" (_d2), "r" (_d3)
@@ -920,12 +982,13 @@ __intuition_AutoRequest(struct IntuitionBase *__base, struct Window * window, CO
 	return (BOOL)_d0;
 }
 #define AutoRequest(window, body, posText, negText, pFlag, nFlag, width, height) __intuition_AutoRequest((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(pFlag), (ULONG)(nFlag), (UWORD)(width), (UWORD)(height))
+#define __AutoRequest_base(__in_base, window, body, posText, negText, pFlag, nFlag, width, height) __intuition_AutoRequest((__in_base), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(pFlag), (ULONG)(nFlag), (UWORD)(width), (UWORD)(height))
 
 static __inline__ VOID
-__intuition_BeginRefresh(struct IntuitionBase *__base, struct Window * window)
+__intuition_BeginRefresh(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -936,9 +999,10 @@ __intuition_BeginRefresh(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define BeginRefresh(window) __intuition_BeginRefresh((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __BeginRefresh_base(__in_base, window) __intuition_BeginRefresh((__in_base), (struct Window *)(window))
 
 static __inline__ struct Window *
-__intuition_BuildSysRequest(struct IntuitionBase *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG flags, UWORD width, UWORD height)
+__intuition_BuildSysRequest(void *__base, struct Window * window, CONST struct IntuiText * body, CONST struct IntuiText * posText, CONST struct IntuiText * negText, ULONG flags, UWORD width, UWORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(body);
@@ -947,7 +1011,7 @@ __intuition_BuildSysRequest(struct IntuitionBase *__base, struct Window * window
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
 	register ULONG _d1 __asm("d1") = (ULONG)(width);
 	register ULONG _d2 __asm("d2") = (ULONG)(height);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -360(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a3), "r" (_a6), "r" (_d2)
@@ -955,13 +1019,14 @@ __intuition_BuildSysRequest(struct IntuitionBase *__base, struct Window * window
 	return (struct Window *)_d0;
 }
 #define BuildSysRequest(window, body, posText, negText, flags, width, height) __intuition_BuildSysRequest((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(flags), (UWORD)(width), (UWORD)(height))
+#define __BuildSysRequest_base(__in_base, window, body, posText, negText, flags, width, height) __intuition_BuildSysRequest((__in_base), (struct Window *)(window), (CONST struct IntuiText *)(body), (CONST struct IntuiText *)(posText), (CONST struct IntuiText *)(negText), (ULONG)(flags), (UWORD)(width), (UWORD)(height))
 
 static __inline__ VOID
-__intuition_EndRefresh(struct IntuitionBase *__base, struct Window * window, LONG complete)
+__intuition_EndRefresh(void *__base, struct Window * window, LONG complete)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(complete);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -366(%/a6)"
@@ -971,12 +1036,13 @@ __intuition_EndRefresh(struct IntuitionBase *__base, struct Window * window, LON
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define EndRefresh(window, complete) __intuition_EndRefresh((INTUITION_BASE_NAME), (struct Window *)(window), (LONG)(complete))
+#define __EndRefresh_base(__in_base, window, complete) __intuition_EndRefresh((__in_base), (struct Window *)(window), (LONG)(complete))
 
 static __inline__ VOID
-__intuition_FreeSysRequest(struct IntuitionBase *__base, struct Window * window)
+__intuition_FreeSysRequest(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -987,12 +1053,13 @@ __intuition_FreeSysRequest(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeSysRequest(window) __intuition_FreeSysRequest((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __FreeSysRequest_base(__in_base, window) __intuition_FreeSysRequest((__in_base), (struct Window *)(window))
 
 static __inline__ LONG
-__intuition_MakeScreen(struct IntuitionBase *__base, struct Screen * screen)
+__intuition_MakeScreen(void *__base, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1003,11 +1070,12 @@ __intuition_MakeScreen(struct IntuitionBase *__base, struct Screen * screen)
 	return (LONG)_d0;
 }
 #define MakeScreen(screen) __intuition_MakeScreen((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __MakeScreen_base(__in_base, screen) __intuition_MakeScreen((__in_base), (struct Screen *)(screen))
 
 static __inline__ LONG
-__intuition_RemakeDisplay(struct IntuitionBase *__base)
+__intuition_RemakeDisplay(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1019,11 +1087,12 @@ __intuition_RemakeDisplay(struct IntuitionBase *__base)
 	return (LONG)_d0;
 }
 #define RemakeDisplay() __intuition_RemakeDisplay((INTUITION_BASE_NAME))
+#define __RemakeDisplay_base(__in_base) __intuition_RemakeDisplay((__in_base))
 
 static __inline__ LONG
-__intuition_RethinkDisplay(struct IntuitionBase *__base)
+__intuition_RethinkDisplay(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1035,14 +1104,15 @@ __intuition_RethinkDisplay(struct IntuitionBase *__base)
 	return (LONG)_d0;
 }
 #define RethinkDisplay() __intuition_RethinkDisplay((INTUITION_BASE_NAME))
+#define __RethinkDisplay_base(__in_base) __intuition_RethinkDisplay((__in_base))
 
 static __inline__ APTR
-__intuition_AllocRemember(struct IntuitionBase *__base, struct Remember ** rememberKey, ULONG size, ULONG flags)
+__intuition_AllocRemember(void *__base, struct Remember ** rememberKey, ULONG size, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rememberKey);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -396(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -1051,12 +1121,13 @@ __intuition_AllocRemember(struct IntuitionBase *__base, struct Remember ** remem
 	return (APTR)_d0;
 }
 #define AllocRemember(rememberKey, size, flags) __intuition_AllocRemember((INTUITION_BASE_NAME), (struct Remember **)(rememberKey), (ULONG)(size), (ULONG)(flags))
+#define __AllocRemember_base(__in_base, rememberKey, size, flags) __intuition_AllocRemember((__in_base), (struct Remember **)(rememberKey), (ULONG)(size), (ULONG)(flags))
 
 static __inline__ VOID
-__intuition_AlohaWorkbench(struct IntuitionBase *__base, LONG wbport)
+__intuition_AlohaWorkbench(void *__base, LONG wbport)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(wbport);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1067,13 +1138,14 @@ __intuition_AlohaWorkbench(struct IntuitionBase *__base, LONG wbport)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AlohaWorkbench(wbport) __intuition_AlohaWorkbench((INTUITION_BASE_NAME), (LONG)(wbport))
+#define __AlohaWorkbench_base(__in_base, wbport) __intuition_AlohaWorkbench((__in_base), (LONG)(wbport))
 
 static __inline__ VOID
-__intuition_FreeRemember(struct IntuitionBase *__base, struct Remember ** rememberKey, BOOL reallyForget)
+__intuition_FreeRemember(void *__base, struct Remember ** rememberKey, BOOL reallyForget)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rememberKey);
 	register ULONG _d0 __asm("d0") = (ULONG)(reallyForget);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -408(%/a6)"
@@ -1083,12 +1155,13 @@ __intuition_FreeRemember(struct IntuitionBase *__base, struct Remember ** rememb
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeRemember(rememberKey, reallyForget) __intuition_FreeRemember((INTUITION_BASE_NAME), (struct Remember **)(rememberKey), (BOOL)(reallyForget))
+#define __FreeRemember_base(__in_base, rememberKey, reallyForget) __intuition_FreeRemember((__in_base), (struct Remember **)(rememberKey), (BOOL)(reallyForget))
 
 static __inline__ ULONG
-__intuition_LockIBase(struct IntuitionBase *__base, ULONG dontknow)
+__intuition_LockIBase(void *__base, ULONG dontknow)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(dontknow);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1099,12 +1172,13 @@ __intuition_LockIBase(struct IntuitionBase *__base, ULONG dontknow)
 	return (ULONG)_d0;
 }
 #define LockIBase(dontknow) __intuition_LockIBase((INTUITION_BASE_NAME), (ULONG)(dontknow))
+#define __LockIBase_base(__in_base, dontknow) __intuition_LockIBase((__in_base), (ULONG)(dontknow))
 
 static __inline__ VOID
-__intuition_UnlockIBase(struct IntuitionBase *__base, ULONG ibLock)
+__intuition_UnlockIBase(void *__base, ULONG ibLock)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(ibLock);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1115,15 +1189,16 @@ __intuition_UnlockIBase(struct IntuitionBase *__base, ULONG ibLock)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockIBase(ibLock) __intuition_UnlockIBase((INTUITION_BASE_NAME), (ULONG)(ibLock))
+#define __UnlockIBase_base(__in_base, ibLock) __intuition_UnlockIBase((__in_base), (ULONG)(ibLock))
 
 static __inline__ LONG
-__intuition_GetScreenData(struct IntuitionBase *__base, APTR buffer, UWORD size, UWORD type, CONST struct Screen * screen)
+__intuition_GetScreenData(void *__base, APTR buffer, UWORD size, UWORD type, CONST struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(buffer);
 	register ULONG _d0 __asm("d0") = (ULONG)(size);
 	register ULONG _d1 __asm("d1") = (ULONG)(type);
 	register ULONG _a1 __asm("a1") = (ULONG)(screen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -426(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -1131,15 +1206,16 @@ __intuition_GetScreenData(struct IntuitionBase *__base, APTR buffer, UWORD size,
 	return (LONG)_d0;
 }
 #define GetScreenData(buffer, size, type, screen) __intuition_GetScreenData((INTUITION_BASE_NAME), (APTR)(buffer), (UWORD)(size), (UWORD)(type), (CONST struct Screen *)(screen))
+#define __GetScreenData_base(__in_base, buffer, size, type, screen) __intuition_GetScreenData((__in_base), (APTR)(buffer), (UWORD)(size), (UWORD)(type), (CONST struct Screen *)(screen))
 
 static __inline__ VOID
-__intuition_RefreshGList(struct IntuitionBase *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester, WORD numGad)
+__intuition_RefreshGList(void *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester, WORD numGad)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadgets);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
 	register ULONG _d0 __asm("d0") = (ULONG)(numGad);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -432(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1148,16 +1224,17 @@ __intuition_RefreshGList(struct IntuitionBase *__base, struct Gadget * gadgets, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RefreshGList(gadgets, window, requester, numGad) __intuition_RefreshGList((INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester), (WORD)(numGad))
+#define __RefreshGList_base(__in_base, gadgets, window, requester, numGad) __intuition_RefreshGList((__in_base), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester), (WORD)(numGad))
 
 static __inline__ UWORD
-__intuition_AddGList(struct IntuitionBase *__base, struct Window * window, struct Gadget * gadget, UWORD position, WORD numGad, struct Requester * requester)
+__intuition_AddGList(void *__base, struct Window * window, struct Gadget * gadget, UWORD position, WORD numGad, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(gadget);
 	register ULONG _d0 __asm("d0") = (ULONG)(position);
 	register ULONG _d1 __asm("d1") = (ULONG)(numGad);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -438(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
@@ -1165,14 +1242,15 @@ __intuition_AddGList(struct IntuitionBase *__base, struct Window * window, struc
 	return (UWORD)_d0;
 }
 #define AddGList(window, gadget, position, numGad, requester) __intuition_AddGList((INTUITION_BASE_NAME), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position), (WORD)(numGad), (struct Requester *)(requester))
+#define __AddGList_base(__in_base, window, gadget, position, numGad, requester) __intuition_AddGList((__in_base), (struct Window *)(window), (struct Gadget *)(gadget), (UWORD)(position), (WORD)(numGad), (struct Requester *)(requester))
 
 static __inline__ UWORD
-__intuition_RemoveGList(struct IntuitionBase *__base, struct Window * remPtr, struct Gadget * gadget, WORD numGad)
+__intuition_RemoveGList(void *__base, struct Window * remPtr, struct Gadget * gadget, WORD numGad)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(remPtr);
 	register ULONG _a1 __asm("a1") = (ULONG)(gadget);
 	register ULONG _d0 __asm("d0") = (ULONG)(numGad);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -444(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1181,12 +1259,13 @@ __intuition_RemoveGList(struct IntuitionBase *__base, struct Window * remPtr, st
 	return (UWORD)_d0;
 }
 #define RemoveGList(remPtr, gadget, numGad) __intuition_RemoveGList((INTUITION_BASE_NAME), (struct Window *)(remPtr), (struct Gadget *)(gadget), (WORD)(numGad))
+#define __RemoveGList_base(__in_base, remPtr, gadget, numGad) __intuition_RemoveGList((__in_base), (struct Window *)(remPtr), (struct Gadget *)(gadget), (WORD)(numGad))
 
 static __inline__ VOID
-__intuition_ActivateWindow(struct IntuitionBase *__base, struct Window * window)
+__intuition_ActivateWindow(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1197,12 +1276,13 @@ __intuition_ActivateWindow(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ActivateWindow(window) __intuition_ActivateWindow((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ActivateWindow_base(__in_base, window) __intuition_ActivateWindow((__in_base), (struct Window *)(window))
 
 static __inline__ VOID
-__intuition_RefreshWindowFrame(struct IntuitionBase *__base, struct Window * window)
+__intuition_RefreshWindowFrame(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1213,14 +1293,15 @@ __intuition_RefreshWindowFrame(struct IntuitionBase *__base, struct Window * win
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RefreshWindowFrame(window) __intuition_RefreshWindowFrame((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __RefreshWindowFrame_base(__in_base, window) __intuition_RefreshWindowFrame((__in_base), (struct Window *)(window))
 
 static __inline__ BOOL
-__intuition_ActivateGadget(struct IntuitionBase *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester)
+__intuition_ActivateGadget(void *__base, struct Gadget * gadgets, struct Window * window, struct Requester * requester)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadgets);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -462(%/a6)"
@@ -1230,9 +1311,10 @@ __intuition_ActivateGadget(struct IntuitionBase *__base, struct Gadget * gadgets
 	return (BOOL)_d0;
 }
 #define ActivateGadget(gadgets, window, requester) __intuition_ActivateGadget((INTUITION_BASE_NAME), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
+#define __ActivateGadget_base(__in_base, gadgets, window, requester) __intuition_ActivateGadget((__in_base), (struct Gadget *)(gadgets), (struct Window *)(window), (struct Requester *)(requester))
 
 static __inline__ VOID
-__intuition_NewModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, UWORD flags, UWORD horizPot, UWORD vertPot, UWORD horizBody, UWORD vertBody, WORD numGad)
+__intuition_NewModifyProp(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, UWORD flags, UWORD horizPot, UWORD vertPot, UWORD horizBody, UWORD vertBody, WORD numGad)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
@@ -1243,7 +1325,7 @@ __intuition_NewModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, 
 	register ULONG _d3 __asm("d3") = (ULONG)(horizBody);
 	register ULONG _d4 __asm("d4") = (ULONG)(vertBody);
 	register ULONG _d5 __asm("d5") = (ULONG)(numGad);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -468(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2), "r" (_d3), "r" (_d4), "r" (_d5)
@@ -1251,14 +1333,15 @@ __intuition_NewModifyProp(struct IntuitionBase *__base, struct Gadget * gadget, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define NewModifyProp(gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody, numGad) __intuition_NewModifyProp((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody), (WORD)(numGad))
+#define __NewModifyProp_base(__in_base, gadget, window, requester, flags, horizPot, vertPot, horizBody, vertBody, numGad) __intuition_NewModifyProp((__in_base), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (UWORD)(flags), (UWORD)(horizPot), (UWORD)(vertPot), (UWORD)(horizBody), (UWORD)(vertBody), (WORD)(numGad))
 
 static __inline__ LONG
-__intuition_QueryOverscan(struct IntuitionBase *__base, ULONG displayID, struct Rectangle * rect, WORD oScanType)
+__intuition_QueryOverscan(void *__base, ULONG displayID, struct Rectangle * rect, WORD oScanType)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(displayID);
 	register ULONG _a1 __asm("a1") = (ULONG)(rect);
 	register ULONG _d0 __asm("d0") = (ULONG)(oScanType);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -474(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1267,13 +1350,14 @@ __intuition_QueryOverscan(struct IntuitionBase *__base, ULONG displayID, struct 
 	return (LONG)_d0;
 }
 #define QueryOverscan(displayID, rect, oScanType) __intuition_QueryOverscan((INTUITION_BASE_NAME), (ULONG)(displayID), (struct Rectangle *)(rect), (WORD)(oScanType))
+#define __QueryOverscan_base(__in_base, displayID, rect, oScanType) __intuition_QueryOverscan((__in_base), (ULONG)(displayID), (struct Rectangle *)(rect), (WORD)(oScanType))
 
 static __inline__ VOID
-__intuition_MoveWindowInFrontOf(struct IntuitionBase *__base, struct Window * window, struct Window * behindWindow)
+__intuition_MoveWindowInFrontOf(void *__base, struct Window * window, struct Window * behindWindow)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(behindWindow);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -480(%/a6)"
@@ -1283,16 +1367,17 @@ __intuition_MoveWindowInFrontOf(struct IntuitionBase *__base, struct Window * wi
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define MoveWindowInFrontOf(window, behindWindow) __intuition_MoveWindowInFrontOf((INTUITION_BASE_NAME), (struct Window *)(window), (struct Window *)(behindWindow))
+#define __MoveWindowInFrontOf_base(__in_base, window, behindWindow) __intuition_MoveWindowInFrontOf((__in_base), (struct Window *)(window), (struct Window *)(behindWindow))
 
 static __inline__ VOID
-__intuition_ChangeWindowBox(struct IntuitionBase *__base, struct Window * window, WORD left, WORD top, WORD width, WORD height)
+__intuition_ChangeWindowBox(void *__base, struct Window * window, WORD left, WORD top, WORD width, WORD height)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(left);
 	register ULONG _d1 __asm("d1") = (ULONG)(top);
 	register ULONG _d2 __asm("d2") = (ULONG)(width);
 	register ULONG _d3 __asm("d3") = (ULONG)(height);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -486(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -1301,12 +1386,13 @@ __intuition_ChangeWindowBox(struct IntuitionBase *__base, struct Window * window
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ChangeWindowBox(window, left, top, width, height) __intuition_ChangeWindowBox((INTUITION_BASE_NAME), (struct Window *)(window), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height))
+#define __ChangeWindowBox_base(__in_base, window, left, top, width, height) __intuition_ChangeWindowBox((__in_base), (struct Window *)(window), (WORD)(left), (WORD)(top), (WORD)(width), (WORD)(height))
 
 static __inline__ struct Hook *
-__intuition_SetEditHook(struct IntuitionBase *__base, struct Hook * hook)
+__intuition_SetEditHook(void *__base, struct Hook * hook)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(hook);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1317,13 +1403,14 @@ __intuition_SetEditHook(struct IntuitionBase *__base, struct Hook * hook)
 	return (struct Hook *)_d0;
 }
 #define SetEditHook(hook) __intuition_SetEditHook((INTUITION_BASE_NAME), (struct Hook *)(hook))
+#define __SetEditHook_base(__in_base, hook) __intuition_SetEditHook((__in_base), (struct Hook *)(hook))
 
 static __inline__ LONG
-__intuition_SetMouseQueue(struct IntuitionBase *__base, struct Window * window, UWORD queueLength)
+__intuition_SetMouseQueue(void *__base, struct Window * window, UWORD queueLength)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _d0 __asm("d0") = (ULONG)(queueLength);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -498(%/a6)"
@@ -1333,12 +1420,13 @@ __intuition_SetMouseQueue(struct IntuitionBase *__base, struct Window * window, 
 	return (LONG)_d0;
 }
 #define SetMouseQueue(window, queueLength) __intuition_SetMouseQueue((INTUITION_BASE_NAME), (struct Window *)(window), (UWORD)(queueLength))
+#define __SetMouseQueue_base(__in_base, window, queueLength) __intuition_SetMouseQueue((__in_base), (struct Window *)(window), (UWORD)(queueLength))
 
 static __inline__ VOID
-__intuition_ZipWindow(struct IntuitionBase *__base, struct Window * window)
+__intuition_ZipWindow(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1349,12 +1437,13 @@ __intuition_ZipWindow(struct IntuitionBase *__base, struct Window * window)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ZipWindow(window) __intuition_ZipWindow((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __ZipWindow_base(__in_base, window) __intuition_ZipWindow((__in_base), (struct Window *)(window))
 
 static __inline__ struct Screen *
-__intuition_LockPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
+__intuition_LockPubScreen(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1365,13 +1454,14 @@ __intuition_LockPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
 	return (struct Screen *)_d0;
 }
 #define LockPubScreen(name) __intuition_LockPubScreen((INTUITION_BASE_NAME), (CONST_STRPTR)(name))
+#define __LockPubScreen_base(__in_base, name) __intuition_LockPubScreen((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ VOID
-__intuition_UnlockPubScreen(struct IntuitionBase *__base, CONST_STRPTR name, struct Screen * screen)
+__intuition_UnlockPubScreen(void *__base, CONST_STRPTR name, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
 	register ULONG _a1 __asm("a1") = (ULONG)(screen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -516(%/a6)"
@@ -1381,11 +1471,12 @@ __intuition_UnlockPubScreen(struct IntuitionBase *__base, CONST_STRPTR name, str
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockPubScreen(name, screen) __intuition_UnlockPubScreen((INTUITION_BASE_NAME), (CONST_STRPTR)(name), (struct Screen *)(screen))
+#define __UnlockPubScreen_base(__in_base, name, screen) __intuition_UnlockPubScreen((__in_base), (CONST_STRPTR)(name), (struct Screen *)(screen))
 
 static __inline__ struct List *
-__intuition_LockPubScreenList(struct IntuitionBase *__base)
+__intuition_LockPubScreenList(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1397,11 +1488,12 @@ __intuition_LockPubScreenList(struct IntuitionBase *__base)
 	return (struct List *)_d0;
 }
 #define LockPubScreenList() __intuition_LockPubScreenList((INTUITION_BASE_NAME))
+#define __LockPubScreenList_base(__in_base) __intuition_LockPubScreenList((__in_base))
 
 static __inline__ VOID
-__intuition_UnlockPubScreenList(struct IntuitionBase *__base)
+__intuition_UnlockPubScreenList(void *__base)
 {
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -1413,13 +1505,14 @@ __intuition_UnlockPubScreenList(struct IntuitionBase *__base)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define UnlockPubScreenList() __intuition_UnlockPubScreenList((INTUITION_BASE_NAME))
+#define __UnlockPubScreenList_base(__in_base) __intuition_UnlockPubScreenList((__in_base))
 
 static __inline__ STRPTR
-__intuition_NextPubScreen(struct IntuitionBase *__base, CONST struct Screen * screen, STRPTR namebuf)
+__intuition_NextPubScreen(void *__base, CONST struct Screen * screen, STRPTR namebuf)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _a1 __asm("a1") = (ULONG)(namebuf);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -534(%/a6)"
@@ -1429,12 +1522,13 @@ __intuition_NextPubScreen(struct IntuitionBase *__base, CONST struct Screen * sc
 	return (STRPTR)_d0;
 }
 #define NextPubScreen(screen, namebuf) __intuition_NextPubScreen((INTUITION_BASE_NAME), (CONST struct Screen *)(screen), (STRPTR)(namebuf))
+#define __NextPubScreen_base(__in_base, screen, namebuf) __intuition_NextPubScreen((__in_base), (CONST struct Screen *)(screen), (STRPTR)(namebuf))
 
 static __inline__ VOID
-__intuition_SetDefaultPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
+__intuition_SetDefaultPubScreen(void *__base, CONST_STRPTR name)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(name);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1445,12 +1539,13 @@ __intuition_SetDefaultPubScreen(struct IntuitionBase *__base, CONST_STRPTR name)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetDefaultPubScreen(name) __intuition_SetDefaultPubScreen((INTUITION_BASE_NAME), (CONST_STRPTR)(name))
+#define __SetDefaultPubScreen_base(__in_base, name) __intuition_SetDefaultPubScreen((__in_base), (CONST_STRPTR)(name))
 
 static __inline__ UWORD
-__intuition_SetPubScreenModes(struct IntuitionBase *__base, UWORD modes)
+__intuition_SetPubScreenModes(void *__base, UWORD modes)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(modes);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
 	register ULONG _a1 __asm("a1");
@@ -1461,13 +1556,14 @@ __intuition_SetPubScreenModes(struct IntuitionBase *__base, UWORD modes)
 	return (UWORD)_d0;
 }
 #define SetPubScreenModes(modes) __intuition_SetPubScreenModes((INTUITION_BASE_NAME), (UWORD)(modes))
+#define __SetPubScreenModes_base(__in_base, modes) __intuition_SetPubScreenModes((__in_base), (UWORD)(modes))
 
 static __inline__ UWORD
-__intuition_PubScreenStatus(struct IntuitionBase *__base, struct Screen * screen, UWORD statusFlags)
+__intuition_PubScreenStatus(void *__base, struct Screen * screen, UWORD statusFlags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(statusFlags);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -552(%/a6)"
@@ -1477,12 +1573,13 @@ __intuition_PubScreenStatus(struct IntuitionBase *__base, struct Screen * screen
 	return (UWORD)_d0;
 }
 #define PubScreenStatus(screen, statusFlags) __intuition_PubScreenStatus((INTUITION_BASE_NAME), (struct Screen *)(screen), (UWORD)(statusFlags))
+#define __PubScreenStatus_base(__in_base, screen, statusFlags) __intuition_PubScreenStatus((__in_base), (struct Screen *)(screen), (UWORD)(statusFlags))
 
 static __inline__ struct RastPort *
-__intuition_ObtainGIRPort(struct IntuitionBase *__base, struct GadgetInfo * gInfo)
+__intuition_ObtainGIRPort(void *__base, struct GadgetInfo * gInfo)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gInfo);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1493,12 +1590,13 @@ __intuition_ObtainGIRPort(struct IntuitionBase *__base, struct GadgetInfo * gInf
 	return (struct RastPort *)_d0;
 }
 #define ObtainGIRPort(gInfo) __intuition_ObtainGIRPort((INTUITION_BASE_NAME), (struct GadgetInfo *)(gInfo))
+#define __ObtainGIRPort_base(__in_base, gInfo) __intuition_ObtainGIRPort((__in_base), (struct GadgetInfo *)(gInfo))
 
 static __inline__ VOID
-__intuition_ReleaseGIRPort(struct IntuitionBase *__base, struct RastPort * rp)
+__intuition_ReleaseGIRPort(void *__base, struct RastPort * rp)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1509,14 +1607,15 @@ __intuition_ReleaseGIRPort(struct IntuitionBase *__base, struct RastPort * rp)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ReleaseGIRPort(rp) __intuition_ReleaseGIRPort((INTUITION_BASE_NAME), (struct RastPort *)(rp))
+#define __ReleaseGIRPort_base(__in_base, rp) __intuition_ReleaseGIRPort((__in_base), (struct RastPort *)(rp))
 
 static __inline__ VOID
-__intuition_GadgetMouse(struct IntuitionBase *__base, struct Gadget * gadget, struct GadgetInfo * gInfo, WORD * mousePoint)
+__intuition_GadgetMouse(void *__base, struct Gadget * gadget, struct GadgetInfo * gInfo, WORD * mousePoint)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(gInfo);
 	register ULONG _a2 __asm("a2") = (ULONG)(mousePoint);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -570(%/a6)"
@@ -1526,12 +1625,13 @@ __intuition_GadgetMouse(struct IntuitionBase *__base, struct Gadget * gadget, st
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GadgetMouse(gadget, gInfo, mousePoint) __intuition_GadgetMouse((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct GadgetInfo *)(gInfo), (WORD *)(mousePoint))
+#define __GadgetMouse_base(__in_base, gadget, gInfo, mousePoint) __intuition_GadgetMouse((__in_base), (struct Gadget *)(gadget), (struct GadgetInfo *)(gInfo), (WORD *)(mousePoint))
 
 static __inline__ VOID
-__intuition_GetDefaultPubScreen(struct IntuitionBase *__base, STRPTR nameBuffer)
+__intuition_GetDefaultPubScreen(void *__base, STRPTR nameBuffer)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(nameBuffer);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1542,15 +1642,16 @@ __intuition_GetDefaultPubScreen(struct IntuitionBase *__base, STRPTR nameBuffer)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define GetDefaultPubScreen(nameBuffer) __intuition_GetDefaultPubScreen((INTUITION_BASE_NAME), (STRPTR)(nameBuffer))
+#define __GetDefaultPubScreen_base(__in_base, nameBuffer) __intuition_GetDefaultPubScreen((__in_base), (STRPTR)(nameBuffer))
 
 static __inline__ LONG
-__intuition_EasyRequestArgs(struct IntuitionBase *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG * idcmpPtr, CONST_APTR args)
+__intuition_EasyRequestArgs(void *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG * idcmpPtr, CONST_APTR args)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(easyStruct);
 	register ULONG _a2 __asm("a2") = (ULONG)(idcmpPtr);
 	register ULONG _a3 __asm("a3") = (ULONG)(args);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -588(%/a6)"
@@ -1560,17 +1661,27 @@ __intuition_EasyRequestArgs(struct IntuitionBase *__base, struct Window * window
 	return (LONG)_d0;
 }
 #define EasyRequestArgs(window, easyStruct, idcmpPtr, args) __intuition_EasyRequestArgs((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)(args))
+#define __EasyRequestArgs_base(__in_base, window, easyStruct, idcmpPtr, args) __intuition_EasyRequestArgs((__in_base), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)(args))
 
-#define EasyRequest(window, easyStruct, idcmpPtr, ...) (EasyRequest)((struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR LONG
+__EasyRequest_va(void *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG * idcmpPtr, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, idcmpPtr);
+	LONG _r = (LONG)__intuition_EasyRequestArgs(__base, (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), (CONST_APTR)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define EasyRequest(window, easyStruct, idcmpPtr, ...) __EasyRequest_va((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG *)(idcmpPtr), ##__VA_ARGS__)
 
 static __inline__ struct Window *
-__intuition_BuildEasyRequestArgs(struct IntuitionBase *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG idcmp, CONST_APTR args)
+__intuition_BuildEasyRequestArgs(void *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG idcmp, CONST_APTR args)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(easyStruct);
 	register ULONG _d0 __asm("d0") = (ULONG)(idcmp);
 	register ULONG _a3 __asm("a3") = (ULONG)(args);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -594(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1579,16 +1690,26 @@ __intuition_BuildEasyRequestArgs(struct IntuitionBase *__base, struct Window * w
 	return (struct Window *)_d0;
 }
 #define BuildEasyRequestArgs(window, easyStruct, idcmp, args) __intuition_BuildEasyRequestArgs((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)(args))
+#define __BuildEasyRequestArgs_base(__in_base, window, easyStruct, idcmp, args) __intuition_BuildEasyRequestArgs((__in_base), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)(args))
 
-#define BuildEasyRequest(window, easyStruct, idcmp, ...) (BuildEasyRequest)((struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct Window *
+__BuildEasyRequest_va(void *__base, struct Window * window, CONST struct EasyStruct * easyStruct, ULONG idcmp, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, idcmp);
+	struct Window * _r = (struct Window *)__intuition_BuildEasyRequestArgs(__base, (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), (CONST_APTR)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define BuildEasyRequest(window, easyStruct, idcmp, ...) __BuildEasyRequest_va((INTUITION_BASE_NAME), (struct Window *)(window), (CONST struct EasyStruct *)(easyStruct), (ULONG)(idcmp), ##__VA_ARGS__)
 
 static __inline__ LONG
-__intuition_SysReqHandler(struct IntuitionBase *__base, struct Window * window, ULONG * idcmpPtr, BOOL waitInput)
+__intuition_SysReqHandler(void *__base, struct Window * window, ULONG * idcmpPtr, BOOL waitInput)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(idcmpPtr);
 	register ULONG _d0 __asm("d0") = (ULONG)(waitInput);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -600(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1597,13 +1718,14 @@ __intuition_SysReqHandler(struct IntuitionBase *__base, struct Window * window, 
 	return (LONG)_d0;
 }
 #define SysReqHandler(window, idcmpPtr, waitInput) __intuition_SysReqHandler((INTUITION_BASE_NAME), (struct Window *)(window), (ULONG *)(idcmpPtr), (BOOL)(waitInput))
+#define __SysReqHandler_base(__in_base, window, idcmpPtr, waitInput) __intuition_SysReqHandler((__in_base), (struct Window *)(window), (ULONG *)(idcmpPtr), (BOOL)(waitInput))
 
 static __inline__ struct Window *
-__intuition_OpenWindowTagList(struct IntuitionBase *__base, CONST struct NewWindow * newWindow, CONST struct TagItem * tagList)
+__intuition_OpenWindowTagList(void *__base, CONST struct NewWindow * newWindow, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(newWindow);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -606(%/a6)"
@@ -1613,15 +1735,25 @@ __intuition_OpenWindowTagList(struct IntuitionBase *__base, CONST struct NewWind
 	return (struct Window *)_d0;
 }
 #define OpenWindowTagList(newWindow, tagList) __intuition_OpenWindowTagList((INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)(tagList))
+#define __OpenWindowTagList_base(__in_base, newWindow, tagList) __intuition_OpenWindowTagList((__in_base), (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)(tagList))
 
-#define OpenWindowTags(newWindow, ...) (OpenWindowTags)((CONST struct NewWindow *)(newWindow), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct Window *
+__OpenWindowTags_va(void *__base, CONST struct NewWindow * newWindow, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, newWindow);
+	struct Window * _r = (struct Window *)__intuition_OpenWindowTagList(__base, (CONST struct NewWindow *)(newWindow), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define OpenWindowTags(newWindow, ...) __OpenWindowTags_va((INTUITION_BASE_NAME), (CONST struct NewWindow *)(newWindow), ##__VA_ARGS__)
 
 static __inline__ struct Screen *
-__intuition_OpenScreenTagList(struct IntuitionBase *__base, CONST struct NewScreen * newScreen, CONST struct TagItem * tagList)
+__intuition_OpenScreenTagList(void *__base, CONST struct NewScreen * newScreen, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(newScreen);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -612(%/a6)"
@@ -1631,11 +1763,21 @@ __intuition_OpenScreenTagList(struct IntuitionBase *__base, CONST struct NewScre
 	return (struct Screen *)_d0;
 }
 #define OpenScreenTagList(newScreen, tagList) __intuition_OpenScreenTagList((INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)(tagList))
+#define __OpenScreenTagList_base(__in_base, newScreen, tagList) __intuition_OpenScreenTagList((__in_base), (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)(tagList))
 
-#define OpenScreenTags(newScreen, ...) (OpenScreenTags)((CONST struct NewScreen *)(newScreen), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR struct Screen *
+__OpenScreenTags_va(void *__base, CONST struct NewScreen * newScreen, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, newScreen);
+	struct Screen * _r = (struct Screen *)__intuition_OpenScreenTagList(__base, (CONST struct NewScreen *)(newScreen), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define OpenScreenTags(newScreen, ...) __OpenScreenTags_va((INTUITION_BASE_NAME), (CONST struct NewScreen *)(newScreen), ##__VA_ARGS__)
 
 static __inline__ VOID
-__intuition_DrawImageState(struct IntuitionBase *__base, struct RastPort * rp, struct Image * image, WORD leftOffset, WORD topOffset, ULONG state, CONST struct DrawInfo * drawInfo)
+__intuition_DrawImageState(void *__base, struct RastPort * rp, struct Image * image, WORD leftOffset, WORD topOffset, ULONG state, CONST struct DrawInfo * drawInfo)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(image);
@@ -1643,7 +1785,7 @@ __intuition_DrawImageState(struct IntuitionBase *__base, struct RastPort * rp, s
 	register ULONG _d1 __asm("d1") = (ULONG)(topOffset);
 	register ULONG _d2 __asm("d2") = (ULONG)(state);
 	register ULONG _a2 __asm("a2") = (ULONG)(drawInfo);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -618(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6), "r" (_d2)
@@ -1651,13 +1793,14 @@ __intuition_DrawImageState(struct IntuitionBase *__base, struct RastPort * rp, s
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DrawImageState(rp, image, leftOffset, topOffset, state, drawInfo) __intuition_DrawImageState((INTUITION_BASE_NAME), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset), (ULONG)(state), (CONST struct DrawInfo *)(drawInfo))
+#define __DrawImageState_base(__in_base, rp, image, leftOffset, topOffset, state, drawInfo) __intuition_DrawImageState((__in_base), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset), (ULONG)(state), (CONST struct DrawInfo *)(drawInfo))
 
 static __inline__ BOOL
-__intuition_PointInImage(struct IntuitionBase *__base, ULONG point, struct Image * image)
+__intuition_PointInImage(void *__base, ULONG point, struct Image * image)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(point);
 	register ULONG _a0 __asm("a0") = (ULONG)(image);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -624(%/a6)"
@@ -1667,15 +1810,16 @@ __intuition_PointInImage(struct IntuitionBase *__base, ULONG point, struct Image
 	return (BOOL)_d0;
 }
 #define PointInImage(point, image) __intuition_PointInImage((INTUITION_BASE_NAME), (ULONG)(point), (struct Image *)(image))
+#define __PointInImage_base(__in_base, point, image) __intuition_PointInImage((__in_base), (ULONG)(point), (struct Image *)(image))
 
 static __inline__ VOID
-__intuition_EraseImage(struct IntuitionBase *__base, struct RastPort * rp, struct Image * image, WORD leftOffset, WORD topOffset)
+__intuition_EraseImage(void *__base, struct RastPort * rp, struct Image * image, WORD leftOffset, WORD topOffset)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(rp);
 	register ULONG _a1 __asm("a1") = (ULONG)(image);
 	register ULONG _d0 __asm("d0") = (ULONG)(leftOffset);
 	register ULONG _d1 __asm("d1") = (ULONG)(topOffset);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -630(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -1683,14 +1827,15 @@ __intuition_EraseImage(struct IntuitionBase *__base, struct RastPort * rp, struc
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define EraseImage(rp, image, leftOffset, topOffset) __intuition_EraseImage((INTUITION_BASE_NAME), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
+#define __EraseImage_base(__in_base, rp, image, leftOffset, topOffset) __intuition_EraseImage((__in_base), (struct RastPort *)(rp), (struct Image *)(image), (WORD)(leftOffset), (WORD)(topOffset))
 
 static __inline__ APTR
-__intuition_NewObjectA(struct IntuitionBase *__base, struct IClass * classPtr, CONST_STRPTR classID, CONST struct TagItem * tagList)
+__intuition_NewObjectA(void *__base, struct IClass * classPtr, CONST_STRPTR classID, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(classPtr);
 	register ULONG _a1 __asm("a1") = (ULONG)(classID);
 	register ULONG _a2 __asm("a2") = (ULONG)(tagList);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -636(%/a6)"
@@ -1700,14 +1845,24 @@ __intuition_NewObjectA(struct IntuitionBase *__base, struct IClass * classPtr, C
 	return (APTR)_d0;
 }
 #define NewObjectA(classPtr, classID, tagList) __intuition_NewObjectA((INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)(tagList))
+#define __NewObjectA_base(__in_base, classPtr, classID, tagList) __intuition_NewObjectA((__in_base), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)(tagList))
 
-#define NewObject(classPtr, classID, ...) (NewObject)((struct IClass *)(classPtr), (CONST_STRPTR)(classID), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR APTR
+__NewObject_va(struct IClass * classPtr, CONST_STRPTR classID, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, classID);
+	APTR _r = (APTR)__intuition_NewObjectA((INTUITION_BASE_NAME), (struct IClass *)(classPtr), (CONST_STRPTR)(classID), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define NewObject __NewObject_va
 
 static __inline__ VOID
-__intuition_DisposeObject(struct IntuitionBase *__base, APTR object)
+__intuition_DisposeObject(void *__base, APTR object)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1718,13 +1873,14 @@ __intuition_DisposeObject(struct IntuitionBase *__base, APTR object)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define DisposeObject(object) __intuition_DisposeObject((INTUITION_BASE_NAME), (APTR)(object))
+#define __DisposeObject_base(__in_base, object) __intuition_DisposeObject((__in_base), (APTR)(object))
 
 static __inline__ ULONG
-__intuition_SetAttrsA(struct IntuitionBase *__base, APTR object, CONST struct TagItem * tagList)
+__intuition_SetAttrsA(void *__base, APTR object, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
 	register ULONG _a1 __asm("a1") = (ULONG)(tagList);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -648(%/a6)"
@@ -1734,16 +1890,26 @@ __intuition_SetAttrsA(struct IntuitionBase *__base, APTR object, CONST struct Ta
 	return (ULONG)_d0;
 }
 #define SetAttrsA(object, tagList) __intuition_SetAttrsA((INTUITION_BASE_NAME), (APTR)(object), (CONST struct TagItem *)(tagList))
+#define __SetAttrsA_base(__in_base, object, tagList) __intuition_SetAttrsA((__in_base), (APTR)(object), (CONST struct TagItem *)(tagList))
 
-#define SetAttrs(object, ...) (SetAttrs)((APTR)(object), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__SetAttrs_va(void *__base, APTR object, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, object);
+	ULONG _r = (ULONG)__intuition_SetAttrsA(__base, (APTR)(object), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetAttrs(object, ...) __SetAttrs_va((INTUITION_BASE_NAME), (APTR)(object), ##__VA_ARGS__)
 
 static __inline__ ULONG
-__intuition_GetAttr(struct IntuitionBase *__base, ULONG attrID, APTR object, ULONG * storagePtr)
+__intuition_GetAttr(void *__base, ULONG attrID, APTR object, ULONG * storagePtr)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(attrID);
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
 	register ULONG _a1 __asm("a1") = (ULONG)(storagePtr);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -654(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1752,15 +1918,16 @@ __intuition_GetAttr(struct IntuitionBase *__base, ULONG attrID, APTR object, ULO
 	return (ULONG)_d0;
 }
 #define GetAttr(attrID, object, storagePtr) __intuition_GetAttr((INTUITION_BASE_NAME), (ULONG)(attrID), (APTR)(object), (ULONG *)(storagePtr))
+#define __GetAttr_base(__in_base, attrID, object, storagePtr) __intuition_GetAttr((__in_base), (ULONG)(attrID), (APTR)(object), (ULONG *)(storagePtr))
 
 static __inline__ ULONG
-__intuition_SetGadgetAttrsA(struct IntuitionBase *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, CONST struct TagItem * tagList)
+__intuition_SetGadgetAttrsA(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, CONST struct TagItem * tagList)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gadget);
 	register ULONG _a1 __asm("a1") = (ULONG)(window);
 	register ULONG _a2 __asm("a2") = (ULONG)(requester);
 	register ULONG _a3 __asm("a3") = (ULONG)(tagList);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -660(%/a6)"
@@ -1770,14 +1937,24 @@ __intuition_SetGadgetAttrsA(struct IntuitionBase *__base, struct Gadget * gadget
 	return (ULONG)_d0;
 }
 #define SetGadgetAttrsA(gadget, window, requester, tagList) __intuition_SetGadgetAttrsA((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)(tagList))
+#define __SetGadgetAttrsA_base(__in_base, gadget, window, requester, tagList) __intuition_SetGadgetAttrsA((__in_base), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)(tagList))
 
-#define SetGadgetAttrs(gadget, window, requester, ...) (SetGadgetAttrs)((struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__SetGadgetAttrs_va(void *__base, struct Gadget * gadget, struct Window * window, struct Requester * requester, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, requester);
+	ULONG _r = (ULONG)__intuition_SetGadgetAttrsA(__base, (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define SetGadgetAttrs(gadget, window, requester, ...) __SetGadgetAttrs_va((INTUITION_BASE_NAME), (struct Gadget *)(gadget), (struct Window *)(window), (struct Requester *)(requester), ##__VA_ARGS__)
 
 static __inline__ APTR
-__intuition_NextObject(struct IntuitionBase *__base, APTR objectPtrPtr)
+__intuition_NextObject(void *__base, APTR objectPtrPtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(objectPtrPtr);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1788,16 +1965,17 @@ __intuition_NextObject(struct IntuitionBase *__base, APTR objectPtrPtr)
 	return (APTR)_d0;
 }
 #define NextObject(objectPtrPtr) __intuition_NextObject((INTUITION_BASE_NAME), (APTR)(objectPtrPtr))
+#define __NextObject_base(__in_base, objectPtrPtr) __intuition_NextObject((__in_base), (APTR)(objectPtrPtr))
 
 static __inline__ struct IClass *
-__intuition_MakeClass(struct IntuitionBase *__base, CONST_STRPTR classID, CONST_STRPTR superClassID, CONST struct IClass * superClassPtr, UWORD instanceSize, ULONG flags)
+__intuition_MakeClass(void *__base, CONST_STRPTR classID, CONST_STRPTR superClassID, CONST struct IClass * superClassPtr, UWORD instanceSize, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(classID);
 	register ULONG _a1 __asm("a1") = (ULONG)(superClassID);
 	register ULONG _a2 __asm("a2") = (ULONG)(superClassPtr);
 	register ULONG _d0 __asm("d0") = (ULONG)(instanceSize);
 	register ULONG _d1 __asm("d1") = (ULONG)(flags);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -678(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a2), "r" (_a6)
@@ -1805,12 +1983,13 @@ __intuition_MakeClass(struct IntuitionBase *__base, CONST_STRPTR classID, CONST_
 	return (struct IClass *)_d0;
 }
 #define MakeClass(classID, superClassID, superClassPtr, instanceSize, flags) __intuition_MakeClass((INTUITION_BASE_NAME), (CONST_STRPTR)(classID), (CONST_STRPTR)(superClassID), (CONST struct IClass *)(superClassPtr), (UWORD)(instanceSize), (ULONG)(flags))
+#define __MakeClass_base(__in_base, classID, superClassID, superClassPtr, instanceSize, flags) __intuition_MakeClass((__in_base), (CONST_STRPTR)(classID), (CONST_STRPTR)(superClassID), (CONST struct IClass *)(superClassPtr), (UWORD)(instanceSize), (ULONG)(flags))
 
 static __inline__ VOID
-__intuition_AddClass(struct IntuitionBase *__base, struct IClass * classPtr)
+__intuition_AddClass(void *__base, struct IClass * classPtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(classPtr);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1821,12 +2000,13 @@ __intuition_AddClass(struct IntuitionBase *__base, struct IClass * classPtr)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define AddClass(classPtr) __intuition_AddClass((INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define __AddClass_base(__in_base, classPtr) __intuition_AddClass((__in_base), (struct IClass *)(classPtr))
 
 static __inline__ struct DrawInfo *
-__intuition_GetScreenDrawInfo(struct IntuitionBase *__base, struct Screen * screen)
+__intuition_GetScreenDrawInfo(void *__base, struct Screen * screen)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1837,13 +2017,14 @@ __intuition_GetScreenDrawInfo(struct IntuitionBase *__base, struct Screen * scre
 	return (struct DrawInfo *)_d0;
 }
 #define GetScreenDrawInfo(screen) __intuition_GetScreenDrawInfo((INTUITION_BASE_NAME), (struct Screen *)(screen))
+#define __GetScreenDrawInfo_base(__in_base, screen) __intuition_GetScreenDrawInfo((__in_base), (struct Screen *)(screen))
 
 static __inline__ VOID
-__intuition_FreeScreenDrawInfo(struct IntuitionBase *__base, struct Screen * screen, struct DrawInfo * drawInfo)
+__intuition_FreeScreenDrawInfo(void *__base, struct Screen * screen, struct DrawInfo * drawInfo)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _a1 __asm("a1") = (ULONG)(drawInfo);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -696(%/a6)"
@@ -1853,13 +2034,14 @@ __intuition_FreeScreenDrawInfo(struct IntuitionBase *__base, struct Screen * scr
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeScreenDrawInfo(screen, drawInfo) __intuition_FreeScreenDrawInfo((INTUITION_BASE_NAME), (struct Screen *)(screen), (struct DrawInfo *)(drawInfo))
+#define __FreeScreenDrawInfo_base(__in_base, screen, drawInfo) __intuition_FreeScreenDrawInfo((__in_base), (struct Screen *)(screen), (struct DrawInfo *)(drawInfo))
 
 static __inline__ BOOL
-__intuition_ResetMenuStrip(struct IntuitionBase *__base, struct Window * window, struct Menu * menu)
+__intuition_ResetMenuStrip(void *__base, struct Window * window, struct Menu * menu)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(menu);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -702(%/a6)"
@@ -1869,12 +2051,13 @@ __intuition_ResetMenuStrip(struct IntuitionBase *__base, struct Window * window,
 	return (BOOL)_d0;
 }
 #define ResetMenuStrip(window, menu) __intuition_ResetMenuStrip((INTUITION_BASE_NAME), (struct Window *)(window), (struct Menu *)(menu))
+#define __ResetMenuStrip_base(__in_base, window, menu) __intuition_ResetMenuStrip((__in_base), (struct Window *)(window), (struct Menu *)(menu))
 
 static __inline__ VOID
-__intuition_RemoveClass(struct IntuitionBase *__base, struct IClass * classPtr)
+__intuition_RemoveClass(void *__base, struct IClass * classPtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(classPtr);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1885,12 +2068,13 @@ __intuition_RemoveClass(struct IntuitionBase *__base, struct IClass * classPtr)
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define RemoveClass(classPtr) __intuition_RemoveClass((INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define __RemoveClass_base(__in_base, classPtr) __intuition_RemoveClass((__in_base), (struct IClass *)(classPtr))
 
 static __inline__ BOOL
-__intuition_FreeClass(struct IntuitionBase *__base, struct IClass * classPtr)
+__intuition_FreeClass(void *__base, struct IClass * classPtr)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(classPtr);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -1901,14 +2085,15 @@ __intuition_FreeClass(struct IntuitionBase *__base, struct IClass * classPtr)
 	return (BOOL)_d0;
 }
 #define FreeClass(classPtr) __intuition_FreeClass((INTUITION_BASE_NAME), (struct IClass *)(classPtr))
+#define __FreeClass_base(__in_base, classPtr) __intuition_FreeClass((__in_base), (struct IClass *)(classPtr))
 
 static __inline__ struct ScreenBuffer *
-__intuition_AllocScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, struct BitMap * bm, ULONG flags)
+__intuition_AllocScreenBuffer(void *__base, struct Screen * sc, struct BitMap * bm, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sc);
 	register ULONG _a1 __asm("a1") = (ULONG)(bm);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -768(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1917,13 +2102,14 @@ __intuition_AllocScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, 
 	return (struct ScreenBuffer *)_d0;
 }
 #define AllocScreenBuffer(sc, bm, flags) __intuition_AllocScreenBuffer((INTUITION_BASE_NAME), (struct Screen *)(sc), (struct BitMap *)(bm), (ULONG)(flags))
+#define __AllocScreenBuffer_base(__in_base, sc, bm, flags) __intuition_AllocScreenBuffer((__in_base), (struct Screen *)(sc), (struct BitMap *)(bm), (ULONG)(flags))
 
 static __inline__ VOID
-__intuition_FreeScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, struct ScreenBuffer * sb)
+__intuition_FreeScreenBuffer(void *__base, struct Screen * sc, struct ScreenBuffer * sb)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sc);
 	register ULONG _a1 __asm("a1") = (ULONG)(sb);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -774(%/a6)"
@@ -1933,13 +2119,14 @@ __intuition_FreeScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, s
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define FreeScreenBuffer(sc, sb) __intuition_FreeScreenBuffer((INTUITION_BASE_NAME), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
+#define __FreeScreenBuffer_base(__in_base, sc, sb) __intuition_FreeScreenBuffer((__in_base), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
 
 static __inline__ ULONG
-__intuition_ChangeScreenBuffer(struct IntuitionBase *__base, struct Screen * sc, struct ScreenBuffer * sb)
+__intuition_ChangeScreenBuffer(void *__base, struct Screen * sc, struct ScreenBuffer * sb)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(sc);
 	register ULONG _a1 __asm("a1") = (ULONG)(sb);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -780(%/a6)"
@@ -1949,14 +2136,15 @@ __intuition_ChangeScreenBuffer(struct IntuitionBase *__base, struct Screen * sc,
 	return (ULONG)_d0;
 }
 #define ChangeScreenBuffer(sc, sb) __intuition_ChangeScreenBuffer((INTUITION_BASE_NAME), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
+#define __ChangeScreenBuffer_base(__in_base, sc, sb) __intuition_ChangeScreenBuffer((__in_base), (struct Screen *)(sc), (struct ScreenBuffer *)(sb))
 
 static __inline__ VOID
-__intuition_ScreenDepth(struct IntuitionBase *__base, struct Screen * screen, ULONG flags, APTR reserved)
+__intuition_ScreenDepth(void *__base, struct Screen * screen, ULONG flags, APTR reserved)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
 	register ULONG _a1 __asm("a1") = (ULONG)(reserved);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -786(%/a6)"
 		: "+r" (_d0), "=r" (_d1), "+r" (_a0), "+r" (_a1)
@@ -1965,9 +2153,10 @@ __intuition_ScreenDepth(struct IntuitionBase *__base, struct Screen * screen, UL
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScreenDepth(screen, flags, reserved) __intuition_ScreenDepth((INTUITION_BASE_NAME), (struct Screen *)(screen), (ULONG)(flags), (APTR)(reserved))
+#define __ScreenDepth_base(__in_base, screen, flags, reserved) __intuition_ScreenDepth((__in_base), (struct Screen *)(screen), (ULONG)(flags), (APTR)(reserved))
 
 static __inline__ VOID
-__intuition_ScreenPosition(struct IntuitionBase *__base, struct Screen * screen, ULONG flags, LONG x1, LONG y1, LONG x2, LONG y2)
+__intuition_ScreenPosition(void *__base, struct Screen * screen, ULONG flags, LONG x1, LONG y1, LONG x2, LONG y2)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(screen);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
@@ -1975,7 +2164,7 @@ __intuition_ScreenPosition(struct IntuitionBase *__base, struct Screen * screen,
 	register ULONG _d2 __asm("d2") = (ULONG)(y1);
 	register ULONG _d3 __asm("d3") = (ULONG)(x2);
 	register ULONG _d4 __asm("d4") = (ULONG)(y2);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -792(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "=r" (_a1)
@@ -1984,9 +2173,10 @@ __intuition_ScreenPosition(struct IntuitionBase *__base, struct Screen * screen,
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScreenPosition(screen, flags, x1, y1, x2, y2) __intuition_ScreenPosition((INTUITION_BASE_NAME), (struct Screen *)(screen), (ULONG)(flags), (LONG)(x1), (LONG)(y1), (LONG)(x2), (LONG)(y2))
+#define __ScreenPosition_base(__in_base, screen, flags, x1, y1, x2, y2) __intuition_ScreenPosition((__in_base), (struct Screen *)(screen), (ULONG)(flags), (LONG)(x1), (LONG)(y1), (LONG)(x2), (LONG)(y2))
 
 static __inline__ VOID
-__intuition_ScrollWindowRaster(struct IntuitionBase *__base, struct Window * win, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
+__intuition_ScrollWindowRaster(void *__base, struct Window * win, WORD dx, WORD dy, WORD xMin, WORD yMin, WORD xMax, WORD yMax)
 {
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
 	register ULONG _d0 __asm("d0") = (ULONG)(dx);
@@ -1995,7 +2185,7 @@ __intuition_ScrollWindowRaster(struct IntuitionBase *__base, struct Window * win
 	register ULONG _d3 __asm("d3") = (ULONG)(yMin);
 	register ULONG _d4 __asm("d4") = (ULONG)(xMax);
 	register ULONG _d5 __asm("d5") = (ULONG)(yMax);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _a0 __asm("a0");
 	__asm__ __volatile__ ("jsr -798(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "=r" (_a0), "+r" (_a1)
@@ -2004,13 +2194,14 @@ __intuition_ScrollWindowRaster(struct IntuitionBase *__base, struct Window * win
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define ScrollWindowRaster(win, dx, dy, xMin, yMin, xMax, yMax) __intuition_ScrollWindowRaster((INTUITION_BASE_NAME), (struct Window *)(win), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
+#define __ScrollWindowRaster_base(__in_base, win, dx, dy, xMin, yMin, xMax, yMax) __intuition_ScrollWindowRaster((__in_base), (struct Window *)(win), (WORD)(dx), (WORD)(dy), (WORD)(xMin), (WORD)(yMin), (WORD)(xMax), (WORD)(yMax))
 
 static __inline__ VOID
-__intuition_LendMenus(struct IntuitionBase *__base, struct Window * fromwindow, struct Window * towindow)
+__intuition_LendMenus(void *__base, struct Window * fromwindow, struct Window * towindow)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(fromwindow);
 	register ULONG _a1 __asm("a1") = (ULONG)(towindow);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -804(%/a6)"
@@ -2020,15 +2211,16 @@ __intuition_LendMenus(struct IntuitionBase *__base, struct Window * fromwindow, 
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define LendMenus(fromwindow, towindow) __intuition_LendMenus((INTUITION_BASE_NAME), (struct Window *)(fromwindow), (struct Window *)(towindow))
+#define __LendMenus_base(__in_base, fromwindow, towindow) __intuition_LendMenus((__in_base), (struct Window *)(fromwindow), (struct Window *)(towindow))
 
 static __inline__ ULONG
-__intuition_DoGadgetMethodA(struct IntuitionBase *__base, struct Gadget * gad, struct Window * win, struct Requester * req, Msg message)
+__intuition_DoGadgetMethodA(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, Msg message)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(gad);
 	register ULONG _a1 __asm("a1") = (ULONG)(win);
 	register ULONG _a2 __asm("a2") = (ULONG)(req);
 	register ULONG _a3 __asm("a3") = (ULONG)(message);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -810(%/a6)"
@@ -2038,15 +2230,25 @@ __intuition_DoGadgetMethodA(struct IntuitionBase *__base, struct Gadget * gad, s
 	return (ULONG)_d0;
 }
 #define DoGadgetMethodA(gad, win, req, message) __intuition_DoGadgetMethodA((INTUITION_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)(message))
+#define __DoGadgetMethodA_base(__in_base, gad, win, req, message) __intuition_DoGadgetMethodA((__in_base), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)(message))
 
-#define DoGadgetMethod(gad, win, req, ...) (DoGadgetMethod)((struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__DoGadgetMethod_va(void *__base, struct Gadget * gad, struct Window * win, struct Requester * req, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, req);
+	ULONG _r = (ULONG)__intuition_DoGadgetMethodA(__base, (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), (Msg)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define DoGadgetMethod(gad, win, req, ...) __DoGadgetMethod_va((INTUITION_BASE_NAME), (struct Gadget *)(gad), (struct Window *)(win), (struct Requester *)(req), ##__VA_ARGS__)
 
 static __inline__ VOID
-__intuition_SetWindowPointerA(struct IntuitionBase *__base, struct Window * win, CONST struct TagItem * taglist)
+__intuition_SetWindowPointerA(void *__base, struct Window * win, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(win);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -816(%/a6)"
@@ -2056,17 +2258,26 @@ __intuition_SetWindowPointerA(struct IntuitionBase *__base, struct Window * win,
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define SetWindowPointerA(win, taglist) __intuition_SetWindowPointerA((INTUITION_BASE_NAME), (struct Window *)(win), (CONST struct TagItem *)(taglist))
+#define __SetWindowPointerA_base(__in_base, win, taglist) __intuition_SetWindowPointerA((__in_base), (struct Window *)(win), (CONST struct TagItem *)(taglist))
 
-#define SetWindowPointer(win, ...) (SetWindowPointer)((struct Window *)(win), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR VOID
+__SetWindowPointer_va(void *__base, struct Window * win, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, win);
+	__intuition_SetWindowPointerA(__base, (struct Window *)(win), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+}
+#define SetWindowPointer(win, ...) __SetWindowPointer_va((INTUITION_BASE_NAME), (struct Window *)(win), ##__VA_ARGS__)
 
 static __inline__ BOOL
-__intuition_TimedDisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, CONST_STRPTR string, UWORD height, ULONG time)
+__intuition_TimedDisplayAlert(void *__base, ULONG alertNumber, CONST_STRPTR string, UWORD height, ULONG time)
 {
 	register ULONG _d0 __asm("d0") = (ULONG)(alertNumber);
 	register ULONG _a0 __asm("a0") = (ULONG)(string);
 	register ULONG _d1 __asm("d1") = (ULONG)(height);
 	register ULONG _a1 __asm("a1") = (ULONG)(time);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	__asm__ __volatile__ ("jsr -822(%/a6)"
 		: "+r" (_d0), "+r" (_d1), "+r" (_a0), "+r" (_a1)
 		: "r" (_a6)
@@ -2074,13 +2285,14 @@ __intuition_TimedDisplayAlert(struct IntuitionBase *__base, ULONG alertNumber, C
 	return (BOOL)_d0;
 }
 #define TimedDisplayAlert(alertNumber, string, height, time) __intuition_TimedDisplayAlert((INTUITION_BASE_NAME), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height), (ULONG)(time))
+#define __TimedDisplayAlert_base(__in_base, alertNumber, string, height, time) __intuition_TimedDisplayAlert((__in_base), (ULONG)(alertNumber), (CONST_STRPTR)(string), (UWORD)(height), (ULONG)(time))
 
 static __inline__ VOID
-__intuition_HelpControl(struct IntuitionBase *__base, struct Window * win, ULONG flags)
+__intuition_HelpControl(void *__base, struct Window * win, ULONG flags)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(win);
 	register ULONG _d0 __asm("d0") = (ULONG)(flags);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
 	__asm__ __volatile__ ("jsr -828(%/a6)"
@@ -2090,13 +2302,14 @@ __intuition_HelpControl(struct IntuitionBase *__base, struct Window * win, ULONG
 	(void)_d0; (void)_d1; (void)_a0; (void)_a1;
 }
 #define HelpControl(win, flags) __intuition_HelpControl((INTUITION_BASE_NAME), (struct Window *)(win), (ULONG)(flags))
+#define __HelpControl_base(__in_base, win, flags) __intuition_HelpControl((__in_base), (struct Window *)(win), (ULONG)(flags))
 
 static __inline__ BOOL
-__intuition_ShowWindow(struct IntuitionBase *__base, struct Window * window, struct Window * other)
+__intuition_ShowWindow(void *__base, struct Window * window, struct Window * other)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
 	register ULONG _a1 __asm("a1") = (ULONG)(other);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -834(%/a6)"
@@ -2106,12 +2319,13 @@ __intuition_ShowWindow(struct IntuitionBase *__base, struct Window * window, str
 	return (BOOL)_d0;
 }
 #define ShowWindow(window, other) __intuition_ShowWindow((INTUITION_BASE_NAME), (struct Window *)(window), (struct Window *)(other))
+#define __ShowWindow_base(__in_base, window, other) __intuition_ShowWindow((__in_base), (struct Window *)(window), (struct Window *)(other))
 
 static __inline__ BOOL
-__intuition_HideWindow(struct IntuitionBase *__base, struct Window * window)
+__intuition_HideWindow(void *__base, struct Window * window)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(window);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a1 __asm("a1");
@@ -2122,13 +2336,14 @@ __intuition_HideWindow(struct IntuitionBase *__base, struct Window * window)
 	return (BOOL)_d0;
 }
 #define HideWindow(window) __intuition_HideWindow((INTUITION_BASE_NAME), (struct Window *)(window))
+#define __HideWindow_base(__in_base, window) __intuition_HideWindow((__in_base), (struct Window *)(window))
 
 static __inline__ ULONG
-__intuition_IntuitionControlA(struct IntuitionBase *__base, APTR object, CONST struct TagItem * taglist)
+__intuition_IntuitionControlA(void *__base, APTR object, CONST struct TagItem * taglist)
 {
 	register ULONG _a0 __asm("a0") = (ULONG)(object);
 	register ULONG _a1 __asm("a1") = (ULONG)(taglist);
-	register struct IntuitionBase *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	__asm__ __volatile__ ("jsr -1212(%/a6)"
@@ -2138,7 +2353,17 @@ __intuition_IntuitionControlA(struct IntuitionBase *__base, APTR object, CONST s
 	return (ULONG)_d0;
 }
 #define IntuitionControlA(object, taglist) __intuition_IntuitionControlA((INTUITION_BASE_NAME), (APTR)(object), (CONST struct TagItem *)(taglist))
+#define __IntuitionControlA_base(__in_base, object, taglist) __intuition_IntuitionControlA((__in_base), (APTR)(object), (CONST struct TagItem *)(taglist))
 
-#define IntuitionControl(object, ...) (IntuitionControl)((APTR)(object), ##__VA_ARGS__)
+static __inline__ __OPENNDK_VA_ATTR ULONG
+__IntuitionControl_va(void *__base, APTR object, ...)
+{
+	__builtin_va_list _ap;
+	__builtin_va_start(_ap, object);
+	ULONG _r = (ULONG)__intuition_IntuitionControlA(__base, (APTR)(object), (CONST struct TagItem *)_ap);
+	__builtin_va_end(_ap);
+	return _r;
+}
+#define IntuitionControl(object, ...) __IntuitionControl_va((INTUITION_BASE_NAME), (APTR)(object), ##__VA_ARGS__)
 
 #endif /* INLINE_INTUITION_H */

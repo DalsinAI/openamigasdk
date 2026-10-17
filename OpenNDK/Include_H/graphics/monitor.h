@@ -17,6 +17,8 @@
 #include <graphics/gfx.h>
 #endif
 
+struct View;
+
 struct MonitorSpec
 {
     struct ExtendedNode ms_Node;
@@ -29,22 +31,28 @@ struct MonitorSpec
     UWORD     BeamCon0;
     UWORD     min_row;
     struct SpecialMonitor *ms_Special;
-    UWORD     ms_OpenCount;
-    LONG    (*ms_transform)();
-    LONG    (*ms_translate)();
-    LONG    (*ms_scale)();
+    WORD      ms_OpenCount;
+    /* the monitor's own calls, as the 3.2 interface declares them */
+    LONG    (* __ASM__ ms_transform) __CLIB_PROTOTYPE((__REG__(a0, struct MonitorSpec *),
+                __REG__(a1, Point *), __REG__(d0, UWORD), __REG__(a2, Point *)));
+    LONG    (* __ASM__ ms_translate) __CLIB_PROTOTYPE((__REG__(a0, struct MonitorSpec *),
+                __REG__(a1, Point *), __REG__(d0, UWORD), __REG__(a2, Point *)));
+    LONG    (* __ASM__ ms_scale) __CLIB_PROTOTYPE((__REG__(a0, struct MonitorSpec *),
+                __REG__(a1, Point *), __REG__(d0, UWORD), __REG__(a2, Point *)));
     UWORD     ms_xoffset;
     UWORD     ms_yoffset;
     struct Rectangle ms_LegalView;
-    LONG    (*ms_maxoscan)();
-    LONG    (*ms_videoscan)();
+    LONG    (* __ASM__ ms_maxoscan) __CLIB_PROTOTYPE((__REG__(a0, struct MonitorSpec *),
+                __REG__(a1, struct Rectangle *), __REG__(d0, ULONG)));
+    LONG    (* __ASM__ ms_videoscan) __CLIB_PROTOTYPE((__REG__(a0, struct MonitorSpec *),
+                __REG__(a1, struct Rectangle *), __REG__(d0, ULONG)));
     UWORD     DeniseMinDisplayColumn;
     ULONG     DisplayCompatible;
     struct List DisplayInfoDataBase;
     struct SignalSemaphore DisplayInfoDataBaseSemaphore;
-    LONG    (*ms_MrgCop)();
-    LONG    (*ms_LoadView)();
-    LONG    (*ms_KillView)();
+    LONG    (* __STDARGS__ ms_MrgCop) __CLIB_PROTOTYPE((struct View *));
+    LONG    (* __STDARGS__ ms_LoadView) __CLIB_PROTOTYPE((struct View *));
+    LONG    (* __ASM__ ms_KillView) __CLIB_PROTOTYPE((__REG__(a0, struct MonitorSpec *)));
 };
 
 #define TO_MONITOR	0
@@ -153,10 +161,10 @@ struct SpecialMonitor
 {
     struct ExtendedNode spm_Node;
     UWORD   spm_Flags;
-    LONG  (*do_monitor)();
-    LONG  (*reserved1)();
-    LONG  (*reserved2)();
-    LONG  (*reserved3)();
+    LONG  (* __STDARGS__ do_monitor) __CLIB_PROTOTYPE((struct MonitorSpec *));
+    LONG  (* __STDARGS__ reserved1)();
+    LONG  (* __STDARGS__ reserved2)();
+    LONG  (* __STDARGS__ reserved3)();
     struct AnalogSignalInterval hblank;
     struct AnalogSignalInterval vblank;
     struct AnalogSignalInterval hsync;

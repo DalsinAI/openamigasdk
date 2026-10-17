@@ -15,6 +15,7 @@
 
 struct Device;
 
+
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
 #define __OPENNDK_FPCLOBBER "fp0", "fp1",
@@ -24,9 +25,9 @@ struct Device;
 #endif
 
 static __inline__ UWORD
-__input_PeekQualifier(struct Device *__base)
+__input_PeekQualifier(void *__base)
 {
-	register struct Device *_a6 __asm("a6") = __base;
+	register void *_a6 __asm("a6") = __base;
 	register ULONG _d0 __asm("d0");
 	register ULONG _d1 __asm("d1");
 	register ULONG _a0 __asm("a0");
@@ -38,5 +39,6 @@ __input_PeekQualifier(struct Device *__base)
 	return (UWORD)_d0;
 }
 #define PeekQualifier() __input_PeekQualifier((INPUT_BASE_NAME))
+#define __PeekQualifier_base(__in_base) __input_PeekQualifier((__in_base))
 
 #endif /* INLINE_INPUT_H */
