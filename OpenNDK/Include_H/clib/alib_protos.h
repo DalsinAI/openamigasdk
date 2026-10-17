@@ -78,7 +78,7 @@ ULONG SetSuperAttrs(struct IClass *cl, Object *obj, ULONG tag1, ...);
 
 /* Timer */
 LONG TimeDelay(LONG unit, ULONG seconds, ULONG micros);
-LONG DoTimer(struct timeval *tv, LONG unit, LONG command);
+LONG DoTimer(TimeVal_Type *tv, LONG unit, LONG command);
 
 /* Tool types for programs started from the Shell or Workbench */
 STRPTR *ArgArrayInit(LONG argc, CONST_STRPTR *argv);

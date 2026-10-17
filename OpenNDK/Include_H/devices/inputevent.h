@@ -176,7 +176,7 @@ struct InputEvent {
 			UBYTE	ie_prev2DownQual;
 		} ie_dead;
 	} ie_position;
-	struct timeval ie_TimeStamp;
+	TimeVal_Type ie_TimeStamp;
 };
 
 #define ie_X			ie_position.ie_xy.ie_x
