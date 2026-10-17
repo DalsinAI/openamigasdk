@@ -38,15 +38,21 @@ i=0
     done
 } > "$tmp/t.c"
 answer() {   # the type each name is, from which lines compile
-    "$GCC" -nostdinc -isystem "$1" -isystem "$("$GCC" -print-file-name=include)" -fsyntax-only -fmax-errors=0 "$tmp/t.c" 2> "$tmp/err" >/dev/null
+    # the NDK's exec/types.h wants <stdint.h>, which the stove may lack
+    "$GCC" -nostdinc -ffreestanding -isystem "$1" -isystem "$("$GCC" -print-file-name=include)" \
+        -idirafter "$HERE/OpenNDK/check/shim" -fsyntax-only -fmax-errors=0 "$tmp/t.c" 2> "$tmp/err" >/dev/null
+    if grep -v "t\.c:[0-9]*:[0-9]*: error: size of array" "$tmp/err" | grep -q "error"; then
+        echo "the headers in $1 don't compile here:" >&2; grep error "$tmp/err" | grep -v "size of array" | head -5 >&2
+        exit 2
+    fi
     sed -n 's/.*t\.c:\([0-9]*\):.*error.*/\1/p' "$tmp/err" | sort -un > "$tmp/badlines"
     while read -r k n c; do
         line=$((k + 1))
         grep -qx "$line" "$tmp/badlines" || echo "$n=$c"
     done < "$tmp/map"
 }
-answer "$VENDOR" | sort > "$tmp/vendor"
-answer "$OURS" | sort > "$tmp/ours"
+answer "$VENDOR" > "$tmp/vendor" || exit 2
+answer "$OURS" > "$tmp/ours" || exit 2
 bad=0
 for n in $names; do
     v=$(sed -n "s/^$n=//p" "$tmp/vendor" | head -1)
