@@ -48,6 +48,33 @@
       "files": {
         "include/oap_device.h": "Include/openprint/oap_device.h"
       }
+    },
+    {
+      "name": "bsdsocket.library (OpenSocket SDK)",
+      "version": "fix e912544",
+      "repo": "DalsinAI/openamigasocket",
+      "commit": "e912544a7946d412322d1540302f231b179d8b46",
+      "licence": "MIT",
+      "files": {
+        "sdk/Include_H/amitcp/socketbasetags.h": "OpenNDK/Include_H/amitcp/socketbasetags.h",
+        "sdk/Include_H/arpa/inet.h": "OpenNDK/Include_H/arpa/inet.h",
+        "sdk/Include_H/bsdsocket/socketbasetags.h": "OpenNDK/Include_H/bsdsocket/socketbasetags.h",
+        "sdk/Include_H/libraries/bsdsocket.h": "OpenNDK/Include_H/libraries/bsdsocket.h",
+        "sdk/Include_H/net/if.h": "OpenNDK/Include_H/net/if.h",
+        "sdk/Include_H/netdb.h": "OpenNDK/Include_H/netdb.h",
+        "sdk/Include_H/netinet/in.h": "OpenNDK/Include_H/netinet/in.h",
+        "sdk/Include_H/netinet/tcp.h": "OpenNDK/Include_H/netinet/tcp.h",
+        "sdk/Include_H/pwd.h": "OpenNDK/Include_H/pwd.h",
+        "sdk/Include_H/sys/filio.h": "OpenNDK/Include_H/sys/filio.h",
+        "sdk/Include_H/sys/ioccom.h": "OpenNDK/Include_H/sys/ioccom.h",
+        "sdk/Include_H/sys/ioctl.h": "OpenNDK/Include_H/sys/ioctl.h",
+        "sdk/Include_H/sys/socket.h": "OpenNDK/Include_H/sys/socket.h",
+        "sdk/Include_H/sys/sockio.h": "OpenNDK/Include_H/sys/sockio.h",
+        "sdk/Include_H/sys/syslog.h": "OpenNDK/Include_H/sys/syslog.h",
+        "sdk/Include_H/sys/uio.h": "OpenNDK/Include_H/sys/uio.h",
+        "sdk/Include_H/syslog.h": "OpenNDK/Include_H/syslog.h",
+        "sdk/SFD/bsdsocket_lib.sfd": "OpenNDK/SFD/bsdsocket_lib.sfd"
+      }
     }
   ]
 }
