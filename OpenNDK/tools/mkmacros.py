@@ -50,7 +50,9 @@ def main():
            " */",
            "#ifndef __INLINE_MACROS_H",
            "#define __INLINE_MACROS_H\n",
-           "#ifndef EXEC_TYPES_H\n#include <exec/types.h>\n#endif\n",
+           "#ifndef EXEC_TYPES_H\n#include <exec/types.h>\n#endif",
+           "/* the types such headers' prototypes take for granted (inline/stubs.h) */",
+           "#ifndef __INLINE_STUBS_H\n#include <inline/stubs.h>\n#endif\n",
            "#ifndef __OPENNDK_FPCLOBBER\n#ifdef __HAVE_68881__\n"
            "#define __OPENNDK_FPCLOBBER \"fp0\", \"fp1\",\n#else\n"
            "#define __OPENNDK_FPCLOBBER\n#endif\n#endif\n"]
