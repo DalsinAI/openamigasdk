@@ -6,6 +6,10 @@ on them. OpenNDK's own inline headers (tools/ndkgen.py) do not use them.
 
     LPn(offs, rt, name, t1, v1, r1, ..., bt, bn)    a call returning rt
     LPnNR(offs, name, t1, v1, r1, ..., bt, bn)      a call returning nothing
+    LPnA4, LPnNRA4, LPnA5, LPnNRA5                  the same, for a call that
+        takes an argument in a4 (or a5): it is written with register d7 and
+        swapped into a4 (a5) just for the call, since the compiler may hold
+        its small-data base (or frame) there
 
 offs is the call's offset as a positive number (0x1e for -30), rN a
 register name without quotes (d0, a1, ...), bt and bn the base's type and
@@ -17,7 +21,7 @@ import os
 MAX = 12
 
 
-def macro(n, nr):
+def macro(n, nr, xr=None):
     params = ["offs"] + ([] if nr else ["rt"]) + ["name"]
     for i in range(1, n + 1):
         params += ["t%d" % i, "v%d" % i, "r%d" % i]
@@ -33,14 +37,15 @@ def macro(n, nr):
               "\tregister ULONG __ndk_d1 __asm(\"d1\");",
               "\tregister ULONG __ndk_a0 __asm(\"a0\");",
               "\tregister ULONG __ndk_a1 __asm(\"a1\");",
-              "\t__asm__ __volatile__ (\"jsr -\" #offs \"(%/a6)\"",
+              ("\t__asm__ __volatile__ (\"jsr -\" #offs \"(%/a6)\"" if not xr else
+               "\t__asm__ __volatile__ (\"exg %%/d7,%%/%s\\n\\tjsr -\" #offs \"(%%/a6)\\n\\texg %%/d7,%%/%s\"" % (xr, xr)),
               "\t\t: \"=r\" (__ndk_d0), \"=r\" (__ndk_d1), \"=r\" (__ndk_a0), \"=r\" (__ndk_a1)",
               "\t\t: \"r\" (__ndk_bn)" + "".join(", \"r\" (__ndk_r%d)" % i for i in range(1, n + 1)),
               "\t\t: __OPENNDK_FPCLOBBER \"cc\", \"memory\");",
               "\t(void)__ndk_d1; (void)__ndk_a0; (void)__ndk_a1;"]
     lines.append("\t(void)__ndk_d0;" if nr else "\t(rt)__ndk_d0;")
     body = " \\\n".join(["({"] + lines + ["})"])
-    return "#define LP%d%s(%s) \\\n%s\n" % (n, "NR" if nr else "", ", ".join(params), body)
+    return "#define LP%d%s%s(%s) \\\n%s\n" % (n, "NR" if nr else "", (xr or "").upper(), ", ".join(params), body)
 
 
 def main():
@@ -59,6 +64,10 @@ def main():
     for n in range(MAX + 1):
         out.append(macro(n, False))
         out.append(macro(n, True))
+    for xr in ("a4", "a5"):
+        for n in range(1, MAX + 1):
+            out.append(macro(n, False, xr))
+            out.append(macro(n, True, xr))
     out.append("#endif /* __INLINE_MACROS_H */")
     dest = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "Include_H", "inline", "macros.h")
     os.makedirs(os.path.dirname(dest), exist_ok=True)
