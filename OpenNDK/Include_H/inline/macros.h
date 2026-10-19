@@ -8,6 +8,10 @@
 #ifndef EXEC_TYPES_H
 #include <exec/types.h>
 #endif
+/* the types such headers' prototypes take for granted (inline/stubs.h) */
+#ifndef __INLINE_STUBS_H
+#include <inline/stubs.h>
+#endif
 
 #ifndef __OPENNDK_FPCLOBBER
 #ifdef __HAVE_68881__
