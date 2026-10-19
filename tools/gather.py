@@ -59,7 +59,8 @@ def main():
         for frm, to in part["files"].items():
             data = open(os.path.join(src, frm), "rb").read()
             outs = [(to, data)]
-            if to.endswith(".sfd"):
+            # OpenNDK's own tools/ndkgen.py makes its FD and the rest
+            if to.endswith(".sfd") and not to.startswith("OpenNDK/"):
                 fd = sfd_to_fd(data.decode("latin-1")).encode("latin-1")
                 outs.append(("FD/" + os.path.basename(to)[:-4] + ".fd", fd))
             for path, body in outs:
