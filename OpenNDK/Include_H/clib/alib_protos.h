@@ -96,6 +96,17 @@ LONG ArgInt(CONST_STRPTR *tt, CONST_STRPTR entry, LONG defaultVal);
 CxObj *HotKey(CONST_STRPTR description, struct MsgPort *port, LONG id);
 VOID FreeIEvents(struct InputEvent *events);
 
+/* ARexx: a host's way to the variables of the program whose command it
+ * holds, through rexxsyslib.library 45's GetRexxVarFromMsg and
+ * SetRexxVarFromMsg. Each answers 0, or an ERR10_ code from
+ * <rexx/errors.h>: 3 no memory, 9 too long, 10 not a message from an
+ * ARexx program, 14 no rexxsyslib.library 45. GetRexxVar's value (at most
+ * 255 characters) is a copy in libamiga.a's own memory, good until the
+ * program's next GetRexxVar; don't write to it. */
+BOOL CheckRexxMsg(CONST struct RexxMsg *rexxmsg);
+LONG GetRexxVar(struct RexxMsg *rexxmsg, CONST_STRPTR name, STRPTR *result);
+LONG SetRexxVar(struct RexxMsg *rexxmsg, CONST_STRPTR name, CONST_STRPTR value, LONG length);
+
 #ifdef __cplusplus
 }
 #endif
