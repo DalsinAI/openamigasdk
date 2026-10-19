@@ -31,9 +31,9 @@
     },
     {
       "name": "bsdsocket.library",
-      "version": "OpenSocket SDK, team2/netinclude-20261019 239d91a",
+      "version": "OpenSocket SDK, main b3cb188",
       "repo": "DalsinAI/openamigasocket",
-      "commit": "239d91adebad6913fe79329739c78c39e47875d9",
+      "commit": "b3cb188dc629bce9834871f2af46a424bb077b31",
       "licence": "MIT",
       "files": {
         "sdk/Include_H/amitcp/socketbasetags.h": "OpenNDK/Include_H/amitcp/socketbasetags.h",
