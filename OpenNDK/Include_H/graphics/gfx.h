@@ -69,7 +69,7 @@ struct BitMap
 #define BMF_MINPLANES	(1L << BMB_MINPLANES)
 #define BMF_SPECIALFMT	(1L << BMB_SPECIALFMT)
 
-#define SHIFT_PIXFMT(fmt)	(((ULONG)(fmt)) << 24)
+#define SHIFT_PIXFMT(fmt)	(((ULONG)(fmt)) << 24UL)	/* spelt as CyberGraphX's and Picasso96's headers spell it, so either may follow */
 
 /* GetBitMapAttr() attributes */
 #define BMA_HEIGHT	0
