@@ -39,4 +39,4 @@ Team".
 
 ## Contributors
 
-The Open SDK is created and maintained by [SacredTrees](https://github.com/SacredTrees) with the AmigaChrome agent team, copyright AmigaChrome Team. Everyone whose work it includes is credited in [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
+The Open SDK is created and maintained by [SacredTrees](https://github.com/SacredTrees) with the AmigaChrome team, copyright AmigaChrome Team. Everyone whose work it includes is credited in [`CONTRIBUTORS.md`](CONTRIBUTORS.md).
