@@ -42,6 +42,7 @@ NDK 3.2) and `m68k-aros-gcc` on your PATH.
 | --- | --- | --- |
 | openrtg.library 0.10 | `openrtg/openrtg.h`, `openrtg/modes.h`, `proto/`, `inline/` | `SFD/openrtg_lib.sfd`, `FD/openrtg_lib.fd` |
 | opensocket.library | `acnetwork.h`, `proto/acnetwork.h`, `opensocket/acnet_socket_tags.h` | in the proto header |
+| bsdsocket.library | in OpenNDK: `proto/bsdsocket.h`, `sys/socket.h`, `netinet/in.h`, `netdb.h`, `arpa/inet.h` and the rest | `OpenNDK/SFD/bsdsocket_lib.sfd` |
 | accontrol.device | `accontrol/accontrol.h` | device commands |
 | oapspool.device | `openprint/oap_device.h` | device commands |
 | os4compat 0.1 | `os4compat/os4compat.h`, made `interfaces/` and `proto/` | `Lib/os4compat`, made from the NDK's SFD files |
