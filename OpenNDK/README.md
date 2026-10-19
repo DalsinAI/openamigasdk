@@ -15,6 +15,7 @@ is in [CLEAN-ROOM.md](CLEAN-ROOM.md); how to add to it is in
 | Folder | Holds |
 | --- | --- |
 | `Include_H/` | The C headers, under the OS's own paths (`exec/`, `dos/`, `graphics/`, `intuition/`, `utility/`, `libraries/`, `devices/`, `hardware/`, `resources/`, `workbench/`, `datatypes/`, `rexx/`, `diskfont/`, `prefs/`, and ReAction's `gadgets/`, `images/`, `classes/` and `reaction/`) |
+| `Include_H/sys/`, `netinet/`, `arpa/`, `net/`, `netdb.h`, `libraries/bsdsocket.h`, `amitcp/` | bsdsocket.library's headers and `SFD/bsdsocket_lib.sfd`: OpenSocket's own (DalsinAI/openamigasocket `sdk/`), copied by `tools/gather.py` at the commit `manifest.json` pins. Change them there, never here |
 | `Include_H/proto/`, `clib/`, `inline/`, `pragmas/` | Generated from the SFDs: the header a program includes, the prototypes, GCC inline calls and SAS/C-style pragmas. `inline/macros.h` gives the LPn macros for hand-written inline headers |
 | `Include_I/lvo/` | Generated `_LVO` equates for assembler |
 | `SFD/`, `FD/` | Each library's calls: the SFDs are written by hand, the FDs generated |
