@@ -8,12 +8,13 @@
 # links whose compilers put the chosen include folder first.
 #   GUEST=/path/to/amigachrome-guest  (default: Cradle's checkout, its HEAD)
 #   ONLY="libraries/opendos devices/opentimer.device"  (default: every module)
+#   JOBS=3  (modules built at once; 3 is Daletop's limit for builds)
 # Exits 1 if a module builds with the vendor NDK and not with OpenNDK.
 set -u
 HERE=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 REAL=${STOVE:-"$HOME/AmigaChrome/stoves/os32-gcc16"}
 SRC=${GUEST:-"$HOME/AmigaChrome-dev/cradle-builds/DalsinAI__amigachrome-guest"}
-JOBS=${JOBS:-6}
+JOBS=${JOBS:-3}
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
 
