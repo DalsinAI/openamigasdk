@@ -30,4 +30,6 @@
 #define DATEBROWSER_CalendarType	(DATEBROWSER_Dummy + 12)
 #define DATEBROWSER_WeekTitle	(DATEBROWSER_Dummy + 11)
 
+#define EndDateBrowser		TAG_DONE)
+
 #endif /* GADGETS_DATEBROWSER_H */

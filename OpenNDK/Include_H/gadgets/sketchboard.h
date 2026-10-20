@@ -90,4 +90,9 @@ struct spScrollRaster
 #define SGTOOL_RECT_FILLED	5
 #define SGTOOL_SELECT		10
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef REACTION_REACTION_H
+#include <reaction/reaction.h>
+#endif
+
 #endif /* GADGETS_SKETCHBOARD_H */

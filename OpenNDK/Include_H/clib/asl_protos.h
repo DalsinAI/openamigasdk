@@ -20,10 +20,10 @@ struct FileRequester * AllocFileRequest(VOID);
 VOID FreeFileRequest(struct FileRequester * fileReq);
 BOOL RequestFile(struct FileRequester * fileReq);
 APTR AllocAslRequest(ULONG reqType, CONST struct TagItem * tagList);
-APTR AllocAslRequestTags(ULONG reqType, Tag tag1, ...);
+APTR AllocAslRequestTags(ULONG reqType, ...);
 VOID FreeAslRequest(APTR requester);
 BOOL AslRequest(APTR requester, CONST struct TagItem * tagList);
-BOOL AslRequestTags(APTR requester, Tag tag1, ...);
+BOOL AslRequestTags(APTR requester, ...);
 
 /* From version 44 */
 VOID AbortAslRequest(APTR requester);

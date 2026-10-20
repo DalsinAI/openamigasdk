@@ -17,17 +17,17 @@ extern "C" {
 
 /* From version 47 */
 LONG TFStartUnitTagList(LONG unitNumber, CONST struct TagItem * tags);
-LONG TFStartUnitTags(LONG unitNumber, Tag tag1, ...);
+LONG TFStartUnitTags(LONG unitNumber, ...);
 LONG TFStopUnitTagList(LONG unitNumber, CONST struct TagItem * tags);
-LONG TFStopUnitTags(LONG unitNumber, Tag tag1, ...);
+LONG TFStopUnitTags(LONG unitNumber, ...);
 LONG TFInsertMediaTagList(LONG unitNumber, CONST struct TagItem * tags);
-LONG TFInsertMediaTags(LONG unitNumber, Tag tag1, ...);
+LONG TFInsertMediaTags(LONG unitNumber, ...);
 LONG TFEjectMediaTagList(LONG unitNumber, CONST struct TagItem * tags);
-LONG TFEjectMediaTags(LONG unitNumber, Tag tag1, ...);
+LONG TFEjectMediaTags(LONG unitNumber, ...);
 struct TrackFileUnitData * TFGetUnitData(LONG unitNumber);
 VOID TFFreeUnitData(struct TrackFileUnitData * data);
 LONG TFChangeUnitTagList(LONG unitNumber, CONST struct TagItem * tags);
-LONG TFChangeUnitTags(LONG unitNumber, Tag tag1, ...);
+LONG TFChangeUnitTags(LONG unitNumber, ...);
 LONG TFExamineFileSize(LONG unitNumber);
 
 #ifdef __cplusplus

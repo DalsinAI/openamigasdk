@@ -19,11 +19,11 @@ extern "C" {
 struct GlyphEngine * OpenEngine(VOID);
 VOID CloseEngine(struct GlyphEngine * glyphEngine);
 ULONG SetInfoA(struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList);
-ULONG SetInfo(struct GlyphEngine * glyphEngine, Tag tag1, ...);
+ULONG SetInfo(struct GlyphEngine * glyphEngine, ...);
 ULONG ObtainInfoA(struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList);
-ULONG ObtainInfo(struct GlyphEngine * glyphEngine, Tag tag1, ...);
+ULONG ObtainInfo(struct GlyphEngine * glyphEngine, ...);
 ULONG ReleaseInfoA(struct GlyphEngine * glyphEngine, CONST struct TagItem * tagList);
-ULONG ReleaseInfo(struct GlyphEngine * glyphEngine, Tag tag1, ...);
+ULONG ReleaseInfo(struct GlyphEngine * glyphEngine, ...);
 
 #ifdef __cplusplus
 }

@@ -25,9 +25,9 @@ struct Node * AllocClickTabNodeA(struct TagItem * tags);
 struct Node * AllocClickTabNode(Tag tag1, ...);
 VOID FreeClickTabNode(struct Node * node);
 VOID SetClickTabNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID SetClickTabNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID SetClickTabNodeAttrs(struct Node * node, ...);
 VOID GetClickTabNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID GetClickTabNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID GetClickTabNodeAttrs(struct Node * node, ...);
 
 #ifdef __cplusplus
 }

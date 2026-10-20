@@ -215,4 +215,9 @@
 #define shinePen		3
 #define textPen			2
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_INTUITION_H
+#include <intuition/intuition.h>
+#endif
+
 #endif /* INTUITION_IOBSOLETE_H */

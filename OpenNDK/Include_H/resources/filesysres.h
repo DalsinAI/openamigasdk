@@ -50,4 +50,9 @@ struct FileSysEntry {
 	BPTR	fse_GlobalVec;
 };
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef DOS_DOS_H
+#include <dos/dos.h>
+#endif
+
 #endif /* RESOURCES_FILESYSRES_H */

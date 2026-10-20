@@ -63,4 +63,9 @@ struct ListLabelNode
 #define LVJ_LEFT		0
 #define LVJ_RIGHT		2
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_GADGETCLASS_H
+#include <intuition/gadgetclass.h>
+#endif
+
 #endif /* GADGETS_LISTVIEW_H */

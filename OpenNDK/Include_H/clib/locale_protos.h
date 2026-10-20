@@ -39,7 +39,7 @@ BOOL IsSpace(CONST struct Locale * locale, ULONG character);
 BOOL IsUpper(CONST struct Locale * locale, ULONG character);
 BOOL IsXDigit(CONST struct Locale * locale, ULONG character);
 struct Catalog * OpenCatalogA(CONST struct Locale * locale, CONST_STRPTR name, CONST struct TagItem * tags);
-struct Catalog * OpenCatalog(CONST struct Locale * locale, CONST_STRPTR name, Tag tag1, ...);
+struct Catalog * OpenCatalog(CONST struct Locale * locale, CONST_STRPTR name, ...);
 struct Locale * OpenLocale(CONST_STRPTR name);
 BOOL ParseDate(CONST struct Locale * locale, struct DateStamp * date, CONST_STRPTR fmtTemplate, CONST struct Hook * getCharFunc);
 ULONG StrConvert(CONST struct Locale * locale, CONST_STRPTR string, APTR buffer, ULONG bufferSize, ULONG type);

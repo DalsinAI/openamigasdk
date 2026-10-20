@@ -25,9 +25,9 @@ struct Node * AllocChooserNodeA(struct TagItem * tags);
 struct Node * AllocChooserNode(Tag tag1, ...);
 VOID FreeChooserNode(struct Node * node);
 VOID SetChooserNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID SetChooserNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID SetChooserNodeAttrs(struct Node * node, ...);
 VOID GetChooserNodeAttrsA(struct Node * node, struct TagItem * tags);
-VOID GetChooserNodeAttrs(struct Node * node, Tag tag1, ...);
+VOID GetChooserNodeAttrs(struct Node * node, ...);
 
 /* From version 45 */
 ULONG ShowChooser(Object * o, struct Window * w, ULONG xpos, ULONG ypos);

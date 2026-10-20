@@ -13,20 +13,20 @@
 ==version 47
 LONG TFStartUnitTagList(LONG unitNumber, CONST struct TagItem * tags) (d0,a0)
 ==varargs
-LONG TFStartUnitTags(LONG unitNumber, Tag tag1, ...) (d0,a0)
+LONG TFStartUnitTags(LONG unitNumber, ...) (d0,a0)
 LONG TFStopUnitTagList(LONG unitNumber, CONST struct TagItem * tags) (d0,a0)
 ==varargs
-LONG TFStopUnitTags(LONG unitNumber, Tag tag1, ...) (d0,a0)
+LONG TFStopUnitTags(LONG unitNumber, ...) (d0,a0)
 LONG TFInsertMediaTagList(LONG unitNumber, CONST struct TagItem * tags) (d0,a0)
 ==varargs
-LONG TFInsertMediaTags(LONG unitNumber, Tag tag1, ...) (d0,a0)
+LONG TFInsertMediaTags(LONG unitNumber, ...) (d0,a0)
 LONG TFEjectMediaTagList(LONG unitNumber, CONST struct TagItem * tags) (d0,a0)
 ==varargs
-LONG TFEjectMediaTags(LONG unitNumber, Tag tag1, ...) (d0,a0)
+LONG TFEjectMediaTags(LONG unitNumber, ...) (d0,a0)
 struct TrackFileUnitData * TFGetUnitData(LONG unitNumber) (d0)
 VOID TFFreeUnitData(struct TrackFileUnitData * data) (a0)
 LONG TFChangeUnitTagList(LONG unitNumber, CONST struct TagItem * tags) (d0,a0)
 ==varargs
-LONG TFChangeUnitTags(LONG unitNumber, Tag tag1, ...) (d0,a0)
+LONG TFChangeUnitTags(LONG unitNumber, ...) (d0,a0)
 LONG TFExamineFileSize(LONG unitNumber) (d0)
 ==end

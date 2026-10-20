@@ -48,13 +48,13 @@ struct WorkbenchExtendedPrefs
 /* A hidden device's name (ID_WBHD) */
 struct WorkbenchHiddenDevicePrefs
 {
-    UBYTE whdp_Name[0];			/* NUL-terminated, as long as the chunk */
+    TEXT	whdp_Name[0];			/* NUL-terminated, as long as the chunk */
 };
 
 /* The screen title's format (ID_WBTF) */
 struct WorkbenchTitleFormatPrefs
 {
-    UBYTE wtfp_Format[0];		/* NUL-terminated, as long as the chunk */
+    TEXT	wtfp_Format[0];		/* NUL-terminated, as long as the chunk */
 };
 
 #endif /* PREFS_WORKBENCH_H */

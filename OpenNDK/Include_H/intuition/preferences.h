@@ -59,7 +59,7 @@ struct Preferences
 
     /* The printer */
     UWORD PrinterType;
-    UBYTE PrinterFilename[FILENAME_SIZE];
+    TEXT	PrinterFilename[FILENAME_SIZE];
 
     UWORD PrintPitch;
     UWORD PrintQuality;
@@ -82,7 +82,7 @@ struct Preferences
     UBYTE LaceWB;
 
     UBYTE Pad[12];
-    UBYTE PrtDevName[DEVNAME_SIZE];	/* without ".device" */
+    TEXT	PrtDevName[DEVNAME_SIZE];	/* without ".device" */
 
     UBYTE DefaultPrtUnit;
     UBYTE DefaultSerUnit;

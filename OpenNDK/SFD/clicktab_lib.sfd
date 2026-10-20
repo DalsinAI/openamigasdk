@@ -22,8 +22,8 @@ struct Node * AllocClickTabNode(Tag tag1, ...) (a0)
 VOID FreeClickTabNode(struct Node * node) (a0)
 VOID SetClickTabNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
 ==varargs
-VOID SetClickTabNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+VOID SetClickTabNodeAttrs(struct Node * node, ...) (a0,a1)
 VOID GetClickTabNodeAttrsA(struct Node * node, struct TagItem * tags) (a0,a1)
 ==varargs
-VOID GetClickTabNodeAttrs(struct Node * node, Tag tag1, ...) (a0,a1)
+VOID GetClickTabNodeAttrs(struct Node * node, ...) (a0,a1)
 ==end

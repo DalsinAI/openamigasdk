@@ -39,20 +39,20 @@ VOID FreeFree(struct FreeList * freelist, APTR address);
 
 /* From version 44 */
 struct DiskObject * DupDiskObjectA(CONST struct DiskObject * diskObject, CONST struct TagItem * tags);
-struct DiskObject * DupDiskObject(CONST struct DiskObject * diskObject, Tag tag1, ...);
+struct DiskObject * DupDiskObject(CONST struct DiskObject * diskObject, ...);
 ULONG IconControlA(struct DiskObject * icon, CONST struct TagItem * tags);
-ULONG IconControl(struct DiskObject * icon, Tag tag1, ...);
+ULONG IconControl(struct DiskObject * icon, ...);
 VOID DrawIconStateA(struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, CONST struct TagItem * tags);
-VOID DrawIconState(struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, Tag tag1, ...);
+VOID DrawIconState(struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, LONG leftOffset, LONG topOffset, ULONG state, ...);
 BOOL GetIconRectangleA(struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, CONST struct TagItem * tags);
-BOOL GetIconRectangle(struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, Tag tag1, ...);
+BOOL GetIconRectangle(struct RastPort * rp, CONST struct DiskObject * icon, CONST_STRPTR label, struct Rectangle * rect, ...);
 struct DiskObject * NewDiskObject(LONG type);
 struct DiskObject * GetIconTagList(CONST_STRPTR name, CONST struct TagItem * tags);
-struct DiskObject * GetIconTags(CONST_STRPTR name, Tag tag1, ...);
+struct DiskObject * GetIconTags(CONST_STRPTR name, ...);
 BOOL PutIconTagList(CONST_STRPTR name, CONST struct DiskObject * icon, CONST struct TagItem * tags);
-BOOL PutIconTags(CONST_STRPTR name, CONST struct DiskObject * icon, Tag tag1, ...);
+BOOL PutIconTags(CONST_STRPTR name, CONST struct DiskObject * icon, ...);
 BOOL LayoutIconA(struct DiskObject * icon, struct Screen * screen, struct TagItem * tags);
-BOOL LayoutIcon(struct DiskObject * icon, struct Screen * screen, Tag tag1, ...);
+BOOL LayoutIcon(struct DiskObject * icon, struct Screen * screen, ...);
 VOID ChangeToSelectedIconColor(struct ColorRegister * cr);
 
 /* From version 47 */
