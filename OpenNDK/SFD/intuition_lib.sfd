@@ -243,5 +243,5 @@ VOID intuitionPrivate71() ()
 ==public
 ULONG IntuitionControlA(APTR object, CONST struct TagItem * taglist) (a0,a1)
 ==varargs
-ULONG IntuitionControl(APTR object, Tag tag1, ...) (a0,a1)
+ULONG IntuitionControl(APTR object, ...) (a0,a1)
 ==end

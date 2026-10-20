@@ -113,6 +113,10 @@ typedef unsigned char	TEXT;
 
 #define BYTEMASK	0xFF
 
+/* APTR and CONST_APTR are typedefs here (other headers test these) */
+#define APTR_TYPEDEF
+#define CONST_APTR_TYPEDEF
+
 /* __STDARGS__, __SAVE_DS__, __REG__ and the other compiler words */
 #include <clib/compiler-specific.h>
 

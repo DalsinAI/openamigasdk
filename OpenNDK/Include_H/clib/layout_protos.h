@@ -27,7 +27,7 @@ BOOL RethinkLayout(struct Gadget * gadget, struct Window * window, struct Reques
 VOID LayoutLimits(struct Gadget * gadget, struct LayoutLimits * limits, struct TextFont * font, struct Screen * screen);
 Class * PAGE_GetClass(VOID);
 ULONG SetPageGadgetAttrsA(struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, struct TagItem * tags);
-ULONG SetPageGadgetAttrs(struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, Tag tag1, ...);
+ULONG SetPageGadgetAttrs(struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester, ...);
 VOID RefreshPageGadget(struct Gadget * gadget, Object * object, struct Window * window, struct Requester * requester);
 
 #ifdef __cplusplus

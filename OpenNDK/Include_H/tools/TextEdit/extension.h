@@ -99,4 +99,9 @@ struct LeftBarRenderMessage
 #define EXTENSIONPLUGINHEAD_ID	0x45585453
 #define EXTENSIONPLUGIN_VERSION	1
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef INTUITION_CLASSUSR_H
+#include <intuition/classusr.h>
+#endif
+
 #endif /* TOOLS_TEXTEDIT_EXTENSION_H */

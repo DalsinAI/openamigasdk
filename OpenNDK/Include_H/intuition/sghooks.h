@@ -26,7 +26,7 @@ struct SGWork
 {
     struct Gadget *Gadget;
     struct StringInfo *StringInfo;
-    UBYTE *WorkBuffer;
+    STRPTR	WorkBuffer;
     STRPTR	PrevBuffer;
     ULONG Modes;
     struct InputEvent *IEvent;

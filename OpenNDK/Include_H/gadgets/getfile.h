@@ -70,4 +70,9 @@ struct gfileFreelist
 #define GETFILE_FilterHook	(GETFILE_Dummy + 25)
 #define GETFILE_InitialShowVolumes	(GETFILE_Dummy + 26)
 
+/* the requester through the gadget, and freeing its list of files */
+#define gfRequestFile(obj, win)	DoMethod((obj), GFILE_REQUEST, (win))
+#define gfRequestDir(obj, win)	DoMethod((obj), GFILE_REQUEST, (win))
+#define gfFreeFilelist(obj, list)	DoMethod((obj), GFILE_FREELIST, (list))
+
 #endif /* GADGETS_GETFILE_H */

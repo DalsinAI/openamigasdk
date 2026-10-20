@@ -23,28 +23,28 @@ extern "C" {
 LONG LockAmigaGuideBase(APTR handle);
 VOID UnlockAmigaGuideBase(LONG key);
 APTR OpenAmigaGuideA(struct NewAmigaGuide * nag, CONST struct TagItem * attrs);
-APTR OpenAmigaGuide(struct NewAmigaGuide * nag, Tag tag1, ...);
+APTR OpenAmigaGuide(struct NewAmigaGuide * nag, ...);
 APTR OpenAmigaGuideAsyncA(struct NewAmigaGuide * nag, CONST struct TagItem * attrs);
-APTR OpenAmigaGuideAsync(struct NewAmigaGuide * nag, Tag tag1, ...);
+APTR OpenAmigaGuideAsync(struct NewAmigaGuide * nag, ...);
 VOID CloseAmigaGuide(APTR cl);
 ULONG AmigaGuideSignal(APTR cl);
 struct AmigaGuideMsg * GetAmigaGuideMsg(APTR cl);
 VOID ReplyAmigaGuideMsg(struct AmigaGuideMsg * amsg);
 LONG SetAmigaGuideContextA(APTR cl, ULONG id, CONST struct TagItem * attrs);
-LONG SetAmigaGuideContext(APTR cl, ULONG id, Tag tag1, ...);
+LONG SetAmigaGuideContext(APTR cl, ULONG id, ...);
 LONG SendAmigaGuideContextA(APTR cl, CONST struct TagItem * attrs);
-LONG SendAmigaGuideContext(APTR cl, Tag tag1, ...);
+LONG SendAmigaGuideContext(APTR cl, ...);
 LONG SendAmigaGuideCmdA(APTR cl, CONST_STRPTR cmd, CONST struct TagItem * attrs);
-LONG SendAmigaGuideCmd(APTR cl, CONST_STRPTR cmd, Tag tag1, ...);
+LONG SendAmigaGuideCmd(APTR cl, CONST_STRPTR cmd, ...);
 LONG SetAmigaGuideAttrsA(APTR cl, CONST struct TagItem * attrs);
-LONG SetAmigaGuideAttrs(APTR cl, Tag tag1, ...);
+LONG SetAmigaGuideAttrs(APTR cl, ...);
 LONG GetAmigaGuideAttr(Tag tag, APTR cl, ULONG * storage);
 LONG LoadXRef(BPTR lock, CONST_STRPTR name);
 VOID ExpungeXRef(VOID);
 APTR AddAmigaGuideHostA(struct Hook * h, CONST_STRPTR name, CONST struct TagItem * attrs);
-APTR AddAmigaGuideHost(struct Hook * h, CONST_STRPTR name, Tag tag1, ...);
+APTR AddAmigaGuideHost(struct Hook * h, CONST_STRPTR name, ...);
 LONG RemoveAmigaGuideHostA(APTR hh, CONST struct TagItem * attrs);
-LONG RemoveAmigaGuideHost(APTR hh, Tag tag1, ...);
+LONG RemoveAmigaGuideHost(APTR hh, ...);
 CONST_STRPTR GetAmigaGuideString(LONG id);
 
 #ifdef __cplusplus

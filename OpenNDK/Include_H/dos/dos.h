@@ -53,13 +53,13 @@ struct DateStamp {
 struct FileInfoBlock {
 	LONG	fib_DiskKey;
 	LONG	fib_DirEntryType;	/* < 0 file, > 0 directory */
-	char	fib_FileName[108];
+	TEXT	fib_FileName[108];
 	LONG	fib_Protection;
 	LONG	fib_EntryType;
 	LONG	fib_Size;
 	LONG	fib_NumBlocks;
 	struct DateStamp fib_Date;
-	char	fib_Comment[80];
+	TEXT	fib_Comment[80];
 	UWORD	fib_OwnerUID;
 	UWORD	fib_OwnerGID;
 	char	fib_Reserved[32];

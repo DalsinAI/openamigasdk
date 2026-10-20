@@ -18,17 +18,17 @@ extern "C" {
 
 /* From version 36 */
 struct Gadget * CreateGadgetA(ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, CONST struct TagItem * taglist);
-struct Gadget * CreateGadget(ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, Tag tag1, ...);
+struct Gadget * CreateGadget(ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, ...);
 VOID FreeGadgets(struct Gadget * gad);
 VOID GT_SetGadgetAttrsA(struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist);
-VOID GT_SetGadgetAttrs(struct Gadget * gad, struct Window * win, struct Requester * req, Tag tag1, ...);
+VOID GT_SetGadgetAttrs(struct Gadget * gad, struct Window * win, struct Requester * req, ...);
 struct Menu * CreateMenusA(CONST struct NewMenu * newmenu, CONST struct TagItem * taglist);
-struct Menu * CreateMenus(CONST struct NewMenu * newmenu, Tag tag1, ...);
+struct Menu * CreateMenus(CONST struct NewMenu * newmenu, ...);
 VOID FreeMenus(struct Menu * menu);
 BOOL LayoutMenuItemsA(struct MenuItem * firstitem, APTR vi, CONST struct TagItem * taglist);
-BOOL LayoutMenuItems(struct MenuItem * firstitem, APTR vi, Tag tag1, ...);
+BOOL LayoutMenuItems(struct MenuItem * firstitem, APTR vi, ...);
 BOOL LayoutMenusA(struct Menu * firstmenu, APTR vi, CONST struct TagItem * taglist);
-BOOL LayoutMenus(struct Menu * firstmenu, APTR vi, Tag tag1, ...);
+BOOL LayoutMenus(struct Menu * firstmenu, APTR vi, ...);
 struct IntuiMessage * GT_GetIMsg(struct MsgPort * iport);
 VOID GT_ReplyIMsg(struct IntuiMessage * imsg);
 VOID GT_RefreshWindow(struct Window * win, struct Requester * req);
@@ -38,20 +38,20 @@ struct IntuiMessage * GT_FilterIMsg(CONST struct IntuiMessage * imsg);
 struct IntuiMessage * GT_PostFilterIMsg(struct IntuiMessage * imsg);
 struct Gadget * CreateContext(struct Gadget ** glistptr);
 VOID DrawBevelBoxA(struct RastPort * rport, WORD left, WORD top, WORD width, WORD height, CONST struct TagItem * taglist);
-VOID DrawBevelBox(struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, Tag tag1, ...);
+VOID DrawBevelBox(struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, ...);
 APTR GetVisualInfoA(struct Screen * screen, CONST struct TagItem * taglist);
-APTR GetVisualInfo(struct Screen * screen, Tag tag1, ...);
+APTR GetVisualInfo(struct Screen * screen, ...);
 VOID FreeVisualInfo(APTR vi);
 
 /* From version 47 */
 LONG SetDesignFontA(APTR vi, CONST struct TextAttr * tattr, CONST struct TagItem * taglist);
-LONG SetDesignFont(APTR vi, CONST struct TextAttr * tattr, Tag tag1, ...);
+LONG SetDesignFont(APTR vi, CONST struct TextAttr * tattr, ...);
 LONG ScaleGadgetRectA(struct NewGadget * ng, CONST struct TagItem * taglist);
-LONG ScaleGadgetRect(struct NewGadget * ng, Tag tag1, ...);
+LONG ScaleGadgetRect(struct NewGadget * ng, ...);
 
 /* From version 39 */
 LONG GT_GetGadgetAttrsA(struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist);
-LONG GT_GetGadgetAttrs(struct Gadget * gad, struct Window * win, struct Requester * req, Tag tag1, ...);
+LONG GT_GetGadgetAttrs(struct Gadget * gad, struct Window * win, struct Requester * req, ...);
 
 #ifdef __cplusplus
 }

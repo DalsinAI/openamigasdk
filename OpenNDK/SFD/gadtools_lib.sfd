@@ -14,21 +14,21 @@
 ==version 36
 struct Gadget * CreateGadgetA(ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, CONST struct TagItem * taglist) (d0,a0,a1,a2)
 ==varargs
-struct Gadget * CreateGadget(ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, Tag tag1, ...) (d0,a0,a1,a2)
+struct Gadget * CreateGadget(ULONG kind, struct Gadget * gad, CONST struct NewGadget * ng, ...) (d0,a0,a1,a2)
 VOID FreeGadgets(struct Gadget * gad) (a0)
 VOID GT_SetGadgetAttrsA(struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist) (a0,a1,a2,a3)
 ==varargs
-VOID GT_SetGadgetAttrs(struct Gadget * gad, struct Window * win, struct Requester * req, Tag tag1, ...) (a0,a1,a2,a3)
+VOID GT_SetGadgetAttrs(struct Gadget * gad, struct Window * win, struct Requester * req, ...) (a0,a1,a2,a3)
 struct Menu * CreateMenusA(CONST struct NewMenu * newmenu, CONST struct TagItem * taglist) (a0,a1)
 ==varargs
-struct Menu * CreateMenus(CONST struct NewMenu * newmenu, Tag tag1, ...) (a0,a1)
+struct Menu * CreateMenus(CONST struct NewMenu * newmenu, ...) (a0,a1)
 VOID FreeMenus(struct Menu * menu) (a0)
 BOOL LayoutMenuItemsA(struct MenuItem * firstitem, APTR vi, CONST struct TagItem * taglist) (a0,a1,a2)
 ==varargs
-BOOL LayoutMenuItems(struct MenuItem * firstitem, APTR vi, Tag tag1, ...) (a0,a1,a2)
+BOOL LayoutMenuItems(struct MenuItem * firstitem, APTR vi, ...) (a0,a1,a2)
 BOOL LayoutMenusA(struct Menu * firstmenu, APTR vi, CONST struct TagItem * taglist) (a0,a1,a2)
 ==varargs
-BOOL LayoutMenus(struct Menu * firstmenu, APTR vi, Tag tag1, ...) (a0,a1,a2)
+BOOL LayoutMenus(struct Menu * firstmenu, APTR vi, ...) (a0,a1,a2)
 struct IntuiMessage * GT_GetIMsg(struct MsgPort * iport) (a0)
 VOID GT_ReplyIMsg(struct IntuiMessage * imsg) (a1)
 VOID GT_RefreshWindow(struct Window * win, struct Requester * req) (a0,a1)
@@ -39,18 +39,18 @@ struct IntuiMessage * GT_PostFilterIMsg(struct IntuiMessage * imsg) (a1)
 struct Gadget * CreateContext(struct Gadget ** glistptr) (a0)
 VOID DrawBevelBoxA(struct RastPort * rport, WORD left, WORD top, WORD width, WORD height, CONST struct TagItem * taglist) (a0,d0,d1,d2,d3,a1)
 ==varargs
-VOID DrawBevelBox(struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, Tag tag1, ...) (a0,d0,d1,d2,d3,a1)
+VOID DrawBevelBox(struct RastPort * rport, LONG left, LONG top, LONG width, LONG height, ...) (a0,d0,d1,d2,d3,a1)
 APTR GetVisualInfoA(struct Screen * screen, CONST struct TagItem * taglist) (a0,a1)
 ==varargs
-APTR GetVisualInfo(struct Screen * screen, Tag tag1, ...) (a0,a1)
+APTR GetVisualInfo(struct Screen * screen, ...) (a0,a1)
 VOID FreeVisualInfo(APTR vi) (a0)
 ==version 47
 LONG SetDesignFontA(APTR vi, CONST struct TextAttr * tattr, CONST struct TagItem * taglist) (a0,a1,a2)
 ==varargs
-LONG SetDesignFont(APTR vi, CONST struct TextAttr * tattr, Tag tag1, ...) (a0,a1,a2)
+LONG SetDesignFont(APTR vi, CONST struct TextAttr * tattr, ...) (a0,a1,a2)
 LONG ScaleGadgetRectA(struct NewGadget * ng, CONST struct TagItem * taglist) (a0,a1)
 ==varargs
-LONG ScaleGadgetRect(struct NewGadget * ng, Tag tag1, ...) (a0,a1)
+LONG ScaleGadgetRect(struct NewGadget * ng, ...) (a0,a1)
 ==private
 VOID gadtoolsPrivate1() ()
 VOID gadtoolsPrivate2() ()
@@ -60,5 +60,5 @@ VOID gadtoolsPrivate4() ()
 ==version 39
 LONG GT_GetGadgetAttrsA(struct Gadget * gad, struct Window * win, struct Requester * req, CONST struct TagItem * taglist) (a0,a1,a2,a3)
 ==varargs
-LONG GT_GetGadgetAttrs(struct Gadget * gad, struct Window * win, struct Requester * req, Tag tag1, ...) (a0,a1,a2,a3)
+LONG GT_GetGadgetAttrs(struct Gadget * gad, struct Window * win, struct Requester * req, ...) (a0,a1,a2,a3)
 ==end

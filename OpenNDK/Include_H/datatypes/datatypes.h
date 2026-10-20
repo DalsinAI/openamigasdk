@@ -168,4 +168,8 @@ struct DTMethod {
 	ULONG	dtm_Method;	/* the STM_ trigger */
 };
 
+/* the old names, as the OS 3.2 header keeps them */
+#define DATATYPE
+#define TSIZE			sizeof(struct Tool)
+
 #endif /* DATATYPES_DATATYPES_H */
