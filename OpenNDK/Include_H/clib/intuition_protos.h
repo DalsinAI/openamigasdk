@@ -162,7 +162,7 @@ VOID HelpControl(struct Window * win, ULONG flags);
 BOOL ShowWindow(struct Window * window, struct Window * other);
 BOOL HideWindow(struct Window * window);
 ULONG IntuitionControlA(APTR object, CONST struct TagItem * taglist);
-ULONG IntuitionControl(APTR object, Tag tag1, ...);
+ULONG IntuitionControl(APTR object, ...);
 
 #ifdef __cplusplus
 }

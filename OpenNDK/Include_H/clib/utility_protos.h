@@ -55,7 +55,7 @@ ULONG PackStructureTags(APTR pack, CONST ULONG * packTable, CONST struct TagItem
 ULONG UnpackStructureTags(CONST_APTR pack, CONST ULONG * packTable, struct TagItem * tagList);
 BOOL AddNamedObject(struct NamedObject * nameSpace, struct NamedObject * object);
 struct NamedObject * AllocNamedObjectA(CONST_STRPTR name, CONST struct TagItem * tagList);
-struct NamedObject * AllocNamedObject(CONST_STRPTR name, Tag tag1, ...);
+struct NamedObject * AllocNamedObject(CONST_STRPTR name, ...);
 LONG AttemptRemNamedObject(struct NamedObject * object);
 struct NamedObject * FindNamedObject(struct NamedObject * nameSpace, CONST_STRPTR name, struct NamedObject * lastObject);
 VOID FreeNamedObject(struct NamedObject * object);

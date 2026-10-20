@@ -19,14 +19,14 @@ struct Player * CreatePlayer(Tag tag1, ...) (a0)
 VOID DeletePlayer(struct Player * player) (a0)
 BOOL SetPlayerAttrsA(struct Player * player, CONST struct TagItem * tagList) (a0,a1)
 ==varargs
-BOOL SetPlayerAttrs(struct Player * player, Tag tag1, ...) (a0,a1)
+BOOL SetPlayerAttrs(struct Player * player, ...) (a0,a1)
 LONG SetConductorState(struct Player * player, ULONG state, LONG time) (a0,d0,d1)
 BOOL ExternalSync(struct Player * player, LONG minTime, LONG maxTime) (a0,d0,d1)
 struct Conductor * NextConductor(CONST struct Conductor * previousConductor) (a0)
 struct Conductor * FindConductor(CONST_STRPTR name) (a0)
 ULONG GetPlayerAttrsA(CONST struct Player * player, CONST struct TagItem * tagList) (a0,a1)
 ==varargs
-ULONG GetPlayerAttrs(CONST struct Player * player, Tag tag1, ...) (a0,a1)
+ULONG GetPlayerAttrs(CONST struct Player * player, ...) (a0,a1)
 ==private
 VOID realtimePrivate1() ()
 VOID realtimePrivate2() ()

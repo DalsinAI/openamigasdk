@@ -34,4 +34,8 @@
 #define PENMAP_RenderData	0x80020007UL
 #define PENMAP_SelectMaskPlane	(PENMAP_Dummy + 13)
 
+/* a pen map's size: its first two UWORDs */
+#define IMAGE_WIDTH(i)		(((UWORD *)(i))[0])
+#define IMAGE_HEIGHT(i)		(((UWORD *)(i))[1])
+
 #endif /* IMAGES_PENMAP_H */

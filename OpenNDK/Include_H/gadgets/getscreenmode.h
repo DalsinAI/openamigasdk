@@ -54,4 +54,6 @@ struct gsmRequest
     struct Window *gsmr_Window;
 };
 
+#define RequestScreenMode(obj, win)	DoMethod((obj), GSM_REQUEST, (win))
+
 #endif /* GADGETS_GETSCREENMODE_H */

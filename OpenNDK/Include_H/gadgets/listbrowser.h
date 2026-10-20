@@ -194,7 +194,7 @@ struct lbSort
 	ULONG			MethodID;	/* LBM_SORT */
 	struct GadgetInfo	*lbs_GInfo;
 	ULONG			lbs_Column;
-	ULONG			lbs_Reverse;	/* LBSORT_REVERSE to sort descending */
+	ULONG			lbs_Direction;	/* LBSORT_REVERSE to sort descending */
 	struct Hook		*lbs_CompareHook;	/* NULL: compare the text */
 };
 
@@ -308,5 +308,8 @@ struct lbShowChildren
 #define LRJ_CENTER		1
 #define LRJ_CENTRE		1
 #define LRJ_TOP			2
+
+/* lbSort's field under its older name */
+#define lbs_Reverse		lbs_Direction
 
 #endif /* GADGETS_LISTBROWSER_H */

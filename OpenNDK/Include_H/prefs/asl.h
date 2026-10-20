@@ -31,4 +31,9 @@ struct AslPrefs
 /* More names from the 3.2 interface */
 #define ID_ASL			0x41534C20
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef LIBRARIES_ASL_H
+#include <libraries/asl.h>
+#endif
+
 #endif /* PREFS_ASL_H */

@@ -81,4 +81,15 @@
 #define DrawCircle(rp, cx, cy, r)	DrawEllipse((rp), (cx), (cy), (r), (r))
 #define AreaCircle(rp, cx, cy, r)	AreaEllipse((rp), (cx), (cy), (r), (r))
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef GRAPHICS_GFXBASE_H
+#include <graphics/gfxbase.h>
+#endif
+#ifndef HARDWARE_CUSTOM_H
+#include <hardware/custom.h>
+#endif
+#ifndef HARDWARE_DMABITS_H
+#include <hardware/dmabits.h>
+#endif
+
 #endif /* GRAPHICS_GFXMACROS_H */

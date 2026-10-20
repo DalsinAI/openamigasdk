@@ -20,13 +20,13 @@ VOID UpdateWorkbench(CONST_STRPTR name, BPTR parentLock, LONG action);
 
 /* From version 36 */
 struct AppWindow * AddAppWindowA(ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, CONST struct TagItem * taglist);
-struct AppWindow * AddAppWindow(ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, Tag tag1, ...);
+struct AppWindow * AddAppWindow(ULONG id, ULONG userdata, struct Window * window, struct MsgPort * msgport, ...);
 BOOL RemoveAppWindow(struct AppWindow * appWindow);
 struct AppIcon * AddAppIconA(ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, CONST struct TagItem * taglist);
-struct AppIcon * AddAppIcon(ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, Tag tag1, ...);
+struct AppIcon * AddAppIcon(ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, BPTR lock, struct DiskObject * diskobj, ...);
 BOOL RemoveAppIcon(struct AppIcon * appIcon);
 struct AppMenuItem * AddAppMenuItemA(ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, CONST struct TagItem * taglist);
-struct AppMenuItem * AddAppMenuItem(ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, Tag tag1, ...);
+struct AppMenuItem * AddAppMenuItem(ULONG id, ULONG userdata, CONST_STRPTR text, struct MsgPort * msgport, ...);
 BOOL RemoveAppMenuItem(struct AppMenuItem * appMenuItem);
 
 /* From version 39 */
@@ -34,22 +34,22 @@ ULONG WBInfo(BPTR lock, CONST_STRPTR name, struct Screen * screen);
 
 /* From version 44 */
 BOOL OpenWorkbenchObjectA(CONST_STRPTR name, CONST struct TagItem * tags);
-BOOL OpenWorkbenchObject(CONST_STRPTR name, Tag tag1, ...);
+BOOL OpenWorkbenchObject(CONST_STRPTR name, ...);
 BOOL CloseWorkbenchObjectA(CONST_STRPTR name, CONST struct TagItem * tags);
-BOOL CloseWorkbenchObject(CONST_STRPTR name, Tag tag1, ...);
+BOOL CloseWorkbenchObject(CONST_STRPTR name, ...);
 BOOL WorkbenchControlA(CONST_STRPTR name, CONST struct TagItem * tags);
-BOOL WorkbenchControl(CONST_STRPTR name, Tag tag1, ...);
+BOOL WorkbenchControl(CONST_STRPTR name, ...);
 struct AppWindowDropZone * AddAppWindowDropZoneA(struct AppWindow * aw, ULONG id, ULONG userdata, CONST struct TagItem * tags);
-struct AppWindowDropZone * AddAppWindowDropZone(struct AppWindow * aw, ULONG id, ULONG userdata, Tag tag1, ...);
+struct AppWindowDropZone * AddAppWindowDropZone(struct AppWindow * aw, ULONG id, ULONG userdata, ...);
 BOOL RemoveAppWindowDropZone(struct AppWindow * aw, struct AppWindowDropZone * dropZone);
 BOOL ChangeWorkbenchSelectionA(CONST_STRPTR name, struct Hook * hook, CONST struct TagItem * tags);
-BOOL ChangeWorkbenchSelection(CONST_STRPTR name, struct Hook * hook, Tag tag1, ...);
+BOOL ChangeWorkbenchSelection(CONST_STRPTR name, struct Hook * hook, ...);
 BOOL MakeWorkbenchObjectVisibleA(CONST_STRPTR name, CONST struct TagItem * tags);
-BOOL MakeWorkbenchObjectVisible(CONST_STRPTR name, Tag tag1, ...);
+BOOL MakeWorkbenchObjectVisible(CONST_STRPTR name, ...);
 
 /* From version 45 */
 ULONG WhichWorkbenchObjectA(struct Window * window, LONG x, LONG y, CONST struct TagItem * tags);
-ULONG WhichWorkbenchObject(struct Window * window, LONG x, LONG y, Tag tag1, ...);
+ULONG WhichWorkbenchObject(struct Window * window, LONG x, LONG y, ...);
 
 #ifdef __cplusplus
 }

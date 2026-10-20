@@ -571,7 +571,7 @@ struct NewWindow
     ULONG Flags;
     struct Gadget *FirstGadget;
     struct Image *CheckMark;
-    UBYTE *Title;
+    STRPTR	Title;
     struct Screen *Screen;		/* with Type CUSTOMSCREEN */
     struct BitMap *BitMap;		/* with WFLG_SUPER_BITMAP */
     WORD MinWidth, MinHeight;
@@ -589,7 +589,7 @@ struct ExtNewWindow
     ULONG Flags;
     struct Gadget *FirstGadget;
     struct Image *CheckMark;
-    UBYTE *Title;
+    STRPTR	Title;
     struct Screen *Screen;
     struct BitMap *BitMap;
     WORD MinWidth, MinHeight;

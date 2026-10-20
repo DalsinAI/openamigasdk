@@ -37,7 +37,7 @@ typedef long BSTR;
 
 /* One size in a .font file (FCH_ID) */
 struct FontContents {
-	char	fc_FileName[MAXFONTPATH];
+	TEXT	fc_FileName[MAXFONTPATH];
 	UWORD	fc_YSize;
 	UBYTE	fc_Style;
 	UBYTE	fc_Flags;
@@ -46,7 +46,7 @@ struct FontContents {
 /* One size in a .font file with tags (TFCH_ID, OFCH_ID); the tags sit
  * at the end of tfc_FileName */
 struct TFontContents {
-	char	tfc_FileName[MAXFONTPATH-2];
+	TEXT	tfc_FileName[MAXFONTPATH-2];
 	UWORD	tfc_TagCount;	/* tags, with the TAG_DONE */
 	UWORD	tfc_YSize;
 	UBYTE	tfc_Style;
@@ -73,7 +73,7 @@ struct DiskFontHeader {
 	UWORD		dfh_FileID;	/* DFH_ID */
 	UWORD		dfh_Revision;
 	BPTR		dfh_Segment;	/* the font's seglist */
-	char		dfh_Name[MAXFONTNAME];
+	TEXT	dfh_Name[MAXFONTNAME];
 	struct TextFont	dfh_TF;
 };
 

@@ -62,4 +62,6 @@ struct PBoxDrawMsg
 #define GETCOLOR_SmallTextAttr	(GETCOLOR_Dummy + 19)
 #define GETCOLOR_SwitchMode	(GETCOLOR_Dummy + 15)
 
+#define RequestColor(obj, win)	DoMethod((obj), GCOLOR_REQUEST, (win))
+
 #endif /* GADGETS_GETCOLOR_H */
