@@ -173,10 +173,10 @@
 #define VCentered		2
 
 /* older and shorter names */
-#define ArrowUp			GLYPH_ARROWUP
-#define ArrowDown		GLYPH_ARROWDOWN
-#define ArrowLeft		GLYPH_ARROWLEFT
-#define ArrowRight		GLYPH_ARROWRIGHT
+#define ArrowUp			GLYPH_UPARROW
+#define ArrowDown		GLYPH_DOWNARROW
+#define ArrowLeft		GLYPH_LEFTARROW
+#define ArrowRight		GLYPH_RIGHTARROW
 #define ClickTabsObject		ClickTabObject
 #define ClickTabsEnd		End
 #define FuelObject		FuelGaugeObject
@@ -213,7 +213,7 @@
 #define String(text, id, maxchars)	StringObject, STRINGA_TextVal, (text), STRINGA_MaxChars, (maxchars), GA_ID, (id), GA_RelVerify, TRUE, GA_TabCycle, TRUE, StringEnd
 #define LabelString(text, id, maxchars, label)	String(text, id, maxchars), Label(label)
 #define LabelTextLine(text, label)	TextLine(text), Label(label)
-#define PopString(text, id, maxchars, image)	LAYOUT_AddChild, HLayoutObject, String(text, 0, maxchars), ButtonObject, BAG_AutoButton, (image), GA_RelVerify, TRUE, GA_ID, (id), ButtonEnd, LayoutEnd
+#define PopString(text, id, maxchars, image)	LAYOUT_AddChild, HLayoutObject, String(text, 0, maxchars), ButtonObject, BUTTON_AutoButton, (image), GA_RelVerify, TRUE, GA_ID, (id), ButtonEnd, LayoutEnd
 
 /* struct NewMenu lines */
 #define Title(t)		{ NM_TITLE, (t), NULL, 0, 0, NULL }
