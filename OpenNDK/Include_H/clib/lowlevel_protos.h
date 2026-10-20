@@ -34,7 +34,7 @@ ULONG ElapsedTime(struct EClockVal * context);
 APTR AddVBlankInt(APTR intRoutine, APTR intData);
 VOID RemVBlankInt(APTR intHandle);
 BOOL SetJoyPortAttrsA(ULONG portNumber, CONST struct TagItem * tagList);
-BOOL SetJoyPortAttrs(ULONG portNumber, Tag firstTag, ...);
+BOOL SetJoyPortAttrs(ULONG portNumber, ...);
 
 #ifdef __cplusplus
 }

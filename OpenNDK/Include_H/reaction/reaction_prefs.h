@@ -60,4 +60,7 @@ struct UIExtPens
 #define GLT_FLAT		1
 #define GLT_GT			0
 
+#define RAPREFSSEMAPHORE	"REACTION-PREFS"
+#define ClassActPrefs		UIPrefs
+
 #endif /* REACTION_REACTION_PREFS_H */

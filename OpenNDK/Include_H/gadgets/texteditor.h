@@ -285,4 +285,9 @@ struct WordColorEntry
 #define TBSTYLE_STYLEMASK	255
 #define TBSTYLE_UNDERLINE	1
 
+/* what the OS 3.2 header brings in with this one, which programs rely on */
+#ifndef IMAGES_BEVEL_H
+#include <images/bevel.h>
+#endif
+
 #endif /* GADGETS_TEXTEDITOR_H */
