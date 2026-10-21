@@ -13,7 +13,7 @@
 set -u
 HERE=$(CDPATH= cd -- "$(dirname -- "$0")/../.." && pwd)
 REAL=${STOVE:-"$HOME/AmigaChrome/stoves/os32-gcc16"}
-SRC=${GUEST:-"$HOME/AmigaChrome-dev/cradle-builds/DalsinAI__amigachrome-guest"}
+SRC=${GUEST:-"${AMIGACHROME_DEV:-$HOME/AmigaChrome-dev}/cradle-builds/DalsinAI__amigachrome-guest"}
 JOBS=${JOBS:-3}
 tmp=$(mktemp -d)
 trap 'rm -rf "$tmp"' EXIT
