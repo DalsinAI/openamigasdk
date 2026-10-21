@@ -92,6 +92,9 @@ its `proto/` header, and `__NOLIBBASE__` leaves out the base's declaration.
   defines `CheckMark` as the NDK's does, so a unit that includes it can't
   name the `CheckMark` field of `struct Window` either.
 - **Not yet written:** the assembler structure includes (`Include_I` other
-  than `lvo/`), `debug.lib`, autodocs, vbcc's inline headers,
-  `piechart.h`, and the OS 4.1 headers (OS 4.1
-  builds keep using Hyperion's SDK for now).
+  than `lvo/`), `debug.lib`, autodocs, vbcc's inline headers, and the
+  OS 4.1 headers (OS 4.1 builds keep using Hyperion's SDK for now).
+- **Beyond the vendor NDK:** `gadgets/piechart.h`, the GETCOLOR box tags
+  (`GETCOLOR_LeftEdge` to `GETCOLOR_Height`, at +40 to +43) and
+  `mmu_lib.sfd` (MMULib's mmu.library) are OpenNDK's own, read from the
+  open libraries in amigachrome-guest; the 3.2 NDK has none of them.
