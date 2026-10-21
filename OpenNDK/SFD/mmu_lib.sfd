@@ -1,0 +1,89 @@
+==id OpenNDK mmu_lib.sfd 47.1
+* mmu.library's calls (MMULib's interface, not part of NDK 3.2), for OpenNDK.
+* Read from openmmu's own jump table and code in amigachrome-guest
+* (libraries/openmmu); calls openmmu does not implement yet take APTR in
+* address registers and ULONG in data registers.
+* Copyright (c) 2026 AmigaChrome Team. MIT licence (see OpenNDK/LICENSE).
+==base _MMUBase
+==basetype struct Library *
+==libname mmu.library
+==bias 30
+==public
+==include <exec/types.h>
+==include <exec/libraries.h>
+==include <utility/tagitem.h>
+==version 40
+APTR AllocAligned(ULONG size, ULONG req, ULONG align) (d0,d1,a0)
+APTR GetMapping(APTR c) (a0)
+VOID ReleaseMapping(APTR c, APTR l) (a0,a1)
+ULONG GetPageSize(APTR c) (a0)
+ULONG GetMMUType() ()
+ULONG GetMMUConfig() ()
+ULONG ReleaseMMUConfig(APTR a1) (a1)
+VOID LockMMUContext(APTR c) (a0)
+VOID UnlockMMUContext(APTR c) (a0)
+ULONG SetPropertiesA(APTR c, ULONG flags, ULONG mask, ULONG lower, ULONG size, struct TagItem *tags) (a0,d1,d2,a1,d0,a2)
+ULONG GetPropertiesA(APTR c, ULONG addr, struct TagItem *tags) (a0,a1,a2)
+ULONG RebuildTree(APTR c) (a0)
+ULONG SetPagePropertiesA(APTR c, ULONG flags, ULONG mask, ULONG lower, struct TagItem *tags) (a0,d1,d2,a1,a2)
+ULONG GetPagePropertiesA(APTR c, ULONG addr, struct TagItem *tags) (a0,a1,a2)
+APTR CreateMMUContextA(struct TagItem *tags) (a0)
+VOID DeleteMMUContext(APTR c) (a0)
+APTR AllocLineMem(ULONG size, ULONG req) (d0,d1)
+APTR AllocLineVec(ULONG size, ULONG req) (d0,d1)
+ULONG PhysicalPageLocation(APTR c, ULONG addr) (a0,a1)
+APTR SuperContext(APTR c) (a0)
+APTR DefaultContext() ()
+ULONG EnterMMUContext(APTR a0, APTR a1) (a0,a1)
+ULONG LeaveMMUContext(APTR a1) (a1)
+ULONG AddContextHookA(APTR a0) (a0)
+ULONG RemContextHook(APTR a1) (a1)
+ULONG AddMessageHookA(APTR a0) (a0)
+ULONG RemMessageHook(APTR a1) (a1)
+ULONG ActivateException(APTR a1) (a1)
+ULONG DeactivateException(APTR a1) (a1)
+ULONG AttemptLockMMUContext(APTR c) (a0)
+VOID LockContextList() ()
+VOID UnlockContextList() ()
+ULONG AttemptLockContextList() ()
+VOID SetPropertyList(APTR c, APTR l) (a0,a1)
+ULONG TouchPropertyList(APTR a1) (a1)
+APTR CurrentContext(APTR task) (a1)
+ULONG DMAInitiate(ULONG d1, APTR a0, APTR a1, ULONG d0) (d1,a0,a1,d0)
+ULONG DMATerminate(ULONG d1) (d1)
+ULONG PhysicalLocation(APTR c, ULONG *addr, ULONG *len) (d1,a0,a1)
+ULONG RemapSize(APTR c) (a0)
+ULONG WithoutMMU(APTR a5) (a5)
+ULONG SetBusError(APTR a0, APTR a1) (a0,a1)
+ULONG GetMMUContextData(APTR c, ULONG tag) (a0,d0)
+ULONG SetMMUContextDataA(APTR a0, APTR a1) (a0,a1)
+APTR NewMapping() ()
+ULONG CopyMapping(APTR a0, APTR a1, ULONG d0, ULONG d1, ULONG d2) (a0,a1,d0,d1,d2)
+APTR DupMapping(APTR src) (a0)
+ULONG CopyContextRegion(APTR a0, APTR a1, ULONG d0, ULONG d1, ULONG d2) (a0,a1,d0,d1,d2)
+ULONG SetPropertiesMapping(APTR a0, APTR a1, ULONG d0, ULONG d1, ULONG d2) (a0,a1,d0,d1,d2)
+ULONG SetMappingPropertiesA(APTR l, ULONG flags, ULONG mask, ULONG lower, ULONG size, struct TagItem *tags) (a0,d1,d2,a1,d0,a2)
+ULONG GetMappingPropertiesA(APTR l, ULONG addr, struct TagItem *tags) (a0,a1,a2)
+ULONG BuildIndirect(APTR a0, ULONG d0, ULONG d1) (a0,d0,d1)
+ULONG SetIndirect(APTR a0, APTR a1, ULONG d0) (a0,a1,d0)
+ULONG GetIndirect(APTR a0, APTR a1, ULONG d0) (a0,a1,d0)
+ULONG SwitchControl(APTR a0) (a0)
+ULONG RebuildTreesA(APTR *cs) (a0)
+ULONG RunOldConfig(APTR a5) (a5)
+ULONG SetIndirectArray(APTR a0, APTR a1, ULONG d0) (a0,a1,d0)
+ULONG GetPageUsedModified(APTR a0, APTR a1) (a0,a1)
+==private
+VOID reserved1() ()
+VOID reserved2() ()
+VOID reserved3() ()
+VOID reserved4() ()
+VOID reserved5() ()
+VOID reserved6() ()
+==public
+ULONG MapWindow(APTR a0, APTR a1, ULONG d1) (a0,a1,d1)
+ULONG CreateContextWindowA(APTR a0, APTR a1) (a0,a1)
+ULONG ReleaseContextWindow(APTR a1) (a1)
+ULONG RefreshContextWindow(APTR a0) (a0)
+ULONG MapWindowCached(APTR a0, APTR a1, ULONG d1) (a0,a1,d1)
+ULONG LayoutContextWindow(APTR a0) (a0)
+==end

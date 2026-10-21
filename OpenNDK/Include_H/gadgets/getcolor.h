@@ -15,10 +15,12 @@
 #define GETCOLOR_Dummy		(REACTION_Dummy + 0x43000)
 
 #define GETCOLOR_TitleText	(GETCOLOR_Dummy + 1)	/* the requester's title */
-#define GETCOLOR_LeftEdge	(GETCOLOR_Dummy + 2)	/* the requester's box */
-#define GETCOLOR_TopEdge	(GETCOLOR_Dummy + 3)
-#define GETCOLOR_Width		(GETCOLOR_Dummy + 4)
-#define GETCOLOR_Height		(GETCOLOR_Dummy + 5)
+/* The requester's box: not in the 3.2 interface. These are OpenReAction's
+ * own tags, placed after the 3.2 ones so they can't clash with them. */
+#define GETCOLOR_LeftEdge	(GETCOLOR_Dummy + 40)
+#define GETCOLOR_TopEdge	(GETCOLOR_Dummy + 41)
+#define GETCOLOR_Width		(GETCOLOR_Dummy + 42)
+#define GETCOLOR_Height		(GETCOLOR_Dummy + 43)
 #define GETCOLOR_Screen		(GETCOLOR_Dummy + 2)
 #define GETCOLOR_Color		(GETCOLOR_Dummy + 3)	/* ULONG: 0x00RRGGBB */
 #define GETCOLOR_RGB		(GETCOLOR_Dummy + 10)	/* ULONG *: three 32-bit values */
