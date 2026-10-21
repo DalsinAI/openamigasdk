@@ -29,10 +29,12 @@ fake_stove() { # $1 name, $2 include folder, $3 a folder searched last (optional
         n=$(basename "$b")
         case $n in
         *-gcc|*-g++|*-c++|*-cpp)
+            # after the build's own flags, so a script's -isystem comes
+            # first, as it does on a stove whose NDK folder is switched
             if [ -n "${3:-}" ]; then
-                printf '#!/bin/sh\nexec "%s" -isystem "%s" -idirafter "%s" "$@"\n' "$b" "$2" "$3"
+                printf '#!/bin/sh\nexec "%s" "$@" -isystem "%s" -idirafter "%s"\n' "$b" "$2" "$3"
             else
-                printf '#!/bin/sh\nexec "%s" -isystem "%s" "$@"\n' "$b" "$2"
+                printf '#!/bin/sh\nexec "%s" "$@" -isystem "%s"\n' "$b" "$2"
             fi > "$s/prefix/bin/$n"
             chmod +x "$s/prefix/bin/$n" ;;
         *) ln -s "$b" "$s/prefix/bin/$n" ;;
