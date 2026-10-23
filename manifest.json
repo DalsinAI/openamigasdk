@@ -7,7 +7,7 @@
       "name": "openrtg.library",
       "version": "0.10",
       "repo": "DalsinAI/openamigartg",
-      "commit": "0f0aa04c63c61fe22d66a7ab035d7277d247e5c5",
+      "commit": "6401b7f1022df7a83224162c0ce174428e73d0f7",
       "licence": "MIT",
       "files": {
         "include/openrtg/openrtg.h": "Include/openrtg/openrtg.h",
@@ -19,9 +19,9 @@
     },
     {
       "name": "opensocket.library",
-      "version": "main 3603f02",
+      "version": "main 7228e11",
       "repo": "DalsinAI/openamigasocket",
-      "commit": "3603f02badcbd0704e7cd301c63cb1a6d851eaaa",
+      "commit": "7228e11ef703d2bf0999836dc4525bdd5583c878",
       "licence": "MIT",
       "files": {
         "guest/network/acnetwork/include/acnetwork.h": "Include/acnetwork.h",
@@ -58,9 +58,9 @@
     },
     {
       "name": "accontrol.device",
-      "version": "guest 8349ead",
+      "version": "guest 47e380e",
       "repo": "DalsinAI/amigachrome-guest",
-      "commit": "8349ead65881ad33c58bc67e3e240df74d36d27e",
+      "commit": "47e380e79705279ae0a67741edea2106121e108a",
       "licence": "MIT",
       "files": {
         "devices/accontrol.device/include/accontrol.h": "Include/accontrol/accontrol.h"
@@ -68,9 +68,9 @@
     },
     {
       "name": "oapspool.device",
-      "version": "main bbbbecf",
+      "version": "main 1dce08b",
       "repo": "DalsinAI/openamigaprint",
-      "commit": "bbbbecf3be7006cdb4597b7876776af1efbcd35a",
+      "commit": "1dce08b20981a3316355308386e96bcf1cae4a81",
       "licence": "MIT",
       "files": {
         "include/oap_device.h": "Include/openprint/oap_device.h"
