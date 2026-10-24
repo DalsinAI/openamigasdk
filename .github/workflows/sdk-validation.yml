@@ -20,7 +20,7 @@ jobs:
           m68k-linux-gnu-g++ -x c++ -std=gnu++17 -m68040 -IInclude -IOpenNDK/Include_H -Wall -Wextra -Werror -fsyntax-only tests/sdk/headers.c
       - run: sh tests/host/run.sh
       - run: python3 -m unittest discover -s tests/sdk -v
-      - run: python3 tools/gather.py --check
+      - run: python3 tools/gather.py --offline-check
       - run: python3 -m py_compile tools/build_curl_sdk.py
   curl-overlay:
     runs-on: ubuntu-latest
@@ -71,6 +71,14 @@ jobs:
           grep -q 'Features:.*HTTP2' build/overlay/build.log
           grep -q 'Protocols: http https$' build/overlay/build.log
           build/stove/prefix/bin/m68k-amigaos-objdump -f build/overlay/sdk/curltest | grep amiga
+      - name: Link a consumer through the relocated CMake package
+        shell: bash
+        run: |
+          set -euo pipefail
+          cp -a build/overlay/sdk build/relocated-sdk
+          cmake -S tests/sdk/curl_consumer -B build/consumer -DCMAKE_SYSTEM_NAME=Generic -DCMAKE_TRY_COMPILE_TARGET_TYPE=STATIC_LIBRARY -DCMAKE_C_COMPILER="$PWD/build/stove/prefix/bin/m68k-amigaos-gcc" -DCMAKE_C_FLAGS="-m68040 -m68881 -mcrt=nix20 -pthread" -DCURL_DIR="$PWD/build/relocated-sdk/lib/cmake/CURL"
+          cmake --build build/consumer
+          build/stove/prefix/bin/m68k-amigaos-objdump -f build/consumer/curl-consumer | grep amiga
       - uses: actions/upload-artifact@v4
         if: always()
         with:

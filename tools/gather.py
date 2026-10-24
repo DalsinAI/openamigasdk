@@ -5,11 +5,16 @@
 
     tools/gather.py            fetch each part at its pinned commit and copy its files
     tools/gather.py --check    the same, but only say whether the copies here match
+    tools/gather.py --offline-check  verify recorded source hashes without repository access
+
+The full online check needs access to every source repository, including the
+private guest repository. Cloud checks use the recorded file hashes; maintainers
+must run the full online check when advancing a source pin.
 
 manifest.json names each part's repository, commit and files. The FD files
 are made from the SFD files, so there is one source for each function table.
 """
-import json, os, subprocess, sys, tempfile, shutil
+import hashlib, json, os, subprocess, sys, tempfile, shutil
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -48,9 +53,33 @@ def sfd_to_fd(sfd):
     return "\n".join(out) + "\n"
 
 
+def output_paths(part):
+    paths = set(part["files"].values())
+    for path in list(paths):
+        if path.endswith(".sfd") and not path.startswith("OpenNDK/"):
+            paths.add("FD/" + os.path.basename(path)[:-4] + ".fd")
+    return paths
+
+
+def offline_check(manifest, root):
+    for part in manifest["parts"]:
+        expected = part.get("sha256", {})
+        if set(expected) != output_paths(part):
+            raise ValueError("incomplete source-file receipt: " + part["name"])
+        for path, sha in expected.items():
+            with open(os.path.join(root, path), "rb") as f:
+                actual = hashlib.file_digest(f, "sha256").hexdigest()
+            if actual != sha:
+                raise ValueError("gathered file changed: " + path)
+    print("all gathered file hashes match the recorded pinned-source receipts")
+    return 0
+
+
 def main():
     check = "--check" in sys.argv
     manifest = json.load(open(os.path.join(ROOT, "manifest.json")))
+    if "--offline-check" in sys.argv:
+        return offline_check(manifest, ROOT)
     cache = os.environ.get("OPENSDK_CACHE") or os.path.join(tempfile.gettempdir(), "opensdk-cache")
     os.makedirs(cache, exist_ok=True)
     stale = []
@@ -64,6 +93,8 @@ def main():
                 fd = sfd_to_fd(data.decode("latin-1")).encode("latin-1")
                 outs.append(("FD/" + os.path.basename(to)[:-4] + ".fd", fd))
             for path, body in outs:
+                if part.get("sha256") and hashlib.sha256(body).hexdigest() != part["sha256"].get(path):
+                    raise ValueError("pinned source disagrees with receipt: " + path)
                 dst = os.path.join(ROOT, path)
                 have = open(dst, "rb").read() if os.path.exists(dst) else None
                 if have != body:

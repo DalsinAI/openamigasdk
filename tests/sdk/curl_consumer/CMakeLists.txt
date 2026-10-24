@@ -1,0 +1,5 @@
+cmake_minimum_required(VERSION 3.16)
+project(curl_sdk_consumer C)
+find_package(CURL CONFIG REQUIRED)
+add_executable(curl-consumer main.c)
+target_link_libraries(curl-consumer PRIVATE CURL::libcurl)
