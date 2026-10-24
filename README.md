@@ -28,6 +28,14 @@ Part of the Open family (internally, the Great Open Source Reunification
 Project): one platform, AmigaOS 3.2.x with the Open libraries, that is easy
 to set up, and to build and port for.
 
+## SDK refresh, 24 October 2026
+
+[The SDK/NDK audit](Docs/SDK-AUDIT-20261024.md) records current interface pins,
+OpenNDK compatibility checks and the isolated OpenAmigaCurl overlay builder.
+OpenBrowser's curl port already exists; the overlay makes that dependency
+available to other builds without replacing an active stove or runtime.
+It does not provide a curl Shell command or certify every library.
+
 ## Licence
 
 MIT, Copyright (c) 2026 AmigaChrome Team (`LICENSE`), for our own files.

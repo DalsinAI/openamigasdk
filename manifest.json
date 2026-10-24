@@ -5,9 +5,9 @@
   "parts": [
     {
       "name": "openrtg.library",
-      "version": "0.10",
+      "version": "main 7f80613",
       "repo": "DalsinAI/openamigartg",
-      "commit": "6401b7f1022df7a83224162c0ce174428e73d0f7",
+      "commit": "7f80613d4adf3c6be7fa7a311c010111ef9dbde6",
       "licence": "MIT",
       "files": {
         "include/openrtg/openrtg.h": "Include/openrtg/openrtg.h",
@@ -19,9 +19,9 @@
     },
     {
       "name": "opensocket.library",
-      "version": "main 7228e11",
+      "version": "main 721d664",
       "repo": "DalsinAI/openamigasocket",
-      "commit": "7228e11ef703d2bf0999836dc4525bdd5583c878",
+      "commit": "721d66422978953ec4f2f58da01d92fe3b667db8",
       "licence": "MIT",
       "files": {
         "guest/network/acnetwork/include/acnetwork.h": "Include/acnetwork.h",
@@ -31,9 +31,9 @@
     },
     {
       "name": "bsdsocket.library",
-      "version": "OpenSocket SDK, main b3cb188",
+      "version": "main 721d664",
       "repo": "DalsinAI/openamigasocket",
-      "commit": "b3cb188dc629bce9834871f2af46a424bb077b31",
+      "commit": "721d66422978953ec4f2f58da01d92fe3b667db8",
       "licence": "MIT",
       "files": {
         "sdk/Include_H/amitcp/socketbasetags.h": "OpenNDK/Include_H/amitcp/socketbasetags.h",
@@ -58,9 +58,9 @@
     },
     {
       "name": "accontrol.device",
-      "version": "guest 47e380e",
+      "version": "main 941ee87",
       "repo": "DalsinAI/amigachrome-guest",
-      "commit": "47e380e79705279ae0a67741edea2106121e108a",
+      "commit": "941ee87df1798a701249af3d956b873f49dc234d",
       "licence": "MIT",
       "files": {
         "devices/accontrol.device/include/accontrol.h": "Include/accontrol/accontrol.h"
@@ -68,12 +68,31 @@
     },
     {
       "name": "oapspool.device",
-      "version": "main 1dce08b",
+      "version": "main 964634a",
       "repo": "DalsinAI/openamigaprint",
-      "commit": "1dce08b20981a3316355308386e96bcf1cae4a81",
+      "commit": "964634a5e3f38ab46a2942a6a4b3f6942bb16b86",
       "licence": "MIT",
       "files": {
         "include/oap_device.h": "Include/openprint/oap_device.h"
+      }
+    },
+    {
+      "name": "opentls.library / opencrypto.library",
+      "version": "main 919dd04",
+      "repo": "DalsinAI/openamigatls",
+      "commit": "919dd04ff675bee42a5bf0c26393043fd4c78d77",
+      "licence": "MIT",
+      "files": {
+        "include/fd/opentls_lib.fd": "FD/opentls_lib.fd",
+        "include/libraries/opentls.h": "Include/libraries/opentls.h",
+        "include/libraries/opencrypto.h": "Include/libraries/opencrypto.h",
+        "include/inline/opentls.h": "Include/inline/opentls.h",
+        "include/inline/opentls_protos.h": "Include/inline/opentls_protos.h",
+        "include/inline/opencrypto.h": "Include/inline/opencrypto.h",
+        "include/proto/opentls.h": "Include/proto/opentls.h",
+        "include/proto/opencrypto.h": "Include/proto/opencrypto.h",
+        "include/opencrypto/opencrypto.h": "Include/opencrypto/opencrypto.h",
+        "include/clib/opentls_protos.h": "Include/clib/opentls_protos.h"
       }
     }
   ]

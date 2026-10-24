@@ -34,6 +34,27 @@
  *                   ACFilePut (its name, its bytes and their count).
  *                   The four file commands (ACBridge capability bit 12) give
  *                   ACCERR_NOFILES on a board without them.
+ *   ACCMD_FLOPPYLIST  the disks for a floppy drive: io_Offset = the drive (0
+ *                   DF0 to 3 DF3); text into io_Data, at most io_Length bytes,
+ *                   io_Actual its length: a line "DFn<TAB>1|0<TAB>what is in
+ *                   it" (1 a disk is in), then a line for each disk the host
+ *                   can put in: a name in the instance's floppy directory,
+ *                   "repo:NAME" from its install media, "__builtin__" the
+ *                   AROS boot disk. UTF-8 names, LF line ends.
+ *   ACCMD_FLOPPYINSERT  put one of those disks in the drive: io_Offset = the
+ *                   drive, io_Data = its name, NUL ended (NULL or "" ejects);
+ *                   io_Actual = 1 a disk is in, 0 the drive is empty. The
+ *                   host keeps the choice, so a reboot starts from it.
+ *   ACCMD_FLOPPYPUT  an ADF from the Amiga into the drive: io_Offset = the
+ *                   drive, io_Data points to a struct ACFilePut (the ADF's
+ *                   name, its bytes, 901120 of them); the host keeps it in
+ *                   the instance's floppy directory and puts it in.
+ *                   io_Actual = 1.
+ *                   The three floppy commands (ACBridge capability bit 14)
+ *                   give ACCERR_NOFLOPPY on a board without them, and
+ *                   ACCERR_HOST when the host refuses: io_Actual is then its
+ *                   reason's number (2 the drive is not fitted, 3 the runtime
+ *                   can't change disks, 4 not an 880 KB ADF, 6 it didn't go in).
  *   NSCMD_DEVICEQUERY  the standard query (NSDEVTYPE_UNKNOWN; the commands
  *                   above).
  *
@@ -57,8 +78,13 @@
 #define ACCMD_FILEREAD (CMD_NONSTD + 7)
 #define ACCMD_FILEDONE (CMD_NONSTD + 8)
 #define ACCMD_FILEPUT  (CMD_NONSTD + 9)
+#define ACCMD_FLOPPYLIST   (CMD_NONSTD + 10)
+#define ACCMD_FLOPPYINSERT (CMD_NONSTD + 11)
+#define ACCMD_FLOPPYPUT    (CMD_NONSTD + 12)
 
-/* ACCMD_FILEPUT's io_Data */
+#define ACC_ADF_BYTES 901120UL             /* an 880 KB DD disk: what ACCMD_FLOPPYPUT takes */
+
+/* ACCMD_FILEPUT's and ACCMD_FLOPPYPUT's io_Data */
 struct ACFilePut {
     const char *name;                       /* the file's name for the PC (no path) */
     const UBYTE *data;                      /* its bytes */
@@ -77,5 +103,6 @@ struct ACFilePut {
 #define ACCERR_HOST      43        /* the host could not answer a query */
 #define ACCERR_NOCLIP    44        /* an ACBridge from before ABI 1.2 (no clipboard) */
 #define ACCERR_NOFILES   45        /* an ACBridge without files (capability bit 12) */
+#define ACCERR_NOFLOPPY  46        /* an ACBridge without the floppy changer (capability bit 14) */
 
 #endif
