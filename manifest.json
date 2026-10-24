@@ -5,9 +5,9 @@
   "parts": [
     {
       "name": "openrtg.library",
-      "version": "0.10",
+      "version": "main 7f80613",
       "repo": "DalsinAI/openamigartg",
-      "commit": "6401b7f1022df7a83224162c0ce174428e73d0f7",
+      "commit": "7f80613d4adf3c6be7fa7a311c010111ef9dbde6",
       "licence": "MIT",
       "files": {
         "include/openrtg/openrtg.h": "Include/openrtg/openrtg.h",
@@ -15,25 +15,38 @@
         "include/inline/openrtg.h": "Include/inline/openrtg.h",
         "library/modes.h": "Include/openrtg/modes.h",
         "library/openrtg_lib.sfd": "SFD/openrtg_lib.sfd"
+      },
+      "sha256": {
+        "FD/openrtg_lib.fd": "4897ca65664e0580562e84bbb4f17ab65784fef17001e589750f9e3ffba3343d",
+        "Include/inline/openrtg.h": "6af390f3dcb3910bde3b1a6b67b3239c59a130721adbf1a6c368661fbe19baef",
+        "Include/openrtg/modes.h": "4dd5cf3a301a9aa85a4f929bd966081091b0a367b10eb03e94c770bac65da785",
+        "Include/openrtg/openrtg.h": "c9a4223a17dfc8244c27d797205cdda0883a57900898b726ec6f91792a80c0d4",
+        "Include/proto/openrtg.h": "ff5f86b2967d80775f60c97e5861f52f2a51c62a827c2146e218344c872a5cf9",
+        "SFD/openrtg_lib.sfd": "8a9f478b95364c174d1b0c759d8c8e4ffadc0a32f6ce150c2d83c115dc00d36a"
       }
     },
     {
       "name": "opensocket.library",
-      "version": "main 7228e11",
+      "version": "main 721d664",
       "repo": "DalsinAI/openamigasocket",
-      "commit": "7228e11ef703d2bf0999836dc4525bdd5583c878",
+      "commit": "721d66422978953ec4f2f58da01d92fe3b667db8",
       "licence": "MIT",
       "files": {
         "guest/network/acnetwork/include/acnetwork.h": "Include/acnetwork.h",
         "guest/network/acnetwork/include/proto/acnetwork.h": "Include/proto/acnetwork.h",
         "guest/network/acnet/include/acnet_socket_tags.h": "Include/opensocket/acnet_socket_tags.h"
+      },
+      "sha256": {
+        "Include/acnetwork.h": "af15978a383081dd1b9f150fb99515281067a7d4e0613572bbb6148b64e8bcbc",
+        "Include/opensocket/acnet_socket_tags.h": "f229c10dff68f24e75873eac3ba5423d4d90d965462cb85e89185d890a326903",
+        "Include/proto/acnetwork.h": "3a839520c64c2e8ade425bcde4b5c39997a20d4916e27d0bff92c939351b7df7"
       }
     },
     {
       "name": "bsdsocket.library",
-      "version": "OpenSocket SDK, main b3cb188",
+      "version": "main 721d664",
       "repo": "DalsinAI/openamigasocket",
-      "commit": "b3cb188dc629bce9834871f2af46a424bb077b31",
+      "commit": "721d66422978953ec4f2f58da01d92fe3b667db8",
       "licence": "MIT",
       "files": {
         "sdk/Include_H/amitcp/socketbasetags.h": "OpenNDK/Include_H/amitcp/socketbasetags.h",
@@ -54,26 +67,83 @@
         "sdk/Include_H/sys/uio.h": "OpenNDK/Include_H/sys/uio.h",
         "sdk/Include_H/syslog.h": "OpenNDK/Include_H/syslog.h",
         "sdk/SFD/bsdsocket_lib.sfd": "OpenNDK/SFD/bsdsocket_lib.sfd"
+      },
+      "sha256": {
+        "OpenNDK/Include_H/amitcp/socketbasetags.h": "2fd4dca6c828f7a62cfda37f4cb8e19ccadbb97219966c863ef394a5df72ea4e",
+        "OpenNDK/Include_H/arpa/inet.h": "85fe05fa485f1e70e577be047c99689c22798318e316231928729ab0902ba9a3",
+        "OpenNDK/Include_H/bsdsocket/socketbasetags.h": "e43e06d76e1d544942f2e81c32b12e9f67afff4d9fcf44078f0e2c6c2eb5d5d4",
+        "OpenNDK/Include_H/libraries/bsdsocket.h": "4e7e7c65835bbaee9555f65802fe2a068ac117691c8eacf7af63749a49089226",
+        "OpenNDK/Include_H/net/if.h": "cd12f89d44ba248fda94f77487c3ef98cfccfd10ed1e818ff2fd396b7e67d774",
+        "OpenNDK/Include_H/netdb.h": "e20ceae9e499ac6f5124b4b503f9aa59798a3970837386fe0d6c5ecade688f7b",
+        "OpenNDK/Include_H/netinet/in.h": "0edb20c7d78e767480b4e7415a8d9569b9003e577dfdd65f60fe32c1291fbaf0",
+        "OpenNDK/Include_H/netinet/tcp.h": "1dac8ce9077b4d0fce221c7918345737ed4a2cb106990cb33d3ce3332a1bfcd3",
+        "OpenNDK/Include_H/pwd.h": "652a99c1027fc814b33dc3afeb1e5fbcdda81ca852ca5d528b61c67117936b25",
+        "OpenNDK/Include_H/sys/filio.h": "a066e280abc43afeb4339f7b8be784f7f33c74a296990a1c8dbd0a037231e974",
+        "OpenNDK/Include_H/sys/ioccom.h": "2eba4dd1d7cf3eb59fe89d55beb5d38eb2963707a01cd0fdc47674cecab45a78",
+        "OpenNDK/Include_H/sys/ioctl.h": "0fa8d355f6fd480c85c506ad1ed1167742e7609425a724516c359e603faa7434",
+        "OpenNDK/Include_H/sys/socket.h": "3e8ca69715f5991bca8ffe44849eb5ffc8be9dbed55e16a3737516197f74293f",
+        "OpenNDK/Include_H/sys/sockio.h": "08bfee40b1482927f94cd65ce2a7296a2bca1c6e09b2c4e7d12d6fcc5c2b45c2",
+        "OpenNDK/Include_H/sys/syslog.h": "9f126c461547f72440c4dec149c5a8bdb054299bc7798da4db8c850522a76405",
+        "OpenNDK/Include_H/sys/uio.h": "90bf97029ece21ede2cf0d87d81932a150d6338dafbe47603cfdeaaf03cca5b2",
+        "OpenNDK/Include_H/syslog.h": "a54bad2a141ea18193e92cc17f20a2276bb180761dbf9e61dc723fbc5cc06e12",
+        "OpenNDK/SFD/bsdsocket_lib.sfd": "1197eb240817427b897ba42209cbb54980aa4b258784f04ed683497ccdc07d5a"
       }
     },
     {
       "name": "accontrol.device",
-      "version": "guest 47e380e",
+      "version": "main 941ee87",
       "repo": "DalsinAI/amigachrome-guest",
-      "commit": "47e380e79705279ae0a67741edea2106121e108a",
+      "commit": "941ee87df1798a701249af3d956b873f49dc234d",
       "licence": "MIT",
       "files": {
         "devices/accontrol.device/include/accontrol.h": "Include/accontrol/accontrol.h"
+      },
+      "sha256": {
+        "Include/accontrol/accontrol.h": "38620d0bde3302dce7caf77c6e32eab6255fbbc588a3e7c939dc8190d2339728"
       }
     },
     {
       "name": "oapspool.device",
-      "version": "main 1dce08b",
+      "version": "main 964634a",
       "repo": "DalsinAI/openamigaprint",
-      "commit": "1dce08b20981a3316355308386e96bcf1cae4a81",
+      "commit": "964634a5e3f38ab46a2942a6a4b3f6942bb16b86",
       "licence": "MIT",
       "files": {
         "include/oap_device.h": "Include/openprint/oap_device.h"
+      },
+      "sha256": {
+        "Include/openprint/oap_device.h": "51fc1777901635a259f95fe78ce37564d84eace317d8b82ed96ce88c49e8f162"
+      }
+    },
+    {
+      "name": "opentls.library / opencrypto.library",
+      "version": "main 919dd04",
+      "repo": "DalsinAI/openamigatls",
+      "commit": "919dd04ff675bee42a5bf0c26393043fd4c78d77",
+      "licence": "MIT",
+      "files": {
+        "include/fd/opentls_lib.fd": "FD/opentls_lib.fd",
+        "include/libraries/opentls.h": "Include/libraries/opentls.h",
+        "include/libraries/opencrypto.h": "Include/libraries/opencrypto.h",
+        "include/inline/opentls.h": "Include/inline/opentls.h",
+        "include/inline/opentls_protos.h": "Include/inline/opentls_protos.h",
+        "include/inline/opencrypto.h": "Include/inline/opencrypto.h",
+        "include/proto/opentls.h": "Include/proto/opentls.h",
+        "include/proto/opencrypto.h": "Include/proto/opencrypto.h",
+        "include/opencrypto/opencrypto.h": "Include/opencrypto/opencrypto.h",
+        "include/clib/opentls_protos.h": "Include/clib/opentls_protos.h"
+      },
+      "sha256": {
+        "FD/opentls_lib.fd": "a493691484bd7abb8d4d47d3d2d60e3fb20d37db8651a81de9967006270856e2",
+        "Include/clib/opentls_protos.h": "e7b615f3fff9b042c8a934874a6ad6ecf2fc945f0a3ddddf4dd8637a9c0ab160",
+        "Include/inline/opencrypto.h": "9f5889c0044c7f0b7353e0428fb842911b02190d35e2e8a076588a9b380ab6e5",
+        "Include/inline/opentls.h": "77253123860fc9eb65b2cb53edca27aea9ce199bf0aa9ade049d9ea36dc6e366",
+        "Include/inline/opentls_protos.h": "1f6d3b0a0f00b2195b5168ccf9fa96dd96cd8a0fe753a39e74452fd8fa9572af",
+        "Include/libraries/opencrypto.h": "045b37ce069e1be98af802cbb0f2645dbb39c3c51dd209933c6e3d330ac42b29",
+        "Include/libraries/opentls.h": "3936b9791a0581e39b2639778653b492969ef816dbaf0dc10ca38fa3969300d9",
+        "Include/opencrypto/opencrypto.h": "07928fb6c3de2c60ceebfa14a0dfddaf3cfa8c0496055d19c1e8a89c5e27479c",
+        "Include/proto/opencrypto.h": "c6a51280cf2cf6204ba1c1b68879df6b55d514f753b708c70a1aa8b85cb8ba2e",
+        "Include/proto/opentls.h": "1f9131ec7917a55b15443151563fbe2ba590c50b4057901440302da48b67f7d5"
       }
     }
   ]
