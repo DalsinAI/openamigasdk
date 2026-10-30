@@ -10,6 +10,7 @@ build for AROS 68k, as two separate binaries from one source, with no
 | --- | --- |
 | `Templates/shell-command` | A Shell command with ReadArgs, Ctrl-C and a version string |
 | `Templates/gadtools-app` | A font-sensitive GadTools window with a menu, keys and a status line, following the Open apps' rules |
+| `Templates/olui-app` | A window described in HTML and CSS, in the user's theme, with its events in C (OpenLayout UI: [OPENLAYOUT-UI.md](OPENLAYOUT-UI.md)). OS 3.2 only |
 
 Copy the drawer, rename the program, then run `make`. That gives you
 `build/<Name>.os32` and `build/<Name>.aros`. ACKitchen sets `CC_OS32` and
