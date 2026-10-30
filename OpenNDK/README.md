@@ -53,6 +53,22 @@ GCC's default (`a5`). A call's base can be swapped by defining
 its `proto/` header, and `__NOLIBBASE__` leaves out the base's declaration.
 `__OPENNDK_NO_INLINE__` uses the stubs in `libamiga.a` instead of inlines.
 
+## Windows in HTML and CSS
+
+OpenLayout UI (`DalsinAI/openamigalayout`, `docs/OpenLayout-UI.md`; the
+SDK's `Docs/OPENLAYOUT-UI.md`) builds with OpenNDK's headers alone: its
+Intuition glue uses exec, dos, graphics, layers, intuition and diskfont
+from `Include_H/`, and cybergraphics.library through `inline/macros.h`'s
+LP macros, as OpenGadTools does. Its sources were checked against
+`Include_H/` (`-fsyntax-only`, 30 October 2026). Add OpenLayout's
+`include/` after OpenNDK's:
+
+```sh
+m68k-amigaos-gcc -nostdinc -isystem "$(m68k-amigaos-gcc -print-file-name=include)" \
+    -I OpenNDK/Include_H -I <openamigalayout>/include -m68040 -O2 -fomit-frame-pointer \
+    -c prog.c
+```
+
 ## Status, 15 October 2026
 
 - **Written:** 220 C headers in the OS's own paths and 77 SFDs: exec, dos,
